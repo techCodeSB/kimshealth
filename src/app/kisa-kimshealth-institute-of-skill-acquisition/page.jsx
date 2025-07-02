@@ -123,6 +123,7 @@ const KisaHealth = () => {
                                                                             <li>Course period (stipend): 5000/-</li>
                                                                             <li>Internship (stipend): 6500/-</li>
                                                                         </ul>
+                                                                        <a href="#" className="doctotal-btn">View More</a>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -153,6 +154,7 @@ const KisaHealth = () => {
                                                                             <li>Course period (stipend): 3000/-</li>
                                                                             <li>Internship (stipend): 5000/-</li>
                                                                         </ul>
+                                                                        <a href="#" className="doctotal-btn">View More</a>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -183,6 +185,7 @@ const KisaHealth = () => {
                                                                             <li>Course period (stipend): 2000/-</li>
                                                                             <li>Internship (stipend): 3000/-</li>
                                                                         </ul>
+                                                                        <a href="#" className="doctotal-btn">View More</a>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -213,6 +216,7 @@ const KisaHealth = () => {
                                                                             <li>Course period (stipend): 2000/-</li>
                                                                             <li>Internship (stipend): 3000/-</li>
                                                                         </ul>
+                                                                        <a href="#" className="doctotal-btn">View More</a>
                                                                     </div>
                                                                 </div>
                                                             </div>

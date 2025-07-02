@@ -2,14 +2,11 @@ import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import React from 'react'
 import { getStaticPageContent } from '../lib/getStaticPageContent';
-import { cookies } from 'next/headers';
 
 const Faqs = async () => {
     const data = await getStaticPageContent("faqs");
     const pageContent = data?.data[0]?.pageContent;
     const pageMeta = data?.data[0]?.metaSection;
-
-   
 
 
     return (
@@ -28,9 +25,9 @@ const Faqs = async () => {
                                 <div className="col-12">
                                     <ul className="breadcrumb mb-0">
                                         <li>
-                                            <a href="index.php">Home</a>
+                                            <a href="/">Home</a>
                                         </li>
-                                        <li className="active"> FAQs</li>
+                                        <li className="active"> {pageContent ? pageContent[0]?.title : null}</li>
                                     </ul>
                                 </div>
                             </div>
@@ -66,13 +63,7 @@ const Faqs = async () => {
                             </div>
                         </div>
                     </section>
-
                 </div>
-
-
-
-
-
             </div> 
             <Footer />
         </>

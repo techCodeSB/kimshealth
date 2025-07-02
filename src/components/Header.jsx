@@ -1,5 +1,4 @@
 "use client"
-import { usePathname } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 import langLoc from "@/app/lib/getLangLoc";
 import { onLangChangeRedirection, onLocChangeRedirection, } from "@/helper/onChageRedirection";
@@ -10,11 +9,8 @@ import Cookies from 'js-cookie';
 const Header = () => {
     const [allLanguages, setAllLanguage] = useState([]); // Store all language;
     const [allLocations, setAllLocations] = useState([]); // Store all locations;
-    const pathname = usePathname();
-    let [selectedLang, setSelectedLang] = useState(null);
-    let [selectedLoc, setSelectedLoc] = useState(null);
-
-
+    const [selectedLang, setSelectedLang] = useState(null);
+    const [selectedLoc, setSelectedLoc] = useState(null);
 
 
     // Get all languages
@@ -36,11 +32,7 @@ const Header = () => {
         setSelectedLang(JSON.parse(Cookies.get("systemLang")))
         setSelectedLoc(JSON.parse(Cookies.get("systemLocation")))
 
-
-        console.log("in useEffect--->", JSON.parse(Cookies.get("systemLang")))
-
     }, [])
-
 
 
 

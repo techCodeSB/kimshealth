@@ -1,9 +1,13 @@
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
-import React from 'react';
+import { getStaticPageContent } from '../lib/getStaticPageContent';
 
 
-const EwsServices = () => {
+const EwsServices = async () => {
+    const data = await getStaticPageContent("ews-services");
+    const pageContent = data?.data[0]?.pageContent;
+    const pageMeta = data?.data[0]?.metaSection;
+
     return (
         <>
             <Header />
@@ -11,7 +15,7 @@ const EwsServices = () => {
                 <div className="patients-and-visitors-main-page">
                     <div className="page-header">
                         <div className="container">
-                            <h2>EWS Compliance</h2>
+                            <h2>{pageContent[0]?.title}</h2>
                         </div>
                     </div>
                     <section className="breadcrumb-wrapper py-2">
@@ -20,9 +24,9 @@ const EwsServices = () => {
                                 <div className="col-12">
                                     <ul className="breadcrumb mb-0">
                                         <li>
-                                            <a href="index.php">Home</a>
+                                            <a href="/">Home</a>
                                         </li>
-                                        <li className="active"> EWS Compliance</li>
+                                        <li className="active"> {pageContent[0]?.title}</li>
                                     </ul>
                                 </div>
                             </div>
@@ -32,34 +36,10 @@ const EwsServices = () => {
                     <section className="section">
                         <div className="container">
                             <div className="main-heading main-list sub-heading">
-                                <h2>EWS (ECONOMICALLY WEAKER SECTION)</h2>
-                                <ul>
-                                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                                        labore et adipiscing elit,</li>
-                                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                                        labore et adipiscing elit,</li>
-                                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                                        labore et adipiscing elit,</li>
-                                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                                        labore et adipiscing elit,</li>
-                                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                                        labore et adipiscing elit,</li>
-                                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                                        labore et adipiscing elit,</li>
-                                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                                        labore et adipiscing elit,</li>
-                                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                                        labore et adipiscing elit,</li>
-                                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                                        labore et adipiscing elit,</li>
-                                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                                        labore et adipiscing elit,</li>
-                                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                                        labore et adipiscing elit,</li>
-                                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                                        labore et adipiscing elit,</li>
-
-                                </ul>
+                                <h2>{pageContent[1]?.title}</h2>
+                                <div
+                                    dangerouslySetInnerHTML={{ __html: pageContent[1]?.details || "" }}
+                                ></div>
 
                             </div>
                         </div>
@@ -69,36 +49,12 @@ const EwsServices = () => {
                     <section className="section">
                         <div className="container">
                             <div className="main-heading">
-                                <h2>Compliance Report</h2>
+                                <h2>{pageContent[2]?.title}</h2>
                             </div>
 
-                            <div className="table-responsive services-table mt-4">
-                                <table className="table table-hover text-start" style={{width:"70%"}}>
-                                    <tbody>
-                                        <tr>
-                                            <th>Particulars </th>
-                                            <th>Compliance Report </th>
-                                        </tr>
-
-                                        <tr>
-                                            <td>Particulars</td>
-                                            <td>Compliance Report</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Particulars</td>
-                                            <td>Compliance Report</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Particulars</td>
-                                            <td>Compliance Report</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Particulars</td>
-                                            <td>Compliance Report</td>
-                                        </tr>
-
-                                    </tbody>
-                                </table>
+                            <div
+                                dangerouslySetInnerHTML={{ __html: pageContent[2]?.details || "" }}
+                                className="table-responsive services-table mt-4">
                             </div>
                         </div>
                     </section>
@@ -109,4 +65,5 @@ const EwsServices = () => {
     )
 }
 
-export default EwsServices
+export default EwsServices;
+

@@ -1,8 +1,12 @@
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import React from 'react'
+import { getStaticPageContent } from '../lib/getStaticPageContent';
 
-const SecondOpinion = () => {
+const SecondOpinion = async () => {
+    const data = await getStaticPageContent("second-opinion");
+        const pageContent = data?.data[0]?.pageContent;
+        const pageMeta = data?.data[0]?.metaSection;
     return (
         <>
             <Header />
@@ -10,7 +14,7 @@ const SecondOpinion = () => {
                 <div className="find-doctor-main-page">
                     <div className="page-header">
                         <div className="container">
-                            <h2>Second Opinion</h2>
+                            <h2>{pageContent[0]?.title}</h2>
                         </div>
                     </div>
                     <section className="breadcrumb-wrapper py-2">
@@ -19,9 +23,9 @@ const SecondOpinion = () => {
                                 <div className="col-12">
                                     <ul className="breadcrumb mb-0">
                                         <li>
-                                            <a href="index.php">Home</a>
+                                            <a href="/">Home</a>
                                         </li>
-                                        <li className="active"> Second Opinion </li>
+                                        <li className="active">{pageContent[0]?.title}</li>
                                     </ul>
                                 </div>
                             </div>
@@ -36,11 +40,11 @@ const SecondOpinion = () => {
                                         <div className="tab-group text-center mb-3">
                                             {/*  onclick="showBox(this,'omega')" */}
                                             <button type="button" className="btn-tab treat-tab active">
-                                                Get a Medical Second Opinion</button>
+                                                {pageContent[1]?.title}</button>
 
                                             {/* onclick="showBox(this,'omega1')" */}
                                             <button type="button" className="btn-tab treat-tab " >
-                                                Get a Cancer Opinion</button>
+                                                {pageContent[2]?.title}</button>
 
 
                                         </div>
@@ -52,7 +56,7 @@ const SecondOpinion = () => {
                                     <div className="treat-box" id="omega" style={{display: "block"}}>
 
                                         <div className="main-heading sub-heading main-list mb-4">
-                                            <h2>Get Medical Second Opinion</h2>
+                                            <h2>{pageContent[1]?.title}</h2>
 
                                         </div>
                                         <div className="custom-from bg-field mx-0">
@@ -124,7 +128,7 @@ const SecondOpinion = () => {
 
                                     <div className="treat-box" id="omega1" style={{display: "none"}}>
                                         <div className="main-heading sub-heading main-list mb-4">
-                                            <h2>Get a Cancer Opinion</h2>
+                                            <h2>{pageContent[2]?.title}</h2>
 
                                         </div>
                                         <div className="custom-from bg-field mx-0">

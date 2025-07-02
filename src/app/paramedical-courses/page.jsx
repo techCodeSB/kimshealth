@@ -1,6 +1,7 @@
-import Footer from '@/components/Footer'
-import Header from '@/components/Header'
-import React from 'react'
+import Footer from '@/components/Footer';
+import Header from '@/components/Header';
+import React from 'react';
+
 
 const ParamedicalCourse = () => {
     return (
@@ -108,6 +109,7 @@ const ParamedicalCourse = () => {
                                                         <li className="calender-doc">Commencement: Commencement</li>
                                                         <li className="car-seat">No of seat: 15</li>
                                                     </ul>
+                                                    <a href="#" className="doctotal-btn">View More</a>
                                                 </div>
                                             </div>
 
@@ -121,6 +123,7 @@ const ParamedicalCourse = () => {
                                                         <li className="calender-doc">Commencement: Commencement</li>
                                                         <li className="car-seat">No of seat: 6</li>
                                                     </ul>
+                                                    <a href="#" className="doctotal-btn">View More</a>
                                                 </div>
                                             </div>
 
@@ -134,6 +137,7 @@ const ParamedicalCourse = () => {
                                                         <li className="calender-doc">Commencement: Commencement</li>
                                                         <li className="car-seat">No of seat: 6</li>
                                                     </ul>
+                                                    <a href="#" className="doctotal-btn">View More</a>
                                                 </div>
                                             </div>
 
@@ -148,6 +152,7 @@ const ParamedicalCourse = () => {
                                                         <li className="calender-doc">Commencement: Commencement</li>
                                                         <li className="car-seat">No of seat: 25</li>
                                                     </ul>
+                                                    <a href="#" className="doctotal-btn">View More</a>
                                                 </div>
                                             </div>
                                         </div>

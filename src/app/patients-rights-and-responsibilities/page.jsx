@@ -3,8 +3,9 @@ import Header from '@/components/Header'
 import React from 'react'
 import { getStaticPageContent } from '../lib/getStaticPageContent';
 
-const RefundAndCancellation = async () => {
-    const data = await getStaticPageContent("refund-and-cancellation-policy");
+
+const PatientRights = async () => {
+    const data = await getStaticPageContent("patients-rights-and-responsibilities");
     const pageContent = data?.data[0]?.pageContent;
     const pageMeta = data?.data[0]?.metaSection;
 
@@ -12,7 +13,7 @@ const RefundAndCancellation = async () => {
         <>
             <Header />
             <div role="main" className="main">
-                <div className="refund-policy-main-page">
+                <div className="privacy-policy-main-page">
                     <div className="page-header">
                         <div className="container">
                             <h2>{pageContent[0]?.title}</h2>
@@ -35,9 +36,26 @@ const RefundAndCancellation = async () => {
 
                     <section className="section">
                         <div className="container">
-                            <div className="main-heading main-list sub-heading">
-                                <h2>{pageContent[1]?.title}</h2>
-                                <div dangerouslySetInnerHTML={{__html: pageContent[1]?.details}}></div>
+                            <div className="row">
+                                <div className="col-md-6 border-right">
+                                    <div className="box-rights p-3">
+                                        <div className="main-heading main-list sub-heading ">
+                                            <h2>{pageContent[1]?.title}</h2>
+                                            <div dangerouslySetInnerHTML={{ __html: pageContent[1]?.details || "" }}>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="col-md-6">
+                                    <div className="box-rights p-3">
+                                        <div className="main-heading main-list sub-heading ">
+                                            <h2>{pageContent[2]?.title}</h2>
+                                            <div dangerouslySetInnerHTML={{ __html: pageContent[2]?.details || "" }}>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </section>
@@ -48,4 +66,4 @@ const RefundAndCancellation = async () => {
     )
 }
 
-export default RefundAndCancellation
+export default PatientRights

@@ -25,9 +25,9 @@ const BloodBank = async () => {
                                 <div className="col-12">
                                     <ul className="breadcrumb mb-0">
                                         <li>
-                                            <a href="index.php">Home</a>
+                                            <a href="/">Home</a>
                                         </li>
-                                        <li className="active"> Blood Bank</li>
+                                        <li className="active"> {pageContent[0]?.title}</li>
                                     </ul>
                                 </div>
                             </div>

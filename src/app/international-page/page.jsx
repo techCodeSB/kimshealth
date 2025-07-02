@@ -3,9 +3,11 @@ import Footer from '@/components/Footer'
 import FromDoctor from '@/components/FromDoctor'
 import Header from '@/components/Header'
 import TestimonialSection from '@/components/TestimonialSection'
-import React from 'react'
+import { getStaticPageContent } from '../lib/getStaticPageContent'
 
-const InternationalPage = () => {
+const InternationalPage = async () => {
+
+
     return (
         <>
             <Header />
@@ -960,13 +962,13 @@ const InternationalPage = () => {
                     </section>
 
                     <div className="line-divider"></div>
-                    <TestimonialSection/>
+                    <TestimonialSection />
 
                     <div className="line-divider"></div>
-                    <FromDoctor/>
+                    <FromDoctor />
 
                     <div className="line-divider"></div>
-                    <BlogCarousel/>
+                    <BlogCarousel />
                 </div>
             </div>
 

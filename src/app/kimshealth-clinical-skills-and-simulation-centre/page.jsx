@@ -1,54 +1,89 @@
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
-import React from 'react';
+import { getStaticPageContent } from '../lib/getStaticPageContent';
 
-const ClinicalSkills = () => {
+const ClinicalSkills = async () => {
+    const field = "populate[0]=pageContent&populate[1]=pageContent.bannerItem&populate[2]=pageContent.bannerItem.bannerImageDesktop&populate[3]=pageContent.bannerItem.bannerImageMobile&populate[4]=metaSection&populate[5]=pageContent.journal&populate[6]=pageContent.journal.thumbnailImage&populate[7]=pageContent.journal.file";
+
+    const data = await getStaticPageContent("kimshealth-clinical-skills-and-simulation-centre", field);
+    const pageContent = data?.data[0]?.pageContent;
+    const pageMeta = data?.data[0]?.metaSection;
+
+    console.log(pageContent)
     return (
         <>
             <Header />
             <div role="main" className="main">
                 <div className="emergency-medicine-main-page">
-                    <section className="section details-page-before py-0">
+                    {/* Desktop section */}
+                    <section className="section details-page-before py-0 d-lg-block d-none">
                         <div className="procedures-details-page-header inner-pages-header">
                             <div className="container-fluid px-0">
                                 <div className="row">
                                     <div className="col-md-6 details-proceduce-banner-left-col">
-
                                         <div className="hospital-banner-container">
                                             <div className="breadcrumb-wrapper py-2 ps-2 ms-1">
                                                 <div className="row">
                                                     <div className="col-12 px-0">
                                                         <ul className="breadcrumb mb-0">
                                                             <li>
-                                                                <a href="index.php">Home</a>
+                                                                <a href="/">Home</a>
                                                             </li>
-                                                            <li>
-                                                                <a href="hospital-master.php">Academics</a>
-                                                            </li>
-                                                            <li className="active"> KIMSHEALTH Clinical Skills and Simulation Centre </li>
+                                                            <li className="active"> {pageContent[0]?.title} </li>
                                                         </ul>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div className="details-banner">
                                                 <div className="details-heading">
-                                                    <h3>KIMSHEALTH Clinical Skills and Simulation Centre</h3>
+                                                    <h3>{pageContent[0]?.title}</h3>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div className="col-md-6 details-proceduce-banner-right-col">
-                                        <img src="img/clinical-skill-banner.jpg" className="img-fluid details-banner-image" alt="" />
+                                    <div className="col-md-6 details-proceduce-banner-right-col mt-lg-0 mt-4">
+                                        <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${pageContent[1]?.bannerItem[0].bannerImageDesktop.url}`} className="img-fluid details-banner-image" alt={pageContent[1]?.bannerItem[0].title} />
                                     </div>
-
-                                    {/* <!-- <div className="col-md-6">
-                                        <img src="img/details-banner.png" alt="" className="img-fluid w-100">
-                                    </div> --> */}
                                 </div>
                             </div>
                         </div>
-
+                    </section>
+                    {/* mobile section */}
+                    <section className="section details-page-before py-0 d-lg-none d-block">
+                        <div className="procedures-details-page-header inner-pages-header">
+                            <div className="container-fluid px-0">
+                                <div className="row">
+                                    <div className="col-md-6 details-proceduce-banner-left-col mt-lg-auto">
+                                        <div className="hospital-banner-container">
+                                            <div className="breadcrumb-wrapper py-2 ps-2 ms-1">
+                                                <div className="row">
+                                                    <div className="col-12">
+                                                        <ul className="breadcrumb mb-0">
+                                                            <li>
+                                                                <a href="/">Home</a>
+                                                            </li>
+                                                            <li className="active"> {pageContent[0]?.title} </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="details-proceduce-banner-right-col mt-lg-0 mt-4">
+                                                <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${pageContent[1]?.bannerItem[0].bannerImageDesktop.url}`}
+                                                    className="img-fluid details-banner-image" alt={pageContent[1]?.bannerItem[0].title} />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-md-6 mt-lg-0 mt-4">
+                                    <div className="details-banner">
+                                        <div className="details-heading">
+                                            <h3>{pageContent[0]?.title}</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </section>
 
                     <section className="section doctor-line-divider">
@@ -57,16 +92,9 @@ const ClinicalSkills = () => {
                                 <div className="col-md-8 ps-lg-0 ">
                                     <section className="section pt-0">
                                         <div className="container">
-                                            <div className="main-heading sub-heading">
-
-                                                <h3>“Enhancing quality and patient safety in healthcare”</h3>
-                                                <p>Clinical skills are a mix of discrete and measurable knowledge, skills and attitudes essential for patient safety and quality health care. Clinical skills acquisition is an important aspect of medical education and a bridge between gaining procedural knowledge and clinical competence. Learning clinical skills on ‘real patients’ not only jeopardizes patient safety but also raises many ethical concerns.</p>
-                                                <p> KIMSHEALTH clinical skills and simulation center represents the leading edge in clinical education by offering an authentic, immersive environment for healthcare professionals to develop safe, innovative and compassionate approaches to patient care. We offer a “mistake forgiving” where participants can safely learn and test their knowledge, skills and abilities in a simulated clinical setting. Our training improves skills not only in novices but also in experts.</p>
-
-                                                <h2>Clinical Skills Lab</h2>
-                                                <p>Our skill lab houses state of the art equipments, anatomical models and electronic simulators to provide hands on
-                                                    learning experiences for medical, dental and nursing graduates, doctors and nursing staff for the practice of clinical
-                                                    skills which are deemed essential for the effective and safe management of patients.</p>
+                                            <div
+                                                dangerouslySetInnerHTML={{ __html: pageContent[2]?.details }}
+                                                className="main-heading sub-heading">
                                             </div>
                                         </div>
                                     </section>
@@ -74,20 +102,9 @@ const ClinicalSkills = () => {
                                     <section className="section">
                                         <div className="container">
                                             <div className="main-heading sub-heading main-list">
-                                                <h2>Facilities</h2>
-                                                <p>Basic and advanced skills development packages in accordance with standard protocols in:</p>
-                                                <ul>
-                                                    <li>Intra venous access</li>
-                                                    <li>Central line placement</li>
-                                                    <li>Lumbar puncture</li>
-                                                    <li>ICD insertion</li>
-                                                    <li>Needle thoracotomy</li>
-                                                    <li>Abdominal paracentesis</li>
-                                                    <li>Intubation</li>
-                                                    <li>Intraosseous insertion</li>
-                                                    <li>Nasogastric tube insertion</li>
-                                                    <li>Urinary catheterization</li>
-                                                </ul>
+                                                <h2>{pageContent[4]?.title}</h2>
+                                                <div dangerouslySetInnerHTML={{ __html: pageContent[4]?.details }}>
+                                                </div>
                                             </div>
                                         </div>
                                     </section>
@@ -95,10 +112,9 @@ const ClinicalSkills = () => {
                                     <section className="section">
                                         <div className="container">
                                             <div className="main-heading sub-heading main-list">
-                                                <h2>Simulation Centre (SC)</h2>
-                                                <p>Our simulation center provides realistic, accurate, real-time medical simulation. We allow participants to develop skill sets in a safe, controlled environment away from the clinical setting by providing computer-generated scenarios,
-                                                    simulating real life acute medical conditions. We currently have high-fidelity adult, pediatric, and neonatal
-                                                    mannequins to Empirical knowledge and help develop the practical knowledge.</p>
+                                                <h2>{pageContent[5]?.title}</h2>
+                                                <div dangerouslySetInnerHTML={{ __html: pageContent[5]?.details }}>
+                                                </div>
                                             </div>
                                         </div>
                                     </section>
@@ -106,22 +122,9 @@ const ClinicalSkills = () => {
                                     <section className="section">
                                         <div className="container">
                                             <div className="main-heading sub-heading main-list">
-                                                <h2>Procedures in Our Simulation Lab</h2>
-                                                <p>Customized standard protocol based scenarios with due stress on complete participation and hands on practice for
-                                                    continuous skills training and improvement of participants in the following areas before moving to actual procedures. We
-                                                    also focus on clinical and behavioral aspects of performance, focusing on crisis management and error prevention.</p>
-                                                <ul>
-                                                    <li>Patient assessment</li>
-                                                    <li>Simulated clinical situations – Respiratory and cardiac arrest</li>
-                                                    <li>Acute airway emergencies</li>
-                                                    <li>Sepsis management</li>
-                                                    <li>Central line placement</li>
-                                                    <li>Enhancing teamwork, effective communication and resource management</li>
-                                                    <li>Punctuated with debriefings supported by videotaped scenarios.</li>
-                                                </ul>
-                                                <h3 className="mt-3">Need Help Finding Information?</h3>
-                                                <p className="mb-0"><a href="tel:+914713041472">Contact us: +91 471 304 1472/1424</a></p>
-                                                <p className="mb-0"><a href="mailto:socomer@kimshealth.org">E mail us: socomer@kimshealth.org</a></p>
+                                                <h2>{pageContent[6]?.title}</h2>
+                                                <div dangerouslySetInnerHTML={{ __html: pageContent[6]?.details }}>
+                                                </div>
                                             </div>
                                         </div>
                                     </section>
@@ -151,12 +154,15 @@ const ClinicalSkills = () => {
 
 
                                     </div>
-                                    <h4>For More Information Contact Us</h4>
-                                    <p><strong>Dr. Manoj M.T</strong></p>
-                                    <p> Senior Manager</p>
-                                    <a href="tel:+914712941472"><i className="fa-solid fa-phone"></i> +91 471 294 1472</a>
-                                    <a href="mailto:socomer@kimshealth.org"><i className="fa-solid fa-envelope"></i> socomer@kimshealth.org</a>
-
+                                    <h4>{pageContent[3]?.sectionTitle}</h4>
+                                    <p><strong>{pageContent[3]?.contactPerson}</strong></p>
+                                    <p> {pageContent[3]?.designation}</p>
+                                    <a href={pageContent[3]?.phone}><i className="fa-solid fa-phone"></i>
+                                        {pageContent[3]?.phone}</a>
+                                    {
+                                        pageContent[3]?.email ?
+                                            <a href={`mailto:${pageContent[3]?.email}`}><i className="fa-solid fa-envelope"></i> {pageContent[3]?.email}</a> : null
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -165,88 +171,25 @@ const ClinicalSkills = () => {
                     <section className="section journal-section">
                         <div className="container">
                             <div className="main-heading">
-                                <h2>Journals</h2>
+                                <h2>{pageContent[7]?.title}</h2>
                             </div>
                             <div className="owl-carousel owl-theme journal-slider">
-                                <div className="expert-card" data-aos="fade-right">
-                                    <a href="#">
-                                        <div className="card border-0">
-                                            <div className="card-top">
-                                                <img src="img/journal1.jpg" className="img-fluid w-100" alt="" />
-                                            </div>
-                                            <div className="card-content">
-                                                <h5>KIMSHEALTH Expressions - Issue 31</h5>
-                                            </div>
+                                {
+                                    pageContent[7]?.journal.map((j, index) => {
+                                        return <div className="expert-card" data-aos="fade-right" key={index}>
+                                            <a download href={`${process.env.NEXT_PUBLIC_IMAGE_URL}${j.file.url}`} >
+                                                <div className="card border-0">
+                                                    <div className="card-top">
+                                                        <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${j.thumbnailImage.url}`} className="img-fluid w-100" alt={j.title} />
+                                                    </div>
+                                                    <div className="card-content">
+                                                        <h5>{j.title}</h5>
+                                                    </div>
+                                                </div>
+                                            </a>
                                         </div>
-                                    </a>
-
-                                </div>
-
-                                <div className="expert-card" data-aos="fade-right">
-                                    <div className="card border-0 p-0">
-                                        <div className="card-top">
-                                            <img src="img/journal2.jpg" className="img-fluid w-100" alt="" />
-                                        </div>
-                                        <div className="card-content">
-                                            <h5>KIMSHEALTH Expressions - Issue 30</h5>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                                <div className="expert-card" data-aos="fade-left">
-                                    <a href="#">
-                                        <div className="card border-0 p-0">
-                                            <div className="card-top">
-                                                <img src="img/journal3.jpg" className="img-fluid w-100" alt="" />
-                                            </div>
-                                            <div className="card-content">
-                                                <h5>KIMSHEALTH Expressions - Issue 29</h5>
-                                            </div>
-                                        </div>
-                                    </a>
-
-                                </div>
-
-                                <div className="expert-card" data-aos="fade-left">
-                                    <a href="#">
-                                        <div className="card border-0 p-0">
-                                            <div className="card-top">
-                                                <img src="img/journal4.jpg" className="img-fluid w-100" alt="" />
-                                            </div>
-                                            <div className="card-content">
-                                                <h5>KIMSHEALTH Scientific Proceedings 12</h5>
-                                            </div>
-                                        </div>
-                                    </a>
-
-                                </div>
-
-                                <div className="expert-card" data-aos="fade-left">
-                                    <a href="#">
-                                        <div className="card border-0 p-0">
-                                            <div className="card-top">
-                                                <img src="img/journal5.jpg" className="img-fluid w-100" alt="" />
-                                            </div>
-                                            <div className="card-content">
-                                                <h5>KIMSHEALTH Scientific Proceedings 12</h5>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-
-                                <div className="expert-card" data-aos="fade-left">
-                                    <a href="#">
-                                        <div className="card border-0 p-0">
-                                            <div className="card-top">
-                                                <img src="img/journal5.jpg" className="img-fluid w-100" alt="" />
-                                            </div>
-                                            <div className="card-content">
-                                                <h5>KIMSHEALTH Scientific Proceedings 12</h5>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
+                                    })
+                                }
                             </div>
                         </div>
                     </section>

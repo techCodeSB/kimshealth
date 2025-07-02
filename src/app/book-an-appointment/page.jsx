@@ -1,8 +1,13 @@
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
-import React from 'react'
+import { getStaticPageContent } from '../lib/getStaticPageContent';
 
-const BookAnAppoinment = () => {
+const BookAnAppoinment = async () => {
+    const data = await getStaticPageContent("book-an-appointment");
+    const pageContent = data?.data[0]?.pageContent;
+    const pageMeta = data?.data[0]?.metaSection;
+
+
     return (
         <>
             <Header />
@@ -10,7 +15,7 @@ const BookAnAppoinment = () => {
                 <div className="book-appointment-main-page">
                     <div className="page-header">
                         <div className="container">
-                            <h2>Book an Appointment</h2>
+                            <h2>{pageContent[0]?.title}</h2>
                         </div>
                     </div>
                     <section className="breadcrumb-wrapper py-2">
@@ -19,9 +24,9 @@ const BookAnAppoinment = () => {
                                 <div className="col-12">
                                     <ul className="breadcrumb mb-0">
                                         <li>
-                                            <a href="index.php">Home</a>
+                                            <a href="/">Home</a>
                                         </li>
-                                        <li className="active"> Book an Appointment </li>
+                                        <li className="active"> {pageContent[0]?.title} </li>
                                     </ul>
                                 </div>
                             </div>
@@ -34,27 +39,27 @@ const BookAnAppoinment = () => {
                                 <div className="row justify-content-between">
                                     <div className="col-md-5 mb-3">
                                         <div className="main-heading">
-                                            <h2>Personal Information</h2>
+                                            <h2>{pageContent[1]?.title}</h2>
                                         </div>
                                         <div className="custom-from bg-field mx-0">
                                             <div className="row justify-content-between">
                                                 <div className="col-xl-12 col-lg-12 col-md-12 col-12 mb-3">
                                                     <label htmlFor=''>Patient / Visitor Name*</label>
                                                     <input type="text" placeholder="Enter Your Name" name=""
-                                                        className="form-control pe-0"/>
+                                                        className="form-control pe-0" />
 
                                                 </div>
                                                 <div className="col-xl-12 col-lg-12 col-md-12 col-12 mb-3">
                                                     <label htmlFor=''>Contact Number*</label>
                                                     <input type="text" placeholder="Enter Your Phone Number" name=""
-                                                        className="form-control pe-0"/>
+                                                        className="form-control pe-0" />
 
                                                 </div>
 
                                                 <div className="col-xl-12 col-lg-12 col-md-12 col-12 mb-3">
                                                     <label htmlFor=''>Email Address*</label>
                                                     <input type="text" placeholder="Enter Your Email Address" name=""
-                                                        className="form-control pe-0"/>
+                                                        className="form-control pe-0" />
 
                                                 </div>
                                                 <div className="col-xl-12 col-lg-12 col-md-12 col-12 mb-3">
@@ -75,7 +80,7 @@ const BookAnAppoinment = () => {
                                     </div>
                                     <div className="col-md-5 mb-3">
                                         <div className="main-heading">
-                                            <h2>Appointment Schedule</h2>
+                                            <h2>{pageContent[2]?.title}</h2>
                                         </div>
                                         <div className="custom-from bg-field mx-0">
                                             <div className="row justify-content-between">
@@ -103,9 +108,9 @@ const BookAnAppoinment = () => {
                                                     <label htmlFor=''>Appointment Date*</label>
                                                     <div className="input-group">
                                                         <input type="text" placeholder="Select Your Date" name=""
-                                                            className="form-control pe-0 datepicker" autoComplete="off"/>
-                                                            <span className="input-group-text" id="from-icon"><i
-                                                                className="icon-calendar"></i></span>
+                                                            className="form-control pe-0 datepicker" autoComplete="off" />
+                                                        <span className="input-group-text" id="from-icon"><i
+                                                            className="icon-calendar"></i></span>
                                                     </div>
 
 
@@ -115,9 +120,9 @@ const BookAnAppoinment = () => {
                                                     <label htmlFor=''>Appointment Time*</label>
                                                     <div className="input-group">
                                                         <input type="text" placeholder="Select Your Time" name=""
-                                                            className="form-control pe-0 timePicker" autoComplete="off"/>
-                                                            <span className="input-group-text" id="from-icon"><i
-                                                                className="icon-clock"></i></span>
+                                                            className="form-control pe-0 timePicker" autoComplete="off" />
+                                                        <span className="input-group-text" id="from-icon"><i
+                                                            className="icon-clock"></i></span>
                                                     </div>
 
 

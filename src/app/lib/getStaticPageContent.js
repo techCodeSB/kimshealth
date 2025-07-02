@@ -1,6 +1,6 @@
 import { cookies } from 'next/headers';
 
-export const getStaticPageContent = async (slug = 'home', lang = true, loc = true) => {
+export const getStaticPageContent = async (slug = 'home', field = "", lang = true, loc = true) => {
     const cookieStore = await cookies();
 
     try {
@@ -12,7 +12,7 @@ export const getStaticPageContent = async (slug = 'home', lang = true, loc = tru
         let staticContentUrlPath = `static-page-contents?`;
 
         //Get Fields
-        staticContentUrlPath += `populate[pageContent][populate]=*&populate[metaSection]=*`;
+        staticContentUrlPath += field === "" ? `populate[pageContent][populate]=*&populate[metaSection]=*` : field;
 
         //Data filter
         staticContentUrlPath += `&filters[pageCategory][id][$eq]=${staticPageRes?.data[0]?.id}`;
