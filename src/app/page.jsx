@@ -4,28 +4,108 @@ import ExpertCarousel from '@/components/ExpertCarousel'
 import Footer from '@/components/Footer'
 import FromDoctor from '@/components/FromDoctor'
 import Header from '@/components/Header'
-// import HomeBanner from '@/components/HomeBanner'
 import SocialMedia from '@/components/SocialMedia'
 import TestimonialSection from '@/components/TestimonialSection'
 import WallframeSection from '@/components/WallframeSection'
-import mainHelper from '@/app/lib/getLangLoc'
-import dynamic from 'next/dynamic'
-import { cookies } from 'next/headers'
 import { getStaticPageContent } from './lib/getStaticPageContent'
-const HomeBanner = dynamic(()=>import("@/components/HomeBanner"));
+import doctorData from './lib/getDoctor'
+import { getBaseUrl } from './lib/getBaseUrl';
+import blogData from './lib/getBlog';
+import testimonialData from './lib/getTestimonial'
+import getSpecialityData from './lib/getSpeciality'
+import getAwardData from './lib/getAward'
+import doctorTalkData from './lib/getDoctorTalk'
+
 
 
 
 const Home = async () => {
-  const pageData = await getStaticPageContent();
+  const field = "populate[0]=pageContent&populate[1]=pageContent.bannerItem&populate[2]=pageContent.bannerItem.bannerImageDesktop&populate[3]=pageContent.bannerItem.bannerImageMobile&populate[4]=metaSection&populate[5]=pageContent.highlightButtonItem&populate[6]=pageContent.highlightButtonItem.iconImage";
+  const data = await getStaticPageContent("home", field);
+  const pageContent = data?.data[0]?.pageContent;
+  const pageMeta = data?.data[0]?.metaSection;
+
+  // console.log(pageContent);
+
+  const specialityDataSet = {
+    sectionTitle: pageContent[2]?.title,
+    buttonText: 'View All', buttonURL: '#',
+    data: await getSpecialityData.getAll(),
+    baseUrl: await getBaseUrl(true, true)
+  };
+
+  const expertDataSet = {
+    sectionTitle: pageContent[3]?.title,
+    buttonText: 'View All', buttonURL: '#',
+    data: await doctorData.getDoctorAll(10),
+    baseUrl: await getBaseUrl(true, true)
+  };
+
+  const awardDataSet = {
+    sectionTitle: pageContent[4]?.title,
+    buttonText: 'View All', buttonURL: '#',
+    data: await getAwardData.getAll(),
+    baseUrl: await getBaseUrl(true, true)
+  };
+
+  const testimonialDataSet = {
+    sectionTitle: pageContent[5]?.title,
+    buttonText: 'View All', buttonURL: '#',
+    data: await testimonialData.getAll(),
+    baseUrl: await getBaseUrl(true, true)
+  }
+
+  const blogDataSet = {
+    sectionTitle: pageContent[6]?.title,
+    buttonText: 'View All', buttonURL: '#',
+    data: await blogData.allBlog(),
+    baseUrl: await getBaseUrl(true, true)
+  }
+
+  const docTalkDataSet = {
+    sectionTitle: pageContent[7]?.title,
+    buttonText: 'View All', buttonURL: '#',
+    data: await doctorTalkData.allData(),
+    baseUrl: await getBaseUrl(true, true)
+  }
+
+
+
 
   return (
     <>
       <Header />
       <div role="main" className="main">
-        <HomeBanner/>
+        <section className="d-lg-block d-none">
+          <div className="container-wrapper">
+            <div className="owl-carousel owl-theme homepage-slider">
+              {
+                pageContent[0]?.bannerItem.map((banner, index) => {
+                  return <div className="item" key={index}>
+                    <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${banner.bannerImageDesktop.url}`}
+                      className="img-fluid" alt={banner.title} />
+                  </div>
+                })
+              }
+            </div>
+          </div>
+        </section>
+        <section className="d-lg-none d-block">
+          <div className="container-wrapper">
+            <div className="owl-carousel owl-theme homepage-slider">
+              {
+                pageContent[0]?.bannerItem.map((banner, index) => {
+                  return <div className="item" key={index}>
+                    <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${banner.bannerImageMobile.url}`}
+                      className="img-fluid" alt={banner.title} />
+                  </div>
+                })
+              }
+            </div>
+          </div>
+        </section>
 
-        {/* <!-- ======= homepage end ========== --> */}
+        {/* <!-- ======= homepage start ========== --> */}
         <section className="section py-4 d-lg-block d-none">
           <div className="container">
             <div className="custom-from">
@@ -67,61 +147,29 @@ const Home = async () => {
             <div className="row">
               <div className="cta-col ctn-left-col">
                 <div className="cta-diff">
-                  <h3>I am here to <i className="icon-arrow-right"></i></h3>
+                  <h3>{pageContent[1].title} <i className="icon-arrow-right"></i></h3>
                 </div>
               </div>
-              <div className="cta-col">
-                <a href="#">
-                  <div className="cta-diff">
-                    <div className="d-flex align-items-center justify-content-center">
-                      <img src="/img/doctor.png" alt="" />
-                      <h3>Find a <br /> <span>Doctor</span></h3>
-                      {/* <!-- <div className="cta-right-arrow">
+              {
+
+                pageContent[1].highlightButtonItem.map((h, index) => {
+                  return <div className="cta-col" key={index}>
+                    <a href={h.hyperlink}>
+                      <div className="cta-diff">
+                        <div className="d-flex align-items-center justify-content-center">
+                          <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${h.iconImage?.url}`} alt={h.title} />
+                          <h3>{h.title} <br /> <span>{h.subTitle}</span></h3>
+                          {/* <!-- <div className="cta-right-arrow">
                           <img src="/img/right-arrow.svg" className="img-fluid" alt=""/>
                         </div> --> */}
-                    </div>
+                        </div>
+                      </div>
+                    </a>
                   </div>
-                </a>
-              </div>
-              <div className="cta-col">
-                <a href="#">
-                  <div className="cta-diff">
-                    <div className="d-flex align-items-center justify-content-center">
-                      <img src="/img/appointment.png" alt="" />
-                      <h3>Book an <br /> <span>Appointment</span></h3>
-                      {/* <!-- <div className="cta-right-arrow">
-                          <img src="/img/right-arrow.svg" className="img-fluid" alt=""/>
-                        </div> --> */}
-                    </div>
-                  </div>
-                </a>
-              </div>
-              <div className="cta-col">
-                <a href="#">
-                  <div className="cta-diff">
-                    <div className="d-flex align-items-center justify-content-center">
-                      <img src="/img/health.png" alt="" />
-                      <h3>Book a <br /> <span>Health Checkup</span></h3>
-                      {/* <!-- <div className="cta-right-arrow">
-                          <img src="/img/right-arrow.svg" className="img-fluid" alt=""/>
-                        </div> --> */}
-                    </div>
-                  </div>
-                </a>
-              </div>
-              <div className="cta-col">
-                <a href="#">
-                  <div className="cta-diff">
-                    <div className="d-flex align-items-center justify-content-center">
-                      <img src="/img/opinion.png" alt="" />
-                      <h3>Get <br /> <span>Second Opinion</span></h3>
-                      {/* <!-- <div className="cta-right-arrow">
-                          <img src="/img/right-arrow.svg" className="img-fluid" alt=""/>
-                        </div> --> */}
-                    </div>
-                  </div>
-                </a>
-              </div>
+                })
+
+              }
+
             </div>
           </div>
         </section>
@@ -170,30 +218,30 @@ const Home = async () => {
           </div>
         </section>
         {/* <!-- ====== cta section ==== --> */}
-        <ExcellenceCarousel />
+        <ExcellenceCarousel dataSet={specialityDataSet} />
 
         <div className="line-divider"> </div>
 
-        <ExpertCarousel />
+        <ExpertCarousel dataSet={expertDataSet} />
 
         <div className="line-divider"> </div>
 
-        <WallframeSection />
+        <WallframeSection dataSet={awardDataSet} />
 
         <div className="line-divider"></div>
-        <TestimonialSection />
+        <TestimonialSection dataSet={testimonialDataSet} />
 
 
         {/* <!-- ========== testimonial section end ============ --> */}
 
         <div className="line-divider"></div>
-        <BlogCarousel />
+        <BlogCarousel dataSet={blogDataSet} />
 
         {/* <!-- ========== blog section end =========== --> */}
 
         <div className="line-divider"></div>
 
-        <FromDoctor />
+        <FromDoctor dataSet={docTalkDataSet} />
 
         <SocialMedia />
 

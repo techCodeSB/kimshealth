@@ -1,8 +1,18 @@
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import React from 'react'
+import doctorData from '../lib/getDoctor'
+import { getStaticPageContent } from '../lib/getStaticPageContent'
+import { getBaseUrl } from '../lib/getBaseUrl'
 
-const Doctor = () => {
+const Doctor = async () => {
+    const baseURL = await getBaseUrl(true, true);
+    const data = await getStaticPageContent("doctor");
+    const pageContent = data?.data[0]?.pageContent;
+    const pageMeta = data?.data[0]?.metaSection;
+    const docData = await doctorData.getDoctorAll();
+
+
     return (
         <>
             <Header />
@@ -10,7 +20,7 @@ const Doctor = () => {
                 <div className="find-doctor-main-page">
                     <div className="page-header">
                         <div className="container">
-                            <h2>Find a Doctor</h2>
+                            <h2>{pageContent[0]?.title}</h2>
                         </div>
                     </div>
                     <section className="breadcrumb-wrapper py-2">
@@ -19,9 +29,9 @@ const Doctor = () => {
                                 <div className="col-12">
                                     <ul className="breadcrumb mb-0">
                                         <li>
-                                            <a href="index.php">Home</a>
+                                            <a href="/">Home</a>
                                         </li>
-                                        <li className="active"> Find a Doctor </li>
+                                        <li className="active"> {pageContent[0]?.title}</li>
                                     </ul>
                                 </div>
                             </div>
@@ -33,7 +43,7 @@ const Doctor = () => {
                             <div className="row">
                                 <div className="col-md-12 col-6">
                                     <div className="main-heading">
-                                        <h2>1,000 Doctors Found</h2>
+                                        <h2>{docData.length} Doctors Found</h2>
                                     </div>
                                 </div>
                                 <div className="col-6 d-lg-none d-block">
@@ -152,8 +162,6 @@ const Doctor = () => {
                                                         </div>
                                                     </div>
                                                 </form>
-
-
                                             </div>
                                         </div>
                                     </div>
@@ -161,147 +169,34 @@ const Doctor = () => {
 
                                 <div className="col-md-9 expert-section">
                                     <div className="row">
-                                        <div className="col-md-4 col-6 mb-3">
-                                            <div className="expert-card">
-                                                <div className="card border-0 p-lg-4 p-0">
-                                                    <div className="card-top">
-                                                        <a href="#">
-                                                            <img src="/img/expert1.png" className="img-fluid w-100" alt="" />
-                                                        </a>
-                                                    </div>
-                                                    <div className="card-content">
-                                                        <h4>Dr. Ajith R</h4>
-                                                        <p>Sr Consultant and Coordinator</p>
-                                                        <h5>Neurosurgery</h5>
-                                                        <div className="from-btn">
-                                                            <a href="#" className="btn">Appointment</a>
+                                        {
+                                            docData.map((d, index) => {
+                                                return <div className="col-md-4 col-6 mb-3">
+                                                    <div className="expert-card">
+                                                        <div className="card border-0 p-lg-4 p-0">
+                                                            <div className="card-top">
+                                                                <a href="#">
+                                                                    <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${d.doctorImage.url}`} className="img-fluid w-100" alt="" />
+                                                                </a>
+                                                            </div>
+                                                            <div className="card-content">
+                                                                <h4>{d.name}</h4>
+                                                                <p>{d.doctorDesignation}</p>
+                                                                <h5>{d.specialities[0].title}</h5>
+                                                                <div className="from-btn">
+                                                                    <a href="#" className="btn">Appointment</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div className="main-btn  text-lg-center text-start ms-lg-0 ms-2 mt-2">
+                                                            <a href={baseURL + "/doctor/" + d.slug}>View Profile</a>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div className="main-btn  text-lg-center text-start ms-lg-0 ms-2 mt-2">
-                                                    <a href="#">View Profile</a>
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                        <div className="col-md-4 col-6 mb-3">
-                                            <div className="expert-card">
-                                                <div className=" card border-0 p-lg-4 p-0">
-                                                    <div className="card-top">
-                                                        <a href="#">
-                                                            <img src="/img/expert3.png" className="img-fluid w-100" alt="" />
-                                                        </a>
-                                                    </div>
-                                                    <div className="card-content">
-                                                        <h4>Dr. Shabeerali T U</h4>
-                                                        <p>Chief Coordinator & Senior . . . </p>
-                                                        <h5>Hepatobiliary, Pancreatic & . . . </h5>
-                                                        <div className="from-btn">
-                                                            <a href="#" className="btn">Appointment</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="main-btn text-lg-center text-start ms-lg-0 ms-2 mt-2">
-                                                    <a href="#">View Profile</a>
-                                                </div>
-                                            </div>
-                                        </div>
+                                            })
+                                        }
 
 
-                                        <div className="col-md-4 col-6 mb-3">
-                                            <div className="expert-card">
-                                                <div className=" card border-0 p-lg-4 p-0">
-                                                    <div className="card-top">
-                                                        <a href="">
-                                                            <img src="/img/expert4.png" className="img-fluid w-100" alt="" />
-                                                        </a>
-                                                    </div>
-                                                    <div className="card-content">
-                                                        <h4>Dr. Muhammed Nazeer </h4>
-                                                        <p>Senior Consultant & Group . . . </p>
-                                                        <h5>Orthopedics & Trauma </h5>
-                                                        <div className="from-btn">
-                                                            <a href="#" className="btn">Appointment</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="main-btn text-lg-center text-start ms-lg-0 ms-2 mt-2">
-                                                    <a href="#">View Profile</a>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div className="col-md-4 col-6 mb-3">
-                                            <div className="expert-card">
-                                                <div className="card border-0  p-lg-4 p-0">
-                                                    <div className="card-top">
-                                                        <a href="#">
-                                                            <img src="/img/expert2.png" className="img-fluid w-100" alt="" />
-                                                        </a>
-                                                    </div>
-                                                    <div className="card-content">
-                                                        <h4>Dr. Deepa Das</h4>
-                                                        <p>Senior Consultant</p>
-                                                        <h5>Critical Care</h5>
-                                                        <div className="from-btn">
-                                                            <a href="#" className="btn">Appointment</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="main-btn text-lg-center text-start ms-lg-0 ms-2 mt-2">
-                                                    <a href="#">View Profile</a>
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-                                        <div className="col-md-4 col-6 mb-3">
-                                            <div className="expert-card">
-                                                <div className="card border-0 p-lg-4 p-0">
-                                                    <div className="card-top">
-                                                        <a href="#">
-                                                            <img src="/img/expert1.png" className="img-fluid w-100" alt="" />
-                                                        </a>
-                                                    </div>
-                                                    <div className="card-content">
-                                                        <h4>Dr. Ajith R</h4>
-                                                        <p>Sr Consultant and Coordinator</p>
-                                                        <h5>Neurosurgery</h5>
-                                                        <div className="from-btn">
-                                                            <a href="#" className="btn">Appointment</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="main-btn  text-lg-center text-start ms-lg-0 ms-2 mt-2">
-                                                    <a href="#">View Profile</a>
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                        <div className="col-md-4 col-6 mb-3">
-                                            <div className="expert-card">
-                                                <div className=" card border-0 p-lg-4 p-0">
-                                                    <div className="card-top">
-                                                        <a href="#">
-                                                            <img src="/img/expert3.png" className="img-fluid w-100" alt="" />
-                                                        </a>
-                                                    </div>
-                                                    <div className="card-content">
-                                                        <h4>Dr. Shabeerali T U</h4>
-                                                        <p>Chief Coordinator & Senior . . . </p>
-                                                        <h5>Hepatobiliary, Pancreatic & . . . </h5>
-                                                        <div className="from-btn">
-                                                            <a href="#" className="btn">Appointment</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="main-btn text-lg-center text-start ms-lg-0 ms-2 mt-2">
-                                                    <a href="#">View Profile</a>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                             </div>

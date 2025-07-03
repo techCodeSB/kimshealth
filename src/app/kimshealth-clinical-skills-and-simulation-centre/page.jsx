@@ -9,7 +9,7 @@ const ClinicalSkills = async () => {
     const pageContent = data?.data[0]?.pageContent;
     const pageMeta = data?.data[0]?.metaSection;
 
-    console.log(pageContent)
+
     return (
         <>
             <Header />

@@ -4,13 +4,13 @@ import JournalCarousel from '@/components/JournalCarousel';
 import { getStaticPageContent } from '../lib/getStaticPageContent';
 
 const InternalMedicine = async () => {
-    const field = "populate[0]=pageContent&populate[1]=pageContent.bannerItem&populate[2]=pageContent.bannerItem.bannerImageDesktop&populate[3]=pageContent.bannerItem.bannerImageMobile&populate[4]=metaSection&populate[5]=pageContent.journal&populate[6]=pageContent.journal.thumbnailImage&populate[7]=pageContent.journal.file";
+    const field = "populate[0]=pageContent&populate[1]=pageContent.bannerItem&populate[2]=pageContent.bannerItem.bannerImageDesktop&populate[3]=pageContent.bannerItem.bannerImageMobile&populate[4]=metaSection&populate[5]=pageContent.journal&populate[6]=pageContent.journal.thumbnailImage&populate[7]=pageContent.journal.file&populate[8]=pageContent.file";
 
     const data = await getStaticPageContent("internal-medicine-training-imt", field);
     const pageContent = data?.data[0]?.pageContent;
     const pageMeta = data?.data[0]?.metaSection;
 
-
+    console.log(pageContent)
 
     return (
         <>
@@ -43,7 +43,9 @@ const InternalMedicine = async () => {
                                                     <h3 className="mb-2">{pageContent[0]?.title}</h3>
                                                     <p>{pageContent[0]?.subTitle}</p>
                                                     <h5>{pageContent[2]?.title}</h5>
-                                                    <a href="#" className="mb-3 mt-2 d-block"><i className="custom-download"></i>{pageContent[2]?.buttonText}</a>
+                                                    <a download href={`${process.env.NEXT_PUBLIC_IMAGE_URL}${pageContent[2]?.file.url}`} 
+                                                    className="mb-3 mt-2 d-block"><i className="custom-download"></i>
+                                                    {pageContent[2]?.buttonText}</a>
                                                     <a href="#" className="hospital-primarybtn"> Apply Now</a>
                                                 </div>
                                             </div>

@@ -1,56 +1,92 @@
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import React from 'react'
+import { getStaticPageContent } from '../lib/getStaticPageContent';
 
-const EmergencyMedicine = () => {
+const EmergencyMedicine = async () => {
+    const field = "populate[0]=pageContent&populate[1]=pageContent.bannerItem&populate[2]=pageContent.bannerItem.bannerImageDesktop&populate[3]=pageContent.bannerItem.bannerImageMobile&populate[4]=metaSection";
+
+    const data = await getStaticPageContent("emergency-medicine-program", field);
+    const pageContent = data?.data[0]?.pageContent;
+    const pageMeta = data?.data[0]?.metaSection;
+
+    console.log(pageContent);
     return (
         <>
             <Header />
             <div role="main" className="main">
                 <div className="emergency-medicine-main-page">
-                    <section className="section details-page-before py-0">
+                    {/* Desktop section */}
+                    <section className="section details-page-before py-0 d-lg-block d-none">
                         <div className="procedures-details-page-header inner-pages-header">
                             <div className="container-fluid px-0">
                                 <div className="row">
                                     <div className="col-md-6 details-proceduce-banner-left-col">
-
                                         <div className="hospital-banner-container">
                                             <div className="breadcrumb-wrapper py-2 ps-2 ms-1">
                                                 <div className="row">
                                                     <div className="col-12 px-0">
                                                         <ul className="breadcrumb mb-0">
                                                             <li>
-                                                                <a href="index.php">Home</a>
+                                                                <a href="/">Home</a>
                                                             </li>
-                                                            <li>
-                                                                <a href="hospital-master.php">Academics</a>
-                                                            </li>
-                                                            <li className="active"> KIMSHEALTH Masters in Emergency Medicine Program
-                                                            </li>
+                                                            <li className="active"> {pageContent[0]?.title} </li>
                                                         </ul>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div className="details-banner">
                                                 <div className="details-heading">
-                                                    <h3>KIMSHEALTH Masters in Emergency Medicine Program</h3>
+                                                    <h3>{pageContent[0]?.title}</h3>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div className="col-md-6 details-proceduce-banner-right-col">
-                                        <img src="img/emergency-medicine-banner.jpg" className="img-fluid details-banner-image" alt="" />
+                                    <div className="col-md-6 details-proceduce-banner-right-col mt-lg-0 mt-4">
+                                        <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${pageContent[1]?.bannerItem[0].bannerImageDesktop.url}`} className="img-fluid details-banner-image" alt={pageContent[1]?.bannerItem[0].title} />
                                     </div>
-
-                                    {/* <!-- <div className="col-md-6">
-                                        <img src="img/details-banner.png" alt="" className="img-fluid w-100">
-                                    </div> --> */}
                                 </div>
                             </div>
                         </div>
-
                     </section>
+                    {/* mobile section */}
+                    <section className="section details-page-before py-0 d-lg-none d-block">
+                        <div className="procedures-details-page-header inner-pages-header">
+                            <div className="container-fluid px-0">
+                                <div className="row">
+                                    <div className="col-md-6 details-proceduce-banner-left-col mt-lg-auto">
+                                        <div className="hospital-banner-container">
+                                            <div className="breadcrumb-wrapper py-2 ps-2 ms-1">
+                                                <div className="row">
+                                                    <div className="col-12">
+                                                        <ul className="breadcrumb mb-0">
+                                                            <li>
+                                                                <a href="/">Home</a>
+                                                            </li>
+                                                            <li className="active"> {pageContent[0]?.title} </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="details-proceduce-banner-right-col mt-lg-0 mt-4">
+                                                <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${pageContent[1]?.bannerItem[0].bannerImageDesktop.url}`}
+                                                    className="img-fluid details-banner-image" alt={pageContent[1]?.bannerItem[0].title} />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-md-6 mt-lg-0 mt-4">
+                                    <div className="details-banner">
+                                        <div className="details-heading">
+                                            <h3>{pageContent[0]?.title}</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
 
                     <section className="section doctor-line-divider">
                         <div className="container">
@@ -59,10 +95,8 @@ const EmergencyMedicine = () => {
                                     <section className="section pt-0">
                                         <div className="container">
                                             <div className="main-heading sub-heading">
-                                                <h2>In Partnership with Upstate Medical University, Syracuse, NY, USA</h2>
-                                                <p>KIMSHEALTH Kollam hosts a three year emergency medicine residency programme, with
-                                                    support from Upstate Medical University, Syracuse, NY, a U.S. Level 1 trauma
-                                                    centre.</p>
+                                                <h2>{pageContent[2]?.title}</h2>
+                                                <div dangerouslySetInnerHTML={{ __html: pageContent[2]?.details }}></div>
                                             </div>
                                         </div>
                                     </section>
@@ -70,10 +104,8 @@ const EmergencyMedicine = () => {
                                     <section className="section">
                                         <div className="container">
                                             <div className="main-heading sub-heading">
-                                                <h2>Eligibility Criteria</h2>
-                                                <p>All applicants must possess MBBS degree from an accredited university and the
-                                                    medical license must be registered with the Medical Council of India at the time
-                                                    of enrolment to the program.</p>
+                                                <h2>{pageContent[3]?.title}</h2>
+                                                <div dangerouslySetInnerHTML={{ __html: pageContent[3]?.details }}></div>
                                             </div>
                                         </div>
                                     </section>
@@ -81,12 +113,8 @@ const EmergencyMedicine = () => {
                                     <section className="section">
                                         <div className="container">
                                             <div className="main-heading sub-heading main-list">
-                                                <h2>Application Process</h2>
-                                                <ul>
-                                                    <li>Candidates will be selected based on merit following an online screening
-                                                        exam and an interview in person.</li>
-                                                    <li>Last date for submission of applications will be May 15th, 2019</li>
-                                                </ul>
+                                                <h2>{pageContent[4]?.title}</h2>
+                                                <div dangerouslySetInnerHTML={{ __html: pageContent[4]?.details }}></div>
                                             </div>
                                         </div>
                                     </section>
@@ -94,23 +122,8 @@ const EmergencyMedicine = () => {
                                     <section className="section">
                                         <div className="container">
                                             <div className="main-heading sub-heading main-list">
-                                                <h2>Highlights</h2>
-                                                <ul>
-                                                    <li>Rotation among Emergency Departments in KIMSHEALTH hospitals including the
-                                                        flagship hospital, KIMSHEALTH Trivandrum, the only NABH accredited ED in
-                                                        south Kerala</li>
-                                                    <li>Training in BLS, ACLS & PALS as KIMSHEALTH is an accredited ITC by American
-                                                        Heart Association</li>
-                                                    <li>ED with all modern resuscitative equipment including cardiac monitors,
-                                                        defibrillators, ultrasound machine etc</li>
-                                                    <li>Academic sessions by international and national faculty trained in Emergency
-                                                        Medicine</li>
-                                                    <li>Structured training for MRCEM and guaranteed placement in NHS, UK following
-                                                        the successful completion of the exam</li>
-                                                    <li>Opportunities in simulation training and disaster management</li>
-                                                    <li>Access to national & international journals in emergency medicine</li>
-                                                    <li>1 month observership at the Emergency Department, Upstate, New York</li>
-                                                </ul>
+                                                <h2>{pageContent[5]?.title}</h2>
+                                                <div dangerouslySetInnerHTML={{ __html: pageContent[5]?.details }}></div>
                                             </div>
                                         </div>
                                     </section>
@@ -119,11 +132,8 @@ const EmergencyMedicine = () => {
                                     <section className="section">
                                         <div className="container">
                                             <div className="main-heading sub-heading main-list">
-                                                <h2>Course Fees</h2>
-                                                <ul>
-                                                    <li>Indian citizens : Rs.5 Lakhs per year</li>
-                                                    <li>Non-Indian citizens : US $14,000 per year.</li>
-                                                </ul>
+                                                <h2>{pageContent[6]?.title}</h2>
+                                                <div dangerouslySetInnerHTML={{ __html: pageContent[6]?.details }}></div>
                                             </div>
                                         </div>
                                     </section>
@@ -131,12 +141,8 @@ const EmergencyMedicine = () => {
                                     <section className="section">
                                         <div className="container">
                                             <div className="main-heading sub-heading main-list">
-                                                <h2>Stipend</h2>
-                                                <ul>
-                                                    <li>1st Year – Rs.43,000/ month</li>
-                                                    <li>2nd Year – Rs. 44,000/ month</li>
-                                                    <li>3rd Year – Rs.45,000/ month</li>
-                                                </ul>
+                                                <h2>{pageContent[7]?.title}</h2>
+                                                <div dangerouslySetInnerHTML={{ __html: pageContent[7]?.details }}></div>
                                             </div>
                                         </div>
                                     </section>
@@ -171,20 +177,21 @@ const EmergencyMedicine = () => {
 
                                         </div>
                                         <div className="em-sticky-ele">
-                                            <h4>For More Information Contact Us</h4>
-                                            <p><strong>Dr. Manoj M.T</strong></p>
+                                            <h4>{pageContent[8]?.sectionTitle}</h4>
+                                            <p><strong>{pageContent[8]?.contactPerson}</strong></p>
                                             <p> SOCOMER</p>
-                                            <p> Academics, KIMSHEALTH Trivandrum</p>
-                                            <a href="#"><i className="fa-solid fa-phone"></i> +91 471 308 1034 / 1030 +91 989 524
-                                                8337</a>
-                                            <a href="mailto:socomer@kimsip.com"><i className="fa-solid fa-envelope"></i>
-                                                socomer@kimsip.com</a>
+                                            <p> {pageContent[8]?.address}</p>
+                                            <a href="#"><i className="fa-solid fa-phone"></i>
+                                                {pageContent[8]?.phone}
+                                            </a>
+                                            <a href={`mailto: ${pageContent[8]?.email}`}><i className="fa-solid fa-envelope"></i>
+                                                {pageContent[8]?.email}</a>
                                             <div className="mt-3">
-                                                <p> <strong>Executive – Academic Affairs</strong> </p>
-                                                <p> Academics, KIMSHEALTH Trivandrum</p>
-                                                <a href="tel:+914713041849"><i className="fa-solid fa-phone"></i> +91 471 304 1849</a>
-                                                <a href="mailto:academics.tvm@ kimsip.com"><i className="fa-solid fa-envelope"></i>
-                                                    academics.tvm@ kimsip.com</a>
+                                                <p> <strong>{pageContent[9]?.contactPerson}</strong> </p>
+                                                <p> {pageContent[9]?.address}</p>
+                                                <a href={`tel: ${pageContent[8]?.phone}`}><i className="fa-solid fa-phone"></i> 
+                                                {pageContent[8]?.phone}</a>
+                                                <a href={`mailto: ${pageContent[9]?.email}`}><i className="fa-solid fa-envelope"></i>{pageContent[9]?.email}</a>
                                             </div>
                                         </div>
                                     </div>
@@ -199,4 +206,5 @@ const EmergencyMedicine = () => {
     )
 }
 
-export default EmergencyMedicine
+export default EmergencyMedicine;
+

@@ -463,19 +463,19 @@ const SpecialityDetails = () => {
 
 
                     <div className="line-divider"> </div>
-                    <ExpertCarousel/>
+                    {/* <ExpertCarousel/> */}
 
 
                     <div className="line-divider"></div>
-                    <TestimonialSection/>
+                    {/* <TestimonialSection/> */}
 
 
                     <div className="line-divider"></div>
-                    <FromDoctor/>
+                    {/* <FromDoctor/> */}
 
 
                     <div className="line-divider"></div>
-                    <BlogCarousel/>
+                    {/* <BlogCarousel/> */}
 
                 </div>
             </div>
