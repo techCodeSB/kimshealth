@@ -43,7 +43,7 @@ html {
 .menu-button {
     position: relative;
     z-index: 9999;
-    display: block;
+    display: none;
     background-color: transparent;
     border: 0;
     cursor: pointer;

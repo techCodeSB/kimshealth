@@ -71,7 +71,7 @@ const TestimonialDetails = () => {
 
                     <div className="line-divider"></div>
 
-                    <TestimonialSection/>
+                    {/* <TestimonialSection/> */}
                 </div>
             </div>
             <Footer />

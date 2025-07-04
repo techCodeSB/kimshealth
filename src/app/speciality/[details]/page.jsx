@@ -1,3 +1,5 @@
+import { getBaseUrl } from '@/app/lib/getBaseUrl'
+import getSpecialityData from '@/app/lib/getSpeciality'
 import BlogCarousel from '@/components/BlogCarousel'
 import ExpertCarousel from '@/components/ExpertCarousel'
 import Footer from '@/components/Footer'
@@ -6,7 +8,11 @@ import Header from '@/components/Header'
 import TestimonialSection from '@/components/TestimonialSection'
 import React from 'react'
 
-const SpecialityDetails = () => {
+const SpecialityDetails = async ({ params }) => {
+    const baseUrl = await getBaseUrl();
+    const data = await getSpecialityData.getSingleSpeciality(params.details);
+
+
     return (
         <>
             <Header />
@@ -23,12 +29,12 @@ const SpecialityDetails = () => {
                                                     <div className="col-12 px-lg-0 px-4">
                                                         <ul className="breadcrumb mb-0">
                                                             <li>
-                                                                <a href="index.php">Home</a>
+                                                                <a href={baseUrl + "/"}>Home</a>
                                                             </li>
                                                             <li>
-                                                                <a href="hospital-master.php"> Specialities</a>
+                                                                <a href={baseUrl + "/speciality"}> Specialities</a>
                                                             </li>
-                                                            <li className="active"> Cardiac Sciences </li>
+                                                            <li className="active"> {data.title} </li>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -82,12 +88,12 @@ const SpecialityDetails = () => {
                                                 <div className="col-12 px-lg-0 px-4">
                                                     <ul className="breadcrumb mb-0">
                                                         <li>
-                                                            <a href="index.php">Home</a>
+                                                            <a href="/">Home</a>
                                                         </li>
                                                         <li>
-                                                            <a href="hospital-master.php"> Specialities</a>
+                                                            <a href={baseUrl + "/speciality"}> Specialities</a>
                                                         </li>
-                                                        <li className="active"> Cardiac Sciences </li>
+                                                        <li className="active"> {data.title} </li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -137,30 +143,13 @@ const SpecialityDetails = () => {
                             <div className="row justify-content-between">
                                 <div className="col-md-7  mb-lg-0 mb-3 pe-lg-5">
                                     <div className="main-heading sub-heading">
-                                        <h2>Cardiac Sciences</h2>
+                                        <h2>{data.overviewSection.title}</h2>
                                     </div>
-
-                                    <p>KIMSHEALTH offers one of the country's most advanced cardiac care facilities with a
-                                        distinguished faculty. Our Department of Cardiac Science provides comprehensive
-                                        services, including diagnostics, interventional procedures, therapy, and prevention. We
-                                        offer
-                                        outpatient and inpatient care and state-of-the-art investigative and interventional
-                                        facilities.
-                                    </p>
-                                    <p>Our specialised department has expert cardiologists who address heart-related problems such
-                                        as
-                                        heart failure, arrhythmias, pediatric cardiology, and cardiomyopathy. Heart specialists, or
-                                        cardiologists, as they are commonly known, not only treat heart conditions but also deal
-                                        with
-                                        problems in the cardiovascular system, a network of blood vessels running throughout the
-                                        body.
-                                        Our hospital is well-equipped with the latest technology for diagnosing and treating
-                                        cardiovascular conditions, which allows us to provide the best patient care. The
-                                        cardiologists
-                                        work closely with other departments at the hospital to provide complete patient care. These
-                                        include
-                                        rehabilitation, nutritionists, physicians, interventional radiologists, cardiac surgeons and
-                                        others. This multidisciplinary approach ensures . . . . Read More</p>
+                                    {
+                                        data.overviewSection.details.split("\n").map((p, _) => (
+                                            <p key={_}>{p}</p>
+                                        ))
+                                    }
                                 </div>
                                 <div className="col-md-5">
                                     <div className="details-right-col text-center">
@@ -179,10 +168,10 @@ const SpecialityDetails = () => {
                     <div className="line-divider"> </div>
 
                     <section className="section"
-                        style={{background: "linear-gradient(180deg,rgba(255, 255, 255, 1) 45%, rgba(248, 248, 248, 1) 74%)"}}>
+                        style={{ background: "linear-gradient(180deg,rgba(255, 255, 255, 1) 45%, rgba(248, 248, 248, 1) 74%)" }}>
                         <div className="container">
                             <div className="details-card-wrapper pb-5">
-                                <div className="row position-relative" style={{zIndex: "99"}}>
+                                <div className="row position-relative" style={{ zIndex: "99" }}>
                                     <div className="col-md-4 mb-lg-0 mb-3">
                                         <div className="details-card text-center">
                                             <div className="card-content">

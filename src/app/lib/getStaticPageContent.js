@@ -1,9 +1,10 @@
 import { cookies } from 'next/headers';
+import { notFound } from 'next/navigation';
 
 export const getStaticPageContent = async (slug = 'home', field = "", lang = true, loc = true) => {
     const cookieStore = await cookies();
 
-    try {
+    // try {
         // Get page category first;
         const getStaticPageCat = await fetch(`${process.env.NEXT_PUBLIC_CMS_API_URL}/static-pages?filters[slug][$eq]=${slug}`);
         const staticPageRes = await getStaticPageCat.json();
@@ -30,9 +31,14 @@ export const getStaticPageContent = async (slug = 'home', field = "", lang = tru
         const getStaticPageContent = await fetch(`${process.env.NEXT_PUBLIC_CMS_API_URL}/${staticContentUrlPath}`);
         const staticPageContentRes = await getStaticPageContent.json();
 
+        if(staticPageContentRes.data.length < 1){
+            notFound();
+        }
+        
         return staticPageContentRes;
 
-    } catch (error) {
-        console.log("Err:", error)
-    }
+
+    // } catch (error) {
+    //     console.log("Err:", error)
+    // }
 }

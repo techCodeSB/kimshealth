@@ -1,8 +1,20 @@
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import React from 'react'
+import testimonialData from '../lib/getTestimonial'
+import { getBaseUrl } from '../lib/getBaseUrl'
+import { getStaticPageContent } from '../lib/getStaticPageContent';
 
-const Testimonial = () => {
+
+
+const Testimonial = async () => {
+    const basePath = await getBaseUrl();
+    const testimoData = await testimonialData.getAll();
+    const data = await getStaticPageContent("testimonial");
+    const pageContent = data?.data[0]?.pageContent;
+    const pageMeta = data?.data[0]?.metaSection;
+
+
     return (
         <>
             <Header />
@@ -10,7 +22,7 @@ const Testimonial = () => {
                 <div className="doctor-talk-main-page">
                     <div className="page-header">
                         <div className="container">
-                            <h2>Testimonial </h2>
+                            <h2>{pageContent[0]?.title} </h2>
                         </div>
                     </div>
                     <section className="breadcrumb-wrapper py-2">
@@ -19,9 +31,9 @@ const Testimonial = () => {
                                 <div className="col-12">
                                     <ul className="breadcrumb mb-0">
                                         <li>
-                                            <a href="index.php">Home</a>
+                                            <a href="/">Home</a>
                                         </li>
-                                        <li className="active"> Testimonial </li>
+                                        <li className="active"> {pageContent[0]?.title} </li>
                                     </ul>
                                 </div>
                             </div>
@@ -56,754 +68,43 @@ const Testimonial = () => {
                     <div className="section section pt-0">
                         <div className="container">
                             <div className="row">
-                                <div className="col-xl-6 col-lg-6 col-md-6 col-12" data-aos="fade-right">
-                                    <div className="row testi-card">
-                                        <div className="col-md-3 mb-3 col-4">
-                                            <div className="overflow-hidden">
-                                                <a href="#">
-                                                    <img src="/img/testi-img1.jpg" alt="" className="img-fluid w-100" />
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div className="col-md-9 my-auto col-8">
-                                            <div className="testi-rightbox">
-                                                <h3>24-Week Preterm Miracle: Uma's Heartfelt
-                                                    Testimonial </h3>
-                                                <p>Uma, a Scientist at ISRO, Trivandrum, pours her
-                                                    heartfelt gratitude towards . . . .<a href="#"> Watch Video</a></p>
-
-                                                <div className="d-flex align-items-center justify-content-between mt-3">
-                                                    <div className="doctor-name">
-                                                        <p><span><img src="/img/doctor.png" className="img-fluid" alt="" /></span> Dr.
-                                                            Naveen Jain </p>
+                                {
+                                    testimoData.map((t, index) => {
+                                        return <div className="col-xl-6 col-lg-6 col-md-6 col-12"
+                                            data-aos={index % 2 == 0 ? "fade-right" : "fade-left"} key={index}>
+                                            <div className="row testi-card">
+                                                <div className="col-md-3">
+                                                    <div className="overflow-hidden">
+                                                        <a href={basePath + "/testimonial/" + t.slug}>
+                                                            <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${t.thumbnailImage.url}`} alt="" className="img-fluid w-100" />
+                                                        </a>
                                                     </div>
-                                                    <div className="doctor-catagory">
-                                                        <p>Obstetrics & Gynecology </p>
+                                                </div>
+                                                <div className="col-md-9 my-auto">
+                                                    <div className="testi-rightbox">
+                                                        <h3>{t.title}</h3>
+                                                        <p>{`${t.shortDetails.slice(0, 80)}...`}
+                                                            <a href={basePath + "/testimonial/" + t.slug}> Watch Video</a>
+                                                        </p>
+
+                                                        <div className="d-flex align-items-center justify-content-between mt-3">
+                                                            <div className="doctor-name">
+                                                                <p><span><img src="/img/doctor.png" className="img-fluid" alt="" /></span> {t.doctor.name} </p>
+                                                            </div>
+                                                            <div className="doctor-catagory">
+                                                                <p>{t.specialities[0].title}</p>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-
-                                <div className="col-xl-6 col-lg-6 col-md-6 col-12" data-aos="fade-left">
-                                    <div className="row testi-card">
-                                        <div className="col-md-3 mb-3 col-4">
-                                            <div className="overflow-hidden">
-                                                <a href="#">
-                                                    <img src="/img/testi-img2.jpg" alt="" className="img-fluid w-100" />
-                                                </a>
-                                            </div>
-
-                                        </div>
-                                        <div className="col-md-9 my-auto col-8">
-                                            <div className="testi-rightbox">
-                                                <h3>Mr Menon's Remarkable Recovery with Intrasaccular
-                                                    Flow Diverter</h3>
-                                                <p>This is a testimonial by Mr Menon on his journey to recovery
-                                                    from aneurysm! With cutting-edge . . . .<a href="#"> Watch Video</a></p>
-
-                                                <div className="d-flex align-items-center justify-content-between mt-3">
-                                                    <div className="doctor-name">
-                                                        <p><span><img src="/img/doctor.png" className="img-fluid" alt="" /></span>Dr.
-                                                            Santhosh Joseph </p>
-                                                    </div>
-                                                    <div className="doctor-catagory">
-                                                        <p>Neuro Interventional Radiology </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="col-xl-6 col-lg-6 col-md-6 col-12" data-aos="fade-right">
-                                    <div className="row testi-card">
-                                        <div className="col-md-3 mb-3 col-4">
-                                            <div className="overflow-hidden">
-                                                <a href="#">
-                                                    <img src="/img/testi-img3.jpg" alt="" className="img-fluid w-100" />
-                                                </a>
-                                            </div>
-
-                                        </div>
-                                        <div className="col-md-9 my-auto col-8">
-                                            <div className="testi-rightbox">
-                                                <h3>A successful Shoulder Replacement surgery is
-                                                    done for Mrs Norah Mohammed Alsuqufi.</h3>
-                                                <p>A successful Shoulder Replacement surgery is done for
-                                                    Mrs Norah Mohammed Alsuqufi from Saudi . . . .<a href="#"> Watch Video</a></p>
-
-                                                <div className="d-flex align-items-center justify-content-between mt-3">
-                                                    <div className="doctor-name">
-                                                        <p><span><img src="/img/doctor.png" className="img-fluid" alt="" /></span> Dr.
-                                                            Muhammed Nazeer </p>
-                                                    </div>
-                                                    <div className="doctor-catagory">
-                                                        <p>Orthopedics & Trauma </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="col-xl-6 col-lg-6 col-md-6 col-12" data-aos="fade-left">
-                                    <div className="row testi-card">
-                                        <div className="col-md-3 mb-3 col-4">
-                                            <div className="overflow-hidden">
-                                                <a href="#">
-                                                    <img src="/img/testi-img4.jpg" alt="" className="img-fluid w-100" />
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div className="col-md-9 my-auto col-8">
-                                            <div className="testi-rightbox">
-                                                <h3>Experience Excellence in Medical Care:
-                                                    Maryan Germain's Testimonial at KIMSHEALTH </h3>
-                                                <p>At KIMSHEALTH Hospital, we prioritize patient satisfaction and
-                                                    aim to provide the best care possible . . . .<a href="#"> Watch Video</a>
-                                                </p>
-
-                                                <div className="d-flex align-items-center justify-content-between mt-3">
-                                                    <div className="doctor-name">
-                                                        <p><span><img src="/img/doctor.png" className="img-fluid" alt="" /></span> Dr.
-                                                            Renjith Unnikrishnan </p>
-                                                    </div>
-                                                    <div className="doctor-catagory">
-                                                        <p>Orthopaedics </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="col-xl-6 col-lg-6 col-md-6 col-12" data-aos="fade-right">
-                                    <div className="row testi-card">
-                                        <div className="col-md-3 mb-3 col-4">
-                                            <div className="overflow-hidden">
-                                                <a href="#">
-                                                    <img src="/img/testi-img1.jpg" alt="" className="img-fluid w-100" />
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div className="col-md-9 my-auto col-8">
-                                            <div className="testi-rightbox">
-                                                <h3>24-Week Preterm Miracle: Uma's Heartfelt
-                                                    Testimonial </h3>
-                                                <p>Uma, a Scientist at ISRO, Trivandrum, pours her
-                                                    heartfelt gratitude towards . . . .<a href="#"> Watch Video</a></p>
-
-                                                <div className="d-flex align-items-center justify-content-between mt-3">
-                                                    <div className="doctor-name">
-                                                        <p><span><img src="/img/doctor.png" className="img-fluid" alt="" /></span> Dr.
-                                                            Naveen Jain </p>
-                                                    </div>
-                                                    <div className="doctor-catagory">
-                                                        <p>Obstetrics & Gynecology </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="col-xl-6 col-lg-6 col-md-6 col-12" data-aos="fade-left">
-                                    <div className="row testi-card">
-                                        <div className="col-md-3 mb-3 col-4">
-                                            <div className="overflow-hidden">
-                                                <a href="#">
-                                                    <img src="/img/testi-img2.jpg" alt="" className="img-fluid w-100" />
-                                                </a>
-                                            </div>
-
-                                        </div>
-                                        <div className="col-md-9 my-auto col-8">
-                                            <div className="testi-rightbox">
-                                                <h3>Mr Menon's Remarkable Recovery with Intrasaccular
-                                                    Flow Diverter</h3>
-                                                <p>This is a testimonial by Mr Menon on his journey to recovery
-                                                    from aneurysm! With cutting-edge . . . .<a href="#"> Watch Video</a></p>
-
-                                                <div className="d-flex align-items-center justify-content-between mt-3">
-                                                    <div className="doctor-name">
-                                                        <p><span><img src="/img/doctor.png" className="img-fluid" alt="" /></span>Dr.
-                                                            Santhosh Joseph </p>
-                                                    </div>
-                                                    <div className="doctor-catagory">
-                                                        <p>Neuro Interventional Radiology </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="col-xl-6 col-lg-6 col-md-6 col-12" data-aos="fade-right">
-                                    <div className="row testi-card">
-                                        <div className="col-md-3 mb-3 col-4">
-                                            <div className="overflow-hidden">
-                                                <a href="#">
-                                                    <img src="/img/testi-img3.jpg" alt="" className="img-fluid w-100" />
-                                                </a>
-                                            </div>
-
-                                        </div>
-                                        <div className="col-md-9 my-auto col-8">
-                                            <div className="testi-rightbox">
-                                                <h3>A successful Shoulder Replacement surgery is
-                                                    done for Mrs Norah Mohammed Alsuqufi.</h3>
-                                                <p>A successful Shoulder Replacement surgery is done for
-                                                    Mrs Norah Mohammed Alsuqufi from Saudi . . . .<a href="#"> Watch Video</a></p>
-
-                                                <div className="d-flex align-items-center justify-content-between mt-3">
-                                                    <div className="doctor-name">
-                                                        <p><span><img src="/img/doctor.png" className="img-fluid" alt="" /></span> Dr.
-                                                            Muhammed Nazeer </p>
-                                                    </div>
-                                                    <div className="doctor-catagory">
-                                                        <p>Orthopedics & Trauma </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="col-xl-6 col-lg-6 col-md-6 col-12" data-aos="fade-left">
-                                    <div className="row testi-card">
-                                        <div className="col-md-3 mb-3 col-4">
-                                            <div className="overflow-hidden">
-                                                <a href="#">
-                                                    <img src="/img/testi-img4.jpg" alt="" className="img-fluid w-100" />
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div className="col-md-9 my-auto col-8">
-                                            <div className="testi-rightbox">
-                                                <h3>Experience Excellence in Medical Care:
-                                                    Maryan Germain's Testimonial at KIMSHEALTH </h3>
-                                                <p>At KIMSHEALTH Hospital, we prioritize patient satisfaction and
-                                                    aim to provide the best care possible . . . .<a href="#"> Watch Video</a>
-                                                </p>
-
-                                                <div className="d-flex align-items-center justify-content-between mt-3">
-                                                    <div className="doctor-name">
-                                                        <p><span><img src="/img/doctor.png" className="img-fluid" alt="" /></span> Dr.
-                                                            Renjith Unnikrishnan </p>
-                                                    </div>
-                                                    <div className="doctor-catagory">
-                                                        <p>Orthopaedics </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <div className="col-xl-6 col-lg-6 col-md-6 col-12" data-aos="fade-right">
-                                    <div className="row testi-card">
-                                        <div className="col-md-3 mb-3 col-4">
-                                            <div className="overflow-hidden">
-                                                <a href="#">
-                                                    <img src="/img/testi-img1.jpg" alt="" className="img-fluid w-100" />
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div className="col-md-9 my-auto col-8">
-                                            <div className="testi-rightbox">
-                                                <h3>24-Week Preterm Miracle: Uma's Heartfelt
-                                                    Testimonial </h3>
-                                                <p>Uma, a Scientist at ISRO, Trivandrum, pours her
-                                                    heartfelt gratitude towards . . . .<a href="#"> Watch Video</a></p>
-
-                                                <div className="d-flex align-items-center justify-content-between mt-3">
-                                                    <div className="doctor-name">
-                                                        <p><span><img src="/img/doctor.png" className="img-fluid" alt="" /></span> Dr.
-                                                            Naveen Jain </p>
-                                                    </div>
-                                                    <div className="doctor-catagory">
-                                                        <p>Obstetrics & Gynecology </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="col-xl-6 col-lg-6 col-md-6 col-12" data-aos="fade-left">
-                                    <div className="row testi-card">
-                                        <div className="col-md-3 mb-3 col-4">
-                                            <div className="overflow-hidden">
-                                                <a href="#">
-                                                    <img src="/img/testi-img2.jpg" alt="" className="img-fluid w-100" />
-                                                </a>
-                                            </div>
-
-                                        </div>
-                                        <div className="col-md-9 my-auto col-8">
-                                            <div className="testi-rightbox">
-                                                <h3>Mr Menon's Remarkable Recovery with Intrasaccular
-                                                    Flow Diverter</h3>
-                                                <p>This is a testimonial by Mr Menon on his journey to recovery
-                                                    from aneurysm! With cutting-edge . . . .<a href="#"> Watch Video</a></p>
-
-                                                <div className="d-flex align-items-center justify-content-between mt-3">
-                                                    <div className="doctor-name">
-                                                        <p><span><img src="/img/doctor.png" className="img-fluid" alt="" /></span>Dr.
-                                                            Santhosh Joseph </p>
-                                                    </div>
-                                                    <div className="doctor-catagory">
-                                                        <p>Neuro Interventional Radiology </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="col-xl-6 col-lg-6 col-md-6 col-12" data-aos="fade-right">
-                                    <div className="row testi-card">
-                                        <div className="col-md-3 mb-3 col-4">
-                                            <div className="overflow-hidden">
-                                                <a href="#">
-                                                    <img src="/img/testi-img3.jpg" alt="" className="img-fluid w-100" />
-                                                </a>
-                                            </div>
-
-                                        </div>
-                                        <div className="col-md-9 my-auto col-8">
-                                            <div className="testi-rightbox">
-                                                <h3>A successful Shoulder Replacement surgery is
-                                                    done for Mrs Norah Mohammed Alsuqufi.</h3>
-                                                <p>A successful Shoulder Replacement surgery is done for
-                                                    Mrs Norah Mohammed Alsuqufi from Saudi . . . .<a href="#"> Watch Video</a></p>
-
-                                                <div className="d-flex align-items-center justify-content-between mt-3">
-                                                    <div className="doctor-name">
-                                                        <p><span><img src="/img/doctor.png" className="img-fluid" alt="" /></span> Dr.
-                                                            Muhammed Nazeer </p>
-                                                    </div>
-                                                    <div className="doctor-catagory">
-                                                        <p>Orthopedics & Trauma </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="col-xl-6 col-lg-6 col-md-6 col-12" data-aos="fade-left">
-                                    <div className="row testi-card">
-                                        <div className="col-md-3 mb-3 col-4">
-                                            <div className="overflow-hidden">
-                                                <a href="#">
-                                                    <img src="/img/testi-img4.jpg" alt="" className="img-fluid w-100" />
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div className="col-md-9 my-auto col-8">
-                                            <div className="testi-rightbox">
-                                                <h3>Experience Excellence in Medical Care:
-                                                    Maryan Germain's Testimonial at KIMSHEALTH </h3>
-                                                <p>At KIMSHEALTH Hospital, we prioritize patient satisfaction and
-                                                    aim to provide the best care possible . . . .<a href="#"> Watch Video</a>
-                                                </p>
-
-                                                <div className="d-flex align-items-center justify-content-between mt-3">
-                                                    <div className="doctor-name">
-                                                        <p><span><img src="/img/doctor.png" className="img-fluid" alt="" /></span> Dr.
-                                                            Renjith Unnikrishnan </p>
-                                                    </div>
-                                                    <div className="doctor-catagory">
-                                                        <p>Orthopaedics </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <div className="col-xl-6 col-lg-6 col-md-6 col-12" data-aos="fade-right">
-                                    <div className="row testi-card">
-                                        <div className="col-md-3 mb-3 col-4">
-                                            <div className="overflow-hidden">
-                                                <a href="#">
-                                                    <img src="/img/testi-img1.jpg" alt="" className="img-fluid w-100" />
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div className="col-md-9 my-auto col-8">
-                                            <div className="testi-rightbox">
-                                                <h3>24-Week Preterm Miracle: Uma's Heartfelt
-                                                    Testimonial </h3>
-                                                <p>Uma, a Scientist at ISRO, Trivandrum, pours her
-                                                    heartfelt gratitude towards . . . .<a href="#"> Watch Video</a></p>
-
-                                                <div className="d-flex align-items-center justify-content-between mt-3">
-                                                    <div className="doctor-name">
-                                                        <p><span><img src="/img/doctor.png" className="img-fluid" alt="" /></span> Dr.
-                                                            Naveen Jain </p>
-                                                    </div>
-                                                    <div className="doctor-catagory">
-                                                        <p>Obstetrics & Gynecology </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="col-xl-6 col-lg-6 col-md-6 col-12" data-aos="fade-left">
-                                    <div className="row testi-card">
-                                        <div className="col-md-3 mb-3 col-4">
-                                            <div className="overflow-hidden">
-                                                <a href="#">
-                                                    <img src="/img/testi-img2.jpg" alt="" className="img-fluid w-100" />
-                                                </a>
-                                            </div>
-
-                                        </div>
-                                        <div className="col-md-9 my-auto col-8">
-                                            <div className="testi-rightbox">
-                                                <h3>Mr Menon's Remarkable Recovery with Intrasaccular
-                                                    Flow Diverter</h3>
-                                                <p>This is a testimonial by Mr Menon on his journey to recovery
-                                                    from aneurysm! With cutting-edge . . . .<a href="#"> Watch Video</a></p>
-
-                                                <div className="d-flex align-items-center justify-content-between mt-3">
-                                                    <div className="doctor-name">
-                                                        <p><span><img src="/img/doctor.png" className="img-fluid" alt="" /></span>Dr.
-                                                            Santhosh Joseph </p>
-                                                    </div>
-                                                    <div className="doctor-catagory">
-                                                        <p>Neuro Interventional Radiology </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="col-xl-6 col-lg-6 col-md-6 col-12" data-aos="fade-right">
-                                    <div className="row testi-card">
-                                        <div className="col-md-3 mb-3 col-4">
-                                            <div className="overflow-hidden">
-                                                <a href="#">
-                                                    <img src="/img/testi-img3.jpg" alt="" className="img-fluid w-100" />
-                                                </a>
-                                            </div>
-
-                                        </div>
-                                        <div className="col-md-9 my-auto col-8">
-                                            <div className="testi-rightbox">
-                                                <h3>A successful Shoulder Replacement surgery is
-                                                    done for Mrs Norah Mohammed Alsuqufi.</h3>
-                                                <p>A successful Shoulder Replacement surgery is done for
-                                                    Mrs Norah Mohammed Alsuqufi from Saudi . . . .<a href="#"> Watch Video</a></p>
-
-                                                <div className="d-flex align-items-center justify-content-between mt-3">
-                                                    <div className="doctor-name">
-                                                        <p><span><img src="/img/doctor.png" className="img-fluid" alt="" /></span> Dr.
-                                                            Muhammed Nazeer </p>
-                                                    </div>
-                                                    <div className="doctor-catagory">
-                                                        <p>Orthopedics & Trauma </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="col-xl-6 col-lg-6 col-md-6 col-12" data-aos="fade-left">
-                                    <div className="row testi-card">
-                                        <div className="col-md-3 mb-3 col-4">
-                                            <div className="overflow-hidden">
-                                                <a href="#">
-                                                    <img src="/img/testi-img4.jpg" alt="" className="img-fluid w-100" />
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div className="col-md-9 my-auto col-8">
-                                            <div className="testi-rightbox">
-                                                <h3>Experience Excellence in Medical Care:
-                                                    Maryan Germain's Testimonial at KIMSHEALTH </h3>
-                                                <p>At KIMSHEALTH Hospital, we prioritize patient satisfaction and
-                                                    aim to provide the best care possible . . . .<a href="#"> Watch Video</a>
-                                                </p>
-
-                                                <div className="d-flex align-items-center justify-content-between mt-3">
-                                                    <div className="doctor-name">
-                                                        <p><span><img src="/img/doctor.png" className="img-fluid" alt="" /></span> Dr.
-                                                            Renjith Unnikrishnan </p>
-                                                    </div>
-                                                    <div className="doctor-catagory">
-                                                        <p>Orthopaedics </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <div className="col-xl-6 col-lg-6 col-md-6 col-12" data-aos="fade-right">
-                                    <div className="row testi-card">
-                                        <div className="col-md-3 mb-3 col-4">
-                                            <div className="overflow-hidden">
-                                                <a href="#">
-                                                    <img src="/img/testi-img1.jpg" alt="" className="img-fluid w-100" />
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div className="col-md-9 my-auto col-8">
-                                            <div className="testi-rightbox">
-                                                <h3>24-Week Preterm Miracle: Uma's Heartfelt
-                                                    Testimonial </h3>
-                                                <p>Uma, a Scientist at ISRO, Trivandrum, pours her
-                                                    heartfelt gratitude towards . . . .<a href="#"> Watch Video</a></p>
-
-                                                <div className="d-flex align-items-center justify-content-between mt-3">
-                                                    <div className="doctor-name">
-                                                        <p><span><img src="/img/doctor.png" className="img-fluid" alt="" /></span> Dr.
-                                                            Naveen Jain </p>
-                                                    </div>
-                                                    <div className="doctor-catagory">
-                                                        <p>Obstetrics & Gynecology </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="col-xl-6 col-lg-6 col-md-6 col-12" data-aos="fade-left">
-                                    <div className="row testi-card">
-                                        <div className="col-md-3 mb-3 col-4">
-                                            <div className="overflow-hidden">
-                                                <a href="#">
-                                                    <img src="/img/testi-img2.jpg" alt="" className="img-fluid w-100" />
-                                                </a>
-                                            </div>
-
-                                        </div>
-                                        <div className="col-md-9 my-auto col-8">
-                                            <div className="testi-rightbox">
-                                                <h3>Mr Menon's Remarkable Recovery with Intrasaccular
-                                                    Flow Diverter</h3>
-                                                <p>This is a testimonial by Mr Menon on his journey to recovery
-                                                    from aneurysm! With cutting-edge . . . .<a href="#"> Watch Video</a></p>
-
-                                                <div className="d-flex align-items-center justify-content-between mt-3">
-                                                    <div className="doctor-name">
-                                                        <p><span><img src="/img/doctor.png" className="img-fluid" alt="" /></span>Dr.
-                                                            Santhosh Joseph </p>
-                                                    </div>
-                                                    <div className="doctor-catagory">
-                                                        <p>Neuro Interventional Radiology </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="col-xl-6 col-lg-6 col-md-6 col-12" data-aos="fade-right">
-                                    <div className="row testi-card">
-                                        <div className="col-md-3 mb-3 col-4">
-                                            <div className="overflow-hidden">
-                                                <a href="#">
-                                                    <img src="/img/testi-img3.jpg" alt="" className="img-fluid w-100" />
-                                                </a>
-                                            </div>
-
-                                        </div>
-                                        <div className="col-md-9 my-auto col-8">
-                                            <div className="testi-rightbox">
-                                                <h3>A successful Shoulder Replacement surgery is
-                                                    done for Mrs Norah Mohammed Alsuqufi.</h3>
-                                                <p>A successful Shoulder Replacement surgery is done for
-                                                    Mrs Norah Mohammed Alsuqufi from Saudi . . . .<a href="#"> Watch Video</a></p>
-
-                                                <div className="d-flex align-items-center justify-content-between mt-3">
-                                                    <div className="doctor-name">
-                                                        <p><span><img src="/img/doctor.png" className="img-fluid" alt="" /></span> Dr.
-                                                            Muhammed Nazeer </p>
-                                                    </div>
-                                                    <div className="doctor-catagory">
-                                                        <p>Orthopedics & Trauma </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="col-xl-6 col-lg-6 col-md-6 col-12" data-aos="fade-left">
-                                    <div className="row testi-card">
-                                        <div className="col-md-3 mb-3 col-4">
-                                            <div className="overflow-hidden">
-                                                <a href="#">
-                                                    <img src="/img/testi-img4.jpg" alt="" className="img-fluid w-100" />
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div className="col-md-9 my-auto col-8">
-                                            <div className="testi-rightbox">
-                                                <h3>Experience Excellence in Medical Care:
-                                                    Maryan Germain's Testimonial at KIMSHEALTH </h3>
-                                                <p>At KIMSHEALTH Hospital, we prioritize patient satisfaction and
-                                                    aim to provide the best care possible . . . .<a href="#"> Watch Video</a>
-                                                </p>
-
-                                                <div className="d-flex align-items-center justify-content-between mt-3">
-                                                    <div className="doctor-name">
-                                                        <p><span><img src="/img/doctor.png" className="img-fluid" alt="" /></span> Dr.
-                                                            Renjith Unnikrishnan </p>
-                                                    </div>
-                                                    <div className="doctor-catagory">
-                                                        <p>Orthopaedics </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <div className="col-xl-6 col-lg-6 col-md-6 col-12" data-aos="fade-right">
-                                    <div className="row testi-card">
-                                        <div className="col-md-3 mb-3 col-4">
-                                            <div className="overflow-hidden">
-                                                <a href="#">
-                                                    <img src="/img/testi-img1.jpg" alt="" className="img-fluid w-100" />
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div className="col-md-9 my-auto col-8">
-                                            <div className="testi-rightbox">
-                                                <h3>24-Week Preterm Miracle: Uma's Heartfelt
-                                                    Testimonial </h3>
-                                                <p>Uma, a Scientist at ISRO, Trivandrum, pours her
-                                                    heartfelt gratitude towards . . . .<a href="#"> Watch Video</a></p>
-
-                                                <div className="d-flex align-items-center justify-content-between mt-3">
-                                                    <div className="doctor-name">
-                                                        <p><span><img src="/img/doctor.png" className="img-fluid" alt="" /></span> Dr.
-                                                            Naveen Jain </p>
-                                                    </div>
-                                                    <div className="doctor-catagory">
-                                                        <p>Obstetrics & Gynecology </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="col-xl-6 col-lg-6 col-md-6 col-12" data-aos="fade-left">
-                                    <div className="row testi-card">
-                                        <div className="col-md-3 mb-3 col-4">
-                                            <div className="overflow-hidden">
-                                                <a href="#">
-                                                    <img src="/img/testi-img2.jpg" alt="" className="img-fluid w-100" />
-                                                </a>
-                                            </div>
-
-                                        </div>
-                                        <div className="col-md-9 my-auto col-8">
-                                            <div className="testi-rightbox">
-                                                <h3>Mr Menon's Remarkable Recovery with Intrasaccular
-                                                    Flow Diverter</h3>
-                                                <p>This is a testimonial by Mr Menon on his journey to recovery
-                                                    from aneurysm! With cutting-edge . . . .<a href="#"> Watch Video</a></p>
-
-                                                <div className="d-flex align-items-center justify-content-between mt-3">
-                                                    <div className="doctor-name">
-                                                        <p><span><img src="/img/doctor.png" className="img-fluid" alt="" /></span>Dr.
-                                                            Santhosh Joseph </p>
-                                                    </div>
-                                                    <div className="doctor-catagory">
-                                                        <p>Neuro Interventional Radiology </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="col-xl-6 col-lg-6 col-md-6 col-12" data-aos="fade-right">
-                                    <div className="row testi-card">
-                                        <div className="col-md-3 mb-3 col-4">
-                                            <div className="overflow-hidden">
-                                                <a href="#">
-                                                    <img src="/img/testi-img3.jpg" alt="" className="img-fluid w-100" />
-                                                </a>
-                                            </div>
-
-                                        </div>
-                                        <div className="col-md-9 my-auto col-8">
-                                            <div className="testi-rightbox">
-                                                <h3>A successful Shoulder Replacement surgery is
-                                                    done for Mrs Norah Mohammed Alsuqufi.</h3>
-                                                <p>A successful Shoulder Replacement surgery is done for
-                                                    Mrs Norah Mohammed Alsuqufi from Saudi . . . .<a href="#"> Watch Video</a></p>
-
-                                                <div className="d-flex align-items-center justify-content-between mt-3">
-                                                    <div className="doctor-name">
-                                                        <p><span><img src="/img/doctor.png" className="img-fluid" alt="" /></span> Dr.
-                                                            Muhammed Nazeer </p>
-                                                    </div>
-                                                    <div className="doctor-catagory">
-                                                        <p>Orthopedics & Trauma </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="col-xl-6 col-lg-6 col-md-6 col-12" data-aos="fade-left">
-                                    <div className="row testi-card">
-                                        <div className="col-md-3 mb-3 col-4">
-                                            <div className="overflow-hidden">
-                                                <a href="#">
-                                                    <img src="/img/testi-img4.jpg" alt="" className="img-fluid w-100" />
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div className="col-md-9 my-auto col-8">
-                                            <div className="testi-rightbox">
-                                                <h3>Experience Excellence in Medical Care:
-                                                    Maryan Germain's Testimonial at KIMSHEALTH </h3>
-                                                <p>At KIMSHEALTH Hospital, we prioritize patient satisfaction and
-                                                    aim to provide the best care possible . . . .<a href="#"> Watch Video</a>
-                                                </p>
-
-                                                <div className="d-flex align-items-center justify-content-between mt-3">
-                                                    <div className="doctor-name">
-                                                        <p><span><img src="/img/doctor.png" className="img-fluid" alt="" /></span> Dr.
-                                                            Renjith Unnikrishnan </p>
-                                                    </div>
-                                                    <div className="doctor-catagory">
-                                                        <p>Orthopaedics </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
+                                    })
+                                }
                             </div>
                         </div>
                     </div>
                 </div>
-
-
             </div>
             <Footer />
         </>

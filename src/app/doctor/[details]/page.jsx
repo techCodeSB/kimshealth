@@ -1,9 +1,14 @@
+import doctorData from '@/app/lib/getDoctor';
 import BlogCarousel from '@/components/BlogCarousel';
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 import React from 'react'
 
-const DoctorDetails = () => {
+const DoctorDetails = async ({ params }) => {
+    const imgUrl = process.env.NEXT_PUBLIC_IMAGE_URL;
+    const slug = params.details;
+    const data = await doctorData.getSingleDoctor(slug);
+
     return (
         <>
             <Header />
@@ -12,7 +17,7 @@ const DoctorDetails = () => {
                 <div className="doctor-details-main-page">
                     <div className="page-header">
                         <div className="container">
-                            <h2>Dr. Shabeerali T U</h2>
+                            <h2>{data.name}</h2>
                         </div>
                     </div>
                     <section className="breadcrumb-wrapper py-2">
@@ -21,12 +26,12 @@ const DoctorDetails = () => {
                                 <div className="col-12">
                                     <ul className="breadcrumb mb-0">
                                         <li>
-                                            <a href="index.php">Home</a>
+                                            <a href="/">Home</a>
                                         </li>
                                         <li>
                                             <a href="index.php">Find a Doctor</a>
                                         </li>
-                                        <li className="active"> Dr. Shabeerali T U</li>
+                                        <li className="active"> {data.name}</li>
                                     </ul>
                                 </div>
                             </div>
@@ -37,16 +42,15 @@ const DoctorDetails = () => {
                             <div className="row">
                                 <div className="col-md-3 mb-4">
                                     <div className="left-col-img">
-                                        <img src="/img/doctor-details.jpg" alt="" className="img-fluid" />
+                                        <img src={imgUrl + data.doctorImage.url} alt={data.name} className="img-fluid" />
                                         <div className="main-heading sub-heading mt-3">
-                                            <h3>Dr. Shabeerali T U</h3>
+                                            <h3>{data.name}</h3>
                                         </div>
                                         <div className="left-details-list mt-3">
                                             <ul>
-                                                <li className="details-doc-ic">Chief Coordinator & Senior Consultant</li>
-                                                <li className="details-liver-ic"><strong>Hepatobiliary, Pancreatic & Liver Transplant
-                                                    Surgery</strong></li>
-                                                <li className="details-hospital-ic">KIMSHEALTH, Trivandrum</li>
+                                                <li className="details-doc-ic">{data.doctorDesignation}</li>
+                                                <li className="details-liver-ic"><strong>{data.specialities[0].title}</strong></li>
+                                                <li className="details-hospital-ic">{data.hospitals[0].address}</li>
                                             </ul>
                                             <a href="#" className="form-btn mt-3 d-block text-center text-light">Book an Appointment</a>
                                         </div>
@@ -84,22 +88,11 @@ const DoctorDetails = () => {
                                             </div>
 
                                             <ul>
-                                                <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                                    incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices
-                                                    gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. </li>
-                                                <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                                    incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices
-                                                    gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. </li>
-                                                <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                                    incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices
-                                                    gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. </li>
-                                                <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                                    incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices
-                                                    gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. </li>
-                                                <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                                    incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices
-                                                    gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. </li>
-
+                                                {
+                                                    data.workExperience?.split("\n").map((w, i) => {
+                                                        return <li key={i}>{w.startsWith("-") ? w.slice(1, w.length) : w}</li>
+                                                    })
+                                                }
                                             </ul>
 
 
@@ -109,16 +102,11 @@ const DoctorDetails = () => {
                                             </div>
 
                                             <ul>
-                                                <li>Gastrointestinal Surgery</li>
-                                                <li>Hepatobiliary Surgery</li>
-                                                <li>Pancreatic Surgery - For benign and cancer </li>
-                                                <li>Surgical conditions of Liver, Biliary Tract, Pancreas Spleen and Retroperitoneum
-                                                </li>
-                                                <li>Open and laparoscopic surgical procedures </li>
-                                                <li>Liver transplant </li>
-                                                <li>Colorectal Surgery </li>
-                                                <li>GI & Hepato pancreatico biliary oncosurgery </li>
-
+                                                {
+                                                    data.areaOfExpertise?.split("\n").map((a, i) => {
+                                                        return <li key={i}>{a.startsWith("-") ? a.slice(1, a.length) : a}</li>
+                                                    })
+                                                }
                                             </ul>
 
 
@@ -128,14 +116,11 @@ const DoctorDetails = () => {
                                             </div>
 
                                             <ul>
-                                                <li>Fellowship in Hepatobiliary Surgery and Liver Transplantation at the Center for
-                                                    Liver and Biliary Sciences Indraprastha Apollo, Delhi DNB in Surgical
-                                                    Gastroenterology</li>
-                                                <li>MCh in Surgical Gastroenterology</li>
-                                                <li>DNB in General Surgery </li>
-                                                <li>MS in General Surgery </li>
-                                                <li>MCh in Surgical Gastroenterology</li>
-
+                                                {
+                                                    data.educationAndTraning?.split("\n").map((e, i) => {
+                                                        return <li key={i}>{e.startsWith("-") ? e.slice(1, e.length) : e}</li>
+                                                    })
+                                                }
                                             </ul>
 
                                             <div className="d-flex align-items-center gap-2 mb-2">
@@ -144,10 +129,11 @@ const DoctorDetails = () => {
                                             </div>
 
                                             <ul>
-                                                <li>Member of Indian Medical Association</li>
-                                                <li>Association of Surgeons of India</li>
-                                                <li>Liver Transplant Society of India</li>
-
+                                                {
+                                                    data.membership?.split("\n").map((m, i) => {
+                                                        return <li key={i}>{m.startsWith("-") ? m.slice(1, m.length) : m}</li>
+                                                    })
+                                                }
                                             </ul>
 
                                             <div className="d-flex align-items-center gap-2 mb-2">
@@ -156,21 +142,11 @@ const DoctorDetails = () => {
                                             </div>
 
                                             <ul>
-                                                <li>T.U. Shabeer Ali. Hemorrhagic ascites: are we missing endometriosis? Indian
-                                                    Journal of Gastroenterology 2012, 31, 195-197 case series Co-Author </li>
-                                                <li>T.U. Shabeer Ali. Hemorrhagic ascites: are we missing endometriosis? Indian
-                                                    Journal of Gastroenterology 2012, 31, 195-197 case series Co-Author </li>
-                                                <li>T.U. Shabeer Ali. Hemorrhagic ascites: are we missing endometriosis? Indian
-                                                    Journal of Gastroenterology 2012, 31, 195-197 case series Co-Author </li>
-                                                <li>T.U. Shabeer Ali. Hemorrhagic ascites: are we missing endometriosis? Indian
-                                                    Journal of Gastroenterology 2012, 31, 195-197 case series Co-Author </li>
-                                                <li>T.U. Shabeer Ali. Hemorrhagic ascites: are we missing endometriosis? Indian
-                                                    Journal of Gastroenterology 2012, 31, 195-197 case series Co-Author </li>
-                                                <li>T.U. Shabeer Ali. Hemorrhagic ascites: are we missing endometriosis? Indian
-                                                    Journal of Gastroenterology 2012, 31, 195-197 case series Co-Author </li>
-                                                <li>T.U. Shabeer Ali. Hemorrhagic ascites: are we missing endometriosis? Indian
-                                                    Journal of Gastroenterology 2012, 31, 195-197 case series Co-Author </li>
-
+                                                {
+                                                    data.awards?.split("\n").map((aw, i) => {
+                                                        return <li key={i}>{aw.startsWith("-") ? aw.slice(1, aw.length) : aw}</li>
+                                                    })
+                                                }
                                             </ul>
 
                                             <div className="d-flex align-items-center gap-2 mb-2">
@@ -179,9 +155,11 @@ const DoctorDetails = () => {
                                             </div>
 
                                             <ul>
-                                                <li>English </li>
-                                                <li>Malayalam </li>
-
+                                                {
+                                                    data.languagesKnown?.split("\n").map((lg, i) => {
+                                                        return <li key={i}>{lg.startsWith("-") ? lg.slice(1, lg.length) : lg}</li>
+                                                    })
+                                                }
                                             </ul>
                                         </div>
                                     </div>
@@ -278,7 +256,7 @@ const DoctorDetails = () => {
                     </section>
 
                     <div className="line-divider"></div>
-                    <BlogCarousel />
+                    {/* <BlogCarousel /> */}
                 </div>
             </div>
             <Footer />

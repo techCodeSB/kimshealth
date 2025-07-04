@@ -4,6 +4,7 @@ import langLoc from "@/app/lib/getLangLoc";
 import { onLangChangeRedirection, onLocChangeRedirection, } from "@/helper/onChageRedirection";
 import Link from 'next/link';
 import Cookies from 'js-cookie';
+import { getBaseUrl } from '@/helper/getBaseUrl';
 
 
 const Header = () => {
@@ -11,6 +12,8 @@ const Header = () => {
     const [allLocations, setAllLocations] = useState([]); // Store all locations;
     const [selectedLang, setSelectedLang] = useState(null);
     const [selectedLoc, setSelectedLoc] = useState(null);
+    const [basePath, setBasePath] = useState();
+
 
 
     // Get all languages
@@ -28,9 +31,11 @@ const Header = () => {
         getLang()
         getLoc()
 
-        
+
         setSelectedLang(JSON.parse(Cookies.get("systemLang")))
         setSelectedLoc(JSON.parse(Cookies.get("systemLocation")))
+
+        setBasePath(getBaseUrl(true, true))
 
     }, [])
 
@@ -66,13 +71,13 @@ const Header = () => {
                         </div>
                         <div className="header-contact d-flex align-items-center justify-content-center">
                             <ul>
-                                <li><a href="#">About Us</a></li>
-                                <li><a href="#">Home Care</a></li>
-                                <li><a href="">Second Opinion</a></li>
+                                <li><a href={`${basePath}/about-us`}>About Us</a></li>
+                                <li><a href={`${basePath}/at-home-services`}>Home Care</a></li>
+                                <li><a href={`${basePath}/second-opinion`}>Second Opinion</a></li>
                                 <li><a href="#">My Reports</a></li>
-                                <li><a href="#">Call Ambulance</a></li>
-                                <li><a href="/contact-us">Contact Us</a></li>
-                                <li><a href="">Health Checkup</a></li>
+                                <li><a href={`${basePath}/ambulance-services`}>Call Ambulance</a></li>
+                                <li><a href={`${basePath}/contact-us`}>Contact Us</a></li>
+                                <li><a href={`${basePath}/health-package`}>Health Checkup</a></li>
                             </ul>
 
                             <div className="top-bar-icon d-flex align-items-center">
@@ -228,10 +233,10 @@ const Header = () => {
                                             </div>
                                         </div>
                                     </li>
-                                    <li><a href="" className="anchor-menu">Find a Doctor</a></li>
+                                    <li><a href={`${basePath}/doctor`} className="anchor-menu">Find a Doctor</a></li>
                                     {/* <!-- <li><a href="" className="anchor-menu">Health Checkup</a></li> --> */}
-                                    <li><a href="" className="anchor-menu">Visa Medical</a></li>
-                                    <li><a href="" className="anchor-menu">International Patients</a></li>
+                                    <li><a href={`${basePath}/visa-medical`} className="anchor-menu">Visa Medical</a></li>
+                                    <li><a href={`${basePath}/international-pages`} className="anchor-menu">International Patients</a></li>
                                     <li className="menu-item-has-children show-submenu d-lg-inline-block d-none">
                                         <Link href="#" className="anchor-menu">Locations</Link>
                                         <div className="sub-menu ">
@@ -836,7 +841,10 @@ const Header = () => {
                             </div>
 
                             <div className="appointment-btn d-lg-block d-none me-4">
-                                <button className="btn" type="submit">Book An Appointment</button>
+                                <button className="btn" type="submit"
+                                    onClick={() => { location.href = `${basePath}/book-an-appointment` }}>
+                                    Book An Appointment
+                                </button>
                             </div>
                             <div className="menu-button">
                                 <span className="toggle-bar"></span>

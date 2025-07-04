@@ -4,7 +4,7 @@ import { headers } from "next/headers";
 
 
 export default function RootLayout({ children }) {
-  
+
   return (
     <html lang="en">
       <head>
@@ -37,7 +37,7 @@ export default function RootLayout({ children }) {
 
 
         {/* All Scripts */}
-        <Script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" strategy="beforeInteractive"></Script>
+        <Script strategy="beforeInteractive" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></Script>
         <Script strategy="beforeInteractive" src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></Script>
         <Script strategy="beforeInteractive" src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></Script>
         <Script strategy="beforeInteractive" src="https://unpkg.com/aos@next/dist/aos.js"></Script>

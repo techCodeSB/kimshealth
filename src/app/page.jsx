@@ -51,7 +51,7 @@ const Home = async () => {
   const testimonialDataSet = {
     sectionTitle: pageContent[5]?.title,
     buttonText: 'View All', buttonURL: '#',
-    data: await testimonialData.getAll(),
+    data: await testimonialData.getAll(10),
     baseUrl: await getBaseUrl(true, true)
   }
 
