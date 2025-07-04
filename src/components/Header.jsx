@@ -1,6 +1,6 @@
 "use client"
 import React, { useEffect, useState } from 'react'
-import langLoc from "@/app/lib/getLangLoc";
+import langLoc from "@/helper/getLangLoc";
 import { onLangChangeRedirection, onLocChangeRedirection, } from "@/helper/onChageRedirection";
 import Link from 'next/link';
 import Cookies from 'js-cookie';
@@ -35,7 +35,7 @@ const Header = () => {
         setSelectedLang(JSON.parse(Cookies.get("systemLang")))
         setSelectedLoc(JSON.parse(Cookies.get("systemLocation")))
 
-        setBasePath(getBaseUrl(true, true))
+        setBasePath(getBaseUrl(true, true));
 
     }, [])
 
