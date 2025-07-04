@@ -420,23 +420,23 @@ const HospitalDetails = () => {
                 </section>
 
                 <div className="line-divider"></div>
-                <ExcellenceCarousel/>
+                {/* <ExcellenceCarousel/> */}
 
 
                 <div className="line-divider"> </div>
-                <ExpertCarousel/>
+                {/* <ExpertCarousel/> */}
 
                 <div className="line-divider"></div>
-                <TestimonialSection/>
+                {/* <TestimonialSection/> */}
 
                 <div className="line-divider"></div>
-                <FromDoctor/>
+                {/* <FromDoctor/> */}
 
                 <div className="line-divider"></div>
-                <BlogCarousel/>
+                {/* <BlogCarousel/> */}
 
                 <div className="line-divider"></div>
-                <OtherHospital/>
+                {/* <OtherHospital/> */}
 
 
             </div>

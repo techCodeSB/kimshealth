@@ -151,11 +151,11 @@ const HomeServices = () => {
                     </section>
 
                     <div className="line-divider"></div>
-                    <TestimonialSection/>
+                    {/* <TestimonialSection/> */}
 
 
                     <div className="line-divider"></div>
-                    <BlogCarousel/>
+                    {/* <BlogCarousel/> */}
                 </div>
             </div>
             <Footer />

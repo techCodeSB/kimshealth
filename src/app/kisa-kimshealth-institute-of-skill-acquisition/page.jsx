@@ -782,7 +782,7 @@ const KisaHealth = () => {
 
                     <div className="line-divider"> </div>
 
-                    <JournalCarousel />
+                    {/* <JournalCarousel /> */}
 
                 </div>
             </div>

@@ -164,7 +164,7 @@ const AmericanHeartAssoc = () => {
 
                     <div className="line-divider"> </div>
 
-                    <JournalCarousel/>
+                    {/* <JournalCarousel/> */}
                 </div>
             </div>
             <Footer />

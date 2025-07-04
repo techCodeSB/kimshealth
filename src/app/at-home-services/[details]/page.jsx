@@ -500,4 +500,4 @@ const HomeServiceDetails = () => {
     )
 }
 
-export default HomeServiceDetails
+export default HomeServiceDetails;

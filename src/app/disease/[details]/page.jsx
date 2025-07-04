@@ -393,15 +393,15 @@ const ConditionDetails = () => {
                 </section>
 
                 <div className="line-divider"> </div>
-                <ExpertCarousel/>
+                {/* <ExpertCarousel/> */}
 
 
                 <div className="line-divider"></div>
-                <TestimonialSection/>
+                {/* <TestimonialSection/> */}
 
 
                 <div className="line-divider"></div>
-                <FromDoctor/>
+                {/* <FromDoctor/> */}
             </div>
             <Footer />
         </>

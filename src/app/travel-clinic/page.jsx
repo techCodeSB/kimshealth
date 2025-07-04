@@ -71,7 +71,7 @@ const TravelClinic = async () => {
                     </section>
                     <div className="line-divider"> </div>
 
-                    <ExpertCarousel />
+                    {/* <ExpertCarousel /> */}
                 </div>
             </div>
             <Footer />
