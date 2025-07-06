@@ -8,15 +8,17 @@ export const getBaseUrl = (lang = false, loc = false) => {
     langFromStorage = JSON.parse(Cookies.get("systemLang"));
     locationFromStorage = JSON.parse(Cookies.get("systemLocation"));
 
-
+    
+    
     if (lang && langFromStorage.default === false) {
         baseUrl = `${baseUrl}/${langFromStorage.slug}`;
     }
-
+    
     if (loc && locationFromStorage.default === false) {
         baseUrl = `${baseUrl}/${locationFromStorage.slug}`;
     }
 
+    
     return baseUrl;
 
 }

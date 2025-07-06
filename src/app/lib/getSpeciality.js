@@ -26,14 +26,38 @@ const getSpecialityData = {
         const getIdReq = await fetch(process.env.NEXT_PUBLIC_CMS_API_URL + `/specialities?filters[slug][$eq]=${slug}`);
         const getIdRes = await getIdReq.json();
         const id = getIdRes.data[0].id;
-        console.log(id)
 
         // Get speciality data using id;
         const req = await fetch(process.env.NEXT_PUBLIC_CMS_API_URL + `/specialty-details?populate=*&filters[speciality][$eq]=${id}`);
         const res = await req.json();
 
         return res.data[0];
+    },
+
+
+    getSpecialityTitle: async () => {
+        const baseUrl = process.env.NEXT_PUBLIC_CMS_API_URL;
+        // Get total count
+        const initialReq = await fetch(`${baseUrl}/specialty-details`);
+        const initialRes = await initialReq.json();
+        const totalCount = initialRes.meta.pagination.total;
+
+        const limit = 100;
+        const pages = Math.ceil(totalCount / limit);
+        let data = [];
+
+        // Actual Data
+        for (let i = 0; i < pages; i++) {
+            const start = i * limit;
+            const url = `${baseUrl}/specialty-details?populate[0]=speciality&pagination[start]=${start}&pagination[limit]=${limit}`;
+            const res = await fetch(url);
+            const json = await res.json();
+            json.data.forEach((d, _) => data.push(d.speciality))
+        }
+
+        return data;
     }
+
 
 }
 

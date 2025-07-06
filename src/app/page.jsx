@@ -15,58 +15,65 @@ import testimonialData from './lib/getTestimonial'
 import getSpecialityData from './lib/getSpeciality'
 import getAwardData from './lib/getAward'
 import doctorTalkData from './lib/getDoctorTalk'
+import hospitalData from './lib/getHospital'
+import staticPage from './lib/getStaticPage'
 
 
 
 
 const Home = async () => {
+  const basePath = await getBaseUrl(true, true);
   const field = "populate[0]=pageContent&populate[1]=pageContent.bannerItem&populate[2]=pageContent.bannerItem.bannerImageDesktop&populate[3]=pageContent.bannerItem.bannerImageMobile&populate[4]=metaSection&populate[5]=pageContent.highlightButtonItem&populate[6]=pageContent.highlightButtonItem.iconImage";
   const data = await getStaticPageContent("home", field);
   const pageContent = data?.data[0]?.pageContent;
   const pageMeta = data?.data[0]?.metaSection;
 
-  // console.log(pageContent);
+  const allSpecility = await getSpecialityData.getSpecialityTitle()
+  const allHospitals = await hospitalData.getHospitalTitle();
+  const allStaticPage = await staticPage.getHospitalTitle();
+
+
 
   const specialityDataSet = {
     sectionTitle: pageContent[2]?.title,
     buttonText: 'View All', buttonURL: '#',
     data: await getSpecialityData.getAll(),
-    baseUrl: await getBaseUrl(true, true)
+    baseUrl: basePath
   };
 
   const expertDataSet = {
     sectionTitle: pageContent[3]?.title,
     buttonText: 'View All', buttonURL: '#',
     data: await doctorData.getDoctorAll(10),
-    baseUrl: await getBaseUrl(true, true)
+    baseUrl: basePath
   };
 
   const awardDataSet = {
     sectionTitle: pageContent[4]?.title,
     buttonText: 'View All', buttonURL: '#',
     data: await getAwardData.getAll(),
-    baseUrl: await getBaseUrl(true, true)
+    baseUrl: basePath
   };
 
   const testimonialDataSet = {
     sectionTitle: pageContent[5]?.title,
     buttonText: 'View All', buttonURL: '#',
     data: await testimonialData.getAll(10),
-    baseUrl: await getBaseUrl(true, true)
+    baseUrl: basePath
   }
 
   const blogDataSet = {
     sectionTitle: pageContent[6]?.title,
     buttonText: 'View All', buttonURL: '#',
-    data: await blogData.allBlog(),
-    baseUrl: await getBaseUrl(true, true)
+    data: await blogData.allBlog(10),
+    baseUrl: basePath
   }
 
   const docTalkDataSet = {
     sectionTitle: pageContent[7]?.title,
     buttonText: 'View All', buttonURL: '#',
-    data: await doctorTalkData.allData(),
-    baseUrl: await getBaseUrl(true, true)
+    data: await doctorTalkData.allData(10),
+    baseUrl: basePath
   }
 
 
@@ -74,7 +81,7 @@ const Home = async () => {
 
   return (
     <>
-      <Header />
+      <Header/>
       <div role="main" className="main">
         <section className="d-lg-block d-none">
           <div className="container-wrapper">
@@ -154,7 +161,7 @@ const Home = async () => {
 
                 pageContent[1].highlightButtonItem.map((h, index) => {
                   return <div className="cta-col" key={index}>
-                    <a href={h.hyperlink}>
+                    <a href={basePath + h.hyperlink}>
                       <div className="cta-diff">
                         <div className="d-flex align-items-center justify-content-center">
                           <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${h.iconImage?.url}`} alt={h.title} />
@@ -247,7 +254,11 @@ const Home = async () => {
 
       </div>
 
-      <Footer />
+      <Footer
+        speciality={allSpecility}
+        hospitals={allHospitals}
+        staticPage={allStaticPage}
+      />
     </>
   )
 }

@@ -31,7 +31,7 @@ export const getStaticPageContent = async (slug = 'home', field = "", lang = tru
         const getStaticPageContent = await fetch(`${process.env.NEXT_PUBLIC_CMS_API_URL}/${staticContentUrlPath}`);
         const staticPageContentRes = await getStaticPageContent.json();
 
-        if(staticPageContentRes.data.length < 1){
+        if(staticPageContentRes.data?.length < 1){
             notFound();
         }
         

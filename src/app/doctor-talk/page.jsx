@@ -1,8 +1,22 @@
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import React from 'react'
+import { getBaseUrl } from '../lib/getBaseUrl';
+import { getStaticPageContent } from '../lib/getStaticPageContent';
+import doctorTalkData from '../lib/getDoctorTalk';
+import formatDate from '../lib/formatDate';
 
-const DoctorTalk = () => {
+
+
+const DoctorTalk = async () => {
+    const baseURL = await getBaseUrl(true, true);
+    const data = await getStaticPageContent("doctor-talk");
+    const pageContent = data?.data[0]?.pageContent;
+    const pageMeta = data?.data[0]?.metaSection;
+    const docTalkData = await doctorTalkData.allData();
+
+
+
     return (
         <>
             <Header />
@@ -10,7 +24,7 @@ const DoctorTalk = () => {
                 <div className="doctor-talk-main-page">
                     <div className="page-header">
                         <div className="container">
-                            <h2>Hear From The Doctor </h2>
+                            <h2>{pageContent[0]?.title}</h2>
                         </div>
                     </div>
                     <section className="breadcrumb-wrapper py-2">
@@ -19,9 +33,9 @@ const DoctorTalk = () => {
                                 <div className="col-12">
                                     <ul className="breadcrumb mb-0">
                                         <li>
-                                            <a href="index.php">Home</a>
+                                            <a href="/">Home</a>
                                         </li>
-                                        <li className="active"> Hear From The Doctor </li>
+                                        <li className="active"> {pageContent[0]?.title}</li>
                                     </ul>
                                 </div>
                             </div>
@@ -57,479 +71,30 @@ const DoctorTalk = () => {
                     <div className="section section">
                         <div className="container">
                             <div className="row">
-                                <div className="col-md-4 blog-right-col overflow-hidden mb-3">
-                                    <div className="position-relative overflow-hidden" data-aos="fade-up">
-                                        <img src="/img/hear-doc2.jpg" className="img-fluid w-100 hear-doc-image" alt="" />
-                                        <div className="hear-doctor-content">
-                                            <div className="d-block align-items-center justify-content-between">
-                                                <div>
-                                                    <h5 className="">12<sup>th</sup> May 2024</h5>
-                                                    <p>A talk on Liver Transplant by Dr. Shabeer Ali T U</p>
-                                                </div>
-                                                <div className="main-btn ">
-                                                    <span><img src="/img/play-button.png" className="img-fluid" alt="" /> </span>
-                                                    <a href="#">Watch Video <span><i
-                                                        className="fa-solid fa-arrow-right"></i></span></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="col-md-4 blog-right-col overflow-hidden mb-3">
-                                    <div className="position-relative overflow-hidden" data-aos="fade-up">
-                                        <img src="/img/hear-doc2.jpg" className="img-fluid w-100 hear-doc-image" alt="" />
-                                        <div className="hear-doctor-content">
-                                            <div className="d-block align-items-center justify-content-between">
-                                                <div>
-                                                    <h5 className="">12<sup>th</sup> May 2024</h5>
-                                                    <p>A talk on Liver Transplant by Dr. Shabeer Ali T U</p>
-                                                </div>
-                                                <div className="main-btn ">
-                                                    <span><img src="/img/play-button.png" className="img-fluid" alt="" /> </span>
-                                                    <a href="#">Watch Video <span><i
-                                                        className="fa-solid fa-arrow-right"></i></span></a>
+                                {
+                                    docTalkData.map((dt, index) => {
+                                        return <div className="col-md-4 blog-right-col overflow-hidden mb-3" key={index}>
+                                            <div className="position-relative overflow-hidden" data-aos={index % 2 == 0 ? "fade-right" : "fade-left"}>
+                                                <img src={process.env.NEXT_PUBLIC_IMAGE_URL + dt.thumbnailImage.url} className="img-fluid w-100 hear-doc-image" alt="" />
+                                                <div className="hear-doctor-content">
+                                                    <div className="d-block align-items-center justify-content-between">
+                                                        <div>
+                                                            <h5 className="">{formatDate(dt.date)}</h5>
+                                                            <p>{dt.title}</p>
+                                                        </div>
+                                                        <div className="main-btn ">
+                                                            <span><img src="/img/play-button.png" className="img-fluid" alt="" /> </span>
+                                                            <a href={baseURL + "/doctor-talk/" + dt.slug}>Watch Video <span><i
+                                                                className="fa-solid fa-arrow-right"></i></span></a>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-
-                                <div className="col-md-4 blog-right-col overflow-hidden mb-3">
-                                    <div className="position-relative overflow-hidden" data-aos="fade-up">
-                                        <img src="/img/hear-doc2.jpg" className="img-fluid w-100 hear-doc-image" alt="" />
-                                        <div className="hear-doctor-content">
-                                            <div className="d-block align-items-center justify-content-between">
-                                                <div>
-                                                    <h5 className="">12<sup>th</sup> May 2024</h5>
-                                                    <p>A talk on Liver Transplant by Dr. Shabeer Ali T U</p>
-                                                </div>
-                                                <div className="main-btn ">
-                                                    <span><img src="/img/play-button.png" className="img-fluid" alt="" /> </span>
-                                                    <a href="#">Watch Video <span><i
-                                                        className="fa-solid fa-arrow-right"></i></span></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="col-md-4 blog-right-col overflow-hidden mb-3">
-                                    <div className="position-relative overflow-hidden" data-aos="fade-up">
-                                        <img src="/img/hear-doc3.jpg"
-                                            className="img-fluid w-100 hear-doc-image " alt="" />
-                                        <div className="hear-doctor-content">
-                                            <div className="d-block align-items-center justify-content-between">
-                                                <div>
-                                                    <h5 className="">20<sup>th</sup> May 2024</h5>
-                                                    <p>Understanding Hernias & Hydroceles in Children</p>
-                                                </div>
-                                                <div className="main-btn ">
-                                                    <span><img src="/img/play-button.png" className="img-fluid" alt="" /></span>
-                                                    <a href="#">Watch Video <span><i
-                                                        className="fa-solid fa-arrow-right"></i></span></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="col-md-4 blog-right-col overflow-hidden mb-3">
-                                    <div className="position-relative overflow-hidden" data-aos="fade-up">
-                                        <img src="/img/hear-doc3.jpg"
-                                            className="img-fluid w-100 hear-doc-image " alt="" />
-                                        <div className="hear-doctor-content">
-                                            <div className="d-block align-items-center justify-content-between">
-                                                <div>
-                                                    <h5 className="">20<sup>th</sup> May 2024</h5>
-                                                    <p>Understanding Hernias & Hydroceles in Children</p>
-                                                </div>
-                                                <div className="main-btn ">
-                                                    <span><img src="/img/play-button.png" className="img-fluid" alt="" /></span>
-                                                    <a href="#">Watch Video <span><i
-                                                        className="fa-solid fa-arrow-right"></i></span></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="col-md-4 blog-right-col overflow-hidden mb-3">
-                                    <div className="position-relative overflow-hidden" data-aos="fade-up">
-                                        <img src="/img/hear-doc3.jpg"
-                                            className="img-fluid w-100 hear-doc-image " alt="" />
-                                        <div className="hear-doctor-content">
-                                            <div className="d-block align-items-center justify-content-between">
-                                                <div>
-                                                    <h5 className="">20<sup>th</sup> May 2024</h5>
-                                                    <p>Understanding Hernias & Hydroceles in Children</p>
-                                                </div>
-                                                <div className="main-btn">
-                                                    <span><img src="/img/play-button.png" className="img-fluid" alt="" /></span>
-                                                    <a href="#">Watch Video <span><i
-                                                        className="fa-solid fa-arrow-right"></i></span></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                    })
+                                }
 
 
-
-
-                                <div className="col-md-4 blog-right-col overflow-hidden mb-3">
-                                    <div className="position-relative overflow-hidden" data-aos="fade-up">
-                                        <img src="/img/hear-doc2.jpg" className="img-fluid w-100 hear-doc-image" alt="" />
-                                        <div className="hear-doctor-content">
-                                            <div className="d-block align-items-center justify-content-between">
-                                                <div>
-                                                    <h5 className="">12<sup>th</sup> May 2024</h5>
-                                                    <p>A talk on Liver Transplant by Dr. Shabeer Ali T U</p>
-                                                </div>
-                                                <div className="main-btn ">
-                                                    <span><img src="/img/play-button.png" className="img-fluid" alt="" /> </span>
-                                                    <a href="#">Watch Video <span><i
-                                                        className="fa-solid fa-arrow-right"></i></span></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="col-md-4 blog-right-col overflow-hidden mb-3">
-                                    <div className="position-relative overflow-hidden" data-aos="fade-up">
-                                        <img src="/img/hear-doc2.jpg" className="img-fluid w-100 hear-doc-image" alt="" />
-                                        <div className="hear-doctor-content">
-                                            <div className="d-block align-items-center justify-content-between">
-                                                <div>
-                                                    <h5 className="">12<sup>th</sup> May 2024</h5>
-                                                    <p>A talk on Liver Transplant by Dr. Shabeer Ali T U</p>
-                                                </div>
-                                                <div className="main-btn ">
-                                                    <span><img src="/img/play-button.png" className="img-fluid" alt="" /> </span>
-                                                    <a href="#">Watch Video <span><i
-                                                        className="fa-solid fa-arrow-right"></i></span></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="col-md-4 blog-right-col overflow-hidden mb-3">
-                                    <div className="position-relative overflow-hidden" data-aos="fade-up">
-                                        <img src="/img/hear-doc2.jpg" className="img-fluid w-100 hear-doc-image" alt="" />
-                                        <div className="hear-doctor-content">
-                                            <div className="d-block align-items-center justify-content-between">
-                                                <div>
-                                                    <h5 className="">12<sup>th</sup> May 2024</h5>
-                                                    <p>A talk on Liver Transplant by Dr. Shabeer Ali T U</p>
-                                                </div>
-                                                <div className="main-btn ">
-                                                    <span><img src="/img/play-button.png" className="img-fluid" alt="" /> </span>
-                                                    <a href="#">Watch Video <span><i
-                                                        className="fa-solid fa-arrow-right"></i></span></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="col-md-4 blog-right-col overflow-hidden mb-3">
-                                    <div className="position-relative overflow-hidden" data-aos="fade-up">
-                                        <img src="/img/hear-doc3.jpg"
-                                            className="img-fluid w-100 hear-doc-image " alt="" />
-                                        <div className="hear-doctor-content">
-                                            <div className="d-block align-items-center justify-content-between">
-                                                <div>
-                                                    <h5 className="">20<sup>th</sup> May 2024</h5>
-                                                    <p>Understanding Hernias & Hydroceles in Children</p>
-                                                </div>
-                                                <div className="main-btn ">
-                                                    <span><img src="/img/play-button.png" className="img-fluid" alt="" /></span>
-                                                    <a href="#">Watch Video <span><i
-                                                        className="fa-solid fa-arrow-right"></i></span></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="col-md-4 blog-right-col overflow-hidden mb-3">
-                                    <div className="position-relative overflow-hidden" data-aos="fade-up">
-                                        <img src="/img/hear-doc3.jpg"
-                                            className="img-fluid w-100 hear-doc-image " alt="" />
-                                        <div className="hear-doctor-content">
-                                            <div className="d-block align-items-center justify-content-between">
-                                                <div>
-                                                    <h5 className="">20<sup>th</sup> May 2024</h5>
-                                                    <p>Understanding Hernias & Hydroceles in Children</p>
-                                                </div>
-                                                <div className="main-btn ">
-                                                    <span><img src="/img/play-button.png" className="img-fluid" alt="" /></span>
-                                                    <a href="#">Watch Video <span><i
-                                                        className="fa-solid fa-arrow-right"></i></span></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="col-md-4 blog-right-col overflow-hidden mb-3">
-                                    <div className="position-relative overflow-hidden" data-aos="fade-up">
-                                        <img src="/img/hear-doc3.jpg"
-                                            className="img-fluid w-100 hear-doc-image " alt="" />
-                                        <div className="hear-doctor-content">
-                                            <div className="d-block align-items-center justify-content-between">
-                                                <div>
-                                                    <h5 className="">20<sup>th</sup> May 2024</h5>
-                                                    <p>Understanding Hernias & Hydroceles in Children</p>
-                                                </div>
-                                                <div className="main-btn">
-                                                    <span><img src="/img/play-button.png" className="img-fluid" alt="" /></span>
-                                                    <a href="#">Watch Video <span><i
-                                                        className="fa-solid fa-arrow-right"></i></span></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="col-md-4 blog-right-col overflow-hidden mb-3">
-                                    <div className="position-relative overflow-hidden" data-aos="fade-up">
-                                        <img src="/img/hear-doc2.jpg" className="img-fluid w-100 hear-doc-image" alt="" />
-                                        <div className="hear-doctor-content">
-                                            <div className="d-block align-items-center justify-content-between">
-                                                <div>
-                                                    <h5 className="">12<sup>th</sup> May 2024</h5>
-                                                    <p>A talk on Liver Transplant by Dr. Shabeer Ali T U</p>
-                                                </div>
-                                                <div className="main-btn ">
-                                                    <span><img src="/img/play-button.png" className="img-fluid" alt="" /> </span>
-                                                    <a href="#">Watch Video <span><i
-                                                        className="fa-solid fa-arrow-right"></i></span></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="col-md-4 blog-right-col overflow-hidden mb-3">
-                                    <div className="position-relative overflow-hidden" data-aos="fade-up">
-                                        <img src="/img/hear-doc2.jpg" className="img-fluid w-100 hear-doc-image" alt="" />
-                                        <div className="hear-doctor-content">
-                                            <div className="d-block align-items-center justify-content-between">
-                                                <div>
-                                                    <h5 className="">12<sup>th</sup> May 2024</h5>
-                                                    <p>A talk on Liver Transplant by Dr. Shabeer Ali T U</p>
-                                                </div>
-                                                <div className="main-btn ">
-                                                    <span><img src="/img/play-button.png" className="img-fluid" alt="" /> </span>
-                                                    <a href="#">Watch Video <span><i
-                                                        className="fa-solid fa-arrow-right"></i></span></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="col-md-4 blog-right-col overflow-hidden mb-3">
-                                    <div className="position-relative overflow-hidden" data-aos="fade-up">
-                                        <img src="/img/hear-doc2.jpg" className="img-fluid w-100 hear-doc-image" alt="" />
-                                        <div className="hear-doctor-content">
-                                            <div className="d-block align-items-center justify-content-between">
-                                                <div>
-                                                    <h5 className="">12<sup>th</sup> May 2024</h5>
-                                                    <p>A talk on Liver Transplant by Dr. Shabeer Ali T U</p>
-                                                </div>
-                                                <div className="main-btn ">
-                                                    <span><img src="/img/play-button.png" className="img-fluid" alt="" /> </span>
-                                                    <a href="#">Watch Video <span><i
-                                                        className="fa-solid fa-arrow-right"></i></span></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <div className="col-md-4 blog-right-col overflow-hidden mb-3">
-                                    <div className="position-relative overflow-hidden" data-aos="fade-up">
-                                        <img src="/img/hear-doc3.jpg"
-                                            className="img-fluid w-100 hear-doc-image " alt="" />
-                                        <div className="hear-doctor-content">
-                                            <div className="d-block align-items-center justify-content-between">
-                                                <div>
-                                                    <h5 className="">20<sup>th</sup> May 2024</h5>
-                                                    <p>Understanding Hernias & Hydroceles in Children</p>
-                                                </div>
-                                                <div className="main-btn ">
-                                                    <span><img src="/img/play-button.png" className="img-fluid" alt="" /></span>
-                                                    <a href="#">Watch Video <span><i
-                                                        className="fa-solid fa-arrow-right"></i></span></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="col-md-4 blog-right-col overflow-hidden mb-3">
-                                    <div className="position-relative overflow-hidden" data-aos="fade-up">
-                                        <img src="/img/hear-doc3.jpg"
-                                            className="img-fluid w-100 hear-doc-image " alt="" />
-                                        <div className="hear-doctor-content">
-                                            <div className="d-block align-items-center justify-content-between">
-                                                <div>
-                                                    <h5 className="">20<sup>th</sup> May 2024</h5>
-                                                    <p>Understanding Hernias & Hydroceles in Children</p>
-                                                </div>
-                                                <div className="main-btn ">
-                                                    <span><img src="/img/play-button.png" className="img-fluid" alt="" /></span>
-                                                    <a href="#">Watch Video <span><i
-                                                        className="fa-solid fa-arrow-right"></i></span></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="col-md-4 blog-right-col overflow-hidden mb-3">
-                                    <div className="position-relative overflow-hidden" data-aos="fade-up">
-                                        <img src="/img/hear-doc3.jpg"
-                                            className="img-fluid w-100 hear-doc-image " alt="" />
-                                        <div className="hear-doctor-content">
-                                            <div className="d-block align-items-center justify-content-between">
-                                                <div>
-                                                    <h5 className="">20<sup>th</sup> May 2024</h5>
-                                                    <p>Understanding Hernias & Hydroceles in Children</p>
-                                                </div>
-                                                <div className="main-btn">
-                                                    <span><img src="/img/play-button.png" className="img-fluid" alt="" /></span>
-                                                    <a href="#">Watch Video <span><i
-                                                        className="fa-solid fa-arrow-right"></i></span></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <div className="col-md-4 blog-right-col overflow-hidden mb-3">
-                                    <div className="position-relative overflow-hidden" data-aos="fade-up">
-                                        <img src="/img/hear-doc2.jpg" className="img-fluid w-100 hear-doc-image" alt="" />
-                                        <div className="hear-doctor-content">
-                                            <div className="d-block align-items-center justify-content-between">
-                                                <div>
-                                                    <h5 className="">12<sup>th</sup> May 2024</h5>
-                                                    <p>A talk on Liver Transplant by Dr. Shabeer Ali T U</p>
-                                                </div>
-                                                <div className="main-btn ">
-                                                    <span><img src="/img/play-button.png" className="img-fluid" alt="" /> </span>
-                                                    <a href="#">Watch Video <span><i
-                                                        className="fa-solid fa-arrow-right"></i></span></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="col-md-4 blog-right-col overflow-hidden mb-3">
-                                    <div className="position-relative overflow-hidden" data-aos="fade-up">
-                                        <img src="/img/hear-doc2.jpg" className="img-fluid w-100 hear-doc-image" alt="" />
-                                        <div className="hear-doctor-content">
-                                            <div className="d-block align-items-center justify-content-between">
-                                                <div>
-                                                    <h5 className="">12<sup>th</sup> May 2024</h5>
-                                                    <p>A talk on Liver Transplant by Dr. Shabeer Ali T U</p>
-                                                </div>
-                                                <div className="main-btn ">
-                                                    <span><img src="/img/play-button.png" className="img-fluid" alt="" /> </span>
-                                                    <a href="#">Watch Video <span><i
-                                                        className="fa-solid fa-arrow-right"></i></span></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="col-md-4 blog-right-col overflow-hidden mb-3">
-                                    <div className="position-relative overflow-hidden" data-aos="fade-up">
-                                        <img src="/img/hear-doc2.jpg" className="img-fluid w-100 hear-doc-image" alt="" />
-                                        <div className="hear-doctor-content">
-                                            <div className="d-block align-items-center justify-content-between">
-                                                <div>
-                                                    <h5 className="">12<sup>th</sup> May 2024</h5>
-                                                    <p>A talk on Liver Transplant by Dr. Shabeer Ali T U</p>
-                                                </div>
-                                                <div className="main-btn ">
-                                                    <span><img src="/img/play-button.png" className="img-fluid" alt="" /> </span>
-                                                    <a href="#">Watch Video <span><i
-                                                        className="fa-solid fa-arrow-right"></i></span></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <div className="col-md-4 blog-right-col overflow-hidden mb-3">
-                                    <div className="position-relative overflow-hidden" data-aos="fade-up">
-                                        <img src="/img/hear-doc3.jpg"
-                                            className="img-fluid w-100 hear-doc-image " alt="" />
-                                        <div className="hear-doctor-content">
-                                            <div className="d-block align-items-center justify-content-between">
-                                                <div>
-                                                    <h5 className="">20<sup>th</sup> May 2024</h5>
-                                                    <p>Understanding Hernias & Hydroceles in Children</p>
-                                                </div>
-                                                <div className="main-btn ">
-                                                    <span><img src="/img/play-button.png" className="img-fluid" alt="" /></span>
-                                                    <a href="#">Watch Video <span><i
-                                                        className="fa-solid fa-arrow-right"></i></span></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="col-md-4 blog-right-col overflow-hidden mb-3">
-                                    <div className="position-relative overflow-hidden" data-aos="fade-up">
-                                        <img src="/img/hear-doc3.jpg"
-                                            className="img-fluid w-100 hear-doc-image " alt="" />
-                                        <div className="hear-doctor-content">
-                                            <div className="d-block align-items-center justify-content-between">
-                                                <div>
-                                                    <h5 className="">20<sup>th</sup> May 2024</h5>
-                                                    <p>Understanding Hernias & Hydroceles in Children</p>
-                                                </div>
-                                                <div className="main-btn ">
-                                                    <span><img src="/img/play-button.png" className="img-fluid" alt="" /></span>
-                                                    <a href="#">Watch Video <span><i
-                                                        className="fa-solid fa-arrow-right"></i></span></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="col-md-4 blog-right-col overflow-hidden mb-3">
-                                    <div className="position-relative overflow-hidden" data-aos="fade-up">
-                                        <img src="/img/hear-doc3.jpg"
-                                            className="img-fluid w-100 hear-doc-image " alt="" />
-                                        <div className="hear-doctor-content">
-                                            <div className="d-block align-items-center justify-content-between">
-                                                <div>
-                                                    <h5 className="">20<sup>th</sup> May 2024</h5>
-                                                    <p>Understanding Hernias & Hydroceles in Children</p>
-                                                </div>
-                                                <div className="main-btn">
-                                                    <span><img src="/img/play-button.png" className="img-fluid" alt="" /></span>
-                                                    <a href="#">Watch Video <span><i
-                                                        className="fa-solid fa-arrow-right"></i></span></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>

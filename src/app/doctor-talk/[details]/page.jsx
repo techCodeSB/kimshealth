@@ -1,9 +1,22 @@
-import Footer from '@/components/Footer'
-import FromDoctor from '@/components/FromDoctor'
-import Header from '@/components/Header'
-import React from 'react'
+import formatDate from '@/app/lib/formatDate';
+import { getBaseUrl } from '@/app/lib/getBaseUrl';
+import doctorTalkData from '@/app/lib/getDoctorTalk';
+import youtubeData from '@/app/lib/getYoutubeData';
+import Footer from '@/components/Footer';
+import FromDoctor from '@/components/FromDoctor';
+import Header from '@/components/Header';
 
-const DoctorTalkDetails = () => {
+const DoctorTalkDetails = async ({ params }) => {
+    const basePath = await getBaseUrl();
+    const data = await doctorTalkData.getSingleDoctor(params.details);
+    const youtube = await youtubeData(data.videoId);
+    const docTalkDataSet = {
+        sectionTitle: data.title,
+        buttonText: 'View All', buttonURL: '#',
+        data: await doctorTalkData.allData(10),
+        baseUrl: await getBaseUrl(true, true)
+    }
+
     return (
         <>
             <Header />
@@ -11,7 +24,7 @@ const DoctorTalkDetails = () => {
                 <div className="testimonial-details-main-page">
                     <div className="page-header">
                         <div className="container">
-                            <h2>IBD Explained: Beat Gut Issues with Dr. Arun P</h2>
+                            <h2>{data.title}</h2>
                         </div>
                     </div>
                     <section className="breadcrumb-wrapper py-2">
@@ -20,12 +33,12 @@ const DoctorTalkDetails = () => {
                                 <div className="col-12">
                                     <ul className="breadcrumb mb-0">
                                         <li>
-                                            <a href="index.php">Home</a>
+                                            <a href="/">Home</a>
                                         </li>
                                         <li>
-                                            <a href="index.php">Doctor Talk</a>
+                                            <a href={basePath + "doctor-talk"}>Doctor Talk</a>
                                         </li>
-                                        <li className="active"> IBD Explained: Beat Gut Issues with Dr. Arun P </li>
+                                        <li className="active"> {data.title} </li>
                                     </ul>
                                 </div>
                             </div>
@@ -38,23 +51,41 @@ const DoctorTalkDetails = () => {
                             <div className="testimonial-details-card">
                                 <div className="row">
                                     <div className="col-md-7 mb-lg-0 mb-3">
-                                        <img src="/img/doctor-talk-details-banner.jpg" alt="" className="img-fluid" />
+                                        {/* <img src="/img/doctor-talk-details-banner.jpg" alt="" className="img-fluid" /> */}
+                                        {
+                                            data.videoSource === "Youtube" ?
+                                                <iframe width="560" height="315" src={`https://www.youtube.com/embed/${data.videoId}?si=uQi_tVy9LN6UaOhE`} title={youtube.items[0].snippet.title} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
+
+                                                : <iframe src={`https://www.facebook.com/plugins/video.php?height=476&amp;href=https://www.facebook.com/watch/?v=${data.videoId}`} width="560" height="315" style={{ border: 'none', overflow: 'hidden' }} scrolling="no" frameBorder="0" allowFullScreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+                                        }
                                     </div>
                                     <div className="col-md-5 testi-rightbox my-auto">
                                         <div className="main-heading">
-                                            <h3>211 views May 31, 2024 </h3>
-                                            <h3> #CrohnsDisease #UlcerativeColitis #InvisibleIllness</h3>
-                                            <p>Join Dr. Arun P, Associate Consultant in Gastroenterology at
-                                                KIMSHEALTH, as he explores the complexities of Inflammatory Bowel Disease, including Crohn’s Disease and Ulcerative Colitis. Gain a deeper understanding of these conditions, their causes, symptoms, and the latest treatment options available. Learn how to effectively manage your health, reduce flare-ups, and improve your quality of life. Whether you’re a patient, caregiver, or simply interested in digestive health, this session offers valuable insights to help you stay informed and proactive about your well-being. Don’t miss this opportunity to
-                                                enhance your knowledge and take control of your health.</p>
+                                            <h3>{data.videoSource === "Youtube" ? youtube.items[0].statistics.viewCount + "views," : null} {formatDate(data.date)} </h3>
+                                            <h3>
+                                                {
+                                                    data.videoSource === "Youtube" ? youtube.items[0].snippet.tags.map((tag, _) => {
+                                                        return <span className='me-2'>
+                                                            #<a href={`https://www.youtube.com/results?search_query=${tag}`} target='_blank'>{tag}</a>
+                                                        </span>
+                                                    })
+                                                        : null
+                                                }
+                                            </h3>
+                                            <p>{data.details}</p>
                                         </div>
                                         <div className="d-flex align-items-center justify-content-between mt-3">
                                             <div className="doctor-name">
-                                                <p><span><img src="/img/doctor.png" className="img-fluid" alt="" /></span> Dr.
-                                                    Arun P </p>
+                                                <p><span><img src="/img/doctor.png" className="img-fluid" alt="" /></span>{data.doctor.name}</p>
                                             </div>
                                             <div className="doctor-catagory">
-                                                <p>Gastroenterology </p>
+                                                <p>
+                                                    {
+                                                        data.specialities.map((st, _) => (
+                                                            st.title + (data.specialities.length - 1 !== _ ? ", " : '')
+                                                        ))
+                                                    }
+                                                </p>
                                             </div>
                                         </div>
                                     </div>
@@ -64,7 +95,7 @@ const DoctorTalkDetails = () => {
                     </section>
 
                     <div className="line-divider"></div>
-                    <FromDoctor />
+                    <FromDoctor dataSet={docTalkDataSet}/>
                 </div>
             </div>
             <Footer />

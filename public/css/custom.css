@@ -3063,6 +3063,7 @@ i.custom-download {
 .home-details-main-page .hospital-primarybtn {
     display: inline-block;
     margin-top: 10px;
+    margin-right: 10px;
 }
 
 .home-details-main-page .details-heading ul li {

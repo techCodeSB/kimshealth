@@ -1,9 +1,26 @@
+import { getBaseUrl } from '@/app/lib/getBaseUrl'
+import testimonialData from '@/app/lib/getTestimonial'
+import youtubeData from '@/app/lib/getYoutubeData'
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import TestimonialSection from '@/components/TestimonialSection'
-import React from 'react'
+import formatDate from '@/app/lib/formatDate'
 
-const TestimonialDetails = () => {
+
+const TestimonialDetails = async ({ params }) => {
+    const basePath = await getBaseUrl();
+    const data = await testimonialData.getSingleTestimonaial(params.details);
+    const youtube = await youtubeData(data.videoId);
+
+    const testimonialDataSet = {
+        sectionTitle: data.title,
+        buttonText: 'View All', buttonURL: '#',
+        data: await testimonialData.getAll(10),
+        baseUrl: await getBaseUrl(true, true)
+    }
+
+
+
     return (
         <>
             <Header />
@@ -11,7 +28,7 @@ const TestimonialDetails = () => {
                 <div className="testimonial-details-main-page">
                     <div className="page-header">
                         <div className="container">
-                            <h2>24-Week Preterm Miracle: Uma's Heartfelt Testimonial | KIMSHEALTH </h2>
+                            <h2>{data.title}</h2>
                         </div>
                     </div>
                     <section className="breadcrumb-wrapper py-2">
@@ -20,12 +37,12 @@ const TestimonialDetails = () => {
                                 <div className="col-12">
                                     <ul className="breadcrumb mb-0">
                                         <li>
-                                            <a href="index.php">Home</a>
+                                            <a href="/">Home</a>
                                         </li>
                                         <li>
-                                            <a href="index.php">Testimonial</a>
+                                            <a href="/testimonial">Testimonial</a>
                                         </li>
-                                        <li className="active"> 24-Week Preterm Miracle: Uma's Heartfelt Testimonial | KIMSHEALTH </li>
+                                        <li className="active">{data.title}</li>
                                     </ul>
                                 </div>
                             </div>
@@ -38,29 +55,42 @@ const TestimonialDetails = () => {
                             <div className="testimonial-details-card">
                                 <div className="row">
                                     <div className="col-md-7 mb-lg-0 mb-3">
-                                        <img src="/img/testimonial-details-col.jpg" alt="" className="img-fluid" />
+                                        {
+                                            data.videoSource === "Youtube" ?
+                                                <iframe width="560" height="315" src={`https://www.youtube.com/embed/${data.videoId}?si=uQi_tVy9LN6UaOhE`} title={youtube.items[0].snippet.title} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
+
+                                                : <iframe src={`https://www.facebook.com/plugins/video.php?height=476&amp;href=https://www.facebook.com/watch/?v=${data.videoId}`} width="560" height="315" style={{ border: 'none', overflow: 'hidden' }} scrolling="no" frameBorder="0" allowFullScreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+                                        }
+
                                     </div>
                                     <div className="col-md-5 testi-rightbox my-auto">
                                         <div className="main-heading">
-                                            <h3>1,046 views, Jul 24, 2023 </h3>
-                                            <h3> #PrematureBaby #InfantHealth #NewbornCare</h3>
-                                            <p>Uma, a Scientist at ISRO, Trivandrum, pours her heartfelt gratitude
-                                                towards KIMSHEALTH for turning her dreams into reality. Amidst the
-                                                challenges of delivering an extreme pre-term baby at just 24 weeks,
-                                                she found solace in the care of Dr. Naveen Jain, Dr. Jyothi Prabhakar,
-                                                Dr. Femitha Pournami, and Dr. Anand, who became her unwavering
-                                                guardian angels, assuring her of a healthy baby. Their dedication and
-                                                expertise left Uma in awe, beyond words. KIMSHEALTH's patient-centric
-                                                approach creates a new dimension of hope for Uma and every parent
-                                                who seeks care here.</p>
+                                            <h3>{data.videoSource === "Youtube" ? youtube.items[0].statistics.viewCount + "views, " : null} {formatDate(data.date)} </h3>
+                                            <h3>
+                                                {
+                                                    data.videoSource === "Youtube" ? youtube.items[0].snippet.tags.map((tag, _) => {
+                                                        return <span className='me-2'>
+                                                            #<a href={`https://www.youtube.com/results?search_query=${tag}`} target='_blank'>{tag}</a>
+                                                        </span>
+                                                    })
+                                                        : null
+                                                }
+                                            </h3>
+                                            <p>{data.details}</p>
                                         </div>
                                         <div className="d-flex align-items-center justify-content-between mt-3">
                                             <div className="doctor-name">
-                                                <p><span><img src="/img/doctor.png" className="img-fluid" alt="" /></span> Dr.
-                                                    Naveen Jain </p>
+                                                <p><span><img src="/img/doctor.png" className="img-fluid" alt="" /></span>
+                                                    {data.doctor.name}</p>
                                             </div>
                                             <div className="doctor-catagory">
-                                                <p>Obstetrics & Gynecology </p>
+                                                <p>
+                                                    {
+                                                        data.specialities.map((st, _) => (
+                                                            st.title + (data.specialities.length - 1 !== _ ? ", " : '')
+                                                        ))
+                                                    }
+                                                </p>
                                             </div>
                                         </div>
                                     </div>
@@ -71,7 +101,7 @@ const TestimonialDetails = () => {
 
                     <div className="line-divider"></div>
 
-                    {/* <TestimonialSection/> */}
+                    <TestimonialSection dataSet={testimonialDataSet}/>
                 </div>
             </div>
             <Footer />

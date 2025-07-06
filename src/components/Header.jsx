@@ -5,6 +5,7 @@ import { onLangChangeRedirection, onLocChangeRedirection, } from "@/helper/onCha
 import Link from 'next/link';
 import Cookies from 'js-cookie';
 import { getBaseUrl } from '@/helper/getBaseUrl';
+import allTitles from '@/helper/getTitles';
 
 
 const Header = () => {
@@ -13,6 +14,16 @@ const Header = () => {
     const [selectedLang, setSelectedLang] = useState(null);
     const [selectedLoc, setSelectedLoc] = useState(null);
     const [basePath, setBasePath] = useState();
+    const [speciality, setSpeciality] = useState();
+
+
+    useEffect(() => {
+        const get = async () => {
+            const sp = await allTitles.getSpecialityTitle();
+            setSpeciality(sp)
+        }
+        get();
+    }, [])
 
 
 
@@ -40,25 +51,6 @@ const Header = () => {
     }, [])
 
 
-
-
-
-    // Set Current Language and location on Page load or URL redirection
-    // useEffect(() => {
-    //     const refer = document.referrer;
-    //     const origin = location.origin;
-
-    //     if (refer == "" || `${origin}/` !== refer) {
-    //         detectedAndSetLocationORLanguage()
-    //             .then((d) => {
-    //                 setSelectedLang(JSON.parse(localStorage.getItem("systemLang")))
-    //                 setSelectedLoc(JSON.parse(localStorage.getItem("systemLocation")))
-    //             })
-    //             .catch(er => {
-    //                 console.log(er)
-    //             })
-    //     }
-    // }, [pathname])
     return (
         <>
             <header id="header-sticky" className="header">
@@ -121,40 +113,27 @@ const Header = () => {
                             </div> --> */}
                                 <ul className="menu-navigation" id="menu-main-navigation-1">
                                     <li className="menu-item-has-children show-submenu">
-                                        <a href="speciality.php" className="anchor-menu">Specialities & Treatments</a>
+                                        <a href={basePath + "/speciality"} className="anchor-menu">Specialities & Treatments</a>
                                         <div className="sub-menu">
                                             <div className="row">
                                                 <div className="col-lg-4">
                                                     <div className="sub-menu-details">
                                                         <ul>
-                                                            <li>
-                                                                <a href="#"><span><img src="/img/oncology.png" alt=""
-                                                                    className="img-fluid" /></span>Oncology</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#"><span><img src="/img/oncology.png" alt=""
-                                                                    className="img-fluid" /></span>Neuro Sciences</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#"><span><img src="/img/oncology.png" alt=""
-                                                                    className="img-fluid" /></span>Cardiac Sciences</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#"><span><img src="/img/oncology.png" alt=""
-                                                                    className="img-fluid" /></span>Orthopadics</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#"><span><img src="/img/oncology.png" alt=""
-                                                                    className="img-fluid" /></span>Transplants</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#"><span><img src="/img/oncology.png" alt=""
-                                                                    className="img-fluid" /></span>Urology</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#"><span><img src="/img/oncology.png" alt=""
-                                                                    className="img-fluid" /></span>Nephrology</a>
-                                                            </li>
+                                                            {
+                                                                speciality?.map((s, index) => {
+                                                                    return index < (Math.ceil(speciality.length / 3)) ?
+                                                                        <li key={index}>
+                                                                            <a href={basePath + "/speciality/" + s?.slug}>
+                                                                                <span>
+                                                                                    <img src="/img/oncology.png" alt=""
+                                                                                        className="img-fluid" />
+                                                                                </span>
+                                                                                {s?.title}
+                                                                            </a>
+                                                                        </li>
+                                                                        : null
+                                                                })
+                                                            }
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -162,34 +141,21 @@ const Header = () => {
                                                 <div className="col-lg-4">
                                                     <div className="sub-menu-details">
                                                         <ul>
-                                                            <li>
-                                                                <a href="#"><span><img src="/img/oncology.png" alt=""
-                                                                    className="img-fluid" /></span>Oncology</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#"><span><img src="/img/oncology.png" alt=""
-                                                                    className="img-fluid" /></span>Neuro Sciences</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#"><span><img src="/img/oncology.png" alt=""
-                                                                    className="img-fluid" /></span>Cardiac Sciences</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#"><span><img src="/img/oncology.png" alt=""
-                                                                    className="img-fluid" /></span>Orthopadics</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#"><span><img src="/img/oncology.png" alt=""
-                                                                    className="img-fluid" /></span>Transplants</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#"><span><img src="/img/oncology.png" alt=""
-                                                                    className="img-fluid" /></span>Urology</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#"><span><img src="/img/oncology.png" alt=""
-                                                                    className="img-fluid" /></span>Nephrology</a>
-                                                            </li>
+                                                            {
+                                                                speciality?.map((s, index) => {
+                                                                    return index > Math.ceil(speciality.length / 3) && index < (Math.ceil(speciality.length / 3) * 2) ?
+                                                                        <li key={index}>
+                                                                            <a href={basePath + "/speciality/" + s?.slug}>
+                                                                                <span>
+                                                                                    <img src="/img/oncology.png" alt=""
+                                                                                        className="img-fluid" />
+                                                                                </span>
+                                                                                {s?.title}
+                                                                            </a>
+                                                                        </li>
+                                                                        : null
+                                                                })
+                                                            }
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -198,34 +164,25 @@ const Header = () => {
                                                 <div className="col-lg-4">
                                                     <div className="sub-menu-details">
                                                         <ul>
-                                                            <li>
+                                                            {/* <li>
                                                                 <a href="#"><span><img src="/img/oncology.png" alt=""
                                                                     className="img-fluid" /></span>Oncology</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#"><span><img src="/img/oncology.png" alt=""
-                                                                    className="img-fluid" /></span>Neuro Sciences</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#"><span><img src="/img/oncology.png" alt=""
-                                                                    className="img-fluid" /></span>Cardiac Sciences</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#"><span><img src="/img/oncology.png" alt=""
-                                                                    className="img-fluid" /></span>Orthopadics</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#"><span><img src="/img/oncology.png" alt=""
-                                                                    className="img-fluid" /></span>Transplants</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#"><span><img src="/img/oncology.png" alt=""
-                                                                    className="img-fluid" /></span>Urology</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#"><span><img src="/img/oncology.png" alt=""
-                                                                    className="img-fluid" /></span>Nephrology</a>
-                                                            </li>
+                                                            </li> */}
+                                                            {
+                                                                speciality?.map((s, index) => {
+                                                                    return index > (Math.ceil(speciality.length / 3) * 2) ?
+                                                                        <li key={index}>
+                                                                            <a href={basePath + "/speciality/" + s?.slug}>
+                                                                                <span>
+                                                                                    <img src="/img/oncology.png" alt=""
+                                                                                        className="img-fluid" />
+                                                                                </span>
+                                                                                {s?.title}
+                                                                            </a>
+                                                                        </li>
+                                                                        : null
+                                                                })
+                                                            }
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -464,8 +421,8 @@ const Header = () => {
 
                                             </div>
                                         </div>
-
                                     </li>
+
                                     <li className="menu-item-has-children show-submenu d-lg-none d-block">
                                         <a href="#">Locations</a>
                                         <div className="sub-menu">

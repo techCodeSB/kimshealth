@@ -28,7 +28,7 @@ const TestimonialSection = ({ dataSet }) => {
                                     <div className="row testi-card">
                                         <div className="col-md-3">
                                             <div className="overflow-hidden">
-                                                <a href="#">
+                                                <a href={dataSet.baseUrl + "/testimonial/" + t.slug}>
                                                     <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${t.thumbnailImage.url}`} alt="" className="img-fluid w-100" />
                                                 </a>
                                             </div>
@@ -36,7 +36,8 @@ const TestimonialSection = ({ dataSet }) => {
                                         <div className="col-md-9 my-auto">
                                             <div className="testi-rightbox">
                                                 <h3>{t.title}</h3>
-                                                <p>{`${t.shortDetails.slice(0, 80)}...`}<a href="#"> Watch Video</a></p>
+                                                <p>{`${t.shortDetails.slice(0, 80)}...`}
+                                                    <a href={dataSet.baseUrl + "/testimonial/" + t.slug}> Watch Video</a></p>
 
                                                 <div className="d-flex align-items-center justify-content-between mt-3">
                                                     <div className="doctor-name">

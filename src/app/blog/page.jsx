@@ -1,8 +1,19 @@
-import Footer from '@/components/Footer'
-import Header from '@/components/Header'
-import React from 'react'
+import Footer from '@/components/Footer';
+import Header from '@/components/Header';
+import { getBaseUrl } from '../lib/getBaseUrl';
+import { getStaticPageContent } from '../lib/getStaticPageContent';
+import blogData from '../lib/getBlog';
+import getSpecialityData from '../lib/getSpeciality';
+import formatDate from '../lib/formatDate';
 
-const Blog = () => {
+const Blog = async () => {
+    const basePath = await getBaseUrl()
+    const data = await getStaticPageContent("blog");
+    const pageContent = data?.data[0]?.pageContent;
+    const pageMeta = data?.data[0]?.metaSection;
+    const allBlog = await blogData.allBlog();
+
+
     return (
         <>
             <Header />
@@ -10,7 +21,7 @@ const Blog = () => {
                 <div className="blog-master-main-page">
                     <div className="page-header">
                         <div className="container">
-                            <h2>Blogs</h2>
+                            <h2>{pageContent[0].title}</h2>
                         </div>
                     </div>
                     <section className="breadcrumb-wrapper py-2">
@@ -19,9 +30,9 @@ const Blog = () => {
                                 <div className="col-12">
                                     <ul className="breadcrumb mb-0">
                                         <li>
-                                            <a href="index.php">Home</a>
+                                            <a href="/">Home</a>
                                         </li>
-                                        <li className="active"> Blogs </li>
+                                        <li className="active"> {pageContent[0].title} </li>
                                     </ul>
                                 </div>
                             </div>
@@ -42,9 +53,9 @@ const Blog = () => {
                                                     <div className="col-12">
                                                         <div className="input-group">
                                                             <input type="text" className="form-control" placeholder="Search Blog"
-                                                                aria-label="Recipient's username" aria-describedby="basic-addon2"/>
-                                                                <span className="input-group-text"><i
-                                                                    className="fa-solid fa-magnifying-glass"></i></span>
+                                                                aria-label="Recipient's username" aria-describedby="basic-addon2" />
+                                                            <span className="input-group-text"><i
+                                                                className="fa-solid fa-magnifying-glass"></i></span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -119,22 +130,24 @@ const Blog = () => {
                                         <div className="col-md-6 mb-4">
                                             <div className="card border-0">
                                                 <div className="card-top">
-                                                    <a href="#">
-                                                        <img src="/img/blog-page.jpg" className="img-fluid w-100" alt=""/>
+                                                    <a href={basePath + "/blog/" + allBlog[0].slug}>
+                                                        <img src={process.env.NEXT_PUBLIC_IMAGE_URL + allBlog[0].featuredImage.url} className="img-fluid w-100" alt="" />
                                                     </a>
                                                 </div>
                                                 <div className="card-content">
-                                                    <a href="#">
-                                                        <h4>Stapled Hemorrhoidectomy : A New Frontier In Hemorrhoid Treatment </h4>
+                                                    <a href={basePath + "/blog/" + allBlog[0].slug}>
+                                                        <h4>{allBlog[0].title} </h4>
                                                     </a>
-                                                    <p>Many individuals, at some point in their lives, confront the uncomfortable
-                                                        and often stigmatized issue . . . <span> Read More</span></p>
+                                                    <p>
+                                                        {allBlog[0].shortDetails.slice(0, 90)}
+                                                        <span> Read More</span>
+                                                    </p>
                                                     <div className="d-flex align-items-center justify-content-between">
                                                         <div>
-                                                            <strong> By: KIMSHEALTH</strong>
+                                                            <strong> By: {allBlog[0].doctor[0].name}</strong>
                                                         </div>
                                                         <div className="main-btn">
-                                                            <p>27th July 2024</p>
+                                                            <p>{formatDate(allBlog[0].date)}</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -144,22 +157,24 @@ const Blog = () => {
                                         <div className="col-md-6 mb-4">
                                             <div className="card border-0">
                                                 <div className="card-top">
-                                                    <a href="#">
-                                                        <img src="/img/blog-page1.jpg" className="img-fluid w-100" alt=""/>
+                                                    <a href={basePath + "/blog/" + allBlog[1].slug}>
+                                                        <img src={process.env.NEXT_PUBLIC_IMAGE_URL + allBlog[1].featuredImage.url} className="img-fluid w-100" alt="" />
                                                     </a>
                                                 </div>
                                                 <div className="card-content">
-                                                    <a href="#">
-                                                        <h4>Is Your Psoriasis Getting Out Of Control: 5 Things That Can Help </h4>
+                                                    <a href={basePath + "/blog/" + allBlog[1].slug}>
+                                                        <h4>{allBlog[1].title} </h4>
                                                     </a>
-                                                    <p>Psoriasis is a condition that causes cells to multiply leading patches on the
-                                                        skin. It can be . . . <span> Read More</span></p>
+                                                    <p>
+                                                        {allBlog[1].shortDetails.slice(0, 90)}
+                                                        <span> Read More</span>
+                                                    </p>
                                                     <div className="d-flex align-items-center justify-content-between">
                                                         <div>
-                                                            <strong> By: KIMSHEALTH</strong>
+                                                            <strong> By: {allBlog[1].doctor[0].name}</strong>
                                                         </div>
                                                         <div className="main-btn">
-                                                            <p>27th July 2024</p>
+                                                            <p>{formatDate(allBlog[1].date)}</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -169,47 +184,25 @@ const Blog = () => {
 
                                         <div className="col-md-12 my-3">
                                             <div className="owl-carousel owl-theme blog-page-slider">
-                                                <div className="card border-0">
-                                                    <div className="card-content">
-                                                        <h4>Benign Hematology: Thrombosis, Hemostasis, And Women's Unique Struggles
-                                                            With Excessive Bleeding </h4>
-                                                        <p>Benign hematology is the branch of medicine dedicated to non-cancerous
-                                                            blood-related disorders, and it
-                                                            plays a vital role in understanding and addressing the multifaceted
-                                                            challenges faced by women, particularly
-                                                            when excessive bleeding gives rise to hematological issues. In this
-                                                            exploration, we will delve . . . <span> Read More</span></p>
-                                                        <div className="d-flex align-items-center justify-content-between">
-                                                            <div>
-                                                                <strong> By: KIMSHEALTH</strong>
+                                                {
+                                                    allBlog.map((b, index) => {
+                                                        return index < 4 ? <div className="card border-0" key={index}>
+                                                            <div className="card-content">
+                                                                <h4>{b.title}</h4>
+                                                                <p>{b.shortDetails} <span> Read More</span></p>
+                                                                <div className="d-flex align-items-center justify-content-between">
+                                                                    <div>
+                                                                        <strong> By: {b.doctor[0].name}</strong>
+                                                                    </div>
+                                                                    <div className="main-btn">
+                                                                        <p>{formatDate(b.date)}</p>
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                            <div className="main-btn">
-                                                                <p>27th July 2024</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                        </div> : null
+                                                    })
+                                                }
 
-                                                <div className="card border-0">
-                                                    <div className="card-content">
-                                                        <h4>Benign Hematology: Thrombosis, Hemostasis, And Women's Unique Struggles
-                                                            With Excessive Bleeding </h4>
-                                                        <p>Benign hematology is the branch of medicine dedicated to non-cancerous
-                                                            blood-related disorders, and it
-                                                            plays a vital role in understanding and addressing the multifaceted
-                                                            challenges faced by women, particularly
-                                                            when excessive bleeding gives rise to hematological issues. In this
-                                                            exploration, we will delve . . . <span> Read More</span></p>
-                                                        <div className="d-flex align-items-center justify-content-between">
-                                                            <div>
-                                                                <strong> By: KIMSHEALTH</strong>
-                                                            </div>
-                                                            <div className="main-btn">
-                                                                <p>27th July 2024</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
                                             </div>
                                         </div>
 
@@ -225,156 +218,43 @@ const Blog = () => {
                                             </div>
                                         </div>
 
-                                        <div className="col-md-6 mb-4">
-                                            <div className="card border-0">
-                                                <div className="card-top">
-                                                    <a href="#">
-                                                        <img src="/img/blog-page.jpg" className="img-fluid w-100" alt=""/>
-                                                    </a>
-                                                </div>
-                                                <div className="card-content">
-                                                    <a href="#">
-                                                        <h4>Stapled Hemorrhoidectomy : A New Frontier In Hemorrhoid Treatment </h4>
-                                                    </a>
-                                                    <p>Many individuals, at some point in their lives, confront the uncomfortable
-                                                        and often stigmatized issue . . . <span> Read More</span></p>
-                                                    <div className="d-flex align-items-center justify-content-between">
-                                                        <div>
-                                                            <strong> By: KIMSHEALTH</strong>
+
+                                        {
+                                            allBlog.map((b, index) => {
+                                                return <div className="col-md-6 mb-4">
+                                                    <div className="card border-0">
+                                                        <div className="card-top">
+                                                            <a href={basePath + "/blog/" + b.slug}>
+                                                                <img src={process.env.NEXT_PUBLIC_IMAGE_URL + b.featuredImage.url} className="img-fluid w-100" alt="" />
+                                                            </a>
                                                         </div>
-                                                        <div className="main-btn">
-                                                            <p>27th July 2024</p>
+                                                        <div className="card-content">
+                                                            <a href={basePath + "/blog/" + b.slug}>
+                                                                <h4>{b.title} </h4>
+                                                            </a>
+                                                            <p>
+                                                                {b.shortDetails?.slice(0, 90)}
+                                                                <span> Read More</span>
+                                                            </p>
+                                                            <div className="d-flex align-items-center justify-content-between">
+                                                                <div>
+                                                                    <strong> By: {b.doctor[0]?.name}</strong>
+                                                                </div>
+                                                                <div className="main-btn">
+                                                                    <p>{formatDate(b.date)}</p>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
-
-                                        <div className="col-md-6 mb-4">
-                                            <div className="card border-0">
-                                                <div className="card-top">
-                                                    <a href="#">
-                                                        <img src="/img/blog-page1.jpg" className="img-fluid w-100" alt=""/>
-                                                    </a>
-                                                </div>
-                                                <div className="card-content">
-                                                    <a href="#">
-                                                        <h4>Is Your Psoriasis Getting Out Of Control: 5 Things That Can Help </h4>
-                                                    </a>
-                                                    <p>Psoriasis is a condition that causes cells to multiply leading patches on the
-                                                        skin. It can be . . . <span> Read More</span></p>
-                                                    <div className="d-flex align-items-center justify-content-between">
-                                                        <div>
-                                                            <strong> By: KIMSHEALTH</strong>
-                                                        </div>
-                                                        <div className="main-btn">
-                                                            <p>27th July 2024</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div className="col-md-6 mb-4">
-                                            <div className="card border-0">
-                                                <div className="card-top">
-                                                    <a href="#">
-                                                        <img src="/img/blog-page.jpg" className="img-fluid w-100" alt=""/>
-                                                    </a>
-                                                </div>
-                                                <div className="card-content">
-                                                    <a href="#">
-                                                        <h4>Stapled Hemorrhoidectomy : A New Frontier In Hemorrhoid Treatment </h4>
-                                                    </a>
-                                                    <p>Many individuals, at some point in their lives, confront the uncomfortable
-                                                        and often stigmatized issue . . . <span> Read More</span></p>
-                                                    <div className="d-flex align-items-center justify-content-between">
-                                                        <div>
-                                                            <strong> By: KIMSHEALTH</strong>
-                                                        </div>
-                                                        <div className="main-btn">
-                                                            <p>27th July 2024</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div className="col-md-6 mb-4">
-                                            <div className="card border-0">
-                                                <div className="card-top">
-                                                    <a href="#">
-                                                        <img src="/img/blog-page1.jpg" className="img-fluid w-100" alt=""/>
-                                                    </a>
-                                                </div>
-                                                <div className="card-content">
-                                                    <a href="#">
-                                                        <h4>Is Your Psoriasis Getting Out Of Control: 5 Things That Can Help </h4>
-                                                    </a>
-                                                    <p>Psoriasis is a condition that causes cells to multiply leading patches on the
-                                                        skin. It can be . . . <span> Read More</span></p>
-                                                    <div className="d-flex align-items-center justify-content-between">
-                                                        <div>
-                                                            <strong> By: KIMSHEALTH</strong>
-                                                        </div>
-                                                        <div className="main-btn">
-                                                            <p>27th July 2024</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                            })
+                                        }
 
 
-                                        <div className="col-md-6 mb-4">
-                                            <div className="card border-0">
-                                                <div className="card-top">
-                                                    <a href="#">
-                                                        <img src="/img/blog-page.jpg" className="img-fluid w-100" alt=""/>
-                                                    </a>
-                                                </div>
-                                                <div className="card-content">
-                                                    <a href="#">
-                                                        <h4>Stapled Hemorrhoidectomy : A New Frontier In Hemorrhoid Treatment </h4>
-                                                    </a>
-                                                    <p>Many individuals, at some point in their lives, confront the uncomfortable
-                                                        and often stigmatized issue . . . <span> Read More</span></p>
-                                                    <div className="d-flex align-items-center justify-content-between">
-                                                        <div>
-                                                            <strong> By: KIMSHEALTH</strong>
-                                                        </div>
-                                                        <div className="main-btn">
-                                                            <p>27th July 2024</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
 
-                                        <div className="col-md-6 mb-4">
-                                            <div className="card border-0">
-                                                <div className="card-top">
-                                                    <a href="#">
-                                                        <img src="/img/blog-page1.jpg" className="img-fluid w-100" alt=""/>
-                                                    </a>
-                                                </div>
-                                                <div className="card-content">
-                                                    <a href="#">
-                                                        <h4>Is Your Psoriasis Getting Out Of Control: 5 Things That Can Help </h4>
-                                                    </a>
-                                                    <p>Psoriasis is a condition that causes cells to multiply leading patches on the
-                                                        skin. It can be . . . <span> Read More</span></p>
-                                                    <div className="d-flex align-items-center justify-content-between">
-                                                        <div>
-                                                            <strong> By: KIMSHEALTH</strong>
-                                                        </div>
-                                                        <div className="main-btn">
-                                                            <p>27th July 2024</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+
+
+
                                     </div>
                                 </div>
                             </div>

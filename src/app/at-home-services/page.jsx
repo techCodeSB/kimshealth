@@ -2,10 +2,34 @@ import BlogCarousel from '@/components/BlogCarousel';
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import TestimonialSection from '@/components/TestimonialSection';
-import React from 'react';
+import { getStaticPageContent } from '../lib/getStaticPageContent';
+import { getBaseUrl } from '../lib/getBaseUrl';
+import testimonialData from '../lib/getTestimonial';
+import blogData from '../lib/getBlog';
+import homeServices from '../lib/getHomeServices';
 
 
-const HomeServices = () => {
+const HomeServices = async () => {
+    const basePath = await getBaseUrl()
+    const data = await getStaticPageContent("at-home-services");
+    const pageContent = data?.data[0]?.pageContent;
+    const pageMeta = data?.data[0]?.metaSection;
+    const homeServiceData = await homeServices.getAll();
+
+    const testimonialDataSet = {
+        sectionTitle: pageContent[2]?.title,
+        buttonText: 'View All', buttonURL: '#',
+        data: await testimonialData.getAll(10),
+        baseUrl: await getBaseUrl(true, true)
+    }
+
+    const blogDataSet = {
+        sectionTitle: pageContent[3]?.title,
+        buttonText: 'View All', buttonURL: '#',
+        data: await blogData.allBlog(10),
+        baseUrl: await getBaseUrl(true, true)
+    }
+
     return (
         <>
             <Header />
@@ -13,7 +37,7 @@ const HomeServices = () => {
                 <div className="home-service-main-page">
                     <div className="page-header">
                         <div className="container">
-                            <h2>At Home Services</h2>
+                            <h2>{pageContent[0].title}</h2>
                         </div>
                     </div>
                     <section className="breadcrumb-wrapper py-2">
@@ -22,9 +46,9 @@ const HomeServices = () => {
                                 <div className="col-12">
                                     <ul className="breadcrumb mb-0">
                                         <li>
-                                            <a href="index.php">Home</a>
+                                            <a href="/">Home</a>
                                         </li>
-                                        <li className="active"> At Home Services </li>
+                                        <li className="active"> {pageContent[0].title} </li>
                                     </ul>
                                 </div>
                             </div>
@@ -36,126 +60,56 @@ const HomeServices = () => {
                             <div className="row">
                                 <div className="col-md-5 mb-lg-0 mb-4 order-lg-1 order-2">
                                     <div className="details-right-col text-center">
-                                        <img src="/img/home-services-left-col.jpg" alt="" className="img-fluid w-100"/>
-                                            <h5>KIMSHEALTH Home Care Services</h5>
-                                            <p>KIMSHEALTH Home Care Services is a private, dedicated . . . . </p>
-                                            <div className="main-btn">
-                                                <a href="#">Watch Video <span><i className="fa-solid fa-arrow-right"></i></span></a>
-                                            </div>
+                                        {/* <img src="/img/home-services-left-col.jpg" alt="" className="img-fluid w-100" /> */}
+                                        <iframe width="100%" height="315" src={`https://www.youtube.com/embed/${pageContent[1].videoId}?si=uQi_tVy9LN6UaOhE`} title={"KIMSHEALTH"} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
+                                        <h5>{pageContent[1].title}</h5>
+                                        <p>{pageContent[1].subTitle}</p>
+                                        <div className="main-btn">
+                                            <a href="#">Watch Video <span><i className="fa-solid fa-arrow-right"></i></span></a>
+                                        </div>
                                     </div>
                                 </div>
 
                                 <div className="col-md-7 home-service-right-col mb-3  order-lg-2 order-1">
                                     <div className="main-heading sub-heading">
-                                        <h2>KIMSHEALTH Home Care Services: Compassionate Healthcare in the Comfort of Your Home</h2>
-                                        <p>KIMSHEALTH Home Care Services offers compassionate, professional medical support in the comfort of your home. Designed for patients who require clinical care but prefer to recover in familiar surroundings, our services bring hospital-quality nursing directly to your doorstep. Our team of trained and certified nurses provide a range of services including post-operative care, elderly care, chronic disease management, wound care, medication administration, and more.</p>
-                                        <p>Whether you're managing a long-term condition or recovering from surgery, KIMSHEALTH ensures personalized attention and round-the-clock support tailored to your needs. Our goal is to enhance patient comfort, reduce hospital readmissions, and promote faster recovery through skilled,
-                                            dignified, and attentive care.</p>
-                                        <p>Backed by the trusted legacy of KIMSHEALTH, one of the region’s leading healthcare networks, our home care services uphold the highest standards of medical excellence, safety, and compassion. With KIMSHEALTH, you’re not just receiving care — you’re being cared for like family.</p>
+                                        <h2>{pageContent[1].title}</h2>
+                                        <p>{pageContent[1].details}</p>
                                     </div>
                                 </div>
 
                             </div>
 
                             <div className="row">
-                                <div className="col-md-4">
-                                    <div className="home-service-card">
-                                        <div className="home-service-card-image text-center">
-                                            <img src="/img/home-services-doctor.png" alt="" className="img-fluid"/>
-                                        </div>
-                                        <div className="home-service-content text-center">
-                                            <h3>Doctor Consultation</h3>
-                                            <p>We value every guest and believe in offering personalized believe in offering personalized believe in offering personalized </p>
-                                            <div className="main-btn text-center">
-                                                <a href="#">Read More <span><i className="fa-solid fa-arrow-right"></i></span></a>
+                                {
+                                    homeServiceData.map((h, index) => {
+                                        return <div className="col-md-4" key={index}>
+                                            <div className="home-service-card">
+                                                <div className="home-service-card-image text-center">
+                                                    <img src={process.env.NEXT_PUBLIC_IMAGE_URL + h.icon.url} alt={h.title} className="img-fluid" />
+                                                </div>
+                                                <div className="home-service-content text-center">
+                                                    <h3>{h.title}</h3>
+                                                    <p>{h.shortDetails}</p>
+                                                    <div className="main-btn text-center">
+                                                        <a href={basePath+"/at-home-services/"+h.slug}>
+                                                            Read More <span><i className="fa-solid fa-arrow-right"></i></span>
+                                                        </a>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-
-                                <div className="col-md-4">
-                                    <div className="home-service-card">
-                                        <div className="home-service-card-image text-center">
-                                            <img src="/img/home-service-microscope.png" alt="" className="img-fluid"/>
-                                        </div>
-                                        <div className="home-service-content text-center">
-                                            <h3>Laboratory Services</h3>
-                                            <p>We value every guest and believe in offering personalized believe in offering personalized believe in offering personalized </p>
-                                            <div className="main-btn text-center">
-                                                <a href="#">Read More <span><i className="fa-solid fa-arrow-right"></i></span></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="col-md-4">
-                                    <div className="home-service-card">
-                                        <div className="home-service-card-image text-center">
-                                            <img src="/img/home-service-nurse.png" alt="" className="img-fluid"/>
-                                        </div>
-                                        <div className="home-service-content text-center">
-                                            <h3>Nursing Care</h3>
-                                            <p>We value every guest and believe in offering personalized believe in offering personalized believe in offering personalized </p>
-                                            <div className="main-btn text-center">
-                                                <a href="#">Read More <span><i className="fa-solid fa-arrow-right"></i></span></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="col-md-4">
-                                    <div className="home-service-card">
-                                        <div className="home-service-card-image text-center">
-                                            <img src="/img/home-service-scooter.png" alt="" className="img-fluid"/>
-                                        </div>
-                                        <div className="home-service-content text-center">
-                                            <h3>Medicine Delivery</h3>
-                                            <p>We value every guest and believe in offering personalized believe in offering personalized believe in offering personalized </p>
-                                            <div className="main-btn text-center">
-                                                <a href="#">Read More <span><i className="fa-solid fa-arrow-right"></i></span></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="col-md-4">
-                                    <div className="home-service-card">
-                                        <div className="home-service-card-image text-center">
-                                            <img src="/img/home-service-wheelchair.png" alt="" className="img-fluid"/>
-                                        </div>
-                                        <div className="home-service-content text-center">
-                                            <h3>Equipment Rentals</h3>
-                                            <p>We value every guest and believe in offering personalized believe in offering personalized believe in offering personalized </p>
-                                            <div className="main-btn text-center">
-                                                <a href="#">Read More <span><i className="fa-solid fa-arrow-right"></i></span></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="col-md-4">
-                                    <div className="home-service-card">
-                                        <div className="home-service-card-image text-center">
-                                            <img src="/img/home-service-physical-therapy.png" alt="" className="img-fluid"/>
-                                        </div>
-                                        <div className="home-service-content text-center">
-                                            <h3>Physiotherapy At Home</h3>
-                                            <p>We value every guest and believe in offering personalized believe in offering personalized believe in offering personalized </p>
-                                            <div className="main-btn text-center">
-                                                <a href="#">Read More <span><i className="fa-solid fa-arrow-right"></i></span></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                    })
+                                }
                             </div>
                         </div>
                     </section>
 
                     <div className="line-divider"></div>
-                    {/* <TestimonialSection/> */}
+                    <TestimonialSection dataSet={testimonialDataSet} />
 
 
                     <div className="line-divider"></div>
-                    {/* <BlogCarousel/> */}
+                    <BlogCarousel dataSet={blogDataSet} />
                 </div>
             </div>
             <Footer />
