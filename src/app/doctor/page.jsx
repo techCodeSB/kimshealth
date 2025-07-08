@@ -4,6 +4,7 @@ import React from 'react'
 import doctorData from '../lib/getDoctor'
 import { getStaticPageContent } from '../lib/getStaticPageContent'
 import { getBaseUrl } from '../lib/getBaseUrl'
+import getStaticText from '../lib/getStaticTextServer'
 
 const Doctor = async () => {
     const baseURL = await getBaseUrl(true, true);
@@ -11,6 +12,7 @@ const Doctor = async () => {
     const pageContent = data?.data[0]?.pageContent;
     const pageMeta = data?.data[0]?.metaSection;
     const docData = await doctorData.getDoctorAll();
+    const staticText = await getStaticText();
 
 
     return (
@@ -29,7 +31,7 @@ const Doctor = async () => {
                                 <div className="col-12">
                                     <ul className="breadcrumb mb-0">
                                         <li>
-                                            <a href="/">Home</a>
+                                            <a href="/">{staticText['Home']}</a>
                                         </li>
                                         <li className="active"> {pageContent[0]?.title}</li>
                                     </ul>
@@ -43,18 +45,18 @@ const Doctor = async () => {
                             <div className="row">
                                 <div className="col-md-12 col-6">
                                     <div className="main-heading">
-                                        <h2>{docData.length} Doctors Found</h2>
+                                        <h2>{docData.length} {staticText['Doctors Found']}</h2>
                                     </div>
                                 </div>
                                 <div className="col-6 d-lg-none d-block">
-                                    <button type="button" className="btn-tab form-btn mx-2 filter-box-mobile">Filters <i
+                                    <button type="button" className="btn-tab form-btn mx-2 filter-box-mobile">{staticText['Filters']} <i
                                         className="fa-solid fa-filter"></i></button>
                                 </div>
                             </div>
                             <div className="row">
                                 <div className="col-md-3 mb-4">
                                     <div className="find-doctor-left-col filter-form mt-3">
-                                        <h4>Select Filters</h4>
+                                        <h4>{staticText['Select Filters']}</h4>
                                         <div className="find-doc-box">
                                             <h3>By City</h3>
                                             <div className="rounded-field-form mb-3">
@@ -182,14 +184,14 @@ const Doctor = async () => {
                                                             <div className="card-content">
                                                                 <h4>{d.name}</h4>
                                                                 <p>{d.doctorDesignation}</p>
-                                                                <h5>{d.specialities[0].title}</h5>
+                                                                <h5>{d.specialities[0]?.title}</h5>
                                                                 <div className="from-btn">
-                                                                    <a href="#" className="btn">Appointment</a>
+                                                                    <a href="#" className="btn">{staticText['Appointment']}</a>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div className="main-btn  text-lg-center text-start ms-lg-0 ms-2 mt-2">
-                                                            <a href={baseURL + "/doctor/" + d.slug}>View Profile</a>
+                                                            <a href={baseURL + "/doctor/" + d.slug}>{staticText['View Profile']}</a>
                                                         </div>
                                                     </div>
                                                 </div>

@@ -1,5 +1,22 @@
 const hospitalData = {
-    getHospitalTitle: async () => {
+    getAll: async (limit) => {
+        let url = process.env.NEXT_PUBLIC_CMS_API_URL + `/hospitals?populate[0]=featuredImage${limit ? '&pagination[limit]=' + limit : ''}`;
+        const req = await fetch(url);
+        const res = await req.json();
+
+        return res.data;
+    },
+
+    getSingleHospital: async (slug) => {
+        let url = process.env.NEXT_PUBLIC_CMS_API_URL + `/hospitals/?filters[slug][$eq]=${slug}&populate[0]=featuredImage&populate[1]=manageAppearance&populate[2]=USPSection&populate[3]=USPSection.uspItem&populate[4]=hospitalsSection&populate[5]=specialitySection&populate[6]=pageBanner&populate[7]=pageBanner.bannerImageDesktop&populate[8]=pageBanner.bannerImageMobile&populate[9]=metaSection&populate[10]=overviewSection&populate[11]=blog&populate[12]=doctorTalk&populate[13]=testimonialSection&populate[14]=expertSection`;
+        const req = await fetch(url);
+        const res = await req.json();
+
+        return res.data[0];
+
+    },
+
+    getFooterHospital: async () => {
         const baseUrl = process.env.NEXT_PUBLIC_CMS_API_URL;
         // Get total count
         const initialReq = await fetch(`${baseUrl}/hospitals`);
@@ -13,14 +30,50 @@ const hospitalData = {
         // Actual Data
         for (let i = 0; i < pages; i++) {
             const start = i * limit;
-            const url = `${baseUrl}/hospitals?fields=title&fields=slug&fields=type&pagination[start]=${start}&pagination[limit]=${limit}`;
+            const url = `${baseUrl}/hospitals?fields=title&fields=slug&fields=type&filters[manageAppearance][showingHeader][$eq]=true&filters[manageAppearance][showingFooter][$eq]=true&populate[0]=manageAppearance&pagination[start]=${start}&pagination[limit]=${limit}`;
             const res = await fetch(url);
             const json = await res.json();
             data = [...data, ...json.data];
         }
 
+
+        return data;
+    },
+
+
+    getAllHospitalAndMedicalCenter: async ()=>{
+         const baseUrl = process.env.NEXT_PUBLIC_CMS_API_URL;
+        // Get total count
+        const initialReq = await fetch(`${baseUrl}/hospitals`);
+        const initialRes = await initialReq.json();
+        const totalCount = initialRes.meta.pagination.total;
+
+        const limit = 100;
+        const pages = Math.ceil(totalCount / limit);
+        let data = [];
+
+        // Actual Data
+        for (let i = 0; i < pages; i++) {
+            const start = i * limit;
+            const url = `${baseUrl}/hospitals?fields=title&fields=slug&fields=type&filters[manageAppearance][showingHeader][$eq]=true&pagination[start]=${start}&pagination[limit]=${limit}&populate[0]=location`;
+
+
+            console.log(url);
+            const res = await fetch(url);
+            const json = await res.json();
+            data = [...data, ...json.data];
+        }
+
+
+        console.log(data);
         return data;
     }
+
+
+
+
+
+
 
 }
 

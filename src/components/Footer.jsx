@@ -1,30 +1,36 @@
 "use client"
+import hospitalData from '@/app/lib/getHospital';
+import getSpecialityData from '@/app/lib/getSpeciality';
 import { getBaseUrl } from '@/helper/getBaseUrl';
-import allTitles from '@/helper/getTitles';
+import getStaticText from '@/helper/getStaticText';
 import React, { useEffect, useState } from 'react'
 
 const Footer = () => {
     const [basePath, setBasePath] = useState(null);
     const [speciality, setSpeciality] = useState();
     const [hospitals, setHospitals] = useState();
-    const [staticPage, setStaticPage] = useState();
+    const [staticTexts, setStaticTexts] = useState({});
 
+
+
+    useEffect(() => {
+        const fetchTexts = async () => {
+            setStaticTexts({ ...await getStaticText() })
+        };
+
+        fetchTexts();
+    }, []);
 
     useEffect(() => {
         const fetchAllTitles = async () => {
             try {
-                const [sp, hos, st] = await Promise.all([
-                    allTitles.getSpecialityTitle(),
-                    allTitles.getHospitalTitle(),
-                    allTitles.staticPageTitles()
-                ]);
-
-                setSpeciality(sp);
-                setHospitals(hos);
-                setStaticPage(st);
+                setSpeciality(await getSpecialityData.getFooterSpeciality());
+                setHospitals(await hospitalData.getFooterHospital());
             } catch (error) {
                 console.error("Error fetching titles:", error);
             }
+
+
         };
 
         fetchAllTitles();
@@ -212,15 +218,26 @@ const Footer = () => {
 
                         <div className="col-md-2">
                             <div className="link-part">
-                                <h3>Important Link</h3>
+                                <h3>{staticTexts['Important Link']}</h3>
                                 <ul>
-                                    {
-                                        staticPage?.map((sp, index) => {
-                                            return <li key={index}>
-                                                <a href={basePath + "/" + sp?.slug}>{sp?.title}</a>
-                                            </li>
-                                        })
-                                    }
+                                    <li><a href={basePath + "/about-us"}>About Us</a></li>
+                                    <li><a href={basePath + "/doctor"}>Find a Doctor</a></li>
+                                    <li><a href={basePath + "/book-an-appointment"}>Book an Appointment</a></li>
+                                    <li><a href={basePath + "/health-package"}>Book a Health Check-up</a></li>
+                                    <li><a href={basePath + "/at-home-services"}>Home Care Services</a></li>
+                                    <li><a href={basePath + "/second-opinion"}>Get Second Opinion</a></li>
+                                    <li><a href={basePath + "/visa-medical"}>Visa Medicals</a></li>
+                                    <li><a href={basePath + "/"}>Telehealth</a></li>
+                                    <li><a href={basePath + "/bmw-report"}>Lab Reports</a></li>
+                                    <li><a href={basePath + "/all-companies-on-panel"}>TPA and Insurance</a></li>
+                                    <li><a href={basePath + "/"}>Corporate</a></li>
+                                    <li><a href={basePath + "/csr-policy"}>CSR</a></li>
+                                    <li><a href={basePath + "/media-and-events"}>News and Media</a></li>
+                                    <li><a href={basePath + "/patients-rights-and-responsibilities"}>Rights &amp; Responsibilities</a></li>
+                                    <li><a href={basePath + "/"}>Health Tips</a></li>
+                                    <li><a href={basePath + "/"}>Career</a></li>
+                                    <li><a href={basePath + "/"}>Sitemap</a></li>
+                                    <li><a href={basePath + "/contact-us"}>Contact Us</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -228,31 +245,31 @@ const Footer = () => {
 
                         <div className="col-md-3">
                             <div className="link-part">
-                                <h3>Our Specialities</h3>
+                                <h3>{staticTexts['Our Specialities']}</h3>
                                 <ul>
                                     {
                                         speciality?.map((sp, index) => {
                                             return <li key={index}>
-                                                <a href={basePath + "/speciality/" + sp?.slug}>{sp?.title}</a>
+                                                <a href={basePath + "/speciality/" + sp?.speciality.slug}>{sp?.speciality.title}</a>
                                             </li>
                                         })
                                     }
                                 </ul>
                             </div>
-
                         </div>
 
                         <div className="col-md-2">
                             <div className="row">
                                 <div className="col-12  mb-lg-4">
                                     <div className="link-part">
-                                        <h3>Hospitals</h3>
+                                        <h3>{staticTexts['Hospitals']}</h3>
                                         <ul>
                                             {
                                                 hospitals?.map((h, index) => {
-                                                    return h.type === null || h.type === "Hospital" ? <li key={index}>
-                                                        <a href={basePath + "/hospital/" + h?.slug}>{h?.title}</a>
-                                                    </li>
+                                                    return (h.type === null || h.type === "Hospital") && h?.manageAppearance?.showingFooter ?
+                                                        <li key={index}>
+                                                            <a href={basePath + "/hospital/" + h?.slug}>{h?.title}</a>
+                                                        </li>
                                                         : null
                                                 })
                                             }
@@ -262,11 +279,11 @@ const Footer = () => {
 
                                 <div className="col-12">
                                     <div className="link-part">
-                                        <h3>Medical Centers</h3>
+                                        <h3>{staticTexts['Medical Centers']}</h3>
                                         <ul>
                                             {
                                                 hospitals?.map((h, index) => {
-                                                    return h.type !== null && h.type !== "Hospital" ? <li key={index}>
+                                                    return (h.type !== null && h.type !== "Hospital") && h?.manageAppearance?.showingFooter ? <li key={index}>
                                                         <a href={basePath + "/hospital/" + h?.slug}>{h?.title}</a>
                                                     </li>
                                                         : null
@@ -295,13 +312,14 @@ const Footer = () => {
 
                         <div className="colum-link col-12 mb-2">
                             <div className="footer-menu expanded link-part drop-down">
-                                <h3 className="accordian-footer position-relative d-lg-none">Hospitals</h3>
+                                <h3 className="accordian-footer position-relative d-lg-none">{staticTexts['Hospitals']}</h3>
                                 <ul className="first-child">
                                     {
                                         hospitals?.map((h, index) => {
-                                            return h.type === null || h.type === "Hospital" ? <li key={index}>
-                                                <a href={basePath + "/hospital/" + h?.slug}>{h?.title}</a>
-                                            </li>
+                                            return (h.type === null || h.type === "Hospital") && h?.manageAppearance?.showingFooter ?
+                                                <li key={index}>
+                                                    <a href={basePath + "/hospital/" + h?.slug}>{h?.title}</a>
+                                                </li>
                                                 : null
                                         })
                                     }
@@ -312,13 +330,14 @@ const Footer = () => {
 
                         <div className="colum-link col-12 mb-2">
                             <div className="footer-menu expanded link-part">
-                                <h3 className="accordian-footer position-relative d-lg-none">Medical Centers</h3>
+                                <h3 className="accordian-footer position-relative d-lg-none">{staticTexts['Medical Centers']}</h3>
                                 <ul className="first-child">
                                     {
                                         hospitals?.map((h, index) => {
-                                            return h.type !== null && h.type !== "Hospital" ? <li key={index}>
-                                                <a href={basePath + "/hospital/" + h?.slug}>{h?.title}</a>
-                                            </li>
+                                            return h.type !== null && h.type !== "Hospital" && h?.manageAppearance?.showingFooter ?
+                                                <li key={index}>
+                                                    <a href={basePath + "/hospital/" + h?.slug}>{h?.title}</a>
+                                                </li>
                                                 : null
                                         })
                                     }
@@ -328,13 +347,13 @@ const Footer = () => {
 
                         <div className="colum-link col-12 mb-2">
                             <div className="footer-menu expanded link-part">
-                                <h3 className="accordian-footer position-relative d-lg-none">Our Specialities</h3>
+                                <h3 className="accordian-footer position-relative d-lg-none">{staticTexts['Our Specialities']}</h3>
                                 <ul className="first-child">
                                     {
                                         speciality?.map((sp, index) => {
                                             return <li key={index}>
-                                                <a href={basePath + "/speciality/" + sp?.slug}>{sp?.title}</a>
-                                            </li>
+                                                <a href={basePath + "/speciality/" + sp?.speciality.slug}>{sp?.speciality.title}</a>
+                                            </li> 
                                         })
                                     }
                                 </ul>
@@ -342,19 +361,28 @@ const Footer = () => {
                         </div>
 
 
-
-
                         <div className="colum-link col-12 mb-4">
                             <div className="footer-menu expanded link-part">
-                                <h3 className="accordian-footer position-relative d-lg-none">Important Link</h3>
+                                <h3 className="accordian-footer position-relative d-lg-none">{staticTexts['Important Link']}</h3>
                                 <ul className="first-child">
-                                    {
-                                        staticPage?.map((sp, index) => {
-                                            return <li key={index}>
-                                                <a href={basePath + "/" + sp?.slug}>{sp?.title}</a>
-                                            </li>
-                                        })
-                                    }
+                                    <li><a href={basePath + "/about-us"}>About Us</a></li>
+                                    <li><a href={basePath + "/doctor"}>Find a Doctor</a></li>
+                                    <li><a href={basePath + "/book-an-appointment"}>Book an Appointment</a></li>
+                                    <li><a href={basePath + "/health-package"}>Book a Health Check-up</a></li>
+                                    <li><a href={basePath + "/at-home-services"}>Home Care Services</a></li>
+                                    <li><a href={basePath + "/second-opinion"}>Get Second Opinion</a></li>
+                                    <li><a href={basePath + "/visa-medical"}>Visa Medicals</a></li>
+                                    <li><a href={basePath + "#"}>Telehealth</a></li>
+                                    <li><a href={basePath + "#"}>Lab Reports</a></li>
+                                    <li><a href={basePath + "/all-companies-on-panel"}>TPA and Insurance</a></li>
+                                    <li><a href={basePath + "#"}>Corporate</a></li>
+                                    <li><a href={basePath + "/csr-policy"}>CSR</a></li>
+                                    <li><a href={basePath + "/media-and-events"}>News and Media</a></li>
+                                    <li><a href={basePath + "/patients-rights-and-responsibilities"}>Rights &amp; Responsibilities</a></li>
+                                    <li><a href={basePath + "#"}>Health Tips</a></li>
+                                    <li><a href={basePath + "#"}>Career</a></li>
+                                    <li><a href={basePath + "#"}>Sitemap</a></li>
+                                    <li><a href={basePath + "/contact-us"}>Contact Us</a></li>
                                 </ul>
                             </div>
                         </div>

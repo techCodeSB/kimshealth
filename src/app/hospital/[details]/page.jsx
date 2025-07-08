@@ -1,15 +1,63 @@
+import { getBaseUrl } from '@/app/lib/getBaseUrl';
+import blogData from '@/app/lib/getBlog';
+import doctorData from '@/app/lib/getDoctor';
+import doctorTalkData from '@/app/lib/getDoctorTalk';
+import hospitalData from '@/app/lib/getHospital';
+import getSpecialityData from '@/app/lib/getSpeciality';
+import getStaticText from '@/app/lib/getStaticTextServer';
+import testimonialData from '@/app/lib/getTestimonial';
 import BlogCarousel from '@/components/BlogCarousel';
 import ExcellenceCarousel from '@/components/ExcellenceCarousel';
 import ExpertCarousel from '@/components/ExpertCarousel';
 import Footer from '@/components/Footer';
 import FromDoctor from '@/components/FromDoctor';
 import Header from '@/components/Header';
-import OtherHospital from '@/components/OtherHospital';
 import TestimonialSection from '@/components/TestimonialSection';
+import WatchVideoButton from '@/components/WatchVideoButton';
+import { marked } from 'marked';
 import React from 'react';
 
 
-const HospitalDetails = () => {
+const HospitalDetails = async ({ params }) => {
+    const basePath = await getBaseUrl(true, true);
+    const hptData = await hospitalData.getSingleHospital(params.details);
+    const hospitals = await hospitalData.getAll(10);
+
+    const specialityDataSet = {
+        sectionTitle: hptData.specialitySection.title,
+        buttonText: 'View All', buttonURL: '#',
+        data: await getSpecialityData.getAll(),
+        baseUrl: basePath
+    };
+
+    const expertDataSet = {
+        sectionTitle: hptData.expertSection.title,
+        buttonText: 'View All', buttonURL: '#',
+        data: await doctorData.getDoctorAll(10),
+        baseUrl: basePath
+    };
+
+    const testimonialDataSet = {
+        sectionTitle: hptData.testimonialSection.title,
+        buttonText: 'View All', buttonURL: '#',
+        data: await testimonialData.getAll(10),
+        baseUrl: basePath
+    }
+
+    const blogDataSet = {
+        sectionTitle: hptData.blog.title,
+        buttonText: 'View All', buttonURL: '#',
+        data: await blogData.allBlog(10),
+        baseUrl: basePath
+    }
+
+    const docTalkDataSet = {
+        sectionTitle: hptData.doctorTalk.title,
+        buttonText: 'View All', buttonURL: '#',
+        data: await doctorTalkData.allData(10),
+        baseUrl: basePath
+    }
+
     return (
         <>
             <Header />
@@ -92,12 +140,12 @@ const HospitalDetails = () => {
                                         <div className="col-12 px-0">
                                             <ul className="breadcrumb mb-0">
                                                 <li>
-                                                    <a href="index.php">Home</a>
+                                                    <a href={basePath + "/"}>Home</a>
                                                 </li>
                                                 <li>
-                                                    <a href="hospital-master.php">Our Hospital</a>
+                                                    <a href={basePath + "/hospital"}>Our Hospital</a>
                                                 </li>
-                                                <li className="active"> KIMSHEALTH Trivandrum </li>
+                                                <li className="active"> {hptData.title} </li>
                                             </ul>
                                         </div>
                                     </div>
@@ -110,9 +158,8 @@ const HospitalDetails = () => {
                                             <div className="details-heading">
                                                 <div className="hospital-content">
                                                     <ul>
-                                                        <li className="hospital-icon-custom"> KIMSHEALTH Trivandrum </li>
-                                                        <li> KIMSHEALTH, P.B.No.1, Anayara P.O, Trivandrum – 695029, Kerala, India</li>
-
+                                                        <li className="hospital-icon-custom">{hptData.title}  </li>
+                                                        <li>{hptData.address} </li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -124,8 +171,10 @@ const HospitalDetails = () => {
                                             <div className="details-heading">
                                                 <div className="hospital-content">
                                                     <ul>
-                                                        <li className="telephone-icon-custom"><a href="tel:04714711000"> Appointment Number- 0471 471 1000</a></li>
-                                                        <li className="send-custom-icon"><a href="#"> Get Direction</a></li>
+                                                        <li className="telephone-icon-custom"><a href={`tel:${hptData.contactNo}`}> Appointment Number- {hptData.contactNo} </a></li>
+                                                        <li className="send-custom-icon">
+                                                            <a href={hptData.mapURL} target='_blank'> Get Direction</a>
+                                                        </li>
                                                     </ul>
                                                     <div className="d-flex align-items-center">
                                                         <img src="/img/google.png" alt="Google Logo" className="me-2" />
@@ -152,7 +201,7 @@ const HospitalDetails = () => {
                     <div className="container">
                         <div className="row">
                             <div className="col-12 px-0">
-                                <img src="/img/hospital-detailsbg.jpg" alt="" className="img-fluid hospital-details-mobile-banner" />
+                                <img src={process.env.NEXT_PUBLIC_IMAGE_URL + hptData.featuredImage.url} alt="" className="img-fluid hospital-details-mobile-banner" />
                             </div>
                             <div className="col-12">
                                 <div className="row">
@@ -162,12 +211,12 @@ const HospitalDetails = () => {
                                                 <div className="col-12 px-0">
                                                     <ul className="breadcrumb mb-0">
                                                         <li>
-                                                            <a href="index.php">Home</a>
+                                                            <a href={basePath + "/"}>Home</a>
                                                         </li>
                                                         <li>
-                                                            <a href="hospital-master.php">Our Hospital</a>
+                                                            <a href={basePath + "/hospital"}>Our Hospital</a>
                                                         </li>
-                                                        <li className="active"> KIMSHEALTH Trivandrum </li>
+                                                        <li className="active"> {hptData.title} </li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -180,29 +229,29 @@ const HospitalDetails = () => {
                                                     <div className="details-heading">
                                                         <div className="hospital-content">
                                                             <ul>
-                                                                <li className="hospital-icon-custom"> KIMSHEALTH Trivandrum </li>
-                                                                <li> KIMSHEALTH, P.B.No.1, Anayara P.O, Trivandrum – 695029, Kerala, India</li>
-                                                                <li className="telephone-icon-custom"><a href="tel:04714711000"> Appointment Number- 0471 471 1000</a></li>
+                                                                <li className="hospital-icon-custom">{hptData.title} </li>
+                                                                <li>{hptData.address}</li>
+                                                                <li className="telephone-icon-custom"><a href={`tel:${hptData.contactNo}`}> Appointment Number- {hptData.contactNo}</a></li>
                                                                 <li className="send-custom-icon"><a href="#"> Get Direction</a></li>
                                                             </ul>
 
                                                             <div className="d-flex align-items-center mt-2">
                                                                 <img src="/img/google.png" alt="Google Logo" className="me-2" />
                                                                 <div className="star-rating" data-rating="4.7">
-                                                                    <i className="fa fa-solid fa-star ms-1" style={{ color: "#ffc107" }}></i>
-                                                                    <i className="fa fa-solid fa-star ms-1" style={{ color: "#ffc107" }}></i>
-                                                                    <i className="fa fa-solid fa-star ms-1" style={{ color: "#ffc107" }}></i>
-                                                                    <i className="fa fa-solid fa-star ms-1" style={{ color: "#ffc107" }}></i>
-                                                                    <i className="fa fa-solid fa-star-half ms-1" style={{ color: "#ffc107" }}></i>
-                                                                    4.5
+                                                                    {
+                                                                        Array.from({ length: hptData.rating }).map((r, index) => {
+                                                                            return index + 1 < hptData.rating - 1 ?
+                                                                                <i className="fa fa-solid fa-star ms-1" style={{ color: "#ffc107" }} key={index}></i>
+                                                                                : <i key={index} className={`fa fa-solid ms-1 ${Number.isInteger(hptData.rating) ? 'fa-star' : 'fa-star-half'}`} style={{ color: "#ffc107" }}></i>
+                                                                        })
+                                                                    }
+                                                                    {hptData.rating}
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-
-
                                         </div>
                                     </div>
                                 </div>
@@ -243,7 +292,10 @@ const HospitalDetails = () => {
                                 </div>
                                 <div className="col-xl-3 col-lg-3 col-md-3 col-12">
                                     <div className="from-btn">
-                                        <button type="button" className="btn">Book An Appointment</button>
+                                        <a href={basePath + "/book-an-appointment"} className='btn'>
+                                            {/* Book An Appointment */}
+                                            {await getStaticText("Book An Appointment")}
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -367,52 +419,38 @@ const HospitalDetails = () => {
                         <div className="row">
                             <div className="col-md-5 my-auto order-lg-1 order-2">
                                 <div className="details-right-col text-center">
-                                    <img src="/img/hospital-details-overview-img.jpg" alt="" className="img-fluid w-100" />
-                                    <h5>KIMSHEALTH Trivandrum</h5>
+                                    <img src={process.env.NEXT_PUBLIC_IMAGE_URL + hptData.featuredImage.url} alt="" className="img-fluid w-100" />
+                                    <h5>{hptData.title}</h5>
                                     <p>An Integrated Healthcare Destination </p>
-                                    <div className="main-btn">
-                                        <a href="#">Watch Video <span><i className="fa-solid fa-arrow-right"></i></span></a>
-                                    </div>
+                                    {
+                                        hptData.overviewSection.videoId ?
+                                            <WatchVideoButton txt={"Watch Video"} id={hptData.overviewSection.videoId} />
+                                            : null
+                                    }
                                 </div>
                             </div>
                             <div className="col-md-7 sub-heading order-lg-2 order-1 mb-lg-0 mb-3">
                                 <div className="main-heading">
-                                    <h2 className="mb-1">KIMSHEALTH Trivandrum</h2>
-                                    <h4 className="mb-3">Where Expertise Meets Care</h4>
+                                    <h2 className="mb-1">{hptData.overviewSection.title}</h2>
+                                    <h4 className="mb-3">{hptData.overviewSection.subTitle}</h4>
                                 </div>
 
-                                <p>KIMSHEALTH Trivandrum, the flagship hospital of the KIMSHEALTH Group, is a premier quaternary care facility offering comprehensive medical services across all specialties. Established in 2002, it is accredited by NABH and ACHSI, reflecting its commitment to international healthcare standards. </p>
-                                <p>With over 650 beds, advanced ICUs, modern operating theatres, and a robust transplant program, it delivers high-quality, patient-centered care. Supported by renowned doctors and 23 academic programs, it is also a hub for medical education.</p>
-                                <p>The International Patient Relations Department ensures a smooth experience for global patients through visa support, language services, and personalized care. KIMSHEALTH stands for courtesy, compassion, and competence in every aspect of care.</p>
+                                <div dangerouslySetInnerHTML={{ __html: marked(hptData.overviewSection.details) }}></div>
 
-                                <div className="details-counter-section">
+                                {hptData.USPSection.uspItem.length > 1 ? <div className="details-counter-section">
                                     <div className="row">
-                                        <div className="col-md-3 col-6 mb-lg-0 mb-3">
-                                            <div className="details-counter-box">
-                                                <h2><span className="counter">100</span> <span>+</span></h2>
-                                                <p>Beds Facility</p>
-                                            </div>
-                                        </div>
-                                        <div className="col-md-3 col-6 mb-lg-0 mb-3">
-                                            <div className="details-counter-box">
-                                                <h2><span className="counter">100</span> <span>+</span></h2>
-                                                <p>Doctors</p>
-                                            </div>
-                                        </div>
-                                        <div className="col-md-3 col-6 mb-lg-0 mb-3">
-                                            <div className="details-counter-box">
-                                                <h2><span className="counter">100</span> <span>+</span></h2>
-                                                <p>Specialities </p>
-                                            </div>
-                                        </div>
-                                        <div className="col-md-3 col-6 mb-lg-0 mb-3">
-                                            <div className="details-counter-box">
-                                                <h2><span className="counter">100</span> <span>+</span></h2>
-                                                <p>Trained Staff</p>
-                                            </div>
-                                        </div>
+                                        {
+                                            hptData.USPSection.uspItem.map((upsec, index) => {
+                                                return <div className="col-md-3 col-6 mb-lg-0 mb-3" key={index}>
+                                                    <div className="details-counter-box">
+                                                        <h2><span className="counter">{upsec.number}</span> <span>{upsec.suffix}</span></h2>
+                                                        <p>{upsec.title}</p>
+                                                    </div>
+                                                </div>
+                                            })
+                                        }
                                     </div>
-                                </div>
+                                </div> : null}
                             </div>
 
                         </div>
@@ -420,23 +458,91 @@ const HospitalDetails = () => {
                 </section>
 
                 <div className="line-divider"></div>
-                {/* <ExcellenceCarousel/> */}
+                <ExcellenceCarousel dataSet={specialityDataSet} />
 
 
                 <div className="line-divider"> </div>
-                {/* <ExpertCarousel/> */}
+                <ExpertCarousel dataSet={expertDataSet} />
 
                 <div className="line-divider"></div>
-                {/* <TestimonialSection/> */}
+                <TestimonialSection dataSet={testimonialDataSet} />
 
                 <div className="line-divider"></div>
-                {/* <FromDoctor/> */}
+                <FromDoctor dataSet={docTalkDataSet} />
 
                 <div className="line-divider"></div>
-                {/* <BlogCarousel/> */}
+                <BlogCarousel dataSet={blogDataSet} />
 
                 <div className="line-divider"></div>
-                {/* <OtherHospital/> */}
+                <section className="section">
+                    <div className="container">
+                        <div className="row justify-content-between" data-aos="fade-up">
+                            <div className="col-md-6 col-8">
+                                <div className="main-heading">
+                                    <h2>{hptData.hospitalsSection.title} </h2>
+                                </div>
+                            </div>
+                            <div className="col-md-2 col-4">
+                                <div className="over-all-btn text-end">
+                                    <a href={basePath+"/hospital"}>View All <span><img src="/img/slider-right-arrow.svg" className="img-fluid"
+                                        alt="" /></span></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="owl-carousel owl-theme hospital-slider">
+                            {
+                                hospitals.map((h, index) => {
+                                    return <div className="custom-hospital-top-card" key={index}>
+                                        <div className="custom-hospital-top-card">
+                                            <div className="hospital-img">
+                                                <a href={basePath + "/hospital/" + h.slug}>
+                                                    <img src={process.env.NEXT_PUBLIC_IMAGE_URL + h.featuredImage.url} alt="" className="img-fluid w-100" />
+                                                </a>
+                                            </div>
+                                            <div className="hospital-content">
+
+                                                <ul>
+                                                    <li className="hospital-icon-custom">{h.title}</li>
+                                                    <li className="location-icon-custom">{h.address}</li>
+                                                    <li className="telephone-icon-custom">{h.contactNo}</li>
+                                                </ul>
+                                                <div className="d-lg-flex d-block align-items-center justify-content-between py-2 " style={{ borderBottom: "1px solid #fff" }}>
+                                                    <div className="hospital-content mb-lg-0 mb-3 p-0">
+                                                        <ul>
+                                                            <li className="mb-0 send-custom-icon">
+                                                                <a href={h.mapURL} target='_blank'>Get Direction</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <div className="d-flex align-items-center">
+                                                        <img src="/img/google.png" alt="Google Logo" className="me-2" style={{ width: "auto" }} />
+                                                        <div className="star-rating" data-rating="4.7">
+                                                            {
+                                                                Array.from({ length: h.rating }).map((r, index) => {
+                                                                    return index + 1 < h.rating - 1 ?
+                                                                        <i className="fa fa-solid fa-star ms-1" style={{ color: "#ffc107" }} key={index}></i>
+                                                                        : <i key={index} className={`fa fa-solid ms-1 ${Number.isInteger(h.rating) ? 'fa-star' : 'fa-star-half'}`} style={{ color: "#ffc107" }}></i>
+                                                                })
+                                                            }
+                                                            {h.rating}
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div className="d-lg-flex d-block align-items-center justify-content-between pt-3">
+                                                    <a href={basePath + "/hospital/" + h.slug} className="btn mb-lg-0 mb-2 hospital-primarybtn">View Details</a>
+                                                    <a href={basePath + "/book-an-appointment"} className="btn mb-lg-0 mb-3 hospital-secondarybtn">Appointment</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                })
+                            }
+                        </div>
+                    </div>
+                </section>
 
 
             </div>

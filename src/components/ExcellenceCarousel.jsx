@@ -1,7 +1,19 @@
 "use client"
-import React from 'react'
+import getStaticText from '@/helper/getStaticText';
+import React, { useEffect, useState } from 'react'
 
 const ExcellenceCarousel = ({ dataSet }) => {
+    const [staticTexts, setStaticTexts] = useState({});
+
+
+    useEffect(() => {
+        const fetchTexts = async () => {
+            setStaticTexts({ ...await getStaticText() })
+        };
+
+        fetchTexts();
+    }, []);
+
     return (
         <>
             <section className="section exellence-section" data-aos="fade-up">
@@ -14,7 +26,7 @@ const ExcellenceCarousel = ({ dataSet }) => {
                         </div>
                         <div className="col-md-2 col-4">
                             <div className="over-all-btn text-end">
-                                <a href={dataSet.buttonURL}>{dataSet.buttonText} <span><img src="/img/slider-right-arrow.svg" className="img-fluid"
+                                <a href={dataSet.buttonURL}>{staticTexts[dataSet.buttonText]} <span><img src="/img/slider-right-arrow.svg" className="img-fluid"
                                     alt="" /></span></a>
                             </div>
                         </div>
@@ -34,7 +46,7 @@ const ExcellenceCarousel = ({ dataSet }) => {
                                             <p>{e.overviewSection.details}</p>
                                             <div className="main-btn">
                                                 <a href={dataSet.baseUrl + "/speciality/" + e.speciality?.slug}>
-                                                    Read More <span><i className="fa-solid fa-arrow-right"></i></span>
+                                                    {staticTexts['Read More']} <span><i className="fa-solid fa-arrow-right"></i></span>
                                                 </a>
                                             </div>
                                         </div>

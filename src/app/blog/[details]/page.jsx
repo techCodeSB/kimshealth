@@ -1,7 +1,9 @@
 import { getBaseUrl } from '@/app/lib/getBaseUrl';
 import blogData from '@/app/lib/getBlog';
 import doctorData from '@/app/lib/getDoctor';
+import getStaticText from '@/app/lib/getStaticTextServer';
 import Footer from '@/components/Footer';
+import Form1 from '@/components/Forms/Form1';
 import Header from '@/components/Header';
 import { marked } from 'marked';
 
@@ -10,7 +12,7 @@ const BlogDetails = async ({ params }) => {
     const basePath = await getBaseUrl();
     const data = await blogData.getSingleBlog(params.details);
     const docData = await doctorData.getSingleDoctor(data.doctor[0].slug);
-    console.log(data);
+    const staticText = await getStaticText();
 
 
     return (
@@ -29,10 +31,10 @@ const BlogDetails = async ({ params }) => {
                                                     <div className="col-12 px-0">
                                                         <ul className="breadcrumb mb-0">
                                                             <li>
-                                                                <a href="/">Home</a>
+                                                                <a href="/">{staticText['Home']}</a>
                                                             </li>
                                                             <li>
-                                                                <a href="hospital-master.php">Blogs</a>
+                                                                <a href="hospital-master.php">{staticText['Blogs']}</a>
                                                             </li>
                                                             <li className="active">{data.title}</li>
                                                         </ul>
@@ -91,10 +93,10 @@ const BlogDetails = async ({ params }) => {
                                                     <div className="col-12">
                                                         <ul className="breadcrumb mb-0">
                                                             <li>
-                                                                <a href="/">Home</a>
+                                                                <a href="/">{staticText['Home']}</a>
                                                             </li>
                                                             <li>
-                                                                <a href="hospital-master.php">Blogs</a>
+                                                                <a href="hospital-master.php">{staticText['Blogs']}</a>
                                                             </li>
                                                             <li className="active">{data.title}</li>
                                                         </ul>
@@ -103,7 +105,7 @@ const BlogDetails = async ({ params }) => {
                                             </div>
                                             <div className="details-proceduce-banner-right-col mt-lg-0 mt-4">
                                                 <img src={process.env.NEXT_PUBLIC_IMAGE_URL + data.featuredImage.url} className="img-fluid details-banner-image"
-                                                    alt="" />
+                                                    alt={data.title} />
                                             </div>
                                         </div>
                                     </div>
@@ -118,16 +120,16 @@ const BlogDetails = async ({ params }) => {
                                                 </div>
                                                 <div className="col-6 my-auto pe-3">
                                                     <h3>{data.title}</h3>
-                                                    <p>{docData.hospitals.map((data, _) => {
+                                                    <p>{docData?.hospitals.map((data, _) => {
                                                         return data.title + (docData.hospitals.length - 1 !== _ ? "," : "");
                                                     })}</p>
                                                     <h4>
-                                                        {docData.specialities.map((data, _) => {
+                                                        {docData?.specialities.map((data, _) => {
                                                             return data.title + (docData.specialities.length - 1 !== _ ? "," : "");
                                                         })}
                                                     </h4>
                                                     <div className="mt-4">
-                                                        <a href={basePath + "/book-an-appointment"} className="hospital-primarybtn ">Book An Appointment</a>
+                                                        <a href={basePath + "/book-an-appointment"} className="hospital-primarybtn ">{staticText['Book An Appointment']}</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -155,25 +157,7 @@ const BlogDetails = async ({ params }) => {
                                 </div>
                                 <div className="col-md-4 mb-3">
                                     <div className="association-form-card">
-                                        <h3>GET A CALLBACK FROM OUR HEALTH ADVISOR</h3>
-                                        <form action="">
-                                            <div className="row">
-                                                <div className="col-md-12 mb-3">
-                                                    <input type="text" className="form-control" placeholder="Name" name="name" />
-                                                </div>
-                                                <div className="col-md-12 mb-3">
-                                                    <input type="text" className="form-control"
-                                                        placeholder="Enter 10 Digit Mobile Number" name="name" />
-                                                </div>
-                                                <div className="col-md-12 mb-3">
-                                                    <textarea className="form-control" placeholder="Message"
-                                                        id="floatingTextarea"></textarea>
-                                                </div>
-                                                <div className="col-md-12 mb-3 text-center">
-                                                    <button className="btn mb-lg-0 mb-2 hospital-primarybtn px-5 py-2">Submit</button>
-                                                </div>
-                                            </div>
-                                        </form>
+                                        <Form1 title={"GET A CALLBACK FROM OUR HEALTH ADVISOR"}/>
                                     </div>
                                 </div>
                             </div>
@@ -192,7 +176,7 @@ const BlogDetails = async ({ params }) => {
                                 </div>
                                 <div className="col-md-2 col-4">
                                     <div className="over-all-btn text-end">
-                                        <a href="#">View All <span><img src="/img/slider-right-arrow.svg" className="img-fluid"
+                                        <a href="#">{staticText['View All']} <span><img src="/img/slider-right-arrow.svg" className="img-fluid"
                                             alt="" /></span></a>
                                     </div>
                                 </div>
@@ -215,7 +199,7 @@ const BlogDetails = async ({ params }) => {
                                                 <strong> By: KIMSHEALTH</strong>
                                             </div>
                                             <div className="main-btn">
-                                                <a href="#">Read More <span><i className="fa-solid fa-arrow-right"></i></span></a>
+                                                <a href="#">{staticText['Read More']} <span><i className="fa-solid fa-arrow-right"></i></span></a>
                                             </div>
                                         </div>
                                     </div>
@@ -236,7 +220,7 @@ const BlogDetails = async ({ params }) => {
                                                 <strong> By: KIMSHEALTH</strong>
                                             </div>
                                             <div className="main-btn">
-                                                <a href="#">Read More <span><i className="fa-solid fa-arrow-right"></i></span></a>
+                                                <a href="#">{staticText['Read More']} <span><i className="fa-solid fa-arrow-right"></i></span></a>
                                             </div>
                                         </div>
                                     </div>
@@ -258,7 +242,7 @@ const BlogDetails = async ({ params }) => {
                                                 <strong> By: KIMSHEALTH</strong>
                                             </div>
                                             <div className="main-btn">
-                                                <a href="#">Read More <span><i className="fa-solid fa-arrow-right"></i></span></a>
+                                                <a href="#">{staticText['Read More']} <span><i className="fa-solid fa-arrow-right"></i></span></a>
                                             </div>
                                         </div>
                                     </div>
@@ -279,7 +263,7 @@ const BlogDetails = async ({ params }) => {
                                                 <strong> By: KIMSHEALTH</strong>
                                             </div>
                                             <div className="main-btn">
-                                                <a href="#">Read More <span><i className="fa-solid fa-arrow-right"></i></span></a>
+                                                <a href="#">{staticText['Read More']} <span><i className="fa-solid fa-arrow-right"></i></span></a>
                                             </div>
                                         </div>
                                     </div>
@@ -300,7 +284,7 @@ const BlogDetails = async ({ params }) => {
                                                 <strong> By: KIMSHEALTH</strong>
                                             </div>
                                             <div className="main-btn">
-                                                <a href="#">Read More <span><i className="fa-solid fa-arrow-right"></i></span></a>
+                                                <a href="#">{staticText['Read More']} <span><i className="fa-solid fa-arrow-right"></i></span></a>
                                             </div>
                                         </div>
                                     </div>
@@ -322,7 +306,7 @@ const BlogDetails = async ({ params }) => {
                                                 <strong> By: KIMSHEALTH</strong>
                                             </div>
                                             <div className="main-btn">
-                                                <a href="#">Read More <span><i className="fa-solid fa-arrow-right"></i></span></a>
+                                                <a href="#">{staticText['Read More']} <span><i className="fa-solid fa-arrow-right"></i></span></a>
                                             </div>
                                         </div>
                                     </div>
@@ -341,7 +325,7 @@ const BlogDetails = async ({ params }) => {
                                 </div>
                                 <div className="col-md-2 col-4">
                                     <div className="over-all-btn text-end">
-                                        <a href="#">View All <span><img src="/img/slider-right-arrow.svg" className="img-fluid"
+                                        <a href="#">{staticText['View All']} <span><img src="/img/slider-right-arrow.svg" className="img-fluid"
                                             alt="" /></span></a>
                                     </div>
                                 </div>
@@ -364,7 +348,7 @@ const BlogDetails = async ({ params }) => {
                                                             <strong> By: Dr Aman Agarwal</strong>
                                                         </div>
                                                         <div className="main-btn mt-lg-0 mt-1">
-                                                            <a href="#">Read More <span><i
+                                                            <a href="#">{staticText['Read More']} <span><i
                                                                 className="fa-solid fa-arrow-right"></i></span></a>
                                                         </div>
                                                     </div>
@@ -393,7 +377,7 @@ const BlogDetails = async ({ params }) => {
                                                             <strong> By: Dr Aman Agarwal </strong>
                                                         </div>
                                                         <div className="main-btn mt-lg-0 mt-1">
-                                                            <a href="#">Read More <span><i
+                                                            <a href="#">{staticText['Read More']} <span><i
                                                                 className="fa-solid fa-arrow-right"></i></span></a>
                                                         </div>
                                                     </div>

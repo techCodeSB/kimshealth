@@ -1,25 +1,19 @@
 "use client"
+import formatDate from "@/app/lib/formatDate";
+import getStaticText from "@/helper/getStaticText";
+import { useEffect, useState } from "react";
 
-const FromDoctor = ({dataSet}) => {
-    function formatDate(dateString) {
-        const date = new Date(dateString);
-        const day = date.getDate();
-        const month = date.toLocaleString('default', { month: 'long' }); // "July"
-        const year = date.getFullYear();
+const FromDoctor = ({ dataSet }) => {
+    const [staticTexts, setStaticTexts] = useState({});
 
-        // Add ordinal suffix
-        const getOrdinal = (n) => {
-            if (n > 3 && n < 21) return n + 'th';
-            switch (n % 10) {
-                case 1: return n + 'st';
-                case 2: return n + 'nd';
-                case 3: return n + 'rd';
-                default: return n + 'th';
-            }
+    useEffect(() => {
+        const fetchTexts = async () => {
+            setStaticTexts({ ...await getStaticText() })
         };
 
-        return `${getOrdinal(day)} ${month} ${year}`;
-    }
+        fetchTexts();
+    }, []);
+  
 
     return (
         <>
@@ -33,7 +27,7 @@ const FromDoctor = ({dataSet}) => {
                         </div>
                         <div className="col-md-2 col-4">
                             <div className="over-all-btn text-end">
-                                <a href={dataSet.buttonURL}>{dataSet.buttonText} <span><img src="/img/slider-right-arrow.svg" className="img-fluid"
+                                <a href={dataSet.buttonURL}>{staticTexts[dataSet.buttonText]} <span><img src="/img/slider-right-arrow.svg" className="img-fluid"
                                     alt="" /></span></a>
                             </div>
                         </div>
@@ -51,7 +45,7 @@ const FromDoctor = ({dataSet}) => {
                                         </div>
                                         <div className="main-btn d-lg-block d-none">
                                             <span><img src="/img/play-button.png" className="img-fluid" alt="" /> </span>
-                                            <a href={dataSet.baseUrl + "/doctor-talk/" + dataSet.data[0].slug}>Watch Video <span><i className="fa-solid fa-arrow-right"></i></span></a>
+                                            <a href={dataSet.baseUrl + "/doctor-talk/" + dataSet.data[0].slug}>{staticTexts['Watch Video']} <span><i className="fa-solid fa-arrow-right"></i></span></a>
                                         </div>
                                     </div>
                                 </div>
@@ -73,15 +67,15 @@ const FromDoctor = ({dataSet}) => {
                                                 </div>
                                                 <div className="main-btn d-lg-block d-none">
                                                     <span><img src="/img/play-button.png" className="img-fluid" alt="" /> </span>
-                                                    <a href={dataSet.baseUrl + "/doctor-talk/" + dataSet.data[1].slug}>Watch Video <span><i
+                                                    <a href={dataSet.baseUrl + "/doctor-talk/" + dataSet.data[1].slug}>{staticTexts['Watch Video']} <span><i
                                                         className="fa-solid fa-arrow-right"></i></span></a>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                
-                               <div className="col-md-12 col-6 mb-3">
+
+                                <div className="col-md-12 col-6 mb-3">
                                     <div className="position-relative overflow-hidden" data-aos="fade-up">
                                         <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${dataSet.data[2].thumbnailImage.url}`}
                                             className="img-fluid w-100 hear-doc-image d-lg-block d-none" alt="" />
@@ -94,7 +88,7 @@ const FromDoctor = ({dataSet}) => {
                                                 </div>
                                                 <div className="main-btn d-lg-block d-none">
                                                     <span><img src="/img/play-button.png" className="img-fluid" alt="" /> </span>
-                                                    <a href={dataSet.baseUrl + "/doctor-talk/" + dataSet.data[2].slug}>Watch Video <span><i
+                                                    <a href={dataSet.baseUrl + "/doctor-talk/" + dataSet.data[2].slug}>{staticTexts['Watch Video']} <span><i
                                                         className="fa-solid fa-arrow-right"></i></span></a>
                                                 </div>
                                             </div>

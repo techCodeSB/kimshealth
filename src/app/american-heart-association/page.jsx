@@ -1,9 +1,14 @@
 import Footer from '@/components/Footer'
+import Form1 from '@/components/Forms/Form1'
 import Header from '@/components/Header'
 import JournalCarousel from '@/components/JournalCarousel'
 import React from 'react'
+import getStaticText from '../lib/getStaticTextServer'
 
-const AmericanHeartAssoc = () => {
+const AmericanHeartAssoc = async () => {
+    let staticTexts = await getStaticText();
+
+
     return (
         <>
             <Header />
@@ -21,10 +26,10 @@ const AmericanHeartAssoc = () => {
                                                     <div className="col-12 px-0">
                                                         <ul className="breadcrumb mb-0">
                                                             <li>
-                                                                <a href="index.php">Home</a>
+                                                                <a href="index.php">{staticTexts['Home']}</a>
                                                             </li>
                                                             <li>
-                                                                <a href="hospital-master.php">Academics</a>
+                                                                <a href="hospital-master.php">{staticTexts['Academics']}</a>
                                                             </li>
                                                             <li className="active"> American Heart Associations </li>
                                                         </ul>
@@ -41,7 +46,7 @@ const AmericanHeartAssoc = () => {
                                     </div>
 
                                     <div className="col-md-6 details-proceduce-banner-right-col">
-                                        <img src="/img/heart-assotion-banner.jpg" className="img-fluid details-banner-image" alt=""/>
+                                        <img src="/img/heart-assotion-banner.jpg" className="img-fluid details-banner-image" alt="" />
                                     </div>
 
                                     {/* <!-- <div className="col-md-6">
@@ -127,26 +132,7 @@ const AmericanHeartAssoc = () => {
                                 <div className="col-md-4 ">
                                     <div className="association-left-col">
                                         <div className="association-form-card mb-5">
-                                            <h3>Request a Call Back</h3>
-                                            <form action="">
-                                                <div className="row">
-                                                    <div className="col-md-12 mb-3">
-                                                        <input type="text" className="form-control" placeholder="Name" name="name"/>
-                                                    </div>
-                                                    <div className="col-md-12 mb-3">
-                                                        <input type="text" className="form-control"
-                                                            placeholder="Enter 10 Digit Mobile Number" name="name"/>
-                                                    </div>
-                                                    <div className="col-md-12 mb-3">
-                                                        <textarea className="form-control" placeholder="Message"
-                                                            id="floatingTextarea"></textarea>
-                                                    </div>
-                                                    <div className="col-md-12 mb-3 text-center">
-                                                        <button className="btn mb-lg-0 mb-2 hospital-primarybtn px-5 py-2">Submit</button>
-                                                    </div>
-                                                </div>
-                                            </form>
-
+                                            <Form1 title={"Request a Call Back"} />
 
                                         </div>
                                         <h4>For More Information Contact Us</h4>

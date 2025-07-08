@@ -5,6 +5,7 @@ import { getStaticPageContent } from '../lib/getStaticPageContent';
 import blogData from '../lib/getBlog';
 import getSpecialityData from '../lib/getSpeciality';
 import formatDate from '../lib/formatDate';
+import getStaticText from '../lib/getStaticTextServer';
 
 const Blog = async () => {
     const basePath = await getBaseUrl()
@@ -12,6 +13,7 @@ const Blog = async () => {
     const pageContent = data?.data[0]?.pageContent;
     const pageMeta = data?.data[0]?.metaSection;
     const allBlog = await blogData.allBlog();
+    const staticText = await getStaticText();
 
 
     return (
@@ -30,7 +32,7 @@ const Blog = async () => {
                                 <div className="col-12">
                                     <ul className="breadcrumb mb-0">
                                         <li>
-                                            <a href="/">Home</a>
+                                            <a href="/">{staticText['Home']}</a>
                                         </li>
                                         <li className="active"> {pageContent[0].title} </li>
                                     </ul>
@@ -45,7 +47,7 @@ const Blog = async () => {
                             <div className="row">
                                 <div className="col-md-3 mb-3">
                                     <div className="blog-left-col">
-                                        <h3>By Specialties</h3>
+                                        <h3>{staticText['By Specialties']}</h3>
 
                                         <div className="rounded-field-form my-3">
                                             <form action="">
@@ -140,7 +142,7 @@ const Blog = async () => {
                                                     </a>
                                                     <p>
                                                         {allBlog[0].shortDetails.slice(0, 90)}
-                                                        <span> Read More</span>
+                                                        <span> {staticText['Read More']}</span>
                                                     </p>
                                                     <div className="d-flex align-items-center justify-content-between">
                                                         <div>
@@ -167,11 +169,11 @@ const Blog = async () => {
                                                     </a>
                                                     <p>
                                                         {allBlog[1].shortDetails.slice(0, 90)}
-                                                        <span> Read More</span>
+                                                        <span>{staticText['Read More']}</span>
                                                     </p>
                                                     <div className="d-flex align-items-center justify-content-between">
                                                         <div>
-                                                            <strong> By: {allBlog[1].doctor[0].name}</strong>
+                                                            <strong> {staticText['By']}: {allBlog[1].doctor[0].name}</strong>
                                                         </div>
                                                         <div className="main-btn">
                                                             <p>{formatDate(allBlog[1].date)}</p>
@@ -192,7 +194,7 @@ const Blog = async () => {
                                                                 <p>{b.shortDetails} <span> Read More</span></p>
                                                                 <div className="d-flex align-items-center justify-content-between">
                                                                     <div>
-                                                                        <strong> By: {b.doctor[0].name}</strong>
+                                                                        <strong> {staticText['By']}: {b.doctor[0].name}</strong>
                                                                     </div>
                                                                     <div className="main-btn">
                                                                         <p>{formatDate(b.date)}</p>
@@ -208,7 +210,7 @@ const Blog = async () => {
 
                                         <div className="col-md-12 mb-4">
                                             <div className="blog-tagging">
-                                                <h3>Trending</h3>
+                                                <h3>{staticText['Trending']}</h3>
                                                 <span className="active">COVID 19</span>
                                                 <span>Fever</span>
                                                 <span>Kne Replacement</span>
@@ -234,11 +236,11 @@ const Blog = async () => {
                                                             </a>
                                                             <p>
                                                                 {b.shortDetails?.slice(0, 90)}
-                                                                <span> Read More</span>
+                                                                <span>{staticText['Read More']}</span>
                                                             </p>
                                                             <div className="d-flex align-items-center justify-content-between">
                                                                 <div>
-                                                                    <strong> By: {b.doctor[0]?.name}</strong>
+                                                                    <strong> {staticText['By']}: {b.doctor[0]?.name}</strong>
                                                                 </div>
                                                                 <div className="main-btn">
                                                                     <p>{formatDate(b.date)}</p>
@@ -249,11 +251,6 @@ const Blog = async () => {
                                                 </div>
                                             })
                                         }
-
-
-
-
-
 
                                     </div>
                                 </div>

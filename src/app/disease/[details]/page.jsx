@@ -1,11 +1,15 @@
+import getStaticText from '@/app/lib/getStaticTextServer'
 import ExpertCarousel from '@/components/ExpertCarousel'
 import Footer from '@/components/Footer'
+import Form2 from '@/components/Forms/Form2'
 import FromDoctor from '@/components/FromDoctor'
 import Header from '@/components/Header'
 import TestimonialSection from '@/components/TestimonialSection'
 import React from 'react'
 
-const ConditionDetails = () => {
+const DiseaseDetails = async () => {
+    const staticText = await getStaticText();
+
     return (
         <>
             <Header />
@@ -20,10 +24,10 @@ const ConditionDetails = () => {
                                             <div className="col-12 px-0">
                                                 <ul className="breadcrumb mb-0">
                                                     <li>
-                                                        <a href="index.php">Home</a>
+                                                        <a href="index.php">{staticText['Home']}</a>
                                                     </li>
                                                     <li>
-                                                        <a href="conditions.php">Conditions</a>
+                                                        <a href="/disease">{staticText['Disease']}</a>
                                                     </li>
                                                     <li className="active"> Coronary Artery Disease (CAD) </li>
                                                 </ul>
@@ -32,26 +36,7 @@ const ConditionDetails = () => {
                                     </div>
                                     <div className="details-banner pb-5">
                                         <div className="details-heading">
-                                            <h3>Have a query?</h3>
-                                            <form action="" method="">
-                                                <div className="row">
-                                                    <div className="col-xl-8 col-lg-8 col-md-8 col-12 mb-3">
-                                                        <input type="text" className="form-control border-0"
-                                                            placeholder="Enter Your Name *" aria-label="Username"
-                                                            aria-describedby="basic-addon1" />
-                                                    </div>
-                                                    <div className="col-xl-8 col-lg-8 col-md-8 col-12 mb-3">
-                                                        <input type="text" className="form-control border-0"
-                                                            placeholder="Enter 10 Digit Mobile Number *" aria-label="Username"
-                                                            aria-describedby="basic-addon1" />
-                                                    </div>
-                                                    <div className="col-xl-8 col-lg-8 col-md-8 col-12">
-                                                        <div className="from-btn">
-                                                            <button type="button" className="btn">REQUEST A CALL BACK</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </form>
+                                            <Form2 title={"Have a query?"}/>
                                         </div>
                                     </div>
                                 </div>
@@ -62,8 +47,8 @@ const ConditionDetails = () => {
                                         <h4>Coronary Artery Disease (CAD) </h4>
                                     </div>
                                     <div className="d-flex align-items-center justify-content-center">
-                                        <a href="#" className="procedure-btn-left">Get Second Opinion</a>
-                                        <a href="#" className="procedure-btn-right">Meet Our Cardiologist</a>
+                                        <a href="#" className="procedure-btn-left">{staticText['Get Second Opinion']}</a>
+                                        <a href="#" className="procedure-btn-right">{staticText['Meet Our Cardiologist']}</a>
                                     </div>
                                 </div>
 
@@ -86,10 +71,10 @@ const ConditionDetails = () => {
                                             <div className="col-12 px-0">
                                                 <ul className="breadcrumb mb-0">
                                                     <li>
-                                                        <a href="index.php">Home</a>
+                                                        <a href="index.php">{staticText['Home']}</a>
                                                     </li>
                                                     <li>
-                                                        <a href="conditions.php">Conditions</a>
+                                                        <a href="/disease">{staticText['Disease']}</a>
                                                     </li>
                                                     <li className="active"> Coronary Artery Disease (CAD) </li>
                                                 </ul>
@@ -102,8 +87,8 @@ const ConditionDetails = () => {
                                             <h4>Coronary Artery Disease (CAD) </h4>
                                         </div>
                                         <div className="d-flex align-items-center justify-content-center">
-                                            <a href="#" className="procedure-btn-left">Get Second Opinion</a>
-                                            <a href="#" className="procedure-btn-right">Meet Our Cardiologist</a>
+                                            <a href="#" className="procedure-btn-left">{staticText['Get Second Opinion']}</a>
+                                            <a href="#" className="procedure-btn-right">{staticText['Meet Our Cardiologist']}</a>
                                         </div>
                                     </div>
 
@@ -111,26 +96,7 @@ const ConditionDetails = () => {
                                 <div className="col-md-6">
                                     <div className="details-banner">
                                         <div className="details-heading">
-                                            <h3>Have a query?</h3>
-                                            <form action="" method="">
-                                                <div className="row">
-                                                    <div className="col-xl-8 col-lg-8 col-md-8 col-12 mb-3">
-                                                        <input type="text" className="form-control border-0"
-                                                            placeholder="Enter Your Name *" aria-label="Username"
-                                                            aria-describedby="basic-addon1" />
-                                                    </div>
-                                                    <div className="col-xl-8 col-lg-8 col-md-8 col-12 mb-3">
-                                                        <input type="text" className="form-control border-0"
-                                                            placeholder="Enter 10 Digit Mobile Number *" aria-label="Username"
-                                                            aria-describedby="basic-addon1" />
-                                                    </div>
-                                                    <div className="col-xl-8 col-lg-8 col-md-8 col-12">
-                                                        <div className="from-btn">
-                                                            <button type="button" className="btn">REQUEST A CALL BACK</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </form>
+                                            <Form2 title={"Have a query?"}/>
                                         </div>
                                     </div>
                                 </div>
@@ -175,7 +141,7 @@ const ConditionDetails = () => {
                                     <h5>Coronary Artery Disease (CAD) treatment at KIMSHEALTH</h5>
                                     <p>Coronary Artery Disease (CAD) is regarded . . . . </p>
                                     <div className="main-btn">
-                                        <a href="#">Watch Video <span><i className="fa-solid fa-arrow-right"></i></span></a>
+                                        <a href="#">{staticText['Watch Video']} <span><i className="fa-solid fa-arrow-right"></i></span></a>
                                     </div>
                                 </div>
                             </div>
@@ -408,4 +374,4 @@ const ConditionDetails = () => {
     )
 }
 
-export default ConditionDetails;
+export default DiseaseDetails;

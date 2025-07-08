@@ -4752,6 +4752,13 @@ li.chat-ic::before {
     justify-content: space-between;
 }
 
+.menu-item-has-children .tab a {
+    color: #000000;
+}
+.menu-item-has-children .tab a:hover{
+    color: black;
+}
+
 .menu-item-has-children .tab:last-child {
     border: none;
 }

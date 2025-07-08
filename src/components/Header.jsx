@@ -1,11 +1,14 @@
 "use client"
 import React, { useEffect, useState } from 'react'
 import langLoc from "@/helper/getLangLoc";
-import { onLangChangeRedirection, onLocChangeRedirection, } from "@/helper/onChageRedirection";
+import { onLangChangeRedirection, } from "@/helper/onChageRedirection";
 import Link from 'next/link';
 import Cookies from 'js-cookie';
 import { getBaseUrl } from '@/helper/getBaseUrl';
-import allTitles from '@/helper/getTitles';
+import getLocation from '@/app/lib/getLocation';
+import getSpecialityData from '@/app/lib/getSpeciality';
+import hospitalData from '@/app/lib/getHospital';
+import getStaticText from '@/helper/getStaticText';
 
 
 const Header = () => {
@@ -14,15 +17,40 @@ const Header = () => {
     const [selectedLang, setSelectedLang] = useState(null);
     const [selectedLoc, setSelectedLoc] = useState(null);
     const [basePath, setBasePath] = useState();
+    const [basePathOnlyLang, setBasePathOnlyLang] = useState();
     const [speciality, setSpeciality] = useState();
+    const [locationData, setLocationData] = useState();
+    const [allHospital, setAllHospital] = useState();
+    const [activeIndex, setActiveIndex] = useState(null);
+    const [staticTexts, setStaticTexts] = useState({});
+
+
+    useEffect(() => {
+        const fetchTexts = async () => {
+            setStaticTexts({...await getStaticText()})
+        };
+
+        fetchTexts();
+    }, []);
+
+
+    const toggleAccordion = (index) => {
+        setActiveIndex((prev) => (prev === index ? null : index));
+    };
 
 
     useEffect(() => {
         const get = async () => {
-            const sp = await allTitles.getSpecialityTitle();
-            setSpeciality(sp)
+            setSpeciality(await getSpecialityData.getHeaderSpeciality())
+            setLocationData(await getLocation());
+
+            // await hospitalData.getHospitalByLocationId();
+            setAllHospital(await hospitalData.getAllHospitalAndMedicalCenter());
+
         }
         get();
+
+
     }, [])
 
 
@@ -47,6 +75,7 @@ const Header = () => {
         setSelectedLoc(JSON.parse(Cookies.get("systemLocation")))
 
         setBasePath(getBaseUrl(true, true));
+        setBasePathOnlyLang(getBaseUrl(true, false));
 
     }, [])
 
@@ -74,7 +103,7 @@ const Header = () => {
 
                             <div className="top-bar-icon d-flex align-items-center">
                                 <div className="whatapp-icon">
-                                    <a href="#"> <img src="/img/whatsapp.svg" className="img-fluid" alt="" /></a>
+                                    <a href={"https://wa.me/" + locationData?.whatsapp} target='_blank'> <img src="/img/whatsapp.svg" className="img-fluid" alt="" /></a>
                                 </div>
                                 <div className="search-icon ms-3 me-2">
                                     <i className="fa-solid fa-magnifying-glass"></i>
@@ -116,84 +145,44 @@ const Header = () => {
                                         <a href={basePath + "/speciality"} className="anchor-menu">Specialities & Treatments</a>
                                         <div className="sub-menu">
                                             <div className="row">
-                                                <div className="col-lg-4">
-                                                    <div className="sub-menu-details">
-                                                        <ul>
-                                                            {
-                                                                speciality?.map((s, index) => {
-                                                                    return index < (Math.ceil(speciality.length / 3)) ?
-                                                                        <li key={index}>
-                                                                            <a href={basePath + "/speciality/" + s?.slug}>
-                                                                                <span>
-                                                                                    <img src="/img/oncology.png" alt=""
-                                                                                        className="img-fluid" />
-                                                                                </span>
-                                                                                {s?.title}
-                                                                            </a>
-                                                                        </li>
-                                                                        : null
-                                                                })
-                                                            }
-                                                        </ul>
-                                                    </div>
-                                                </div>
+                                                {
+                                                    (() => {
+                                                        const columns = [[], [], []]; // 3 columns
+                                                        const perColumn = Math.ceil(speciality?.length / 3);
 
-                                                <div className="col-lg-4">
-                                                    <div className="sub-menu-details">
-                                                        <ul>
-                                                            {
-                                                                speciality?.map((s, index) => {
-                                                                    return index > Math.ceil(speciality.length / 3) && index < (Math.ceil(speciality.length / 3) * 2) ?
-                                                                        <li key={index}>
-                                                                            <a href={basePath + "/speciality/" + s?.slug}>
-                                                                                <span>
-                                                                                    <img src="/img/oncology.png" alt=""
-                                                                                        className="img-fluid" />
-                                                                                </span>
-                                                                                {s?.title}
-                                                                            </a>
-                                                                        </li>
-                                                                        : null
-                                                                })
-                                                            }
-                                                        </ul>
-                                                    </div>
-                                                </div>
+                                                        for (let i = 0; i < speciality?.length; i++) {
+                                                            const s = speciality[i];
+                                                            const colIndex = Math.floor(i / perColumn);
+                                                            columns[colIndex].push(
+                                                                <li key={i}>
+                                                                    <a href={basePath + "/speciality/" + s?.slug}>
+                                                                        <span>
+                                                                            <img src={s.iconImage ? process.env.NEXT_PUBLIC_IMAGE_URL + s.iconImage.url : "/img/no-image.jpg"} alt={s?.title} className="img-fluid" />
+                                                                        </span>
+                                                                        {s?.title}
+                                                                    </a>
+                                                                </li>
+                                                            );
 
+                                                        }
 
-                                                <div className="col-lg-4">
-                                                    <div className="sub-menu-details">
-                                                        <ul>
-                                                            {/* <li>
-                                                                <a href="#"><span><img src="/img/oncology.png" alt=""
-                                                                    className="img-fluid" /></span>Oncology</a>
-                                                            </li> */}
-                                                            {
-                                                                speciality?.map((s, index) => {
-                                                                    return index > (Math.ceil(speciality.length / 3) * 2) ?
-                                                                        <li key={index}>
-                                                                            <a href={basePath + "/speciality/" + s?.slug}>
-                                                                                <span>
-                                                                                    <img src="/img/oncology.png" alt=""
-                                                                                        className="img-fluid" />
-                                                                                </span>
-                                                                                {s?.title}
-                                                                            </a>
-                                                                        </li>
-                                                                        : null
-                                                                })
-                                                            }
-                                                        </ul>
-                                                    </div>
-                                                </div>
-
+                                                        return columns.map((items, idx) => (
+                                                            <div className="col-lg-4" key={idx}>
+                                                                <div className="sub-menu-details">
+                                                                    <ul>{items}</ul>
+                                                                </div>
+                                                            </div>
+                                                        ));
+                                                    })()
+                                                }
                                             </div>
+
                                         </div>
                                     </li>
                                     <li><a href={`${basePath}/doctor`} className="anchor-menu">Find a Doctor</a></li>
                                     {/* <!-- <li><a href="" className="anchor-menu">Health Checkup</a></li> --> */}
                                     <li><a href={`${basePath}/visa-medical`} className="anchor-menu">Visa Medical</a></li>
-                                    <li><a href={`${basePath}/international-pages`} className="anchor-menu">International Patients</a></li>
+                                    <li><a href={`${basePath}/international-patient`} className="anchor-menu">International Patients</a></li>
                                     <li className="menu-item-has-children show-submenu d-lg-inline-block d-none">
                                         <Link href="#" className="anchor-menu">Locations</Link>
                                         <div className="sub-menu ">
@@ -204,11 +193,21 @@ const Header = () => {
                                                             {
                                                                 allLocations.map((loc, _) => (
                                                                     <div
-                                                                        onClick={() => onLocChangeRedirection(loc)}
+
+                                                                        onMouseEnter={(e) => {
+                                                                            const tabId = e.currentTarget.getAttribute('data-tab');
+                                                                            document.querySelectorAll('.tab-content').forEach(tab => {
+                                                                                tab.classList.remove('active');
+                                                                            });
+                                                                            const targetTab = document.getElementById(tabId);
+                                                                            if (targetTab) {
+                                                                                targetTab.classList.add('active');
+                                                                            }
+                                                                        }}
                                                                         className={`tab ${selectedLoc?.slug === loc.slug ? 'active' : ''}`}
-                                                                        data-tab="tab5" key={loc.documentId}
+                                                                        data-tab={"tab" + _} key={loc.documentId}
                                                                     >
-                                                                        {loc.title} <i className="fa-solid fa-chevron-right"></i>
+                                                                        <a href={basePathOnlyLang + "/" + loc.slug}>{loc.title} <i className="fa-solid fa-chevron-right"></i></a>
                                                                     </div>
                                                                 ))
                                                             }
@@ -218,204 +217,43 @@ const Header = () => {
 
                                                 <div className="col-lg-8">
                                                     <div className="sub-menu-details">
-                                                        <div id="tab1" className="tab-content active">
-                                                            <div className="row">
-                                                                <div className="col-md-6 mb-3">
-                                                                    <h3>Hospital</h3>
-                                                                    <ul>
-                                                                        <li>
-                                                                            <a href="#">KIMSHEALTH Trivandrum</a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
+                                                        {
+                                                            allLocations.map((l, index) => {
+                                                                // Filter once per location
+                                                                const hospitalsForLocation = allHospital?.filter(h => h.location.id === l.id) || [];
 
-                                                                <div className="col-md-6 mb-3">
-                                                                    <h3>Medical Centers</h3>
-                                                                    <ul>
-                                                                        <li>
-                                                                            <a href="#">Kuravankonam</a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="#">Manacaud</a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="#">Attingal</a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="#">Pothencode</a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="#">Ayoor</a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="#">Vedivachankoil</a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="#">Vattiyoorkavu</a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                                const onlyHospitals = hospitalsForLocation.filter(h => h.type === "Hospital");
+                                                                const onlyMedicalCenters = hospitalsForLocation.filter(h => h.type === "Medical Center");
 
-                                                        <div id="tab2" className="tab-content">
-                                                            <div className="row">
-                                                                <div className="col-md-6 mb-3">
-                                                                    <h3>Medical Centers</h3>
-                                                                    <ul>
-                                                                        <li>
-                                                                            <a href="#">Kuravankonam</a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="#">Manacaud</a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="#">Attingal</a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="#">Pothencode</a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="#">Ayoor</a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="#">Vedivachankoil</a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="#">Vattiyoorkavu</a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                                <div className="col-md-6 mb-3">
-                                                                    <h3>Hospital</h3>
-                                                                    <ul>
-                                                                        <li>
-                                                                            <a href="#">KIMSHEALTH Trivandrum</a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
+                                                                return (
+                                                                    <div id={"tab" + index} className={`tab-content ${index === 0 ? 'active' : ''}`} key={index}>
+                                                                        <div className="row">
+                                                                            <div className="col-md-6 mb-3">
+                                                                                <h3>{staticTexts['Hospital']}</h3>
+                                                                                <ul>
+                                                                                    {onlyHospitals.map((hospital, i) => (
+                                                                                        <li key={`hospital-${i}`}>
+                                                                                            <a href={`${basePathOnlyLang}/${l.slug}/hospital/${hospital.slug}`}>{hospital.title}</a>
+                                                                                        </li>
+                                                                                    ))}
+                                                                                </ul>
+                                                                            </div>
 
-
-                                                            </div>
-                                                        </div>
-                                                        <div id="tab3" className="tab-content">
-                                                            <div className="row">
-                                                                <div className="col-md-6 mb-3">
-                                                                    <h3>Hospital</h3>
-                                                                    <ul>
-                                                                        <li>
-                                                                            <a href="#">KIMSHEALTH Trivandrum</a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-
-                                                                <div className="col-md-6 mb-3">
-                                                                    <h3>Medical Centers</h3>
-                                                                    <ul>
-                                                                        <li>
-                                                                            <a href="#">Kuravankonam</a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="#">Manacaud</a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="#">Attingal</a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="#">Pothencode</a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="#">Ayoor</a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="#">Vedivachankoil</a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="#">Vattiyoorkavu</a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div id="tab4" className="tab-content">
-                                                            <div className="row">
-                                                                <div className="col-md-6 mb-3">
-                                                                    <h3>Medical Centers</h3>
-                                                                    <ul>
-                                                                        <li>
-                                                                            <a href="#">Kuravankonam</a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="#">Manacaud</a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="#">Attingal</a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="#">Pothencode</a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="#">Ayoor</a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="#">Vedivachankoil</a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="#">Vattiyoorkavu</a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                                <div className="col-md-6 mb-3">
-                                                                    <h3>Hospital</h3>
-                                                                    <ul>
-                                                                        <li>
-                                                                            <a href="#">KIMSHEALTH Trivandrum</a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-
-
-                                                            </div>
-                                                        </div>
-                                                        <div id="tab5" className="tab-content">
-                                                            <div className="row">
-                                                                <div className="col-md-6 mb-3">
-                                                                    <h3>Hospital</h3>
-                                                                    <ul>
-                                                                        <li>
-                                                                            <a href="#">KIMSHEALTH Trivandrum</a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-
-                                                                <div className="col-md-6 mb-3">
-                                                                    <h3>Medical Centers</h3>
-                                                                    <ul>
-                                                                        <li>
-                                                                            <a href="#">Kuravankonam</a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="#">Manacaud</a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="#">Attingal</a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="#">Pothencode</a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="#">Ayoor</a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="#">Vedivachankoil</a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="#">Vattiyoorkavu</a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                                            <div className="col-md-6 mb-3">
+                                                                                <h3>{staticTexts["Medical Centers"]}</h3>
+                                                                                <ul>
+                                                                                    {onlyMedicalCenters.map((center, i) => (
+                                                                                        <li key={`medcenter-${i}`}>
+                                                                                            <a href={`${basePathOnlyLang}/${l.slug}/hospital/${center.slug}`}>{center.title}</a>
+                                                                                        </li>
+                                                                                    ))}
+                                                                                </ul>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                );
+                                                            })
+                                                        }
                                                     </div>
                                                 </div>
 
@@ -428,371 +266,61 @@ const Header = () => {
                                         <div className="sub-menu">
                                             <div className="sub-menu-details">
                                                 <div className="accordion">
-                                                    <div className="accordion-item">
-                                                        <div className="accordion-header">
-                                                            <h3>Trivandrum</h3>
-                                                            <div className="accordion-icon"></div>
-                                                        </div>
-                                                        <div className="accordion-content">
-                                                            <div className="content-inner">
-                                                                <div className="row">
-                                                                    <div className="col-md-6 mb-3">
-                                                                        <h3>Hospital</h3>
-                                                                        <ul>
-                                                                            <li>
-                                                                                <a href="#">KIMSHEALTH Trivandrum</a>
-                                                                            </li>
-                                                                        </ul>
-                                                                    </div>
-                                                                    <div className="col-md-6">
-                                                                        <h3>Medical Centers</h3>
-                                                                        <ul>
-                                                                            <li>
-                                                                                <a href="#">Kuravankonam</a>
-                                                                            </li>
-                                                                            <li>
-                                                                                <a href="#">Manacaud</a>
-                                                                            </li>
-                                                                            <li>
-                                                                                <a href="#">Attingal</a>
-                                                                            </li>
-                                                                            <li>
-                                                                                <a href="#">Pothencode</a>
-                                                                            </li>
-                                                                            <li>
-                                                                                <a href="#">Ayoor</a>
-                                                                            </li>
-                                                                            <li>
-                                                                                <a href="#">Vedivachankoil</a>
-                                                                            </li>
-                                                                            <li>
-                                                                                <a href="#">Vattiyoorkavu</a>
-                                                                            </li>
-                                                                        </ul>
-                                                                    </div>
+                                                    {allLocations.map((l, index) => {
+                                                        const hospitalsForLocation = allHospital?.filter(h => h.location.id === l.id) || [];
+                                                        const onlyHospitals = hospitalsForLocation.filter(h => h.type === "Hospital");
+                                                        const onlyMedicalCenters = hospitalsForLocation.filter(h => h.type === "Medical Center");
+
+                                                        const isOpen = activeIndex === index;
+
+                                                        return (
+                                                            <div className={`accordion-item ${isOpen ? "active" : ""}`} key={index}>
+                                                                <div className="accordion-header" onClick={() => toggleAccordion(index)}>
+                                                                    <h3>
+                                                                        <a href={basePathOnlyLang + "/" + l.slug}>{l.title}</a>
+                                                                    </h3>
+                                                                    <div className="accordion-icon"></div>
                                                                 </div>
+
+                                                                {isOpen && (
+                                                                    <div className="accordion-content">
+                                                                        <div className="content-inner">
+                                                                            <div className="row">
+                                                                                <div className="col-md-6 mb-3">
+                                                                                    <h3>{staticTexts['Hospital']}</h3>
+                                                                                    <ul>
+                                                                                        {onlyHospitals.map((hospital, i) => (
+                                                                                            <li key={`hospital-${i}`}>
+                                                                                                <a href={`${basePathOnlyLang}/${l.slug}/hospital/${hospital.slug}`}>
+                                                                                                    {hospital.title}
+                                                                                                </a>
+                                                                                            </li>
+                                                                                        ))}
+                                                                                    </ul>
+                                                                                </div>
+                                                                                <div className="col-md-6">
+                                                                                    <h3>{staticTexts["Medical Centers"]}</h3>
+                                                                                    <ul>
+                                                                                        {onlyMedicalCenters.map((center, i) => (
+                                                                                            <li key={`medcenter-${i}`}>
+                                                                                                <a href={`${basePathOnlyLang}/${l.slug}/hospital/${center.slug}`}>
+                                                                                                    {center.title}
+                                                                                                </a>
+                                                                                            </li>
+                                                                                        ))}
+                                                                                    </ul>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                )}
                                                             </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div className="accordion-item">
-                                                        <div className="accordion-header">
-                                                            <h3>Kollam</h3>
-                                                            <div className="accordion-icon"></div>
-                                                        </div>
-                                                        <div className="accordion-content">
-                                                            <div className="content-inner">
-                                                                <div className="row">
-                                                                    <div className="col-md-6 mb-3">
-                                                                        <h3>Medical Centers</h3>
-                                                                        <ul>
-                                                                            <li>
-                                                                                <a href="#">Kuravankonam</a>
-                                                                            </li>
-                                                                            <li>
-                                                                                <a href="#">Manacaud</a>
-                                                                            </li>
-                                                                            <li>
-                                                                                <a href="#">Attingal</a>
-                                                                            </li>
-                                                                            <li>
-                                                                                <a href="#">Pothencode</a>
-                                                                            </li>
-                                                                            <li>
-                                                                                <a href="#">Ayoor</a>
-                                                                            </li>
-                                                                            <li>
-                                                                                <a href="#">Vedivachankoil</a>
-                                                                            </li>
-                                                                            <li>
-                                                                                <a href="#">Vattiyoorkavu</a>
-                                                                            </li>
-                                                                        </ul>
-                                                                    </div>
-                                                                    <div className="col-md-6 mb-0">
-                                                                        <h3>Hospital</h3>
-                                                                        <ul>
-                                                                            <li>
-                                                                                <a href="#">KIMSHEALTH Trivandrum</a>
-                                                                            </li>
-                                                                        </ul>
-                                                                    </div>
-
-
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div className="accordion-item">
-                                                        <div className="accordion-header">
-                                                            <h3>Kottayam</h3>
-                                                            <div className="accordion-icon"></div>
-                                                        </div>
-                                                        <div className="accordion-content">
-                                                            <div className="content-inner">
-                                                                <div className="row">
-                                                                    <div className="col-md-6 mb-3">
-                                                                        <h3>Hospital</h3>
-                                                                        <ul>
-                                                                            <li>
-                                                                                <a href="#">KIMSHEALTH Trivandrum</a>
-                                                                            </li>
-                                                                        </ul>
-                                                                    </div>
-
-                                                                    <div className="col-md-6 mb-0">
-                                                                        <h3>Medical Centers</h3>
-                                                                        <ul>
-                                                                            <li>
-                                                                                <a href="#">Kuravankonam</a>
-                                                                            </li>
-                                                                            <li>
-                                                                                <a href="#">Manacaud</a>
-                                                                            </li>
-                                                                            <li>
-                                                                                <a href="#">Attingal</a>
-                                                                            </li>
-                                                                            <li>
-                                                                                <a href="#">Pothencode</a>
-                                                                            </li>
-                                                                            <li>
-                                                                                <a href="#">Ayoor</a>
-                                                                            </li>
-                                                                            <li>
-                                                                                <a href="#">Vedivachankoil</a>
-                                                                            </li>
-                                                                            <li>
-                                                                                <a href="#">Vattiyoorkavu</a>
-                                                                            </li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div className="accordion-item">
-                                                        <div className="accordion-header">
-                                                            <h3>Perintalmanna</h3>
-                                                            <div className="accordion-icon"></div>
-                                                        </div>
-                                                        <div className="accordion-content">
-                                                            <div className="content-inner">
-                                                                <div className="row">
-                                                                    <div className="col-md-6 mb-3">
-                                                                        <h3>Medical Centers</h3>
-                                                                        <ul>
-                                                                            <li>
-                                                                                <a href="#">Kuravankonam</a>
-                                                                            </li>
-                                                                            <li>
-                                                                                <a href="#">Manacaud</a>
-                                                                            </li>
-                                                                            <li>
-                                                                                <a href="#">Attingal</a>
-                                                                            </li>
-                                                                            <li>
-                                                                                <a href="#">Pothencode</a>
-                                                                            </li>
-                                                                            <li>
-                                                                                <a href="#">Ayoor</a>
-                                                                            </li>
-                                                                            <li>
-                                                                                <a href="#">Vedivachankoil</a>
-                                                                            </li>
-                                                                            <li>
-                                                                                <a href="#">Vattiyoorkavu</a>
-                                                                            </li>
-                                                                        </ul>
-                                                                    </div>
-                                                                    <div className="col-md-6 mb-0">
-                                                                        <h3>Hospital</h3>
-                                                                        <ul>
-                                                                            <li>
-                                                                                <a href="#">KIMSHEALTH Trivandrum</a>
-                                                                            </li>
-                                                                        </ul>
-                                                                    </div>
-
-
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div className="accordion-item">
-                                                        <div className="accordion-header">
-                                                            <h3>Nagercoil</h3>
-                                                            <div className="accordion-icon"></div>
-                                                        </div>
-                                                        <div className="accordion-content">
-                                                            <div className="content-inner">
-                                                                <div className="row">
-                                                                    <div className="col-md-6 mb-3">
-                                                                        <h3>Medical Centers</h3>
-                                                                        <ul>
-                                                                            <li>
-                                                                                <a href="#">Kuravankonam</a>
-                                                                            </li>
-                                                                            <li>
-                                                                                <a href="#">Manacaud</a>
-                                                                            </li>
-                                                                            <li>
-                                                                                <a href="#">Attingal</a>
-                                                                            </li>
-                                                                            <li>
-                                                                                <a href="#">Pothencode</a>
-                                                                            </li>
-                                                                            <li>
-                                                                                <a href="#">Ayoor</a>
-                                                                            </li>
-                                                                            <li>
-                                                                                <a href="#">Vedivachankoil</a>
-                                                                            </li>
-                                                                            <li>
-                                                                                <a href="#">Vattiyoorkavu</a>
-                                                                            </li>
-                                                                        </ul>
-                                                                    </div>
-                                                                    <div className="col-md-6 mb-0">
-                                                                        <h3>Hospital</h3>
-                                                                        <ul>
-                                                                            <li>
-                                                                                <a href="#">KIMSHEALTH Trivandrum</a>
-                                                                            </li>
-                                                                        </ul>
-                                                                    </div>
-
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
+                                                        );
+                                                    })}
                                                 </div>
-
                                             </div>
                                         </div>
                                     </li>
-
-                                    {/* <!-- <li className="menu-item-has-children show-submenu">
-                                    <a href="#" className="anchor-menu">Programmes</a>
-                                    <div className="sub-menu">
-                                        <div className="row">
-                                            <div className="col-lg-4">
-                                                <div className="sub-menu-details">
-                                                    <h3>Admissions</h3>
-                                                    <ul>
-                                                        <li>
-                                                            <a href="">Centre for Heart & Vascular Care</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="">
-                                                                Centre for Bone & Joint Care</a>
-                                                        </li>
-
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div className="col-lg-4">
-                                                <div className="sub-menu-details">
-                                                    <h3>Executive Education</h3>
-                                                    <ul>
-                                                        <li>
-                                                            <a href="">
-                                                                Centre for Gastro Sciences</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="">
-                                                                Centre for Nephro urosciences and Kidney Transplantation</a>
-                                                        </li>
-
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div className="col-lg-4">
-                                                <div className="sub-menu-details">
-                                                    <h3>Faculty</h3>
-                                                    <ul>
-                                                        <li>
-                                                            <a href="">
-                                                                Centre For Neurosciences</a>
-                                                        </li>
-
-                                                        <li>
-                                                            <a href="">
-                                                                Centre for Blood Disease, BMT & Cancer Immunotherapy</a>
-                                                        </li>
-
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="sub-menu sub-menu-single">
-                                        <div className="sub-menu-details">
-                                            <ul>
-                                                <li>
-                                                    <a href="#">Post-Graduate Diploma In Management (PGDM)</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">Fellow Programme In Management (FPM)</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">Online Post Graduate Diploma In Management (OPGDM)</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">International Student Exchange Programme (ISEP)</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">Post Graduate Certificate In Financial Market
-                                                        (PGCFM)</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">Certificate Programme In Data Science</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </li> --> */}
-
-                                    {/* <!-- <li><a href="" className="anchor-menu">Executive Education</a>
-                                    <div className="sub-menu sub-menu-single">
-                                        <div className="sub-menu-details">
-                                            <ul>
-                                                <li>
-                                                    <a href="">Collaborative Programme</a>
-                                                </li>
-                                                <li>
-                                                    <a href="">Custom Programme</a>
-                                                </li>
-                                                <li>
-                                                    <a href="">Custom Programme - Contact</a>
-                                                </li>
-
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </li> --> */}
-                                    {/* <!-- <li><a href="" className="anchor-menu">Faculty</a></li> --> */}
-                                    {/* <!-- <li><a href="" className="anchor-menu">Research</a>
-                                    <div className="sub-menu sub-menu-single">
-                                        <div className="sub-menu-details">
-                                            <ul>
-                                                <li>
-                                                    <a href="">Faculty Publications</a>
-                                                </li>
-                                                <li>
-                                                    <a href="">IMI Kolkata Publications</a>
-                                                </li>
-                                                <li>
-                                                    <a href="">Certers Of Exellence</a>
-                                                </li>
-
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </li> --> */}
 
                                 </ul>
                             </div>
@@ -817,4 +345,4 @@ const Header = () => {
     )
 }
 
-export default Header
+export default Header;

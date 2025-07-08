@@ -28,12 +28,6 @@ const Home = async () => {
   const pageContent = data?.data[0]?.pageContent;
   const pageMeta = data?.data[0]?.metaSection;
 
-  const allSpecility = await getSpecialityData.getSpecialityTitle()
-  const allHospitals = await hospitalData.getHospitalTitle();
-  const allStaticPage = await staticPage.getHospitalTitle();
-
-
-
   const specialityDataSet = {
     sectionTitle: pageContent[2]?.title,
     buttonText: 'View All', buttonURL: '#',
@@ -254,11 +248,7 @@ const Home = async () => {
 
       </div>
 
-      <Footer
-        speciality={allSpecility}
-        hospitals={allHospitals}
-        staticPage={allStaticPage}
-      />
+      <Footer/>
     </>
   )
 }

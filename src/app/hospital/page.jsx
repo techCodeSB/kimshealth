@@ -1,9 +1,21 @@
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import React from 'react';
+import { getBaseUrl } from '../lib/getBaseUrl';
+import { getStaticPageContent } from '../lib/getStaticPageContent';
+import hospitalData from '../lib/getHospital';
 
 
-const Hospital = () => {
+const Hospital = async () => {
+    const baseURL = await getBaseUrl(true, true);
+    const data = await getStaticPageContent("hospital");
+    const pageContent = data?.data[0]?.pageContent;
+    const pageMeta = data?.data[0]?.metaSection;
+    const hospitals = await hospitalData.getAll();
+
+    console.log(hospitals)
+
+
     return (
         <>
             <Header />
@@ -11,7 +23,7 @@ const Hospital = () => {
                 <div className="hospital-details-main-page">
                     <div className="page-header">
                         <div className="container">
-                            <h2>Locations</h2>
+                            <h2>{pageContent[0]?.title}</h2>
                         </div>
                     </div>
                     <section className="breadcrumb-wrapper py-2">
@@ -20,9 +32,9 @@ const Hospital = () => {
                                 <div className="col-12">
                                     <ul className="breadcrumb mb-0">
                                         <li>
-                                            <a href="index.php">Home</a>
+                                            <a href="/">Home</a>
                                         </li>
-                                        <li className="active"> Locations </li>
+                                        <li className="active"> {pageContent[0]?.title} </li>
                                     </ul>
                                 </div>
                             </div>
@@ -56,217 +68,121 @@ const Hospital = () => {
                                 </div>
                             </div>
                             <div className="row">
-                                <div className="col-md-6 mb-4">
 
-                                    <div className="custom-hospital-top-card">
-                                        <div className="hospital-img">
-                                            <a href="#"><img src="/img/hospital-left-col.jpg" alt="" className="img-fluid w-100" /></a>
-                                        </div>
-                                        <div className="hospital-content">
+                                {
+                                    hospitals.map((h, index) => {
+                                        return index <= 1 ?
+                                            <div className="col-md-6 mb-4" key={index}>
+                                                <div className="custom-hospital-top-card">
+                                                    <div className="hospital-img">
+                                                        <a href={baseURL + "/hospital/" + h.slug}>
+                                                            <img src={process.env.NEXT_PUBLIC_IMAGE_URL + h.featuredImage.url} alt="" className="img-fluid w-100" />
+                                                        </a>
+                                                    </div>
+                                                    <div className="hospital-content">
 
-                                            <ul>
-                                                <li className="hospital-icon-custom"> KIMSHEALTH Trivandrum </li>
-                                                <li className="location-icon-custom"> 1, Vinod Nagar Rd, Anayara, Thiruvananthapuram, Kerala 695029</li>
-                                                <li className="telephone-icon-custom"> 0471 471 1000</li>
-                                            </ul>
-                                            <div className="d-lg-flex d-block align-items-center justify-content-between py-2 " style={{borderBottom: "1px solid #fff"}}>
-                                                <div className="hospital-content mb-lg-0 mb-3 p-0">
-                                                    <ul>
-                                                        <li className="mb-0 send-custom-icon"> Get Direction</li>
-                                                    </ul>
-                                                </div>
-                                                <div className="d-flex align-items-center">
-                                                    <img src="/img/google.png" alt="Google Logo" className="me-2" />
-                                                        <div className="star-rating" data-rating="4.7">
-                                                            <i className="fa fa-solid fa-star ms-1" style={{color: "#ffc107"}}></i>
-                                                            <i className="fa fa-solid fa-star ms-1" style={{color: "#ffc107"}}></i>
-                                                            <i className="fa fa-solid fa-star ms-1" style={{color: "#ffc107"}}></i>
-                                                            <i className="fa fa-solid fa-star ms-1" style={{color: "#ffc107"}}></i>
-                                                            <i className="fa fa-solid fa-star-half ms-1" style={{color: "#ffc107"}}></i>
-                                                            4.5
+                                                        <ul>
+                                                            <li className="hospital-icon-custom">{h.title}</li>
+                                                            <li className="location-icon-custom">{h.address}</li>
+                                                            <li className="telephone-icon-custom">{h.contactNo}</li>
+                                                        </ul>
+                                                        <div className="d-lg-flex d-block align-items-center justify-content-between py-2 " style={{ borderBottom: "1px solid #fff" }}>
+                                                            <div className="hospital-content mb-lg-0 mb-3 p-0">
+                                                                <ul>
+                                                                    <li className="mb-0 send-custom-icon">
+                                                                        <a href={h.mapURL} target='_blank'>Get Direction</a>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                            <div className="d-flex align-items-center">
+                                                                <img src="/img/google.png" alt="Google Logo" className="me-2" />
+                                                                <div className="star-rating" data-rating="4.7">
+                                                                    {/* <i className="fa fa-solid fa-star ms-1" style={{ color: "#ffc107" }}></i>
+                                                                    <i className="fa fa-solid fa-star ms-1" style={{ color: "#ffc107" }}></i>
+                                                                    <i className="fa fa-solid fa-star ms-1" style={{ color: "#ffc107" }}></i>
+                                                                    <i className="fa fa-solid fa-star ms-1" style={{ color: "#ffc107" }}></i>
+                                                                    <i className="fa fa-solid fa-star-half ms-1" style={{ color: "#ffc107" }}></i> */}
+                                                                    {
+                                                                        Array.from({ length: h.rating }).map((r, index) => {
+                                                                            return index + 1 < h.rating - 1 ?
+                                                                                <i className="fa fa-solid fa-star ms-1" style={{ color: "#ffc107" }} key={index}></i>
+                                                                                : <i key={index} className={`fa fa-solid ms-1 ${Number.isInteger(h.rating) ? 'fa-star' : 'fa-star-half'}`} style={{ color: "#ffc107" }}></i>
+                                                                        })
+                                                                    }
+                                                                    {h.rating}
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                </div>
-                                            </div>
 
-                                            <div className="d-lg-flex d-block align-items-center justify-content-between pt-3">
-                                                <a href="#" className="btn mb-lg-0 mb-2 hospital-primarybtn">View Details</a>
-                                                <a href="#" className="btn mb-lg-0 mb-3 hospital-secondarybtn">Appointment</a>
-                                            </div>
-                                        </div>
-
-
-
-                                    </div>
-                                </div>
-                                <div className="col-md-6 mb-4">
-
-                                    <div className="custom-hospital-top-card">
-                                        <div className="hospital-img">
-                                            <a href="#"><img src="/img/hospital-right-col.jpg" alt="" className="img-fluid w-100" /></a>
-                                        </div>
-                                        <div className="hospital-content">
-
-                                            <ul>
-                                                <li className="hospital-icon-custom"> KIMSHEALTH Kollam </li>
-                                                <li className="location-icon-custom"> Sithara Jn. Kottiyam P.O., Kollam, rala - 691 571</li>
-                                                <li className="telephone-icon-custom"> 0471 471 1000</li>
-                                            </ul>
-                                            <div className="d-lg-flex d-block align-items-center justify-content-between py-2 " style={{borderBottom: "1px solid #fff"}}>
-                                                <div className="hospital-content mb-lg-0 mb-3 p-0">
-                                                    <ul>
-                                                        <li className="mb-0 send-custom-icon"> Get Direction</li>
-                                                    </ul>
-                                                </div>
-                                                <div className="d-flex align-items-center">
-                                                    <img src="/img/google.png" alt="Google Logo" className="me-2" />
-                                                        <div className="star-rating" data-rating="4.7">
-                                                            <i className="fa fa-solid fa-star ms-1" style={{color: "#ffc107"}}></i>
-                                                            <i className="fa fa-solid fa-star ms-1" style={{color: "#ffc107"}}></i>
-                                                            <i className="fa fa-solid fa-star ms-1" style={{color: "#ffc107"}}></i>
-                                                            <i className="fa fa-solid fa-star ms-1" style={{color: "#ffc107"}}></i>
-                                                            <i className="fa fa-solid fa-star-half ms-1" style={{color: "#ffc107"}}></i>
-                                                            4.5
+                                                        <div className="d-lg-flex d-block align-items-center justify-content-between pt-3">
+                                                            <a href={baseURL + "/hospital/" + h.slug} className="btn mb-lg-0 mb-2 hospital-primarybtn">View Details</a>
+                                                            <a href={baseURL + "/book-an-appointment"} className="btn mb-lg-0 mb-3 hospital-secondarybtn">Appointment</a>
                                                         </div>
+                                                    </div>
                                                 </div>
                                             </div>
 
-                                            <div className="d-lg-flex d-block align-items-center justify-content-between pt-3">
-                                                <a href="#" className="btn mb-lg-0 mb-2 hospital-primarybtn">View Details</a>
-                                                <a href="#" className="btn mb-lg-0 mb-3 hospital-secondarybtn">Appointment</a>
-                                            </div>
-                                        </div>
+                                            : null
+                                    })
+                                }
 
 
+                                {
+                                    hospitals.map((h, index) => {
+                                        return index >= 2 && index <= 4 ?
+                                            <div className="col-md-4 mb-4" key={index}>
+                                                <div className="custom-hospital-top-card">
+                                                    <div className="hospital-img">
+                                                        <a href={baseURL + "/hospital/" + h.slug}>
+                                                            <img src={process.env.NEXT_PUBLIC_IMAGE_URL + h.featuredImage.url} alt="" className="img-fluid w-100" />
+                                                        </a>
+                                                    </div>
+                                                    <div className="hospital-content">
 
-                                    </div>
-                                </div>
-
-
-
-                                <div className="col-md-4 mb-4">
-                                    <div className="custom-hospital-top-card">
-                                        <div className="hospital-img">
-                                            <a href="#"><img src="/img/hospital1.jpg" alt="" className="img-fluid w-100" /></a>
-                                        </div>
-                                        <div className="hospital-content">
-
-                                            <ul>
-                                                <li className="hospital-icon-custom"> KIMSHEALTH AL SHIFA </li>
-                                                <li className="location-icon-custom"> Ootty, Road, Perintalmanna, Kerala 679322  </li>
-                                                <li className="telephone-icon-custom"> 0471 471 1000</li>
-                                            </ul>
-                                            <div className="d-lg-flex d-block align-items-center justify-content-between py-2 " style={{borderBottom: "1px solid #fff"}}>
-                                                <div className="hospital-content mb-lg-0 mb-3 p-0">
-                                                    <ul>
-                                                        <li className="mb-0 send-custom-icon"> Get Direction</li>
-                                                    </ul>
-                                                </div>
-                                                <div className="d-flex align-items-center">
-                                                    <img src="/img/google.png" alt="Google Logo" className="me-2" />
-                                                        <div className="star-rating" data-rating="4.7">
-                                                            <i className="fa fa-solid fa-star ms-1" style={{color: "#ffc107"}}></i>
-                                                            <i className="fa fa-solid fa-star ms-1" style={{color: "#ffc107"}}></i>
-                                                            <i className="fa fa-solid fa-star ms-1" style={{color: "#ffc107"}}></i>
-                                                            <i className="fa fa-solid fa-star ms-1" style={{color: "#ffc107"}}></i>
-                                                            <i className="fa fa-solid fa-star-half ms-1" style={{color: "#ffc107"}}></i>
-                                                            4.5
+                                                        <ul>
+                                                            <li className="hospital-icon-custom">{h.title}</li>
+                                                            <li className="location-icon-custom">{h.address}</li>
+                                                            <li className="telephone-icon-custom">{h.contactNo}</li>
+                                                        </ul>
+                                                        <div className="d-lg-flex d-block align-items-center justify-content-between py-2 " style={{ borderBottom: "1px solid #fff" }}>
+                                                            <div className="hospital-content mb-lg-0 mb-3 p-0">
+                                                                <ul>
+                                                                    <li className="mb-0 send-custom-icon">
+                                                                        <a href={h.mapURL} target='_blank'>Get Direction</a>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                            <div className="d-flex align-items-center">
+                                                                <img src="/img/google.png" alt="Google Logo" className="me-2" />
+                                                                <div className="star-rating" data-rating="4.7">
+                                                                    {/* <i className="fa fa-solid fa-star ms-1" style={{ color: "#ffc107" }}></i>
+                                                                    <i className="fa fa-solid fa-star ms-1" style={{ color: "#ffc107" }}></i>
+                                                                    <i className="fa fa-solid fa-star ms-1" style={{ color: "#ffc107" }}></i>
+                                                                    <i className="fa fa-solid fa-star ms-1" style={{ color: "#ffc107" }}></i>
+                                                                    <i className="fa fa-solid fa-star-half ms-1" style={{ color: "#ffc107" }}></i> */}
+                                                                    {
+                                                                        Array.from({ length: h.rating }).map((r, index) => {
+                                                                            return index + 1 < h.rating - 1 ?
+                                                                                <i className="fa fa-solid fa-star ms-1" style={{ color: "#ffc107" }} key={index}></i>
+                                                                                : <i key={index} className={`fa fa-solid ms-1 ${Number.isInteger(h.rating) ? 'fa-star' : 'fa-star-half'}`} style={{ color: "#ffc107" }}></i>
+                                                                        })
+                                                                    }
+                                                                    {h.rating}
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                </div>
-                                            </div>
 
-                                            <div className="d-lg-flex d-block align-items-center justify-content-between pt-3">
-                                                <a href="#" className="btn mb-lg-0 mb-2 hospital-primarybtn">View Details</a>
-                                                <a href="#" className="btn mb-lg-0 mb-3 hospital-secondarybtn">Appointment</a>
-                                            </div>
-                                        </div>
-
-
-
-                                    </div>
-                                </div>
-
-                                <div className="col-md-4 mb-4">
-                                    <div className="custom-hospital-top-card">
-                                        <div className="hospital-img">
-                                            <a href="#"><img src="/img/hospital2.jpg" alt="" className="img-fluid w-100" /></a>
-                                        </div>
-                                        <div className="hospital-content">
-                                            <ul>
-                                                <li className="hospital-icon-custom"> KIMSHEALTH Hospital Nagercoil </li>
-                                                <li className="location-icon-custom"> Behind Arulanandh Floorings , TVM Main Road, P.O, Vetturimadam, Tamil Nadu 629003</li>
-                                                <li className="telephone-icon-custom"> 0471 471 1000</li>
-                                            </ul>
-                                            <div className="d-lg-flex d-block align-items-center justify-content-between py-2 " style={{borderBottom: "1px solid #fff"}}>
-                                                <div className="hospital-content mb-lg-0 mb-3 p-0">
-                                                    <ul>
-                                                        <li className="mb-0 send-custom-icon"> Get Direction</li>
-                                                    </ul>
-                                                </div>
-                                                <div className="d-flex align-items-center">
-                                                    <img src="/img/google.png" alt="Google Logo" className="me-2" />
-                                                        <div className="star-rating" data-rating="4.7">
-                                                            <i className="fa fa-solid fa-star ms-1" style={{color: "#ffc107"}}></i>
-                                                            <i className="fa fa-solid fa-star ms-1" style={{color: "#ffc107"}}></i>
-                                                            <i className="fa fa-solid fa-star ms-1" style={{color: "#ffc107"}}></i>
-                                                            <i className="fa fa-solid fa-star ms-1" style={{color: "#ffc107"}}></i>
-                                                            <i className="fa fa-solid fa-star-half ms-1" style={{color: "#ffc107"}}></i>
-                                                            4.5
+                                                        <div className="d-lg-flex d-block align-items-center justify-content-between pt-3">
+                                                            <a href={baseURL + "/hospital/" + h.slug} className="btn mb-lg-0 mb-2 hospital-primarybtn">View Details</a>
+                                                            <a href={baseURL + "/book-an-appointment"} className="btn mb-lg-0 mb-3 hospital-secondarybtn">Appointment</a>
                                                         </div>
+                                                    </div>
                                                 </div>
                                             </div>
 
-                                            <div className="d-lg-flex d-block align-items-center justify-content-between pt-3">
-                                                <a href="#" className="btn mb-lg-0 mb-2 hospital-primarybtn">View Details</a>
-                                                <a href="#" className="btn mb-lg-0 mb-3 hospital-secondarybtn">Appointment</a>
-                                            </div>
-                                        </div>
-
-
-
-                                    </div>
-                                </div>
-
-                                <div className="col-md-4 mb-4">
-                                    <div className="custom-hospital-top-card">
-                                        <div className="hospital-img">
-                                            <a href="#"><img src="/img/hospital3.jpg" alt="" className="img-fluid w-100" /></a>
-                                        </div>
-                                        <div className="hospital-content">
-                                            <ul>
-                                                <li className="hospital-icon-custom"> KIMSHEALTH Kottayam </li>
-                                                <li className="location-icon-custom"> Thoothutty Junction, Kudamaloor P.O, Kottayam – 686017, Kerala, India</li>
-                                                <li className="telephone-icon-custom"> 0471 471 1000</li>
-                                            </ul>
-                                            <div className="d-lg-flex d-block align-items-center justify-content-between py-2 " style={{borderBottom: "1px solid #fff"}}>
-                                                <div className="hospital-content mb-lg-0 mb-3 p-0">
-                                                    <ul>
-                                                        <li className="mb-0 send-custom-icon"> Get Direction</li>
-                                                    </ul>
-                                                </div>
-                                                <div className="d-flex align-items-center">
-                                                    <img src="/img/google.png" alt="Google Logo" className="me-2" />
-                                                        <div className="star-rating" data-rating="4.7">
-                                                            <i className="fa fa-solid fa-star ms-1" style={{color: "#ffc107"}}></i>
-                                                            <i className="fa fa-solid fa-star ms-1" style={{color: "#ffc107"}}></i>
-                                                            <i className="fa fa-solid fa-star ms-1" style={{color: "#ffc107"}}></i>
-                                                            <i className="fa fa-solid fa-star ms-1" style={{color: "#ffc107"}}></i>
-                                                            <i className="fa fa-solid fa-star-half ms-1" style={{color: "#ffc107"}}></i>
-                                                            4.5
-                                                        </div>
-                                                </div>
-                                            </div>
-
-                                            <div className="d-lg-flex d-block align-items-center justify-content-between pt-3">
-                                                <a href="#" className="btn mb-lg-0 mb-2 hospital-primarybtn">View Details</a>
-                                                <a href="#" className="btn mb-lg-0 mb-3 hospital-secondarybtn">Appointment</a>
-                                            </div>
-                                        </div>
-
-
-
-                                    </div>
-                                </div>
-
+                                            : null
+                                    })
+                                }
 
                             </div>
                         </div>
@@ -285,340 +201,119 @@ const Hospital = () => {
 
                             </div>
                             <div className="row">
+                                {
+                                    hospitals.map((h, index) => {
+                                        return index >= 5 && index <= 10 ?
+                                            <div className="col-md-4 mb-4" key={index}>
+                                                <div className="custom-hospital-top-card">
+                                                    <div className="hospital-img">
+                                                        <a href={baseURL + "/hospital/" + h.slug}>
+                                                            <img src={process.env.NEXT_PUBLIC_IMAGE_URL + h.featuredImage.url} alt="" className="img-fluid w-100" />
+                                                        </a>
+                                                    </div>
+                                                    <div className="hospital-content">
 
-                                <div className="col-md-4 mb-4">
-                                    <div className="custom-hospital-top-card">
-                                        <div className="hospital-img">
-                                            <a href="#"><img src="/img/hospital4.jpg" alt="" className="img-fluid w-100" /></a>
-                                        </div>
-                                        <div className="hospital-content">
-                                            <ul>
-                                                <li className="hospital-icon-custom"> KIMSHEALTH Cancer Center </li>
-                                                <li className="location-icon-custom"> KIMSHEALTH North, Anayara P.B 1 Trivandrum 695 029</li>
-                                                <li className="telephone-icon-custom"> 0471 471 1000</li>
-                                            </ul>
-                                            <div className="d-lg-flex d-block align-items-center justify-content-between py-2 " style={{borderBottom: "1px solid #fff"}}>
-                                                <div className="hospital-content mb-lg-0 mb-3 p-0">
-                                                    <ul>
-                                                        <li className="mb-0 send-custom-icon"> Get Direction</li>
-                                                    </ul>
-                                                </div>
-                                                <div className="d-flex align-items-center">
-                                                    <img src="/img/google.png" alt="Google Logo" className="me-2" />
-                                                        <div className="star-rating" data-rating="4.7">
-                                                            <i className="fa fa-solid fa-star ms-1" style={{color: "#ffc107"}}></i>
-                                                            <i className="fa fa-solid fa-star ms-1" style={{color: "#ffc107"}}></i>
-                                                            <i className="fa fa-solid fa-star ms-1" style={{color: "#ffc107"}}></i>
-                                                            <i className="fa fa-solid fa-star ms-1" style={{color: "#ffc107"}}></i>
-                                                            <i className="fa fa-solid fa-star-half ms-1" style={{color: "#ffc107"}}></i>
-                                                            4.5
+                                                        <ul>
+                                                            <li className="hospital-icon-custom">{h.title}</li>
+                                                            <li className="location-icon-custom">{h.address}</li>
+                                                            <li className="telephone-icon-custom">{h.contactNo}</li>
+                                                        </ul>
+                                                        <div className="d-lg-flex d-block align-items-center justify-content-between py-2 " style={{ borderBottom: "1px solid #fff" }}>
+                                                            <div className="hospital-content mb-lg-0 mb-3 p-0">
+                                                                <ul>
+                                                                    <li className="mb-0 send-custom-icon">
+                                                                        <a href={h.mapURL} target='_blank'>Get Direction</a>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                            <div className="d-flex align-items-center">
+                                                                <img src="/img/google.png" alt="Google Logo" className="me-2" />
+                                                                <div className="star-rating" data-rating="4.7">
+                                                                    {/* <i className="fa fa-solid fa-star ms-1" style={{ color: "#ffc107" }}></i>
+                                                                    <i className="fa fa-solid fa-star ms-1" style={{ color: "#ffc107" }}></i>
+                                                                    <i className="fa fa-solid fa-star ms-1" style={{ color: "#ffc107" }}></i>
+                                                                    <i className="fa fa-solid fa-star ms-1" style={{ color: "#ffc107" }}></i>
+                                                                    <i className="fa fa-solid fa-star-half ms-1" style={{ color: "#ffc107" }}></i> */}
+                                                                    {
+                                                                        Array.from({ length: h.rating }).map((r, index) => {
+                                                                            return index + 1 < h.rating - 1 ?
+                                                                                <i className="fa fa-solid fa-star ms-1" style={{ color: "#ffc107" }} key={index}></i>
+                                                                                : <i key={index} className={`fa fa-solid ms-1 ${Number.isInteger(h.rating) ? 'fa-star' : 'fa-star-half'}`} style={{ color: "#ffc107" }}></i>
+                                                                        })
+                                                                    }
+                                                                    {h.rating}
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                </div>
-                                            </div>
 
-                                            <div className="d-lg-flex d-block align-items-center justify-content-between pt-3">
-                                                <a href="#" className="btn mb-lg-0 mb-2 hospital-primarybtn">View Details</a>
-                                                <a href="#" className="btn mb-lg-0 mb-3 hospital-secondarybtn">Appointment</a>
-                                            </div>
-                                        </div>
-
-
-
-                                    </div>
-                                </div>
-
-                                <div className="col-md-4 mb-4">
-                                    <div className="custom-hospital-top-card">
-                                        <div className="hospital-img">
-                                            <a href="#"><img src="/img/hospital4.jpg" alt="" className="img-fluid w-100" /></a>
-                                        </div>
-                                        <div className="hospital-content">
-                                            <ul>
-                                                <li className="hospital-icon-custom"> KIMSHEALTH Medical Centre, Kuravankonam </li>
-                                                <li className="location-icon-custom"> P.B.No.1, Anayara P.O, Trivandrum – 695029, Kerala, India</li>
-                                                <li className="telephone-icon-custom"> 0471 471 1000</li>
-                                            </ul>
-                                            <div className="d-lg-flex d-block align-items-center justify-content-between py-2 " style={{borderBottom: "1px solid #fff"}}>
-                                                <div className="hospital-content mb-lg-0 mb-3 p-0">
-                                                    <ul>
-                                                        <li className="mb-0 send-custom-icon"> Get Direction</li>
-                                                    </ul>
-                                                </div>
-                                                <div className="d-flex align-items-center">
-                                                    <img src="/img/google.png" alt="Google Logo" className="me-2" />
-                                                        <div className="star-rating" data-rating="4.7">
-                                                            <i className="fa fa-solid fa-star ms-1" style={{color: "#ffc107"}}></i>
-                                                            <i className="fa fa-solid fa-star ms-1" style={{color: "#ffc107"}}></i>
-                                                            <i className="fa fa-solid fa-star ms-1" style={{color: "#ffc107"}}></i>
-                                                            <i className="fa fa-solid fa-star ms-1" style={{color: "#ffc107"}}></i>
-                                                            <i className="fa fa-solid fa-star-half ms-1" style={{color: "#ffc107"}}></i>
-                                                            4.5
+                                                        <div className="d-lg-flex d-block align-items-center justify-content-between pt-3">
+                                                            <a href={baseURL + "/hospital/" + h.slug} className="btn mb-lg-0 mb-2 hospital-primarybtn">View Details</a>
+                                                            <a href={baseURL + "/book-an-appointment"} className="btn mb-lg-0 mb-3 hospital-secondarybtn">Appointment</a>
                                                         </div>
+                                                    </div>
                                                 </div>
                                             </div>
 
-                                            <div className="d-lg-flex d-block align-items-center justify-content-between pt-3">
-                                                <a href="#" className="btn mb-lg-0 mb-2 hospital-primarybtn">View Details</a>
-                                                <a href="#" className="btn mb-lg-0 mb-3 hospital-secondarybtn">Appointment</a>
-                                            </div>
-                                        </div>
+                                            : null
+                                    })
+                                }
 
+                                {
+                                    hospitals.map((h, index) => {
+                                        return index >= 11 && index <= 12 ?
+                                            <div className="col-md-6 mb-4" key={index}>
+                                                <div className="custom-hospital-top-card">
+                                                    <div className="hospital-img">
+                                                        <a href={baseURL + "/hospital/" + h.slug}>
+                                                            <img src={process.env.NEXT_PUBLIC_IMAGE_URL + h.featuredImage.url} alt="" className="img-fluid w-100" />
+                                                        </a>
+                                                    </div>
+                                                    <div className="hospital-content">
 
-
-                                    </div>
-                                </div>
-
-                                <div className="col-md-4 mb-4">
-                                    <div className="custom-hospital-top-card">
-                                        <div className="hospital-img">
-                                            <a href="#"><img src="/img/hospital4.jpg" alt="" className="img-fluid w-100" /></a>
-                                        </div>
-                                        <div className="hospital-content">
-                                            <ul>
-                                                <li className="hospital-icon-custom"> KIMSHEALTH Medical Centre Kamaleswaram </li>
-                                                <li className="location-icon-custom"> SMH Complex, Opp Kamaleshwaram Govt. HSS, Manacaud P.O.,Trivandrum 695009, Kerala, India</li>
-                                                <li className="telephone-icon-custom"> 0471 471 1000</li>
-                                            </ul>
-                                            <div className="d-lg-flex d-block align-items-center justify-content-between py-2 " style={{borderBottom: "1px solid #fff"}}>
-                                                <div className="hospital-content mb-lg-0 mb-3 p-0">
-                                                    <ul>
-                                                        <li className="mb-0 send-custom-icon"> Get Direction</li>
-                                                    </ul>
-                                                </div>
-                                                <div className="d-flex align-items-center">
-                                                    <img src="/img/google.png" alt="Google Logo" className="me-2" />
-                                                        <div className="star-rating" data-rating="4.7">
-                                                            <i className="fa fa-solid fa-star ms-1" style={{color: "#ffc107"}}></i>
-                                                            <i className="fa fa-solid fa-star ms-1" style={{color: "#ffc107"}}></i>
-                                                            <i className="fa fa-solid fa-star ms-1" style={{color: "#ffc107"}}></i>
-                                                            <i className="fa fa-solid fa-star ms-1" style={{color: "#ffc107"}}></i>
-                                                            <i className="fa fa-solid fa-star-half ms-1" style={{color: "#ffc107"}}></i>
-                                                            4.5
+                                                        <ul>
+                                                            <li className="hospital-icon-custom">{h.title}</li>
+                                                            <li className="location-icon-custom">{h.address}</li>
+                                                            <li className="telephone-icon-custom">{h.contactNo}</li>
+                                                        </ul>
+                                                        <div className="d-lg-flex d-block align-items-center justify-content-between py-2 " style={{ borderBottom: "1px solid #fff" }}>
+                                                            <div className="hospital-content mb-lg-0 mb-3 p-0">
+                                                                <ul>
+                                                                    <li className="mb-0 send-custom-icon">
+                                                                        <a href={h.mapURL} target='_blank'>Get Direction</a>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                            <div className="d-flex align-items-center">
+                                                                <img src="/img/google.png" alt="Google Logo" className="me-2" />
+                                                                <div className="star-rating" data-rating="4.7">
+                                                                    {/* <i className="fa fa-solid fa-star ms-1" style={{ color: "#ffc107" }}></i>
+                                                                    <i className="fa fa-solid fa-star ms-1" style={{ color: "#ffc107" }}></i>
+                                                                    <i className="fa fa-solid fa-star ms-1" style={{ color: "#ffc107" }}></i>
+                                                                    <i className="fa fa-solid fa-star ms-1" style={{ color: "#ffc107" }}></i>
+                                                                    <i className="fa fa-solid fa-star-half ms-1" style={{ color: "#ffc107" }}></i> */}
+                                                                    {
+                                                                        Array.from({ length: h.rating }).map((r, index) => {
+                                                                            return index + 1 < h.rating - 1 ?
+                                                                                <i className="fa fa-solid fa-star ms-1" style={{ color: "#ffc107" }} key={index}></i>
+                                                                                : <i key={index} className={`fa fa-solid ms-1 ${Number.isInteger(h.rating) ? 'fa-star' : 'fa-star-half'}`} style={{ color: "#ffc107" }}></i>
+                                                                        })
+                                                                    }
+                                                                    {h.rating}
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                </div>
-                                            </div>
 
-                                            <div className="d-lg-flex d-block align-items-center justify-content-between pt-3">
-                                                <a href="#" className="btn mb-lg-0 mb-2 hospital-primarybtn">View Details</a>
-                                                <a href="#" className="btn mb-lg-0 mb-3 hospital-secondarybtn">Appointment</a>
-                                            </div>
-                                        </div>
-
-
-
-                                    </div>
-                                </div>
-
-                                <div className="col-md-4 mb-4">
-                                    <div className="custom-hospital-top-card">
-                                        <div className="hospital-img">
-                                            <a href="#"><img src="/img/hospital4.jpg" alt="" className="img-fluid w-100" /></a>
-                                        </div>
-                                        <div className="hospital-content">
-                                            <ul>
-                                                <li className="hospital-icon-custom"> KIMSHEALTH Medical Centre, Pothencode</li>
-                                                <li className="location-icon-custom"> Ground Floor, Sun Plaza, Santhigiri Ashram Road, Pothencode, Kerala 695584</li>
-                                                <li className="telephone-icon-custom"> 0471 471 1000</li>
-                                            </ul>
-                                            <div className="d-lg-flex d-block align-items-center justify-content-between py-2 " style={{borderBottom: "1px solid #fff"}}>
-                                                <div className="hospital-content mb-lg-0 mb-3 p-0">
-                                                    <ul>
-                                                        <li className="mb-0 send-custom-icon"> Get Direction</li>
-                                                    </ul>
-                                                </div>
-                                                <div className="d-flex align-items-center">
-                                                    <img src="/img/google.png" alt="Google Logo" className="me-2" />
-                                                        <div className="star-rating" data-rating="4.7">
-                                                            <i className="fa fa-solid fa-star ms-1" style={{color: "#ffc107"}}></i>
-                                                            <i className="fa fa-solid fa-star ms-1" style={{color: "#ffc107"}}></i>
-                                                            <i className="fa fa-solid fa-star ms-1" style={{color: "#ffc107"}}></i>
-                                                            <i className="fa fa-solid fa-star ms-1" style={{color: "#ffc107"}}></i>
-                                                            <i className="fa fa-solid fa-star-half ms-1" style={{color: "#ffc107"}}></i>
-                                                            4.5
+                                                        <div className="d-lg-flex d-block align-items-center justify-content-between pt-3">
+                                                            <a href={baseURL + "/hospital/" + h.slug} className="btn mb-lg-0 mb-2 hospital-primarybtn">View Details</a>
+                                                            <a href={baseURL + "/book-an-appointment"} className="btn mb-lg-0 mb-3 hospital-secondarybtn">Appointment</a>
                                                         </div>
+                                                    </div>
                                                 </div>
                                             </div>
 
-                                            <div className="d-lg-flex d-block align-items-center justify-content-between pt-3">
-                                                <a href="#" className="btn mb-lg-0 mb-2 hospital-primarybtn">View Details</a>
-                                                <a href="#" className="btn mb-lg-0 mb-3 hospital-secondarybtn">Appointment</a>
-                                            </div>
-                                        </div>
-
-
-
-                                    </div>
-                                </div>
-
-                                <div className="col-md-4 mb-4">
-                                    <div className="custom-hospital-top-card">
-                                        <div className="hospital-img">
-                                            <a href="#"><img src="/img/hospital4.jpg" alt="" className="img-fluid w-100" /></a>
-                                        </div>
-                                        <div className="hospital-content">
-                                            <ul>
-                                                <li className="hospital-icon-custom"> KIMSHEALTH Medical Centre, Attingal</li>
-                                                <li className="location-icon-custom"> P.B.No.1, Anayara P.O, Trivandrum – 695029, Kerala, India</li>
-                                                <li className="telephone-icon-custom"> 0471 471 1000</li>
-                                            </ul>
-                                            <div className="d-lg-flex d-block align-items-center justify-content-between py-2 " style={{borderBottom: "1px solid #fff"}}>
-                                                <div className="hospital-content mb-lg-0 mb-3 p-0">
-                                                    <ul>
-                                                        <li className="mb-0 send-custom-icon"> Get Direction</li>
-                                                    </ul>
-                                                </div>
-                                                <div className="d-flex align-items-center">
-                                                    <img src="/img/google.png" alt="Google Logo" className="me-2" />
-                                                        <div className="star-rating" data-rating="4.7">
-                                                            <i className="fa fa-solid fa-star ms-1" style={{color: "#ffc107"}}></i>
-                                                            <i className="fa fa-solid fa-star ms-1" style={{color: "#ffc107"}}></i>
-                                                            <i className="fa fa-solid fa-star ms-1" style={{color: "#ffc107"}}></i>
-                                                            <i className="fa fa-solid fa-star ms-1" style={{color: "#ffc107"}}></i>
-                                                            <i className="fa fa-solid fa-star-half ms-1" style={{color: "#ffc107"}}></i>
-                                                            4.5
-                                                        </div>
-                                                </div>
-                                            </div>
-
-                                            <div className="d-lg-flex d-block align-items-center justify-content-between pt-3">
-                                                <a href="#" className="btn mb-lg-0 mb-2 hospital-primarybtn">View Details</a>
-                                                <a href="#" className="btn mb-lg-0 mb-3 hospital-secondarybtn">Appointment</a>
-                                            </div>
-                                        </div>
-
-
-
-                                    </div>
-                                </div>
-
-                                <div className="col-md-4 mb-4">
-                                    <div className="custom-hospital-top-card">
-                                        <div className="hospital-img">
-                                            <a href="#"><img src="/img/hospital4.jpg" alt="" className="img-fluid w-100" /></a>
-                                        </div>
-                                        <div className="hospital-content">
-                                            <ul>
-                                                <li className="hospital-icon-custom"> KIMSHEALTH Medical Centre, Ayoor</li>
-                                                <li className="location-icon-custom"> KIMSHEALTH Medical Centre, Ayoor Ayoor PO, Kollam, Kerala. Pin- 691533</li>
-                                                <li className="telephone-icon-custom"> 0471 471 1000</li>
-                                            </ul>
-                                            <div className="d-lg-flex d-block align-items-center justify-content-between py-2 " style={{borderBottom: "1px solid #fff"}}>
-                                                <div className="hospital-content mb-lg-0 mb-3 p-0">
-                                                    <ul>
-                                                        <li className="mb-0 send-custom-icon"> Get Direction</li>
-                                                    </ul>
-                                                </div>
-                                                <div className="d-flex align-items-center">
-                                                    <img src="/img/google.png" alt="Google Logo" className="me-2" />
-                                                        <div className="star-rating" data-rating="4.7">
-                                                            <i className="fa fa-solid fa-star ms-1" style={{color: "#ffc107"}}></i>
-                                                            <i className="fa fa-solid fa-star ms-1" style={{color: "#ffc107"}}></i>
-                                                            <i className="fa fa-solid fa-star ms-1" style={{color: "#ffc107"}}></i>
-                                                            <i className="fa fa-solid fa-star ms-1" style={{color: "#ffc107"}}></i>
-                                                            <i className="fa fa-solid fa-star-half ms-1" style={{color: "#ffc107"}}></i>
-                                                            4.5
-                                                        </div>
-                                                </div>
-                                            </div>
-
-                                            <div className="d-lg-flex d-block align-items-center justify-content-between pt-3">
-                                                <a href="#" className="btn mb-lg-0 mb-2 hospital-primarybtn">View Details</a>
-                                                <a href="#" className="btn mb-lg-0 mb-3 hospital-secondarybtn">Appointment</a>
-                                            </div>
-                                        </div>
-
-
-
-                                    </div>
-                                </div>
-
-
-
-                                <div className="col-md-6 mb-4">
-
-                                    <div className="custom-hospital-top-card">
-                                        <div className="hospital-img">
-                                            <a href="#"><img src="/img/hospital5.jpg" alt="" className="img-fluid w-100" /></a>
-                                        </div>
-                                        <div className="hospital-content">
-                                            <ul>
-                                                <li className="hospital-icon-custom">
-                                                    KIMSHEALTH Medical Centre, Vattiyoorkavu</li>
-                                                <li className="location-icon-custom address-half-col"> Zahra Centre, Ground Floor, Near State Bank
-                                                    of India, Vattiyoorkavu</li>
-                                                <li className="telephone-icon-custom"> 0471 471 1000</li>
-                                            </ul>
-                                            <div className="d-lg-flex d-block align-items-center justify-content-between py-2 " style={{borderBottom: "1px solid #fff"}}>
-                                                <div className="hospital-content mb-lg-0 mb-3 p-0">
-                                                    <ul>
-                                                        <li className="mb-0 send-custom-icon"> Get Direction</li>
-                                                    </ul>
-                                                </div>
-                                                <div className="d-flex align-items-center">
-                                                    <img src="/img/google.png" alt="Google Logo" className="me-2" />
-                                                        <div className="star-rating" data-rating="4.7">
-                                                            <i className="fa fa-solid fa-star ms-1" style={{color: "#ffc107"}}></i>
-                                                            <i className="fa fa-solid fa-star ms-1" style={{color: "#ffc107"}}></i>
-                                                            <i className="fa fa-solid fa-star ms-1" style={{color: "#ffc107"}}></i>
-                                                            <i className="fa fa-solid fa-star ms-1" style={{color: "#ffc107"}}></i>
-                                                            <i className="fa fa-solid fa-star-half ms-1" style={{color: "#ffc107"}}></i>
-                                                            4.5
-                                                        </div>
-                                                </div>
-                                            </div>
-
-                                            <div className="d-lg-flex d-block align-items-center justify-content-between pt-3">
-                                                <a href="#" className="btn mb-lg-0 mb-2 hospital-primarybtn">View Details</a>
-                                                <a href="#" className="btn mb-lg-0 mb-3 hospital-secondarybtn">Appointment</a>
-                                            </div>
-                                        </div>
-
-
-
-                                    </div>
-                                </div>
-
-
-                                <div className="col-md-6 mb-4">
-
-                                    <div className="custom-hospital-top-card">
-                                        <div className="hospital-img">
-                                            <a href="#"><img src="/img/hospital5.jpg" alt="" className="img-fluid w-100" /></a>
-                                        </div>
-                                        <div className="hospital-content">
-                                            <ul>
-                                                <li className="hospital-icon-custom">
-                                                    KIMSHEALTH Medical Centre, Varkala</li>
-                                                <li className="location-icon-custom address-half-col"> Ground Floor Fadil, Near Meva Convention Centre Palachira, Kallambalam, Palachira, Kerala 965143</li>
-                                                <li className="telephone-icon-custom"> 0471 471 1000</li>
-                                            </ul>
-                                            <div className="d-lg-flex d-block align-items-center justify-content-between py-2 " style={{borderBottom: "1px solid #fff"}}>
-                                                <div className="hospital-content mb-lg-0 mb-3 p-0">
-                                                    <ul>
-                                                        <li className="mb-0 send-custom-icon"> Get Direction</li>
-                                                    </ul>
-                                                </div>
-                                                <div className="d-flex align-items-center">
-                                                    <img src="/img/google.png" alt="Google Logo" className="me-2" />
-                                                        <div className="star-rating" data-rating="4.7">
-                                                            <i className="fa fa-solid fa-star ms-1" style={{color: "#ffc107"}}></i>
-                                                            <i className="fa fa-solid fa-star ms-1" style={{color: "#ffc107"}}></i>
-                                                            <i className="fa fa-solid fa-star ms-1" style={{color: "#ffc107"}}></i>
-                                                            <i className="fa fa-solid fa-star ms-1" style={{color: "#ffc107"}}></i>
-                                                            <i className="fa fa-solid fa-star-half ms-1" style={{color: "#ffc107"}}></i>
-                                                            4.5
-                                                        </div>
-                                                </div>
-                                            </div>
-
-                                            <div className="d-lg-flex d-block align-items-center justify-content-between pt-3">
-                                                <a href="#" className="btn mb-lg-0 mb-2 hospital-primarybtn">View Details</a>
-                                                <a href="#" className="btn mb-lg-0 mb-3 hospital-secondarybtn">Appointment</a>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
+                                            : null
+                                    })
+                                }
 
                             </div>
                         </div>

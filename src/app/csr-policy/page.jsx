@@ -1,13 +1,15 @@
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import { getStaticPageContent } from '../lib/getStaticPageContent';
+import getStaticText from '../lib/getStaticTextServer';
+import Form1 from '@/components/Forms/Form1';
 
 const CsrPolicy = async () => {
     const field = "populate[0]=pageContent&populate[1]=pageContent.bannerItem&populate[2]=pageContent.bannerItem.bannerImageDesktop&populate[3]=pageContent.bannerItem.bannerImageMobile&populate[4]=metaSection";
-
     const data = await getStaticPageContent("csr-policy", field);
     const pageContent = data?.data[0]?.pageContent;
     const pageMeta = data?.data[0]?.metaSection;
+    const statictText = await getStaticText()
 
 
     return (
@@ -27,7 +29,7 @@ const CsrPolicy = async () => {
                                                     <div className="col-12 px-0">
                                                         <ul className="breadcrumb mb-0">
                                                             <li>
-                                                                <a href="/">Home</a>
+                                                                <a href="/">{statictText['Home']}</a>
                                                             </li>
                                                             <li className="active"> {pageContent[0]?.title} </li>
                                                         </ul>
@@ -61,7 +63,7 @@ const CsrPolicy = async () => {
                                                     <div className="col-12">
                                                         <ul className="breadcrumb mb-0">
                                                             <li>
-                                                                <a href="/">Home</a>
+                                                                <a href="/">{statictText['Home']}</a>
                                                             </li>
                                                             <li className="active"> {pageContent[0]?.title} </li>
                                                         </ul>
@@ -195,36 +197,12 @@ const CsrPolicy = async () => {
                                             </div>
                                         </div>
                                     </section>
-
-
-
                                 </div>
 
                                 <div className="col-md-4">
                                     <div className="association-left-col">
                                         <div className="association-form-card mb-5">
-                                            <h3>Request a Call Back</h3>
-                                            <form action="">
-                                                <div className="row">
-                                                    <div className="col-md-12 mb-3">
-                                                        <input type="text" className="form-control" placeholder="Name" name="name" />
-                                                    </div>
-                                                    <div className="col-md-12 mb-3">
-                                                        <input type="text" className="form-control"
-                                                            placeholder="Enter 10 Digit Mobile Number" name="name" />
-                                                    </div>
-                                                    <div className="col-md-12 mb-3">
-                                                        <textarea className="form-control" placeholder="Message"
-                                                            id="floatingTextarea"></textarea>
-                                                    </div>
-                                                    <div className="col-md-12 mb-3 text-center">
-                                                        <button
-                                                            className="btn mb-lg-0 mb-2 hospital-primarybtn px-5 py-2">Submit</button>
-                                                    </div>
-                                                </div>
-                                            </form>
-
-
+                                            <Form1 title={"Request a Call Back"} />
                                         </div>
                                         <h4>{pageContent[4].title}</h4>
                                         {/* <p><strong>CSR Desk, KIMSHEALTH P.B. No. 1, Anayara Trivandrum – 695029 Kerala –

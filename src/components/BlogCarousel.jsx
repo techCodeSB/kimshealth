@@ -1,7 +1,19 @@
 'use client'
-import React from 'react'
+
+import getStaticText from "@/helper/getStaticText";
+import { useEffect, useState } from "react";
 
 const BlogCarousel = ({ dataSet }) => {
+    const [staticTexts, setStaticTexts] = useState({});
+
+
+    useEffect(() => {
+        const fetchTexts = async () => {
+            setStaticTexts({ ...await getStaticText() })
+        };
+
+        fetchTexts();
+    }, []);
 
     return (
         <>
@@ -16,7 +28,7 @@ const BlogCarousel = ({ dataSet }) => {
                         <div className="col-md-2 col-4">
                             <div className="over-all-btn text-end">
                                 <a href={dataSet.buttonURL}>
-                                    {dataSet.buttonText}
+                                    {staticTexts[dataSet.buttonText]}
                                     <span>
                                         <img src="/img/slider-right-arrow.svg" className="img-fluid" alt="" />
                                     </span>
@@ -46,7 +58,7 @@ const BlogCarousel = ({ dataSet }) => {
                                             </div>
                                             <div className="main-btn">
                                                 <a href={dataSet.baseUrl + "/blog/" + blog.slug}>
-                                                    Read More <span><i className="fa-solid fa-arrow-right"></i></span>
+                                                    {staticTexts['Read More']} <span><i className="fa-solid fa-arrow-right"></i></span>
                                                 </a>
                                             </div>
                                         </div>
@@ -97,7 +109,7 @@ const BlogCarousel = ({ dataSet }) => {
                                                                 <strong>{blog.doctor[0].name}</strong>
                                                             </div>
                                                             <div className="main-btn mt-lg-0 mt-1">
-                                                                <a href="#">Read More <span><i
+                                                                <a href="#">{staticTexts['Read More']}<span><i
                                                                     className="fa-solid fa-arrow-right"></i></span></a>
                                                             </div>
                                                         </div>

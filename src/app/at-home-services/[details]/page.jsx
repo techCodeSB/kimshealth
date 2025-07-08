@@ -1,7 +1,9 @@
 import { getBaseUrl } from '@/app/lib/getBaseUrl';
 import homeServices from '@/app/lib/getHomeServices';
+import getStaticText from '@/app/lib/getStaticTextServer';
 import testimonialData from '@/app/lib/getTestimonial';
 import Footer from '@/components/Footer';
+import Form1 from '@/components/Forms/Form1';
 import Header from '@/components/Header';
 import TestimonialSection from '@/components/TestimonialSection';
 import { marked } from 'marked';
@@ -11,6 +13,7 @@ const HomeServiceDetails = async ({ params }) => {
     const basePath = await getBaseUrl();
     const data = await homeServices.getSingleHomeService(params.details);
     const homeServiceData = await homeServices.getAll(10);
+    const staticTexts = await getStaticText()
     
     const testimonialDataSet = {
         sectionTitle: data.testimonialSection.title,
@@ -35,10 +38,10 @@ const HomeServiceDetails = async ({ params }) => {
                                                     <div className="col-12 px-0">
                                                         <ul className="breadcrumb mb-0">
                                                             <li>
-                                                                <a href="/">Home</a>
+                                                                <a href="/">{staticTexts['Home']}</a>
                                                             </li>
                                                             <li>
-                                                                <a href={basePath + "/at-home-services"}>At Home Services</a>
+                                                                <a href={basePath + "/at-home-services"}>{staticTexts['At Home Services']}</a>
                                                             </li>
                                                             <li className="active"> {data.title} </li>
                                                         </ul>
@@ -56,7 +59,7 @@ const HomeServiceDetails = async ({ params }) => {
                                                             {data.contactEmail}</a></li>
                                                     </ul>
                                                     <a href="#" className="hospital-primarybtn"> RS. {data.price} /- </a>
-                                                    <a href="#" className="hospital-primarybtn"> Book Now</a>
+                                                    <a href="#" className="hospital-primarybtn">{staticTexts['Book Now']}</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -85,10 +88,10 @@ const HomeServiceDetails = async ({ params }) => {
                                                     <div className="col-12 px-0">
                                                         <ul className="breadcrumb mb-0">
                                                             <li>
-                                                                <a href="/">Home</a>
+                                                                <a href="/">{staticTexts['Home']}</a>
                                                             </li>
                                                             <li>
-                                                                <a href={basePath + "/at-home-services"}>At Home Services</a>
+                                                                <a href={basePath + "/at-home-services"}>{staticTexts['At Home Services']}</a>
                                                             </li>
                                                             <li className="active"> {data.title} </li>
                                                         </ul>
@@ -115,7 +118,7 @@ const HomeServiceDetails = async ({ params }) => {
                                                         {data.contactEmail}</a></li>
                                                 </ul>
                                                 <a href="#" className="hospital-primarybtn"> RS. {data.price} /- </a>
-                                                <a href="#" className="hospital-primarybtn"> Book Now</a>
+                                                <a href="#" className="hospital-primarybtn"> {staticTexts['Book Now']}</a>
                                             </div>
 
                                         </div>
@@ -143,25 +146,7 @@ const HomeServiceDetails = async ({ params }) => {
                                 </div>
                                 <div className="col-md-4">
                                     <div className="association-form-card mb-0">
-                                        <h3>GET A CALLBACK FROM OUR HEALTH ADVISOR</h3>
-                                        <form action="">
-                                            <div className="row">
-                                                <div className="col-md-12 mb-3">
-                                                    <input type="text" className="form-control" placeholder="Name" name="name" />
-                                                </div>
-                                                <div className="col-md-12 mb-3">
-                                                    <input type="text" className="form-control"
-                                                        placeholder="Enter 10 Digit Mobile Number" name="name" />
-                                                </div>
-                                                <div className="col-md-12 mb-3">
-                                                    <textarea className="form-control" placeholder="Message"
-                                                        id="floatingTextarea"></textarea>
-                                                </div>
-                                                <div className="col-md-12 mb-3 text-center">
-                                                    <button className="btn mb-lg-0 mb-2 hospital-primarybtn px-5 py-2">Submit</button>
-                                                </div>
-                                            </div>
-                                        </form>
+                                        <Form1 title={"GET A CALLBACK FROM OUR HEALTH ADVISOR"}/>
                                     </div>
                                 </div>
                             </div>
@@ -204,7 +189,7 @@ const HomeServiceDetails = async ({ params }) => {
                                 </div>
                                 <div className="col-md-2 col-4">
                                     <div className="over-all-btn text-end">
-                                        <a href="#">View All <span><img src="/img/slider-right-arrow.svg" className="img-fluid"
+                                        <a href="#">{staticTexts['View All']} <span><img src="/img/slider-right-arrow.svg" className="img-fluid"
                                             alt="" /></span></a>
                                     </div>
                                 </div>
@@ -223,7 +208,7 @@ const HomeServiceDetails = async ({ params }) => {
                                                     <p>{h.shortDetails}</p>
                                                     <div className="main-btn">
                                                         <a href={basePath + "/at-home-services/" + h.slug}>
-                                                            Read More <span><i className="fa-solid fa-arrow-right"></i></span>
+                                                            {staticTexts['Read More']} <span><i className="fa-solid fa-arrow-right"></i></span>
                                                         </a>
                                                     </div>
                                                 </div>

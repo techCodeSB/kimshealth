@@ -1,6 +1,20 @@
 "use client"
 
+import getStaticText from "@/helper/getStaticText";
+import { useEffect, useState } from "react";
+
 const TestimonialSection = ({ dataSet }) => {
+    const [staticTexts, setStaticTexts] = useState({});
+
+    useEffect(() => {
+        const fetchTexts = async () => {
+            setStaticTexts({ ...await getStaticText() })
+        };
+
+        fetchTexts();
+    }, []);
+
+
     return (
         <>
             <section className="section d-lg-block d-none testimonial-section overflow-hidden">
@@ -13,7 +27,7 @@ const TestimonialSection = ({ dataSet }) => {
                         </div>
                         <div className="col-md-2 col-4">
                             <div className="over-all-btn text-end">
-                                <a href={dataSet.buttonURL}>{dataSet.buttonText}
+                                <a href={dataSet.buttonURL}>{staticTexts[dataSet.buttonText]}
                                     <span><img src="/img/slider-right-arrow.svg" className="img-fluid"
                                         alt="" /></span></a>
                             </div>
@@ -29,7 +43,7 @@ const TestimonialSection = ({ dataSet }) => {
                                         <div className="col-md-3">
                                             <div className="overflow-hidden">
                                                 <a href={dataSet.baseUrl + "/testimonial/" + t.slug}>
-                                                    <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${t.thumbnailImage.url}`} alt="" className="img-fluid w-100" />
+                                                    <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${t.thumbnailImage?.url}`} alt="" className="img-fluid w-100" />
                                                 </a>
                                             </div>
                                         </div>
@@ -37,14 +51,14 @@ const TestimonialSection = ({ dataSet }) => {
                                             <div className="testi-rightbox">
                                                 <h3>{t.title}</h3>
                                                 <p>{`${t.shortDetails.slice(0, 80)}...`}
-                                                    <a href={dataSet.baseUrl + "/testimonial/" + t.slug}> Watch Video</a></p>
+                                                    <a href={dataSet.baseUrl + "/testimonial/" + t.slug}>{staticTexts['Watch Video']}</a></p>
 
                                                 <div className="d-flex align-items-center justify-content-between mt-3">
                                                     <div className="doctor-name">
-                                                        <p><span><img src="/img/doctor.png" className="img-fluid" alt="" /></span> {t.doctor.name} </p>
+                                                        <p><span><img src="/img/doctor.png" className="img-fluid" alt="" /></span> {t.doctor?.name} </p>
                                                     </div>
                                                     <div className="doctor-catagory">
-                                                        <p>{t.specialities[0].title}</p>
+                                                        <p>{t.specialities[0]?.title}</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -89,10 +103,10 @@ const TestimonialSection = ({ dataSet }) => {
 
                                         <div className="d-block mt-lg-3 mt-2">
                                             <div className="doctor-name mb-1">
-                                                <p>{t.doctor.name}</p>
+                                                <p>{t.doctor?.name}</p>
                                             </div>
                                             <div className="doctor-catagory">
-                                                <p>{t.specialities[0].title}</p>
+                                                <p>{t.specialities[0]?.title}</p>
                                             </div>
                                         </div>
                                     </div>

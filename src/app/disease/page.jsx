@@ -1,8 +1,10 @@
 import Footer from '@/components/Footer'
 import Header from '@/components/Header';
 import React from 'react'
+import getStaticText from '../lib/getStaticTextServer';
 
-const page = () => {
+const Disease = async () => {
+    const staticText = await getStaticText();
     return (
         <>
             <Header />
@@ -19,7 +21,7 @@ const page = () => {
                             <div className="col-12">
                                 <ul className="breadcrumb mb-0">
                                     <li>
-                                        <a href="index.php">Home</a>
+                                        <a href="/">{staticText['Home']}</a>
                                     </li>
                                     <li className="active"> Conditions / Diseases </li>
                                 </ul>
@@ -646,7 +648,7 @@ const page = () => {
                                     <div className="key-master-book-appointment-btn mb-1">
                                         <div className="key-master-book-appointment-content">
                                             <img src="img/doctor.svg" alt="" className="img-fluid" />
-                                            <h5> Find a Doctor</h5>
+                                            <h5> {staticText['Find a Doctor']}</h5>
                                         </div>
 
                                     </div>
@@ -656,16 +658,15 @@ const page = () => {
                                     <div className="key-master-book-appointment-btn mb-1">
                                         <div className="key-master-book-appointment-content">
                                             <img src="img/calender.svg" alt="" className="img-fluid" />
-                                            <h5> Book an Appointment</h5>
+                                            <h5>{staticText['Book An Appointment']}</h5>
                                         </div>
-
                                     </div>
                                 </a>
 
                                 <a href="#">
                                     <div className="key-master-help-btn">
                                         <div className="key-master-book-appointment-content">
-                                            <h5> Need Help Making An Appointment?</h5>
+                                            <h5>{staticText['Need Help Making an Appointment?']}</h5>
                                         </div>
 
                                     </div>
@@ -673,7 +674,7 @@ const page = () => {
                                 <a href="tel:+914712941400">
                                     <div className="key-master-call-btn">
                                         <div className="key-master-book-appointment-content text-center">
-                                            <h5> Please Call</h5>
+                                            <h5> {staticText['Please Call']}</h5>
                                             <h4><i className="fa-solid fa-phone"></i> +91 471 294 1400</h4>
                                         </div>
 
@@ -691,4 +692,4 @@ const page = () => {
     )
 }
 
-export default page;
+export default Disease;

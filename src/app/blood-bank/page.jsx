@@ -2,11 +2,13 @@ import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 import React from 'react';
 import { getStaticPageContent } from '../lib/getStaticPageContent';
+import getStaticText from '../lib/getStaticTextServer';
 
 const BloodBank = async () => {
     const data = await getStaticPageContent("blood-bank");
     const pageContent = data?.data[0]?.pageContent;
     const pageMeta = data?.data[0]?.metaSection;
+    const staticText = await getStaticText();
 
 
     return (
@@ -25,7 +27,7 @@ const BloodBank = async () => {
                                 <div className="col-12">
                                     <ul className="breadcrumb mb-0">
                                         <li>
-                                            <a href="/">Home</a>
+                                            <a href="/">{staticText['Home']}</a>
                                         </li>
                                         <li className="active"> {pageContent[0]?.title}</li>
                                     </ul>

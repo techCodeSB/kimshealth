@@ -1,25 +1,18 @@
 "use client"
+import formatDate from "@/app/lib/formatDate";
+import getStaticText from "@/helper/getStaticText";
+import { useEffect, useState } from "react";
 
 const WallframeSection = ({ dataSet }) => {
-    function formatDate(dateString) {
-        const date = new Date(dateString);
-        const day = date.getDate();
-        const month = date.toLocaleString('default', { month: 'long' }); // "July"
-        const year = date.getFullYear();
+   const [staticTexts, setStaticTexts] = useState({});
 
-        // Add ordinal suffix
-        const getOrdinal = (n) => {
-            if (n > 3 && n < 21) return n + 'th';
-            switch (n % 10) {
-                case 1: return n + 'st';
-                case 2: return n + 'nd';
-                case 3: return n + 'rd';
-                default: return n + 'th';
-            }
+    useEffect(() => {
+        const fetchTexts = async () => {
+            setStaticTexts({ ...await getStaticText() })
         };
 
-        return `${getOrdinal(day)} ${month} ${year}`;
-    }
+        fetchTexts();
+    }, []);
     
     return (
         <>
@@ -34,7 +27,7 @@ const WallframeSection = ({ dataSet }) => {
                         <div className="col-md-2 col-4">
                             <div className="over-all-btn text-end">
                                 <a href={dataSet.buttonURL}>
-                                    {dataSet.buttonText} <span><img src="/img/slider-right-arrow.svg" className="img-fluid"
+                                    {staticTexts[dataSet.buttonText]} <span><img src="/img/slider-right-arrow.svg" className="img-fluid"
                                         alt="" /></span>
                                 </a>
                             </div>
@@ -58,7 +51,7 @@ const WallframeSection = ({ dataSet }) => {
                                     <div className="col-xl-7 col-lg-7 col-md-7 col-6 my-auto">
 
                                         <div className="frame-right-col" data-aos="slide-left">
-                                            <h5>Date: {formatDate(a.date)}</h5>
+                                            <h5>{staticTexts['Date']}: {formatDate(a.date)}</h5>
                                             <h2>{a.title}</h2>
                                             <p>{a.shortDetails}</p>
                                             <p className="d-lg-block d-none">{a.details.slice(0, 120)}</p>

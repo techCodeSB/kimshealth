@@ -1,6 +1,19 @@
 "use client"
 
+import getStaticText from "@/helper/getStaticText";
+import { useEffect, useState } from "react";
+
 const ExpertCarousel = ({ dataSet }) => {
+    const [staticTexts, setStaticTexts] = useState({});
+
+    useEffect(() => {
+        const fetchTexts = async () => {
+            setStaticTexts({ ...await getStaticText() })
+        };
+
+        fetchTexts();
+    }, []);
+
     return (
         <>
             <section className="section expert-section">
@@ -13,7 +26,7 @@ const ExpertCarousel = ({ dataSet }) => {
                         </div>
                         <div className="col-md-2  col-4">
                             <div className="over-all-btn text-end">
-                                <a href={dataSet.buttonURL}>{dataSet.buttonText}
+                                <a href={dataSet.buttonURL}>{staticTexts[dataSet.buttonText]}
                                     <span>
                                         <img src="/img/slider-right-arrow.svg" className="img-fluid" alt="" />
                                     </span>
@@ -40,17 +53,16 @@ const ExpertCarousel = ({ dataSet }) => {
                                             <p>{d.doctorDesignation}</p>
                                             <h5>{d.specialities[0].title}</h5>
                                             <div className="from-btn">
-                                                <a href="#" className="btn">Appointment</a>
+                                                <a href="#" className="btn">{staticTexts['Appointment']}</a>
                                             </div>
                                         </div>
                                     </div>
                                     <div className="main-btn  text-lg-center text-start ms-lg-0 ms-2 mt-2">
-                                        <a href={dataSet.baseUrl + "/doctor/" + d.slug}>View Profile</a>
+                                        <a href={dataSet.baseUrl + "/doctor/" + d.slug}>{staticTexts['View Profile']}</a>
                                     </div>
                                 </div>
                             })
                         }
-
 
                     </div>
                 </div>

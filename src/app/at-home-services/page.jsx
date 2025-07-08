@@ -7,6 +7,7 @@ import { getBaseUrl } from '../lib/getBaseUrl';
 import testimonialData from '../lib/getTestimonial';
 import blogData from '../lib/getBlog';
 import homeServices from '../lib/getHomeServices';
+import getStaticText from '../lib/getStaticTextServer';
 
 
 const HomeServices = async () => {
@@ -15,6 +16,8 @@ const HomeServices = async () => {
     const pageContent = data?.data[0]?.pageContent;
     const pageMeta = data?.data[0]?.metaSection;
     const homeServiceData = await homeServices.getAll();
+    let staticTexts = await getStaticText();
+
 
     const testimonialDataSet = {
         sectionTitle: pageContent[2]?.title,
@@ -46,7 +49,7 @@ const HomeServices = async () => {
                                 <div className="col-12">
                                     <ul className="breadcrumb mb-0">
                                         <li>
-                                            <a href="/">Home</a>
+                                            <a href="/">{staticTexts['Home']}</a>
                                         </li>
                                         <li className="active"> {pageContent[0].title} </li>
                                     </ul>
@@ -65,7 +68,7 @@ const HomeServices = async () => {
                                         <h5>{pageContent[1].title}</h5>
                                         <p>{pageContent[1].subTitle}</p>
                                         <div className="main-btn">
-                                            <a href="#">Watch Video <span><i className="fa-solid fa-arrow-right"></i></span></a>
+                                            <a href="#">{staticTexts['Watch Video']} <span><i className="fa-solid fa-arrow-right"></i></span></a>
                                         </div>
                                     </div>
                                 </div>
@@ -92,7 +95,7 @@ const HomeServices = async () => {
                                                     <p>{h.shortDetails}</p>
                                                     <div className="main-btn text-center">
                                                         <a href={basePath+"/at-home-services/"+h.slug}>
-                                                            Read More <span><i className="fa-solid fa-arrow-right"></i></span>
+                                                            {staticTexts['Read More']} <span><i className="fa-solid fa-arrow-right"></i></span>
                                                         </a>
                                                     </div>
                                                 </div>
