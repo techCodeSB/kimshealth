@@ -1,7 +1,7 @@
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import React from 'react'
-import { getStaticPageContent } from '../lib/getStaticPageContent';
+import { getStaticPageContent } from '@/app/lib/getStaticPageContent';
 
 const AmbulanceServices = async () => {
     const field = "populate[0]=pageContent&populate[1]=pageContent.bannerItem&populate[2]=pageContent.bannerItem.bannerImageDesktop&populate[3]=pageContent.bannerItem.bannerImageMobile&populate[4]=metaSection";

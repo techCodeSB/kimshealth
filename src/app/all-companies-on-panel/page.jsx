@@ -1,7 +1,7 @@
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import React from 'react'
-import { getStaticPageContent } from '../lib/getStaticPageContent';
+import { getStaticPageContent } from '@/app/lib/getStaticPageContent';
 
 const AllCompaniesPanel = async () => {
     const field = "populate[0]=pageContent&populate[1]=pageContent.logoSlider&populate[2]=pageContent.logoSlider.image&populate[3]=metaSection";

@@ -1,6 +1,6 @@
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
-import { getStaticPageContent } from '../lib/getStaticPageContent';
+import { getStaticPageContent } from '@/app/lib/getStaticPageContent';
 
 const BookAnAppoinment = async () => {
     const data = await getStaticPageContent("book-an-appointment");

@@ -1,12 +1,12 @@
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import React from 'react'
-import { getBaseUrl } from '../lib/getBaseUrl';
-import { getStaticPageContent } from '../lib/getStaticPageContent';
-import getSpecialityData from '../lib/getSpeciality';
-import procedureData from '../lib/getProcedure';
+import { getBaseUrl } from '@/app/lib/getBaseUrl';
+import { getStaticPageContent } from '@/app/lib/getStaticPageContent';
+import getSpecialityData from '@/app/lib/getSpeciality';
+import procedureData from '@/app/lib/getProcedure';
 import TreamentSidebar from '@/components/TreamentSidebar';
-import getStaticText from '../lib/getStaticTextServer';
+import getStaticText from '@/app/lib/getStaticTextServer';
 
 
 const Speciality = async () => {

@@ -1,8 +1,8 @@
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 import React from 'react';
-import { getStaticPageContent } from '../lib/getStaticPageContent';
-import getStaticText from '../lib/getStaticTextServer';
+import { getStaticPageContent } from '@/app/lib/getStaticPageContent';
+import getStaticText from '@/app/lib/getStaticTextServer';
 
 const BloodBank = async () => {
     const data = await getStaticPageContent("blood-bank");

@@ -2,7 +2,7 @@ import ExpertCarousel from '@/components/ExpertCarousel'
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import React from 'react'
-import { getStaticPageContent } from '../lib/getStaticPageContent'
+import { getStaticPageContent } from '@/app/lib/getStaticPageContent'
 
 const TravelClinic = async () => {
     const data = await getStaticPageContent("travel-clinic");

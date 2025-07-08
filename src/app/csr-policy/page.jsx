@@ -1,7 +1,7 @@
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
-import { getStaticPageContent } from '../lib/getStaticPageContent';
-import getStaticText from '../lib/getStaticTextServer';
+import { getStaticPageContent } from '@/app/lib/getStaticPageContent';
+import getStaticText from '@/app/lib/getStaticTextServer';
 import Form1 from '@/components/Forms/Form1';
 
 const CsrPolicy = async () => {

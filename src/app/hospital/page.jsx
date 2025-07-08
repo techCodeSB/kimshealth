@@ -1,10 +1,10 @@
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import React from 'react';
-import { getBaseUrl } from '../lib/getBaseUrl';
-import { getStaticPageContent } from '../lib/getStaticPageContent';
-import hospitalData from '../lib/getHospital';
-import getStaticText from '../lib/getStaticTextServer';
+import { getBaseUrl } from '@/app/lib/getBaseUrl';
+import { getStaticPageContent } from '@/app/lib/getStaticPageContent';
+import hospitalData from '@/app/lib/getHospital';
+import getStaticText from '@/app/lib/getStaticTextServer';
 
 
 const Hospital = async () => {

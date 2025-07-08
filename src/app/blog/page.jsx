@@ -1,11 +1,11 @@
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
-import { getBaseUrl } from '../lib/getBaseUrl';
-import { getStaticPageContent } from '../lib/getStaticPageContent';
-import blogData from '../lib/getBlog';
-import getSpecialityData from '../lib/getSpeciality';
-import formatDate from '../lib/formatDate';
-import getStaticText from '../lib/getStaticTextServer';
+import { getBaseUrl } from '@/app/lib/getBaseUrl';
+import { getStaticPageContent } from '@/app/lib/getStaticPageContent';
+import blogData from '@/app/lib/getBlog';
+import getSpecialityData from '@/app/lib/getSpeciality';
+import formatDate from '@/app/lib/formatDate';
+import getStaticText from '@/app/lib/getStaticTextServer';
 
 const Blog = async () => {
     const basePath = await getBaseUrl()

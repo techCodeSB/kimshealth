@@ -1,9 +1,9 @@
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import React from 'react'
-import testimonialData from '../lib/getTestimonial'
-import { getBaseUrl } from '../lib/getBaseUrl'
-import { getStaticPageContent } from '../lib/getStaticPageContent';
+import testimonialData from '@/app/lib/getTestimonial'
+import { getBaseUrl } from '@/app/lib/getBaseUrl'
+import { getStaticPageContent } from '@/app/lib/getStaticPageContent';
 
 
 

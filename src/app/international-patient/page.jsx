@@ -3,7 +3,7 @@ import Footer from '@/components/Footer'
 import FromDoctor from '@/components/FromDoctor'
 import Header from '@/components/Header'
 import TestimonialSection from '@/components/TestimonialSection'
-import { getStaticPageContent } from '../lib/getStaticPageContent'
+import { getStaticPageContent } from '@/app/lib/getStaticPageContent'
 
 const InternationalPage = async () => {
 

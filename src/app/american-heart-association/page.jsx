@@ -3,7 +3,7 @@ import Form1 from '@/components/Forms/Form1'
 import Header from '@/components/Header'
 import JournalCarousel from '@/components/JournalCarousel'
 import React from 'react'
-import getStaticText from '../lib/getStaticTextServer'
+import getStaticText from '@/app/lib/getStaticTextServer'
 
 const AmericanHeartAssoc = async () => {
     let staticTexts = await getStaticText();

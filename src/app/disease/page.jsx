@@ -1,7 +1,7 @@
 import Footer from '@/components/Footer'
 import Header from '@/components/Header';
 import React from 'react'
-import getStaticText from '../lib/getStaticTextServer';
+import getStaticText from '@/app/lib/getStaticTextServer';
 
 const Disease = async () => {
     const staticText = await getStaticText();

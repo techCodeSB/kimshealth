@@ -1,10 +1,10 @@
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import React from 'react'
-import doctorData from '../lib/getDoctor'
-import { getStaticPageContent } from '../lib/getStaticPageContent'
-import { getBaseUrl } from '../lib/getBaseUrl'
-import getStaticText from '../lib/getStaticTextServer'
+import doctorData from '@/app/lib/getDoctor'
+import { getStaticPageContent } from '@/app/lib/getStaticPageContent'
+import { getBaseUrl } from '@/app/lib/getBaseUrl'
+import getStaticText from '@/app/lib/getStaticTextServer'
 
 const Doctor = async () => {
     const baseURL = await getBaseUrl(true, true);

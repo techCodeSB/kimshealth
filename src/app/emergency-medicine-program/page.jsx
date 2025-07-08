@@ -1,9 +1,9 @@
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import React from 'react'
-import { getStaticPageContent } from '../lib/getStaticPageContent';
-import getStaticText from '../lib/getStaticTextServer';
-import { getBaseUrl } from '../lib/getBaseUrl';
+import { getStaticPageContent } from '@/app/lib/getStaticPageContent';
+import getStaticText from '@/app/lib/getStaticTextServer';
+import { getBaseUrl } from '@/app/lib/getBaseUrl';
 import Form1 from '@/components/Forms/Form1';
 
 const EmergencyMedicine = async () => {

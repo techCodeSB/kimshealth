@@ -1,8 +1,8 @@
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import React from 'react';
-import getStaticText from '../lib/getStaticTextServer';
-import { getBaseUrl } from '../lib/getBaseUrl';
+import getStaticText from '@/app/lib/getStaticTextServer';
+import { getBaseUrl } from '@/app/lib/getBaseUrl';
 
 const DoctoralCourse = async () => {
     const basePath = await getBaseUrl(true, true)

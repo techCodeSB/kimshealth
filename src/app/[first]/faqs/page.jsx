@@ -1,22 +1,26 @@
-import Footer from '@/components/Footer'
-import Header from '@/components/Header'
-import React from 'react'
-import { getStaticPageContent } from '../../lib/getStaticPageContent';
+import Footer from '@/components/Footer';
+import Header from '@/components/Header';
+import { getStaticPageContent } from '@/app/lib/getStaticPageContent';
+import getStaticText from '@/app/lib/getStaticTextServer';
+import { getBaseUrl } from '@/app/lib/getBaseUrl';
 
-const Faqs = async ({params}) => {
+
+const Faqs = async () => {
+    const basePath = await getBaseUrl(true, true);
     const data = await getStaticPageContent("faqs");
     const pageContent = data?.data[0]?.pageContent;
     const pageMeta = data?.data[0]?.metaSection;
+    const staticText = await getStaticText()
 
 
     return (
         <>
             <Header />
-            <div role="main" className="main">
+             <div role="main" className="main">
                 <div className="faq-main-page">
                     <div className="page-header">
                         <div className="container">
-                            <h2>{pageContent[0]?.title}</h2>
+                            <h2>{pageContent ? pageContent[0]?.title : null}</h2>
                         </div>
                     </div>
                     <section className="breadcrumb-wrapper py-2">
@@ -25,9 +29,9 @@ const Faqs = async ({params}) => {
                                 <div className="col-12">
                                     <ul className="breadcrumb mb-0">
                                         <li>
-                                            <a href="index.php">Home</a>
+                                            <a href={basePath+ "/"}>{staticText['Home']}</a>
                                         </li>
-                                        <li className="active"> FAQs</li>
+                                        <li className="active"> {pageContent ? pageContent[0]?.title : null}</li>
                                     </ul>
                                 </div>
                             </div>
@@ -63,22 +67,11 @@ const Faqs = async ({params}) => {
                             </div>
                         </div>
                     </section>
-
-
-
-
-
-
                 </div>
-
-
-
-
-
-            </div>
+            </div> 
             <Footer />
         </>
     )
 }
 
-export default Faqs;
+export default Faqs

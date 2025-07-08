@@ -7,16 +7,16 @@ import Header from '@/components/Header'
 import SocialMedia from '@/components/SocialMedia'
 import TestimonialSection from '@/components/TestimonialSection'
 import WallframeSection from '@/components/WallframeSection'
-import { getStaticPageContent } from './lib/getStaticPageContent'
-import doctorData from './lib/getDoctor'
-import { getBaseUrl } from './lib/getBaseUrl';
-import blogData from './lib/getBlog';
-import testimonialData from './lib/getTestimonial'
-import getSpecialityData from './lib/getSpeciality'
-import getAwardData from './lib/getAward'
-import doctorTalkData from './lib/getDoctorTalk'
-import hospitalData from './lib/getHospital'
-import staticPage from './lib/getStaticPage'
+import { getStaticPageContent } from '@/app/lib/getStaticPageContent'
+import doctorData from '@/app/lib/getDoctor'
+import { getBaseUrl } from '@/app/lib/getBaseUrl';
+import blogData from '@/app/lib/getBlog';
+import testimonialData from '@/app/lib/getTestimonial'
+import getSpecialityData from '@/app/lib/getSpeciality'
+import getAwardData from '@/app/lib/getAward'
+import doctorTalkData from '@/app/lib/getDoctorTalk'
+import hospitalData from '@/app/lib/getHospital'
+import staticPage from '@/app/lib/getStaticPage'
 
 
 

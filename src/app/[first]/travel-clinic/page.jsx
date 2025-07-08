@@ -1,8 +1,82 @@
-import TravelClinic from '@/app/travel-clinic/page'
+import ExpertCarousel from '@/components/ExpertCarousel'
+import Footer from '@/components/Footer'
+import Header from '@/components/Header'
 import React from 'react'
+import { getStaticPageContent } from '@/app/lib/getStaticPageContent'
 
-const page = () => {
-  return <TravelClinic/>
+const TravelClinic = async () => {
+    const data = await getStaticPageContent("travel-clinic");
+    const pageContent = data?.data[0]?.pageContent;
+    const pageMeta = data?.data[0]?.metaSection;
+
+
+    return (
+        <>
+            <Header />
+            <div role="main" className="main">
+                <div className="patients-and-visitors-main-page">
+                    <div className="page-header">
+                        <div className="container">
+                            <h2>{pageContent[0]?.title}</h2>
+                        </div>
+                    </div>
+                    <section className="breadcrumb-wrapper py-2">
+                        <div className="container">
+                            <div className="row">
+                                <div className="col-12">
+                                    <ul className="breadcrumb mb-0">
+                                        <li>
+                                            <a href="/">Home</a>
+                                        </li>
+                                        <li className="active"> {pageContent[0]?.title}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section className="section">
+                        <div className="container">
+                            <div className="main-heading main-list sub-heading">
+                                <h2>{pageContent[1]?.title}</h2>
+                                <div
+                                    dangerouslySetInnerHTML={{ __html: pageContent[1]?.details }}
+                                ></div>
+                            </div>
+                        </div>
+                    </section>
+                    <div className="line-divider"></div>
+                    <section className="section">
+                        <div className="container">
+                            <div className="main-heading main-list sub-heading">
+                                <h2>{pageContent[2]?.title}</h2>
+                                <div
+                                    dangerouslySetInnerHTML={{ __html: pageContent[2]?.details }}
+                                ></div>
+
+                            </div>
+                        </div>
+                    </section>
+
+                    <div className="line-divider"></div>
+                    <section className="section">
+                        <div className="container">
+                            <div className="main-heading main-list sub-heading">
+                                <h2>{pageContent[3]?.title}</h2>
+                                <div
+                                    dangerouslySetInnerHTML={{ __html: pageContent[3]?.details }}
+                                ></div>
+                            </div>
+                        </div>
+                    </section>
+                    <div className="line-divider"> </div>
+
+                    {/* <ExpertCarousel /> */}
+                </div>
+            </div>
+            <Footer />
+        </>
+    )
 }
 
-export default page
+export default TravelClinic

@@ -2,12 +2,12 @@ import BlogCarousel from '@/components/BlogCarousel';
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import TestimonialSection from '@/components/TestimonialSection';
-import { getStaticPageContent } from '../lib/getStaticPageContent';
-import { getBaseUrl } from '../lib/getBaseUrl';
-import testimonialData from '../lib/getTestimonial';
-import blogData from '../lib/getBlog';
-import homeServices from '../lib/getHomeServices';
-import getStaticText from '../lib/getStaticTextServer';
+import { getStaticPageContent } from '@/app/lib/getStaticPageContent';
+import { getBaseUrl } from '@/app/lib/getBaseUrl';
+import testimonialData from '@/app/lib/getTestimonial';
+import blogData from '@/app/lib/getBlog';
+import homeServices from '@/app/lib/getHomeServices';
+import getStaticText from '@/app/lib/getStaticTextServer';
 
 
 const HomeServices = async () => {
