@@ -152,10 +152,11 @@ const Header = () => {
 
                                                         for (let i = 0; i < speciality?.length; i++) {
                                                             const s = speciality[i];
+                                                            console.log("All Speciality -->", s)
                                                             const colIndex = Math.floor(i / perColumn);
                                                             columns[colIndex].push(
                                                                 <li key={i}>
-                                                                    <a href={basePath + "/speciality/" + s?.slug}>
+                                                                    <a href={basePath + "/speciality/" + s?.speciality.slug}>
                                                                         <span>
                                                                             <img src={s.iconImage ? process.env.NEXT_PUBLIC_IMAGE_URL + s.iconImage.url : "/img/no-image.jpg"} alt={s?.title} className="img-fluid" />
                                                                         </span>

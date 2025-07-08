@@ -1,17 +1,27 @@
 import { getBaseUrl } from '@/app/lib/getBaseUrl'
+import diseaseData from '@/app/lib/getDisease'
+import procedureData from '@/app/lib/getProcedure'
 import getSpecialityData from '@/app/lib/getSpeciality'
+import getStaticText from '@/app/lib/getStaticTextServer'
 import BlogCarousel from '@/components/BlogCarousel'
 import ExpertCarousel from '@/components/ExpertCarousel'
 import Footer from '@/components/Footer'
+import Form2 from '@/components/Forms/Form2'
 import FromDoctor from '@/components/FromDoctor'
 import Header from '@/components/Header'
 import TestimonialSection from '@/components/TestimonialSection'
+import WatchVideoButton from '@/components/WatchVideoButton'
+import { marked } from 'marked'
 import React from 'react'
 
 const SpecialityDetails = async ({ params }) => {
-    const baseUrl = await getBaseUrl();
+    const staticText = await getStaticText()
+    const baseUrl = await getBaseUrl(true, true);
+    const baseUrlLangOnly = await getBaseUrl(true, false)
     const data = await getSpecialityData.getSingleSpeciality(params.details);
-
+    const allProcedure = await procedureData.getAll(5)
+    const allDiseas = await diseaseData.getAll(10);
+    console.log(data)
 
     return (
         <>
@@ -41,38 +51,17 @@ const SpecialityDetails = async ({ params }) => {
                                             </div>
                                             <div className="details-banner pt-lg-5 pt-4">
                                                 <div className="details-heading">
-                                                    <h3>Have a query?</h3>
-                                                    <form action="" method="">
-                                                        <div className="row">
-                                                            <div className="col-xl-8 col-lg-8 col-md-8 col-12 mb-3">
-                                                                <input type="text" className="form-control border-0"
-                                                                    placeholder="Enter Your Name *" aria-label="Username"
-                                                                    aria-describedby="basic-addon1" />
-                                                            </div>
-                                                            <div className="col-xl-8 col-lg-8 col-md-8 col-12 mb-3">
-                                                                <input type="text" className="form-control border-0"
-                                                                    placeholder="Enter 10 Digit Mobile Number *"
-                                                                    aria-label="Username" aria-describedby="basic-addon1" />
-                                                            </div>
-                                                            <div className="col-xl-8 col-lg-8 col-md-8 col-12">
-                                                                <div className="from-btn">
-                                                                    <button type="button" className="btn">REQUEST A CALL BACK</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </form>
+                                                    <Form2 title={"Have a query?"} />
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
 
                                     <div className="col-md-6 details-proceduce-banner-right-col">
-                                        <img src="/img/details-banner.png" className="img-fluid details-banner-image" alt="" />
+                                        <img src={
+                                            data.pageBanner[0].bannerImageDesktop ? process.env.NEXT_PUBLIC_IMAGE_URL + data.pageBanner[0].bannerImageDesktop.url : "/img/no-image.jpg"}
+                                            className="img-fluid details-banner-image" alt={data.title} />
                                     </div>
-
-                                    {/* <!-- <div className="col-md-6">
-                                        <img src="/img/details-banner.png" alt="" className="img-fluid w-100" />
-                                    </div> --> */}
                                 </div>
                             </div>
                         </div>
@@ -98,41 +87,21 @@ const SpecialityDetails = async ({ params }) => {
                                                 </div>
                                             </div>
                                         </div>
-                                        <img src="/img/details-banner.png" className="img-fluid details-banner-image" alt="" />
+                                        <img src={
+                                            data.pageBanner[0].bannerImageDesktop?.url ? process.env.NEXT_PUBLIC_IMAGE_URL + data.pageBanner[0].bannerImageMobile?.url : "/img/no-image.jpg"}
+                                            className="img-fluid details-banner-image" alt={data.title} />
                                     </div>
                                     <div className="col-md-6 details-proceduce-banner-left-col">
                                         <div className="hospital-banner-container">
 
                                             <div className="details-banner pt-lg-5 pt-4">
                                                 <div className="details-heading">
-                                                    <h3>Have a query?</h3>
-                                                    <form action="" method="">
-                                                        <div className="row">
-                                                            <div className="col-xl-8 col-lg-8 col-md-8 col-12 mb-3">
-                                                                <input type="text" className="form-control border-0"
-                                                                    placeholder="Enter Your Name *" aria-label="Username"
-                                                                    aria-describedby="basic-addon1" />
-                                                            </div>
-                                                            <div className="col-xl-8 col-lg-8 col-md-8 col-12 mb-3">
-                                                                <input type="text" className="form-control border-0"
-                                                                    placeholder="Enter 10 Digit Mobile Number *"
-                                                                    aria-label="Username" aria-describedby="basic-addon1" />
-                                                            </div>
-                                                            <div className="col-xl-8 col-lg-8 col-md-8 col-12">
-                                                                <div className="from-btn">
-                                                                    <button type="button" className="btn">REQUEST A CALL BACK</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </form>
+                                                    <Form2 title={"Have a query?"} />
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
 
-                                    {/* <!-- <div className="col-md-6">
-                                        <img src="/img/details-banner.png" alt="" className="img-fluid w-100" />
-                                    </div> --> */}
                                 </div>
                             </div>
                         </div>
@@ -145,19 +114,17 @@ const SpecialityDetails = async ({ params }) => {
                                     <div className="main-heading sub-heading">
                                         <h2>{data.overviewSection.title}</h2>
                                     </div>
-                                    {
-                                        data.overviewSection.details.split("\n").map((p, _) => (
-                                            <p key={_}>{p}</p>
-                                        ))
-                                    }
+                                    <div dangerouslySetInnerHTML={{ __html: marked(data.overviewSection?.details || "") || "" }}>
+                                    </div>
                                 </div>
                                 <div className="col-md-5">
                                     <div className="details-right-col text-center">
-                                        <img src="/img/details-rightcol.jpg" alt="" className="img-fluid w-100" />
-                                        <h5>Cardiology at KIMSHEALTH</h5>
-                                        <p>The KIMSHEALTH Department of Cardiology is regarded . . . . </p>
+                                        <img src={
+                                            data.speciality?.featuredImage ? process.env.NEXT_PUBLIC_IMAGE_URL + data.speciality?.featuredImage.url : "/img/no-image.jpg"} alt="" className="img-fluid w-100" />
+                                        <h5>{data.overviewSection?.caption}</h5>
+                                        <p>{data.overviewSection?.shortDetails} </p>
                                         <div className="main-btn">
-                                            <a href="#">Watch Video <span><i className="fa-solid fa-arrow-right"></i></span></a>
+                                            <WatchVideoButton txt={"Watch Video"} id={data.overviewSection.videoId} />
                                         </div>
                                     </div>
                                 </div>
@@ -166,7 +133,6 @@ const SpecialityDetails = async ({ params }) => {
                     </section>
 
                     <div className="line-divider"> </div>
-
                     <section className="section"
                         style={{ background: "linear-gradient(180deg,rgba(255, 255, 255, 1) 45%, rgba(248, 248, 248, 1) 74%)" }}>
                         <div className="container">
@@ -181,40 +147,17 @@ const SpecialityDetails = async ({ params }) => {
                                                     treatment, and prevention of cardiovascular conditions.</p>
 
                                                 <div className="main-btn">
-                                                    <a href="#">Read More <span><i className="fa-solid fa-arrow-right"></i></span></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="col-md-4 mb-lg-0 mb-3">
-                                        <div className="details-card text-center">
-                                            <div className="card-content">
-                                                <h4>Cardiac Surgery</h4>
-                                                <p>Cardiac science studies the heart’s function, diseases, diagnostics, treatments,
-                                                    and
-                                                    technologies for maintaining cardiovascular health and performance.</p>
-
-                                                <div className="main-btn">
-                                                    <a href="#">Read More <span><i className="fa-solid fa-arrow-right"></i></span></a>
+                                                    <a href="#">{staticText['Read More']}<span><i className="fa-solid fa-arrow-right"></i></span></a>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div className="col-md-4 mb-lg-0 mb-3">
-                                        <div className="details-card text-center">
-                                            <div className="card-content">
-                                                <h4>Interventional Cardiology</h4>
-                                                <p>Interventional Cardiology employs minimally invasive procedures to diagnose and
-                                                    treat
-                                                    heart conditions, such as angioplasty and stent placement.</p>
+                                    {
 
-                                                <div className="main-btn">
-                                                    <a href="#">Read More <span><i className="fa-solid fa-arrow-right"></i></span></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    }
+
+
                                 </div>
                             </div>
 
@@ -257,194 +200,74 @@ const SpecialityDetails = async ({ params }) => {
                                         </div>
 
                                         <div className="col-md-4 mb-lg-0 mb-3">
-                                            <a href="#">
-                                                <div className="details-key-box">
-                                                    <div className="details-key-left-col">
-                                                        <h5>Coronary Artery Disease (CAD)</h5>
-                                                    </div>
-                                                    <div className="details-key-right-col">
-                                                        <span>C</span>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                            <a href="#">
-                                                <div className="details-key-box">
-                                                    <div className="details-key-left-col">
-                                                        <h5>Myocardial Infarction (Heart Attack)</h5>
-                                                    </div>
-                                                    <div className="details-key-right-col">
-                                                        <span>C</span>
-                                                    </div>
-                                                </div>
-                                            </a>
-
-                                            <a href="#">
-                                                <div className="details-key-box">
-                                                    <div className="details-key-left-col">
-                                                        <h5>Arrhythmias</h5>
-                                                    </div>
-                                                    <div className="details-key-right-col">
-                                                        <span>C</span>
-                                                    </div>
-                                                </div>
-                                            </a>
-
-                                            <a href="#">
-                                                <div className="details-key-box">
-                                                    <div className="details-key-left-col">
-                                                        <h5>Hypertension (High Blood Pressure)</h5>
-                                                    </div>
-                                                    <div className="details-key-right-col">
-                                                        <span>C</span>
-                                                    </div>
-                                                </div>
-                                            </a>
-
-                                            <a href="#">
-                                                <div className="details-key-box border-0">
-                                                    <div className="details-key-left-col">
-                                                        <h5>Valvular Heart Disease</h5>
-                                                    </div>
-                                                    <div className="details-key-right-col">
-                                                        <span>C</span>
-                                                    </div>
-                                                </div>
-                                            </a>
+                                            {
+                                                allDiseas.map((d, index) => {
+                                                    return index < 5 ? <a href={baseUrlLangOnly + "/diseases/" + d.diseases[0].slug} key={index}>
+                                                        <div className="details-key-box">
+                                                            <div className="details-key-left-col">
+                                                                <h5>{d.title}</h5>
+                                                            </div>
+                                                            <div className="details-key-right-col">
+                                                                <span>C</span>
+                                                            </div>
+                                                        </div>
+                                                    </a> : null
+                                                })
+                                            }
 
                                             <div className="over-all-btn text-start mt-3 ms-2 ps-1 d-lg-block d-none">
-                                                <a href="#">View all Diseases <span><img src="/img/slider-right-arrow.svg"
+                                                <a href={baseUrlLangOnly + "/disease"}>View all Diseases <span><img src="/img/slider-right-arrow.svg"
                                                     className="img-fluid" alt="" /></span></a>
                                             </div>
                                         </div>
 
 
                                         <div className="col-md-4 mb-lg-0 mb-3">
-                                            <a href="#">
-                                                <div className="details-key-box">
-                                                    <div className="details-key-left-col">
-                                                        <h5>Congenital Heart Disease</h5>
-                                                    </div>
-                                                    <div className="details-key-right-col">
-                                                        <span>C</span>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                            <a href="#">
-                                                <div className="details-key-box">
-                                                    <div className="details-key-left-col">
-                                                        <h5>Aortic Aneurysm</h5>
-                                                    </div>
-                                                    <div className="details-key-right-col">
-                                                        <span>C</span>
-                                                    </div>
-                                                </div>
-                                            </a>
-
-                                            <a href="#">
-                                                <div className="details-key-box">
-                                                    <div className="details-key-left-col">
-                                                        <h5>Cardiomyopathy</h5>
-                                                    </div>
-                                                    <div className="details-key-right-col">
-                                                        <span>C</span>
-                                                    </div>
-                                                </div>
-                                            </a>
-
-                                            <a href="#">
-                                                <div className="details-key-box">
-                                                    <div className="details-key-left-col">
-                                                        <h5>Pulmonary Embolism</h5>
-                                                    </div>
-                                                    <div className="details-key-right-col">
-                                                        <span>C</span>
-                                                    </div>
-                                                </div>
-                                            </a>
-
-                                            <a href="#">
-                                                <div className="details-key-box border-0">
-                                                    <div className="details-key-left-col">
-                                                        <h5>Stroke</h5>
-                                                    </div>
-                                                    <div className="details-key-right-col">
-                                                        <span>C</span>
-                                                    </div>
-                                                </div>
-                                            </a>
+                                            {
+                                                allDiseas.map((d, index) => {
+                                                    return index >= 5 && index < 10 ? <a href={baseUrlLangOnly + "/diseases/" + d.diseases[0].slug} key={index}>
+                                                        <div className="details-key-box">
+                                                            <div className="details-key-left-col">
+                                                                <h5>{d.title}</h5>
+                                                            </div>
+                                                            <div className="details-key-right-col">
+                                                                <span>C</span>
+                                                            </div>
+                                                        </div>
+                                                    </a> : null
+                                                })
+                                            }
                                         </div>
 
                                         <div className="over-all-btn text-start mb-3 ms-2 ps-1 d-lg-none d-block">
-                                            <a href="#">View all Diseases <span><img src="/img/slider-right-arrow.svg"
+                                            <a href={baseUrlLangOnly + "/disease"}>View all Diseases <span><img src="/img/slider-right-arrow.svg"
                                                 className="img-fluid" alt="" /></span></a>
                                         </div>
 
 
                                         <div className="col-md-4 mb-lg-0 mb-3">
-                                            <a href="#">
-                                                <div className="details-key-box">
-                                                    <div className="details-key-left-col">
-                                                        <h5>Angioplasty and Stenting</h5>
-                                                    </div>
-                                                    <div className="details-key-right-col">
-                                                        <span>T</span>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                            <a href="#">
-                                                <div className="details-key-box">
-                                                    <div className="details-key-left-col">
-                                                        <h5>Coronary Artery Bypass Grafting (CABG)</h5>
-                                                    </div>
-                                                    <div className="details-key-right-col">
-                                                        <span>T</span>
-                                                    </div>
-                                                </div>
-                                            </a>
-
-                                            <a href="#">
-                                                <div className="details-key-box">
-                                                    <div className="details-key-left-col">
-                                                        <h5>Heart Transplantation</h5>
-                                                    </div>
-                                                    <div className="details-key-right-col">
-                                                        <span>T</span>
-                                                    </div>
-                                                </div>
-                                            </a>
-
-                                            <a href="#">
-                                                <div className="details-key-box">
-                                                    <div className="details-key-left-col">
-                                                        <h5>Cardiac Catheterization</h5>
-                                                    </div>
-                                                    <div className="details-key-right-col">
-                                                        <span>T</span>
-                                                    </div>
-                                                </div>
-                                            </a>
-
-                                            <a href="#">
-                                                <div className="details-key-box border-0">
-                                                    <div className="details-key-left-col">
-                                                        <h5>Implantable Cardioverter Defibrillator (ICD)</h5>
-                                                    </div>
-                                                    <div className="details-key-right-col">
-                                                        <span>T</span>
-                                                    </div>
-                                                </div>
-                                            </a>
+                                            {
+                                                allProcedure.map((p, index) => {
+                                                    return <a href={baseUrlLangOnly + "/" + p.procedure.slug} key={index}>
+                                                        <div className="details-key-box">
+                                                            <div className="details-key-left-col">
+                                                                <h5>{p.title}</h5>
+                                                            </div>
+                                                            <div className="details-key-right-col">
+                                                                <span>T</span>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                })
+                                            }
 
                                             <div className="over-all-btn text-start mt-3 ms-2 ps-1">
-                                                <a href="#">View all Procedures <span><img src="/img/slider-right-arrow.svg"
+                                                <a href={baseUrlLangOnly + "/procedure"}>View all Procedures<span><img src="/img/slider-right-arrow.svg"
                                                     className="img-fluid" alt="" /></span></a>
                                             </div>
 
                                         </div>
                                     </div>
-
-
-
                                 </div>
                             </div>
                         </div>

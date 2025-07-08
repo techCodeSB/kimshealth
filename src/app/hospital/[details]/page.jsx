@@ -61,75 +61,6 @@ const HospitalDetails = async ({ params }) => {
         <>
             <Header />
             <div role="main" className="main">
-                {/* <!-- <section className="section details-page-before py-0">
-        <div className="procedures-details-page-header">
-            <div className="container-fluid px-0">
-                <div className="row">
-                    <div className="col-md-6 details-proceduce-banner-left-col">
-
-                        <div className="hospital-banner-container">
-                            <div className="breadcrumb-wrapper py-2 ps-2 ms-1">
-                                <div className="row">
-                                    <div className="col-12 px-0">
-                                        <ul className="breadcrumb mb-0">
-                                            <li>
-                                                <a href="index.php">Home</a>
-                                            </li>
-                                            <li>
-                                                <a href="hospital-master.php">Our Hospital</a>
-                                            </li>
-                                            <li className="active"> KIMSHEALTH Trivandrum </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="details-banner">
-                                <div className="details-heading">
-                                    <div className="hospital-content">
-                                        <ul>
-                                            <li className="hospital-icon-custom"> KIMSHEALTH Trivandrum </li>
-                                            <li className="location-icon-custom"> KIMSHEALTH, P.B.No.1, Anayara P.O, Trivandrum – 695029, Kerala, India</li>
-                                            <li className="telephone-icon-custom"><a href="tel:04714711000"> Appointment Number- 0471 471 1000</a></li>
-                                            <li className="send-custom-icon"><a href="#"> Get Direction</a></li>
-                                        </ul>
-                                        <div className="d-flex align-items-center">
-                                            <img src="/img/google.png" alt="Google Logo" className="me-2" />
-                                            <div className="star-rating" data-rating="4.7">
-                                                <i className="fa fa-solid fa-star ms-1" style={{color: "#ffc107"}}></i>
-                                                <i className="fa fa-solid fa-star ms-1" style={{color: "#ffc107"}}></i>
-                                                <i className="fa fa-solid fa-star ms-1" style={{color: "#ffc107"}}></i>
-                                                <i className="fa fa-solid fa-star ms-1" style={{ color: "#ffc107" }}></i>
-                                                <i className="fa fa-solid fa-star-half ms-1" style={{ color: "#ffc107" }}></i>
-                                                4.5
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="col-md-6 details-proceduce-banner-right-col">
-                        <div className="owl-carousel owl-theme hospital-details-slider">
-                            <div className="item">
-                                <img src="/img/hospital-details-img1.jpg" alt="" className="img-fluid w-100" />
-                            </div>
-                            <div className="item">
-                                <img src="/img/hospital-details-img1.jpg" alt="" className="img-fluid w-100" />
-                            </div>
-
-                            <div className="item">
-                                <img src="/img/hospital-details-img1.jpg" alt="" className="img-fluid w-100" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </section> --> */}
-
                 <section className="section pt-3 hospital-details-page-section d-lg-block  d-none">
                     <div className="container">
                         <div className="row">
@@ -292,8 +223,7 @@ const HospitalDetails = async ({ params }) => {
                                 <div className="col-xl-3 col-lg-3 col-md-3 col-12">
                                     <div className="from-btn">
                                         <a href={basePath + "/book-an-appointment"} className='btn'>
-                                            {/* Book An Appointment */}
-                                            {await getStaticText("Book An Appointment")}
+                                            Book An Appointment
                                         </a>
                                     </div>
                                 </div>

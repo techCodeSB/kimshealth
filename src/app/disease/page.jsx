@@ -2,9 +2,23 @@ import Footer from '@/components/Footer'
 import Header from '@/components/Header';
 import React from 'react'
 import getStaticText from '@/app/lib/getStaticTextServer';
+import { getBaseUrl } from '@/app/lib/getBaseUrl';
+import { getStaticPageContent } from '@/app/lib/getStaticPageContent';
+import diseaseData from '../lib/getDisease';
 
 const Disease = async () => {
     const staticText = await getStaticText();
+    const baseURL = await getBaseUrl(true, true);
+    const baseUrlOnlyLang = await getBaseUrl(true, false);
+    const fields = "populate[0]="
+    const data = await getStaticPageContent("disease");
+    const pageContent = data?.data[0]?.pageContent;
+    const pageMeta = data?.data[0]?.metaSection;
+
+    const getAllDisease = await diseaseData.getDisease();
+    console.log(getAllDisease);
+
+
     return (
         <>
             <Header />
@@ -12,7 +26,7 @@ const Disease = async () => {
             <div role="main" className="main">
                 <div className="page-header">
                     <div className="container">
-                        <h2>Conditions / Diseases</h2>
+                        <h2>{pageContent[0]?.title}</h2>
                     </div>
                 </div>
                 <section className="breadcrumb-wrapper py-2">
@@ -23,7 +37,7 @@ const Disease = async () => {
                                     <li>
                                         <a href="/">{staticText['Home']}</a>
                                     </li>
-                                    <li className="active"> Conditions / Diseases </li>
+                                    <li className="active"> {pageContent[0]?.title} </li>
                                 </ul>
                             </div>
                         </div>
@@ -34,15 +48,12 @@ const Disease = async () => {
                     <div className="container">
                         <div className="row">
                             <div className="col-md-9 mb-3">
-
                                 <div className="speciality-masterpage-card key-procedures-master-page">
-
                                     <div className="details-key-row">
                                         <div className="row justify-content-between">
                                             <div className="col-md-6 mb-2">
                                                 <form action="">
                                                     <div className="input-group p-0 my-lg-4 my-1 position-relative justify-content-center">
-
                                                         <select className="form-select diseases-page-search">
                                                             <option>Search for Conditions/Diseases</option>
                                                             <option value="1">One</option>
@@ -73,609 +84,82 @@ const Disease = async () => {
 
                                     <div className="row">
                                         <div className="col-md-6">
-                                            <div className="speciality-masterpage-card-content">
-                                                <a href="#">
-                                                    <div className="key-master-row">
-                                                        <div className="key-master-image">
-                                                            <img src="img/key-proce1.png" alt="" className="img-fluid" />
-                                                        </div>
-                                                        <div className="key-master-content">
-                                                            <h5>Coronary Artery Disease (CAD)</h5>
-                                                        </div>
+                                            {
+                                                getAllDisease.slice(0, getAllDisease.length / 2).map((d, index) => {
+                                                    return <div className="speciality-masterpage-card-content" key={index}>
+                                                        <a href={baseUrlOnlyLang +"/disease/"+ d.diseases[0]?.slug}>
+                                                            <div className="key-master-row">
+                                                                <div className="key-master-image">
+                                                                    <img src="img/key-proce1.png" alt="" className="img-fluid" />
+                                                                </div>
+                                                                <div className="key-master-content">
+                                                                    <h5>{d.title}</h5>
+                                                                </div>
+                                                            </div>
+                                                        </a>
                                                     </div>
-
-                                                </a>
-                                            </div>
-
-                                            <div className="speciality-masterpage-card-content">
-                                                <a href="#">
-                                                    <div className="key-master-row">
-                                                        <div className="key-master-image">
-                                                            <img src="img/key-proce2.png" alt="" className="img-fluid" />
-                                                        </div>
-                                                        <div className="key-master-content">
-                                                            <h5>Kidney Stones (Nephrolithiasis)</h5>
-                                                        </div>
-                                                    </div>
-
-                                                </a>
-                                            </div>
-
-                                            <div className="speciality-masterpage-card-content">
-                                                <a href="#">
-                                                    <div className="key-master-row">
-                                                        <div className="key-master-image">
-                                                            <img src="img/key-proce3.png" alt="" className="img-fluid" />
-                                                        </div>
-                                                        <div className="key-master-content">
-                                                            <h5>Nephrotic Syndrome</h5>
-                                                        </div>
-                                                    </div>
-
-                                                </a>
-                                            </div>
-
-                                            <div className="speciality-masterpage-card-content">
-                                                <a href="#">
-                                                    <div className="key-master-row">
-                                                        <div className="key-master-image">
-                                                            <img src="img/key-proce4.png" alt="" className="img-fluid" />
-                                                        </div>
-                                                        <div className="key-master-content">
-                                                            <h5>Esophagitis  </h5>
-                                                        </div>
-                                                    </div>
-
-                                                </a>
-                                            </div>
-                                            <div className="speciality-masterpage-card-content">
-                                                <a href="#">
-                                                    <div className="key-master-row">
-                                                        <div className="key-master-image">
-                                                            <img src="img/key-proce1.png" alt="" className="img-fluid" />
-                                                        </div>
-                                                        <div className="key-master-content">
-                                                            <h5>Coronary Artery Disease (CAD)</h5>
-                                                        </div>
-                                                    </div>
-
-                                                </a>
-                                            </div>
-
-                                            <div className="speciality-masterpage-card-content">
-                                                <a href="#">
-                                                    <div className="key-master-row">
-                                                        <div className="key-master-image">
-                                                            <img src="img/key-proce2.png" alt="" className="img-fluid" />
-                                                        </div>
-                                                        <div className="key-master-content">
-                                                            <h5>Kidney Stones (Nephrolithiasis)</h5>
-                                                        </div>
-                                                    </div>
-
-                                                </a>
-                                            </div>
-
-                                            <div className="speciality-masterpage-card-content">
-                                                <a href="#">
-                                                    <div className="key-master-row">
-                                                        <div className="key-master-image">
-                                                            <img src="img/key-proce3.png" alt="" className="img-fluid" />
-                                                        </div>
-                                                        <div className="key-master-content">
-                                                            <h5>Nephrotic Syndrome</h5>
-                                                        </div>
-                                                    </div>
-
-                                                </a>
-                                            </div>
-
-                                            <div className="speciality-masterpage-card-content">
-                                                <a href="#">
-                                                    <div className="key-master-row">
-                                                        <div className="key-master-image">
-                                                            <img src="img/key-proce4.png" alt="" className="img-fluid" />
-                                                        </div>
-                                                        <div className="key-master-content">
-                                                            <h5>Esophagitis  </h5>
-                                                        </div>
-                                                    </div>
-
-                                                </a>
-                                            </div>
-                                            <div className="speciality-masterpage-card-content">
-                                                <a href="#">
-                                                    <div className="key-master-row">
-                                                        <div className="key-master-image">
-                                                            <img src="img/key-proce1.png" alt="" className="img-fluid" />
-                                                        </div>
-                                                        <div className="key-master-content">
-                                                            <h5>Coronary Artery Disease (CAD)</h5>
-                                                        </div>
-                                                    </div>
-
-                                                </a>
-                                            </div>
-
-                                            <div className="speciality-masterpage-card-content">
-                                                <a href="#">
-                                                    <div className="key-master-row">
-                                                        <div className="key-master-image">
-                                                            <img src="img/key-proce2.png" alt="" className="img-fluid" />
-                                                        </div>
-                                                        <div className="key-master-content">
-                                                            <h5>Kidney Stones (Nephrolithiasis)</h5>
-                                                        </div>
-                                                    </div>
-
-                                                </a>
-                                            </div>
-
-                                            <div className="speciality-masterpage-card-content">
-                                                <a href="#">
-                                                    <div className="key-master-row">
-                                                        <div className="key-master-image">
-                                                            <img src="img/key-proce3.png" alt="" className="img-fluid" />
-                                                        </div>
-                                                        <div className="key-master-content">
-                                                            <h5>Nephrotic Syndrome</h5>
-                                                        </div>
-                                                    </div>
-
-                                                </a>
-                                            </div>
-
-                                            <div className="speciality-masterpage-card-content">
-                                                <a href="#">
-                                                    <div className="key-master-row">
-                                                        <div className="key-master-image">
-                                                            <img src="img/key-proce4.png" alt="" className="img-fluid" />
-                                                        </div>
-                                                        <div className="key-master-content">
-                                                            <h5>Esophagitis  </h5>
-                                                        </div>
-                                                    </div>
-
-                                                </a>
-                                            </div>
-                                            <div className="speciality-masterpage-card-content">
-                                                <a href="#">
-                                                    <div className="key-master-row">
-                                                        <div className="key-master-image">
-                                                            <img src="img/key-proce1.png" alt="" className="img-fluid" />
-                                                        </div>
-                                                        <div className="key-master-content">
-                                                            <h5>Coronary Artery Disease (CAD)</h5>
-                                                        </div>
-                                                    </div>
-
-                                                </a>
-                                            </div>
-
-                                            <div className="speciality-masterpage-card-content">
-                                                <a href="#">
-                                                    <div className="key-master-row">
-                                                        <div className="key-master-image">
-                                                            <img src="img/key-proce2.png" alt="" className="img-fluid" />
-                                                        </div>
-                                                        <div className="key-master-content">
-                                                            <h5>Kidney Stones (Nephrolithiasis)</h5>
-                                                        </div>
-                                                    </div>
-
-                                                </a>
-                                            </div>
-
-                                            <div className="speciality-masterpage-card-content">
-                                                <a href="#">
-                                                    <div className="key-master-row">
-                                                        <div className="key-master-image">
-                                                            <img src="img/key-proce3.png" alt="" className="img-fluid" />
-                                                        </div>
-                                                        <div className="key-master-content">
-                                                            <h5>Nephrotic Syndrome</h5>
-                                                        </div>
-                                                    </div>
-
-                                                </a>
-                                            </div>
-
-                                            <div className="speciality-masterpage-card-content">
-                                                <a href="#">
-                                                    <div className="key-master-row">
-                                                        <div className="key-master-image">
-                                                            <img src="img/key-proce4.png" alt="" className="img-fluid" />
-                                                        </div>
-                                                        <div className="key-master-content">
-                                                            <h5>Esophagitis  </h5>
-                                                        </div>
-                                                    </div>
-
-                                                </a>
-                                            </div>
-                                            <div className="speciality-masterpage-card-content">
-                                                <a href="#">
-                                                    <div className="key-master-row">
-                                                        <div className="key-master-image">
-                                                            <img src="img/key-proce1.png" alt="" className="img-fluid" />
-                                                        </div>
-                                                        <div className="key-master-content">
-                                                            <h5>Coronary Artery Disease (CAD)</h5>
-                                                        </div>
-                                                    </div>
-
-                                                </a>
-                                            </div>
-
-                                            <div className="speciality-masterpage-card-content">
-                                                <a href="#">
-                                                    <div className="key-master-row">
-                                                        <div className="key-master-image">
-                                                            <img src="img/key-proce2.png" alt="" className="img-fluid" />
-                                                        </div>
-                                                        <div className="key-master-content">
-                                                            <h5>Kidney Stones (Nephrolithiasis)</h5>
-                                                        </div>
-                                                    </div>
-
-                                                </a>
-                                            </div>
-
-                                            <div className="speciality-masterpage-card-content">
-                                                <a href="#">
-                                                    <div className="key-master-row">
-                                                        <div className="key-master-image">
-                                                            <img src="img/key-proce3.png" alt="" className="img-fluid" />
-                                                        </div>
-                                                        <div className="key-master-content">
-                                                            <h5>Nephrotic Syndrome</h5>
-                                                        </div>
-                                                    </div>
-
-                                                </a>
-                                            </div>
-
-                                            <div className="speciality-masterpage-card-content">
-                                                <a href="#">
-                                                    <div className="key-master-row">
-                                                        <div className="key-master-image">
-                                                            <img src="img/key-proce4.png" alt="" className="img-fluid" />
-                                                        </div>
-                                                        <div className="key-master-content">
-                                                            <h5>Esophagitis  </h5>
-                                                        </div>
-                                                    </div>
-
-                                                </a>
-                                            </div>
-
-
-
-
-
+                                                })
+                                            }
 
                                         </div>
 
                                         <div className="col-md-6">
-                                            <div className="speciality-masterpage-card-content">
-                                                <a href="#">
-                                                    <div className="key-master-row">
-                                                        <div className="key-master-image">
-                                                            <img src="img/key-proce1.png" alt="" className="img-fluid" />
-                                                        </div>
-                                                        <div className="key-master-content">
-                                                            <h5>Coronary Artery Disease (CAD)</h5>
-                                                        </div>
+                                            {
+                                               getAllDisease.slice(0, getAllDisease.length / 2).map((d, index) => {
+                                                    return <div className="speciality-masterpage-card-content" key={index}>
+                                                        <a href={baseUrlOnlyLang +"/disease/"+ d.diseases[0]?.slug}>
+                                                            <div className="key-master-row">
+                                                                <div className="key-master-image">
+                                                                    <img src="img/key-proce1.png" alt="" className="img-fluid" />
+                                                                </div>
+                                                                <div className="key-master-content">
+                                                                    <h5>{d.title}</h5>
+                                                                </div>
+                                                            </div>
+                                                        </a>
                                                     </div>
-
-                                                </a>
-                                            </div>
-
-                                            <div className="speciality-masterpage-card-content">
-                                                <a href="#">
-                                                    <div className="key-master-row">
-                                                        <div className="key-master-image">
-                                                            <img src="img/key-proce2.png" alt="" className="img-fluid" />
-                                                        </div>
-                                                        <div className="key-master-content">
-                                                            <h5>Kidney Stones (Nephrolithiasis)</h5>
-                                                        </div>
-                                                    </div>
-
-                                                </a>
-                                            </div>
-
-                                            <div className="speciality-masterpage-card-content">
-                                                <a href="#">
-                                                    <div className="key-master-row">
-                                                        <div className="key-master-image">
-                                                            <img src="img/key-proce3.png" alt="" className="img-fluid" />
-                                                        </div>
-                                                        <div className="key-master-content">
-                                                            <h5>Nephrotic Syndrome</h5>
-                                                        </div>
-                                                    </div>
-
-                                                </a>
-                                            </div>
-
-                                            <div className="speciality-masterpage-card-content">
-                                                <a href="#">
-                                                    <div className="key-master-row">
-                                                        <div className="key-master-image">
-                                                            <img src="img/key-proce4.png" alt="" className="img-fluid" />
-                                                        </div>
-                                                        <div className="key-master-content">
-                                                            <h5>Esophagitis  </h5>
-                                                        </div>
-                                                    </div>
-
-                                                </a>
-                                            </div>
-                                            <div className="speciality-masterpage-card-content">
-                                                <a href="#">
-                                                    <div className="key-master-row">
-                                                        <div className="key-master-image">
-                                                            <img src="img/key-proce1.png" alt="" className="img-fluid" />
-                                                        </div>
-                                                        <div className="key-master-content">
-                                                            <h5>Coronary Artery Disease (CAD)</h5>
-                                                        </div>
-                                                    </div>
-
-                                                </a>
-                                            </div>
-
-                                            <div className="speciality-masterpage-card-content">
-                                                <a href="#">
-                                                    <div className="key-master-row">
-                                                        <div className="key-master-image">
-                                                            <img src="img/key-proce2.png" alt="" className="img-fluid" />
-                                                        </div>
-                                                        <div className="key-master-content">
-                                                            <h5>Kidney Stones (Nephrolithiasis)</h5>
-                                                        </div>
-                                                    </div>
-
-                                                </a>
-                                            </div>
-
-                                            <div className="speciality-masterpage-card-content">
-                                                <a href="#">
-                                                    <div className="key-master-row">
-                                                        <div className="key-master-image">
-                                                            <img src="img/key-proce3.png" alt="" className="img-fluid" />
-                                                        </div>
-                                                        <div className="key-master-content">
-                                                            <h5>Nephrotic Syndrome</h5>
-                                                        </div>
-                                                    </div>
-
-                                                </a>
-                                            </div>
-
-                                            <div className="speciality-masterpage-card-content">
-                                                <a href="#">
-                                                    <div className="key-master-row">
-                                                        <div className="key-master-image">
-                                                            <img src="img/key-proce4.png" alt="" className="img-fluid" />
-                                                        </div>
-                                                        <div className="key-master-content">
-                                                            <h5>Esophagitis  </h5>
-                                                        </div>
-                                                    </div>
-
-                                                </a>
-                                            </div>
-                                            <div className="speciality-masterpage-card-content">
-                                                <a href="#">
-                                                    <div className="key-master-row">
-                                                        <div className="key-master-image">
-                                                            <img src="img/key-proce1.png" alt="" className="img-fluid" />
-                                                        </div>
-                                                        <div className="key-master-content">
-                                                            <h5>Coronary Artery Disease (CAD)</h5>
-                                                        </div>
-                                                    </div>
-
-                                                </a>
-                                            </div>
-
-                                            <div className="speciality-masterpage-card-content">
-                                                <a href="#">
-                                                    <div className="key-master-row">
-                                                        <div className="key-master-image">
-                                                            <img src="img/key-proce2.png" alt="" className="img-fluid" />
-                                                        </div>
-                                                        <div className="key-master-content">
-                                                            <h5>Kidney Stones (Nephrolithiasis)</h5>
-                                                        </div>
-                                                    </div>
-
-                                                </a>
-                                            </div>
-
-                                            <div className="speciality-masterpage-card-content">
-                                                <a href="#">
-                                                    <div className="key-master-row">
-                                                        <div className="key-master-image">
-                                                            <img src="img/key-proce3.png" alt="" className="img-fluid" />
-                                                        </div>
-                                                        <div className="key-master-content">
-                                                            <h5>Nephrotic Syndrome</h5>
-                                                        </div>
-                                                    </div>
-
-                                                </a>
-                                            </div>
-
-                                            <div className="speciality-masterpage-card-content">
-                                                <a href="#">
-                                                    <div className="key-master-row">
-                                                        <div className="key-master-image">
-                                                            <img src="img/key-proce4.png" alt="" className="img-fluid" />
-                                                        </div>
-                                                        <div className="key-master-content">
-                                                            <h5>Esophagitis  </h5>
-                                                        </div>
-                                                    </div>
-
-                                                </a>
-                                            </div>
-                                            <div className="speciality-masterpage-card-content">
-                                                <a href="#">
-                                                    <div className="key-master-row">
-                                                        <div className="key-master-image">
-                                                            <img src="img/key-proce1.png" alt="" className="img-fluid" />
-                                                        </div>
-                                                        <div className="key-master-content">
-                                                            <h5>Coronary Artery Disease (CAD)</h5>
-                                                        </div>
-                                                    </div>
-
-                                                </a>
-                                            </div>
-
-                                            <div className="speciality-masterpage-card-content">
-                                                <a href="#">
-                                                    <div className="key-master-row">
-                                                        <div className="key-master-image">
-                                                            <img src="img/key-proce2.png" alt="" className="img-fluid" />
-                                                        </div>
-                                                        <div className="key-master-content">
-                                                            <h5>Kidney Stones (Nephrolithiasis)</h5>
-                                                        </div>
-                                                    </div>
-
-                                                </a>
-                                            </div>
-
-                                            <div className="speciality-masterpage-card-content">
-                                                <a href="#">
-                                                    <div className="key-master-row">
-                                                        <div className="key-master-image">
-                                                            <img src="img/key-proce3.png" alt="" className="img-fluid" />
-                                                        </div>
-                                                        <div className="key-master-content">
-                                                            <h5>Nephrotic Syndrome</h5>
-                                                        </div>
-                                                    </div>
-
-                                                </a>
-                                            </div>
-
-                                            <div className="speciality-masterpage-card-content">
-                                                <a href="#">
-                                                    <div className="key-master-row">
-                                                        <div className="key-master-image">
-                                                            <img src="img/key-proce4.png" alt="" className="img-fluid" />
-                                                        </div>
-                                                        <div className="key-master-content">
-                                                            <h5>Esophagitis  </h5>
-                                                        </div>
-                                                    </div>
-
-                                                </a>
-                                            </div>
-                                            <div className="speciality-masterpage-card-content">
-                                                <a href="#">
-                                                    <div className="key-master-row">
-                                                        <div className="key-master-image">
-                                                            <img src="img/key-proce1.png" alt="" className="img-fluid" />
-                                                        </div>
-                                                        <div className="key-master-content">
-                                                            <h5>Coronary Artery Disease (CAD)</h5>
-                                                        </div>
-                                                    </div>
-
-                                                </a>
-                                            </div>
-
-                                            <div className="speciality-masterpage-card-content">
-                                                <a href="#">
-                                                    <div className="key-master-row">
-                                                        <div className="key-master-image">
-                                                            <img src="img/key-proce2.png" alt="" className="img-fluid" />
-                                                        </div>
-                                                        <div className="key-master-content">
-                                                            <h5>Kidney Stones (Nephrolithiasis)</h5>
-                                                        </div>
-                                                    </div>
-
-                                                </a>
-                                            </div>
-
-                                            <div className="speciality-masterpage-card-content">
-                                                <a href="#">
-                                                    <div className="key-master-row">
-                                                        <div className="key-master-image">
-                                                            <img src="img/key-proce3.png" alt="" className="img-fluid" />
-                                                        </div>
-                                                        <div className="key-master-content">
-                                                            <h5>Nephrotic Syndrome</h5>
-                                                        </div>
-                                                    </div>
-
-                                                </a>
-                                            </div>
-
-                                            <div className="speciality-masterpage-card-content">
-                                                <a href="#">
-                                                    <div className="key-master-row">
-                                                        <div className="key-master-image">
-                                                            <img src="img/key-proce4.png" alt="" className="img-fluid" />
-                                                        </div>
-                                                        <div className="key-master-content">
-                                                            <h5>Esophagitis  </h5>
-                                                        </div>
-                                                    </div>
-
-                                                </a>
-                                            </div>
+                                                })
+                                            }
 
                                         </div>
-
-
-
-
                                     </div>
                                 </div>
 
                             </div>
 
                             <div className="col-md-3">
-                                <a href="#">
+                                <a href={baseUrlOnlyLang + "/" + pageContent[1].card1Hyperlink}>
                                     <div className="key-master-book-appointment-btn mb-1">
                                         <div className="key-master-book-appointment-content">
-                                            <img src="img/doctor.svg" alt="" className="img-fluid" />
-                                            <h5> {staticText['Find a Doctor']}</h5>
+                                            <img src={pageContent[1]?.card1Icon?.url ? process.env.NEXT_PUBLIC_IMAGE_URL + pageContent[1].card1Icon.url : "/img/doctor.svg"} alt="" className="img-fluid" />
+                                            <h5> {pageContent[1].card1Title}</h5>
                                         </div>
 
                                     </div>
                                 </a>
 
-                                <a href="#">
+                                <a href={baseUrlOnlyLang + "/" + pageContent[1].card2Hyperlink}>
                                     <div className="key-master-book-appointment-btn mb-1">
                                         <div className="key-master-book-appointment-content">
-                                            <img src="img/calender.svg" alt="" className="img-fluid" />
-                                            <h5>{staticText['Book An Appointment']}</h5>
+                                            <img src={pageContent[1]?.card2Icon?.url ? process.env.NEXT_PUBLIC_IMAGE_URL + pageContent[1].card2Icon.url : "/img/calender.svg"} alt="" className="img-fluid" />
+                                            <h5>{pageContent[1].card2Title}</h5>
                                         </div>
                                     </div>
                                 </a>
 
-                                <a href="#">
+                                <a href={baseUrlOnlyLang + "/" + pageContent[1].card3Hyperlink}>
                                     <div className="key-master-help-btn">
                                         <div className="key-master-book-appointment-content">
-                                            <h5>{staticText['Need Help Making an Appointment?']}</h5>
+                                            <h5>{pageContent[1].card3Title}</h5>
                                         </div>
 
                                     </div>
                                 </a>
-                                <a href="tel:+914712941400">
+                                <a href={`tel:${pageContent[1].card4Title}`}>
                                     <div className="key-master-call-btn">
                                         <div className="key-master-book-appointment-content text-center">
-                                            <h5> {staticText['Please Call']}</h5>
-                                            <h4><i className="fa-solid fa-phone"></i> +91 471 294 1400</h4>
+                                            <h5>{pageContent[1].card4Title}</h5>
+                                            <h4><i className="fa-solid fa-phone"></i> {pageContent[1].card4Contact}</h4>
                                         </div>
 
                                     </div>

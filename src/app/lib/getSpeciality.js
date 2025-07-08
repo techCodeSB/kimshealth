@@ -28,7 +28,7 @@ const getSpecialityData = {
         const id = getIdRes.data[0].id;
 
         // Get speciality data using id;
-        const req = await fetch(process.env.NEXT_PUBLIC_CMS_API_URL + `/specialty-details?populate[0]=overviewSection&populate[1]=locations&populate[2]=metaSection&populate[3]=manageAppearance&populate[4]=blogSection&populate[5]=expertSection&populate[6]=testimonialSection&populate[7]=doctorTalk&populate[8]=subSpecialitySection&populate[9]=diseasesAndProceduresSection&populate[10]=speciality&populate[11]=pageBanner&populate[12]=pageBanner.bannerImageDesktop&populate[13]=pageBanner.bannerImageMobile&filters[speciality][$eq]=${id}`);
+        const req = await fetch(process.env.NEXT_PUBLIC_CMS_API_URL + `/specialty-details?populate[0]=overviewSection&populate[1]=locations&populate[2]=metaSection&populate[3]=manageAppearance&populate[4]=blogSection&populate[5]=expertSection&populate[6]=testimonialSection&populate[7]=doctorTalk&populate[8]=subSpecialitySection&populate[9]=diseasesAndProceduresSection&populate[10]=speciality&populate[11]=pageBanner&populate[12]=pageBanner.bannerImageDesktop&populate[13]=pageBanner.bannerImageMobile&populate[14]=speciality.featuredImage&populate[15]=speciality.specialities&filters[speciality][$eq]=${id}`);
         const res = await req.json();
 
         return res.data[0];
@@ -59,6 +59,7 @@ const getSpecialityData = {
         return data;
     },
 
+
     getFooterSpeciality: async () => {
         const baseUrl = process.env.NEXT_PUBLIC_CMS_API_URL;
         // Get total count
@@ -83,7 +84,7 @@ const getSpecialityData = {
         return data;
     },
 
-
+    
     getSpecialityForSearch: async () => {
         const baseUrl = process.env.NEXT_PUBLIC_CMS_API_URL;
         // Get total count
