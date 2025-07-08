@@ -4,16 +4,18 @@ import React from 'react';
 import { getBaseUrl } from '../lib/getBaseUrl';
 import { getStaticPageContent } from '../lib/getStaticPageContent';
 import hospitalData from '../lib/getHospital';
+import getStaticText from '../lib/getStaticTextServer';
 
 
 const Hospital = async () => {
+    const staticText = await getStaticText();
     const baseURL = await getBaseUrl(true, true);
     const data = await getStaticPageContent("hospital");
     const pageContent = data?.data[0]?.pageContent;
     const pageMeta = data?.data[0]?.metaSection;
     const hospitals = await hospitalData.getAll();
 
-    console.log(hospitals)
+  
 
 
     return (
@@ -32,7 +34,7 @@ const Hospital = async () => {
                                 <div className="col-12">
                                     <ul className="breadcrumb mb-0">
                                         <li>
-                                            <a href="/">Home</a>
+                                            <a href={baseURL+"/"}>{staticText['Home']}</a>
                                         </li>
                                         <li className="active"> {pageContent[0]?.title} </li>
                                     </ul>
@@ -46,7 +48,7 @@ const Hospital = async () => {
                             <div className="row justify-content-between">
                                 <div className="col-md-8 col-12">
                                     <div className="main-heading">
-                                        <h2>Our Hospitals and Medical Centres</h2>
+                                        <h2>{pageContent[1]?.title}</h2>
                                     </div>
                                 </div>
                                 <div className="col-md-3 col-12 hospital-mainpage-form mb-lg-0 mb-4">
@@ -90,18 +92,14 @@ const Hospital = async () => {
                                                             <div className="hospital-content mb-lg-0 mb-3 p-0">
                                                                 <ul>
                                                                     <li className="mb-0 send-custom-icon">
-                                                                        <a href={h.mapURL} target='_blank'>Get Direction</a>
+                                                                        <a href={h.mapURL} target='_blank'>{staticText['Get Direction']}</a>
                                                                     </li>
                                                                 </ul>
                                                             </div>
                                                             <div className="d-flex align-items-center">
                                                                 <img src="/img/google.png" alt="Google Logo" className="me-2" />
                                                                 <div className="star-rating" data-rating="4.7">
-                                                                    {/* <i className="fa fa-solid fa-star ms-1" style={{ color: "#ffc107" }}></i>
-                                                                    <i className="fa fa-solid fa-star ms-1" style={{ color: "#ffc107" }}></i>
-                                                                    <i className="fa fa-solid fa-star ms-1" style={{ color: "#ffc107" }}></i>
-                                                                    <i className="fa fa-solid fa-star ms-1" style={{ color: "#ffc107" }}></i>
-                                                                    <i className="fa fa-solid fa-star-half ms-1" style={{ color: "#ffc107" }}></i> */}
+                               
                                                                     {
                                                                         Array.from({ length: h.rating }).map((r, index) => {
                                                                             return index + 1 < h.rating - 1 ?
@@ -115,8 +113,8 @@ const Hospital = async () => {
                                                         </div>
 
                                                         <div className="d-lg-flex d-block align-items-center justify-content-between pt-3">
-                                                            <a href={baseURL + "/hospital/" + h.slug} className="btn mb-lg-0 mb-2 hospital-primarybtn">View Details</a>
-                                                            <a href={baseURL + "/book-an-appointment"} className="btn mb-lg-0 mb-3 hospital-secondarybtn">Appointment</a>
+                                                            <a href={baseURL + "/hospital/" + h.slug} className="btn mb-lg-0 mb-2 hospital-primarybtn">{staticText['View Details']}</a>
+                                                            <a href={baseURL + "/book-an-appointment"} className="btn mb-lg-0 mb-3 hospital-secondarybtn">{staticText['Appointment']}</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -148,18 +146,13 @@ const Hospital = async () => {
                                                             <div className="hospital-content mb-lg-0 mb-3 p-0">
                                                                 <ul>
                                                                     <li className="mb-0 send-custom-icon">
-                                                                        <a href={h.mapURL} target='_blank'>Get Direction</a>
+                                                                        <a href={h.mapURL} target='_blank'>{staticText['Get Direction']}</a>
                                                                     </li>
                                                                 </ul>
                                                             </div>
                                                             <div className="d-flex align-items-center">
                                                                 <img src="/img/google.png" alt="Google Logo" className="me-2" />
                                                                 <div className="star-rating" data-rating="4.7">
-                                                                    {/* <i className="fa fa-solid fa-star ms-1" style={{ color: "#ffc107" }}></i>
-                                                                    <i className="fa fa-solid fa-star ms-1" style={{ color: "#ffc107" }}></i>
-                                                                    <i className="fa fa-solid fa-star ms-1" style={{ color: "#ffc107" }}></i>
-                                                                    <i className="fa fa-solid fa-star ms-1" style={{ color: "#ffc107" }}></i>
-                                                                    <i className="fa fa-solid fa-star-half ms-1" style={{ color: "#ffc107" }}></i> */}
                                                                     {
                                                                         Array.from({ length: h.rating }).map((r, index) => {
                                                                             return index + 1 < h.rating - 1 ?
@@ -173,8 +166,8 @@ const Hospital = async () => {
                                                         </div>
 
                                                         <div className="d-lg-flex d-block align-items-center justify-content-between pt-3">
-                                                            <a href={baseURL + "/hospital/" + h.slug} className="btn mb-lg-0 mb-2 hospital-primarybtn">View Details</a>
-                                                            <a href={baseURL + "/book-an-appointment"} className="btn mb-lg-0 mb-3 hospital-secondarybtn">Appointment</a>
+                                                            <a href={baseURL + "/hospital/" + h.slug} className="btn mb-lg-0 mb-2 hospital-primarybtn">{staticText['View Details']}</a>
+                                                            <a href={baseURL + "/book-an-appointment"} className="btn mb-lg-0 mb-3 hospital-secondarybtn">{staticText['Appointment']}</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -195,10 +188,9 @@ const Hospital = async () => {
                             <div className="row justify-content-between">
                                 <div className="col-md-8 col-8">
                                     <div className="main-heading">
-                                        <h2>Medical Centres</h2>
+                                        <h2>{pageContent[2]?.title}</h2>
                                     </div>
                                 </div>
-
                             </div>
                             <div className="row">
                                 {
@@ -222,18 +214,13 @@ const Hospital = async () => {
                                                             <div className="hospital-content mb-lg-0 mb-3 p-0">
                                                                 <ul>
                                                                     <li className="mb-0 send-custom-icon">
-                                                                        <a href={h.mapURL} target='_blank'>Get Direction</a>
+                                                                        <a href={h.mapURL} target='_blank'>{staticText['Get Direction']}</a>
                                                                     </li>
                                                                 </ul>
                                                             </div>
                                                             <div className="d-flex align-items-center">
                                                                 <img src="/img/google.png" alt="Google Logo" className="me-2" />
                                                                 <div className="star-rating" data-rating="4.7">
-                                                                    {/* <i className="fa fa-solid fa-star ms-1" style={{ color: "#ffc107" }}></i>
-                                                                    <i className="fa fa-solid fa-star ms-1" style={{ color: "#ffc107" }}></i>
-                                                                    <i className="fa fa-solid fa-star ms-1" style={{ color: "#ffc107" }}></i>
-                                                                    <i className="fa fa-solid fa-star ms-1" style={{ color: "#ffc107" }}></i>
-                                                                    <i className="fa fa-solid fa-star-half ms-1" style={{ color: "#ffc107" }}></i> */}
                                                                     {
                                                                         Array.from({ length: h.rating }).map((r, index) => {
                                                                             return index + 1 < h.rating - 1 ?
@@ -247,8 +234,8 @@ const Hospital = async () => {
                                                         </div>
 
                                                         <div className="d-lg-flex d-block align-items-center justify-content-between pt-3">
-                                                            <a href={baseURL + "/hospital/" + h.slug} className="btn mb-lg-0 mb-2 hospital-primarybtn">View Details</a>
-                                                            <a href={baseURL + "/book-an-appointment"} className="btn mb-lg-0 mb-3 hospital-secondarybtn">Appointment</a>
+                                                            <a href={baseURL + "/hospital/" + h.slug} className="btn mb-lg-0 mb-2 hospital-primarybtn">{staticText['View Details']}</a>
+                                                            <a href={baseURL + "/book-an-appointment"} className="btn mb-lg-0 mb-3 hospital-secondarybtn">{staticText['Appointment']}</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -279,18 +266,14 @@ const Hospital = async () => {
                                                             <div className="hospital-content mb-lg-0 mb-3 p-0">
                                                                 <ul>
                                                                     <li className="mb-0 send-custom-icon">
-                                                                        <a href={h.mapURL} target='_blank'>Get Direction</a>
+                                                                        <a href={h.mapURL} target='_blank'>{staticText['Get Direction']}</a>
                                                                     </li>
                                                                 </ul>
                                                             </div>
                                                             <div className="d-flex align-items-center">
                                                                 <img src="/img/google.png" alt="Google Logo" className="me-2" />
                                                                 <div className="star-rating" data-rating="4.7">
-                                                                    {/* <i className="fa fa-solid fa-star ms-1" style={{ color: "#ffc107" }}></i>
-                                                                    <i className="fa fa-solid fa-star ms-1" style={{ color: "#ffc107" }}></i>
-                                                                    <i className="fa fa-solid fa-star ms-1" style={{ color: "#ffc107" }}></i>
-                                                                    <i className="fa fa-solid fa-star ms-1" style={{ color: "#ffc107" }}></i>
-                                                                    <i className="fa fa-solid fa-star-half ms-1" style={{ color: "#ffc107" }}></i> */}
+                                    
                                                                     {
                                                                         Array.from({ length: h.rating }).map((r, index) => {
                                                                             return index + 1 < h.rating - 1 ?
@@ -304,8 +287,8 @@ const Hospital = async () => {
                                                         </div>
 
                                                         <div className="d-lg-flex d-block align-items-center justify-content-between pt-3">
-                                                            <a href={baseURL + "/hospital/" + h.slug} className="btn mb-lg-0 mb-2 hospital-primarybtn">View Details</a>
-                                                            <a href={baseURL + "/book-an-appointment"} className="btn mb-lg-0 mb-3 hospital-secondarybtn">Appointment</a>
+                                                            <a href={baseURL + "/hospital/" + h.slug} className="btn mb-lg-0 mb-2 hospital-primarybtn">{staticText['View Details']}</a>
+                                                            <a href={baseURL + "/book-an-appointment"} className="btn mb-lg-0 mb-3 hospital-secondarybtn">{staticText['Appointment']}</a>
                                                         </div>
                                                     </div>
                                                 </div>

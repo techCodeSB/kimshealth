@@ -30,46 +30,45 @@ const Home = async () => {
 
   const specialityDataSet = {
     sectionTitle: pageContent[2]?.title,
-    buttonText: 'View All', buttonURL: '#',
+    buttonText: 'View All', buttonURL: `${basePath+"/speciality"}`,
     data: await getSpecialityData.getAll(),
     baseUrl: basePath
   };
 
   const expertDataSet = {
     sectionTitle: pageContent[3]?.title,
-    buttonText: 'View All', buttonURL: '#',
+    buttonText: 'View All', buttonURL: `${basePath+"/doctor"}`,
     data: await doctorData.getDoctorAll(10),
     baseUrl: basePath
   };
 
   const awardDataSet = {
     sectionTitle: pageContent[4]?.title,
-    buttonText: 'View All', buttonURL: '#',
+    buttonText: 'View All', buttonURL: `${basePath}`,
     data: await getAwardData.getAll(),
     baseUrl: basePath
   };
 
   const testimonialDataSet = {
     sectionTitle: pageContent[5]?.title,
-    buttonText: 'View All', buttonURL: '#',
+    buttonText: 'View All', buttonURL: `${basePath+"/testimonial"}`,
     data: await testimonialData.getAll(10),
     baseUrl: basePath
   }
 
   const blogDataSet = {
     sectionTitle: pageContent[6]?.title,
-    buttonText: 'View All', buttonURL: '#',
+    buttonText: 'View All', buttonURL: `${basePath+"/blog"}`,
     data: await blogData.allBlog(10),
     baseUrl: basePath
   }
 
   const docTalkDataSet = {
     sectionTitle: pageContent[7]?.title,
-    buttonText: 'View All', buttonURL: '#',
+    buttonText: 'View All', buttonURL: `${basePath+"/doctor-talk"}`,
     data: await doctorTalkData.allData(10),
     baseUrl: basePath
   }
-
 
 
 

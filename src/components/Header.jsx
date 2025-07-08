@@ -184,7 +184,7 @@ const Header = () => {
                                     <li><a href={`${basePath}/visa-medical`} className="anchor-menu">Visa Medical</a></li>
                                     <li><a href={`${basePath}/international-patient`} className="anchor-menu">International Patients</a></li>
                                     <li className="menu-item-has-children show-submenu d-lg-inline-block d-none">
-                                        <Link href="#" className="anchor-menu">Locations</Link>
+                                        <Link href={basePathOnlyLang+"/hospital"} className="anchor-menu">Locations</Link>
                                         <div className="sub-menu ">
                                             <div className="row">
                                                 <div className="col-md-4">

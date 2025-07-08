@@ -468,7 +468,7 @@ const SpecialityDetails = async ({ params }) => {
 
                 </div>
             </div>
-            {/* <Footer /> */}
+            <Footer />
         </>
     )
 }

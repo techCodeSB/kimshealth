@@ -1,6 +1,7 @@
 import formatDate from '@/app/lib/formatDate';
 import { getBaseUrl } from '@/app/lib/getBaseUrl';
 import doctorTalkData from '@/app/lib/getDoctorTalk';
+import getStaticText from '@/app/lib/getStaticTextServer';
 import youtubeData from '@/app/lib/getYoutubeData';
 import Footer from '@/components/Footer';
 import FromDoctor from '@/components/FromDoctor';
@@ -9,6 +10,7 @@ import Header from '@/components/Header';
 const DoctorTalkDetails = async ({ params }) => {
     const basePath = await getBaseUrl();
     const data = await doctorTalkData.getSingleDoctor(params.details);
+    const staticText = await getStaticText();
     const youtube = await youtubeData(data.videoId);
     const docTalkDataSet = {
         sectionTitle: data.title,
@@ -33,10 +35,10 @@ const DoctorTalkDetails = async ({ params }) => {
                                 <div className="col-12">
                                     <ul className="breadcrumb mb-0">
                                         <li>
-                                            <a href="/">Home</a>
+                                            <a href={basePath+"/"}>{staticText['Home']}</a>
                                         </li>
                                         <li>
-                                            <a href={basePath + "doctor-talk"}>Doctor Talk</a>
+                                            <a href={basePath + "/doctor-talk"}>{staticText['Doctor Talk']}</a>
                                         </li>
                                         <li className="active"> {data.title} </li>
                                     </ul>
@@ -76,7 +78,7 @@ const DoctorTalkDetails = async ({ params }) => {
                                         </div>
                                         <div className="d-flex align-items-center justify-content-between mt-3">
                                             <div className="doctor-name">
-                                                <p><span><img src="/img/doctor.png" className="img-fluid" alt="" /></span>{data.doctor.name}</p>
+                                                <p><span><img src="/img/doctor.png" className="img-fluid" alt="" /></span>{data.doctor?.name}</p>
                                             </div>
                                             <div className="doctor-catagory">
                                                 <p>

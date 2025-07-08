@@ -2,15 +2,19 @@ import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import React from 'react'
 import { getStaticPageContent } from '../lib/getStaticPageContent';
+import getStaticText from '../lib/getStaticTextServer';
+import { getBaseUrl } from '../lib/getBaseUrl';
+import Form1 from '@/components/Forms/Form1';
 
 const EmergencyMedicine = async () => {
+    const basePath = await getBaseUrl(true, true);
     const field = "populate[0]=pageContent&populate[1]=pageContent.bannerItem&populate[2]=pageContent.bannerItem.bannerImageDesktop&populate[3]=pageContent.bannerItem.bannerImageMobile&populate[4]=metaSection";
-
     const data = await getStaticPageContent("emergency-medicine-program", field);
     const pageContent = data?.data[0]?.pageContent;
     const pageMeta = data?.data[0]?.metaSection;
+    const staticText = await getStaticText()
 
-    console.log(pageContent);
+
     return (
         <>
             <Header />
@@ -28,7 +32,7 @@ const EmergencyMedicine = async () => {
                                                     <div className="col-12 px-0">
                                                         <ul className="breadcrumb mb-0">
                                                             <li>
-                                                                <a href="/">Home</a>
+                                                                <a href={basePath + "/"}>{staticText['Home']}</a>
                                                             </li>
                                                             <li className="active"> {pageContent[0]?.title} </li>
                                                         </ul>
@@ -62,7 +66,7 @@ const EmergencyMedicine = async () => {
                                                     <div className="col-12">
                                                         <ul className="breadcrumb mb-0">
                                                             <li>
-                                                                <a href="/">Home</a>
+                                                                <a href={basePath + "/"}>{staticText['Home']}</a>
                                                             </li>
                                                             <li className="active"> {pageContent[0]?.title} </li>
                                                         </ul>
@@ -153,27 +157,7 @@ const EmergencyMedicine = async () => {
 
                                     <div className="association-left-col">
                                         <div className="association-form-card mb-5">
-                                            <h3>Request a Call Back</h3>
-                                            <form action="">
-                                                <div className="row">
-                                                    <div className="col-md-12 mb-3">
-                                                        <input type="text" className="form-control" placeholder="Name" name="name" />
-                                                    </div>
-                                                    <div className="col-md-12 mb-3">
-                                                        <input type="text" className="form-control"
-                                                            placeholder="Enter 10 Digit Mobile Number" name="name" />
-                                                    </div>
-                                                    <div className="col-md-12 mb-3">
-                                                        <textarea className="form-control" placeholder="Message"
-                                                            id="floatingTextarea"></textarea>
-                                                    </div>
-                                                    <div className="col-md-12 mb-3 text-center">
-                                                        <button
-                                                            className="btn mb-lg-0 mb-2 hospital-primarybtn px-5 py-2">Submit</button>
-                                                    </div>
-                                                </div>
-                                            </form>
-
+                                            <Form1 title={"Request a Call Back"} />
 
                                         </div>
                                         <div className="em-sticky-ele">
@@ -181,17 +165,23 @@ const EmergencyMedicine = async () => {
                                             <p><strong>{pageContent[8]?.contactPerson}</strong></p>
                                             <p> SOCOMER</p>
                                             <p> {pageContent[8]?.address}</p>
-                                            <a href="#"><i className="fa-solid fa-phone"></i>
+                                            <a href="#">
+                                                {pageContent[8]?.phone && <i className="fa-solid fa-phone"></i>}
                                                 {pageContent[8]?.phone}
                                             </a>
-                                            <a href={`mailto: ${pageContent[8]?.email}`}><i className="fa-solid fa-envelope"></i>
+                                            <a href={`mailto: ${pageContent[8]?.email}`}>
+                                                {pageContent[8]?.email && <i className="fa-solid fa-envelope"></i>}
                                                 {pageContent[8]?.email}</a>
                                             <div className="mt-3">
                                                 <p> <strong>{pageContent[9]?.contactPerson}</strong> </p>
                                                 <p> {pageContent[9]?.address}</p>
-                                                <a href={`tel: ${pageContent[8]?.phone}`}><i className="fa-solid fa-phone"></i> 
-                                                {pageContent[8]?.phone}</a>
-                                                <a href={`mailto: ${pageContent[9]?.email}`}><i className="fa-solid fa-envelope"></i>{pageContent[9]?.email}</a>
+                                                <a href={`tel: ${pageContent[8]?.phone}`}>
+                                                    {pageContent[8]?.phone && <i className="fa-solid fa-phone"></i>}
+                                                    {pageContent[8]?.phone}</a>
+                                                <a href={`mailto: ${pageContent[9]?.email}`}>
+                                                    {pageContent[9]?.email && <i className="fa-solid fa-envelope"></i>}
+                                                    {pageContent[9]?.email}
+                                                </a>
                                             </div>
                                         </div>
                                     </div>

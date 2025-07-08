@@ -1,12 +1,16 @@
-import Footer from '@/components/Footer'
-import Header from '@/components/Header'
-import React from 'react'
+import Footer from '@/components/Footer';
+import Header from '@/components/Header';
 import { getStaticPageContent } from '../lib/getStaticPageContent';
+import getStaticText from '../lib/getStaticTextServer';
+import { getBaseUrl } from '../lib/getBaseUrl';
+
 
 const Faqs = async () => {
+    const basePath = await getBaseUrl(true, true);
     const data = await getStaticPageContent("faqs");
     const pageContent = data?.data[0]?.pageContent;
     const pageMeta = data?.data[0]?.metaSection;
+    const staticText = await getStaticText()
 
 
     return (
@@ -25,7 +29,7 @@ const Faqs = async () => {
                                 <div className="col-12">
                                     <ul className="breadcrumb mb-0">
                                         <li>
-                                            <a href="/">Home</a>
+                                            <a href={basePath+ "/"}>{staticText['Home']}</a>
                                         </li>
                                         <li className="active"> {pageContent ? pageContent[0]?.title : null}</li>
                                     </ul>

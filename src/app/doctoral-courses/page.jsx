@@ -1,8 +1,14 @@
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import React from 'react';
+import getStaticText from '../lib/getStaticTextServer';
+import { getBaseUrl } from '../lib/getBaseUrl';
 
-const DoctoralCourse = () => {
+const DoctoralCourse = async () => {
+    const basePath = await getBaseUrl(true, true)
+    const staticText = await getStaticText();
+
+
     return (
         <>
             <Header />
@@ -19,10 +25,10 @@ const DoctoralCourse = () => {
                                                     <div className="col-12 px-0">
                                                         <ul className="breadcrumb mb-0">
                                                             <li>
-                                                                <a href="index.php">Home</a>
+                                                                <a href={basePath+"/"}>{staticText['Home']}</a>
                                                             </li>
                                                             <li>
-                                                                <a href="hospital-master.php">Academics</a>
+                                                                <a href={basePath+"/doctoral-courses"}>{staticText['Academics']}</a>
                                                             </li>
                                                             <li className="active"> Doctoral Courses </li>
                                                         </ul>
@@ -38,7 +44,7 @@ const DoctoralCourse = () => {
                                     </div>
 
                                     <div className="col-md-6 details-proceduce-banner-right-col">
-                                        <img src="/img/doctoral-coures-banner.jpg" className="img-fluid details-banner-image" alt=""/>
+                                        <img src="/img/doctoral-coures-banner.jpg" className="img-fluid details-banner-image" alt="" />
                                     </div>
 
                                     {/* <!-- <div className="col-md-6">

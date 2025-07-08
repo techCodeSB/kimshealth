@@ -26,10 +26,10 @@ const WallframeSection = ({ dataSet }) => {
                         </div>
                         <div className="col-md-2 col-4">
                             <div className="over-all-btn text-end">
-                                <a href={dataSet.buttonURL}>
+                                {/* <a href={dataSet.buttonURL}>
                                     {staticTexts[dataSet.buttonText]} <span><img src="/img/slider-right-arrow.svg" className="img-fluid"
                                         alt="" /></span>
-                                </a>
+                                </a> */}
                             </div>
                         </div>
                     </div>

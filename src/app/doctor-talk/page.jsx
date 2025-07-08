@@ -5,6 +5,7 @@ import { getBaseUrl } from '../lib/getBaseUrl';
 import { getStaticPageContent } from '../lib/getStaticPageContent';
 import doctorTalkData from '../lib/getDoctorTalk';
 import formatDate from '../lib/formatDate';
+import getStaticText from '../lib/getStaticTextServer';
 
 
 
@@ -14,6 +15,7 @@ const DoctorTalk = async () => {
     const pageContent = data?.data[0]?.pageContent;
     const pageMeta = data?.data[0]?.metaSection;
     const docTalkData = await doctorTalkData.allData();
+    const staticText = await getStaticText();
 
 
 
@@ -33,7 +35,7 @@ const DoctorTalk = async () => {
                                 <div className="col-12">
                                     <ul className="breadcrumb mb-0">
                                         <li>
-                                            <a href="/">Home</a>
+                                            <a href="/">{staticText['Home']}</a>
                                         </li>
                                         <li className="active"> {pageContent[0]?.title}</li>
                                     </ul>
@@ -47,7 +49,7 @@ const DoctorTalk = async () => {
                             <div className="row justify-content-between">
                                 <div className="col-md-6 mb-3">
                                     <div className="main-heading">
-                                        <h2 className="mb-0">Hear From The Doctor </h2>
+                                        <h2 className="mb-0">{staticText["Hear From The Doctor"]}</h2>
                                     </div>
                                 </div>
                                 <div className="col-md-4 details-key-row">
@@ -84,7 +86,7 @@ const DoctorTalk = async () => {
                                                         </div>
                                                         <div className="main-btn ">
                                                             <span><img src="/img/play-button.png" className="img-fluid" alt="" /> </span>
-                                                            <a href={baseURL + "/doctor-talk/" + dt.slug}>Watch Video <span><i
+                                                            <a href={baseURL + "/doctor-talk/" + dt.slug}>{staticText['Watch Video']} <span><i
                                                                 className="fa-solid fa-arrow-right"></i></span></a>
                                                         </div>
                                                     </div>
@@ -93,8 +95,6 @@ const DoctorTalk = async () => {
                                         </div>
                                     })
                                 }
-
-
                             </div>
                         </div>
                     </div>

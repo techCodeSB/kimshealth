@@ -1,10 +1,16 @@
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import React from 'react';
+import { getBaseUrl } from '../lib/getBaseUrl';
+import getStaticText from '../lib/getStaticTextServer';
 
 
 
-const HealthPackage = () => {
+const HealthPackage = async () => {
+    const basePath = await getBaseUrl(true, true);
+    const staticText = await getStaticText();
+
+
     return (
         <>
             <Header />
@@ -21,7 +27,7 @@ const HealthPackage = () => {
                                 <div className="col-12">
                                     <ul className="breadcrumb mb-0">
                                         <li>
-                                            <a href="index.php">Home</a>
+                                            <a href={basePath+"/"}>{staticText['Home']}</a>
                                         </li>
                                         <li className="active"> Health Packages </li>
                                     </ul>

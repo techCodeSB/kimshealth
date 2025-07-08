@@ -15,7 +15,6 @@ import Header from '@/components/Header';
 import TestimonialSection from '@/components/TestimonialSection';
 import WatchVideoButton from '@/components/WatchVideoButton';
 import { marked } from 'marked';
-import React from 'react';
 
 
 const HospitalDetails = async ({ params }) => {
