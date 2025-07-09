@@ -14,7 +14,7 @@ const Hospital = async () => {
     const pageContent = data?.data[0]?.pageContent;
     const pageMeta = data?.data[0]?.metaSection;
     const hospitals = await hospitalData.getAll();
-  
+
 
 
     return (
@@ -33,7 +33,7 @@ const Hospital = async () => {
                                 <div className="col-12">
                                     <ul className="breadcrumb mb-0">
                                         <li>
-                                            <a href={baseURL+"/"}>{staticText['Home']}</a>
+                                            <a href={baseURL + "/"}>{staticText['Home']}</a>
                                         </li>
                                         <li className="active"> {pageContent[0]?.title} </li>
                                     </ul>
@@ -73,7 +73,7 @@ const Hospital = async () => {
                                             <div className="col-md-6 mb-4" key={index}>
                                                 <div className="custom-hospital-top-card">
                                                     <div className="hospital-img">
-                                                        <a href={baseURL + "/hospital/" + h.slug}>
+                                                        <a href={baseURL + "/" + h.location.slug + "/hospital/" + h.slug}>
                                                             <img src={process.env.NEXT_PUBLIC_IMAGE_URL + h.featuredImage.url} alt="" className="img-fluid w-100" />
                                                         </a>
                                                     </div>
@@ -95,7 +95,7 @@ const Hospital = async () => {
                                                             <div className="d-flex align-items-center">
                                                                 <img src="/img/google.png" alt="Google Logo" className="me-2" />
                                                                 <div className="star-rating" data-rating="4.7">
-                               
+
                                                                     {
                                                                         Array.from({ length: h.rating }).map((r, index) => {
                                                                             return index + 1 < h.rating - 1 ?
@@ -109,7 +109,7 @@ const Hospital = async () => {
                                                         </div>
 
                                                         <div className="d-lg-flex d-block align-items-center justify-content-between pt-3">
-                                                            <a href={baseURL + "/hospital/" + h.slug} className="btn mb-lg-0 mb-2 hospital-primarybtn">{staticText['View Details']}</a>
+                                                            <a href={baseURL + "/" + h.location.slug + "/hospital/" + h.slug} className="btn mb-lg-0 mb-2 hospital-primarybtn">{staticText['View Details']}</a>
                                                             <a href={baseURL + "/book-an-appointment"} className="btn mb-lg-0 mb-3 hospital-secondarybtn">{staticText['Appointment']}</a>
                                                         </div>
                                                     </div>
@@ -127,7 +127,7 @@ const Hospital = async () => {
                                             <div className="col-md-4 mb-4" key={index}>
                                                 <div className="custom-hospital-top-card">
                                                     <div className="hospital-img">
-                                                        <a href={baseURL + "/hospital/" + h.slug}>
+                                                        <a href={baseURL + "/" + h.location.slug + "/hospital/" + h.slug}>
                                                             <img src={process.env.NEXT_PUBLIC_IMAGE_URL + h.featuredImage.url} alt="" className="img-fluid w-100" />
                                                         </a>
                                                     </div>
@@ -162,7 +162,7 @@ const Hospital = async () => {
                                                         </div>
 
                                                         <div className="d-lg-flex d-block align-items-center justify-content-between pt-3">
-                                                            <a href={baseURL + "/hospital/" + h.slug} className="btn mb-lg-0 mb-2 hospital-primarybtn">{staticText['View Details']}</a>
+                                                            <a href={baseURL + "/" + h.location.slug + "/hospital/" + h.slug} className="btn mb-lg-0 mb-2 hospital-primarybtn">{staticText['View Details']}</a>
                                                             <a href={baseURL + "/book-an-appointment"} className="btn mb-lg-0 mb-3 hospital-secondarybtn">{staticText['Appointment']}</a>
                                                         </div>
                                                     </div>
@@ -195,7 +195,7 @@ const Hospital = async () => {
                                             <div className="col-md-4 mb-4" key={index}>
                                                 <div className="custom-hospital-top-card">
                                                     <div className="hospital-img">
-                                                        <a href={baseURL + "/hospital/" + h.slug}>
+                                                        <a href={baseURL + "/" + h.location.slug + "/hospital/" + h.slug}>
                                                             <img src={process.env.NEXT_PUBLIC_IMAGE_URL + h.featuredImage.url} alt="" className="img-fluid w-100" />
                                                         </a>
                                                     </div>
@@ -230,7 +230,7 @@ const Hospital = async () => {
                                                         </div>
 
                                                         <div className="d-lg-flex d-block align-items-center justify-content-between pt-3">
-                                                            <a href={baseURL + "/hospital/" + h.slug} className="btn mb-lg-0 mb-2 hospital-primarybtn">{staticText['View Details']}</a>
+                                                            <a href={baseURL + "/" + h.location.slug + "/hospital/" + h.slug} className="btn mb-lg-0 mb-2 hospital-primarybtn">{staticText['View Details']}</a>
                                                             <a href={baseURL + "/book-an-appointment"} className="btn mb-lg-0 mb-3 hospital-secondarybtn">{staticText['Appointment']}</a>
                                                         </div>
                                                     </div>
@@ -247,7 +247,7 @@ const Hospital = async () => {
                                             <div className="col-md-6 mb-4" key={index}>
                                                 <div className="custom-hospital-top-card">
                                                     <div className="hospital-img">
-                                                        <a href={baseURL + "/hospital/" + h.slug}>
+                                                        <a href={baseURL + "/" + h.location.slug + "/hospital/" + h.slug}>
                                                             <img src={process.env.NEXT_PUBLIC_IMAGE_URL + h.featuredImage.url} alt="" className="img-fluid w-100" />
                                                         </a>
                                                     </div>
@@ -269,7 +269,7 @@ const Hospital = async () => {
                                                             <div className="d-flex align-items-center">
                                                                 <img src="/img/google.png" alt="Google Logo" className="me-2" />
                                                                 <div className="star-rating" data-rating="4.7">
-                                    
+
                                                                     {
                                                                         Array.from({ length: h.rating }).map((r, index) => {
                                                                             return index + 1 < h.rating - 1 ?
@@ -283,7 +283,7 @@ const Hospital = async () => {
                                                         </div>
 
                                                         <div className="d-lg-flex d-block align-items-center justify-content-between pt-3">
-                                                            <a href={baseURL + "/hospital/" + h.slug} className="btn mb-lg-0 mb-2 hospital-primarybtn">{staticText['View Details']}</a>
+                                                            <a href={baseURL + "/" + h.location.slug + "/hospital/" + h.slug} className="btn mb-lg-0 mb-2 hospital-primarybtn">{staticText['View Details']}</a>
                                                             <a href={baseURL + "/book-an-appointment"} className="btn mb-lg-0 mb-3 hospital-secondarybtn">{staticText['Appointment']}</a>
                                                         </div>
                                                     </div>

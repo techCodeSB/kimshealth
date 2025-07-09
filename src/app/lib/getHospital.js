@@ -1,6 +1,6 @@
 const hospitalData = {
     getAll: async (limit) => {
-        let url = process.env.NEXT_PUBLIC_CMS_API_URL + `/hospitals?populate[0]=featuredImage${limit ? '&pagination[limit]=' + limit : ''}`;
+        let url = process.env.NEXT_PUBLIC_CMS_API_URL + `/hospitals?populate=*${limit ? '&pagination[limit]=' + limit : ''}`;
         const req = await fetch(url);
         const res = await req.json();
 

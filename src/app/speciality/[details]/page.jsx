@@ -21,9 +21,9 @@ const SpecialityDetails = async ({ params }) => {
     const data = await getSpecialityData.getSingleSpeciality(params.details);
     const allProcedure = await procedureData.getAll(5)
     const allDiseas = await diseaseData.getAll(10);
-    const allSubSpeciality = await getSpecialityData.getAllSubSpeciality(data.speciality.id)
+    const allSubSpeciality = await getSpecialityData.getAllSubSpeciality(data.speciality?.id)
 
-    console.log(allSubSpeciality);
+
 
     return (
         <>
@@ -41,10 +41,10 @@ const SpecialityDetails = async ({ params }) => {
                                                     <div className="col-12 px-lg-0 px-4">
                                                         <ul className="breadcrumb mb-0">
                                                             <li>
-                                                                <a href={baseUrl + "/"}>Home</a>
+                                                                <a href={baseUrl + "/"}>{staticText['Home']}</a>
                                                             </li>
                                                             <li>
-                                                                <a href={baseUrl + "/speciality"}> Specialities</a>
+                                                                <a href={baseUrl + "/speciality"}> {staticText['Specialities']}</a>
                                                             </li>
                                                             <li className="active"> {data.title} </li>
                                                         </ul>
@@ -79,10 +79,10 @@ const SpecialityDetails = async ({ params }) => {
                                                 <div className="col-12 px-lg-0 px-4">
                                                     <ul className="breadcrumb mb-0">
                                                         <li>
-                                                            <a href="/">Home</a>
+                                                            <a href="/">{staticText["Home"]}</a>
                                                         </li>
                                                         <li>
-                                                            <a href={baseUrl + "/speciality"}> Specialities</a>
+                                                            <a href={baseUrl + "/speciality"}> {staticText['Specialities']}</a>
                                                         </li>
                                                         <li className="active"> {data.title} </li>
                                                     </ul>
