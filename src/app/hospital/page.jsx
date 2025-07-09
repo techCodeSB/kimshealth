@@ -53,7 +53,6 @@ const Hospital = async () => {
                                 <div className="col-md-3 col-12 hospital-mainpage-form mb-lg-0 mb-4">
                                     <form action="">
                                         <div className="input-group p-0 position-relative justify-content-center">
-
                                             <select className="form-select speciality-page-search">
                                                 <option >All Hospital</option>
                                                 <option value="1">One</option>
@@ -66,7 +65,6 @@ const Hospital = async () => {
                                 </div>
                             </div>
                             <div className="row">
-
                                 {
                                     hospitals.map((h, index) => {
                                         return index <= 1 ?

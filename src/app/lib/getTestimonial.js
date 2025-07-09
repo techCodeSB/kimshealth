@@ -15,6 +15,14 @@ const testimonialData = {
         return res.data[0];
 
     },
+
+    getBySpeciality: async (id) => {
+        const url = process.env.NEXT_PUBLIC_CMS_API_URL + `/testimonials?populate=*&filters[specialities][id][$eq]=${id}`;
+        const req = await fetch(url);
+        const res = await req.json();
+
+        return res.data;
+    },
 }
 
 export default testimonialData;

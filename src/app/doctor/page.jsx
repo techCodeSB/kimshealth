@@ -23,8 +23,6 @@ const Doctor = async () => {
     const allSpeciality = await getSpecialityData.getAllSpeciality()
     const allDoctor = await doctorData.getAllDoctor()
 
-    console.log(allLocation)
-
 
 
     return (

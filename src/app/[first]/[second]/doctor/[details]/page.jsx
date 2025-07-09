@@ -9,8 +9,10 @@ import FromDoctor from '@/components/FromDoctor';
 import Header from '@/components/Header';
 import { marked } from 'marked';
 
+
+
 const DoctorDetails = async ({ params }) => {
-    const basePath = await getBaseUrl()
+    const basePath = await getBaseUrl(true, true)
     const imgUrl = process.env.NEXT_PUBLIC_IMAGE_URL;
     const slug = params.details;
     const data = await doctorData.getSingleDoctor(slug);
@@ -18,14 +20,14 @@ const DoctorDetails = async ({ params }) => {
 
     const docTalkDataSet = {
         sectionTitle: data.doctorTalk.title,
-        buttonText: 'View All', buttonURL: '#',
+        buttonText: 'View All', buttonURL: basePath+"/doctor-talk",
         data: await doctorTalkData.getByDoctor(data.id),
         baseUrl: basePath
     }
 
     const blogDataSet = {
         sectionTitle: data.blogSection.title,
-        buttonText: 'View All', buttonURL: '#',
+        buttonText: 'View All', buttonURL: basePath+"/blog",
         data: await blogData.getByDoctor(data.id),
         baseUrl: basePath
     }
@@ -110,40 +112,40 @@ const DoctorDetails = async ({ params }) => {
                                                     <h3>{staticText['Work Experience']}</h3>
                                                 </div>
                                                 : null}
-                                            <div dangerouslySetInnerHTML={{ __html: data?.workExperience ? marked.parse(data.workExperience) : "" }}></div>
+                                            <div dangerouslySetInnerHTML={{ __html: data?.workExperience ? marked(data.workExperience) : "" }}></div>
 
 
                                             {data?.areaOfExpertise ? <div className="d-flex align-items-center gap-2 mb-2">
                                                 <img src="/img/badge.png" alt="" className="img-fluid" />
                                                 <h3>{staticText['Area of Expertise']}</h3>
                                             </div> : null}
-                                            <div dangerouslySetInnerHTML={{ __html: data?.areaOfExpertise ? marked.parse(data.areaOfExpertise) : "" }}></div>
+                                            <div dangerouslySetInnerHTML={{ __html: data?.areaOfExpertise ? marked(data.areaOfExpertise) : "" }}></div>
 
 
                                             {data?.educationAndTraning ? <div className="d-flex align-items-center gap-2 mb-2">
                                                 <img src="/img/mortarboard.png" alt="" className="img-fluid" />
                                                 <h3>{staticText['Education & Tranning']}</h3>
                                             </div> : null}
-                                            <div dangerouslySetInnerHTML={{ __html: data?.educationAndTraning ? marked.parse(data.educationAndTraning) : "" }}></div>
+                                            <div dangerouslySetInnerHTML={{ __html: data?.educationAndTraning ? marked(data.educationAndTraning) : "" }}></div>
 
                                             {data?.membership ? <div className="d-flex align-items-center gap-2 mb-2">
                                                 <img src="/img/recommendation.png" alt="" className="img-fluid" />
                                                 <h3>{staticText['Membership']}</h3>
                                             </div> : null}
-                                            <div dangerouslySetInnerHTML={{ __html: data?.membership ? marked.parse(data.membership) : "" }}></div>
+                                            <div dangerouslySetInnerHTML={{ __html: data?.membership ? marked(data.membership) : "" }}></div>
 
                                             {data?.awards ? <div className="d-flex align-items-center gap-2 mb-2">
                                                 <img src="/img/award.png" alt="" className="img-fluid" />
                                                 <h3>{staticText['Awards']}</h3>
                                             </div> : null}
-                                            <div dangerouslySetInnerHTML={{ __html: data?.awards ? marked.parse(data.awards) : "" }}></div>
+                                            <div dangerouslySetInnerHTML={{ __html: data?.awards ? marked(data.awards) : "" }}></div>
 
 
                                             {data?.languagesKnown ? <div className="d-flex align-items-center gap-2 mb-2">
                                                 <img src="/img/internet.png" alt="" className="img-fluid" />
                                                 <h3>{staticText['Languages Known']}</h3>
                                             </div> : null}
-                                            <div dangerouslySetInnerHTML={{ __html: data?.languagesKnown ? marked.parse(data.languagesKnown) : "" }}></div>
+                                            <div dangerouslySetInnerHTML={{ __html: data?.languagesKnown ? marked(data.languagesKnown) : "" }}></div>
                                         </div>
                                     </div>
                                 </div>

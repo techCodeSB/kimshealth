@@ -32,7 +32,10 @@ const diseaseData = {
         }
 
         return data;
-    }
+    },
+
+    
+
 
 
 }

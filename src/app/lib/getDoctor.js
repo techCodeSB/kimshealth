@@ -41,6 +41,14 @@ const doctorData = {
         return data;
     },
 
+    getBySpeciality: async (id) => {
+        const url = process.env.NEXT_PUBLIC_CMS_API_URL + `/doctor-details?populate=*&filters[specialities][id][$eq]=${id}`;
+        const req = await fetch(url);
+        const res = await req.json();
+
+        return res.data;
+    },
+
 
 };
 

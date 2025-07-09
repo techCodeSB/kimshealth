@@ -101,7 +101,7 @@ const DoctorListing = ({ baseURL, allLocation, allSpeciality, allDoctor }) => {
                                         <div className="row">
                                             <div className="col-12">
                                                 <div className="input-group">
-                                                    <input type="text" className="form-control" placeholder="Search ....."
+                                                    <input type="text" className="form-control" placeholder="Search ...."
                                                         name="search" onChange={onLocationChange} />
                                                     <span className="input-group-text"><i
                                                         className="fa-solid fa-magnifying-glass"></i></span>

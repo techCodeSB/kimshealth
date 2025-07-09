@@ -7,6 +7,7 @@ const procedureData = {
         return res.data;
     },
 
+
     getProcedureBySpeciality: async (filterId) => {
         console.log(filterId)
         const baseUrl = process.env.NEXT_PUBLIC_CMS_API_URL;
@@ -33,6 +34,14 @@ const procedureData = {
         }
 
         return allData;
+    },
+
+    getFeturedProcedure: async () => {
+        let url = process.env.NEXT_PUBLIC_CMS_API_URL + `/procedure-details?populate=*&filters[manageAppearance][showInFeaturedList]=true`;
+        const req = await fetch(url);
+        const res = await req.json();
+
+        return res.data;
     }
 
 }

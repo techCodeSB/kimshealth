@@ -194,17 +194,15 @@ const AboutUs = async () => {
                     </section>
 
 
+                    {/* ==== Leadership ==== */}
                     <div className="line-divider"></div>
                     <section className="section expert-section">
                         <div className="container">
                             <div className="main-heading">
-                                {/* Leadership */}
                                 <h2>{pageContent[8].title}</h2>
                             </div>
 
                             <div className="row">
-
-
                                 {
                                     allLeader.slice(0, 8).map((l, i) => {
                                         return <div className="col-md-3 col-6 mb-4" key={i}>
@@ -241,7 +239,7 @@ const AboutUs = async () => {
 
                                 {
                                     awards.map((a, i) => {
-                                        return <div className="col-md-4 mb-3"  key={i}>
+                                        return <div className="col-md-4 mb-3" key={i}>
                                             <div className="awards-box">
                                                 <p>{a.title}</p>
                                             </div>

@@ -1,8 +1,12 @@
 import { getBaseUrl } from '@/app/lib/getBaseUrl'
+import blogData from '@/app/lib/getBlog'
 import diseaseData from '@/app/lib/getDisease'
+import doctorData from '@/app/lib/getDoctor'
+import doctorTalkData from '@/app/lib/getDoctorTalk'
 import procedureData from '@/app/lib/getProcedure'
 import getSpecialityData from '@/app/lib/getSpeciality'
 import getStaticText from '@/app/lib/getStaticTextServer'
+import testimonialData from '@/app/lib/getTestimonial'
 import BlogCarousel from '@/components/BlogCarousel'
 import ExpertCarousel from '@/components/ExpertCarousel'
 import Footer from '@/components/Footer'
@@ -21,9 +25,33 @@ const SpecialityDetails = async ({ params }) => {
     const data = await getSpecialityData.getSingleSpeciality(params.details);
     const allProcedure = await procedureData.getAll(5)
     const allDiseas = await diseaseData.getAll(10);
-    const allSubSpeciality = await getSpecialityData.getAllSubSpeciality(data.speciality.id)
+    const allSubSpeciality = await getSpecialityData.getAllSubSpeciality(data.speciality?.id)
 
-    console.log(allSubSpeciality);
+    const expertDataSet = {
+        sectionTitle: data.expertSection?.title,
+        buttonText: 'View All', buttonURL: `${baseUrl + "/doctor"}`,
+        data: await doctorData.getBySpeciality(data.speciality.id),
+        baseUrl: baseUrl
+    };
+    const testimonialDataSet = {
+        sectionTitle: data.testimonialSection?.title,
+        buttonText: 'View All', buttonURL: `${baseUrl + "/testimonial"}`,
+        data: await testimonialData.getBySpeciality(data.speciality.id),
+        baseUrl: baseUrl
+    }
+    const blogDataSet = {
+        sectionTitle: data.blogSection?.title,
+        buttonText: 'View All', buttonURL: `${baseUrl + "/blog"}`,
+        data: await blogData.getBySpeciality(data.speciality.id),
+        baseUrl: baseUrl
+    }
+    const docTalkDataSet = {
+        sectionTitle: data.doctorTalk?.title,
+        buttonText: 'View All', buttonURL: `${baseUrl + "/doctor-talk"}`,
+        data: await doctorTalkData.getBySpciality(data.speciality.id),
+        baseUrl: baseUrl
+    }
+
 
     return (
         <>
@@ -41,10 +69,10 @@ const SpecialityDetails = async ({ params }) => {
                                                     <div className="col-12 px-lg-0 px-4">
                                                         <ul className="breadcrumb mb-0">
                                                             <li>
-                                                                <a href={baseUrl + "/"}>Home</a>
+                                                                <a href={baseUrl + "/"}>{staticText['Home']}</a>
                                                             </li>
                                                             <li>
-                                                                <a href={baseUrl + "/speciality"}> Specialities</a>
+                                                                <a href={baseUrl + "/speciality"}> {staticText['Specialities']}</a>
                                                             </li>
                                                             <li className="active"> {data.title} </li>
                                                         </ul>
@@ -79,10 +107,10 @@ const SpecialityDetails = async ({ params }) => {
                                                 <div className="col-12 px-lg-0 px-4">
                                                     <ul className="breadcrumb mb-0">
                                                         <li>
-                                                            <a href="/">Home</a>
+                                                            <a href="/">{staticText["Home"]}</a>
                                                         </li>
                                                         <li>
-                                                            <a href={baseUrl + "/speciality"}> Specialities</a>
+                                                            <a href={baseUrl + "/speciality"}> {staticText['Specialities']}</a>
                                                         </li>
                                                         <li className="active"> {data.title} </li>
                                                     </ul>
@@ -150,7 +178,7 @@ const SpecialityDetails = async ({ params }) => {
                                                         <p>{subS.overviewSection?.details.slice(0, 70)}</p>
 
                                                         <div className="main-btn">
-                                                            <a href={baseUrl+"/speciality/"+subS?.speciality?.slug}>
+                                                            <a href={baseUrl + "/speciality/" + subS?.speciality?.slug}>
                                                                 {staticText['Read More']}<span>
                                                                     <i className="fa-solid fa-arrow-right"></i>
                                                                 </span>
@@ -279,19 +307,19 @@ const SpecialityDetails = async ({ params }) => {
 
 
                     <div className="line-divider"> </div>
-                    {/* <ExpertCarousel/> */}
+                    <ExpertCarousel dataSet={expertDataSet} />
 
 
                     <div className="line-divider"></div>
-                    {/* <TestimonialSection/> */}
+                    <TestimonialSection dataSet={testimonialDataSet} />
 
 
                     <div className="line-divider"></div>
-                    {/* <FromDoctor/> */}
+                    <FromDoctor dataSet={docTalkDataSet} />
 
 
                     <div className="line-divider"></div>
-                    {/* <BlogCarousel/> */}
+                    <BlogCarousel dataSet={blogDataSet} />
 
                 </div>
             </div>

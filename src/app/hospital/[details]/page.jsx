@@ -246,7 +246,7 @@ const HospitalDetails = async ({ params }) => {
                                 </div>
                             </div>
                             <div className="cta-col">
-                                <a href={basePath+"/doctor"}>
+                                <a href={basePath + "/doctor"}>
                                     <div className="cta-diff">
                                         <div className="d-flex align-items-center justify-content-center">
                                             <img src="/img/doctor.png" alt="" />
@@ -256,7 +256,7 @@ const HospitalDetails = async ({ params }) => {
                                 </a>
                             </div>
                             <div className="cta-col">
-                                <a href={basePath+ "/book-an-appointment"}>
+                                <a href={basePath + "/book-an-appointment"}>
                                     <div className="cta-diff">
                                         <div className="d-flex align-items-center justify-content-center">
                                             <img src="/img/appointment.png" alt="" />
@@ -266,7 +266,7 @@ const HospitalDetails = async ({ params }) => {
                                 </a>
                             </div>
                             <div className="cta-col">
-                                <a href={basePath+"/health-package"}>
+                                <a href={basePath + "/health-package"}>
                                     <div className="cta-diff">
                                         <div className="d-flex align-items-center justify-content-center">
                                             <img src="/img/health.png" alt="" />
@@ -276,7 +276,7 @@ const HospitalDetails = async ({ params }) => {
                                 </a>
                             </div>
                             <div className="cta-col">
-                                <a href={basePath+"/second-opinion"}>
+                                <a href={basePath + "/second-opinion"}>
                                     <div className="cta-diff">
                                         <div className="d-flex align-items-center justify-content-center">
                                             <img src="/img/opinion.png" alt="" />
@@ -356,7 +356,9 @@ const HospitalDetails = async ({ params }) => {
                                     <h4 className="mb-3">{hptData.overviewSection.subTitle}</h4>
                                 </div>
 
-                                <div dangerouslySetInnerHTML={{ __html: marked(hptData.overviewSection.details) }}></div>
+                                <div
+                                    className='main-list'
+                                    dangerouslySetInnerHTML={{ __html: marked(hptData.overviewSection.details) }}></div>
 
                                 {hptData.USPSection.uspItem.length > 1 ? <div className="details-counter-section">
                                     <div className="row">
