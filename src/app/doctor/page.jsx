@@ -4,15 +4,19 @@ import React from 'react'
 import doctorData from '@/app/lib/getDoctor'
 import { getStaticPageContent } from '@/app/lib/getStaticPageContent'
 import { getBaseUrl } from '@/app/lib/getBaseUrl'
-import getStaticText from '@/app/lib/getStaticTextServer'
+import getStaticText from '@/app/lib/getStaticTextServer';
+import DoctorListing from '@/components/DoctorListing'
+
+
 
 const Doctor = async () => {
     const baseURL = await getBaseUrl(true, true);
     const data = await getStaticPageContent("doctor");
     const pageContent = data?.data[0]?.pageContent;
     const pageMeta = data?.data[0]?.metaSection;
-    const docData = await doctorData.getDoctorAll();
+    // const docData = await doctorData.getDoctorAll();
     const staticText = await getStaticText();
+
 
 
     return (
@@ -45,7 +49,7 @@ const Doctor = async () => {
                             <div className="row">
                                 <div className="col-md-12 col-6">
                                     <div className="main-heading">
-                                        <h2>{docData.length} {staticText['Doctors Found']}</h2>
+                                        <h2>{10} {staticText['Doctors Found']}</h2>
                                     </div>
                                 </div>
                                 <div className="col-6 d-lg-none d-block">
@@ -169,38 +173,7 @@ const Doctor = async () => {
                                     </div>
                                 </div>
 
-                                <div className="col-md-9 expert-section">
-                                    <div className="row">
-                                        {
-                                            docData.map((d, index) => {
-                                                return <div className="col-md-4 col-6 mb-3" key={index}>
-                                                    <div className="expert-card">
-                                                        <div className="card border-0 p-lg-4 p-0">
-                                                            <div className="card-top">
-                                                                <a href="#">
-                                                                    <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${d.doctorImage.url}`} className="img-fluid w-100" alt="" />
-                                                                </a>
-                                                            </div>
-                                                            <div className="card-content">
-                                                                <h4>{d.name}</h4>
-                                                                <p>{d.doctorDesignation}</p>
-                                                                <h5>{d.specialities[0]?.title}</h5>
-                                                                <div className="from-btn">
-                                                                    <a href="#" className="btn">{staticText['Appointment']}</a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div className="main-btn  text-lg-center text-start ms-lg-0 ms-2 mt-2">
-                                                            <a href={baseURL + "/doctor/" + d.slug}>{staticText['View Profile']}</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            })
-                                        }
-
-
-                                    </div>
-                                </div>
+                                <DoctorListing baseURL={baseURL}/>
                             </div>
                         </div>
                     </section>
