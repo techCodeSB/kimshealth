@@ -882,11 +882,13 @@ header {
     background: #fff;
     transition: .3s;
 }
-.expert-section .card .card-top img{
+
+.expert-section .card .card-top img {
     height: 265px;
     object-fit: cover;
     object-position: top;
 }
+
 .expert-section .card:hover {
     background: #f5f5f5;
 }
@@ -4755,7 +4757,8 @@ li.chat-ic::before {
 .menu-item-has-children .tab a {
     color: #000000;
 }
-.menu-item-has-children .tab a:hover{
+
+.menu-item-has-children .tab a:hover {
     color: black;
 }
 
@@ -4915,7 +4918,8 @@ li.chat-ic::before {
     transition: transform 0.2s ease-in-out;
     transform: rotate(180deg);
 }
-.menu-item-has-children .accordion-item.active .accordion-icon::before{
+
+.menu-item-has-children .accordion-item.active .accordion-icon::before {
     transform: rotate(0deg);
 }
 
@@ -4951,15 +4955,18 @@ li.chat-ic::before {
     background: #fff;
     margin-top: 7px;
 }
-.menu-item-has-children .content-inner h3{
+
+.menu-item-has-children .content-inner h3 {
     font-size: 18px;
     margin-bottom: 0;
     padding: 0;
 }
-.menu-item-has-children .content-inner ul{
+
+.menu-item-has-children .content-inner ul {
     padding-left: 0px !important;
 }
-.menu-item-has-children .content-inner ul li a{
+
+.menu-item-has-children .content-inner ul li a {
     font-size: 15px !important;
     padding: 5px 0px !important;
     margin: 0 !important;
@@ -4969,3 +4976,120 @@ li.chat-ic::before {
     margin-bottom: 15px;
 }
 
+/* DESKTOP HAMBURGER MENU CSS */
+
+.desktop-humberger-menu {
+    position: relative;
+}
+
+.desktop-humberger-menu .hamburger {
+    width: 50px;
+    height: 45px;
+    position: relative;
+    cursor: pointer;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.4s ease;
+}
+
+.desktop-humberger-menu .hamburger span {
+    width: 30px;
+    height: 3px;
+    background: #fff;
+    border-radius: 3px;
+    display: block;
+    position: absolute;
+    transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+.desktop-humberger-menu .hamburger span:nth-child(1) {
+    transform: translateY(-8px);
+}
+
+.desktop-humberger-menu .hamburger span:nth-child(3) {
+    transform: translateY(8px);
+}
+
+.desktop-humberger-menu .hamburger.active {
+    transform: rotate(180deg);
+}
+
+.desktop-humberger-menu .hamburger.active span:nth-child(1) {
+    transform: translateY(0) rotate(45deg);
+}
+
+.desktop-humberger-menu .hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.desktop-humberger-menu .hamburger.active span:nth-child(3) {
+    transform: translateY(0) rotate(-45deg);
+}
+
+.desktop-humberger-menu .sidebar {
+    position: fixed;
+    top: 110px;
+    right: -300px;
+    width: 0;
+    height: auto;
+    background: #fff;
+    backdrop-filter: blur(10px);
+    box-shadow: 5px 0 25px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    z-index: 99;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    transition: .5s;
+}
+
+.desktop-humberger-menu .sidebar.active {
+    transform: translateX(0px);
+    right: 0;
+    width: 25%;
+}
+
+.desktop-humberger-menu .sidebar-header {
+    padding: 30px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+}
+
+
+.desktop-humberger-menu .sidebar .menu-items .sub-menu-details ul li a {
+    position: relative;
+    margin-bottom: 5px;
+    display: block;
+    transition: .5s;
+    font-weight: 500;
+}
+
+.desktop-humberger-menu .sidebar .menu-items .sub-menu-details ul li a:hover {
+    color: #b71c2b;
+    margin-left: 10px;
+}
+
+.desktop-humberger-menu .sidebar .menu-items .sub-menu-details ul li a:hover::before {
+    background-color: #b71c2b;
+}
+
+.desktop-humberger-menu .sidebar .menu-items .sub-menu-details ul li a::before {
+    position: absolute;
+    content: '';
+    width: 10px;
+    height: 2px;
+    background: #000;
+    top: 50%;
+    left: -20px;
+    transition: .5s;
+}
+
+
+.desktop-humberger-menu .menu-items {
+    padding: 25px 0px 25px 55px;
+    flex-grow: 1;
+}

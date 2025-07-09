@@ -27,7 +27,7 @@ const Header = () => {
 
     useEffect(() => {
         const fetchTexts = async () => {
-            setStaticTexts({...await getStaticText()})
+            setStaticTexts({ ...await getStaticText() })
         };
 
         fetchTexts();
@@ -184,7 +184,7 @@ const Header = () => {
                                     <li><a href={`${basePath}/visa-medical`} className="anchor-menu">Visa Medical</a></li>
                                     <li><a href={`${basePath}/international-patient`} className="anchor-menu">International Patients</a></li>
                                     <li className="menu-item-has-children show-submenu d-lg-inline-block d-none">
-                                        <Link href={basePathOnlyLang+"/hospital"} className="anchor-menu">Locations</Link>
+                                        <Link href={basePathOnlyLang + "/hospital"} className="anchor-menu">Locations</Link>
                                         <div className="sub-menu ">
                                             <div className="row">
                                                 <div className="col-md-4">
@@ -330,6 +330,42 @@ const Header = () => {
                                     onClick={() => { location.href = `${basePath}/book-an-appointment` }}>
                                     Book An Appointment
                                 </button>
+                            </div>
+                            <div className="desktop-humberger-menu">
+                                <div className="hamburger" id="hamburger">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </div>
+                                <div className="sidebar" id="sidebar">
+                                    <div className="menu-items">
+                                        <div className="sub-menu-details">
+                                            <ul>
+                                                <li>
+                                                    <a href="#">Kuravankonam</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">Manacaud</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">Attingal</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">Pothencode</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">Ayoor</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">Vedivachankoil</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">Vattiyoorkavu</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div className="menu-button">
                                 <span className="toggle-bar"></span>
