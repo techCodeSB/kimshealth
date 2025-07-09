@@ -4,8 +4,8 @@ import React from 'react'
 import { getBaseUrl } from '@/app/lib/getBaseUrl';
 import { getStaticPageContent } from '@/app/lib/getStaticPageContent';
 import { marked } from 'marked';
-import leaderData from '../lib/getLeader';
-import awardData from '../lib/getAward';
+import leaderData from '@/app/lib/getLeader';
+import awardData from '@/app/lib/getAward';
 
 
 
