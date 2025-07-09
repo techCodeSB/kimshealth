@@ -12,8 +12,13 @@ const FromDoctor = ({ dataSet }) => {
         };
 
         fetchTexts();
+
+
     }, []);
-  
+
+    if (dataSet.data.length < 1) {
+        return;
+    }
 
     return (
         <>
@@ -22,12 +27,12 @@ const FromDoctor = ({ dataSet }) => {
                     <div className="row justify-content-between" data-aos="fade-up">
                         <div className="col-md-4 col-8">
                             <div className="main-heading">
-                                <h2>{dataSet.sectionTitle} </h2>
+                                <h2>{dataSet?.sectionTitle} </h2>
                             </div>
                         </div>
                         <div className="col-md-2 col-4">
                             <div className="over-all-btn text-end">
-                                <a href={dataSet.buttonURL}>{staticTexts[dataSet.buttonText]} <span><img src="/img/slider-right-arrow.svg" className="img-fluid"
+                                <a href={dataSet.buttonURL}>{staticTexts[dataSet?.buttonText]} <span><img src="/img/slider-right-arrow.svg" className="img-fluid"
                                     alt="" /></span></a>
                             </div>
                         </div>
@@ -36,7 +41,7 @@ const FromDoctor = ({ dataSet }) => {
                     <div className="row">
                         <div className="col-xl-8 col-lg-8 col-md-8 col-12 hear-doctor-img mb-lg-0 mb-3">
                             <div className="position-relative overflow-hidden" data-aos="fade-up">
-                                <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${dataSet.data[0].thumbnailImage.url}`} className="img-fluid d-lg-block d-none doc-image-hover w-100" alt={dataSet.data[0].title} />
+                                <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${dataSet.data[0]?.thumbnailImage.url}`} className="img-fluid d-lg-block d-none doc-image-hover w-100" alt={dataSet.data[0].title} />
                                 <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${dataSet.data[0].thumbnailImage.url}`} className="img-fluid w-100 d-lg-none d-block doc-image-hover" alt={dataSet.data[0].title} />
                                 <div className="hear-doctor-content">
                                     <div className="d-flex align-items-center justify-content-between">
@@ -104,6 +109,9 @@ const FromDoctor = ({ dataSet }) => {
             </section>
         </>
     )
+
+
+
 }
 
 export default FromDoctor;

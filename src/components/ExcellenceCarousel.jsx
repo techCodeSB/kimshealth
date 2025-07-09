@@ -14,6 +14,11 @@ const ExcellenceCarousel = ({ dataSet }) => {
         fetchTexts();
     }, []);
 
+
+     if (dataSet.data.length < 1) {
+        return;
+    }
+
     return (
         <>
             <section className="section exellence-section" data-aos="fade-up">

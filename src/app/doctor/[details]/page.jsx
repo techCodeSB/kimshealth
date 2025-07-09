@@ -19,14 +19,14 @@ const DoctorDetails = async ({ params }) => {
     const docTalkDataSet = {
         sectionTitle: data.doctorTalk.title,
         buttonText: 'View All', buttonURL: '#',
-        data: await doctorTalkData.allData(10),
+        data: await doctorTalkData.getByDoctor(data.id),
         baseUrl: basePath
     }
 
     const blogDataSet = {
         sectionTitle: data.blogSection.title,
         buttonText: 'View All', buttonURL: '#',
-        data: await blogData.allBlog(10),
+        data: await blogData.getByDoctor(data.id),
         baseUrl: basePath
     }
 
@@ -76,7 +76,7 @@ const DoctorDetails = async ({ params }) => {
                                             <a href="#" className="form-btn mt-3 d-block text-center text-light">{staticText['Book An Appointment']}</a>
                                         </div>
 
-                                        <div className="calendar mt-5">
+                                        {/* <div className="calendar mt-5">
                                             <div className="calendar-header">
                                                 <button className="btn  previous-month-btn">
                                                     {staticText['Prev']}</button>
@@ -96,7 +96,7 @@ const DoctorDetails = async ({ params }) => {
                                             </div>
 
                                             <button className="form-btn my-3">Go to Doctor's Slot</button>
-                                        </div>
+                                        </div> */}
                                     </div>
                                 </div>
 

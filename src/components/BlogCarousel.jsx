@@ -15,6 +15,10 @@ const BlogCarousel = ({ dataSet }) => {
         fetchTexts();
     }, []);
 
+     if (dataSet.data.length < 1) {
+        return;
+    }
+
     return (
         <>
             <section className="section blog-section d-lg-block d-none">
