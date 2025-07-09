@@ -173,7 +173,7 @@ const Blog = async () => {
                                                     </p>
                                                     <div className="d-flex align-items-center justify-content-between">
                                                         <div>
-                                                            <strong> {staticText['By']}: {allBlog[1].doctor[0].name}</strong>
+                                                            <strong> {staticText['By']}: {allBlog[1].doctor[0]?.name}</strong>
                                                         </div>
                                                         <div className="main-btn">
                                                             <p>{formatDate(allBlog[1].date)}</p>
@@ -187,21 +187,21 @@ const Blog = async () => {
                                         <div className="col-md-12 my-3">
                                             <div className="owl-carousel owl-theme blog-page-slider">
                                                 {
-                                                    allBlog.map((b, index) => {
-                                                        return index < 4 ? <div className="card border-0" key={index}>
+                                                    allBlog.slice(0, 4).map((b, index) => {
+                                                        return <div className="card border-0" key={index}>
                                                             <div className="card-content">
                                                                 <h4>{b.title}</h4>
-                                                                <p>{b.shortDetails} <span> Read More</span></p>
+                                                                <p>{b.shortDetails} <span> {staticText['Read More']}</span></p>
                                                                 <div className="d-flex align-items-center justify-content-between">
                                                                     <div>
-                                                                        <strong> {staticText['By']}: {b.doctor[0].name}</strong>
+                                                                        <strong> {staticText['By']}: {b.doctor[0]?.name}</strong>
                                                                     </div>
                                                                     <div className="main-btn">
                                                                         <p>{formatDate(b.date)}</p>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div> : null
+                                                        </div>
                                                     })
                                                 }
 

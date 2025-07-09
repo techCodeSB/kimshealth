@@ -98,7 +98,7 @@ const Header = () => {
                                 <li><a href="#">My Reports</a></li>
                                 <li><a href={`${basePath}/ambulance-services`}>Call Ambulance</a></li>
                                 <li><a href={`${basePath}/contact-us`}>Contact Us</a></li>
-                                <li><a href={`${basePath}/health-package`}>Health Checkup</a></li>
+                                <li><a href={"https://healthcheckup.kimshealthcare.com/p/kims-trivandrum-1/"} target='_blank'>Health Checkup</a></li>
                             </ul>
 
                             <div className="top-bar-icon d-flex align-items-center">
@@ -152,7 +152,6 @@ const Header = () => {
 
                                                         for (let i = 0; i < speciality?.length; i++) {
                                                             const s = speciality[i];
-                                                            console.log("All Speciality -->", s)
                                                             const colIndex = Math.floor(i / perColumn);
                                                             columns[colIndex].push(
                                                                 <li key={i}>

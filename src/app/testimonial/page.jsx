@@ -4,6 +4,7 @@ import React from 'react'
 import testimonialData from '@/app/lib/getTestimonial'
 import { getBaseUrl } from '@/app/lib/getBaseUrl'
 import { getStaticPageContent } from '@/app/lib/getStaticPageContent';
+import getStaticText from '../lib/getStaticTextServer'
 
 
 
@@ -13,6 +14,7 @@ const Testimonial = async () => {
     const data = await getStaticPageContent("testimonial");
     const pageContent = data?.data[0]?.pageContent;
     const pageMeta = data?.data[0]?.metaSection;
+    const staticText = await getStaticText()
 
 
     return (
@@ -31,7 +33,7 @@ const Testimonial = async () => {
                                 <div className="col-12">
                                     <ul className="breadcrumb mb-0">
                                         <li>
-                                            <a href="/">Home</a>
+                                            <a href={basePath+"/"}>{staticText['Home']}</a>
                                         </li>
                                         <li className="active"> {pageContent[0]?.title} </li>
                                     </ul>
@@ -84,15 +86,15 @@ const Testimonial = async () => {
                                                     <div className="testi-rightbox">
                                                         <h3>{t.title}</h3>
                                                         <p>{`${t.shortDetails.slice(0, 80)}...`}
-                                                            <a href={basePath + "/testimonial/" + t.slug}> Watch Video</a>
+                                                            <a href={basePath + "/testimonial/" + t.slug}>{staticText['Watch Video']}</a>
                                                         </p>
 
                                                         <div className="d-flex align-items-center justify-content-between mt-3">
                                                             <div className="doctor-name">
-                                                                <p><span><img src="/img/doctor.png" className="img-fluid" alt="" /></span> {t.doctor.name} </p>
+                                                                <p><span><img src="/img/doctor.png" className="img-fluid" alt="" /></span> {t.doctor?.name} </p>
                                                             </div>
                                                             <div className="doctor-catagory">
-                                                                <p>{t.specialities[0].title}</p>
+                                                                <p>{t.specialities[0]?.title}</p>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -111,4 +113,4 @@ const Testimonial = async () => {
     )
 }
 
-export default Testimonial
+export default Testimonial;

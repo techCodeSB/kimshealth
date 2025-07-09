@@ -49,7 +49,7 @@ const HomeServices = async () => {
                                 <div className="col-12">
                                     <ul className="breadcrumb mb-0">
                                         <li>
-                                            <a href="/">{staticTexts['Home']}</a>
+                                            <a href={basePath+"/"}>{staticTexts['Home']}</a>
                                         </li>
                                         <li className="active"> {pageContent[0].title} </li>
                                     </ul>

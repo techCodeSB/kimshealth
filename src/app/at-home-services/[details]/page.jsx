@@ -14,7 +14,7 @@ const HomeServiceDetails = async ({ params }) => {
     const data = await homeServices.getSingleHomeService(params.details);
     const homeServiceData = await homeServices.getAll(10);
     const staticTexts = await getStaticText()
-    
+
     const testimonialDataSet = {
         sectionTitle: data.testimonialSection.title,
         buttonText: 'View All', buttonURL: '#',
@@ -66,12 +66,8 @@ const HomeServiceDetails = async ({ params }) => {
                                     </div>
 
                                     <div className="col-md-6 details-proceduce-banner-right-col">
-                                        <img src="/img/home-details-banner.png" className="img-fluid details-banner-image" alt="" />
+                                        <img src="" className="img-fluid details-banner-image" alt="" />
                                     </div>
-
-                                    {/* <!-- <div className="col-md-6">
-                                        <img src="/img/details-banner.png" alt="" className="img-fluid w-100" />
-                                    </div> --> */}
                                 </div>
                             </div>
                         </div>
@@ -124,10 +120,6 @@ const HomeServiceDetails = async ({ params }) => {
                                         </div>
 
                                     </div>
-
-                                    {/* <!-- <div className="col-md-6">
-                                        <img src="/img/details-banner.png" alt="" className="img-fluid w-100" />
-                                    </div> --> */}
                                 </div>
                             </div>
                         </div>
@@ -146,7 +138,7 @@ const HomeServiceDetails = async ({ params }) => {
                                 </div>
                                 <div className="col-md-4">
                                     <div className="association-form-card mb-0">
-                                        <Form1 title={"GET A CALLBACK FROM OUR HEALTH ADVISOR"}/>
+                                        <Form1 title={"GET A CALLBACK FROM OUR HEALTH ADVISOR"} />
                                     </div>
                                 </div>
                             </div>

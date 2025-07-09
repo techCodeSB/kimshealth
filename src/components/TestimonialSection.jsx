@@ -36,7 +36,7 @@ const TestimonialSection = ({ dataSet }) => {
 
                     <div className="row">
                         {
-                            dataSet.data.map((t, index) => {
+                            dataSet.data.slice(0,4).map((t, index) => {
                                 return <div className="col-xl-6 col-lg-6 col-md-6 col-12"
                                     data-aos={index === 0 || index === 2 ? "fade-right" : "fade-left"} key={index}>
                                     <div className="row testi-card">

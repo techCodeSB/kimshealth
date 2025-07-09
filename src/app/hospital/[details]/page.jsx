@@ -17,10 +17,12 @@ import WatchVideoButton from '@/components/WatchVideoButton';
 import { marked } from 'marked';
 
 
+
 const HospitalDetails = async ({ params }) => {
     const basePath = await getBaseUrl(true, true);
     const hptData = await hospitalData.getSingleHospital(params.details);
     const hospitals = await hospitalData.getAll(10);
+    const staticText = await getStaticText()
 
     const specialityDataSet = {
         sectionTitle: hptData.specialitySection.title,
@@ -70,10 +72,10 @@ const HospitalDetails = async ({ params }) => {
                                         <div className="col-12 px-0">
                                             <ul className="breadcrumb mb-0">
                                                 <li>
-                                                    <a href={basePath + "/"}>Home</a>
+                                                    <a href={basePath + "/"}>{staticText['Home']}</a>
                                                 </li>
                                                 <li>
-                                                    <a href={basePath + "/hospital"}>Our Hospital</a>
+                                                    <a href={basePath + "/hospital"}>{staticText['Our Hospital']}</a>
                                                 </li>
                                                 <li className="active"> {hptData.title} </li>
                                             </ul>
@@ -88,7 +90,7 @@ const HospitalDetails = async ({ params }) => {
                                             <div className="details-heading">
                                                 <div className="hospital-content">
                                                     <ul>
-                                                        <li className="hospital-icon-custom">{hptData.title}  </li>
+                                                        <li className="hospital-icon-custom">{hptData.title}</li>
                                                         <li>{hptData.address} </li>
                                                     </ul>
                                                 </div>
@@ -103,18 +105,20 @@ const HospitalDetails = async ({ params }) => {
                                                     <ul>
                                                         <li className="telephone-icon-custom"><a href={`tel:${hptData.contactNo}`}> Appointment Number- {hptData.contactNo} </a></li>
                                                         <li className="send-custom-icon">
-                                                            <a href={hptData.mapURL} target='_blank'> Get Direction</a>
+                                                            <a href={hptData.mapURL} target='_blank'> {staticText['Get Direction']}</a>
                                                         </li>
                                                     </ul>
-                                                    <div className="d-flex align-items-center">
+                                                    <div className="d-flex align-items-center mt-2">
                                                         <img src="/img/google.png" alt="Google Logo" className="me-2" />
                                                         <div className="star-rating" data-rating="4.7">
-                                                            <i className="fa fa-solid fa-star ms-1" style={{ color: "#ffc107" }}></i>
-                                                            <i className="fa fa-solid fa-star ms-1" style={{ color: "#ffc107" }}></i>
-                                                            <i className="fa fa-solid fa-star ms-1" style={{ color: "#ffc107" }}></i>
-                                                            <i className="fa fa-solid fa-star ms-1" style={{ color: "#ffc107" }}></i>
-                                                            <i className="fa fa-solid fa-star-half ms-1" style={{ color: "#ffc107" }}></i>
-                                                            4.5
+                                                            {
+                                                                Array.from({ length: hptData.rating }).map((r, index) => {
+                                                                    return index + 1 < hptData.rating - 1 ?
+                                                                        <i className="fa fa-solid fa-star ms-1" style={{ color: "#ffc107" }} key={index}></i>
+                                                                        : <i key={index} className={`fa fa-solid ms-1 ${Number.isInteger(hptData.rating) ? 'fa-star' : 'fa-star-half'}`} style={{ color: "#ffc107" }}></i>
+                                                                })
+                                                            }
+                                                            {hptData.rating}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -242,53 +246,41 @@ const HospitalDetails = async ({ params }) => {
                                 </div>
                             </div>
                             <div className="cta-col">
-                                <a href="#">
+                                <a href={basePath+"/doctor"}>
                                     <div className="cta-diff">
                                         <div className="d-flex align-items-center justify-content-center">
                                             <img src="/img/doctor.png" alt="" />
                                             <h3>Find a <br /> <span>Doctor</span></h3>
-                                            {/* <!-- <div className="cta-right-arrow">
-                                        <img src="/img/right-arrow.svg" className="img-fluid" alt="" />
-                                    </div> --> */}
                                         </div>
                                     </div>
                                 </a>
                             </div>
                             <div className="cta-col">
-                                <a href="#">
+                                <a href={basePath+ "/book-an-appointment"}>
                                     <div className="cta-diff">
                                         <div className="d-flex align-items-center justify-content-center">
                                             <img src="/img/appointment.png" alt="" />
                                             <h3>Book an <br /> <span>Appointment</span></h3>
-                                            {/* <!-- <div className="cta-right-arrow">
-                                        <img src="/img/right-arrow.svg" className="img-fluid" alt="" />
-                                    </div> --> */}
                                         </div>
                                     </div>
                                 </a>
                             </div>
                             <div className="cta-col">
-                                <a href="#">
+                                <a href={basePath+"/health-package"}>
                                     <div className="cta-diff">
                                         <div className="d-flex align-items-center justify-content-center">
                                             <img src="/img/health.png" alt="" />
                                             <h3>Book a <br /> <span>Health Checkup</span></h3>
-                                            {/* <!-- <div className="cta-right-arrow">
-                                        <img src="/img/right-arrow.svg" className="img-fluid" alt="" />
-                                    </div> --> */}
                                         </div>
                                     </div>
                                 </a>
                             </div>
                             <div className="cta-col">
-                                <a href="#">
+                                <a href={basePath+"/second-opinion"}>
                                     <div className="cta-diff">
                                         <div className="d-flex align-items-center justify-content-center">
                                             <img src="/img/opinion.png" alt="" />
                                             <h3>Get <br /> <span>Second Opinion</span></h3>
-                                            {/* <!-- <div className="cta-right-arrow">
-                                        <img src="/img/right-arrow.svg" className="img-fluid" alt="" />
-                                    </div> --> */}
                                         </div>
                                     </div>
                                 </a>
@@ -413,7 +405,7 @@ const HospitalDetails = async ({ params }) => {
                             </div>
                             <div className="col-md-2 col-4">
                                 <div className="over-all-btn text-end">
-                                    <a href={basePath+"/hospital"}>View All <span><img src="/img/slider-right-arrow.svg" className="img-fluid"
+                                    <a href={basePath + "/hospital"}>View All <span><img src="/img/slider-right-arrow.svg" className="img-fluid"
                                         alt="" /></span></a>
                                 </div>
                             </div>

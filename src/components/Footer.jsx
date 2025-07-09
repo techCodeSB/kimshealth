@@ -227,7 +227,7 @@ const Footer = () => {
                                     <li><a href={basePath + "/at-home-services"}>Home Care Services</a></li>
                                     <li><a href={basePath + "/second-opinion"}>Get Second Opinion</a></li>
                                     <li><a href={basePath + "/visa-medical"}>Visa Medicals</a></li>
-                                    <li><a href={basePath + "/"}>Telehealth</a></li>
+                                    <li><a href={"https://consult.bestdocapp.com/home/KIMSTVM?version=new"} target='_blank'>Telehealth</a></li>
                                     <li><a href={basePath + "/bmw-report"}>Lab Reports</a></li>
                                     <li><a href={basePath + "/all-companies-on-panel"}>TPA and Insurance</a></li>
                                     <li><a href={basePath + "/"}>Corporate</a></li>
@@ -372,7 +372,7 @@ const Footer = () => {
                                     <li><a href={basePath + "/at-home-services"}>Home Care Services</a></li>
                                     <li><a href={basePath + "/second-opinion"}>Get Second Opinion</a></li>
                                     <li><a href={basePath + "/visa-medical"}>Visa Medicals</a></li>
-                                    <li><a href={basePath + "#"}>Telehealth</a></li>
+                                    <li><a href={"https://consult.bestdocapp.com/home/KIMSTVM?version=new"} target='_blank'>Telehealth</a></li>
                                     <li><a href={basePath + "#"}>Lab Reports</a></li>
                                     <li><a href={basePath + "/all-companies-on-panel"}>TPA and Insurance</a></li>
                                     <li><a href={basePath + "#"}>Corporate</a></li>
