@@ -13,6 +13,7 @@ const DoctorListing = ({ baseURL, allLocation, allSpeciality, allDoctor }) => {
     const limit = 12;
     const observerRef = useRef(null);
     const [loading, setLoading] = useState(false);
+    const [endData, setEndData] = useState(false);
 
 
     useEffect(() => {
@@ -42,6 +43,9 @@ const DoctorListing = ({ baseURL, allLocation, allSpeciality, allDoctor }) => {
         setLoading(true);
 
         const data = await doctorData.getDoctorAll(count, limit);
+        if (data.length < 1) {
+            setEndData(true)
+        }
         setDocData(prev => [...prev, ...data]);
         setCount(prev => prev + limit);
 
@@ -51,7 +55,7 @@ const DoctorListing = ({ baseURL, allLocation, allSpeciality, allDoctor }) => {
     useEffect(() => {
         const observer = new IntersectionObserver(
             entries => {
-                if (entries[0].isIntersecting) {
+                if (entries[0].isIntersecting && !endData) {
                     loadDoctor();
                 }
             },
@@ -240,10 +244,11 @@ const DoctorListing = ({ baseURL, allLocation, allSpeciality, allDoctor }) => {
                                         </div>
                                     })
                                 }
-                                {loading && <p className='text-center p-3'>Loading more doctors...</p>}
-                                <div ref={observerRef} style={{ height: "1px" }}></div>
+
 
                             </div>
+                            {loading && <p className='text-center p-3'>Loading more doctors...</p>}
+                            <div ref={observerRef} style={{ height: "1px" }}></div>
                         </div>
                     </div>
                 </div>

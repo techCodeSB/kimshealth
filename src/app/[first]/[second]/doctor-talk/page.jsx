@@ -6,6 +6,7 @@ import { getStaticPageContent } from '@/app/lib/getStaticPageContent';
 import doctorTalkData from '@/app/lib/getDoctorTalk';
 import formatDate from '@/app/lib/formatDate';
 import getStaticText from '@/app/lib/getStaticTextServer';
+import DoctorTalkListing from '@/components/DoctorTalkListing';
 
 
 
@@ -44,60 +45,9 @@ const DoctorTalk = async () => {
                         </div>
                     </section>
 
-                    <section className="section">
-                        <div className="container">
-                            <div className="row justify-content-between">
-                                <div className="col-md-6 mb-3">
-                                    <div className="main-heading">
-                                        <h2 className="mb-0">{staticText["Hear From The Doctor"]}</h2>
-                                    </div>
-                                </div>
-                                <div className="col-md-4 details-key-row">
-                                    <form action="">
-                                        <div className="input-group p-0 position-relative justify-content-center">
-                                            <select className="form-select diseases-page-search">
-                                                <option>Search for Speciality </option>
-                                                <option value="1">One</option>
-                                                <option value="2">Two</option>
-                                                <option value="3">Three</option>
-                                            </select>
-                                            <button className="input-group-text border-0 search-btn-page"><i className="fa-solid fa-magnifying-glass"></i></button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-
-
-                    <div className="section section">
-                        <div className="container">
-                            <div className="row">
-                                {
-                                    docTalkData.map((dt, index) => {
-                                        return <div className="col-md-4 blog-right-col overflow-hidden mb-3" key={index}>
-                                            <div className="position-relative overflow-hidden" data-aos={index % 2 == 0 ? "fade-right" : "fade-left"}>
-                                                <img src={process.env.NEXT_PUBLIC_IMAGE_URL + dt.thumbnailImage.url} className="img-fluid w-100 hear-doc-image" alt="" />
-                                                <div className="hear-doctor-content">
-                                                    <div className="d-block align-items-center justify-content-between">
-                                                        <div>
-                                                            <h5 className="">{formatDate(dt.date)}</h5>
-                                                            <p>{dt.title}</p>
-                                                        </div>
-                                                        <div className="main-btn ">
-                                                            <span><img src="/img/play-button.png" className="img-fluid" alt="" /> </span>
-                                                            <a href={baseURL + "/doctor-talk/" + dt.slug}>{staticText['Watch Video']} <span><i
-                                                                className="fa-solid fa-arrow-right"></i></span></a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    })
-                                }
-                            </div>
-                        </div>
-                    </div>
+                    <DoctorTalkListing
+                        baseURL={baseURL}
+                    />
                 </div>
             </div>
             <Footer />

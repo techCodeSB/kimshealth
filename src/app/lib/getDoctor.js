@@ -1,6 +1,6 @@
 const doctorData = {
     getDoctorAll: async (start=0, limit=12) => {
-        let url = process.env.NEXT_PUBLIC_CMS_API_URL + `/doctor-details?populate=*&pagination[start]=${start}&pagination[limit]=${limit}`;
+        let url = process.env.NEXT_PUBLIC_CMS_API_URL + `/doctor-details?populate=*&pagination[start]=${start}&pagination[limit]=${limit}&sort=name:asc`;
         const req = await fetch(url);
         const res = await req.json();
 
@@ -8,7 +8,7 @@ const doctorData = {
     },
 
     getSingleDoctor: async (slug) => {
-        let url = process.env.NEXT_PUBLIC_CMS_API_URL + `/doctor-details/?filters[slug][$eq]=${slug}&populate=*`;
+        let url = process.env.NEXT_PUBLIC_CMS_API_URL + `/doctor-details/?filters[slug][$eq]=${slug}&populate[0]=doctorImage&populate[1]=hospitals&populate[2]=diseases&populate[3]=locations&populate[4]=procedures&populate[5]=specialities&populate[6]=manageAppearance&populate[7]=metaSection&populate[8]=blogSection&populate[9]=doctorTalk`;
         const req = await fetch(url);
         const res = await req.json();
 

@@ -62,7 +62,7 @@ const BlogCarousel = ({ dataSet }) => {
                                             </div>
                                             <div className="main-btn">
                                                 <a href={dataSet.baseUrl + "/blog/" + blog.slug}>
-                                                    {staticTexts['Read More']} <span><i className="fa-solid fa-arrow-right"></i></span>
+                                                    Read More <span><i className="fa-solid fa-arrow-right"></i></span>
                                                 </a>
                                             </div>
                                         </div>

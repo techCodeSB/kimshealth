@@ -5,6 +5,7 @@ import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import TestimonialSection from '@/components/TestimonialSection'
 import formatDate from '@/app/lib/formatDate'
+import { marked } from 'marked'
 
 
 const TestimonialDetails = async ({ params }) => {
@@ -52,7 +53,6 @@ const TestimonialDetails = async ({ params }) => {
 
                     <section className="section">
                         <div className="container">
-
                             <div className="testimonial-details-card">
                                 <div className="row">
                                     <div className="col-md-7 mb-lg-0 mb-3">
@@ -77,7 +77,8 @@ const TestimonialDetails = async ({ params }) => {
                                                         : null
                                                 }
                                             </h3>
-                                            <p>{data.details}</p>
+                                            <div className='main-list' dangerouslySetInnerHTML={{__html: marked(data.details || "") || ""}}>
+                                            </div>
                                         </div>
                                         <div className="d-flex align-items-center justify-content-between mt-3">
                                             <div className="doctor-name">

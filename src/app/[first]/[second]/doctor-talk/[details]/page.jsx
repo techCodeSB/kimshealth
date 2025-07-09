@@ -12,6 +12,7 @@ const DoctorTalkDetails = async ({ params }) => {
     const data = await doctorTalkData.getSingleDoctor(params.details);
     const staticText = await getStaticText();
     const youtube = await youtubeData(data.videoId);
+    
     const docTalkDataSet = {
         sectionTitle: data.title,
         buttonText: 'View All', buttonURL: '#',

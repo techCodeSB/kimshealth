@@ -57,12 +57,12 @@ const ExpertCarousel = ({ dataSet }) => {
                                             <p>{d.doctorDesignation}</p>
                                             <h5>{d.specialities[0]?.title}</h5>
                                             <div className="from-btn">
-                                                <a href="#" className="btn">{staticTexts['Appointment']}</a>
+                                                <a href="#" className="btn">Appointment</a>
                                             </div>
                                         </div>
                                     </div>
                                     <div className="main-btn  text-lg-center text-start ms-lg-0 ms-2 mt-2">
-                                        <a href={dataSet.baseUrl + "/doctor/" + d.slug}>{staticTexts['View Profile']}</a>
+                                        <a href={dataSet.baseUrl + "/doctor/" + d.slug}>View Profile</a>
                                     </div>
                                 </div>
                             })

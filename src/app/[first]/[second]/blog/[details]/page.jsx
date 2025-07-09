@@ -10,12 +10,12 @@ import { marked } from 'marked';
 
 
 const BlogDetails = async ({ params }) => {
-    const basePath = await getBaseUrl();
+    const basePath = await getBaseUrl(true, true);
     const data = await blogData.getSingleBlog(params.details);
-    const docData = await doctorData.getSingleDoctor(data.doctor[0].slug);
+    const docData = await doctorData.getSingleDoctor(data.doctor[0]?.slug);
     const staticText = await getStaticText();
 
-    console.log(data)
+    console.log(docData)
 
     const blogDataSet = {
         sectionTitle: data.blogSection?.title || "Related Blogs",
@@ -45,7 +45,7 @@ const BlogDetails = async ({ params }) => {
                                                                 <a href="/">{staticText['Home']}</a>
                                                             </li>
                                                             <li>
-                                                                <a href="hospital-master.php">{staticText['Blogs']}</a>
+                                                                <a href={basePath+"/blog"}>{staticText['Blogs']}</a>
                                                             </li>
                                                             <li className="active">{data.title}</li>
                                                         </ul>
@@ -56,18 +56,18 @@ const BlogDetails = async ({ params }) => {
                                                 <div className="details-heading">
                                                     <div className="row">
                                                         <div className="col-md-6">
-                                                            <img src="/img/Dr Ajith R.png" alt="" className="img-fluid" />
+                                                            <img src={docData.doctorImage.url ? process.env.NEXT_PUBLIC_IMAGE_URL + docData.doctorImage.url : "/img/no-image.jpg"} alt="" className="img-fluid" />
                                                         </div>
                                                         <div className="col-md-6 my-auto">
-                                                            <h3>{docData.name}</h3>
+                                                            <h3>{docData?.name}</h3>
                                                             <p>
-                                                                {docData.hospitals.map((data, _) => {
-                                                                    return data.title + (docData.hospitals.length - 1 !== _ ? "," : "");
+                                                                {docData?.hospitals.map((data, _) => {
+                                                                    return data.title + (docData?.hospitals.length - 1 !== _ ? "," : "");
                                                                 })}
                                                             </p>
                                                             <h4>
-                                                                {docData.specialities.map((data, _) => {
-                                                                    return data.title + (docData.specialities.length - 1 !== _ ? "," : "");
+                                                                {docData?.specialities.map((data, _) => {
+                                                                    return data.title + (docData?.specialities.length - 1 !== _ ? "," : "");
                                                                 })}
                                                             </h4>
                                                             <div className="mt-4">
@@ -123,16 +123,16 @@ const BlogDetails = async ({ params }) => {
                                         <div className="details-heading">
                                             <div className="row">
                                                 <div className="col-5">
-                                                    <img src={process.env.NEXT_PUBLIC_IMAGE_URL + data.featuredImage.url} alt="" className="img-fluid" />
+                                                    <img src={process.env.NEXT_PUBLIC_IMAGE_URL + data.featuredImage.url} alt={data.title} className="img-fluid" />
                                                 </div>
                                                 <div className="col-6 my-auto pe-3">
                                                     <h3>{data.title}</h3>
                                                     <p>{docData?.hospitals.map((data, _) => {
-                                                        return data.title + (docData.hospitals.length - 1 !== _ ? "," : "");
+                                                        return data.title + (docData?.hospitals.length - 1 !== _ ? "," : "");
                                                     })}</p>
                                                     <h4>
                                                         {docData?.specialities.map((data, _) => {
-                                                            return data.title + (docData.specialities.length - 1 !== _ ? "," : "");
+                                                            return data.title + (docData?.specialities.length - 1 !== _ ? "," : "");
                                                         })}
                                                     </h4>
                                                     <div className="mt-4">
@@ -154,7 +154,7 @@ const BlogDetails = async ({ params }) => {
                                 <div className="col-md-8 mb-3">
                                     <div className="main-heading sub-heading">
                                         <h2 className="mb-1">{data.title}</h2>
-                                        <div dangerouslySetInnerHTML={{ __html: marked(data?.details || "") || "" }}>
+                                        <div className='main-list' dangerouslySetInnerHTML={{ __html: marked(data?.details || "") || "" }}>
                                         </div>
                                     </div>
                                 </div>
