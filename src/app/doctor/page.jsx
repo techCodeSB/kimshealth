@@ -7,7 +7,7 @@ import { getBaseUrl } from '@/app/lib/getBaseUrl'
 import getStaticText from '@/app/lib/getStaticTextServer';
 import DoctorListing from '@/components/DoctorListing'
 import langLoc from '@/helper/getLangLoc'
-import getSpecialityData from '../lib/getSpeciality'
+import getSpecialityData from '@/app/lib/getSpeciality'
 
 
 

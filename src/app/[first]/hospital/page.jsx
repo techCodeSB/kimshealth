@@ -14,7 +14,6 @@ const Hospital = async () => {
     const pageContent = data?.data[0]?.pageContent;
     const pageMeta = data?.data[0]?.metaSection;
     const hospitals = await hospitalData.getAll();
-
   
 
 
@@ -52,9 +51,6 @@ const Hospital = async () => {
                                     </div>
                                 </div>
                                 <div className="col-md-3 col-12 hospital-mainpage-form mb-lg-0 mb-4">
-                                    {/* <!-- <div className="over-all-btn text-end">
-                                        <a href="#">View All <span><img src="/img/slider-right-arrow.svg" className="img-fluid" alt=""></span></a>
-                                    </div> --> */}
                                     <form action="">
                                         <div className="input-group p-0 position-relative justify-content-center">
 
@@ -308,4 +304,4 @@ const Hospital = async () => {
     )
 }
 
-export default Hospital
+export default Hospital;
