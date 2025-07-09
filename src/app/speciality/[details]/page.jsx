@@ -21,7 +21,9 @@ const SpecialityDetails = async ({ params }) => {
     const data = await getSpecialityData.getSingleSpeciality(params.details);
     const allProcedure = await procedureData.getAll(5)
     const allDiseas = await diseaseData.getAll(10);
-    console.log(data)
+    const allSubSpeciality = await getSpecialityData.getAllSubSpeciality(data.speciality.id)
+
+    console.log(allSubSpeciality);
 
     return (
         <>
@@ -138,25 +140,27 @@ const SpecialityDetails = async ({ params }) => {
                         <div className="container">
                             <div className="details-card-wrapper pb-5">
                                 <div className="row position-relative" style={{ zIndex: "99" }}>
-                                    <div className="col-md-4 mb-lg-0 mb-3">
-                                        <div className="details-card text-center">
-                                            <div className="card-content">
-                                                <h4>Cardiology</h4>
-                                                <p>Cardiology is the medical specialty focusing on heart diseases, including
-                                                    diagnosis,
-                                                    treatment, and prevention of cardiovascular conditions.</p>
-
-                                                <div className="main-btn">
-                                                    <a href="#">{staticText['Read More']}<span><i className="fa-solid fa-arrow-right"></i></span></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
 
                                     {
+                                        allSubSpeciality.map((subS, index) => {
+                                            return <div className="col-md-4 mb-lg-0 mb-3" key={index}>
+                                                <div className="details-card text-center">
+                                                    <div className="card-content">
+                                                        <h4>{subS.title}</h4>
+                                                        <p>{subS.overviewSection?.details.slice(0, 70)}</p>
 
+                                                        <div className="main-btn">
+                                                            <a href={baseUrl+"/speciality/"+subS?.speciality?.slug}>
+                                                                {staticText['Read More']}<span>
+                                                                    <i className="fa-solid fa-arrow-right"></i>
+                                                                </span>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        })
                                     }
-
 
                                 </div>
                             </div>

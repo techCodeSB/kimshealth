@@ -16,6 +16,14 @@ const doctorTalkData = {
 
     },
 
+    getByDoctor: async (id) => {
+        const url = process.env.NEXT_PUBLIC_CMS_API_URL + `/doctor-talks?populate=*&filters[doctor][id][$eq]=${id}`;
+        const req = await fetch(url);
+        const res = await req.json();
+
+        return res.data;
+    },
+
 }
 
 export default doctorTalkData;

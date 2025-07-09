@@ -4693,7 +4693,7 @@ li.chat-ic::before {
 .doctor-details-main-page .right-col-details .main-heading .d-flex.align-items-center.gap-2.mb-2:before {
     position: absolute;
     content: '';
-    background: #ccc;
+    background: #ebebeb;
     width: 100%;
     height: 1px;
     bottom: -5px;

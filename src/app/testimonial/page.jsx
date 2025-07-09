@@ -4,7 +4,7 @@ import React from 'react'
 import testimonialData from '@/app/lib/getTestimonial'
 import { getBaseUrl } from '@/app/lib/getBaseUrl'
 import { getStaticPageContent } from '@/app/lib/getStaticPageContent';
-import getStaticText from '../lib/getStaticTextServer'
+import getStaticText from '@/app/lib/getStaticTextServer'
 
 
 

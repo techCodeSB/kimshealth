@@ -4,7 +4,7 @@ import React from 'react'
 import getStaticText from '@/app/lib/getStaticTextServer';
 import { getBaseUrl } from '@/app/lib/getBaseUrl';
 import { getStaticPageContent } from '@/app/lib/getStaticPageContent';
-import diseaseData from '../lib/getDisease';
+import diseaseData from '@/app/lib/getDisease';
 
 const Disease = async () => {
     const staticText = await getStaticText();

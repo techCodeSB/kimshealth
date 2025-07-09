@@ -14,7 +14,15 @@ const blogData = {
 
         return res.data[0];
 
-    }
+    },
+
+    getByDoctor: async (id) => {
+        const url = process.env.NEXT_PUBLIC_CMS_API_URL + `/blog-posts?populate=*&filters[doctor][id][$eq]=${id}`;
+        const req = await fetch(url);
+        const res = await req.json();
+
+        return res.data;
+    },
 
 }
 

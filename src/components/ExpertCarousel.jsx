@@ -14,6 +14,10 @@ const ExpertCarousel = ({ dataSet }) => {
         fetchTexts();
     }, []);
 
+
+     if (dataSet.data.length < 1) {
+        return;
+    }
     return (
         <>
             <section className="section expert-section">
@@ -51,7 +55,7 @@ const ExpertCarousel = ({ dataSet }) => {
                                         <div className="card-content">
                                             <h4>{d.name}</h4>
                                             <p>{d.doctorDesignation}</p>
-                                            <h5>{d.specialities[0].title}</h5>
+                                            <h5>{d.specialities[0]?.title}</h5>
                                             <div className="from-btn">
                                                 <a href="#" className="btn">{staticTexts['Appointment']}</a>
                                             </div>

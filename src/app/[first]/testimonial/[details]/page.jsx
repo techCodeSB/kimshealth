@@ -10,10 +10,11 @@ import formatDate from '@/app/lib/formatDate'
 const TestimonialDetails = async ({ params }) => {
     const basePath = await getBaseUrl();
     const data = await testimonialData.getSingleTestimonaial(params.details);
-    const youtube = await youtubeData(data.videoId);
+    const youtube = await youtubeData(data?.videoId);
+
 
     const testimonialDataSet = {
-        sectionTitle: data.title,
+        sectionTitle: data?.title,
         buttonText: 'View All', buttonURL: '#',
         data: await testimonialData.getAll(10),
         baseUrl: await getBaseUrl(true, true)
@@ -37,10 +38,10 @@ const TestimonialDetails = async ({ params }) => {
                                 <div className="col-12">
                                     <ul className="breadcrumb mb-0">
                                         <li>
-                                            <a href="/">Home</a>
+                                            <a href={basePath + "/"}>Home</a>
                                         </li>
                                         <li>
-                                            <a href="/testimonial">Testimonial</a>
+                                            <a href={basePath + "/testimonial"}>Testimonial</a>
                                         </li>
                                         <li className="active">{data.title}</li>
                                     </ul>
@@ -81,12 +82,12 @@ const TestimonialDetails = async ({ params }) => {
                                         <div className="d-flex align-items-center justify-content-between mt-3">
                                             <div className="doctor-name">
                                                 <p><span><img src="/img/doctor.png" className="img-fluid" alt="" /></span>
-                                                    {data.doctor.name}</p>
+                                                    {data.doctor?.name}</p>
                                             </div>
                                             <div className="doctor-catagory">
                                                 <p>
                                                     {
-                                                        data.specialities.map((st, _) => (
+                                                        data.specialities?.map((st, _) => (
                                                             st.title + (data.specialities.length - 1 !== _ ? ", " : '')
                                                         ))
                                                     }
@@ -101,7 +102,7 @@ const TestimonialDetails = async ({ params }) => {
 
                     <div className="line-divider"></div>
 
-                    <TestimonialSection dataSet={testimonialDataSet}/>
+                    <TestimonialSection dataSet={testimonialDataSet} />
                 </div>
             </div>
             <Footer />
