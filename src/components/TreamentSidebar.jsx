@@ -23,10 +23,6 @@ const TreamentSidebar = ({ title, procedures, baseUrlOnlyLang, allSpeciality }) 
     };
 
 
-     if (dataSet.data.length < 1) {
-        return;
-    }
-
     return (
         <>
             <div className="col-md-4 speciality-page-search-section">
