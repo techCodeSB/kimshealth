@@ -6,6 +6,7 @@ import { getStaticPageContent } from '@/app/lib/getStaticPageContent';
 import { marked } from 'marked';
 import leaderData from '@/app/lib/getLeader';
 import awardData from '@/app/lib/getAward';
+import getStaticText from '@/app/lib/getStaticTextServer';
 
 
 
@@ -15,8 +16,9 @@ const AboutUs = async () => {
     const data = await getStaticPageContent("about-us", field);
     const pageContent = data?.data[0]?.pageContent;
     const pageMeta = data?.data[0]?.metaSection;
+    const staticText = await getStaticText();
 
-    let allLeader = await leaderData.getAll();
+    let allLeader = await leaderData.getAll('Promoters');
     let awards = await awardData.getAll()
 
 
@@ -37,9 +39,9 @@ const AboutUs = async () => {
                                                     <div className="col-12 px-0">
                                                         <ul className="breadcrumb mb-0">
                                                             <li>
-                                                                <a href="index.php">Home</a>
+                                                                <a href={basePath+"/"}>{staticText['Home']}</a>
                                                             </li>
-                                                            <li className="active"> About Us </li>
+                                                            <li className="active"> {staticText['About Us']} </li>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -209,7 +211,7 @@ const AboutUs = async () => {
                                             <div className="expert-card" data-aos="fade-right">
                                                 <div className="card border-0 p-lg-4 p-0">
                                                     <div className="card-top">
-                                                        <a href="#">
+                                                        <a href={basePath+"/about-us/"+l.slug}>
                                                             <img src={l.image ? process.env.NEXT_PUBLIC_IMAGE_URL + l.image.url : "/img/no-image.jpg"}
                                                                 className="img-fluid w-100" alt={l.name} />
                                                         </a>

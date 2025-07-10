@@ -8,13 +8,16 @@ import formatDate from '@/app/lib/formatDate';
 import getStaticText from '@/app/lib/getStaticTextServer';
 import BlogListing from '@/components/BlogListing';
 
-const Blog = async () => {
+const Blog = async ({searchParams }) => {
     const basePath = await getBaseUrl()
     const data = await getStaticPageContent("blog");
     const pageContent = data?.data[0]?.pageContent;
     const pageMeta = data?.data[0]?.metaSection;
     const allBlog = await blogData.allBlog();
     const staticText = await getStaticText();
+    const slug = await searchParams.spciality
+
+    console.log(slug)
 
 
     return (
@@ -43,7 +46,7 @@ const Blog = async () => {
                     </section>
 
 
-                    <BlogListing basePath={basePath}/>
+                    <BlogListing basePath={basePath} slug={slug}/>
                 </div>
             </div>
             <Footer />

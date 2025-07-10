@@ -9,11 +9,14 @@ import TestimonialSection from '@/components/TestimonialSection';
 import { marked } from 'marked';
 
 
+
 const HomeServiceDetails = async ({ params }) => {
     const basePath = await getBaseUrl();
     const data = await homeServices.getSingleHomeService(params.details);
     const homeServiceData = await homeServices.getAll(10);
     const staticTexts = await getStaticText()
+
+    console.log(data);
 
     const testimonialDataSet = {
         sectionTitle: data.testimonialSection.title,
@@ -66,7 +69,8 @@ const HomeServiceDetails = async ({ params }) => {
                                     </div>
 
                                     <div className="col-md-6 details-proceduce-banner-right-col">
-                                        <img src="" className="img-fluid details-banner-image" alt="" />
+                                        <img src={data.banner.bannerItem[0].bannerImageDesktop.url ?
+                                            process.env.NEXT_PUBLIC_IMAGE_URL + data.banner.bannerItem[0].bannerImageDesktop.url : "/img/no-image.jpg"} className="img-fluid details-banner-image" alt="" />
                                     </div>
                                 </div>
                             </div>
@@ -96,7 +100,8 @@ const HomeServiceDetails = async ({ params }) => {
                                             </div>
 
                                             <div className="details-proceduce-banner-right-col">
-                                                <img src="/img/home-details-banner.png" className="img-fluid details-banner-image" alt="" />
+                                                <img src={data.banner.bannerItem[0].bannerImageMobile.url ?
+                                                    process.env.NEXT_PUBLIC_IMAGE_URL + data.banner.bannerItem[0].bannerImageMobile.url : "/img/no-image.jpg"} className="img-fluid details-banner-image" alt="" />
                                             </div>
 
                                         </div>
@@ -146,13 +151,14 @@ const HomeServiceDetails = async ({ params }) => {
                     </section>
 
                     <div className="line-divider"> </div>
-
                     <section className="section">
                         <div className="container">
                             <div className="row">
                                 <div className="col-md-5 mb-lg-0 mb-3">
                                     <div className="details-right-col text-center">
-                                        <img src={process.env.NEXT_PUBLIC_IMAGE_URL + data.whyChooseUs.image.url} alt={data.whyChooseUs.title} className="img-fluid w-100" />
+                                        <img src={
+                                            data.whyChooseUs.image.url ?
+                                                process.env.NEXT_PUBLIC_IMAGE_URL + data.whyChooseUs.image.url : "/img/no-image.jpg"} alt={data.whyChooseUs.title} className="img-fluid w-100" />
                                     </div>
                                 </div>
                                 <div className="col-md-7">
@@ -193,7 +199,8 @@ const HomeServiceDetails = async ({ params }) => {
                                         return <div className="item" key={index}>
                                             <div className="card border-0">
                                                 <div className="card-top">
-                                                    <img src={process.env.NEXT_PUBLIC_IMAGE_URL + h.featuredImage.url} className="img-fluid w-100" alt={h.title} />
+                                                    <img src={h.featuredImage?.url ?
+                                                        process.env.NEXT_PUBLIC_IMAGE_URL + h.featuredImage.url : "/img/no-image.jpg"} className="img-fluid w-100" alt={h.title} />
                                                 </div>
                                                 <div className="card-content">
                                                     <h4>{h.title}</h4>

@@ -1,9 +1,25 @@
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 import React from 'react';
+import { getStaticPageContent } from '@/app/lib/getStaticPageContent'
+import { getBaseUrl } from '@/app/lib/getBaseUrl'
+import getStaticText from '@/app/lib/getStaticTextServer'
+import courseData from '@/app/lib/getCourse';
+import Form1 from '@/components/Forms/Form1';
 
 
-const ParamedicalCourse = () => {
+const ParamedicalCourse = async () => {
+    const basePath = await getBaseUrl(true, true);
+    const field = "populate[0]=pageContent&populate[1]=pageContent.bannerItem&populate[2]=pageContent.bannerItem.bannerImageDesktop&populate[3]=pageContent.bannerItem.bannerImageMobile&populate[4]=metaSection";
+    const data = await getStaticPageContent("paramedical-courses", field);
+    const pageContent = data?.data[0]?.pageContent;
+    const pageMeta = data?.data[0]?.metaSection;
+    const staticText = await getStaticText();
+
+    let allDiplomaCourses = await courseData.getAll(14);
+    console.log(allDiplomaCourses);
+
+
     return (
         <>
             <Header />
@@ -20,32 +36,27 @@ const ParamedicalCourse = () => {
                                                     <div className="col-12 px-lg-0">
                                                         <ul className="breadcrumb mb-0">
                                                             <li>
-                                                                <a href="index.php">Home</a>
+                                                                <a href={basePath + "/"}>{staticText['Home']}</a>
                                                             </li>
                                                             <li>
-                                                                <a href="hospital-master.php">Academics</a>
+                                                                <a href="#">Academics</a>
                                                             </li>
-                                                            <li className="active"> Paramedical Courses </li>
+                                                            <li className="active"> {pageContent[0].title} </li>
                                                         </ul>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div className="details-banner">
                                                 <div className="details-heading">
-                                                    <h3>Paramedical Courses</h3>
+                                                    <h3>{pageContent[0].title}</h3>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
 
                                     <div className="col-md-6 details-proceduce-banner-right-col">
-                                        <img src="/img/paramedical-banner.jpg" className="img-fluid details-banner-image" alt="" />
+                                        <img src={pageContent[1].bannerItem.length > 0 ? process.env.NEXT_PUBLIC_IMAGE_URL + pageContent[1].bannerItem[0].bannerImageDesktop.url : "/img/no-image.jpg"} className="img-fluid details-banner-image" alt={pageContent[0].title} />
                                     </div>
-
-                                    {/* <!-- <div className="col-md-6">
-                                        <img src="/img/details-banner.png" alt="" className="img-fluid w-100">
-                                    </div> -->
-                                </div> */}
                                 </div>
                             </div>
                         </div>
@@ -58,32 +69,8 @@ const ParamedicalCourse = () => {
                                 <div className="col-md-8">
                                     <section className="section pt-0">
                                         <div className="main-heading sub-heading">
-                                            <h2>Overview</h2>
-                                            <p>Kerala boasts of the best health statistics in India comparable to those in the
-                                                Western world and
-                                                alsoof “quality care at low cost”. Health is the vital ingredient of all
-                                                developmental activities.
-                                                If we analyze the factors responsible for this, definitely the standard of medical
-                                                education delivery system
-                                                in the State comes out to be one of the major factors in achieving this goal. The
-                                                State needs a well qualified
-                                                manpower to handle the health related problems and promotion of positive health. The
-                                                Department of Medical
-                                                Education plays a pivotal role in developing medical and paramedical personnel to
-                                                cater to the health needs of the State. The department also has a role to play in
-                                                establishment and maintenance of well-equipped teaching institutions.</p>
-                                            <p>
-                                                KIMSHEALTH is a 650 bedded multi-specialty tertiary care hospital, established in
-                                                the year 2001 where a competent team of specialists and sophisticated technology
-                                                come together to deliver high-quality medical aid. KIMSHEALTH has a strong academic
-                                                base, focuses on quality education since its inception.</p>
-                                            <p>
-                                                KIMSHEALTH Institute of Paramedical Sciences established in 2004 and conducting
-                                                three Diploma courses,
-                                                affiliated to Directorate of Medical Education (DME) under Government of Kerala.</p>
-                                            <h3 className="mt-3">Aims & Objectives</h3>
-                                            <p>Our emphasis is on value education, intellectual & clinical training of the students
-                                                so that they can excel in their career.</p>
+                                            <h2>{pageContent[2].title}</h2>
+                                            <div dangerouslySetInnerHTML={{ __html: pageContent[2].details || "" }}></div>
                                         </div>
 
 
@@ -94,67 +81,26 @@ const ParamedicalCourse = () => {
 
                                     <section className="section">
                                         <div className="main-heading">
-                                            <h2>Diploma Courses (Certified by: Directorate of Medical Education, Govt. of Kerala)
+                                            <h2>{pageContent[3].title}
                                             </h2>
                                         </div>
                                         <div className="row">
-                                            <div className="col-md-6 mb-3">
-                                                <div className="doctoral-card-content">
-                                                    <h3 className="text-dark">Diploma in Operation Theatre and Anesthesia Technology
-                                                        (DOTAT)</h3>
-                                                    <ul>
-                                                        <li className="hourglass">Duration: 2.5 years</li>
-                                                        <li className="luxury">Eligibility: Plus two with science (Physics, Chemistry &
-                                                            Biology ) </li>
-                                                        <li className="calender-doc">Commencement: Commencement</li>
-                                                        <li className="car-seat">No of seat: 15</li>
-                                                    </ul>
-                                                    <a href="#" className="doctotal-btn">View More</a>
-                                                </div>
-                                            </div>
-
-                                            <div className="col-md-6 mb-3">
-                                                <div className="doctoral-card-content">
-                                                    <h3 className="text-dark">Diploma in Dialysis Technology (DDT)</h3>
-                                                    <ul>
-                                                        <li className="hourglass">Duration: 2 years</li>
-                                                        <li className="luxury">Eligibility: Plus two with science (Physics, Chemistry &
-                                                            Biology ) </li>
-                                                        <li className="calender-doc">Commencement: Commencement</li>
-                                                        <li className="car-seat">No of seat: 6</li>
-                                                    </ul>
-                                                    <a href="#" className="doctotal-btn">View More</a>
-                                                </div>
-                                            </div>
-
-                                            <div className="col-md-6 mb-3">
-                                                <div className="doctoral-card-content">
-                                                    <h3 className="text-dark">Diploma in Neuro Technology (DNT)</h3>
-                                                    <ul>
-                                                        <li className="hourglass">Duration: 2.5 years</li>
-                                                        <li className="luxury">Eligibility: Plus two with science (Physics, Chemistry &
-                                                            Biology ) </li>
-                                                        <li className="calender-doc">Commencement: Commencement</li>
-                                                        <li className="car-seat">No of seat: 6</li>
-                                                    </ul>
-                                                    <a href="#" className="doctotal-btn">View More</a>
-                                                </div>
-                                            </div>
-
-                                            <div className="col-md-6 mb-3">
-                                                <div className="doctoral-card-content">
-                                                    <h3 className="text-dark">Diploma in Radiodiagnosis & Radiotherapy Technology (DRRT)
-                                                    </h3>
-                                                    <ul>
-                                                        <li className="hourglass">Duration: 3 years</li>
-                                                        <li className="luxury">Eligibility: Plus two with science (Physics, Chemistry &
-                                                            Biology ) </li>
-                                                        <li className="calender-doc">Commencement: Commencement</li>
-                                                        <li className="car-seat">No of seat: 25</li>
-                                                    </ul>
-                                                    <a href="#" className="doctotal-btn">View More</a>
-                                                </div>
-                                            </div>
+                                            {
+                                                allDiplomaCourses.slice(0, 8).map((l, i) => {
+                                                    return <div className="col-md-6 mb-3" key={i}>
+                                                        <div className="doctoral-card-content">
+                                                            <h3 className="text-dark">{l.title}</h3>
+                                                            <ul>
+                                                                <li className="hourglass">Duration: {l.duration}</li>
+                                                                <li className="luxury">Eligibility: {l.eligibility} </li>
+                                                                <li className="calender-doc">Commencement: {l.commencement}</li>
+                                                                <li className="car-seat">No of seat: {l.noOfSeat}</li>
+                                                            </ul>
+                                                            <a href={basePath + "/course/" + l.slug} className="doctotal-btn">View More</a>
+                                                        </div>
+                                                    </div>
+                                                })
+                                            }
                                         </div>
                                     </section>
 
@@ -164,38 +110,17 @@ const ParamedicalCourse = () => {
                                 <div className="col-md-4">
                                     <div className="association-left-col sticky-left">
                                         <div className="association-form-card mb-5">
-                                            <h3>Request a Call Back</h3>
-                                            <form action="">
-                                                <div className="row">
-                                                    <div className="col-md-12 mb-3">
-                                                        <input type="text" className="form-control" placeholder="Name" name="name" />
-                                                    </div>
-                                                    <div className="col-md-12 mb-3">
-                                                        <input type="text" className="form-control"
-                                                            placeholder="Enter 10 Digit Mobile Number" name="name" />
-                                                    </div>
-                                                    <div className="col-md-12 mb-3">
-                                                        <textarea className="form-control" placeholder="Message"
-                                                            id="floatingTextarea"></textarea>
-                                                    </div>
-                                                    <div className="col-md-12 mb-3 text-center">
-                                                        <button
-                                                            className="btn mb-lg-0 mb-2 hospital-primarybtn px-5 py-2">Submit</button>
-                                                    </div>
-                                                </div>
-                                            </form>
+                                            <Form1 title={"Request a Call Back"} />
 
 
                                         </div>
-                                        <h4>For More Information Contact Us</h4>
-                                        <p><strong>Dr. Susan Jose</strong></p>
-                                        <p> Principal, College of Nursing KIMSHEALTH Institute of Paramedical Sciences Korani. </p>
-                                        <p>P.O., Chempakamangalam</p>
-                                        <a href="tel:+919895248337"><i className="fa-solid fa-phone"></i> +91 471 308 1034/1030, +91 989
-                                            524
-                                            8337</a>
-                                        <a href="mailto:paramedical@kimskerala.com"><i className="fa-solid fa-envelope"></i>
-                                            sparamedical@kimskerala.com</a>
+                                        <h4>{pageContent[4].sectionTitle}</h4>
+                                        <p><strong>{pageContent[4].contactPerson}</strong></p>
+                                        <p>{pageContent[4].designation}</p>
+                                        <p>{pageContent[4].address}</p>
+                                        <a href={"tel:" + pageContent[4].phone}><i className="fa-solid fa-phone"></i> {pageContent[4].phone}</a>
+                                        <a href={"mailto:" + pageContent[4].email}><i className="fa-solid fa-envelope"></i>
+                                            {pageContent[4].email}</a>
                                     </div>
 
                                 </div>
