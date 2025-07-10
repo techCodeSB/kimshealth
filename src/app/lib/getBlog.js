@@ -1,6 +1,6 @@
 const blogData = {
-    allBlog: async (start = 0, limit = 12) => {
-        const url = process.env.NEXT_PUBLIC_CMS_API_URL + `/blog-posts?populate=*&pagination[start]=${start}&pagination[limit]=${limit}`;
+    allBlog: async (start = 0, limit = 12, speciality) => {
+        const url = process.env.NEXT_PUBLIC_CMS_API_URL + `/blog-posts?populate=*&pagination[start]=${start}&pagination[limit]=${limit} ${speciality ? `filters[specialities][slug][$eq]=${speciality}` : ''}`;
         const req = await fetch(url);
         const res = await req.json();
 

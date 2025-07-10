@@ -84,7 +84,7 @@ const getSpecialityData = {
         return data;
     },
 
-    
+
     getSpecialityForSearch: async () => {
         const baseUrl = process.env.NEXT_PUBLIC_CMS_API_URL;
         // Get total count
@@ -109,7 +109,7 @@ const getSpecialityData = {
         return data;
     },
 
-    
+
     getAllSpeciality: async () => {
         const baseUrl = process.env.NEXT_PUBLIC_CMS_API_URL;
         // Get total count
@@ -135,7 +135,7 @@ const getSpecialityData = {
     },
 
 
-     getAllSubSpeciality: async (id) => {
+    getAllSubSpeciality: async (id) => {
         const baseUrl = process.env.NEXT_PUBLIC_CMS_API_URL;
         // Get total count
         const initialReq = await fetch(`${baseUrl}/specialty-details`);
@@ -158,6 +158,9 @@ const getSpecialityData = {
 
         return data;
     },
+
+
+    
 
 
 

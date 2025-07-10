@@ -3,10 +3,12 @@ import blogData from '@/app/lib/getBlog';
 import getStaticText from '@/helper/getStaticText';
 import React, { useEffect, useRef, useState } from 'react';
 import formatDate from '@/app/lib/formatDate';
+import getSpecialityData from '@/app/lib/getSpeciality';
+import Link from 'next/link';
 
 
-const BlogListing = ({ basePath }) => {
-    const [allBlog, setallBlog] = useState() //Doctors
+const BlogListing = ({ basePath, slug }) => {
+    const [allBlog, setallBlog] = useState([]); //Doctors
     const [count, setCount] = useState(12)
     const [staticText, setStaticTexts] = useState({});
     const limit = 12;
@@ -14,26 +16,37 @@ const BlogListing = ({ basePath }) => {
     const [loading, setLoading] = useState(false);
     const [endData, setEndData] = useState(false);
 
+    const [allSpeciality, setAllSpeciality] = useState([]);
+    const [filterSplty, setFilterSplty] = useState([]);
+    const [noData, setNoData] = useState(false);
+
 
     useEffect(() => {
         const fetchTexts = async () => {
             setStaticTexts({ ...await getStaticText() })
         };
         const getFstLoad = async () => {
-            const data = await blogData.allBlog(count, limit);
-            setallBlog(data);
+            const tempStoreBlog = await blogData.allBlog(count, limit, slug);
+            const tempStoreSpeciality = await getSpecialityData.getAllSpeciality();
+            console.log(tempStoreSpeciality)
+
+
+            setAllSpeciality(tempStoreSpeciality);
+            setFilterSplty(tempStoreSpeciality);
+            setallBlog(tempStoreBlog);
         }
+
 
         getFstLoad();
         fetchTexts();
-    }, []);
+    }, [slug]);
 
 
     const loadDoctor = async () => {
         if (loading) return; // prevent multiple triggers
         setLoading(true);
 
-        const data = await blogData.allBlog(count, limit);
+        const data = await blogData.allBlog(count, limit, slug);
         if (data.length < 1) {
             setEndData(true)
         }
@@ -63,6 +76,35 @@ const BlogListing = ({ basePath }) => {
 
 
 
+    // SideBar Speciality search
+    const onSpltySearch = async (e) => {
+        const value = e.target.value.trim();
+        setLoading(true);
+        setNoData(false);
+
+        if (!value) {
+            setFilterSplty(allSpeciality);
+            setLoading(false);
+            return;
+        }
+
+        const temp = allSpeciality.filter((splty) =>
+            splty.title.toLowerCase().includes(value.toLowerCase())
+        );
+
+        if (temp.length < 1) {
+            setFilterSplty([]);
+            setNoData(true);
+        } else {
+            setFilterSplty(temp);
+            setNoData(false);
+        }
+
+        setLoading(false);
+    };
+
+
+
 
     return (
         <section className="section">
@@ -73,77 +115,31 @@ const BlogListing = ({ basePath }) => {
                             <h3>{staticText['By Specialties']}</h3>
 
                             <div className="rounded-field-form my-3">
-                                <form action="">
-                                    <div className="row">
-                                        <div className="col-12">
-                                            <div className="input-group">
-                                                <input type="text" className="form-control" placeholder="Search Blog"
-                                                    aria-label="Recipient's username" aria-describedby="basic-addon2" />
-                                                <span className="input-group-text"><i
-                                                    className="fa-solid fa-magnifying-glass"></i></span>
-                                            </div>
+                                <div className="row">
+                                    <div className="col-12">
+                                        <div className="input-group">
+                                            <input type="text" className="form-control" placeholder="Search Blog"
+                                                aria-label="Recipient's username" aria-describedby="basic-addon2" onChange={onSpltySearch} />
+                                            <span className="input-group-text"><i
+                                                className="fa-solid fa-magnifying-glass"></i></span>
                                         </div>
                                     </div>
-                                </form>
+                                </div>
                             </div>
 
+                            {/* ::::::::: Speciality for searching ::::::: */}
                             <div className="d-lg-block d-none">
-                                <p>Arthroscopic Surgery <span>(2)</span></p>
-                                <p>Cardiac Sciences <span>(91)</span></p>
-                                <p>Cardiology <span>(59)</span></p>
-                                <p>Dental Care <span>(9)</span></p>
-                                <p>Dermatology <span>(10)</span></p>
-                                <p>Dietetics <span>(37)</span></p>
-                                <p>Emergency Medicine <span>(6)</span></p>
-                                <p>Endocrinology & Diabetes <span>(20)</span></p>
-                                <p>ENT <span>(12)</span></p>
-                                <p>General Surgery <span>(13)</span></p>
-                                <p>Internal Medicine <span>(38)</span></p>
-                                <p>IVF <span>(17)</span></p>
-                                <p>Medical Oncology <span>(59)</span></p>
-                                <p>Mental Health <span>(22)</span></p>
-                                <p>Metabolic And Bariatric Surgery <span>(29)</span></p>
-                                <p>Minimal Access/Laparoscopic Surgery <span>(19)</span></p>
-                                <p>Neonatology <span>(4)</span></p>
-                                <p>Nephrology <span>(14)</span></p>
-                                <p>Neurology <span>(47)</span></p>
-                                <p>Neurosurgery <span>(29)</span></p>
-                                <p>Nuclear Medicine <span>(1)</span></p>
-                                <p>Obstetrics And Gynaecology <span>(58)</span></p>
-                                <p>Ophthalmology <span>(12)</span></p>
-                                <p>Orthopaedics & Joint Replacement <span>(34)</span></p>
-                                <p>Paediatric (Ped) <span>(19)</span></p>
-                                <p>Paediatric (Ped) Cardiac Surgery <span>(1)</span></p>
-                                <p>Paediatric (Ped) Cardiology <span>(5)</span></p>
-                                <p>Paediatric (Ped) Endocrinology <span>(8)</span></p>
-                                <p>Paediatric (Ped) Gastroenterology <span>(2)</span></p>
-                                <p>Paediatric (Ped) Nephrology <span>(1)</span></p>
-                                <p>Paediatric (Ped) Oncology <span>(2)</span></p>
-                                <p>Paediatric (Ped) Orthopaedics <span>(5)</span></p>
-                                <p>Paediatric (Ped) Pulmonology <span>(1)</span></p>
-                                <p>Physiotherapy & Rehabilitation Medicine <span>(4)</span></p>
-                                <p>Podiatry <span>(2)</span></p>
-                                <p>Arthroscopic Surgery <span>(2)</span></p>
-                                <p>Cardiac Sciences <span>(91)</span></p>
-                                <p>Cardiology <span>(59)</span></p>
-                                <p>Dental Care <span>(9)</span></p>
-                                <p>Dermatology <span>(10)</span></p>
-                                <p>Dietetics <span>(37)</span></p>
-                                <p>Emergency Medicine <span>(6)</span></p>
-                                <p>Endocrinology & Diabetes <span>(20)</span></p>
-                                <p>ENT <span>(12)</span></p>
-                                <p>General Surgery <span>(13)</span></p>
-                                <p>Internal Medicine <span>(38)</span></p>
-                                <p>IVF <span>(17)</span></p>
-                                <p>Medical Oncology <span>(59)</span></p>
-                                <p>Mental Health <span>(22)</span></p>
-                                <p>Metabolic And Bariatric Surgery <span>(29)</span></p>
-                                <p>Minimal Access/Laparoscopic Surgery <span>(19)</span></p>
-                                <p>Neonatology <span>(4)</span></p>
-                                <p>Nephrology <span>(14)</span></p>
-                                <p>Internal Medicine <span>(38)</span></p>
-                                <p>IVF <span>(17)</span></p>
-                                <p>Medical Oncology <span>(59)</span></p>
+                                {loading ? (
+                                    <p>Loading...</p>
+                                ) : noData ? (
+                                    <p>No data found</p>
+                                ) : (
+                                    filterSplty.map((splty, i) => {
+                                        return splty.speciality ? <p key={i}>
+                                            <Link href={basePath + "/blog?spciality=" + splty.speciality?.slug}>{splty.title}</Link>
+                                        </p> : null
+                                    })
+                                )}
                             </div>
                         </div>
 
@@ -152,16 +148,16 @@ const BlogListing = ({ basePath }) => {
 
                     <div className="col-md-9 blog-page-right-col mb-3">
                         {
-                            allBlog && <div className="row">
+                            allBlog?.length > 0 && <div className="row">
                                 <div className="col-md-6 mb-4">
                                     <div className="card border-0">
                                         <div className="card-top">
-                                            <a href={basePath + "/blog/" + allBlog[0].slug}>
+                                            <a href={basePath + "/blog/" + allBlog[0]?.slug}>
                                                 <img src={process.env.NEXT_PUBLIC_IMAGE_URL + allBlog[0]?.featuredImage?.url} className="img-fluid w-100" alt="" />
                                             </a>
                                         </div>
                                         <div className="card-content">
-                                            <a href={basePath + "/blog/" + allBlog[0].slug}>
+                                            <a href={basePath + "/blog/" + allBlog[0]?.slug}>
                                                 <h4>{allBlog[0].title} </h4>
                                             </a>
                                             <p>
@@ -251,7 +247,7 @@ const BlogListing = ({ basePath }) => {
                                             <div className="card border-0">
                                                 <div className="card-top">
                                                     <a href={basePath + "/blog/" + b.slug}>
-                                                        <img src={b.featuredImage?.url? process.env.NEXT_PUBLIC_IMAGE_URL + b.featuredImage.url : "/img/no-image.jpg"} className="img-fluid w-100" alt="" />
+                                                        <img src={b.featuredImage?.url ? process.env.NEXT_PUBLIC_IMAGE_URL + b.featuredImage.url : "/img/no-image.jpg"} className="img-fluid w-100" alt="" />
                                                     </a>
                                                 </div>
                                                 <div className="card-content">

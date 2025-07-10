@@ -1,8 +1,19 @@
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import React from 'react'
+import { getStaticPageContent } from '../lib/getStaticPageContent';
+import { getBaseUrl } from '../lib/getBaseUrl';
+import investorDAta from '../lib/getInvestor';
 
-const Investor = () => {
+const Investor = async () => {
+    const basePath = await getBaseUrl(true, true);
+    const data = await getStaticPageContent("investor");
+    const pageContent = data?.data[0]?.pageContent;
+    const pageMeta = data?.data[0]?.metaSection;
+
+    const getAllInvestorDirector = await investorDAta.getAll('Directors & Advisory Board')
+    const getAllInvestorPatrons = await investorDAta.getAll('Patrons')
+
     return (
         <>
             <Header />
@@ -10,7 +21,7 @@ const Investor = () => {
                 <div className="find-doctor-main-page">
                     <div className="page-header">
                         <div className="container">
-                            <h2>Investor</h2>
+                            <h2>{pageContent[0].title}</h2>
                         </div>
                     </div>
                     <section className="breadcrumb-wrapper py-2">
@@ -19,175 +30,76 @@ const Investor = () => {
                                 <div className="col-12">
                                     <ul className="breadcrumb mb-0">
                                         <li>
-                                            <a href="index.php">Home</a>
+                                            <a href={basePath + "/"}>Home</a>
                                         </li>
-                                        <li className="active"> Investor </li>
+                                        <li className="active"> {pageContent[0].title} </li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
                     </section>
 
-                    <section className="section">
+                    <section className="section expert-section">
                         <div className="container">
                             <div className="main-heading">
-                                <h2>Directors & Advisory Board</h2>
+                                <h2>{pageContent[1].title}</h2>
                             </div>
+
                             <div className="row">
-                                <div className="col-md-3 mb-3 col-6">
-                                    <div className="expert-card" data-aos="fade-right">
-                                        <div className="card border-0 p-lg-4 p-0">
-                                            <div className="card-top">
-                                                <a href="#">
-                                                    <img src="/img/leader1.jpg" className="img-fluid w-100" alt=""/>
-                                                </a>
-                                            </div>
-                                            <div className="card-content text-center pb-0">
-                                                <h4>Dr. M. I. Sahadulla</h4>
-                                                <p>Group Chairman & Managing Director</p>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-
-                                <div className="col-md-3 mb-3 col-6">
-                                    <div className="expert-card" data-aos="fade-right">
-                                        <div className="card border-0 p-lg-4 p-0">
-                                            <div className="card-top">
-                                                <a href="#">
-                                                    <img src="/img/leader1.jpg" className="img-fluid w-100" alt=""/>
-                                                </a>
-                                            </div>
-                                            <div className="card-content text-center pb-0">
-                                                <h4>Dr. M. I. Sahadulla</h4>
-                                                <p>Group Chairman & Managing Director</p>
+                                {
+                                    getAllInvestorDirector.slice(0, 8).map((l, i) => {
+                                        return <div className="col-md-3 col-6 mb-4" key={i}>
+                                            <div className="expert-card" data-aos="fade-right">
+                                                <div className="card border-0 p-lg-4 p-0">
+                                                    <div className="card-top">
+                                                        <a href={basePath + "/investor/" + l.slug}>
+                                                            <img src={l.image ? process.env.NEXT_PUBLIC_IMAGE_URL + l.image.url : "/img/no-image.jpg"}
+                                                                className="img-fluid w-100" alt={l.name} />
+                                                        </a>
+                                                    </div>
+                                                    <div className="card-content">
+                                                        <h4>{l.name}</h4>
+                                                        <p>{l.designation}</p>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-
-                                    </div>
-                                </div>
-
-                                <div className="col-md-3 mb-3 col-6">
-                                    <div className="expert-card" data-aos="fade-right">
-                                        <div className="card border-0 p-lg-4 p-0">
-                                            <div className="card-top">
-                                                <a href="#">
-                                                    <img src="/img/leader1.jpg" className="img-fluid w-100" alt=""/>
-                                                </a>
-                                            </div>
-                                            <div className="card-content text-center pb-0">
-                                                <h4>Dr. M. I. Sahadulla</h4>
-                                                <p>Group Chairman & Managing Director</p>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-
-                                <div className="col-md-3 mb-3 col-6">
-                                    <div className="expert-card" data-aos="fade-right">
-                                        <div className="card border-0 p-lg-4 p-0">
-                                            <div className="card-top">
-                                                <a href="#">
-                                                    <img src="/img/leader1.jpg" className="img-fluid w-100" alt=""/>
-                                                </a>
-                                            </div>
-                                            <div className="card-content text-center pb-0">
-                                                <h4>Dr. M. I. Sahadulla</h4>
-                                                <p>Group Chairman & Managing Director</p>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
+                                    })
+                                }
                             </div>
-
-
                         </div>
                     </section>
 
                     <div className="line-divider"></div>
 
-                    <section className="section">
+                    <section className="section expert-section">
                         <div className="container">
                             <div className="main-heading">
-                                <h2>Patrons</h2>
+                                <h2>{pageContent[2].title}</h2>
                             </div>
+
                             <div className="row">
-                                <div className="col-md-3 mb-3 col-6">
-                                    <div className="expert-card" data-aos="fade-right">
-                                        <div className="card border-0 p-lg-4 p-0">
-                                            <div className="card-top">
-                                                <a href="#">
-                                                    <img src="/img/investor2.png" className="img-fluid w-100" alt=""/>
-                                                </a>
-                                            </div>
-                                            <div className="card-content text-center pb-0">
-                                                <h4>Lorem ipsum</h4>
-                                                <p>Dolor sitr</p>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-
-                                <div className="col-md-3 mb-3 col-6">
-                                    <div className="expert-card" data-aos="fade-right">
-                                        <div className="card border-0 p-lg-4 p-0">
-                                            <div className="card-top">
-                                                <a href="#">
-                                                    <img src="/img/investor2.png" className="img-fluid w-100" alt=""/>
-                                                </a>
-                                            </div>
-                                            <div className="card-content text-center pb-0">
-                                                <h4>Lorem ipsum</h4>
-                                                <p>Dolor sitr</p>
+                                {
+                                    getAllInvestorPatrons.slice(0, 8).map((l, i) => {
+                                        return <div className="col-md-3 col-6 mb-4" key={i}>
+                                            <div className="expert-card" data-aos="fade-right">
+                                                <div className="card border-0 p-lg-4 p-0">
+                                                    <div className="card-top">
+                                                        <a href={basePath + "/investor/" + l.slug}>
+                                                            <img src={l.image ? process.env.NEXT_PUBLIC_IMAGE_URL + l.image.url : "/img/no-image.jpg"}
+                                                                className="img-fluid w-100" alt={l.name} />
+                                                        </a>
+                                                    </div>
+                                                    <div className="card-content">
+                                                        <h4>{l.name}</h4>
+                                                        <p>{l.designation}</p>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-
-                                    </div>
-                                </div>
-
-
-                                <div className="col-md-3 mb-3 col-6">
-                                    <div className="expert-card" data-aos="fade-right">
-                                        <div className="card border-0 p-lg-4 p-0">
-                                            <div className="card-top">
-                                                <a href="#">
-                                                    <img src="/img/investor2.png" className="img-fluid w-100" alt=""/>
-                                                </a>
-                                            </div>
-                                            <div className="card-content text-center pb-0">
-                                                <h4>Lorem ipsum</h4>
-                                                <p>Dolor sitr</p>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-
-                                <div className="col-md-3 mb-3 col-6">
-                                    <div className="expert-card" data-aos="fade-right">
-                                        <div className="card border-0 p-lg-4 p-0">
-                                            <div className="card-top">
-                                                <a href="#">
-                                                    <img src="/img/investor2.png" className="img-fluid w-100" alt=""/>
-                                                </a>
-                                            </div>
-                                            <div className="card-content text-center pb-0">
-                                                <h4>Lorem ipsum</h4>
-                                                <p>Dolor sitr</p>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-
-
+                                    })
+                                }
                             </div>
-
-
                         </div>
                     </section>
 

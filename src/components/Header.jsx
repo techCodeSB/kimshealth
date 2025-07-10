@@ -157,7 +157,7 @@ const Header = () => {
                                                                 <li key={i}>
                                                                     <a href={basePath + "/speciality/" + s?.speciality.slug}>
                                                                         <span>
-                                                                            <img src={s.iconImage ? process.env.NEXT_PUBLIC_IMAGE_URL + s.iconImage.url : "/img/no-image.jpg"} alt={s?.title} className="img-fluid" />
+                                                                            <img src={s.speciality.iconImage?.url ? process.env.NEXT_PUBLIC_IMAGE_URL+s.speciality.iconImage.url : "/img/no-image.jpg"} alt={s?.title} className="img-fluid" />
                                                                         </span>
                                                                         {s?.title}
                                                                     </a>

@@ -14,23 +14,25 @@ import blogData from '@/app/lib/getBlog'
 import doctorTalkData from '@/app/lib/getDoctorTalk';
 import diseaseData from '@/app/lib/getDisease'
 import procedureData from '@/app/lib/getProcedure'
+import getStaticText from '@/app/lib/getStaticTextServer'
 
 
 
 const InternationalPage = async () => {
     const basePath = await getBaseUrl(true, true);
-    const field = "populate[0]=pageContent&populate[1]=pageContent.bannerItem&populate[2]=pageContent.bannerItem.bannerImageDesktop&populate[3]=pageContent.bannerItem.bannerImageMobile&populate[4]=metaSection&populate[5]=pageContent.highlightButtonItem&populate[6]=pageContent.highlightButtonItem.iconImage&populate[7]=pageContent.logoSlider&populate[8]=pageContent.logoSlider.image&populate[9]=pageContent.uspItem&populate[10]=pageContent.uspItem.image&populate[11]=pageContent.uspItem.icon&populate[12]=pageContent.contentCard&populate[13]=pageContent.contentCard.image";
+    const field = "populate[0]=pageContent&populate[1]=pageContent.bannerItem&populate[2]=pageContent.bannerItem.bannerImageDesktop&populate[3]=pageContent.bannerItem.bannerImageMobile&populate[4]=metaSection&populate[5]=pageContent.highlightButtonItem&populate[6]=pageContent.highlightButtonItem.iconImage&populate[7]=pageContent.logoSlider&populate[8]=pageContent.logoSlider.image&populate[9]=pageContent.uspItem&populate[10]=pageContent.uspItem.image&populate[11]=pageContent.uspItem.icon&populate[12]=pageContent.contentCard&populate[13]=pageContent.contentCard.image&populate[14]=pageContent.thumbnail";
     const data = await getStaticPageContent("international-patient", field);
     const pageContent = data?.data[0]?.pageContent;
     const pageMeta = data?.data[0]?.metaSection;
     const featuredDisease = await diseaseData.getDisease()
     const featuredProcedure = await procedureData.getFeturedProcedure()
+    const staticText = await getStaticText();
 
 
     console.log(pageContent)
 
     const specialityDataSet = {
-        sectionTitle: pageContent[12]?.title,
+        sectionTitle: pageContent[5]?.title,
         buttonText: 'View All', buttonURL: `${basePath + "/speciality"}`,
         data: await getSpecialityData.getAll(),
         baseUrl: basePath
@@ -51,7 +53,7 @@ const InternationalPage = async () => {
     }
 
     const docTalkDataSet = {
-        sectionTitle: pageContent[7]?.title,
+        sectionTitle: pageContent[12]?.title,
         buttonText: 'View All', buttonURL: `${basePath + "/doctor-talk"}`,
         data: await doctorTalkData.allData(10),
         baseUrl: basePath
@@ -75,7 +77,7 @@ const InternationalPage = async () => {
                                                     <div className="col-12 px-0">
                                                         <ul className="breadcrumb mb-0">
                                                             <li>
-                                                                <a href={basePath + "/"}>Home</a>
+                                                                <a href={basePath + "/"}>{staticText['Home']}</a>
                                                             </li>
                                                             <li className="active"> {pageContent[0].title} </li>
                                                         </ul>
@@ -115,7 +117,7 @@ const InternationalPage = async () => {
                                     </div>
 
                                     <div className="col-md-6 details-proceduce-banner-right-col">
-                                        <img src={pageContent[1].bannerItem.length > 0 ? process.env.NEXT_PUBLIC_IMAGE_URL + pageContent[1].bannerItem[0].bannerImageDesktop.url : "/img/no-image.jpg"} className="img-fluid details-banner-image" alt="" />
+                                        <img src={pageContent[1].bannerItem.length > 0 ? process.env.NEXT_PUBLIC_IMAGE_URL + pageContent[1].bannerItem[0].bannerImageDesktop.url : "/img/no-image.jpg"} className="img-fluid details-banner-image" alt={pageContent[0].title} />
                                     </div>
                                 </div>
                             </div>
@@ -128,7 +130,7 @@ const InternationalPage = async () => {
                             <div className="row">
                                 <div className="col-md-5 my-auto order-lg-1 order-2">
                                     <div className="details-right-col text-center">
-                                        <img src={`https://i.ytimg.com/vi/${pageContent[2].videoId}/maxresdefault.jpg`} alt="" className="img-fluid w-100" />
+                                        <img src={process.env.NEXT_PUBLIC_IMAGE_URL + pageContent[2].thumbnail.url} alt={pageContent[2].caption} className="img-fluid w-100" />
                                         <h5>{pageContent[2].caption}</h5>
                                         <p>{pageContent[2].shortDetails}</p>
                                         <div className="main-btn">
@@ -202,7 +204,7 @@ const InternationalPage = async () => {
                                                 <h2><span className="counter">{u.number}</span> <span>{u.suffix}</span></h2>
                                                 <div className="international-counter-bottom-content">
                                                     <div>
-                                                        <img src={u.icon?.url} alt="" className="img-fluid" />
+                                                        <img src={u.icon?.url ? process.env.NEXT_PUBLIC_IMAGE_URL + u.icon?.url : "no-image.jpg"} alt="" className="img-fluid" />
                                                     </div>
                                                     <div>
                                                         <h3>{u.title}</h3>
@@ -221,10 +223,10 @@ const InternationalPage = async () => {
                     <ExcellenceCarousel dataSet={specialityDataSet} />
 
                     <div className="line-divider"></div>
-                    <section className="section d-lg-block d-none">
+                    {pageContent[6].title ? <section className="section d-lg-block d-none">
                         <div className="container">
                             <div className="main-heading">
-                                <h2>Diseases and Key Procedures</h2>
+                                <h2>{pageContent[6].title}</h2>
                             </div>
                             <div className="row justify-content-between">
                                 <div className="col-md-6">
@@ -282,12 +284,12 @@ const InternationalPage = async () => {
                                 </div>
                             </div>
                         </div>
-                    </section>
+                    </section> : null}
 
-                    <section className="section d-lg-none d-block">
+                    {pageContent[6].title ? <section className="section d-lg-none d-block">
                         <div className="container">
                             <div className="main-heading">
-                                <h2>Diseases and Key Procedures</h2>
+                                <h2>{pageContent[6].title}</h2>
                             </div>
                             <div className="row justify-content-between">
                                 <div className="col-md-6">
@@ -344,7 +346,7 @@ const InternationalPage = async () => {
                                 </div>
                             </div>
                         </div>
-                    </section>
+                    </section> : null}
 
                     <div className="line-divider"></div>
                     <section className="section logo-slider-section">
