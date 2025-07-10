@@ -41,8 +41,8 @@ const FromDoctor = ({ dataSet }) => {
                     <div className="row">
                         <div className="col-xl-8 col-lg-8 col-md-8 col-12 hear-doctor-img mb-lg-0 mb-3">
                             <div className="position-relative overflow-hidden" data-aos="fade-up">
-                                <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${dataSet.data[0]?.thumbnailImage.url}`} className="img-fluid d-lg-block d-none doc-image-hover w-100" alt={dataSet.data[0].title} />
-                                <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${dataSet.data[0].thumbnailImage.url}`} className="img-fluid w-100 d-lg-none d-block doc-image-hover" alt={dataSet.data[0].title} />
+                                <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${dataSet.data[0]?.thumbnailImage?.url}`} className="img-fluid d-lg-block d-none doc-image-hover w-100" alt={dataSet.data[0].title} />
+                                <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${dataSet.data[0].thumbnailImage?.url}`} className="img-fluid w-100 d-lg-none d-block doc-image-hover" alt={dataSet.data[0].title} />
                                 <div className="hear-doctor-content">
                                     <div className="d-flex align-items-center justify-content-between">
                                         <div>
@@ -61,9 +61,9 @@ const FromDoctor = ({ dataSet }) => {
                             <div className="row g-2">
                                 <div className="col-md-12 col-6 mb-3">
                                     <div className="position-relative overflow-hidden" data-aos="fade-up">
-                                        <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${dataSet.data[1].thumbnailImage.url}`}
+                                        <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${dataSet.data[1].thumbnailImage?.url}`}
                                             className="img-fluid w-100 hear-doc-image d-lg-block d-none" alt="" />
-                                        <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${dataSet.data[1].thumbnailImage.url}`} className="img-fluid w-100 d-lg-none d-block" alt="" />
+                                        <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${dataSet.data[1].thumbnailImage?.url}`} className="img-fluid w-100 d-lg-none d-block" alt="" />
                                         <div className="hear-doctor-content">
                                             <div className="d-block align-items-center justify-content-between">
                                                 <div>
@@ -82,9 +82,9 @@ const FromDoctor = ({ dataSet }) => {
 
                                 <div className="col-md-12 col-6 mb-3">
                                     <div className="position-relative overflow-hidden" data-aos="fade-up">
-                                        <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${dataSet.data[2].thumbnailImage.url}`}
+                                        <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${dataSet.data[2].thumbnailImage?.url}`}
                                             className="img-fluid w-100 hear-doc-image d-lg-block d-none" alt="" />
-                                        <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${dataSet.data[2].thumbnailImage.url}`} className="img-fluid w-100 d-lg-none d-block" alt="" />
+                                        <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${dataSet.data[2].thumbnailImage?.url}`} className="img-fluid w-100 d-lg-none d-block" alt="" />
                                         <div className="hear-doctor-content">
                                             <div className="d-block align-items-center justify-content-between">
                                                 <div>
