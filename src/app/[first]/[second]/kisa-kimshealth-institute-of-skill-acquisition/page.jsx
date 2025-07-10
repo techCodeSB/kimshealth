@@ -2,8 +2,21 @@ import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import JournalCarousel from '@/components/JournalCarousel'
 import React from 'react'
+import { getBaseUrl } from '@/app/lib/getBaseUrl'
+import { getStaticPageContent } from '@/app/lib/getStaticPageContent'
+import Form1 from '@/components/Forms/Form1'
+import courseData from '@/app/lib/getCourse'
 
-const KisaHealth = () => {
+const KisaHealth = async () => {
+    const field = "populate[0]=pageContent&populate[1]=pageContent.bannerItem&populate[2]=pageContent.bannerItem.bannerImageDesktop&populate[3]=pageContent.bannerItem.bannerImageMobile&populate[4]=metaSection&populate[5]=pageContent.journal&populate[6]=pageContent.journal.thumbnailImage&populate[7]=pageContent.journal.file&populate[8]=pageContent.file&populate[9]=pageContent.courseCategory";
+    const basePath = await getBaseUrl(true, true);
+    const data = await getStaticPageContent("kisa-kimshealth-institute-of-skill-acquisition", field);
+    const pageContent = data?.data[0]?.pageContent;
+    const pageMeta = data?.data[0]?.metaSection;
+    let allKisaCourse = await courseData.getAll(pageContent[4].courseCategory?.id);
+
+
+
     return (
         <>
             <Header />
@@ -20,36 +33,30 @@ const KisaHealth = () => {
                                                     <div className="col-12 px-0">
                                                         <ul className="breadcrumb mb-0">
                                                             <li>
-                                                                <a href="index.php">Home</a>
+                                                                <a href={basePath + "/"}>Home</a>
                                                             </li>
                                                             <li>
-                                                                <a href="hospital-master.php">Academics</a>
+                                                                <a href="#">Academics</a>
                                                             </li>
-                                                            <li className="active"> KIMSHEALTH Institute of Skill Acquisition (KISA)
-                                                            </li>
+                                                            <li className="active">{pageContent[0].title}</li>
                                                         </ul>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div className="details-banner">
                                                 <div className="details-heading">
-                                                    <h3 className="mb-2"> KIMSHEALTH Institute of Skill Acquisition (KISA)</h3>
-                                                    <p>KISA Main Brochure 2023</p>
-                                                    <a href="#" className="mb-3 mt-2 d-block"><i
-                                                        className="custom-download"></i>Download</a>
+                                                    <h3 className="mb-2">{pageContent[0].title}</h3>
+                                                    <p>{pageContent[0].subTitle}</p>
+                                                    <a download={process.env.NEXT_PUBLIC_IMAGE_URL + pageContent[2].file.url} href={process.env.NEXT_PUBLIC_IMAGE_URL + pageContent[2].file.url} className="mb-3 mt-2 d-block"><i
+                                                        className="custom-download"></i>{pageContent[2].buttonText}</a>
                                                 </div>
-
                                             </div>
                                         </div>
                                     </div>
 
                                     <div className="col-md-6 details-proceduce-banner-right-col">
-                                        <img src="/img/skills-acquisitions-banner.jpg" className="img-fluid details-banner-image" alt="" />
+                                        <img src={pageContent[1].bannerItem[0].bannerImageDesktop.url ? process.env.NEXT_PUBLIC_IMAGE_URL + pageContent[1].bannerItem[0].bannerImageDesktop.url : "/img/no-image.jpg"} className="img-fluid details-banner-image" alt="" />
                                     </div>
-
-                                    {/* <!-- <div className="col-md-6">
-                                        <img src="/img/details-banner.png" alt="" className="img-fluid w-100">
-                                    </div> --> */}
                                 </div>
                             </div>
                         </div>
@@ -61,30 +68,11 @@ const KisaHealth = () => {
                             <div className="row">
                                 <div className="col-md-8 mb-3">
                                     <div className="main-heading sub-heading">
-                                        <h2>KIMSHEALTH Institute of Skill Acquisition – KISA</h2>
-                                        <p>KIMSHEALTH is a 650 bedded multi-specialty quaternary care hospital where a competent
-                                            team of specialists and
-                                            sophisticated technology come together to deliver high-quality medical aid. At
-                                            KIMSHEALTH, we have everything you need to make a safe decision regarding your health
-                                            and healthcare requirements, conforming to global standards.</p>
-                                        <p>KIMSHEALTH has a strong academic base, focuses on quality education since its inception.
-                                            KIMSHEALTH Institute of Skill Acquisition (KISA) is an initiative of KIMSHEALTH
-                                            academics as an additional skill acquisition strategy to address existing gap of skilled
-                                            hands in health care Industry. It has been conceived as an idea for transforming
-                                            KIMSHEALTH as a hub for skilled manpower by imparting skill training to eligible
-                                            candidates.</p>
-                                        <p>The eligibility and duration of the course depend on the curriculum offered. The courses
-                                            under KISA offer an internship component with strong emphasis on practical orientation.
-                                            The certification is approved by KIMSHEALTH along with BSS (Bharat Sevak Samaj),
-                                            National Development Agency, Promoted by Government of India.</p>
-                                        <h3>Our AIM</h3>
-                                        <p>The aim is to provide health care cantered skill training to candidates to assume
-                                            responsibility as competent skilled
-                                            personnel at all the levels of work through scientifically designed specialized courses.
-                                        </p>
+                                        <h2>{pageContent[3].title}</h2>
+                                        <div dangerouslySetInnerHTML={{ __html: pageContent[3].details || "" } || ""}></div>
 
                                         <div className="skill-form-section">
-                                            <form action="">
+                                            <form action="" className='d-none'>
                                                 <div className="row justify-content-center">
                                                     <div className="col-md-6 mb-3">
                                                         <div
@@ -102,652 +90,39 @@ const KisaHealth = () => {
                                             </form>
 
                                             <div className="row">
-                                                <div className="col-md-4">
-                                                    <div className="procedure-acc-card mb-3">
-                                                        <div className="accordion" id="accordionExample">
-                                                            <div className="accordion-item">
-                                                                <h2 className="accordion-header">
-                                                                    <button className="accordion-button" type="button"
-                                                                        data-bs-toggle="collapse" data-bs-target="#collapse40"
-                                                                        aria-expanded="true" aria-controls="collapse40">
-                                                                        <span>Diploma in CSSD Technology Course</span>
-                                                                    </button>
-                                                                </h2>
-                                                                <div id="collapse40" className="accordion-collapse collapse show">
-                                                                    <div className="accordion-body main-list px-0 pt-0">
-                                                                        <ul>
-                                                                            <li>Affiliation: BSS</li>
-                                                                            <li>Entry Level: Plus two with science</li>
-                                                                            <li>Course Duration: 1 Year</li>
-                                                                            <li>Fees: 15,000/-</li>
-                                                                            <li>Course period (stipend): 5000/-</li>
-                                                                            <li>Internship (stipend): 6500/-</li>
-                                                                        </ul>
-                                                                        <a href="#" className="doctotal-btn">View More</a>
+                                                {
+                                                    allKisaCourse.slice(0, 8).map((l, i) => {
+                                                        return <div className="col-md-4" key={i}>
+                                                            <div className="procedure-acc-card mb-3">
+                                                                <div className="accordion" id="accordionExample">
+                                                                    <div className="accordion-item">
+                                                                        <h2 className="accordion-header">
+                                                                            <button className={`accordion-button ${i > 2 ? "collapsed" : ""}`} type="button"
+                                                                                data-bs-toggle="collapse" data-bs-target={"#collapse" + i}
+                                                                                aria-expanded="true" aria-controls={"collapse" + i}>
+                                                                                <span>{l.title}</span>
+                                                                            </button>
+                                                                        </h2>
+                                                                        <div id={"collapse" + i} className={`accordion-collapse collapse ${i <= 2 ? "show" : ""}`}>
+                                                                            <div className="accordion-body main-list px-0 pt-0">
+                                                                                <ul>
+                                                                                    <li>Affiliation: {l.affiliation}</li>
+                                                                                    <li>Entry Level: {l.entryLevel}</li>
+                                                                                    <li>Course Duration: {l.duration}</li>
+                                                                                    <li>Fees: {l.fees}</li>
+                                                                                    <li>Course period (stipend): {l.coursePeriodStipend}</li>
+                                                                                    <li>Internship (stipend): {l.internshipStipend}</li>
+                                                                                </ul>
+                                                                                <a href={basePath + "/course/" + l.slug} className="doctotal-btn">View More</a>
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
+
                                                                 </div>
                                                             </div>
-
                                                         </div>
-                                                    </div>
-                                                </div>
-
-                                                <div className="col-md-4">
-                                                    <div className="procedure-acc-card mb-3">
-                                                        <div className="accordion" id="accordionExample">
-                                                            <div className="accordion-item">
-                                                                <h2 className="accordion-header">
-                                                                    <button className="accordion-button" type="button"
-                                                                        data-bs-toggle="collapse" data-bs-target="#collapse41"
-                                                                        aria-expanded="true" aria-controls="collapse41">
-                                                                        <span>Diploma in Endoscopy
-                                                                            Technology</span>
-                                                                    </button>
-                                                                </h2>
-                                                                <div id="collapse41" className="accordion-collapse collapse show">
-                                                                    <div className="accordion-body main-list px-0 pt-0">
-                                                                        <ul>
-                                                                            <li>Affiliation: BSS</li>
-                                                                            <li>Entry Level: Plus two with science</li>
-                                                                            <li>Course Duration: 2 Year</li>
-                                                                            <li>Fees: 25,000/-</li>
-                                                                            <li>Course period (stipend): 3000/-</li>
-                                                                            <li>Internship (stipend): 5000/-</li>
-                                                                        </ul>
-                                                                        <a href="#" className="doctotal-btn">View More</a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div className="col-md-4">
-                                                    <div className="procedure-acc-card mb-3">
-                                                        <div className="accordion" id="accordionExample">
-                                                            <div className="accordion-item">
-                                                                <h2 className="accordion-header">
-                                                                    <button className="accordion-button" type="button"
-                                                                        data-bs-toggle="collapse" data-bs-target="#collapse42"
-                                                                        aria-expanded="true" aria-controls="collapse42">
-                                                                        <span>Diploma in Dental
-                                                                            Assistant</span>
-                                                                    </button>
-                                                                </h2>
-                                                                <div id="collapse42" className="accordion-collapse collapse show">
-                                                                    <div className="accordion-body main-list px-0 pt-0">
-                                                                        <ul>
-                                                                            <li>Affiliation: BSS</li>
-                                                                            <li>Entry Level: Plus two</li>
-                                                                            <li>Course Duration: 1 Year</li>
-                                                                            <li>Fees: 5,000/-</li>
-                                                                            <li>Course period (stipend): 2000/-</li>
-                                                                            <li>Internship (stipend): 3000/-</li>
-                                                                        </ul>
-                                                                        <a href="#" className="doctotal-btn">View More</a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-
-                                                <div className="col-md-4">
-                                                    <div className="procedure-acc-card mb-3">
-                                                        <div className="accordion" id="accordionExample">
-                                                            <div className="accordion-item">
-                                                                <h2 className="accordion-header">
-                                                                    <button className="accordion-button collapsed" type="button"
-                                                                        data-bs-toggle="collapse" data-bs-target="#collapse43"
-                                                                        aria-expanded="true" aria-controls="collapse43">
-                                                                        <span>Diploma in CSSD Technology Course</span>
-                                                                    </button>
-                                                                </h2>
-                                                                <div id="collapse43" className="accordion-collapse collapse">
-                                                                    <div className="accordion-body main-list px-0 pt-0">
-                                                                        <ul>
-                                                                            <li>Affiliation: BSS</li>
-                                                                            <li>Entry Level: Plus two</li>
-                                                                            <li>Course Duration: 1 Year</li>
-                                                                            <li>Fees: 5,000/-</li>
-                                                                            <li>Course period (stipend): 2000/-</li>
-                                                                            <li>Internship (stipend): 3000/-</li>
-                                                                        </ul>
-                                                                        <a href="#" className="doctotal-btn">View More</a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-
-
-                                                <div className="col-md-4">
-                                                    <div className="procedure-acc-card mb-3">
-                                                        <div className="accordion" id="accordionExample">
-                                                            <div className="accordion-item">
-                                                                <h2 className="accordion-header">
-                                                                    <button className="accordion-button collapsed" type="button"
-                                                                        data-bs-toggle="collapse" data-bs-target="#collapse44"
-                                                                        aria-expanded="true" aria-controls="collapse44">
-                                                                        <span>Diploma in Endoscopy
-                                                                            Technology</span>
-                                                                    </button>
-                                                                </h2>
-                                                                <div id="collapse44" className="accordion-collapse collapse">
-                                                                    <div className="accordion-body main-list px-0 pt-0">
-                                                                        <ul>
-                                                                            <li>Affiliation: BSS</li>
-                                                                            <li>Entry Level: Plus two with science</li>
-                                                                            <li>Course Duration: 2 Year</li>
-                                                                            <li>Fees: 25,000/-</li>
-                                                                            <li>Course period (stipend): 3000/-</li>
-                                                                            <li>Internship (stipend): 5000/-</li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div className="col-md-4">
-                                                    <div className="procedure-acc-card mb-3">
-                                                        <div className="accordion" id="accordionExample">
-                                                            <div className="accordion-item">
-                                                                <h2 className="accordion-header">
-                                                                    <button className="accordion-button collapsed" type="button"
-                                                                        data-bs-toggle="collapse" data-bs-target="#collapse45"
-                                                                        aria-expanded="true" aria-controls="collapse45">
-                                                                        <span>Diploma in Dental
-                                                                            Assistant</span>
-                                                                    </button>
-                                                                </h2>
-                                                                <div id="collapse45" className="accordion-collapse collapse ">
-                                                                    <div className="accordion-body main-list px-0 pt-0">
-                                                                        <ul>
-                                                                            <li>Affiliation: BSS</li>
-                                                                            <li>Entry Level: Plus two</li>
-                                                                            <li>Course Duration: 1 Year</li>
-                                                                            <li>Fees: 5,000/-</li>
-                                                                            <li>Course period (stipend): 2000/-</li>
-                                                                            <li>Internship (stipend): 3000/-</li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div className="col-md-4">
-                                                    <div className="procedure-acc-card mb-3">
-                                                        <div className="accordion" id="accordionExample">
-                                                            <div className="accordion-item">
-                                                                <h2 className="accordion-header">
-                                                                    <button className="accordion-button collapsed" type="button"
-                                                                        data-bs-toggle="collapse" data-bs-target="#collapse46"
-                                                                        aria-expanded="true" aria-controls="collapse46">
-                                                                        <span>Diploma in CSSD Technology Course</span>
-                                                                    </button>
-                                                                </h2>
-                                                                <div id="collapse46" className="accordion-collapse collapse">
-                                                                    <div className="accordion-body main-list px-0 pt-0">
-                                                                        <ul>
-                                                                            <li>Affiliation: BSS</li>
-                                                                            <li>Entry Level: Plus two</li>
-                                                                            <li>Course Duration: 1 Year</li>
-                                                                            <li>Fees: 5,000/-</li>
-                                                                            <li>Course period (stipend): 2000/-</li>
-                                                                            <li>Internship (stipend): 3000/-</li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-
-
-                                                <div className="col-md-4">
-                                                    <div className="procedure-acc-card mb-3">
-                                                        <div className="accordion" id="accordionExample">
-                                                            <div className="accordion-item">
-                                                                <h2 className="accordion-header">
-                                                                    <button className="accordion-button collapsed" type="button"
-                                                                        data-bs-toggle="collapse" data-bs-target="#collapse47"
-                                                                        aria-expanded="true" aria-controls="collapse47">
-                                                                        <span>Diploma in Endoscopy
-                                                                            Technology</span>
-                                                                    </button>
-                                                                </h2>
-                                                                <div id="collapse47" className="accordion-collapse collapse">
-                                                                    <div className="accordion-body main-list px-0 pt-0">
-                                                                        <ul>
-                                                                            <li>Affiliation: BSS</li>
-                                                                            <li>Entry Level: Plus two with science</li>
-                                                                            <li>Course Duration: 2 Year</li>
-                                                                            <li>Fees: 25,000/-</li>
-                                                                            <li>Course period (stipend): 3000/-</li>
-                                                                            <li>Internship (stipend): 5000/-</li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div className="col-md-4">
-                                                    <div className="procedure-acc-card mb-3">
-                                                        <div className="accordion" id="accordionExample">
-                                                            <div className="accordion-item">
-                                                                <h2 className="accordion-header">
-                                                                    <button className="accordion-button collapsed" type="button"
-                                                                        data-bs-toggle="collapse" data-bs-target="#collapse47"
-                                                                        aria-expanded="true" aria-controls="collapse47">
-                                                                        <span>Diploma in Dental
-                                                                            Assistant</span>
-                                                                    </button>
-                                                                </h2>
-                                                                <div id="collapse47" className="accordion-collapse collapse">
-                                                                    <div className="accordion-body main-list px-0 pt-0">
-                                                                        <ul>
-                                                                            <li>Affiliation: BSS</li>
-                                                                            <li>Entry Level: Plus two</li>
-                                                                            <li>Course Duration: 1 Year</li>
-                                                                            <li>Fees: 5,000/-</li>
-                                                                            <li>Course period (stipend): 2000/-</li>
-                                                                            <li>Internship (stipend): 3000/-</li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-
-                                                <div className="col-md-4">
-                                                    <div className="procedure-acc-card mb-3">
-                                                        <div className="accordion" id="accordionExample">
-                                                            <div className="accordion-item">
-                                                                <h2 className="accordion-header">
-                                                                    <button className="accordion-button collapsed" type="button"
-                                                                        data-bs-toggle="collapse" data-bs-target="#collapse48"
-                                                                        aria-expanded="true" aria-controls="collapse48">
-                                                                        <span>Diploma in CSSD Technology Course</span>
-                                                                    </button>
-                                                                </h2>
-                                                                <div id="collapse48" className="accordion-collapse collapse">
-                                                                    <div className="accordion-body main-list px-0 pt-0">
-                                                                        <ul>
-                                                                            <li>Affiliation: BSS</li>
-                                                                            <li>Entry Level: Plus two</li>
-                                                                            <li>Course Duration: 1 Year</li>
-                                                                            <li>Fees: 5,000/-</li>
-                                                                            <li>Course period (stipend): 2000/-</li>
-                                                                            <li>Internship (stipend): 3000/-</li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-
-
-                                                <div className="col-md-4">
-                                                    <div className="procedure-acc-card mb-3">
-                                                        <div className="accordion" id="accordionExample">
-                                                            <div className="accordion-item">
-                                                                <h2 className="accordion-header">
-                                                                    <button className="accordion-button collapsed" type="button"
-                                                                        data-bs-toggle="collapse" data-bs-target="#collapse49"
-                                                                        aria-expanded="true" aria-controls="collapse49">
-                                                                        <span>Diploma in Endoscopy
-                                                                            Technology</span>
-                                                                    </button>
-                                                                </h2>
-                                                                <div id="collapse49" className="accordion-collapse collapse">
-                                                                    <div className="accordion-body main-list px-0 pt-0">
-                                                                        <ul>
-                                                                            <li>Affiliation: BSS</li>
-                                                                            <li>Entry Level: Plus two with science</li>
-                                                                            <li>Course Duration: 2 Year</li>
-                                                                            <li>Fees: 25,000/-</li>
-                                                                            <li>Course period (stipend): 3000/-</li>
-                                                                            <li>Internship (stipend): 5000/-</li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div className="col-md-4">
-                                                    <div className="procedure-acc-card mb-3">
-                                                        <div className="accordion" id="accordionExample">
-                                                            <div className="accordion-item">
-                                                                <h2 className="accordion-header">
-                                                                    <button className="accordion-button collapsed" type="button"
-                                                                        data-bs-toggle="collapse" data-bs-target="#collapse50"
-                                                                        aria-expanded="true" aria-controls="collapse50">
-                                                                        <span>Diploma in Dental
-                                                                            Assistant</span>
-                                                                    </button>
-                                                                </h2>
-                                                                <div id="collapse50" className="accordion-collapse collapse ">
-                                                                    <div className="accordion-body main-list px-0 pt-0">
-                                                                        <ul>
-                                                                            <li>Affiliation: BSS</li>
-                                                                            <li>Entry Level: Plus two</li>
-                                                                            <li>Course Duration: 1 Year</li>
-                                                                            <li>Fees: 5,000/-</li>
-                                                                            <li>Course period (stipend): 2000/-</li>
-                                                                            <li>Internship (stipend): 3000/-</li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-
-                                                <div className="col-md-4">
-                                                    <div className="procedure-acc-card mb-3">
-                                                        <div className="accordion" id="accordionExample">
-                                                            <div className="accordion-item">
-                                                                <h2 className="accordion-header">
-                                                                    <button className="accordion-button collapsed" type="button"
-                                                                        data-bs-toggle="collapse" data-bs-target="#collapse51"
-                                                                        aria-expanded="true" aria-controls="collapse51">
-                                                                        <span>Diploma in CSSD Technology Course</span>
-                                                                    </button>
-                                                                </h2>
-                                                                <div id="collapse51" className="accordion-collapse collapse">
-                                                                    <div className="accordion-body main-list px-0 pt-0">
-                                                                        <ul>
-                                                                            <li>Affiliation: BSS</li>
-                                                                            <li>Entry Level: Plus two</li>
-                                                                            <li>Course Duration: 1 Year</li>
-                                                                            <li>Fees: 5,000/-</li>
-                                                                            <li>Course period (stipend): 2000/-</li>
-                                                                            <li>Internship (stipend): 3000/-</li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-
-
-                                                <div className="col-md-4">
-                                                    <div className="procedure-acc-card mb-3">
-                                                        <div className="accordion" id="accordionExample">
-                                                            <div className="accordion-item">
-                                                                <h2 className="accordion-header">
-                                                                    <button className="accordion-button collapsed" type="button"
-                                                                        data-bs-toggle="collapse" data-bs-target="#collapse52"
-                                                                        aria-expanded="true" aria-controls="collapse52">
-                                                                        <span>Diploma in Endoscopy
-                                                                            Technology</span>
-                                                                    </button>
-                                                                </h2>
-                                                                <div id="collapse52" className="accordion-collapse collapse">
-                                                                    <div className="accordion-body main-list px-0 pt-0">
-                                                                        <ul>
-                                                                            <li>Affiliation: BSS</li>
-                                                                            <li>Entry Level: Plus two with science</li>
-                                                                            <li>Course Duration: 2 Year</li>
-                                                                            <li>Fees: 25,000/-</li>
-                                                                            <li>Course period (stipend): 3000/-</li>
-                                                                            <li>Internship (stipend): 5000/-</li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div className="col-md-4">
-                                                    <div className="procedure-acc-card mb-3">
-                                                        <div className="accordion" id="accordionExample">
-                                                            <div className="accordion-item">
-                                                                <h2 className="accordion-header">
-                                                                    <button className="accordion-button collapsed" type="button"
-                                                                        data-bs-toggle="collapse" data-bs-target="#collapse53"
-                                                                        aria-expanded="true" aria-controls="collapse53">
-                                                                        <span>Diploma in Dental
-                                                                            Assistant</span>
-                                                                    </button>
-                                                                </h2>
-                                                                <div id="collapse53" className="accordion-collapse collapse ">
-                                                                    <div className="accordion-body main-list px-0 pt-0">
-                                                                        <ul>
-                                                                            <li>Affiliation: BSS</li>
-                                                                            <li>Entry Level: Plus two</li>
-                                                                            <li>Course Duration: 1 Year</li>
-                                                                            <li>Fees: 5,000/-</li>
-                                                                            <li>Course period (stipend): 2000/-</li>
-                                                                            <li>Internship (stipend): 3000/-</li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-
-                                                <div className="col-md-4">
-                                                    <div className="procedure-acc-card mb-3">
-                                                        <div className="accordion" id="accordionExample">
-                                                            <div className="accordion-item">
-                                                                <h2 className="accordion-header">
-                                                                    <button className="accordion-button collapsed" type="button"
-                                                                        data-bs-toggle="collapse" data-bs-target="#collapse54"
-                                                                        aria-expanded="true" aria-controls="collapse54">
-                                                                        <span>Diploma in CSSD Technology Course</span>
-                                                                    </button>
-                                                                </h2>
-                                                                <div id="collapse54" className="accordion-collapse collapse">
-                                                                    <div className="accordion-body main-list px-0 pt-0">
-                                                                        <ul>
-                                                                            <li>Affiliation: BSS</li>
-                                                                            <li>Entry Level: Plus two</li>
-                                                                            <li>Course Duration: 1 Year</li>
-                                                                            <li>Fees: 5,000/-</li>
-                                                                            <li>Course period (stipend): 2000/-</li>
-                                                                            <li>Internship (stipend): 3000/-</li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-
-
-                                                <div className="col-md-4">
-                                                    <div className="procedure-acc-card mb-3">
-                                                        <div className="accordion" id="accordionExample">
-                                                            <div className="accordion-item">
-                                                                <h2 className="accordion-header">
-                                                                    <button className="accordion-button collapsed" type="button"
-                                                                        data-bs-toggle="collapse" data-bs-target="#collapse55"
-                                                                        aria-expanded="true" aria-controls="collapse55">
-                                                                        <span>Diploma in Endoscopy
-                                                                            Technology</span>
-                                                                    </button>
-                                                                </h2>
-                                                                <div id="collapse55" className="accordion-collapse collapse">
-                                                                    <div className="accordion-body main-list px-0 pt-0">
-                                                                        <ul>
-                                                                            <li>Affiliation: BSS</li>
-                                                                            <li>Entry Level: Plus two with science</li>
-                                                                            <li>Course Duration: 2 Year</li>
-                                                                            <li>Fees: 25,000/-</li>
-                                                                            <li>Course period (stipend): 3000/-</li>
-                                                                            <li>Internship (stipend): 5000/-</li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div className="col-md-4">
-                                                    <div className="procedure-acc-card mb-3">
-                                                        <div className="accordion" id="accordionExample">
-                                                            <div className="accordion-item">
-                                                                <h2 className="accordion-header">
-                                                                    <button className="accordion-button collapsed" type="button"
-                                                                        data-bs-toggle="collapse" data-bs-target="#collapse56"
-                                                                        aria-expanded="true" aria-controls="collapse56">
-                                                                        <span>Diploma in Dental
-                                                                            Assistant</span>
-                                                                    </button>
-                                                                </h2>
-                                                                <div id="collapse56" className="accordion-collapse collapse ">
-                                                                    <div className="accordion-body main-list px-0 pt-0">
-                                                                        <ul>
-                                                                            <li>Affiliation: BSS</li>
-                                                                            <li>Entry Level: Plus two</li>
-                                                                            <li>Course Duration: 1 Year</li>
-                                                                            <li>Fees: 5,000/-</li>
-                                                                            <li>Course period (stipend): 2000/-</li>
-                                                                            <li>Internship (stipend): 3000/-</li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-
-                                                <div className="col-md-4">
-                                                    <div className="procedure-acc-card mb-3">
-                                                        <div className="accordion" id="accordionExample">
-                                                            <div className="accordion-item">
-                                                                <h2 className="accordion-header">
-                                                                    <button className="accordion-button collapsed" type="button"
-                                                                        data-bs-toggle="collapse" data-bs-target="#collapse57"
-                                                                        aria-expanded="true" aria-controls="collapse57">
-                                                                        <span>Diploma in CSSD Technology Course</span>
-                                                                    </button>
-                                                                </h2>
-                                                                <div id="collapse57" className="accordion-collapse collapse">
-                                                                    <div className="accordion-body main-list px-0 pt-0">
-                                                                        <ul>
-                                                                            <li>Affiliation: BSS</li>
-                                                                            <li>Entry Level: Plus two</li>
-                                                                            <li>Course Duration: 1 Year</li>
-                                                                            <li>Fees: 5,000/-</li>
-                                                                            <li>Course period (stipend): 2000/-</li>
-                                                                            <li>Internship (stipend): 3000/-</li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-
-
-                                                <div className="col-md-4">
-                                                    <div className="procedure-acc-card mb-3">
-                                                        <div className="accordion" id="accordionExample">
-                                                            <div className="accordion-item">
-                                                                <h2 className="accordion-header">
-                                                                    <button className="accordion-button collapsed" type="button"
-                                                                        data-bs-toggle="collapse" data-bs-target="#collapse58"
-                                                                        aria-expanded="true" aria-controls="collapse58">
-                                                                        <span>Diploma in Endoscopy
-                                                                            Technology</span>
-                                                                    </button>
-                                                                </h2>
-                                                                <div id="collapse58" className="accordion-collapse collapse">
-                                                                    <div className="accordion-body main-list px-0 pt-0">
-                                                                        <ul>
-                                                                            <li>Affiliation: BSS</li>
-                                                                            <li>Entry Level: Plus two with science</li>
-                                                                            <li>Course Duration: 2 Year</li>
-                                                                            <li>Fees: 25,000/-</li>
-                                                                            <li>Course period (stipend): 3000/-</li>
-                                                                            <li>Internship (stipend): 5000/-</li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div className="col-md-4">
-                                                    <div className="procedure-acc-card mb-3">
-                                                        <div className="accordion" id="accordionExample">
-                                                            <div className="accordion-item">
-                                                                <h2 className="accordion-header">
-                                                                    <button className="accordion-button collapsed" type="button"
-                                                                        data-bs-toggle="collapse" data-bs-target="#collapse58"
-                                                                        aria-expanded="true" aria-controls="collapse58">
-                                                                        <span>Diploma in Dental
-                                                                            Assistant</span>
-                                                                    </button>
-                                                                </h2>
-                                                                <div id="collapse58" className="accordion-collapse collapse">
-                                                                    <div className="accordion-body main-list px-0 pt-0">
-                                                                        <ul>
-                                                                            <li>Affiliation: BSS</li>
-                                                                            <li>Entry Level: Plus two</li>
-                                                                            <li>Course Duration: 1 Year</li>
-                                                                            <li>Fees: 5,000/-</li>
-                                                                            <li>Course period (stipend): 2000/-</li>
-                                                                            <li>Internship (stipend): 3000/-</li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-
-
+                                                    })
+                                                }
 
                                             </div>
                                         </div>
@@ -755,25 +130,7 @@ const KisaHealth = () => {
                                 </div>
                                 <div className="col-md-4">
                                     <div className="association-form-card mb-5">
-                                        <h3>GET A CALLBACK</h3>
-                                        <form action="">
-                                            <div className="row">
-                                                <div className="col-md-12 mb-3">
-                                                    <input type="text" className="form-control" placeholder="Name" name="name" />
-                                                </div>
-                                                <div className="col-md-12 mb-3">
-                                                    <input type="text" className="form-control"
-                                                        placeholder="Enter 10 Digit Mobile Number" name="name" />
-                                                </div>
-                                                <div className="col-md-12 mb-3">
-                                                    <textarea className="form-control" placeholder="Message"
-                                                        id="floatingTextarea"></textarea>
-                                                </div>
-                                                <div className="col-md-12 mb-3 text-center">
-                                                    <button className="btn mb-lg-0 mb-2 hospital-primarybtn px-5 py-2">Submit</button>
-                                                </div>
-                                            </div>
-                                        </form>
+                                        <Form1 title={"Request a Call Back"} />
                                     </div>
                                 </div>
                             </div>
@@ -781,8 +138,31 @@ const KisaHealth = () => {
                     </section>
 
                     <div className="line-divider"> </div>
-
-                    {/* <JournalCarousel /> */}
+                    <section className="section journal-section">
+                        <div className="container">
+                            <div className="main-heading">
+                                <h2>{pageContent[5]?.title}</h2>
+                            </div>
+                            <div className="owl-carousel owl-theme journal-slider">
+                                {
+                                    pageContent[5]?.journal.map((j, index) => {
+                                        return <div className="expert-card" data-aos="fade-right" key={index}>
+                                            <a download href={`${process.env.NEXT_PUBLIC_IMAGE_URL}${j.file.url}`} >
+                                                <div className="card border-0">
+                                                    <div className="card-top">
+                                                        <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${j.thumbnailImage.url}`} className="img-fluid w-100" alt={j.title} />
+                                                    </div>
+                                                    <div className="card-content">
+                                                        <h5>{j.title}</h5>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    })
+                                }
+                            </div>
+                        </div>
+                    </section>
 
                 </div>
             </div>

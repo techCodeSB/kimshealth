@@ -31,7 +31,7 @@ const ContactUs = () => {
                     <section className="section doctor-line-divider">
                         <div className="container">
                             <div className="row">
-                                <div className="col-md-6 ps-lg-0 ">
+                                <div className="col-md-6 ps-lg-0  order-lg-1 order-2">
                                     <section className="section pt-0">
                                         <div className="container">
                                             <div className="main-heading sub-heading">
@@ -46,6 +46,7 @@ const ContactUs = () => {
                                                 </div>
                                             </div>
 
+
                                             <div className="contact-details">
                                                 <div className="contact-icon"><i className="fa-solid fa-envelope-open"></i></div>
                                                 <div className="contact-content">
@@ -54,6 +55,7 @@ const ContactUs = () => {
                                                 </div>
                                             </div>
 
+
                                             <div className="contact-details">
                                                 <div className="contact-icon"><i className="fa-solid fa-phone"></i></div>
                                                 <div className="contact-content">
@@ -61,6 +63,7 @@ const ContactUs = () => {
                                                     <p>+91 471 294 1101</p>
                                                 </div>
                                             </div>
+                                            <a href="#" className="btn-tab treat-tab form-btn w-auto active mt-2 d-inline-block"><i class="fa-solid fa-diamond-turn-right"></i> Get Direction</a>
                                         </div>
                                     </section>
                                     <div className="line-divider"></div>
@@ -78,38 +81,6 @@ const ContactUs = () => {
                                                 </div>
                                             </div>
 
-                                            <div className="contact-details">
-                                                <div className="contact-icon"><i className="fa-solid fa-envelope-open"></i></div>
-                                                <div className="contact-content">
-                                                    <h3>Email:</h3>
-                                                    <p>feedback.tvm@kimshealth.org</p>
-                                                </div>
-                                            </div>
-
-                                            <div className="contact-details">
-                                                <div className="contact-icon"><i className="fa-solid fa-phone"></i></div>
-                                                <div className="contact-content">
-                                                    <h3>Phone:</h3>
-                                                    <p>+91 471 294 1101</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </section>
-
-                                    <div className="line-divider"></div>
-                                    <section className="section">
-                                        <div className="container">
-                                            <div className="main-heading sub-heading">
-                                                <h2>KIMSHEALTH Trivandrum</h2>
-                                            </div>
-                                            <div className="contact-details">
-                                                <div className="contact-icon location-icon"><i className="fa-solid fa-location-dot"></i>
-                                                </div>
-                                                <div className="contact-content">
-                                                    <h3>Location</h3>
-                                                    <p>P.B.No.1, Anayara P.O, Trivandrum – 695029, Kerala, India</p>
-                                                </div>
-                                            </div>
 
                                             <div className="contact-details">
                                                 <div className="contact-icon"><i className="fa-solid fa-envelope-open"></i></div>
@@ -119,6 +90,7 @@ const ContactUs = () => {
                                                 </div>
                                             </div>
 
+
                                             <div className="contact-details">
                                                 <div className="contact-icon"><i className="fa-solid fa-phone"></i></div>
                                                 <div className="contact-content">
@@ -126,6 +98,7 @@ const ContactUs = () => {
                                                     <p>+91 471 294 1101</p>
                                                 </div>
                                             </div>
+                                            <a href="#" className="btn-tab treat-tab form-btn w-auto active mt-2 d-inline-block"><i class="fa-solid fa-diamond-turn-right"></i> Get Direction</a>
                                         </div>
                                     </section>
 
@@ -145,6 +118,7 @@ const ContactUs = () => {
                                                 </div>
                                             </div>
 
+
                                             <div className="contact-details">
                                                 <div className="contact-icon"><i className="fa-solid fa-envelope-open"></i></div>
                                                 <div className="contact-content">
@@ -153,6 +127,7 @@ const ContactUs = () => {
                                                 </div>
                                             </div>
 
+
                                             <div className="contact-details">
                                                 <div className="contact-icon"><i className="fa-solid fa-phone"></i></div>
                                                 <div className="contact-content">
@@ -160,8 +135,11 @@ const ContactUs = () => {
                                                     <p>+91 471 294 1101</p>
                                                 </div>
                                             </div>
+                                            <a href="#" className="btn-tab treat-tab form-btn w-auto active mt-2 d-inline-block"><i class="fa-solid fa-diamond-turn-right"></i> Get Direction</a>
                                         </div>
                                     </section>
+
+
 
 
                                     <div className="line-divider"></div>
@@ -179,6 +157,7 @@ const ContactUs = () => {
                                                 </div>
                                             </div>
 
+
                                             <div className="contact-details">
                                                 <div className="contact-icon"><i className="fa-solid fa-envelope-open"></i></div>
                                                 <div className="contact-content">
@@ -187,6 +166,7 @@ const ContactUs = () => {
                                                 </div>
                                             </div>
 
+
                                             <div className="contact-details">
                                                 <div className="contact-icon"><i className="fa-solid fa-phone"></i></div>
                                                 <div className="contact-content">
@@ -194,8 +174,11 @@ const ContactUs = () => {
                                                     <p>+91 471 294 1101</p>
                                                 </div>
                                             </div>
+                                            <a href="#" className="btn-tab treat-tab form-btn w-auto active mt-2 d-inline-block"><i class="fa-solid fa-diamond-turn-right"></i> Get Direction</a>
                                         </div>
                                     </section>
+
+
 
 
                                     <div className="line-divider"></div>
@@ -213,6 +196,7 @@ const ContactUs = () => {
                                                 </div>
                                             </div>
 
+
                                             <div className="contact-details">
                                                 <div className="contact-icon"><i className="fa-solid fa-envelope-open"></i></div>
                                                 <div className="contact-content">
@@ -221,6 +205,7 @@ const ContactUs = () => {
                                                 </div>
                                             </div>
 
+
                                             <div className="contact-details">
                                                 <div className="contact-icon"><i className="fa-solid fa-phone"></i></div>
                                                 <div className="contact-content">
@@ -228,8 +213,11 @@ const ContactUs = () => {
                                                     <p>+91 471 294 1101</p>
                                                 </div>
                                             </div>
+                                            <a href="#" className="btn-tab treat-tab form-btn w-auto active mt-2 d-inline-block"><i class="fa-solid fa-diamond-turn-right"></i> Get Direction</a>
                                         </div>
                                     </section>
+
+
 
 
                                     <div className="line-divider"></div>
@@ -247,6 +235,7 @@ const ContactUs = () => {
                                                 </div>
                                             </div>
 
+
                                             <div className="contact-details">
                                                 <div className="contact-icon"><i className="fa-solid fa-envelope-open"></i></div>
                                                 <div className="contact-content">
@@ -255,6 +244,7 @@ const ContactUs = () => {
                                                 </div>
                                             </div>
 
+
                                             <div className="contact-details">
                                                 <div className="contact-icon"><i className="fa-solid fa-phone"></i></div>
                                                 <div className="contact-content">
@@ -262,18 +252,62 @@ const ContactUs = () => {
                                                     <p>+91 471 294 1101</p>
                                                 </div>
                                             </div>
+                                            <a href="#" className="btn-tab treat-tab form-btn w-auto active mt-2 d-inline-block"><i class="fa-solid fa-diamond-turn-right"></i> Get Direction</a>
                                         </div>
                                     </section>
+
+
+
+
+                                    <div className="line-divider"></div>
+                                    <section className="section">
+                                        <div className="container">
+                                            <div className="main-heading sub-heading">
+                                                <h2>KIMSHEALTH Trivandrum</h2>
+                                            </div>
+                                            <div className="contact-details">
+                                                <div className="contact-icon location-icon"><i className="fa-solid fa-location-dot"></i>
+                                                </div>
+                                                <div className="contact-content">
+                                                    <h3>Location</h3>
+                                                    <p>P.B.No.1, Anayara P.O, Trivandrum – 695029, Kerala, India</p>
+                                                </div>
+                                            </div>
+
+
+                                            <div className="contact-details">
+                                                <div className="contact-icon"><i className="fa-solid fa-envelope-open"></i></div>
+                                                <div className="contact-content">
+                                                    <h3>Email:</h3>
+                                                    <p>feedback.tvm@kimshealth.org</p>
+                                                </div>
+                                            </div>
+
+
+                                            <div className="contact-details">
+                                                <div className="contact-icon"><i className="fa-solid fa-phone"></i></div>
+                                                <div className="contact-content">
+                                                    <h3>Phone:</h3>
+                                                    <p>+91 471 294 1101</p>
+                                                </div>
+                                            </div>
+                                            <a href="#" className="btn-tab treat-tab form-btn w-auto active mt-2 d-inline-block"><i class="fa-solid fa-diamond-turn-right"></i> Get Direction</a>
+                                        </div>
+                                    </section>
+
+
 
 
                                 </div>
 
-                                <div className="col-md-6 contact-right-col">
-                                    <div className="association-form-card mb-5">
-                                        <div className="tab-group text-center mb-3">
+
+                                <div className="col-md-6 contact-right-col order-lg-2 order-1">
+                                    <div className="association-form-card mb-5 sticky-from">
+                                        <div className="tab-group text-start mb-3">
                                             <button type="button" className="btn-tab treat-tab form-btn w-auto active mx-2">
                                                 {/* onClick="showBox(this,'omega')"> */}
                                                 Queries</button>
+
 
                                             <button type="button" className="btn-tab form-btn  w-auto treat-tab mx-2">
                                                 {/* onClick="showBox(this,'omega1')"> */}
@@ -287,22 +321,28 @@ const ContactUs = () => {
                                                             <label htmlFor=''>First Name*</label>
                                                             <input type="text" className="form-control pe-0" />
 
+
                                                         </div>
                                                         <div className="col-xl-6 col-lg-6 col-md-6 col-12 mb-3">
                                                             <label htmlFor=''>Last Name*</label>
                                                             <input type="text" className="form-control pe-0" />
 
+
                                                         </div>
+
 
                                                         <div className="col-xl-6 col-lg-6 col-md-6 col-12 mb-3">
                                                             <label htmlFor=''>Mobile Number*</label>
                                                             <input type="text" id="phone" defaultValue="+91" className="form-control pe-0" />
 
+
                                                         </div>
+
 
                                                         <div className="col-xl-6 col-lg-6 col-md-6 col-12 mb-3">
                                                             <label htmlFor=''>Email*</label>
                                                             <input type="text" className="form-control pe-0" />
+
 
                                                         </div>
                                                         <div className="col-xl-12 col-lg-12 col-md-12 col-12 mb-3">
@@ -315,12 +355,19 @@ const ContactUs = () => {
                                                             </select>
                                                         </div>
 
+
                                                         <div className="col-xl-12 col-lg-12 col-md-12 col-12 mb-3">
                                                             <label htmlFor=''>Query*</label>
                                                             <textarea className="form-control" placeholder="Leave a comment here"
                                                                 id="floatingTextarea"></textarea>
 
+
                                                         </div>
+
+
+
+
+
 
 
 
@@ -333,12 +380,13 @@ const ContactUs = () => {
                                                             </div>
                                                         </div>
 
+
                                                     </div>
                                                 </form>
                                             </div>
 
-                                        </div>
 
+                                        </div>
 
 
                                         <div className="treat-box" id="omega1" style={{ display: 'none' }}>
@@ -348,24 +396,18 @@ const ContactUs = () => {
                                                         <div className="col-xl-6 col-lg-6 col-md-6 col-12 mb-3">
                                                             <label htmlFor=''>First Name*</label>
                                                             <input type="text" className="form-control pe-0" />
-
                                                         </div>
                                                         <div className="col-xl-6 col-lg-6 col-md-6 col-12 mb-3">
                                                             <label htmlFor=''>Last Name*</label>
                                                             <input type="text" className="form-control pe-0" />
-
                                                         </div>
-
                                                         <div className="col-xl-6 col-lg-6 col-md-6 col-12 mb-3">
                                                             <label htmlFor=''>Mobile Number*</label>
                                                             <input type="text" id="tel" defaultValue="+91" className="form-control pe-0" />
-
                                                         </div>
-
                                                         <div className="col-xl-6 col-lg-6 col-md-6 col-12 mb-3">
                                                             <label htmlFor=''>Email*</label>
                                                             <input type="text" className="form-control pe-0" />
-
                                                         </div>
                                                         <div className="col-xl-12 col-lg-12 col-md-12 col-12 mb-3">
                                                             <label htmlFor=''>Hospitals*</label>
@@ -376,38 +418,29 @@ const ContactUs = () => {
                                                                 <option value="3">Three</option>
                                                             </select>
                                                         </div>
-
                                                         <div className="col-xl-12 col-lg-12 col-md-12 col-12 mb-3">
                                                             <label htmlFor=''>Query*</label>
                                                             <textarea className="form-control" placeholder="Leave a comment here"
                                                                 id="floatingTextarea"></textarea>
-
                                                         </div>
-
-
-
-
-
                                                         <div className="col-xl-6 col-lg-6 col-md-6 col-12 mb-3">
                                                             <div className="from-btn">
                                                                 <button type="button"
                                                                     className="btn d-inline-block w-auto">Submit</button>
                                                             </div>
                                                         </div>
-
                                                     </div>
                                                 </form>
                                             </div>
                                         </div>
-
-
                                     </div>
-
-
                                 </div>
                             </div>
                         </div>
                     </section>
+
+
+
                     <section className="section pt-0">
                         <div className="container-fluid px-0">
                             <div className="contact-us-map">

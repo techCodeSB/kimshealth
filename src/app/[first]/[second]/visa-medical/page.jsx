@@ -39,7 +39,7 @@ const VisaMedical = async () => {
                                     <div className="sticky-left">
                                         <div className="find-doctor-left-col">
                                             <div className="row">
-                                                <div className="tab-group text-center mb-3">
+                                                <div className="tab-group d-md-block d-none text-center mb-3">
                                                     {/* <button type="button" className="btn-tab treat-tab active" onClick="showBox(this,'omega')"> Australia</button> */}
                                                     <button type="button" className="btn-tab treat-tab active"> {pageContent[1]?.title}</button>
 
@@ -48,28 +48,34 @@ const VisaMedical = async () => {
                                                     <button type="button" className="btn-tab treat-tab ">{pageContent[3]?.title}</button>
                                                     <button type="button" className="btn-tab treat-tab ">{pageContent[4]?.title}</button>
                                                 </div>
+                                                <div className="visa-select d-md-none d-block">
+                                                    <select class="form-select" aria-label="Default select example">
+                                                        <option selected>Australia</option>
+                                                        <option value="1">New Zeeland</option>
+                                                        <option value="2">Canada</option>
+                                                        <option value="3">United Kingdom</option>
+                                                    </select>
+                                                </div>
                                             </div>
 
-                                            <div className="find-doc-box">
+                                            <div className="find-doc-box d-md-block d-none">
                                                 <h3>{pageContent[5]?.title}</h3>
                                                 <div className="rounded-field-form mb-3">
-                                                    <form action="">
-                                                        <div className="row">
-                                                            <div className="col-12 mb-3">
-                                                                <label className="form-label">Name <span>*</span></label>
-                                                                <input type="text" className="form-control" placeholder="Enter your name" name="name" />
-                                                            </div>
-
-                                                            <div className="col-12 mb-3">
-                                                                <label className="form-label">Mobile Number <span>*</span></label>
-                                                                <input type="text" className="form-control" placeholder="000 000 0000" name="name" />
-                                                            </div>
-
-                                                            <div className="col-12 mb-3">
-                                                                <button className="form-btn">Submit</button>
-                                                            </div>
+                                                    <div className="row">
+                                                        <div className="col-12 mb-3">
+                                                            <label className="form-label">Name <span>*</span></label>
+                                                            <input type="text" className="form-control" placeholder="Enter your name" name="name" />
                                                         </div>
-                                                    </form>
+
+                                                        <div className="col-12 mb-3">
+                                                            <label className="form-label">Mobile Number <span>*</span></label>
+                                                            <input type="text" className="form-control" placeholder="Enter Mobile No." name="name" />
+                                                        </div>
+
+                                                        <div className="col-12 mb-3">
+                                                            <button className="form-btn">Submit</button>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -102,6 +108,29 @@ const VisaMedical = async () => {
                                         <div
                                             dangerouslySetInnerHTML={{ __html: pageContent[4]?.details }}
                                             className="main-heading sub-heading main-list">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="find-doctor-left-col d-md-none d-block">
+                                    <div className="find-doc-box">
+                                        <h3>{pageContent[5]?.title}</h3>
+                                        <div className="rounded-field-form mb-3">
+                                            <div className="row">
+                                                <div className="col-12 mb-3">
+                                                    <label className="form-label">Name <span>*</span></label>
+                                                    <input type="text" className="form-control" placeholder="Enter your name" name="name" />
+                                                </div>
+
+                                                <div className="col-12 mb-3">
+                                                    <label className="form-label">Mobile Number <span>*</span></label>
+                                                    <input type="text" className="form-control" placeholder="Enter Mobile No." name="name" />
+                                                </div>
+
+                                                <div className="col-12 mb-3">
+                                                    <button className="form-btn">Submit</button>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

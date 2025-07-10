@@ -4,8 +4,6 @@ import React from 'react'
 import { getBaseUrl } from '@/app/lib/getBaseUrl';
 import { getStaticPageContent } from '@/app/lib/getStaticPageContent';
 import getSpecialityData from '@/app/lib/getSpeciality';
-import procedureData from '@/app/lib/getProcedure';
-import TreamentSidebar from '@/components/TreamentSidebar';
 import getStaticText from '@/app/lib/getStaticTextServer';
 
 
@@ -19,8 +17,6 @@ const Speciality = async () => {
 
     const otherSpecility = await getSpecialityData.getSpeciality('Other Specialties');
     const coeSpecility = await getSpecialityData.getSpeciality('Center of Excellence');
-    const procedures = await procedureData.getAll(25);
-    const allSpeciality = await getSpecialityData.getSpecialityForSearch();
 
 
     return (
@@ -88,12 +84,56 @@ const Speciality = async () => {
                                     </div>
                                 </div>
                             </div>
-                            <TreamentSidebar
+                            {/* <TreamentSidebar
                                 baseUrlOnlyLang={baseUrlOnlyLang}
                                 title={pageContent[3]?.title} 
                                 procedures={procedures}
                                 allSpeciality={allSpeciality}
-                            />
+                            /> */}
+
+                            <div className="col-md-3">
+                                <a href={baseUrlOnlyLang + "/" + pageContent[3].card1Hyperlink}>
+                                    <div className="key-master-book-appointment-btn mb-1">
+                                        <div className="key-master-book-appointment-content">
+                                            <img src={pageContent[3]?.card1Icon?.url ? process.env.NEXT_PUBLIC_IMAGE_URL + pageContent[3].card1Icon.url : "/img/doctor.svg"} alt="" className="img-fluid" />
+                                            <h5> {pageContent[3].card1Title}</h5>
+                                        </div>
+
+
+                                    </div>
+                                </a>
+
+
+                                <a href={baseUrlOnlyLang + "/" + pageContent[3].card2Hyperlink}>
+                                    <div className="key-master-book-appointment-btn mb-1">
+                                        <div className="key-master-book-appointment-content">
+                                            <img src={pageContent[3]?.card2Icon?.url ? process.env.NEXT_PUBLIC_IMAGE_URL + pageContent[3].card2Icon.url : "/img/calender.svg"} alt="" className="img-fluid" />
+                                            <h5>{pageContent[3].card2Title}</h5>
+                                        </div>
+                                    </div>
+                                </a>
+
+
+                                <a href={baseUrlOnlyLang + "/" + pageContent[3].card3Hyperlink}>
+                                    <div className="key-master-help-btn">
+                                        <div className="key-master-book-appointment-content">
+                                            <h5>{pageContent[3].card3Title}</h5>
+                                        </div>
+
+
+                                    </div>
+                                </a>
+                                <a href={`tel:${pageContent[3].card4Title}`}>
+                                    <div className="key-master-call-btn">
+                                        <div className="key-master-book-appointment-content text-center">
+                                            <h5>{pageContent[3].card4Title}</h5>
+                                            <h4><i className="fa-solid fa-phone"></i> {pageContent[3].card4Contact}</h4>
+                                        </div>
+
+
+                                    </div>
+                                </a>
+                            </div>
 
                         </div>
                     </div>

@@ -20,7 +20,7 @@ import getStaticText from '@/app/lib/getStaticTextServer'
 
 const InternationalPage = async () => {
     const basePath = await getBaseUrl(true, true);
-    const field = "populate[0]=pageContent&populate[1]=pageContent.bannerItem&populate[2]=pageContent.bannerItem.bannerImageDesktop&populate[3]=pageContent.bannerItem.bannerImageMobile&populate[4]=metaSection&populate[5]=pageContent.highlightButtonItem&populate[6]=pageContent.highlightButtonItem.iconImage&populate[7]=pageContent.logoSlider&populate[8]=pageContent.logoSlider.image&populate[9]=pageContent.uspItem&populate[10]=pageContent.uspItem.image&populate[11]=pageContent.uspItem.icon&populate[12]=pageContent.contentCard&populate[13]=pageContent.contentCard.image&populate[14]=pageContent.thumbnail";
+    const field = "populate[0]=pageContent&populate[1]=pageContent.bannerItem&populate[2]=pageContent.bannerItem.bannerImageDesktop&populate[3]=pageContent.bannerItem.bannerImageMobile&populate[4]=metaSection&populate[5]=pageContent.highlightButtonItem&populate[6]=pageContent.highlightButtonItem.iconImage&populate[7]=pageContent.logoSlider&populate[8]=pageContent.logoSlider.image&populate[9]=pageContent.uspItem&populate[10]=pageContent.uspItem.image&populate[11]=pageContent.uspItem.icon&populate[12]=pageContent.contentCard&populate[13]=pageContent.contentCard.image&populate[14]=pageContent.thumbnail&populate[15]=pageContent.file";
     const data = await getStaticPageContent("international-patient", field);
     const pageContent = data?.data[0]?.pageContent;
     const pageMeta = data?.data[0]?.metaSection;
@@ -65,7 +65,8 @@ const InternationalPage = async () => {
             <Header />
             <div role="main" className="main">
                 <div className="internation-patients-main-page">
-                    <section className="section details-page-before py-0">
+
+                    <section className="section details-page-before py-0 d-none">
                         <div className="procedures-details-page-header inner-pages-header">
                             <div className="container-fluid px-0">
                                 <div className="row">
@@ -124,6 +125,143 @@ const InternationalPage = async () => {
                         </div>
 
                     </section>
+
+                    <section className="section details-page-before py-0 d-md-block d-none">
+                        <div className="procedures-details-page-header inner-pages-header">
+                            <div className="container-fluid px-0">
+                                <div className="row">
+                                    <div className="col-md-6 details-proceduce-banner-left-col">
+
+
+                                        <div className="hospital-banner-container">
+                                            <div className="breadcrumb-wrapper py-2 ps-2 ms-1">
+                                                <div className="row">
+                                                    <div className="col-12 px-0">
+                                                        <ul className="breadcrumb mb-0">
+                                                            <li>
+                                                                <a href={basePath + "/"}>{staticText['Home']}</a>
+                                                            </li>
+                                                            <li className="active"> {pageContent[0].title} </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="details-banner">
+                                                <div className="details-heading">
+                                                    <h3>{pageContent[0].title}</h3>
+                                                    <p>{pageContent[0].subTitle}</p>
+                                                    <div className="rounded-field-form mb-3">
+                                                        <form action="">
+                                                            <div className="row">
+                                                                <div className="col-md-6 col-12 mb-3">
+                                                                    <div className="input-group">
+                                                                        <input type="text" className="form-control"
+                                                                            placeholder="Enter Your Name" name="search" />
+                                                                    </div>
+                                                                </div>
+                                                                <div className="col-md-6 col-12 mb-3">
+                                                                    <div className="input-group">
+                                                                        <input type="text" id="phone" defaultValue="+91"
+                                                                            className="form-control" placeholder="Enter Mobile Number"
+                                                                            name="search" />
+                                                                    </div>
+                                                                </div>
+
+
+                                                                <div className="col-md-6 col-12 mb-3">
+                                                                    <button className="form-btn w-auto px-5">Submit</button>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div className="col-md-6 details-proceduce-banner-right-col">
+                                        <img src={pageContent[1].bannerItem.length > 0 ? process.env.NEXT_PUBLIC_IMAGE_URL + pageContent[1].bannerItem[0].bannerImageDesktop.url : "/img/no-image.jpg"} className="img-fluid details-banner-image" alt="" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </section>
+
+
+                    <section className="section details-page-before py-0 d-md-none d-block">
+                        <div className="procedures-details-page-header inner-pages-header">
+                            <div className="container pe-0">
+                                <div className="row">
+                                    <div className="col-md-6 details-proceduce-banner-left-col">
+
+
+                                        <div className="hospital-banner-container">
+                                            <div className="breadcrumb-wrapper py-2 ps-2 ms-1">
+                                                <div className="row">
+                                                    <div className="col-12 px-0">
+                                                        <ul className="breadcrumb mb-0">
+                                                            <li>
+                                                                <a href={basePath + "/"}>{staticText['Home']}</a>
+                                                            </li>
+                                                            <li className="active"> {pageContent[0].title} </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="details-proceduce-banner-right-col">
+                                                <img src={pageContent[1].bannerItem.length > 0 ? process.env.NEXT_PUBLIC_IMAGE_URL + pageContent[1].bannerItem[0].bannerImageDesktop.url : "/img/no-image.jpg"} className="img-fluid details-banner-image" alt="" />
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+
+                                    <div className="col-md-6">
+
+
+
+                                        <div className="details-banner">
+                                            <div className="details-heading">
+                                                <h3>{pageContent[0].title}</h3>
+                                                <p>{pageContent[0].subTitle}</p>
+                                                <div className="rounded-field-form mb-3">
+                                                    <form action="">
+                                                        <div className="row">
+                                                            <div className="col-md-6 col-12 mb-3">
+                                                                <div className="input-group">
+                                                                    <input type="text" className="form-control"
+                                                                        placeholder="Enter Your Name" name="search" />
+                                                                </div>
+                                                            </div>
+                                                            <div className="col-md-6 col-12 mb-3">
+                                                                <div className="input-group">
+                                                                    <input type="text" id="phone" defaultValue="+91"
+                                                                        className="form-control" placeholder="Enter Mobile Number"
+                                                                        name="search" />
+                                                                </div>
+                                                            </div>
+
+
+                                                            <div className="col-md-6 col-12 mb-3">
+                                                                <button className="form-btn w-auto px-5">Submit</button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </section>
+
+
 
                     <section className="section">
                         <div className="container">
@@ -351,9 +489,19 @@ const InternationalPage = async () => {
                     <div className="line-divider"></div>
                     <section className="section logo-slider-section">
                         <div className="container-fluid">
-                            <div className="heading-container">
-                                <div className="main-heading">
-                                    <h2>{pageContent[7].title}</h2>
+                            <div class="heading-container">
+                                <div class="row justify-content-between">
+                                    <div class="col-md-8 col-6">
+                                        <div class="main-heading">
+                                            <h2>{pageContent[7].title} </h2>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 col-4">
+                                        <div class="over-all-btn text-end">
+
+                                            <a download target='_blank' href={process.env.NEXT_PUBLIC_IMAGE_URL + pageContent[7].file?.url} >{pageContent[7].buttonText} <span><img src="/img/slider-right-arrow.svg" class="img-fluid" alt="" /></span></a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div id="exampleSlider">
