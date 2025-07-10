@@ -4,8 +4,8 @@ import Header from '@/components/Header'
 import JournalCarousel from '@/components/JournalCarousel'
 import React from 'react'
 import getStaticText from '@/app/lib/getStaticTextServer'
-import { getBaseUrl } from '../lib/getBaseUrl'
-import { getStaticPageContent } from '../lib/getStaticPageContent'
+import { getBaseUrl } from '@/app/lib/getBaseUrl'
+import { getStaticPageContent } from '@/app/lib/getStaticPageContent'
 
 const AmericanHeartAssoc = async () => {
     const basePath = await getBaseUrl(true, true);
