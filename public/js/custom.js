@@ -525,3 +525,6 @@ $('#exampleSlider').multislider({
     slideAll: true,
     duration: 4000
 });
+
+
+

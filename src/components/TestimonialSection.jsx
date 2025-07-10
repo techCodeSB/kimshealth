@@ -44,9 +44,10 @@ const TestimonialSection = ({ dataSet }) => {
                                     data-aos={index === 0 || index === 2 ? "fade-right" : "fade-left"} key={index}>
                                     <div className="row testi-card">
                                         <div className="col-md-3">
-                                            <div className="overflow-hidden">
+                                            <div className="overflow-hidden position-relative">
                                                 <a href={dataSet.baseUrl + "/testimonial/" + t.slug}>
                                                     <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${t.thumbnailImage?.url}`} alt="" className="img-fluid w-100" />
+                                                    <div className="play-icon"> <img src="/img/play-icon-small.png" alt="" /> </div>
                                                 </a>
                                             </div>
                                         </div>

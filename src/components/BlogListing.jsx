@@ -88,62 +88,62 @@ const BlogListing = ({ basePath }) => {
                             </div>
 
                             <div className="d-lg-block d-none">
-                                <p>Arthroscopic Surgery <span>(2)</span></p>
-                                <p>Cardiac Sciences <span>(91)</span></p>
-                                <p>Cardiology <span>(59)</span></p>
-                                <p>Dental Care <span>(9)</span></p>
-                                <p>Dermatology <span>(10)</span></p>
-                                <p>Dietetics <span>(37)</span></p>
-                                <p>Emergency Medicine <span>(6)</span></p>
-                                <p>Endocrinology & Diabetes <span>(20)</span></p>
-                                <p>ENT <span>(12)</span></p>
-                                <p>General Surgery <span>(13)</span></p>
-                                <p>Internal Medicine <span>(38)</span></p>
-                                <p>IVF <span>(17)</span></p>
-                                <p>Medical Oncology <span>(59)</span></p>
-                                <p>Mental Health <span>(22)</span></p>
-                                <p>Metabolic And Bariatric Surgery <span>(29)</span></p>
-                                <p>Minimal Access/Laparoscopic Surgery <span>(19)</span></p>
-                                <p>Neonatology <span>(4)</span></p>
-                                <p>Nephrology <span>(14)</span></p>
-                                <p>Neurology <span>(47)</span></p>
-                                <p>Neurosurgery <span>(29)</span></p>
-                                <p>Nuclear Medicine <span>(1)</span></p>
-                                <p>Obstetrics And Gynaecology <span>(58)</span></p>
-                                <p>Ophthalmology <span>(12)</span></p>
-                                <p>Orthopaedics & Joint Replacement <span>(34)</span></p>
-                                <p>Paediatric (Ped) <span>(19)</span></p>
-                                <p>Paediatric (Ped) Cardiac Surgery <span>(1)</span></p>
-                                <p>Paediatric (Ped) Cardiology <span>(5)</span></p>
-                                <p>Paediatric (Ped) Endocrinology <span>(8)</span></p>
-                                <p>Paediatric (Ped) Gastroenterology <span>(2)</span></p>
-                                <p>Paediatric (Ped) Nephrology <span>(1)</span></p>
-                                <p>Paediatric (Ped) Oncology <span>(2)</span></p>
-                                <p>Paediatric (Ped) Orthopaedics <span>(5)</span></p>
-                                <p>Paediatric (Ped) Pulmonology <span>(1)</span></p>
-                                <p>Physiotherapy & Rehabilitation Medicine <span>(4)</span></p>
-                                <p>Podiatry <span>(2)</span></p>
-                                <p>Arthroscopic Surgery <span>(2)</span></p>
-                                <p>Cardiac Sciences <span>(91)</span></p>
-                                <p>Cardiology <span>(59)</span></p>
-                                <p>Dental Care <span>(9)</span></p>
-                                <p>Dermatology <span>(10)</span></p>
-                                <p>Dietetics <span>(37)</span></p>
-                                <p>Emergency Medicine <span>(6)</span></p>
-                                <p>Endocrinology & Diabetes <span>(20)</span></p>
-                                <p>ENT <span>(12)</span></p>
-                                <p>General Surgery <span>(13)</span></p>
-                                <p>Internal Medicine <span>(38)</span></p>
-                                <p>IVF <span>(17)</span></p>
-                                <p>Medical Oncology <span>(59)</span></p>
-                                <p>Mental Health <span>(22)</span></p>
-                                <p>Metabolic And Bariatric Surgery <span>(29)</span></p>
-                                <p>Minimal Access/Laparoscopic Surgery <span>(19)</span></p>
-                                <p>Neonatology <span>(4)</span></p>
-                                <p>Nephrology <span>(14)</span></p>
-                                <p>Internal Medicine <span>(38)</span></p>
-                                <p>IVF <span>(17)</span></p>
-                                <p>Medical Oncology <span>(59)</span></p>
+                                <a herf="#">Arthroscopic Surgery <span>(2)</span></a>
+                                <a herf="#">Cardiac Sciences <span>(91)</span></a>
+                                <a herf="#">Cardiology <span>(59)</span></a>
+                                <a herf="#">Dental Care <span>(9)</span></a>
+                                <a herf="#">Dermatology <span>(10)</span></a>
+                                <a herf="#">Dietetics <span>(37)</span></a>
+                                <a herf="#">Emergency Medicine <span>(6)</span></a>
+                                <a herf="#">Endocrinology & Diabetes <span>(20)</span></a>
+                                <a herf="#">ENT <span>(12)</span></a>
+                                <a herf="#">General Surgery <span>(13)</span></a>
+                                <a herf="#">Internal Medicine <span>(38)</span></a>
+                                <a herf="#">IVF <span>(17)</span></a>
+                                <a herf="#">Medical Oncology <span>(59)</span></a>
+                                <a herf="#">Mental Health <span>(22)</span></a>
+                                <a herf="#">Metabolic And Bariatric Surgery <span>(29)</span></a>
+                                <a herf="#">Minimal Access/Laparoscopic Surgery <span>(19)</span></a>
+                                <a herf="#">Neonatology <span>(4)</span></a>
+                                <a herf="#">Nephrology <span>(14)</span></a>
+                                <a herf="#">Neurology <span>(47)</span></a>
+                                <a herf="#">Neurosurgery <span>(29)</span></a>
+                                <a herf="#">Nuclear Medicine <span>(1)</span></a>
+                                <a herf="#">Obstetrics And Gynaecology <span>(58)</span></a>
+                                <a herf="#">Ophthalmology <span>(12)</span></a>
+                                <a herf="#">Orthopaedics & Joint Replacement <span>(34)</span></a>
+                                <a herf="#">Paediatric (Ped) <span>(19)</span></a>
+                                <a herf="#">Paediatric (Ped) Cardiac Surgery <span>(1)</span></a>
+                                <a herf="#">Paediatric (Ped) Cardiology <span>(5)</span></a>
+                                <a herf="#">Paediatric (Ped) Endocrinology <span>(8)</span></a>
+                                <a herf="#">Paediatric (Ped) Gastroenterology <span>(2)</span></a>
+                                <a herf="#">Paediatric (Ped) Nephrology <span>(1)</span></a>
+                                <a herf="#">Paediatric (Ped) Oncology <span>(2)</span></a>
+                                <a herf="#">Paediatric (Ped) Orthopaedics <span>(5)</span></a>
+                                <a herf="#">Paediatric (Ped) Pulmonology <span>(1)</span></a>
+                                <a herf="#">Physiotherapy & Rehabilitation Medicine <span>(4)</span></a>
+                                <a herf="#">Podiatry <span>(2)</span></a>
+                                <a herf="#">Arthroscopic Surgery <span>(2)</span></a>
+                                <a herf="#">Cardiac Sciences <span>(91)</span></a>
+                                <a herf="#">Cardiology <span>(59)</span></a>
+                                <a herf="#">Dental Care <span>(9)</span></a>
+                                <a herf="#">Dermatology <span>(10)</span></a>
+                                <a herf="#">Dietetics <span>(37)</span></a>
+                                <a herf="#">Emergency Medicine <span>(6)</span></a>
+                                <a herf="#">Endocrinology & Diabetes <span>(20)</span></a>
+                                <a herf="#">ENT <span>(12)</span></a>
+                                <a herf="#">General Surgery <span>(13)</span></a>
+                                <a herf="#">Internal Medicine <span>(38)</span></a>
+                                <a herf="#">IVF <span>(17)</span></a>
+                                <a herf="#">Medical Oncology <span>(59)</span></a>
+                                <a herf="#">Mental Health <span>(22)</span></a>
+                                <a herf="#">Metabolic And Bariatric Surgery <span>(29)</span></a>
+                                <a herf="#">Minimal Access/Laparoscopic Surgery <span>(19)</span></a>
+                                <a herf="#">Neonatology <span>(4)</span></a>
+                                <a herf="#">Nephrology <span>(14)</span></a>
+                                <a herf="#">Internal Medicine <span>(38)</span></a>
+                                <a herf="#">IVF <span>(17)</span></a>
+                                <a herf="#">Medical Oncology <span>(59)</span></a>
                             </div>
                         </div>
 
@@ -168,9 +168,9 @@ const BlogListing = ({ basePath }) => {
                                                 {allBlog[0].shortDetails.slice(0, 90)}
                                                 <span> {staticText['Read More']}</span>
                                             </p>
-                                            <div className="d-flex align-items-center justify-content-between">
+                                            <div className="d-flex align-items-center justify-content-between blog-list-doc-name">
                                                 <div>
-                                                    <strong> By: {allBlog[0].doctor[0]?.name}</strong>
+                                                    <p><strong> By: {allBlog[0].doctor[0]?.name}</strong></p>
                                                 </div>
                                                 <div className="main-btn">
                                                     <p>{formatDate(allBlog[0].date)}</p>
@@ -235,12 +235,20 @@ const BlogListing = ({ basePath }) => {
                                 <div className="col-md-12 mb-4">
                                     <div className="blog-tagging">
                                         <h3>{staticText['Trending']}</h3>
-                                        <span className="active">COVID 19</span>
-                                        <span>Fever</span>
-                                        <span>Kne Replacement</span>
-                                        <span>Malaria</span>
-                                        <span>Medication</span>
-                                        <span>Cardiology</span>
+
+                                        <div className="scroll-container ms-3">
+                                            <div className="blog-listing-scroll-tab active"><span>COVID 19</span></div>
+                                            <div className="blog-listing-scroll-tab"><span>Fever</span></div>
+                                            <div className="blog-listing-scroll-tab"><span>Kne Replacement</span></div>
+                                            <div className="blog-listing-scroll-tab"><span>Malaria</span></div>
+                                            <div className="blog-listing-scroll-tab"><span>Medication</span></div>
+                                            <div className="blog-listing-scroll-tab"><span>Cardiology</span></div>
+                                            <div className="blog-listing-scroll-tab"><span>Cardiology</span></div>
+                                            <div className="blog-listing-scroll-tab"><span>Cardiology</span></div>
+                                            <div className="blog-listing-scroll-tab"><span>Cardiology</span></div>
+                                        </div>
+
+                                        
                                     </div>
                                 </div>
 
@@ -251,7 +259,7 @@ const BlogListing = ({ basePath }) => {
                                             <div className="card border-0">
                                                 <div className="card-top">
                                                     <a href={basePath + "/blog/" + b.slug}>
-                                                        <img src={b.featuredImage?.url? process.env.NEXT_PUBLIC_IMAGE_URL + b.featuredImage.url : "/img/no-image.jpg"} className="img-fluid w-100" alt="" />
+                                                        <img src={b.featuredImage?.url ? process.env.NEXT_PUBLIC_IMAGE_URL + b.featuredImage.url : "/img/no-image.jpg"} className="img-fluid w-100" alt="" />
                                                     </a>
                                                 </div>
                                                 <div className="card-content">

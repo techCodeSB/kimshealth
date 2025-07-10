@@ -63,7 +63,7 @@ const InternationalPage = async () => {
             <Header />
             <div role="main" className="main">
                 <div className="internation-patients-main-page">
-                    <section className="section details-page-before py-0">
+                    <section className="section details-page-before py-0 d-md-block d-none">
                         <div className="procedures-details-page-header inner-pages-header">
                             <div className="container-fluid px-0">
                                 <div className="row">
@@ -116,6 +116,71 @@ const InternationalPage = async () => {
 
                                     <div className="col-md-6 details-proceduce-banner-right-col">
                                         <img src={pageContent[1].bannerItem.length > 0 ? process.env.NEXT_PUBLIC_IMAGE_URL + pageContent[1].bannerItem[0].bannerImageDesktop.url : "/img/no-image.jpg"} className="img-fluid details-banner-image" alt="" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </section>
+
+                    <section className="section details-page-before py-0 d-md-none d-block">
+                        <div className="procedures-details-page-header inner-pages-header">
+                            <div className="container pe-0">
+                                <div className="row">
+                                    <div className="col-md-6 details-proceduce-banner-left-col">
+
+                                        <div className="hospital-banner-container">
+                                            <div className="breadcrumb-wrapper py-2 ps-2 ms-1">
+                                                <div className="row">
+                                                    <div className="col-12 px-0">
+                                                        <ul className="breadcrumb mb-0">
+                                                            <li>
+                                                                <a href={basePath + "/"}>Home</a>
+                                                            </li>
+                                                            <li className="active"> {pageContent[0].title} </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="details-proceduce-banner-right-col">
+                                                <img src={pageContent[1].bannerItem.length > 0 ? process.env.NEXT_PUBLIC_IMAGE_URL + pageContent[1].bannerItem[0].bannerImageDesktop.url : "/img/no-image.jpg"} className="img-fluid details-banner-image" alt="" />
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+
+                                    <div className="col-md-6">
+                                        
+
+                                        <div className="details-banner">
+                                                <div className="details-heading">
+                                                    <h3>{pageContent[0].title}</h3>
+                                                    <p>{pageContent[0].subTitle}</p>
+                                                    <div className="rounded-field-form mb-3">
+                                                        <form action="">
+                                                            <div className="row">
+                                                                <div className="col-md-6 col-12 mb-3">
+                                                                    <div className="input-group">
+                                                                        <input type="text" className="form-control"
+                                                                            placeholder="Enter Your Name" name="search" />
+                                                                    </div>
+                                                                </div>
+                                                                <div className="col-md-6 col-12 mb-3">
+                                                                    <div className="input-group">
+                                                                        <input type="text" id="phone" defaultValue="+91"
+                                                                            className="form-control" placeholder="Enter Mobile Number"
+                                                                            name="search" />
+                                                                    </div>
+                                                                </div>
+
+                                                                <div className="col-md-6 col-12 mb-3">
+                                                                    <button className="form-btn w-auto px-5">Submit</button>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
                                     </div>
                                 </div>
                             </div>
@@ -220,7 +285,7 @@ const InternationalPage = async () => {
 
                     <ExcellenceCarousel dataSet={specialityDataSet} />
 
-                    <div className="line-divider"></div>
+                    {/* <div className="line-divider"></div>
                     <section className="section d-lg-block d-none">
                         <div className="container">
                             <div className="main-heading">
@@ -282,9 +347,9 @@ const InternationalPage = async () => {
                                 </div>
                             </div>
                         </div>
-                    </section>
+                    </section> */}
 
-                    <section className="section d-lg-none d-block">
+                    {/* <section className="section d-lg-none d-block">
                         <div className="container">
                             <div className="main-heading">
                                 <h2>Diseases and Key Procedures</h2>
@@ -344,16 +409,30 @@ const InternationalPage = async () => {
                                 </div>
                             </div>
                         </div>
-                    </section>
+                    </section> */}
 
                     <div className="line-divider"></div>
                     <section className="section logo-slider-section">
                         <div className="container-fluid">
                             <div className="heading-container">
-                                <div className="main-heading">
-                                    <h2>{pageContent[7].title}</h2>
+                                <div className="row justify-content-between">
+                                    <div className="col-md-8 col-6">
+
+                                        <div className="main-heading">
+                                            <h2>{pageContent[7].title}</h2>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 col-4">
+                                        <div class="over-all-btn text-end">
+                                            <a href="#">View All
+                                                <span>
+                                                    <img src="/img/slider-right-arrow.svg" class="img-fluid" alt="" />
+                                                </span></a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
+
                             <div id="exampleSlider">
                                 <div className="MS-content">
 

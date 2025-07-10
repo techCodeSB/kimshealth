@@ -95,7 +95,7 @@ const Header = () => {
                                 <li><a href={`${basePath}/about-us`}>About Us</a></li>
                                 <li><a href={`${basePath}/at-home-services`}>Home Care</a></li>
                                 <li><a href={`${basePath}/second-opinion`}>Second Opinion</a></li>
-                                <li><a href="#">My Reports</a></li>
+                                {/* <li><a href="#">My Reports</a></li> */}
                                 <li><a href={`${basePath}/ambulance-services`}>Call Ambulance</a></li>
                                 <li><a href={`${basePath}/contact-us`}>Contact Us</a></li>
                                 <li><a href={"https://healthcheckup.kimshealthcare.com/p/kims-trivandrum-1/"} target='_blank'>Health Checkup</a></li>
@@ -321,6 +321,12 @@ const Header = () => {
                                             </div>
                                         </div>
                                     </li>
+                                    <li className="quicklink-header"><a href={`${basePath}/about-us`} className="anchor-menu">About Us</a></li>
+                                    <li className="quicklink-header"><a href={`${basePath}/at-home-services`} className="anchor-menu">Home Care</a></li>
+                                    <li className="quicklink-header"><a href={`${basePath}/second-opinion`} className="anchor-menu">Second Opinion</a></li>
+                                    <li className="quicklink-header"><a href={`${basePath}/ambulance-services`} className="anchor-menu">Call Ambulance</a></li>
+                                    <li className="quicklink-header"><a href={`${basePath}/contact-us`} className="anchor-menu">Contact Us</a></li>
+                                    <li className="quicklink-header"><a href={"https://healthcheckup.kimshealthcare.com/p/kims-trivandrum-1/"} className="anchor-menu">Health Checkup</a></li>
 
                                 </ul>
                             </div>
@@ -330,6 +336,20 @@ const Header = () => {
                                     onClick={() => { location.href = `${basePath}/book-an-appointment` }}>
                                     Book An Appointment
                                 </button>
+                            </div>
+                            <div className="mobile-location-dropdown d-md-none d-block">
+                                <select aria-label="Default select example">
+                                    <option selected>Location</option>
+                                    <option value="1">Ar</option>
+                                    <option value="2">Ml</option>
+                                </select>
+                            </div>
+                            <div className="mobile-location-dropdown d-md-none d-block">
+                                <select aria-label="Default select example">
+                                    <option selected>En</option>
+                                    <option value="1">Ar</option>
+                                    <option value="2">Ml</option>
+                                </select>
                             </div>
                             <div className="desktop-humberger-menu">
                                 <div className="hamburger" id="hamburger">

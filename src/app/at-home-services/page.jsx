@@ -60,7 +60,7 @@ const HomeServices = async () => {
 
                     <section className="section">
                         <div className="container">
-                            <div className="row">
+                            <div className="row mb-lg-5">
                                 <div className="col-md-5 mb-lg-0 mb-4 order-lg-1 order-2">
                                     <div className="details-right-col text-center">
                                         {/* <img src="/img/home-services-left-col.jpg" alt="" className="img-fluid w-100" /> */}
@@ -107,12 +107,12 @@ const HomeServices = async () => {
                         </div>
                     </section>
 
-                    <div className="line-divider"></div>
+                    {/* <div className="line-divider"></div>
                     <TestimonialSection dataSet={testimonialDataSet} />
 
 
                     <div className="line-divider"></div>
-                    <BlogCarousel dataSet={blogDataSet} />
+                    <BlogCarousel dataSet={blogDataSet} /> */}
                 </div>
             </div>
             <Footer />

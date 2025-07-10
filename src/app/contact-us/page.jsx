@@ -31,7 +31,7 @@ const ContactUs = () => {
                     <section className="section doctor-line-divider">
                         <div className="container">
                             <div className="row">
-                                <div className="col-md-6 ps-lg-0 ">
+                                <div className="col-md-6 ps-lg-0  order-lg-1 order-2">
                                     <section className="section pt-0">
                                         <div className="container">
                                             <div className="main-heading sub-heading">
@@ -61,6 +61,7 @@ const ContactUs = () => {
                                                     <p>+91 471 294 1101</p>
                                                 </div>
                                             </div>
+                                            <a href="#" className="btn-tab treat-tab form-btn w-auto active mt-2 d-inline-block"><i class="fa-solid fa-diamond-turn-right"></i> Get Direction</a>
                                         </div>
                                     </section>
                                     <div className="line-divider"></div>
@@ -93,6 +94,7 @@ const ContactUs = () => {
                                                     <p>+91 471 294 1101</p>
                                                 </div>
                                             </div>
+                                            <a href="#" className="btn-tab treat-tab form-btn w-auto active mt-2 d-inline-block"><i class="fa-solid fa-diamond-turn-right"></i> Get Direction</a>
                                         </div>
                                     </section>
 
@@ -126,40 +128,7 @@ const ContactUs = () => {
                                                     <p>+91 471 294 1101</p>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </section>
-
-
-                                    <div className="line-divider"></div>
-                                    <section className="section">
-                                        <div className="container">
-                                            <div className="main-heading sub-heading">
-                                                <h2>KIMSHEALTH Trivandrum</h2>
-                                            </div>
-                                            <div className="contact-details">
-                                                <div className="contact-icon location-icon"><i className="fa-solid fa-location-dot"></i>
-                                                </div>
-                                                <div className="contact-content">
-                                                    <h3>Location</h3>
-                                                    <p>P.B.No.1, Anayara P.O, Trivandrum – 695029, Kerala, India</p>
-                                                </div>
-                                            </div>
-
-                                            <div className="contact-details">
-                                                <div className="contact-icon"><i className="fa-solid fa-envelope-open"></i></div>
-                                                <div className="contact-content">
-                                                    <h3>Email:</h3>
-                                                    <p>feedback.tvm@kimshealth.org</p>
-                                                </div>
-                                            </div>
-
-                                            <div className="contact-details">
-                                                <div className="contact-icon"><i className="fa-solid fa-phone"></i></div>
-                                                <div className="contact-content">
-                                                    <h3>Phone:</h3>
-                                                    <p>+91 471 294 1101</p>
-                                                </div>
-                                            </div>
+                                            <a href="#" className="btn-tab treat-tab form-btn w-auto active mt-2 d-inline-block"><i class="fa-solid fa-diamond-turn-right"></i> Get Direction</a>
                                         </div>
                                     </section>
 
@@ -194,6 +163,7 @@ const ContactUs = () => {
                                                     <p>+91 471 294 1101</p>
                                                 </div>
                                             </div>
+                                            <a href="#" className="btn-tab treat-tab form-btn w-auto active mt-2 d-inline-block"><i class="fa-solid fa-diamond-turn-right"></i> Get Direction</a>
                                         </div>
                                     </section>
 
@@ -228,6 +198,7 @@ const ContactUs = () => {
                                                     <p>+91 471 294 1101</p>
                                                 </div>
                                             </div>
+                                            <a href="#" className="btn-tab treat-tab form-btn w-auto active mt-2 d-inline-block"><i class="fa-solid fa-diamond-turn-right"></i> Get Direction</a>
                                         </div>
                                     </section>
 
@@ -262,15 +233,51 @@ const ContactUs = () => {
                                                     <p>+91 471 294 1101</p>
                                                 </div>
                                             </div>
+                                            <a href="#" className="btn-tab treat-tab form-btn w-auto active mt-2 d-inline-block"><i class="fa-solid fa-diamond-turn-right"></i> Get Direction</a>
+                                        </div>
+                                    </section>
+
+
+                                    <div className="line-divider"></div>
+                                    <section className="section">
+                                        <div className="container">
+                                            <div className="main-heading sub-heading">
+                                                <h2>KIMSHEALTH Trivandrum</h2>
+                                            </div>
+                                            <div className="contact-details">
+                                                <div className="contact-icon location-icon"><i className="fa-solid fa-location-dot"></i>
+                                                </div>
+                                                <div className="contact-content">
+                                                    <h3>Location</h3>
+                                                    <p>P.B.No.1, Anayara P.O, Trivandrum – 695029, Kerala, India</p>
+                                                </div>
+                                            </div>
+
+                                            <div className="contact-details">
+                                                <div className="contact-icon"><i className="fa-solid fa-envelope-open"></i></div>
+                                                <div className="contact-content">
+                                                    <h3>Email:</h3>
+                                                    <p>feedback.tvm@kimshealth.org</p>
+                                                </div>
+                                            </div>
+
+                                            <div className="contact-details">
+                                                <div className="contact-icon"><i className="fa-solid fa-phone"></i></div>
+                                                <div className="contact-content">
+                                                    <h3>Phone:</h3>
+                                                    <p>+91 471 294 1101</p>
+                                                </div>
+                                            </div>
+                                            <a href="#" className="btn-tab treat-tab form-btn w-auto active mt-2 d-inline-block"><i class="fa-solid fa-diamond-turn-right"></i> Get Direction</a>
                                         </div>
                                     </section>
 
 
                                 </div>
 
-                                <div className="col-md-6 contact-right-col">
-                                    <div className="association-form-card mb-5">
-                                        <div className="tab-group text-center mb-3">
+                                <div className="col-md-6 contact-right-col order-lg-2 order-1">
+                                    <div className="association-form-card mb-5 sticky-from">
+                                        <div className="tab-group text-start mb-3">
                                             <button type="button" className="btn-tab treat-tab form-btn w-auto active mx-2">
                                                 {/* onClick="showBox(this,'omega')"> */}
                                                 Queries</button>

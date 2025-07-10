@@ -88,12 +88,50 @@ const Speciality = async () => {
                                     </div>
                                 </div>
                             </div>
-                            <TreamentSidebar
+                            {/* <TreamentSidebar
                                 baseUrlOnlyLang={baseUrlOnlyLang}
                                 title={pageContent[3]?.title} 
                                 procedures={procedures}
                                 allSpeciality={allSpeciality}
-                            />
+                            /> */}
+                            <div className="col-md-3">
+                                <a href={baseUrlOnlyLang + "/" + pageContent[1].card1Hyperlink}>
+                                    <div className="key-master-book-appointment-btn mb-1">
+                                        <div className="key-master-book-appointment-content">
+                                            <img src={pageContent[1]?.card1Icon?.url ? process.env.NEXT_PUBLIC_IMAGE_URL + pageContent[1].card1Icon.url : "/img/doctor.svg"} alt="" className="img-fluid" />
+                                            <h5> {pageContent[1].card1Title}</h5>
+                                        </div>
+
+                                    </div>
+                                </a>
+
+                                <a href={baseUrlOnlyLang + "/" + pageContent[1].card2Hyperlink}>
+                                    <div className="key-master-book-appointment-btn mb-1">
+                                        <div className="key-master-book-appointment-content">
+                                            <img src={pageContent[1]?.card2Icon?.url ? process.env.NEXT_PUBLIC_IMAGE_URL + pageContent[1].card2Icon.url : "/img/calender.svg"} alt="" className="img-fluid" />
+                                            <h5>{pageContent[1].card2Title}</h5>
+                                        </div>
+                                    </div>
+                                </a>
+
+                                <a href={baseUrlOnlyLang + "/" + pageContent[1].card3Hyperlink}>
+                                    <div className="key-master-help-btn">
+                                        <div className="key-master-book-appointment-content">
+                                            <h5>{pageContent[1].card3Title}</h5>
+                                        </div>
+
+                                    </div>
+                                </a>
+                                <a href={`tel:${pageContent[1].card4Title}`}>
+                                    <div className="key-master-call-btn">
+                                        <div className="key-master-book-appointment-content text-center">
+                                            <h5>{pageContent[1].card4Title}</h5>
+                                            <h4><i className="fa-solid fa-phone"></i> {pageContent[1].card4Contact}</h4>
+                                        </div>
+
+                                    </div>
+                                </a>
+                            </div>
 
                         </div>
                     </div>

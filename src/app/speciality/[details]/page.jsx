@@ -144,11 +144,11 @@ const SpecialityDetails = async ({ params }) => {
                                     <div className="main-heading sub-heading">
                                         <h2>{data.overviewSection.title}</h2>
                                     </div>
-                                    <div dangerouslySetInnerHTML={{ __html: marked(data.overviewSection?.details || "") || "" }}>
+                                    <div className="main-heading sub-heading main-list" dangerouslySetInnerHTML={{ __html: marked(data.overviewSection?.details || "") || "" }}>
                                     </div>
                                 </div>
                                 <div className="col-md-5">
-                                    <div className="details-right-col text-center">
+                                    <div className="details-right-col text-center sticky-from">
                                         <img src={
                                             data.speciality?.featuredImage ? process.env.NEXT_PUBLIC_IMAGE_URL + data.speciality?.featuredImage.url : "/img/no-image.jpg"} alt="" className="img-fluid w-100" />
                                         <h5>{data.overviewSection?.caption}</h5>
@@ -163,7 +163,7 @@ const SpecialityDetails = async ({ params }) => {
                     </section>
 
                     <div className="line-divider"> </div>
-                    <section className="section"
+                    {/* <section className="section"
                         style={{ background: "linear-gradient(180deg,rgba(255, 255, 255, 1) 45%, rgba(248, 248, 248, 1) 74%)" }}>
                         <div className="container">
                             <div className="details-card-wrapper pb-5">
@@ -303,7 +303,7 @@ const SpecialityDetails = async ({ params }) => {
                                 </div>
                             </div>
                         </div>
-                    </section>
+                    </section> */}
 
 
                     <div className="line-divider"> </div>

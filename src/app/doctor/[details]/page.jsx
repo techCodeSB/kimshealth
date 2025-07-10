@@ -65,7 +65,7 @@ const DoctorDetails = async ({ params }) => {
                             <div className="row">
                                 <div className="col-md-3 mb-4">
                                     <div className="left-col-img">
-                                        <img src={imgUrl + data.doctorImage.url} alt={data.name} className="img-fluid" />
+                                        <img src={imgUrl + data.doctorImage.url} alt={data.name} className="img-fluid w-100" />
                                         <div className="main-heading sub-heading mt-3">
                                             <h3>{data.name}</h3>
                                         </div>
@@ -104,7 +104,7 @@ const DoctorDetails = async ({ params }) => {
 
                                 <div className="col-md-9">
                                     <div className="right-col-details">
-                                        <div className="main-heading main-list">
+                                        <div className="main-heading main-list sub-heading">
 
                                             {data?.workExperience ?
                                                 <div className="d-flex align-items-center gap-2 mb-2">
@@ -112,7 +112,7 @@ const DoctorDetails = async ({ params }) => {
                                                     <h3>{staticText['Work Experience']}</h3>
                                                 </div>
                                                 : null}
-                                            <div dangerouslySetInnerHTML={{ __html: data?.workExperience ? marked(data.workExperience) : "" }}></div>
+                                            <div dangerouslySetInnerHTML={{ __html: data?.workExperience ? marked(data.workExperience) : "" }} ></div>
 
 
                                             {data?.areaOfExpertise ? <div className="d-flex align-items-center gap-2 mb-2">

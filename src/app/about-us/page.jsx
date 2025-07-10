@@ -25,7 +25,7 @@ const AboutUs = async () => {
             <Header />
             <div role="main" className="main">
                 <div className="about-us-main-page">
-                    <section className="section details-page-before py-0">
+                    <section className="section details-page-before py-0 d-lg-block d-none">
                         <div className="procedures-details-page-header">
                             <div className="container-fluid px-0">
                                 <div className="row">
@@ -126,6 +126,112 @@ const AboutUs = async () => {
 
                     </section>
 
+                    <section className="section details-page-before py-0 d-lg-none d-block">
+                        <div className="procedures-details-page-header">
+                            <div className="container pe-0">
+                                <div className="row">
+                                    <div className="col-md-6 details-proceduce-banner-left-col">
+
+                                        <div className="hospital-banner-container">
+                                            <div className="breadcrumb-wrapper py-2 ps-2 ms-1">
+                                                <div className="row">
+                                                    <div className="col-12 px-0">
+                                                        <ul className="breadcrumb mb-0">
+                                                            <li>
+                                                                <a href="index.php">Home</a>
+                                                            </li>
+                                                            <li className="active"> About Us </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div className="details-proceduce-banner-right-coL">
+                                                <div className="owl-carousel owl-theme hospital-details-slider">
+
+                                                    {
+                                                        pageContent[1]?.bannerItem?.map((b, i) => {
+                                                            return <div className="item">
+                                                                <img src={process.env.NEXT_PUBLIC_IMAGE_URL + b.bannerImageDesktop.url}
+                                                                    alt="" className="img-fluid w-100" />
+                                                            </div>
+                                                        })
+                                                    }
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+
+                                    <div className="col-md-6">
+                                        <div className="details-banner">
+                                            <div className="details-heading">
+                                                <div className="hospital-content">
+                                                    <div className="row">
+                                                        <div className="col-md-6 col-6 mb-3">
+                                                            <div className="d-flex align-items-center">
+                                                                <div>
+                                                                    <img src="/img/about-hospital-ic.png" alt=""
+                                                                        className="img-fluid" />
+                                                                </div>
+                                                                <div>
+                                                                    <h3>5</h3>
+                                                                    <p>Hospitals</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div className="col-md-6 col-6 mb-3">
+                                                            <div className="d-flex align-items-center">
+                                                                <div>
+                                                                    <img src="/img/about-hospital-ic.png" alt=""
+                                                                        className="img-fluid" />
+                                                                </div>
+                                                                <div>
+                                                                    <h3>7</h3>
+                                                                    <p>Medical Centres</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div className="col-md-6 col-6 mb-3">
+                                                            <div className="d-flex align-items-center">
+                                                                <div>
+                                                                    <img src="/img/about-doctor-ic.png" alt="" className="img-fluid" />
+                                                                </div>
+                                                                <div>
+                                                                    <h3>500 +</h3>
+                                                                    <p>Doctors</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div className="col-md-6 col-6 mb-3">
+                                                            <div className="d-flex align-items-center">
+                                                                <div>
+                                                                    <img src="/img/about-patient-ic.png" alt=""
+                                                                        className="img-fluid" />
+                                                                </div>
+                                                                <div>
+                                                                    <h3>10 Millions+</h3>
+                                                                    <p>Happy Patients</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </section>
+
                     <section className="section">
                         <div className="container">
                             <div className="row">
@@ -139,15 +245,15 @@ const AboutUs = async () => {
 
 
                                     <div className="row">
-                                        <div className="col-md-4 mb-3 main-heading sub-heading mission-box ">
-                                            <div className="d-flex align-items-center mb-2">
+                                        <div className="col-md-4 mb-3 main-heading sub-heading mission-box " data-aos="slide-up" data-aos-duration="1000">
+                                            <div className="d-flex align-items-center mb-2 ">
                                                 <img src="/img/mission.png" alt="" className="img-fluid me-2" />
                                                 <h3 className="mb-0">{pageContent[3].title}</h3>
                                             </div>
                                             <div dangerouslySetInnerHTML={{ __html: marked(pageContent[3]?.details || "") || "" }}></div>
                                         </div>
 
-                                        <div className="col-md-4 mb-3 main-heading sub-heading mission-box ">
+                                        <div className="col-md-4 mb-3 main-heading sub-heading mission-box " data-aos="slide-up" data-aos-duration="1500">
                                             <div className="d-flex align-items-center mb-2">
                                                 <img src="/img/vision.png" alt="" className="img-fluid me-2" />
                                                 <h3 className="mb-0">{pageContent[4].title}</h3>
@@ -155,7 +261,7 @@ const AboutUs = async () => {
                                             <div dangerouslySetInnerHTML={{ __html: marked(pageContent[4]?.details || "") || "" }}></div>
                                         </div>
 
-                                        <div className="col-md-4 mb-3 main-heading sub-heading mission-box ">
+                                        <div className="col-md-4 mb-3 main-heading sub-heading mission-box " data-aos="slide-up" data-aos-duration="2000">
                                             <div className="d-flex align-items-center mb-2">
                                                 <img src="/img/values.png" alt="" className="img-fluid me-2" />
                                                 <h3 className="mb-0">{pageContent[5].title}</h3>
@@ -176,16 +282,16 @@ const AboutUs = async () => {
 
                     <section className="section chairman-section pb-0">
                         <div className="container">
-                            <div className="main-heading">
-                                <h2>{pageContent[6].title}</h2>
+                            <div className="main-heading overflow-hidden">
+                                <h2 data-aos="slide-right" data-aos-duration="1500">{pageContent[6].title}</h2>
                             </div>
 
                             <div className="row">
                                 <div className="col-md-5 mt-lg-auto mb-0">
                                     <img src={pageContent[6].image ? process.env.NEXT_PUBLIC_IMAGE_URL + pageContent[6].image.url : "/img/no-image.jpg"} alt="" className="img-fluid" />
                                 </div>
-                                <div className="col-md-7 mb-3 pb-lg-5 mt-3 mt-lg-0">
-                                    <div className="sub-heading main-heading" dangerouslySetInnerHTML={{ __html: marked(pageContent[6].details || "") || "" }}>
+                                <div className="col-md-7 mb-3 pb-lg-5 mt-3 mt-lg-0 overflow-hidden">
+                                    <div className="sub-heading main-heading main-list" data-aos="slide-left" data-aos-duration="1500" dangerouslySetInnerHTML={{ __html: marked(pageContent[6].details || "") || "" }}>
                                     </div>
                                 </div>
                             </div>

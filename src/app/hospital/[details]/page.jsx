@@ -338,8 +338,8 @@ const HospitalDetails = async ({ params }) => {
                 <section className="section hospital-details-overview-section">
                     <div className="container">
                         <div className="row">
-                            <div className="col-md-5 my-auto order-lg-1 order-2">
-                                <div className="details-right-col text-center">
+                            <div className="col-md-5 order-lg-1 order-2">
+                                <div className="details-right-col text-center sticky-from">
                                     <img src={process.env.NEXT_PUBLIC_IMAGE_URL + hptData.featuredImage.url} alt="" className="img-fluid w-100" />
                                     <h5>{hptData.title}</h5>
                                     <p>An Integrated Healthcare Destination </p>

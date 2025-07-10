@@ -25,13 +25,14 @@ const TreamentSidebar = ({ title, procedures, baseUrlOnlyLang, allSpeciality }) 
 
     return (
         <>
-            <div className="col-md-4 speciality-page-search-section">
+        
+            {/* <div className="col-md-4 speciality-page-search-section">
                 <div className="main-heading">
                     <h2 className="mb-2">{title}</h2>
                 </div>
                 <form action="">
                     <div className="input-group p-0 my-lg-3 my-3 position-relative justify-content-center">
-                        {/* speciality-page-search */}
+                        
                         <select className="form-select" onChange={selectSpeciality}>
                             <option value={""}>Select by Speciality</option>
                             {
@@ -58,7 +59,7 @@ const TreamentSidebar = ({ title, procedures, baseUrlOnlyLang, allSpeciality }) 
                         })
                     }
                 </div>
-            </div>
+            </div> */}
         </>
     )
 }

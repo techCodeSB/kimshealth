@@ -136,3 +136,51 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 });
+
+
+const container = document.querySelector('.horizontal-scroll-container');
+
+    // Handle mouse wheel events
+    container.addEventListener('wheel', (e) => {
+      // Skip if user holds shift (browser handles horizontal scroll)
+      if (e.shiftKey) return;
+
+      const canScrollLeft = container.scrollLeft > 0;
+      const canScrollRight =
+        container.scrollLeft < container.scrollWidth - container.clientWidth;
+
+      if (e.deltaY > 0 && canScrollRight) {
+        // Scroll right when mouse wheel down
+        container.scrollLeft += e.deltaY;
+        e.preventDefault();
+      } else if (e.deltaY < 0 && canScrollLeft) {
+        // Scroll left when mouse wheel up
+        container.scrollLeft += e.deltaY; // deltaY is negative
+        e.preventDefault();
+      }
+    }, { passive: false });
+
+    // Handle touch swipe events
+    let startX = 0;
+    let startY = 0;
+
+    container.addEventListener('touchstart', (e) => {
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+    });
+
+    container.addEventListener('touchmove', (e) => {
+      const currentX = e.touches[0].clientX;
+      const currentY = e.touches[0].clientY;
+
+      const diffX = startX - currentX;
+      const diffY = startY - currentY;
+
+      // Only prevent vertical scrolling when swiping horizontally
+      if (Math.abs(diffX) > Math.abs(diffY)) {
+        container.scrollLeft += diffX;
+        startX = currentX;
+        startY = currentY;
+        e.preventDefault();
+      }
+    }, { passive: false });
