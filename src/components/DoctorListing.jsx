@@ -202,7 +202,7 @@ const DoctorListing = ({ baseURL, allLocation, allSpeciality, allDoctor }) => {
 
                                                 <div className="col-12 mb-3">
                                                     <label className="form-label">Mobile Number <span>*</span></label>
-                                                    <input type="text" className="form-control" placeholder="000 000 0000"
+                                                    <input type="text" className="form-control" placeholder="Enter Mobile No."
                                                         name="name" />
                                                 </div>
 

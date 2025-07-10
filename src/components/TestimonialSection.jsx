@@ -20,6 +20,7 @@ const TestimonialSection = ({ dataSet }) => {
     }
     return (
         <>
+        
             <section className="section d-lg-block d-none testimonial-section overflow-hidden">
                 <div className="container">
                     <div className="row justify-content-between" data-aos="fade-right">
@@ -37,6 +38,7 @@ const TestimonialSection = ({ dataSet }) => {
                         </div>
                     </div>
 
+
                     <div className="row">
                         {
                             dataSet.data.slice(0, 4).map((t, index) => {
@@ -44,9 +46,10 @@ const TestimonialSection = ({ dataSet }) => {
                                     data-aos={index === 0 || index === 2 ? "fade-right" : "fade-left"} key={index}>
                                     <div className="row testi-card">
                                         <div className="col-md-3">
-                                            <div className="overflow-hidden">
+                                            <div className="overflow-hidden position-relative">
                                                 <a href={dataSet.baseUrl + "/testimonial/" + t.slug}>
                                                     <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${t.thumbnailImage?.url}`} alt="" className="img-fluid w-100" />
+                                                    <div className="play-icon"> <img src="/img/play-icon-small.png" alt="" /> </div>
                                                 </a>
                                             </div>
                                         </div>
@@ -55,6 +58,7 @@ const TestimonialSection = ({ dataSet }) => {
                                                 <h3>{t.title}</h3>
                                                 <p>{`${t.shortDetails.slice(0, 80)}...`}
                                                     <a href={dataSet.baseUrl + "/testimonial/" + t.slug}>{staticTexts['Watch Video']}</a></p>
+
 
                                                 <div className="d-flex align-items-center justify-content-between mt-3">
                                                     <div className="doctor-name">
@@ -74,6 +78,7 @@ const TestimonialSection = ({ dataSet }) => {
                 </div>
             </section>
 
+
             <section className="section d-lg-none d-block testimonial-section" data-aos="fade-up">
                 <div className="container">
                     <div className="row justify-content-between">
@@ -90,6 +95,7 @@ const TestimonialSection = ({ dataSet }) => {
                         </div>
                     </div>
 
+
                     <div className="owl-carousel owl-theme testimonial">
                         {
                             dataSet.data.map((t, index) => {
@@ -104,6 +110,7 @@ const TestimonialSection = ({ dataSet }) => {
                                         <h3>{t.title}</h3>
                                         <p>{`${t.shortDetails.slice(0, 80)}...`}</p>
 
+
                                         <div className="d-block mt-lg-3 mt-2">
                                             <div className="doctor-name mb-1">
                                                 <p>{t.doctor?.name}</p>
@@ -117,9 +124,14 @@ const TestimonialSection = ({ dataSet }) => {
                             })
                         }
 
+
                     </div>
                 </div>
             </section>
+
+
+
+
         </>
     )
 }

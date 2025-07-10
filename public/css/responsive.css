@@ -17,7 +17,7 @@
         width: 100%;
         height: 100vh;
         position: absolute;
-        top: 50px;
+        top: 65px;
         left: -100%;
         background-color: #fff;
         transition: .5s;
@@ -51,7 +51,7 @@
     }
 
     .mobile_primary ul li a {
-        padding: 17px 8px;
+        padding: 12px 8px;
         text-align: left;
         color: #000;
         font-size: 15px;
@@ -64,11 +64,11 @@
         display: inline-flex;
         justify-content: center;
         align-items: center;
-        height: 49px;
+        height: 39px;
         position: absolute;
         right: 0;
         top: 0;
-        width: 49px;
+        width: 39px;
         z-index: 99;
         background: #b71c2b;
         transition: all .5s;
@@ -134,6 +134,15 @@
         padding: 10px 0;
         top: 0;
     }
+    .header-menu-container{
+        position: inherit;
+    }
+    .quicklink-header{
+    display: block !important;
+}
+.mobile_primary ul li a:hover{
+    color: #b71c2b;
+}
 
 
 }
@@ -333,6 +342,8 @@
 
     .frame-left-col img {
         border-radius: 20px;
+        height: 175px;
+        object-fit: cover;
     }
 
     .testi-rightbox.card-content {
@@ -382,6 +393,10 @@
 
     .blog-section .testi-rightbox .d-block strong {
         font-size: 14px;
+        /* display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden; */
     }
 
     .blog-section {
@@ -419,6 +434,8 @@
 
     .hear-doctor-img img {
         border-radius: 10px;
+        height: 225px;
+        object-fit: cover;
     }
 
     .blog-right-col .hear-doctor-content {
@@ -856,6 +873,8 @@
 
     .blog-section .col-6 img {
         border-radius: 13px;
+        height: 150px;
+        object-fit: cover;
     }
 
     .blog-section {
@@ -879,13 +898,17 @@
 
     .hear-doctor-content {
         padding: 10px 10px;
-        background: linear-gradient(180deg, rgb(0 0 0 / 0%) 0%, rgb(0 0 0) 100%);
+        background: linear-gradient(180deg, rgb(0 0 0 / 38%) 0%, rgb(0 0 0) 100%);
         position: absolute;
         bottom: 0px;
         width: 100%;
-        border-radius: 10px;
+        border-radius: 0px 0px 10px 10px;
     }
-
+.mobile-hear-doc-bottom-image{
+    height: 209px;
+    object-fit: cover;
+    border-radius: 10px;
+}
     .hear-doctor-img img {
         border-radius: 10px;
     }
@@ -1808,6 +1831,12 @@
     .speciality-details-page{
         overflow: hidden;
     }
+    .expert-section .card .card-top img{
+        height: 210px;
+    }
+    .about-us-main-page .expert-section .card{
+    min-height: auto;
+}
 }
 
 @media only screen and (max-width: 480px) {

@@ -104,7 +104,7 @@ const DoctorDetails = async ({ params }) => {
 
                                 <div className="col-md-9">
                                     <div className="right-col-details">
-                                        <div className="main-heading main-list">
+                                        <div className="main-heading main-list sub-heading">
 
                                             {data?.workExperience ?
                                                 <div className="d-flex align-items-center gap-2 mb-2">

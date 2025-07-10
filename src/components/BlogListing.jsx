@@ -231,12 +231,17 @@ const BlogListing = ({ basePath, slug }) => {
                                 <div className="col-md-12 mb-4">
                                     <div className="blog-tagging">
                                         <h3>{staticText['Trending']}</h3>
-                                        <span className="active">COVID 19</span>
-                                        <span>Fever</span>
-                                        <span>Kne Replacement</span>
-                                        <span>Malaria</span>
-                                        <span>Medication</span>
-                                        <span>Cardiology</span>
+                                        <div className="scroll-container ms-3">
+                                            <div className="blog-listing-scroll-tab active"><span>COVID 19</span></div>
+                                            <div className="blog-listing-scroll-tab"><span>Fever</span></div>
+                                            <div className="blog-listing-scroll-tab"><span>Kne Replacement</span></div>
+                                            <div className="blog-listing-scroll-tab"><span>Malaria</span></div>
+                                            <div className="blog-listing-scroll-tab"><span>Medication</span></div>
+                                            <div className="blog-listing-scroll-tab"><span>Cardiology</span></div>
+                                            <div className="blog-listing-scroll-tab"><span>Cardiology</span></div>
+                                            <div className="blog-listing-scroll-tab"><span>Cardiology</span></div>
+                                            <div className="blog-listing-scroll-tab"><span>Cardiology</span></div>
+                                        </div>
                                     </div>
                                 </div>
 
