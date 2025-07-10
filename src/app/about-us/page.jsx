@@ -22,6 +22,7 @@ const AboutUs = async () => {
     let awards = await awardData.getAll()
 
 
+    console.log(pageContent);
     return (
         <>
             <Header />
@@ -113,8 +114,8 @@ const AboutUs = async () => {
 
                                             {
                                                 pageContent[1]?.bannerItem?.map((b, i) => {
-                                                    return <div className="item">
-                                                        <img src={process.env.NEXT_PUBLIC_IMAGE_URL + b.bannerImageDesktop.url}
+                                                    return <div className="item" key={i}>
+                                                        <img src={process.env.NEXT_PUBLIC_IMAGE_URL + b.bannerImageDesktop?.url}
                                                             alt="" className="img-fluid w-100" />
                                                     </div>
                                                 })
@@ -170,9 +171,6 @@ const AboutUs = async () => {
                             </div>
                         </div>
                     </section>
-
-
-
 
                     <div className="line-divider"> </div>
 

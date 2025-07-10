@@ -10,14 +10,12 @@ import Form1 from '@/components/Forms/Form1';
 
 const ParamedicalCourse = async () => {
     const basePath = await getBaseUrl(true, true);
-    const field = "populate[0]=pageContent&populate[1]=pageContent.bannerItem&populate[2]=pageContent.bannerItem.bannerImageDesktop&populate[3]=pageContent.bannerItem.bannerImageMobile&populate[4]=metaSection";
+    const field = "populate[0]=pageContent&populate[1]=pageContent.bannerItem&populate[2]=pageContent.bannerItem.bannerImageDesktop&populate[3]=pageContent.bannerItem.bannerImageMobile&populate[4]=metaSection&populate[5]=pageContent.courseCategory";
     const data = await getStaticPageContent("paramedical-courses", field);
     const pageContent = data?.data[0]?.pageContent;
     const pageMeta = data?.data[0]?.metaSection;
     const staticText = await getStaticText();
-
-    let allDiplomaCourses = await courseData.getAll(14);
-    console.log(allDiplomaCourses);
+    let allDiplomaCourses = await courseData.getAll(pageContent[3].courseCategory?.id);
 
 
     return (

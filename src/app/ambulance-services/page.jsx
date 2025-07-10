@@ -38,6 +38,7 @@ const AmbulanceServices = async () => {
                                             <div className="details-banner">
                                                 <div className="details-heading">
                                                     <h3>{pageContent[0]?.title}</h3>
+                                                    <div class="ambulace-number"><a href={"tel:"+pageContent[0]?.subTitle}><i class="fa-solid fa-phone"></i> {pageContent[0]?.subTitle} </a></div>
                                                 </div>
                                             </div>
                                         </div>

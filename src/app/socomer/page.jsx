@@ -1,8 +1,20 @@
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import React from 'react'
+import { getBaseUrl } from '@/app/lib/getBaseUrl'
+import getStaticText from '@/app/lib/getStaticTextServer'
+import { getStaticPageContent } from '@/app/lib/getStaticPageContent'
 
-const Socomer = () => {
+const Socomer = async () => {
+    const basePath = await getBaseUrl(true, true)
+    const staticText = await getStaticText();
+    const field = "populate[0]=pageContent&populate[1]=pageContent.bannerItem&populate[2]=pageContent.bannerItem.bannerImageDesktop&populate[3]=pageContent.bannerItem.bannerImageMobile&populate[4]=metaSection&populate[5]=pageContent.journal&populate[6]=pageContent.journal.thumbnailImage&populate[7]=pageContent.journal.file&populate[8]=pageContent.file&populate[9]=pageContent.courseCategory&populate[10]=pageContent.socomer&populate[11]=pageContent.socomer.socomerItem";
+    const data = await getStaticPageContent("socomer", field);
+    const pageContent = data?.data[0]?.pageContent;
+    const pageMeta = data?.data[0]?.metaSection;
+
+
+    console.log(pageContent)
     return (
         <>
             <Header />
@@ -20,31 +32,28 @@ const Socomer = () => {
                                                     <div className="col-12 px-0">
                                                         <ul className="breadcrumb mb-0">
                                                             <li>
-                                                                <a href="index.php">Home</a>
+                                                                <a href={basePath + "/"}>{staticText['Home']}</a>
                                                             </li>
                                                             <li>
-                                                                <a href="hospital-master.php">Academics</a>
+                                                                <a href="#">Academics</a>
                                                             </li>
-                                                            <li className="active"> Society for Continuing Medical Education & Research (SOCOMER) </li>
+                                                            <li className="active">{pageContent[0].title} </li>
                                                         </ul>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div className="details-banner">
                                                 <div className="details-heading">
-                                                    <h3>Society for Continuing Medical Education & Research (SOCOMER)</h3>
+                                                    <h3>{pageContent[0].title}</h3>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
 
                                     <div className="col-md-6 details-proceduce-banner-right-col">
-                                        <img src="img/socomer-banner.jpg" className="img-fluid details-banner-image" alt=""/>
+                                        <img src={pageContent[1].bannerItem[0]?.bannerImageDesktop?.url ? process.env.NEXT_PUBLIC_IMAGE_URL + pageContent[1].bannerItem[0].bannerImageDesktop?.url : "/img/no-image.jpg"} className="img-fluid details-banner-image" alt="" />
                                     </div>
 
-                                    {/* <!-- <div className="col-md-6">
-                                        <img src="img/details-banner.png" alt="" className="img-fluid w-100">
-                                    </div> --> */}
                                 </div>
                             </div>
                         </div>
@@ -52,19 +61,7 @@ const Socomer = () => {
                     </section>
                     <section className="section">
                         <div className="container">
-                            <div className="main-heading sub-heading main-list">
-                                <p>Society for Continuing Medical Education and Research is a Registered Society
-                                    under 12th Travancore-Cochin Literary, Scientific and Charitable Societies Act of 1955
-                                    on 6th September 2000.</p>
-                                <h3 className="my-3">Aims & Objectives</h3>
-                                <ul>
-                                    <li>To organize Continuing Medical Education programmes in various medical specialties at State, National and International levels.</li>
-                                    <li>To assist medical institutes to conduct special studies and to develop research projects.</li>
-                                    <li>To plan and execute research projects in various medical institutes.</li>
-                                    <li>To avail of the expertise of faculty members from various nationally and internationally reputed Universities and Institutions.</li>
-                                    <li>To carry out basic and advanced medical research studies.</li>
-                                    <li>To provide thesis guidance to Under Graduate and Post Graduate Medical students.</li>
-                                </ul>
+                            <div className="main-heading sub-heading main-list" dangerouslySetInnerHTML={{__html: pageContent[2].details}}>
                             </div>
                         </div>
                     </section>
@@ -74,7 +71,7 @@ const Socomer = () => {
                     <section className="section">
                         <div className="container">
                             <div className="main-heading">
-                                <h2>CONTINUING MEDICAL EDUCATION ACTIVITIES</h2>
+                                <h2>{pageContent[3].title}</h2>
                             </div>
                             <div className="row">
                                 <div className="col-md-4">
@@ -110,72 +107,6 @@ const Socomer = () => {
                                     </div>
                                 </div>
 
-                                <div className="col-md-4">
-
-
-                                    <div className="socomer-tab">
-                                        <div className="procedure-acc-card mb-3">
-                                            <div className="accordion" id="accordionExample1">
-                                                <div className="accordion-item">
-                                                    <h2 className="accordion-header">
-                                                        <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse34" aria-expanded="true" aria-controls="collapse34">
-                                                            <span>American Heart Association’s Training Programmes</span>
-                                                        </button>
-                                                    </h2>
-                                                    <div id="collapse34" className="accordion-collapse collapse ">
-                                                        <div className="accordion-body px-0 pt-0">
-
-                                                            <ul>
-                                                                <li> - SOCOMER Annual Report 2022
-                                                                    <a href="#"><i className="custom-download"></i>Download</a>
-                                                                </li>
-                                                                <li>
-                                                                    - SOCOMER Annual Report 2022
-                                                                    <a href="#"><i className="custom-download"></i>Download</a>
-                                                                </li>
-
-
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="col-md-4">
-                                    <div className="socomer-tab">
-                                        <div className="procedure-acc-card mb-3">
-                                            <div className="accordion" id="accordionExample2">
-                                                <div className="accordion-item">
-                                                    <h2 className="accordion-header">
-                                                        <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse35" aria-expanded="true" aria-controls="collapse35">
-                                                            <span>Skills Lab & Simulating based training</span>
-                                                        </button>
-                                                    </h2>
-                                                    <div id="collapse35" className="accordion-collapse collapse ">
-                                                        <div className="accordion-body px-0 pt-0">
-
-                                                            <ul>
-                                                                <li> - SOCOMER Annual Report 2022
-                                                                    <a href="#"><i className="custom-download"></i>Download</a>
-                                                                </li>
-                                                                <li>
-                                                                    - SOCOMER Annual Report 2022
-                                                                    <a href="#"><i className="custom-download"></i>Download</a>
-                                                                </li>
-
-
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </section>

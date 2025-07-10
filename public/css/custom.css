@@ -3126,9 +3126,10 @@ i.custom-download {
     color: #b71c2b;
     font-weight: 600;
     margin-bottom: 10px;
-    text-transform: uppercase;
+    text-transform: capitalize;
     display: inline-block;
     position: relative;
+    
 
 }
 

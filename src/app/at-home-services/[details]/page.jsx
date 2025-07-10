@@ -118,7 +118,6 @@ const HomeServiceDetails = async ({ params }) => {
                                                         className="fa-solid fa-envelope"></i>
                                                         {data.contactEmail}</a></li>
                                                 </ul>
-                                                <a href="#" className="hospital-primarybtn"> RS. {data.price} /- </a>
                                                 <a href="#" className="hospital-primarybtn"> {staticTexts['Book Now']}</a>
                                             </div>
 

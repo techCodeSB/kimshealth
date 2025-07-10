@@ -87,13 +87,13 @@ const HomeServices = async () => {
                                     homeServiceData.map((h, index) => {
                                         return <div className="col-md-4" key={index}>
                                             <div className="home-service-card">
-                                                <div className="home-service-card-image text-center">
+                                                <div className="home-service-card-image text-start">
                                                     <img src={process.env.NEXT_PUBLIC_IMAGE_URL + h.icon.url} alt={h.title} className="img-fluid" />
                                                 </div>
-                                                <div className="home-service-content text-center">
+                                                <div className="home-service-content text-start">
                                                     <h3>{h.title}</h3>
                                                     <p>{h.shortDetails}</p>
-                                                    <div className="main-btn text-center">
+                                                    <div className="main-btn text-start">
                                                         <a href={basePath+"/at-home-services/"+h.slug}>
                                                             {staticTexts['Read More']} <span><i className="fa-solid fa-arrow-right"></i></span>
                                                         </a>
