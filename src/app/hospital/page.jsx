@@ -53,7 +53,7 @@ const Hospital = async () => {
                     {
                         hospitals && <section className="section pt-lg-4 pt-0">
                             <div className="container">
-                                <HospitalFilter title={pageContent[1]?.title} />
+                                <HospitalFilter title={pageContent[1]?.title} selectedLocation={getLangLoc.loc}/>
                                 <div className="row">
                                     {
                                         hospitals.map((h, index) => {

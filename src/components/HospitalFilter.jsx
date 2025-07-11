@@ -3,7 +3,7 @@ import { getBaseUrl } from '@/helper/getBaseUrl';
 import langLoc from '@/helper/getLangLoc';
 import React, { useEffect, useState } from 'react'
 
-const HospitalFilter = ({ title }) => {
+const HospitalFilter = ({ title, selectedLocation }) => {
     const [allLocation, setAllLocation] = useState();
     const [basePathOnlyLang, setBasePathOnlyLang] = useState()
 
@@ -43,7 +43,7 @@ const HospitalFilter = ({ title }) => {
                         </div>
 
                     </form> */}
-                    <select className="form-select " onChange={onLocationChange}>
+                    <select value={basePathOnlyLang + "/" + selectedLocation.slug} className="form-select " onChange={onLocationChange}>
                         <option value={basePathOnlyLang + "/hospital"}>All Hospital</option>
                         {
                             allLocation?.map((loc, i) => {
