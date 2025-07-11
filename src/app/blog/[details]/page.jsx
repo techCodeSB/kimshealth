@@ -3,6 +3,7 @@ import blogData from '@/app/lib/getBlog';
 import doctorData from '@/app/lib/getDoctor';
 import getStaticText from '@/app/lib/getStaticTextServer';
 import BlogCarousel from '@/components/BlogCarousel';
+import Breadcrumb from '@/components/Breadcrumb';
 import Footer from '@/components/Footer';
 import Form1 from '@/components/Forms/Form1';
 import Header from '@/components/Header';
@@ -31,7 +32,7 @@ const BlogDetails = async ({ params }) => {
             <Header />
             <div role="main" className="main">
                 <div className="blog-details-main-page">
-                    <section className="section details-page-before py-0 d-lg-block d-none">
+                    {/* <section className="section details-page-before py-0 d-lg-block d-none">
                         <div className="procedures-details-page-header inner-pages-header">
                             <div className="container-fluid px-0">
                                 <div className="row">
@@ -40,15 +41,11 @@ const BlogDetails = async ({ params }) => {
                                             <div className="breadcrumb-wrapper py-2 ps-2 ms-1">
                                                 <div className="row">
                                                     <div className="col-12 px-0">
-                                                        <ul className="breadcrumb mb-0">
-                                                            <li>
-                                                                <a href="/">{staticText['Home']}</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href={basePath+"/blog"}>{staticText['Blogs']}</a>
-                                                            </li>
-                                                            <li className="active">{data.title}</li>
-                                                        </ul>
+                                                        <Breadcrumb
+                                                            activeTitle={data.title}
+                                                            middleTitle={staticText['Blogs']}
+                                                            middleURL={basePath + "/blog"}
+                                                        />
                                                     </div>
                                                 </div>
                                             </div>
@@ -98,15 +95,11 @@ const BlogDetails = async ({ params }) => {
                                             <div className="breadcrumb-wrapper py-2 ps-2 ms-1">
                                                 <div className="row">
                                                     <div className="col-12">
-                                                        <ul className="breadcrumb mb-0">
-                                                            <li>
-                                                                <a href={basePath + "/"}>{staticText['Home']}</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href={basePath + "/blog"}>{staticText['Blogs']}</a>
-                                                            </li>
-                                                            <li className="active">{data.title}</li>
-                                                        </ul>
+                                                        <Breadcrumb
+                                                            activeTitle={data.title}
+                                                            middleTitle={staticText['Blogs']}
+                                                            middleURL={basePath + "/blog"}
+                                                        />
                                                     </div>
                                                 </div>
                                             </div>
@@ -145,7 +138,124 @@ const BlogDetails = async ({ params }) => {
                                 </div>
                             </div>
                         </div>
+                    </section> */}
+
+
+
+
+                    <section className="section details-page-before py-0 d-lg-block d-none">
+                        <div className="procedures-details-page-header inner-pages-header">
+                            <div className="container-fluid px-0">
+                                <div className="row">
+                                    <div className="col-md-6 details-proceduce-banner-left-col">
+                                        <div className="hospital-banner-container">
+                                            <div className="breadcrumb-wrapper py-2 ps-2 ms-1">
+                                                <div className="row">
+                                                    <div className="col-12 px-0">
+                                                         <Breadcrumb
+                                                            activeTitle={data.title}
+                                                            middleTitle={staticText['Blogs']}
+                                                            middleURL={basePath + "/blog"}
+                                                        />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="details-banner blog-details-banner-image">
+                                                <div className="details-heading">
+                                                    <div className="row">
+                                                        <div className="col-md-4 ">
+
+                                                            <img src={docData.doctorImage.url ? process.env.NEXT_PUBLIC_IMAGE_URL + docData.doctorImage.url : "/img/no-image.jpg"} alt="" className="img-fluid" />
+                                                        </div>
+                                                        <div className="col-md-8 my-auto">
+                                                            <h3>{docData?.name}</h3>
+                                                            <p>
+                                                                {docData?.hospitals.map((data, _) => {
+                                                                    return data.title + (docData?.hospitals.length - 1 !== _ ? "," : "");
+                                                                })}
+                                                            </p>
+                                                            <h4>
+                                                                {docData?.specialities.map((data, _) => {
+                                                                    return data.title + (docData?.specialities.length - 1 !== _ ? "," : "");
+                                                                })}
+                                                            </h4>
+                                                            <div className="mt-4">
+                                                                <a href={basePath + "/book-an-appointment"} className="hospital-primarybtn ">{staticText['Book An Appointment']}</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div className="col-md-6 details-proceduce-banner-right-col mt-lg-0 mt-4">
+                                        <img src={data.featuredImage.url ? process.env.NEXT_PUBLIC_IMAGE_URL + data.featuredImage.url : "/img/no-image.jpg"} className="img-fluid details-banner-image" alt="" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </section>
+                    <section className="section details-page-before py-0 d-lg-none d-block">
+                        <div className="procedures-details-page-header inner-pages-header">
+                            <div className="container pe-0">
+                                <div className="row">
+                                    <div className="col-md-6 details-proceduce-banner-left-col mt-lg-auto">
+                                        <div className="hospital-banner-container">
+                                            <div className="breadcrumb-wrapper py-2 ps-2 ms-1">
+                                                <div className="row">
+                                                    <div className="col-12">
+                                                         <Breadcrumb
+                                                            activeTitle={data.title}
+                                                            middleTitle={staticText['Blogs']}
+                                                            middleURL={basePath + "/blog"}
+                                                        />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="details-proceduce-banner-right-col mt-lg-0 mt-4">
+                                                <img src={process.env.NEXT_PUBLIC_IMAGE_URL + data.featuredImage.url} className="img-fluid details-banner-image"
+                                                    alt={data.title} />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div className="col-md-6 mt-lg-0 mt-4">
+                                    <div className="details-banner">
+                                        <div className="details-heading">
+                                            <div className="row">
+                                                <div className="col-12 my-auto pe-3">
+                                                    <h3>{data.title}</h3>
+                                                    <p>{docData?.hospitals.map((data, _) => {
+                                                        return data.title + (docData?.hospitals.length - 1 !== _ ? "," : "");
+                                                    })}</p>
+                                                    <h4>
+                                                        {docData?.specialities.map((data, _) => {
+                                                            return data.title + (docData?.specialities.length - 1 !== _ ? "," : "");
+                                                        })}
+                                                    </h4>
+                                                    <div className="mt-4 mb-4">
+                                                        <a href={basePath + "/book-an-appointment"} className="hospital-primarybtn ">{staticText['Book An Appointment']}</a>
+                                                    </div>
+                                                </div>
+                                                <div className="col-12 mb-3">
+                                                    <img src={process.env.NEXT_PUBLIC_IMAGE_URL + data.featuredImage.url} alt={data.title} className="img-fluid" />
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+
+
+
 
 
                     <section className="section blog-details-section">
@@ -168,7 +278,7 @@ const BlogDetails = async ({ params }) => {
                     </section>
 
                     <div className="line-divider"> </div>
-                    <BlogCarousel dataSet={blogDataSet}/>
+                    <BlogCarousel dataSet={blogDataSet} />
                 </div>
             </div>
             <Footer />

@@ -7,9 +7,9 @@ const WatchVideoButton = ({ txt, id }) => {
     return (
         <>
             <div className="main-btn" >
-                <button className='btn' onClick={() => setShow(true)}>{txt}
+                <a href='javascript:void(0)'  onClick={() => setShow(true)}>{txt}
                     <span><i className="fa-solid fa-arrow-right"></i></span>
-                </button>
+                </a>
             </div>
 
             <div

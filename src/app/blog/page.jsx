@@ -7,8 +7,9 @@ import getSpecialityData from '@/app/lib/getSpeciality';
 import formatDate from '@/app/lib/formatDate';
 import getStaticText from '@/app/lib/getStaticTextServer';
 import BlogListing from '@/components/BlogListing';
+import Breadcrumb from '@/components/Breadcrumb';
 
-const Blog = async ({searchParams }) => {
+const Blog = async ({ searchParams }) => {
     const basePath = await getBaseUrl()
     const data = await getStaticPageContent("blog");
     const pageContent = data?.data[0]?.pageContent;
@@ -34,19 +35,18 @@ const Blog = async ({searchParams }) => {
                         <div className="container">
                             <div className="row">
                                 <div className="col-12">
-                                    <ul className="breadcrumb mb-0">
-                                        <li>
-                                            <a href="/">{staticText['Home']}</a>
-                                        </li>
-                                        <li className="active"> {pageContent[0].title} </li>
-                                    </ul>
+                                    <Breadcrumb
+                                        activeTitle={pageContent[0]?.title}
+                                        middleTitle={''}
+                                        middleURL={''}
+                                    />
                                 </div>
                             </div>
                         </div>
                     </section>
 
 
-                    <BlogListing basePath={basePath} slug={slug}/>
+                    <BlogListing basePath={basePath} slug={slug} />
                 </div>
             </div>
             <Footer />

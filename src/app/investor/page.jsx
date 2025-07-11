@@ -5,12 +5,14 @@ import { getStaticPageContent } from '@/app/lib/getStaticPageContent';
 import { getBaseUrl } from '@/app/lib/getBaseUrl';
 import investorDAta from '@/app/lib/getInvestor';
 import Breadcrumb from '@/components/Breadcrumb';
+import getStaticText from '../lib/getStaticTextServer';
 
 const Investor = async () => {
     const basePath = await getBaseUrl(true, true);
     const data = await getStaticPageContent("investor");
     const pageContent = data?.data[0]?.pageContent;
     const pageMeta = data?.data[0]?.metaSection;
+    const staticText = await getStaticText();
 
     const getAllInvestorDirector = await investorDAta.getAll('Directors & Advisory Board')
     const getAllInvestorPatrons = await investorDAta.getAll('Patrons')

@@ -1,8 +1,12 @@
+import Breadcrumb from '@/components/Breadcrumb'
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import React from 'react'
+import getStaticText from '../lib/getStaticTextServer'
 
-const ContactUs = () => {
+const ContactUs = async () => {
+    const staticText = await getStaticText();
+
     return (
         <>
             <Header />
@@ -17,12 +21,11 @@ const ContactUs = () => {
                         <div className="container">
                             <div className="row">
                                 <div className="col-12">
-                                    <ul className="breadcrumb mb-0">
-                                        <li>
-                                            <a href="index.php">Home</a>
-                                        </li>
-                                        <li className="active"> Contact Us </li>
-                                    </ul>
+                                    <Breadcrumb
+                                        activeTitle={"Contact Us"}
+                                        middleTitle={''}
+                                        middleURL={''}
+                                    />
                                 </div>
                             </div>
                         </div>
@@ -363,15 +366,6 @@ const ContactUs = () => {
 
 
                                                         </div>
-
-
-
-
-
-
-
-
-
 
                                                         <div className="col-xl-6 col-lg-6 col-md-6 col-12 mb-3">
                                                             <div className="from-btn">

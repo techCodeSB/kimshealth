@@ -1,6 +1,7 @@
 import { getBaseUrl } from '@/app/lib/getBaseUrl';
 import leaderData from '@/app/lib/getLeader';
 import getStaticText from '@/app/lib/getStaticTextServer';
+import Breadcrumb from '@/components/Breadcrumb';
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 import { marked } from 'marked';
@@ -14,13 +15,10 @@ const DoctorDetails = async ({ params }) => {
     const data = await leaderData.getSingleLeader(slug);
     const staticText = await getStaticText();
 
-    console.log(data)
-
 
     return (
         <>
             <Header />
-
             <div role="main" className="main">
                 <div className="doctor-details-main-page">
                     <div className="page-header">
@@ -32,15 +30,11 @@ const DoctorDetails = async ({ params }) => {
                         <div className="container">
                             <div className="row">
                                 <div className="col-12">
-                                    <ul className="breadcrumb mb-0">
-                                        <li>
-                                            <a href={basePath+"/"}>{staticText['Home']}</a>
-                                        </li>
-                                        <li>
-                                            <a href={basePath+"/about-us"}>{staticText['About Us ']}</a>
-                                        </li>
-                                        <li className="active"> {data.name}</li>
-                                    </ul>
+                                    <Breadcrumb
+                                        activeTitle={data.name}
+                                        middleTitle={staticText['About Us ']}
+                                        middleURL={basePath + "/about-us"}
+                                    />
                                 </div>
                             </div>
                         </div>
@@ -58,13 +52,13 @@ const DoctorDetails = async ({ params }) => {
                                             <ul>
                                                 <li className="details-doc-ic">{data.designation}</li>
                                             </ul>
-                                       </div>
+                                        </div>
                                     </div>
                                 </div>
 
                                 <div className="col-md-9">
                                     <div className="right-col-details">
-                                        <div className="main-heading main-list" dangerouslySetInnerHTML={{__html: marked(data.details || "") || ""}}>
+                                        <div className="main-heading main-list" dangerouslySetInnerHTML={{ __html: marked(data.details || "") || "" }}>
 
                                         </div>
                                     </div>

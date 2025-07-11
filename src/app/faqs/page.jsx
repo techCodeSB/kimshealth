@@ -3,6 +3,7 @@ import Header from '@/components/Header';
 import { getStaticPageContent } from '@/app/lib/getStaticPageContent';
 import getStaticText from '@/app/lib/getStaticTextServer';
 import { getBaseUrl } from '@/app/lib/getBaseUrl';
+import Breadcrumb from '@/components/Breadcrumb';
 
 
 const Faqs = async () => {

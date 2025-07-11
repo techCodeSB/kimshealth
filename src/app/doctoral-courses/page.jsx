@@ -5,6 +5,7 @@ import getStaticText from '@/app/lib/getStaticTextServer';
 import { getBaseUrl } from '@/app/lib/getBaseUrl';
 import { getStaticPageContent } from '@/app/lib/getStaticPageContent';
 import courseData from '@/app/lib/getCourse';
+import Breadcrumb from '@/components/Breadcrumb';
 
 const DoctoralCourse = async () => {
     const basePath = await getBaseUrl(true, true)
@@ -19,7 +20,6 @@ const DoctoralCourse = async () => {
     let allPostDiplomaCourses = await courseData.getAll(pageContent[4].courseCategory?.id);
     let allBroadCourses = await courseData.getAll(pageContent[5].courseCategory?.id);
     let alltFelowshipCourses = await courseData.getAll(pageContent[6].courseCategory?.id);
-    console.log(pageContent)
 
     return (
         <>
@@ -35,15 +35,11 @@ const DoctoralCourse = async () => {
                                             <div className="breadcrumb-wrapper py-2 ps-2 ms-1">
                                                 <div className="row">
                                                     <div className="col-12 px-0">
-                                                        <ul className="breadcrumb mb-0">
-                                                            <li>
-                                                                <a href={basePath + "/"}>{staticText['Home']}</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href={basePath + "/doctoral-courses"}>{staticText['Academics']}</a>
-                                                            </li>
-                                                            <li className="active">{pageContent[0].title}</li>
-                                                        </ul>
+                                                        <Breadcrumb
+                                                            activeTitle={pageContent[0]?.title}
+                                                            middleTitle={staticText['Academics']}
+                                                            middleURL={basePath + "#"}
+                                                        />
                                                     </div>
                                                 </div>
                                             </div>

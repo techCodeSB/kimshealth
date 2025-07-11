@@ -3,6 +3,7 @@ import Header from '@/components/Header';
 import JournalCarousel from '@/components/JournalCarousel';
 import { getStaticPageContent } from '@/app/lib/getStaticPageContent';
 import getStaticText from '../lib/getStaticTextServer';
+import Breadcrumb from '@/components/Breadcrumb';
 
 const InternalMedicine = async () => {
     const staticText = await getStaticText();
@@ -10,8 +11,6 @@ const InternalMedicine = async () => {
     const data = await getStaticPageContent("internal-medicine-training-imt", field);
     const pageContent = data?.data[0]?.pageContent;
     const pageMeta = data?.data[0]?.metaSection;
-
-    console.log(pageContent)
 
     return (
         <>

@@ -18,11 +18,8 @@ const Hospital = async () => {
     const data = await getStaticPageContent("hospital");
     const pageContent = data?.data[0]?.pageContent;
     const pageMeta = data?.data[0]?.metaSection;
-
     const hospitals = await hospitalData.getAllByType({ type: "Hospital", langLoc: getLangLoc });
     const medicalCenter = await hospitalData.getAllByType({ type: "Medical Center", langLoc: getLangLoc })
-
-
 
 
 

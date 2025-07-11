@@ -5,9 +5,11 @@ import Footer from '@/components/Footer'
 import FromDoctor from '@/components/FromDoctor'
 import Header from '@/components/Header'
 import TestimonialSection from '@/components/TestimonialSection'
+import getStaticText from '@/helper/getStaticText'
 import React from 'react'
 
 const ProcedureDetails = async () => {
+     const staticText = await getStaticText();
     const basePathOnlyLang = await getBaseUrl(true, false)
     return (
         <>

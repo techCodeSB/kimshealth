@@ -1,8 +1,10 @@
+import getStaticText from '@/app/lib/getStaticTextServer';
 import Breadcrumb from '@/components/Breadcrumb';
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 
-const HealthPackageDetails = () => {
+const HealthPackageDetails = async () => {
+    const staticText = await getStaticText();
     return (
         <>
             <Header />

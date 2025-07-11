@@ -5,12 +5,14 @@ import { getBaseUrl } from '@/app/lib/getBaseUrl';
 import { getStaticPageContent } from '@/app/lib/getStaticPageContent';
 import MediaEventListing from '@/components/MediaEventListing';
 import Breadcrumb from '@/components/Breadcrumb';
+import getStaticText from '../lib/getStaticTextServer';
 
 const MediaAndEvents = async () => {
     const basePath = await getBaseUrl(true, true);
     const data = await getStaticPageContent("media-and-events");
     const pageContent = data?.data[0]?.pageContent;
     const pageMeta = data?.data[0]?.metaSection;
+     const staticText = await getStaticText();
 
 
 

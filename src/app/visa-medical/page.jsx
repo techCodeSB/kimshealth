@@ -2,11 +2,13 @@ import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import { getStaticPageContent } from '@/app/lib/getStaticPageContent';
 import Breadcrumb from '@/components/Breadcrumb';
+import getStaticText from '../lib/getStaticTextServer';
 
 const VisaMedical = async () => {
     const data = await getStaticPageContent("visa-medical");
     const pageContent = data?.data[0]?.pageContent;
     const pageMeta = data?.data[0]?.metaSection;
+     const staticText = await getStaticText();
 
     return (
         <>

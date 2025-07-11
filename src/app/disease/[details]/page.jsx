@@ -1,4 +1,6 @@
+import { getBaseUrl } from '@/app/lib/getBaseUrl'
 import getStaticText from '@/app/lib/getStaticTextServer'
+import Breadcrumb from '@/components/Breadcrumb'
 import ExpertCarousel from '@/components/ExpertCarousel'
 import Footer from '@/components/Footer'
 import Form2 from '@/components/Forms/Form2'
@@ -9,6 +11,7 @@ import React from 'react'
 
 const DiseaseDetails = async () => {
     const staticText = await getStaticText();
+    const basePath = await getBaseUrl();
 
     return (
         <>
@@ -22,21 +25,17 @@ const DiseaseDetails = async () => {
                                     <div className="breadcrumb-wrapper py-2 ps-2 ms-1">
                                         <div className="row">
                                             <div className="col-12 px-0">
-                                                <ul className="breadcrumb mb-0">
-                                                    <li>
-                                                        <a href="index.php">{staticText['Home']}</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="/disease">{staticText['Disease']}</a>
-                                                    </li>
-                                                    <li className="active"> Coronary Artery Disease (CAD) </li>
-                                                </ul>
+                                                <Breadcrumb
+                                                    activeTitle={"Coronary Artery Disease (CAD)"}
+                                                    middleTitle={staticText['Disease']}
+                                                    middleURL={basePath + "/disease"}
+                                                />
                                             </div>
                                         </div>
                                     </div>
                                     <div className="details-banner pb-5">
                                         <div className="details-heading">
-                                            <Form2 title={"Have a query?"}/>
+                                            <Form2 title={"Have a query?"} />
                                         </div>
                                     </div>
                                 </div>
@@ -69,15 +68,11 @@ const DiseaseDetails = async () => {
                                     <div className="breadcrumb-wrapper py-2 ps-2 ms-1">
                                         <div className="row">
                                             <div className="col-12 px-0">
-                                                <ul className="breadcrumb mb-0">
-                                                    <li>
-                                                        <a href="index.php">{staticText['Home']}</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="/disease">{staticText['Disease']}</a>
-                                                    </li>
-                                                    <li className="active"> Coronary Artery Disease (CAD) </li>
-                                                </ul>
+                                                <Breadcrumb
+                                                    activeTitle={"Coronary Artery Disease (CAD)"}
+                                                    middleTitle={staticText['Disease']}
+                                                    middleURL={basePath + "/disease"}
+                                                />
                                             </div>
                                         </div>
                                     </div>
@@ -96,7 +91,7 @@ const DiseaseDetails = async () => {
                                 <div className="col-md-6">
                                     <div className="details-banner">
                                         <div className="details-heading">
-                                            <Form2 title={"Have a query?"}/>
+                                            <Form2 title={"Have a query?"} />
                                         </div>
                                     </div>
                                 </div>

@@ -4,12 +4,14 @@ import React from 'react'
 import { getStaticPageContent } from '@/app/lib/getStaticPageContent';
 import Breadcrumb from '@/components/Breadcrumb';
 import { getBaseUrl } from '@/app/lib/getBaseUrl';
+import getStaticText from '../lib/getStaticTextServer';
 
 const SecondOpinion = async () => {
     const basePath = getBaseUrl(true, true,)
     const data = await getStaticPageContent("second-opinion");
     const pageContent = data?.data[0]?.pageContent;
     const pageMeta = data?.data[0]?.metaSection;
+     const staticText = await getStaticText();
 
 
     return (

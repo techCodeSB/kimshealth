@@ -8,6 +8,7 @@ import testimonialData from '@/app/lib/getTestimonial';
 import blogData from '@/app/lib/getBlog';
 import homeServices from '@/app/lib/getHomeServices';
 import getStaticText from '@/app/lib/getStaticTextServer';
+import Breadcrumb from '@/components/Breadcrumb';
 
 
 const HomeServices = async () => {
@@ -47,12 +48,11 @@ const HomeServices = async () => {
                         <div className="container">
                             <div className="row">
                                 <div className="col-12">
-                                    <ul className="breadcrumb mb-0">
-                                        <li>
-                                            <a href={basePath+"/"}>{staticTexts['Home']}</a>
-                                        </li>
-                                        <li className="active"> {pageContent[0].title} </li>
-                                    </ul>
+                                    <Breadcrumb
+                                        activeTitle={pageContent[0].title}
+                                        middleTitle={''}
+                                        middleURL={''}
+                                    />
                                 </div>
                             </div>
                         </div>
@@ -94,7 +94,7 @@ const HomeServices = async () => {
                                                     <h3>{h.title}</h3>
                                                     <p>{h.shortDetails}</p>
                                                     <div className="main-btn text-start">
-                                                        <a href={basePath+"/at-home-services/"+h.slug}>
+                                                        <a href={basePath + "/at-home-services/" + h.slug}>
                                                             {staticTexts['Read More']} <span><i className="fa-solid fa-arrow-right"></i></span>
                                                         </a>
                                                     </div>
@@ -113,7 +113,7 @@ const HomeServices = async () => {
 
                     <div className="line-divider"></div>
                     <BlogCarousel dataSet={blogDataSet} /> */}
-                    
+
                 </div>
             </div>
             <Footer />

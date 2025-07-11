@@ -3,11 +3,13 @@ import Header from '@/components/Header'
 import React from 'react'
 import { getStaticPageContent } from '@/app/lib/getStaticPageContent';
 import Breadcrumb from '@/components/Breadcrumb';
+import getStaticText from '../lib/getStaticTextServer';
 
 const TermsAndConditions = async () => {
     const data = await getStaticPageContent("terms-and-conditions");
     const pageContent = data?.data[0]?.pageContent;
     const pageMeta = data?.data[0]?.metaSection;
+     const staticText = await getStaticText();
 
     return (
         <>

@@ -2,12 +2,15 @@ import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import React from 'react'
 import { getStaticPageContent } from '@/app/lib/getStaticPageContent';
+import Breadcrumb from '@/components/Breadcrumb';
+import getStaticText from '../lib/getStaticTextServer';
 
 const AllCompaniesPanel = async () => {
     const field = "populate[0]=pageContent&populate[1]=pageContent.logoSlider&populate[2]=pageContent.logoSlider.image&populate[3]=metaSection";
     const data = await getStaticPageContent("all-companies-on-panel", field);
     const pageContent = data?.data[0]?.pageContent;
     const pageMeta = data?.data[0]?.metaSection;
+    const staticText = await getStaticText();
 
 
     console.log(pageContent);
@@ -26,12 +29,11 @@ const AllCompaniesPanel = async () => {
                         <div className="container">
                             <div className="row">
                                 <div className="col-12">
-                                    <ul className="breadcrumb mb-0">
-                                        <li>
-                                            <a href="index.php">Home</a>
-                                        </li>
-                                        <li className="active"> {pageContent[0]?.title}</li>
-                                    </ul>
+                                    <Breadcrumb
+                                        activeTitle={pageContent[0]?.title}
+                                        middleTitle={''}
+                                        middleURL={''}
+                                    />
                                 </div>
                             </div>
                         </div>
@@ -49,7 +51,7 @@ const AllCompaniesPanel = async () => {
                                         return <div className="col-md-3 col-6 mb-3" key={index}>
                                             <div className="insurance-card">
                                                 <div className="insurance-img">
-                                                    <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${img.image.url}`} alt={img.title}className="img-fluid" />
+                                                    <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${img.image.url}`} alt={img.title} className="img-fluid" />
                                                 </div>
                                                 <p>{img.title}</p>
                                             </div>
@@ -75,7 +77,7 @@ const AllCompaniesPanel = async () => {
                                         return <div className="col-md-3 col-6 mb-3" key={index}>
                                             <div className="insurance-card">
                                                 <div className="insurance-img">
-                                                    <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${img.image.url}`} alt={img.title}className="img-fluid" />
+                                                    <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${img.image.url}`} alt={img.title} className="img-fluid" />
                                                 </div>
                                                 <p>{img.title}</p>
                                             </div>
