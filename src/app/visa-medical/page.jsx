@@ -45,8 +45,8 @@ const VisaMedical = async () => {
                                                     <button type="button" className="btn-tab treat-tab ">{pageContent[4]?.title}</button>
                                                 </div>
                                                 <div className="visa-select d-md-none d-block">
-                                                    <select class="form-select" aria-label="Default select example">
-                                                        <option selected>Australia</option>
+                                                    <select className="form-select" aria-label="Default select example">
+                                                        <option value={""}>Australia</option>
                                                         <option value="1">New Zeeland</option>
                                                         <option value="2">Canada</option>
                                                         <option value="3">United Kingdom</option>

@@ -42,8 +42,8 @@ const ExpertCarousel = ({ dataSet }) => {
                     <div className="owl-carousel owl-theme expert">
                         {
                             dataSet.data.map((d, index) => {
-                                return <div className={`expert-card ${index === 0 ? 'active' : ""}`} data-aos="fade-right" key={index}>
-                                    <div className="card border-0 p-lg-4 p-0">
+                                return <div className={`expert-card `} data-aos="fade-right" key={index}>
+                                    <div className={`card border-0 p-lg-4 p-0 ${index === 0 ? 'active' : ""}`}>
                                         <div className="card-top">
                                             <a href={dataSet.baseUrl + "/doctor/" + d.slug}>
                                                 <img

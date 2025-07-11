@@ -5243,4 +5243,7 @@ li.chat-ic::before {
 .book-appointment-main-page .contact-right-col .association-form-card .form-select{
     background-position: 44rem;
 }
+.testi-card.active{
+    background: #f5f5f5;
+}
 

@@ -79,6 +79,63 @@ const Header = () => {
     }, [])
 
 
+    useEffect(() => {
+        const hamburger = document.getElementById('hamburger');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+        const menuItems = document.querySelectorAll('.menu-item');
+
+        // Toggle sidebar
+        hamburger?.addEventListener('click', function () {
+            this.classList.toggle('active');
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+
+       
+            document.body.style.overflow = sidebar.classList.contains('active') ? 'hidden' : '';
+        });
+
+
+        overlay?.addEventListener('click', function () {
+            hamburger.classList.remove('active');
+            sidebar.classList.remove('active');
+            this.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        
+        menuItems?.forEach(item => {
+            item.addEventListener('click', function () {
+                menuItems.forEach(i => i.classList.remove('active'));
+
+                // Add active class to clicked item
+                this.classList.add('active');
+
+                // Close sidebar on mobile after selection
+                if (window.innerWidth <= 768) {
+                    setTimeout(() => {
+                        hamburger.classList.remove('active');
+                        sidebar.classList.remove('active');
+                        overlay.classList.remove('active');
+                        document.body.style.overflow = '';
+                    }, 300);
+                }
+            });
+        });
+
+        // Close sidebar when window is resized to desktop
+        window.addEventListener('resize', function () {
+            if (window.innerWidth > 768 && sidebar.classList.contains('active')) {
+                hamburger.classList.remove('active');
+                sidebar.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+
+    }, [])
+
+
     return (
         <>
             <header id="header-sticky" className="header">
@@ -263,7 +320,7 @@ const Header = () => {
                                     </li>
 
                                     <li className="menu-item-has-children show-submenu d-lg-none d-block">
-                                        <a href={basePath+"/hospital"}>Locations</a>
+                                        <a href={basePath + "/hospital"}>Locations</a>
                                         <div className="sub-menu">
                                             <div className="sub-menu-details">
                                                 <div className="accordion">
