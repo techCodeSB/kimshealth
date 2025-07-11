@@ -1,6 +1,7 @@
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 import { getStaticPageContent } from '@/app/lib/getStaticPageContent';
+import Breadcrumb from '@/components/Breadcrumb';
 
 const ClinicalSkills = async () => {
     const field = "populate[0]=pageContent&populate[1]=pageContent.bannerItem&populate[2]=pageContent.bannerItem.bannerImageDesktop&populate[3]=pageContent.bannerItem.bannerImageMobile&populate[4]=metaSection&populate[5]=pageContent.journal&populate[6]=pageContent.journal.thumbnailImage&populate[7]=pageContent.journal.file";
@@ -25,12 +26,11 @@ const ClinicalSkills = async () => {
                                             <div className="breadcrumb-wrapper py-2 ps-2 ms-1">
                                                 <div className="row">
                                                     <div className="col-12 px-0">
-                                                        <ul className="breadcrumb mb-0">
-                                                            <li>
-                                                                <a href="/">Home</a>
-                                                            </li>
-                                                            <li className="active"> {pageContent[0]?.title} </li>
-                                                        </ul>
+                                                       <Breadcrumb
+                                                            activeTitle={pageContent[0]?.title}
+                                                            middleTitle={''}
+                                                            middleURL={""}
+                                                        />
                                                     </div>
                                                 </div>
                                             </div>

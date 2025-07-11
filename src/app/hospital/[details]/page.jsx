@@ -7,6 +7,7 @@ import getSpecialityData from '@/app/lib/getSpeciality';
 import getStaticText from '@/app/lib/getStaticTextServer';
 import testimonialData from '@/app/lib/getTestimonial';
 import BlogCarousel from '@/components/BlogCarousel';
+import Breadcrumb from '@/components/Breadcrumb';
 import ExcellenceCarousel from '@/components/ExcellenceCarousel';
 import ExpertCarousel from '@/components/ExpertCarousel';
 import Footer from '@/components/Footer';
@@ -70,15 +71,11 @@ const HospitalDetails = async ({ params }) => {
                                 <div className="breadcrumb-wrapper py-2 ps-2 ms-1">
                                     <div className="row">
                                         <div className="col-12 px-0">
-                                            <ul className="breadcrumb mb-0">
-                                                <li>
-                                                    <a href={basePath + "/"}>{staticText['Home']}</a>
-                                                </li>
-                                                <li>
-                                                    <a href={basePath + "/hospital"}>{staticText['Our Hospital']}</a>
-                                                </li>
-                                                <li className="active"> {hptData.title} </li>
-                                            </ul>
+                                            <Breadcrumb
+                                                activeTitle={hptData.title}
+                                                middleTitle={staticText['Our Hospital']}
+                                                middleURL={basePath + "/hospital"}
+                                            />
                                         </div>
                                     </div>
                                 </div>

@@ -2,10 +2,11 @@ import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 import JournalCarousel from '@/components/JournalCarousel';
 import { getStaticPageContent } from '@/app/lib/getStaticPageContent';
+import getStaticText from '../lib/getStaticTextServer';
 
 const InternalMedicine = async () => {
+    const staticText = await getStaticText();
     const field = "populate[0]=pageContent&populate[1]=pageContent.bannerItem&populate[2]=pageContent.bannerItem.bannerImageDesktop&populate[3]=pageContent.bannerItem.bannerImageMobile&populate[4]=metaSection&populate[5]=pageContent.journal&populate[6]=pageContent.journal.thumbnailImage&populate[7]=pageContent.journal.file&populate[8]=pageContent.file";
-
     const data = await getStaticPageContent("internal-medicine-training-imt", field);
     const pageContent = data?.data[0]?.pageContent;
     const pageMeta = data?.data[0]?.metaSection;
@@ -26,15 +27,11 @@ const InternalMedicine = async () => {
                                             <div className="breadcrumb-wrapper py-2 ps-2 ms-1">
                                                 <div className="row">
                                                     <div className="col-12 px-0">
-                                                        <ul className="breadcrumb mb-0">
-                                                            <li>
-                                                                <a href="/">Home</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="hospital-master.php">Academics</a>
-                                                            </li>
-                                                            <li className="active"> {pageContent[0]?.title} </li>
-                                                        </ul>
+                                                        <Breadcrumb
+                                                            activeTitle={pageContent[0]?.title}
+                                                            middleTitle={staticText['Academics']}
+                                                            middleURL={"#"}
+                                                        />
                                                     </div>
                                                 </div>
                                             </div>
@@ -43,9 +40,9 @@ const InternalMedicine = async () => {
                                                     <h3 className="mb-2">{pageContent[0]?.title}</h3>
                                                     <p>{pageContent[0]?.subTitle}</p>
                                                     <h5>{pageContent[2]?.title}</h5>
-                                                    <a download href={`${process.env.NEXT_PUBLIC_IMAGE_URL}${pageContent[2]?.file.url}`} 
-                                                    className="mb-3 mt-2 d-block"><i className="custom-download"></i>
-                                                    {pageContent[2]?.buttonText}</a>
+                                                    <a download href={`${process.env.NEXT_PUBLIC_IMAGE_URL}${pageContent[2]?.file.url}`}
+                                                        className="mb-3 mt-2 d-block"><i className="custom-download"></i>
+                                                        {pageContent[2]?.buttonText}</a>
                                                     <a href="#" className="hospital-primarybtn"> Apply Now</a>
                                                 </div>
                                             </div>

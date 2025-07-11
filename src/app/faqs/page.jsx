@@ -27,12 +27,11 @@ const Faqs = async () => {
                         <div className="container">
                             <div className="row">
                                 <div className="col-12">
-                                    <ul className="breadcrumb mb-0">
-                                        <li>
-                                            <a href={basePath+ "/"}>{staticText['Home']}</a>
-                                        </li>
-                                        <li className="active"> {pageContent ? pageContent[0]?.title : null}</li>
-                                    </ul>
+                                    <Breadcrumb
+                                        activeTitle={staticText[pageContent[0]?.title]}
+                                        middleTitle={''}
+                                        middleURL={""}
+                                    />
                                 </div>
                             </div>
                         </div>

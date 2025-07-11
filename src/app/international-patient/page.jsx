@@ -15,6 +15,7 @@ import doctorTalkData from '@/app/lib/getDoctorTalk';
 import diseaseData from '@/app/lib/getDisease'
 import procedureData from '@/app/lib/getProcedure'
 import getStaticText from '@/app/lib/getStaticTextServer'
+import Breadcrumb from '@/components/Breadcrumb'
 
 
 
@@ -28,8 +29,6 @@ const InternationalPage = async () => {
     const featuredProcedure = await procedureData.getFeturedProcedure()
     const staticText = await getStaticText();
 
-
-    console.log(pageContent)
 
     const specialityDataSet = {
         sectionTitle: pageContent[5]?.title,
@@ -76,12 +75,11 @@ const InternationalPage = async () => {
                                             <div className="breadcrumb-wrapper py-2 ps-2 ms-1">
                                                 <div className="row">
                                                     <div className="col-12 px-0">
-                                                        <ul className="breadcrumb mb-0">
-                                                            <li>
-                                                                <a href={basePath + "/"}>{staticText['Home']}</a>
-                                                            </li>
-                                                            <li className="active"> {pageContent[0].title} </li>
-                                                        </ul>
+                                                        <Breadcrumb
+                                                            activeTitle={pageContent[0]?.title}
+                                                            middleTitle={''}
+                                                            middleURL={""}
+                                                        />
                                                     </div>
                                                 </div>
                                             </div>

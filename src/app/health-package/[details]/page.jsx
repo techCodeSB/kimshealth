@@ -1,3 +1,4 @@
+import Breadcrumb from '@/components/Breadcrumb';
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 
@@ -16,15 +17,11 @@ const HealthPackageDetails = () => {
                                             <div className="breadcrumb-wrapper py-2 ps-2 ms-1">
                                                 <div className="row">
                                                     <div className="col-12">
-                                                        <ul className="breadcrumb mb-0">
-                                                            <li>
-                                                                <a href="index.php">Home</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="hospital-master.php">Health Packages</a>
-                                                            </li>
-                                                            <li className="active"> Diabetic Health Check Up </li>
-                                                        </ul>
+                                                        <Breadcrumb
+                                                            activeTitle={'Diabetic Health Check Up'}
+                                                            middleTitle={'Health Packages'}
+                                                            middleURL={"/health-package"}
+                                                        />
                                                     </div>
                                                 </div>
                                             </div>
@@ -45,7 +42,7 @@ const HealthPackageDetails = () => {
                                     </div>
 
                                     <div className="col-md-6 details-proceduce-banner-right-col">
-                                        <img src="/img/health-pack-banner.png" className="img-fluid details-banner-image" alt=""/>
+                                        <img src="/img/health-pack-banner.png" className="img-fluid details-banner-image" alt="" />
                                     </div>
 
                                     {/* <!-- <div className="col-md-6">
@@ -165,7 +162,7 @@ const HealthPackageDetails = () => {
                                 <div className="col-md-2 col-4">
                                     <div className="over-all-btn text-end">
                                         <a href="#">View All <span><img src="/img/slider-right-arrow.svg" className="img-fluid"
-                                            alt=""/></span></a>
+                                            alt="" /></span></a>
                                     </div>
                                 </div>
                             </div>
@@ -174,7 +171,7 @@ const HealthPackageDetails = () => {
                                 <div className="col-md-3 mb-3">
                                     <div className="custom-hospital-top-card">
                                         <div className="hospital-img">
-                                            <a href="#"><img src="/img/health-package1.jpg" alt="" className="img-fluid w-100"/></a>
+                                            <a href="#"><img src="/img/health-package1.jpg" alt="" className="img-fluid w-100" /></a>
                                         </div>
                                         <div className="hospital-content">
                                             <h3>Routine Health Check Up</h3>
@@ -214,7 +211,7 @@ const HealthPackageDetails = () => {
                                 <div className="col-md-3 mb-3">
                                     <div className="custom-hospital-top-card">
                                         <div className="hospital-img">
-                                            <a href="#"><img src="/img/health-package1.jpg" alt="" className="img-fluid w-100"/></a>
+                                            <a href="#"><img src="/img/health-package1.jpg" alt="" className="img-fluid w-100" /></a>
                                         </div>
                                         <div className="hospital-content">
                                             <h3>Routine Health Check Up</h3>
@@ -254,7 +251,7 @@ const HealthPackageDetails = () => {
                                 <div className="col-md-3 mb-3">
                                     <div className="custom-hospital-top-card">
                                         <div className="hospital-img">
-                                            <a href="#"><img src="/img/health-package1.jpg" alt="" className="img-fluid w-100"/></a>
+                                            <a href="#"><img src="/img/health-package1.jpg" alt="" className="img-fluid w-100" /></a>
                                         </div>
                                         <div className="hospital-content">
                                             <h3>Routine Health Check Up</h3>
@@ -294,7 +291,7 @@ const HealthPackageDetails = () => {
                                 <div className="col-md-3 mb-3">
                                     <div className="custom-hospital-top-card">
                                         <div className="hospital-img">
-                                            <a href="#"><img src="/img/health-package1.jpg" alt="" className="img-fluid w-100"/></a>
+                                            <a href="#"><img src="/img/health-package1.jpg" alt="" className="img-fluid w-100" /></a>
                                         </div>
                                         <div className="hospital-content">
                                             <h3>Routine Health Check Up</h3>

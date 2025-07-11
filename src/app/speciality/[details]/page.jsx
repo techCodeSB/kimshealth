@@ -8,6 +8,7 @@ import getSpecialityData from '@/app/lib/getSpeciality'
 import getStaticText from '@/app/lib/getStaticTextServer'
 import testimonialData from '@/app/lib/getTestimonial'
 import BlogCarousel from '@/components/BlogCarousel'
+import Breadcrumb from '@/components/Breadcrumb'
 import ExpertCarousel from '@/components/ExpertCarousel'
 import Footer from '@/components/Footer'
 import Form2 from '@/components/Forms/Form2'
@@ -67,7 +68,7 @@ const SpecialityDetails = async ({ params }) => {
                                             <div className="breadcrumb-wrapper">
                                                 <div className="row">
                                                     <div className="col-12 px-lg-0 px-4">
-                                                        <Breadcrumb activeTitle={pageContent[0]?.title}
+                                                        <Breadcrumb activeTitle={data.title}
                                                             middleTitle={staticText['Specialities']}
                                                             middleURL={baseUrl + "/speciality"}
                                                         />

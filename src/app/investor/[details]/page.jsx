@@ -1,6 +1,7 @@
 import { getBaseUrl } from '@/app/lib/getBaseUrl';
 import investorData from '@/app/lib/getInvestor';
 import getStaticText from '@/app/lib/getStaticTextServer';
+import Breadcrumb from '@/components/Breadcrumb';
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 import { marked } from 'marked';
@@ -32,15 +33,11 @@ const DoctorDetails = async ({ params }) => {
                         <div className="container">
                             <div className="row">
                                 <div className="col-12">
-                                    <ul className="breadcrumb mb-0">
-                                        <li>
-                                            <a href="/">{staticText['Home']}</a>
-                                        </li>
-                                        <li>
-                                            <a href="/investor">Investor</a>
-                                        </li>
-                                        <li className="active"> {data.name}</li>
-                                    </ul>
+                                    <Breadcrumb
+                                        activeTitle={data.name}
+                                        middleTitle={staticText['Investor']}
+                                        middleURL={"/investor"}
+                                    />
                                 </div>
                             </div>
                         </div>
@@ -58,13 +55,13 @@ const DoctorDetails = async ({ params }) => {
                                             <ul>
                                                 <li className="details-doc-ic">{data.designation}</li>
                                             </ul>
-                                       </div>
+                                        </div>
                                     </div>
                                 </div>
 
                                 <div className="col-md-9">
                                     <div className="right-col-details">
-                                        <div className="main-heading main-list" dangerouslySetInnerHTML={{__html: marked(data.details)}}>
+                                        <div className="main-heading main-list" dangerouslySetInnerHTML={{ __html: marked(data.details) }}>
 
                                         </div>
                                     </div>
