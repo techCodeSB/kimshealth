@@ -2,6 +2,7 @@ import formatDate from '@/app/lib/formatDate'
 import { getBaseUrl } from '@/app/lib/getBaseUrl'
 import mediaData from '@/app/lib/getMediaEvent'
 import getStaticText from '@/app/lib/getStaticTextServer'
+import Breadcrumb from '@/components/Breadcrumb'
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import { marked } from 'marked'
@@ -29,15 +30,11 @@ const MediaAndEventsDetails = async ({ params }) => {
                                             <div className="breadcrumb-wrapper py-2 ps-2 ms-1">
                                                 <div className="row">
                                                     <div className="col-12 px-0">
-                                                        <ul className="breadcrumb mb-0">
-                                                            <li>
-                                                                <a href={basePath + "/"}>{staticText['Home']}</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href={basePath + "/media-and-events"}>Media & Events</a>
-                                                            </li>
-                                                            <li className="active"> {data.title} </li>
-                                                        </ul>
+                                                        <Breadcrumb
+                                                            activeTitle={pageContent[0]?.title}
+                                                            middleTitle={staticText["Media & Events"]}
+                                                            middleURL={basePath + "/media-and-events"}
+                                                        />
                                                     </div>
                                                 </div>
                                             </div>
@@ -187,14 +184,10 @@ const MediaAndEventsDetails = async ({ params }) => {
                                     ))
                                 }
 
-
                             </div>
 
                         </div>
                     </section>
-
-
-
                 </div>
             </div>
             <Footer />

@@ -1,3 +1,5 @@
+import { getBaseUrl } from '@/app/lib/getBaseUrl'
+import Breadcrumb from '@/components/Breadcrumb'
 import ExpertCarousel from '@/components/ExpertCarousel'
 import Footer from '@/components/Footer'
 import FromDoctor from '@/components/FromDoctor'
@@ -5,7 +7,8 @@ import Header from '@/components/Header'
 import TestimonialSection from '@/components/TestimonialSection'
 import React from 'react'
 
-const ProcedureDetails = () => {
+const ProcedureDetails = async () => {
+    const basePathOnlyLang = await getBaseUrl(true, false)
     return (
         <>
             <Header />
@@ -19,15 +22,11 @@ const ProcedureDetails = () => {
                                     <div className="breadcrumb-wrapper py-2 ps-2 ms-1">
                                         <div className="row">
                                             <div className="col-12 px-0">
-                                                <ul className="breadcrumb mb-0">
-                                                    <li>
-                                                        <a href="index.php">Home</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="speciality-master.php">Procedures</a>
-                                                    </li>
-                                                    <li className="active"> Coronary Artery Bypass Grafting (CABG) </li>
-                                                </ul>
+                                                <Breadcrumb
+                                                    activeTitle={"Coronary Artery Bypass Grafting (CABG)"}
+                                                    middleTitle={"Procedures"}
+                                                    middleURL={basePathOnlyLang + "/procedure"}
+                                                />
                                             </div>
                                         </div>
                                     </div>
@@ -315,7 +314,7 @@ const ProcedureDetails = () => {
                 {/* <FromDoctor/> */}
 
             </div>
-            <Footer/>
+            <Footer />
         </>
     )
 }

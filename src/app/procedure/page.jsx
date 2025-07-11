@@ -1,3 +1,4 @@
+import Breadcrumb from '@/components/Breadcrumb'
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import React from 'react'
@@ -16,12 +17,11 @@ const Procedure = () => {
                     <div className="container">
                         <div className="row">
                             <div className="col-12">
-                                <ul className="breadcrumb mb-0">
-                                    <li>
-                                        <a href="index.php">Home</a>
-                                    </li>
-                                    <li className="active"> Key Procedures </li>
-                                </ul>
+                                <Breadcrumb
+                                    activeTitle={"Key Procedures"}
+                                    middleTitle={""}
+                                    middleURL={""}
+                                />
                             </div>
                         </div>
                     </div>
@@ -74,7 +74,7 @@ const Procedure = () => {
                                                 <a href="#">
                                                     <div className="key-master-row">
                                                         <div className="key-master-image">
-                                                            <img src="/img/key-proce1.png" alt="" className="img-fluid"/>
+                                                            <img src="/img/key-proce1.png" alt="" className="img-fluid" />
                                                         </div>
                                                         <div className="key-master-content">
                                                             <h5>Coronary Artery Bypass Grafting</h5>
@@ -88,7 +88,7 @@ const Procedure = () => {
                                                 <a href="#">
                                                     <div className="key-master-row">
                                                         <div className="key-master-image">
-                                                            <img src="/img/key-proce2.png" alt="" className="img-fluid"/>
+                                                            <img src="/img/key-proce2.png" alt="" className="img-fluid" />
                                                         </div>
                                                         <div className="key-master-content">
                                                             <h5>Cystoscopy</h5>
@@ -102,7 +102,7 @@ const Procedure = () => {
                                                 <a href="#">
                                                     <div className="key-master-row">
                                                         <div className="key-master-image">
-                                                            <img src="/img/key-proce3.png" alt="" className="img-fluid"/>
+                                                            <img src="/img/key-proce3.png" alt="" className="img-fluid" />
                                                         </div>
                                                         <div className="key-master-content">
                                                             <h5>Renal Ultrasound</h5>
@@ -116,7 +116,7 @@ const Procedure = () => {
                                                 <a href="#">
                                                     <div className="key-master-row">
                                                         <div className="key-master-image">
-                                                            <img src="/img/key-proce4.png" alt="" className="img-fluid"/>
+                                                            <img src="/img/key-proce4.png" alt="" className="img-fluid" />
                                                         </div>
                                                         <div className="key-master-content">
                                                             <h5>Colonoscopy </h5>
@@ -130,7 +130,7 @@ const Procedure = () => {
                                                 <a href="#">
                                                     <div className="key-master-row">
                                                         <div className="key-master-image">
-                                                            <img src="/img/key-proce1.png" alt="" className="img-fluid"/>
+                                                            <img src="/img/key-proce1.png" alt="" className="img-fluid" />
                                                         </div>
                                                         <div className="key-master-content">
                                                             <h5>Coronary Artery Bypass Grafting</h5>
@@ -144,7 +144,7 @@ const Procedure = () => {
                                                 <a href="#">
                                                     <div className="key-master-row">
                                                         <div className="key-master-image">
-                                                            <img src="/img/key-proce2.png" alt="" className="img-fluid"/>
+                                                            <img src="/img/key-proce2.png" alt="" className="img-fluid" />
                                                         </div>
                                                         <div className="key-master-content">
                                                             <h5>Cystoscopy</h5>
@@ -158,7 +158,7 @@ const Procedure = () => {
                                                 <a href="#">
                                                     <div className="key-master-row">
                                                         <div className="key-master-image">
-                                                            <img src="/img/key-proce3.png" alt="" className="img-fluid"/>
+                                                            <img src="/img/key-proce3.png" alt="" className="img-fluid" />
                                                         </div>
                                                         <div className="key-master-content">
                                                             <h5>Renal Ultrasound</h5>
@@ -172,7 +172,7 @@ const Procedure = () => {
                                                 <a href="#">
                                                     <div className="key-master-row">
                                                         <div className="key-master-image">
-                                                            <img src="/img/key-proce4.png" alt="" className="img-fluid"/>
+                                                            <img src="/img/key-proce4.png" alt="" className="img-fluid" />
                                                         </div>
                                                         <div className="key-master-content">
                                                             <h5>Colonoscopy </h5>
@@ -186,7 +186,7 @@ const Procedure = () => {
                                                 <a href="#">
                                                     <div className="key-master-row">
                                                         <div className="key-master-image">
-                                                            <img src="/img/key-proce1.png" alt="" className="img-fluid"/>
+                                                            <img src="/img/key-proce1.png" alt="" className="img-fluid" />
                                                         </div>
                                                         <div className="key-master-content">
                                                             <h5>Coronary Artery Bypass Grafting</h5>
@@ -200,7 +200,7 @@ const Procedure = () => {
                                                 <a href="#">
                                                     <div className="key-master-row">
                                                         <div className="key-master-image">
-                                                            <img src="/img/key-proce2.png" alt="" className="img-fluid"/>
+                                                            <img src="/img/key-proce2.png" alt="" className="img-fluid" />
                                                         </div>
                                                         <div className="key-master-content">
                                                             <h5>Cystoscopy</h5>
@@ -214,7 +214,7 @@ const Procedure = () => {
                                                 <a href="#">
                                                     <div className="key-master-row">
                                                         <div className="key-master-image">
-                                                            <img src="/img/key-proce3.png" alt="" className="img-fluid"/>
+                                                            <img src="/img/key-proce3.png" alt="" className="img-fluid" />
                                                         </div>
                                                         <div className="key-master-content">
                                                             <h5>Renal Ultrasound</h5>
@@ -228,7 +228,7 @@ const Procedure = () => {
                                                 <a href="#">
                                                     <div className="key-master-row">
                                                         <div className="key-master-image">
-                                                            <img src="/img/key-proce4.png" alt="" className="img-fluid"/>
+                                                            <img src="/img/key-proce4.png" alt="" className="img-fluid" />
                                                         </div>
                                                         <div className="key-master-content">
                                                             <h5>Colonoscopy </h5>
@@ -242,7 +242,7 @@ const Procedure = () => {
                                                 <a href="#">
                                                     <div className="key-master-row">
                                                         <div className="key-master-image">
-                                                            <img src="/img/key-proce1.png" alt="" className="img-fluid"/>
+                                                            <img src="/img/key-proce1.png" alt="" className="img-fluid" />
                                                         </div>
                                                         <div className="key-master-content">
                                                             <h5>Coronary Artery Bypass Grafting</h5>
@@ -256,7 +256,7 @@ const Procedure = () => {
                                                 <a href="#">
                                                     <div className="key-master-row">
                                                         <div className="key-master-image">
-                                                            <img src="/img/key-proce2.png" alt="" className="img-fluid"/>
+                                                            <img src="/img/key-proce2.png" alt="" className="img-fluid" />
                                                         </div>
                                                         <div className="key-master-content">
                                                             <h5>Cystoscopy</h5>
@@ -270,7 +270,7 @@ const Procedure = () => {
                                                 <a href="#">
                                                     <div className="key-master-row">
                                                         <div className="key-master-image">
-                                                            <img src="/img/key-proce3.png" alt="" className="img-fluid"/>
+                                                            <img src="/img/key-proce3.png" alt="" className="img-fluid" />
                                                         </div>
                                                         <div className="key-master-content">
                                                             <h5>Renal Ultrasound</h5>
@@ -284,7 +284,7 @@ const Procedure = () => {
                                                 <a href="#">
                                                     <div className="key-master-row">
                                                         <div className="key-master-image">
-                                                            <img src="/img/key-proce4.png" alt="" className="img-fluid"/>
+                                                            <img src="/img/key-proce4.png" alt="" className="img-fluid" />
                                                         </div>
                                                         <div className="key-master-content">
                                                             <h5>Colonoscopy </h5>
@@ -298,7 +298,7 @@ const Procedure = () => {
                                                 <a href="#">
                                                     <div className="key-master-row">
                                                         <div className="key-master-image">
-                                                            <img src="/img/key-proce1.png" alt="" className="img-fluid"/>
+                                                            <img src="/img/key-proce1.png" alt="" className="img-fluid" />
                                                         </div>
                                                         <div className="key-master-content">
                                                             <h5>Coronary Artery Bypass Grafting</h5>
@@ -312,7 +312,7 @@ const Procedure = () => {
                                                 <a href="#">
                                                     <div className="key-master-row">
                                                         <div className="key-master-image">
-                                                            <img src="/img/key-proce2.png" alt="" className="img-fluid"/>
+                                                            <img src="/img/key-proce2.png" alt="" className="img-fluid" />
                                                         </div>
                                                         <div className="key-master-content">
                                                             <h5>Cystoscopy</h5>
@@ -326,7 +326,7 @@ const Procedure = () => {
                                                 <a href="#">
                                                     <div className="key-master-row">
                                                         <div className="key-master-image">
-                                                            <img src="/img/key-proce3.png" alt="" className="img-fluid"/>
+                                                            <img src="/img/key-proce3.png" alt="" className="img-fluid" />
                                                         </div>
                                                         <div className="key-master-content">
                                                             <h5>Renal Ultrasound</h5>
@@ -340,7 +340,7 @@ const Procedure = () => {
                                                 <a href="#" className="border-0">
                                                     <div className="key-master-row">
                                                         <div className="key-master-image">
-                                                            <img src="/img/key-proce4.png" alt="" className="img-fluid"/>
+                                                            <img src="/img/key-proce4.png" alt="" className="img-fluid" />
                                                         </div>
                                                         <div className="key-master-content">
                                                             <h5>Colonoscopy </h5>
@@ -359,7 +359,7 @@ const Procedure = () => {
                                                 <a href="#">
                                                     <div className="key-master-row">
                                                         <div className="key-master-image">
-                                                            <img src="/img/key-proce1.png" alt="" className="img-fluid"/>
+                                                            <img src="/img/key-proce1.png" alt="" className="img-fluid" />
                                                         </div>
                                                         <div className="key-master-content">
                                                             <h5>Coronary Artery Bypass Grafting</h5>
@@ -373,7 +373,7 @@ const Procedure = () => {
                                                 <a href="#">
                                                     <div className="key-master-row">
                                                         <div className="key-master-image">
-                                                            <img src="/img/key-proce2.png" alt="" className="img-fluid"/>
+                                                            <img src="/img/key-proce2.png" alt="" className="img-fluid" />
                                                         </div>
                                                         <div className="key-master-content">
                                                             <h5>Cystoscopy</h5>
@@ -387,7 +387,7 @@ const Procedure = () => {
                                                 <a href="#">
                                                     <div className="key-master-row">
                                                         <div className="key-master-image">
-                                                            <img src="/img/key-proce3.png" alt="" className="img-fluid"/>
+                                                            <img src="/img/key-proce3.png" alt="" className="img-fluid" />
                                                         </div>
                                                         <div className="key-master-content">
                                                             <h5>Renal Ultrasound</h5>
@@ -401,7 +401,7 @@ const Procedure = () => {
                                                 <a href="#">
                                                     <div className="key-master-row">
                                                         <div className="key-master-image">
-                                                            <img src="/img/key-proce4.png" alt="" className="img-fluid"/>
+                                                            <img src="/img/key-proce4.png" alt="" className="img-fluid" />
                                                         </div>
                                                         <div className="key-master-content">
                                                             <h5>Colonoscopy </h5>
@@ -415,7 +415,7 @@ const Procedure = () => {
                                                 <a href="#">
                                                     <div className="key-master-row">
                                                         <div className="key-master-image">
-                                                            <img src="/img/key-proce1.png" alt="" className="img-fluid"/>
+                                                            <img src="/img/key-proce1.png" alt="" className="img-fluid" />
                                                         </div>
                                                         <div className="key-master-content">
                                                             <h5>Coronary Artery Bypass Grafting</h5>
@@ -429,7 +429,7 @@ const Procedure = () => {
                                                 <a href="#">
                                                     <div className="key-master-row">
                                                         <div className="key-master-image">
-                                                            <img src="/img/key-proce2.png" alt="" className="img-fluid"/>
+                                                            <img src="/img/key-proce2.png" alt="" className="img-fluid" />
                                                         </div>
                                                         <div className="key-master-content">
                                                             <h5>Cystoscopy</h5>
@@ -443,7 +443,7 @@ const Procedure = () => {
                                                 <a href="#">
                                                     <div className="key-master-row">
                                                         <div className="key-master-image">
-                                                            <img src="/img/key-proce3.png" alt="" className="img-fluid"/>
+                                                            <img src="/img/key-proce3.png" alt="" className="img-fluid" />
                                                         </div>
                                                         <div className="key-master-content">
                                                             <h5>Renal Ultrasound</h5>
@@ -457,7 +457,7 @@ const Procedure = () => {
                                                 <a href="#">
                                                     <div className="key-master-row">
                                                         <div className="key-master-image">
-                                                            <img src="/img/key-proce4.png" alt="" className="img-fluid"/>
+                                                            <img src="/img/key-proce4.png" alt="" className="img-fluid" />
                                                         </div>
                                                         <div className="key-master-content">
                                                             <h5>Colonoscopy </h5>
@@ -471,7 +471,7 @@ const Procedure = () => {
                                                 <a href="#">
                                                     <div className="key-master-row">
                                                         <div className="key-master-image">
-                                                            <img src="/img/key-proce1.png" alt="" className="img-fluid"/>
+                                                            <img src="/img/key-proce1.png" alt="" className="img-fluid" />
                                                         </div>
                                                         <div className="key-master-content">
                                                             <h5>Coronary Artery Bypass Grafting</h5>
@@ -485,7 +485,7 @@ const Procedure = () => {
                                                 <a href="#">
                                                     <div className="key-master-row">
                                                         <div className="key-master-image">
-                                                            <img src="/img/key-proce2.png" alt="" className="img-fluid"/>
+                                                            <img src="/img/key-proce2.png" alt="" className="img-fluid" />
                                                         </div>
                                                         <div className="key-master-content">
                                                             <h5>Cystoscopy</h5>
@@ -499,7 +499,7 @@ const Procedure = () => {
                                                 <a href="#">
                                                     <div className="key-master-row">
                                                         <div className="key-master-image">
-                                                            <img src="/img/key-proce3.png" alt="" className="img-fluid"/>
+                                                            <img src="/img/key-proce3.png" alt="" className="img-fluid" />
                                                         </div>
                                                         <div className="key-master-content">
                                                             <h5>Renal Ultrasound</h5>
@@ -513,7 +513,7 @@ const Procedure = () => {
                                                 <a href="#">
                                                     <div className="key-master-row">
                                                         <div className="key-master-image">
-                                                            <img src="/img/key-proce4.png" alt="" className="img-fluid"/>
+                                                            <img src="/img/key-proce4.png" alt="" className="img-fluid" />
                                                         </div>
                                                         <div className="key-master-content">
                                                             <h5>Colonoscopy </h5>
@@ -527,7 +527,7 @@ const Procedure = () => {
                                                 <a href="#">
                                                     <div className="key-master-row">
                                                         <div className="key-master-image">
-                                                            <img src="/img/key-proce1.png" alt="" className="img-fluid"/>
+                                                            <img src="/img/key-proce1.png" alt="" className="img-fluid" />
                                                         </div>
                                                         <div className="key-master-content">
                                                             <h5>Coronary Artery Bypass Grafting</h5>
@@ -541,7 +541,7 @@ const Procedure = () => {
                                                 <a href="#">
                                                     <div className="key-master-row">
                                                         <div className="key-master-image">
-                                                            <img src="/img/key-proce2.png" alt="" className="img-fluid"/>
+                                                            <img src="/img/key-proce2.png" alt="" className="img-fluid" />
                                                         </div>
                                                         <div className="key-master-content">
                                                             <h5>Cystoscopy</h5>
@@ -555,7 +555,7 @@ const Procedure = () => {
                                                 <a href="#">
                                                     <div className="key-master-row">
                                                         <div className="key-master-image">
-                                                            <img src="/img/key-proce3.png" alt="" className="img-fluid"/>
+                                                            <img src="/img/key-proce3.png" alt="" className="img-fluid" />
                                                         </div>
                                                         <div className="key-master-content">
                                                             <h5>Renal Ultrasound</h5>
@@ -569,7 +569,7 @@ const Procedure = () => {
                                                 <a href="#">
                                                     <div className="key-master-row">
                                                         <div className="key-master-image">
-                                                            <img src="/img/key-proce4.png" alt="" className="img-fluid"/>
+                                                            <img src="/img/key-proce4.png" alt="" className="img-fluid" />
                                                         </div>
                                                         <div className="key-master-content">
                                                             <h5>Colonoscopy </h5>
@@ -583,7 +583,7 @@ const Procedure = () => {
                                                 <a href="#">
                                                     <div className="key-master-row">
                                                         <div className="key-master-image">
-                                                            <img src="/img/key-proce1.png" alt="" className="img-fluid"/>
+                                                            <img src="/img/key-proce1.png" alt="" className="img-fluid" />
                                                         </div>
                                                         <div className="key-master-content">
                                                             <h5>Coronary Artery Bypass Grafting</h5>
@@ -597,7 +597,7 @@ const Procedure = () => {
                                                 <a href="#">
                                                     <div className="key-master-row">
                                                         <div className="key-master-image">
-                                                            <img src="/img/key-proce2.png" alt="" className="img-fluid"/>
+                                                            <img src="/img/key-proce2.png" alt="" className="img-fluid" />
                                                         </div>
                                                         <div className="key-master-content">
                                                             <h5>Cystoscopy</h5>
@@ -611,7 +611,7 @@ const Procedure = () => {
                                                 <a href="#">
                                                     <div className="key-master-row">
                                                         <div className="key-master-image">
-                                                            <img src="/img/key-proce3.png" alt="" className="img-fluid"/>
+                                                            <img src="/img/key-proce3.png" alt="" className="img-fluid" />
                                                         </div>
                                                         <div className="key-master-content">
                                                             <h5>Renal Ultrasound</h5>
@@ -625,7 +625,7 @@ const Procedure = () => {
                                                 <a href="#" className="border-0">
                                                     <div className="key-master-row">
                                                         <div className="key-master-image">
-                                                            <img src="/img/key-proce4.png" alt="" className="img-fluid"/>
+                                                            <img src="/img/key-proce4.png" alt="" className="img-fluid" />
                                                         </div>
                                                         <div className="key-master-content">
                                                             <h5>Colonoscopy </h5>
@@ -651,8 +651,8 @@ const Procedure = () => {
                                 <a href="#">
                                     <div className="key-master-book-appointment-btn mb-1">
                                         <div className="key-master-book-appointment-content">
-                                            <img src="/img/doctor.svg" alt="" className="img-fluid"/>
-                                                <h5> Find a Doctor</h5>
+                                            <img src="/img/doctor.svg" alt="" className="img-fluid" />
+                                            <h5> Find a Doctor</h5>
                                         </div>
 
                                     </div>
@@ -661,8 +661,8 @@ const Procedure = () => {
                                 <a href="#">
                                     <div className="key-master-book-appointment-btn mb-1">
                                         <div className="key-master-book-appointment-content">
-                                            <img src="/img/calender.svg" alt="" className="img-fluid"/>
-                                                <h5> Book an Appointment</h5>
+                                            <img src="/img/calender.svg" alt="" className="img-fluid" />
+                                            <h5> Book an Appointment</h5>
                                         </div>
 
                                     </div>

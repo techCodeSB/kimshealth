@@ -2,6 +2,7 @@ import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import React from 'react'
 import { getStaticPageContent } from '@/app/lib/getStaticPageContent';
+import Breadcrumb from '@/components/Breadcrumb';
 
 const RefundAndCancellation = async () => {
     const data = await getStaticPageContent("refund-and-cancellation-policy");
@@ -22,12 +23,7 @@ const RefundAndCancellation = async () => {
                         <div className="container">
                             <div className="row">
                                 <div className="col-12">
-                                    <ul className="breadcrumb mb-0">
-                                        <li>
-                                            <a href="/">Home</a>
-                                        </li>
-                                        <li className="active"> {pageContent[0]?.title}</li>
-                                    </ul>
+                                    <Breadcrumb activeTitle={pageContent[0]?.title}/>
                                 </div>
                             </div>
                         </div>

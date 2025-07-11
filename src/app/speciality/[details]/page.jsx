@@ -100,15 +100,11 @@ const SpecialityDetails = async ({ params }) => {
                                         <div className="breadcrumb-wrapper">
                                             <div className="row">
                                                 <div className="col-12 px-lg-0 px-4">
-                                                    <ul className="breadcrumb mb-0">
-                                                        <li>
-                                                            <a href="/">{staticText["Home"]}</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href={baseUrl + "/speciality"}> {staticText['Specialities']}</a>
-                                                        </li>
-                                                        <li className="active"> {data.title} </li>
-                                                    </ul>
+                                                    <Breadcrumb
+                                                        activeTitle={data.title}
+                                                        middleTitle={staticText['Specialities']}
+                                                        middleURL={baseUrl + "/speciality"}
+                                                    />
                                                 </div>
                                             </div>
                                         </div>

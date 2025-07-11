@@ -4,7 +4,7 @@ import getStaticText from "@/app/lib/getStaticTextServer";
 
 const Breadcrumb = async ({ activeTitle, middleTitle, middleURL }) => {
     const staticText = await getStaticText();
-    const baseUrl = getBaseUrl(true, true);
+    const baseUrl = await getBaseUrl(true, true);
 
     return (
         <ul className="breadcrumb mb-0">
