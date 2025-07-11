@@ -1,10 +1,62 @@
 const hospitalData = {
-    getAll: async (limit) => {
-        let url = process.env.NEXT_PUBLIC_CMS_API_URL + `/hospitals?populate=*${limit ? '&pagination[limit]=' + limit : ''}`;
-        const req = await fetch(url);
-        const res = await req.json();
+    getAll: async ({ limit, all = false, langLoc }) => {
+        const baseUrl = process.env.NEXT_PUBLIC_CMS_API_URL;
 
-        return res.data;
+        if (!all) {
+            let url = baseUrl + `/hospitals?populate=*${limit ? '&pagination[limit]=' + limit : ''}`;
+            const req = await fetch(url);
+            const res = await req.json();
+
+            return res.data;
+
+        } else {
+            // Get total count
+            const initialReq = await fetch(`${baseUrl}/hospitals`);
+            const initialRes = await initialReq.json();
+            const totalCount = initialRes.meta.pagination.total;
+
+            const limit = 100;
+            const pages = Math.ceil(totalCount / limit);
+            let data = [];
+
+            // Actual Data
+            for (let i = 0; i < pages; i++) {
+                const start = i * limit;
+                const url = `${baseUrl}/hospitals?populate=*&pagination[start]=${start}&pagination[limit]=${limit}`;
+                const res = await fetch(url);
+                const json = await res.json();
+                data = [...data, ...json.data];
+            }
+
+            return data;
+        }
+    },
+
+
+    getAllByType: async ({ type, langLoc }) => {
+        let baseUrl = process.env.NEXT_PUBLIC_CMS_API_URL;
+
+        // Get total count
+        const initialReq = await fetch(`${baseUrl}/hospitals${!langLoc.loc.default ? `?filters[location][id][$eq]=${langLoc.loc.id}` : ''}`);
+        const initialRes = await initialReq.json();
+        const totalCount = initialRes.meta.pagination.total;
+        const limit = 100;
+        const pages = Math.ceil(totalCount / limit);
+        let data = [];
+
+        // Actual Data
+        for (let i = 0; i < pages; i++) {
+            const start = i * limit;
+            const url = `${baseUrl}/hospitals?populate=*&pagination[start]=${start}&pagination[limit]=${limit}&filters[type][$eq]=${type}${!langLoc.loc.default ? `&filters[location][id][$eq]=${langLoc.loc.id}` : ''}`;
+            const res = await fetch(url);
+            const json = await res.json();
+            data = [...data, ...json.data];
+        }
+
+
+        return data;
+
+
     },
 
     getSingleHospital: async (slug) => {
@@ -41,8 +93,8 @@ const hospitalData = {
     },
 
 
-    getAllHospitalAndMedicalCenter: async ()=>{
-         const baseUrl = process.env.NEXT_PUBLIC_CMS_API_URL;
+    getAllHospitalAndMedicalCenter: async () => {
+        const baseUrl = process.env.NEXT_PUBLIC_CMS_API_URL;
         // Get total count
         const initialReq = await fetch(`${baseUrl}/hospitals`);
         const initialRes = await initialReq.json();
@@ -57,15 +109,12 @@ const hospitalData = {
             const start = i * limit;
             const url = `${baseUrl}/hospitals?fields=title&fields=slug&fields=type&filters[manageAppearance][showingHeader][$eq]=true&pagination[start]=${start}&pagination[limit]=${limit}&populate[0]=location`;
 
-
-            console.log(url);
             const res = await fetch(url);
             const json = await res.json();
             data = [...data, ...json.data];
         }
 
 
-        console.log(data);
         return data;
     }
 

@@ -1,6 +1,7 @@
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import { getStaticPageContent } from '@/app/lib/getStaticPageContent';
+import Breadcrumb from '@/components/Breadcrumb';
 
 const VisaMedical = async () => {
     const data = await getStaticPageContent("visa-medical");
@@ -21,12 +22,7 @@ const VisaMedical = async () => {
                         <div className="container">
                             <div className="row">
                                 <div className="col-12">
-                                    <ul className="breadcrumb mb-0">
-                                        <li>
-                                            <a href="/">Home</a>
-                                        </li>
-                                        <li className="active"> {pageContent[0]?.title} </li>
-                                    </ul>
+                                    <Breadcrumb activeTitle={pageContent[0]?.title} middleTitle={""} middleURL={""} />
                                 </div>
                             </div>
                         </div>

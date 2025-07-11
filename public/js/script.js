@@ -31,9 +31,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 // ----------------------
-
-
-
 document.addEventListener('DOMContentLoaded', function () {
     const accordionItems = document.querySelectorAll('.accordion-item');
 
@@ -79,8 +76,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 // DESKTOP HAMBURGER MENU JS
-
-
 document.addEventListener('DOMContentLoaded', function () {
     const hamburger = document.getElementById('hamburger');
     const sidebar = document.getElementById('sidebar');

@@ -30,6 +30,7 @@ const DoctorListing = ({ baseURL, allLocation, allSpeciality, allDoctor }) => {
         const getFstLoad = async () => {
             const data = await doctorData.getDoctorAll(0, count)
             setDocData(data);
+            setCount(limit)
             console.log("doc", data)
         }
 
@@ -48,7 +49,6 @@ const DoctorListing = ({ baseURL, allLocation, allSpeciality, allDoctor }) => {
         }
         setDocData(prev => [...prev, ...data]);
         setCount(prev => prev + limit);
-
         setLoading(false);
     };
 
@@ -247,7 +247,7 @@ const DoctorListing = ({ baseURL, allLocation, allSpeciality, allDoctor }) => {
 
 
                             </div>
-                            {loading && <p className='text-center p-3'>Loading more doctors...</p>}
+                            {loading && <p className='text-center p-3'>Loading...</p>}
                             <div ref={observerRef} style={{ height: "1px" }}></div>
                         </div>
                     </div>

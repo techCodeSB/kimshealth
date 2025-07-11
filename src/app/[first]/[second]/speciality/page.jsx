@@ -5,6 +5,7 @@ import { getBaseUrl } from '@/app/lib/getBaseUrl';
 import { getStaticPageContent } from '@/app/lib/getStaticPageContent';
 import getSpecialityData from '@/app/lib/getSpeciality';
 import getStaticText from '@/app/lib/getStaticTextServer';
+import Breadcrumb from '@/components/Breadcrumb';
 
 
 const Speciality = async () => {
@@ -32,12 +33,7 @@ const Speciality = async () => {
                     <div className="container">
                         <div className="row">
                             <div className="col-12">
-                                <ul className="breadcrumb mb-0">
-                                    <li>
-                                        <a href={baseURL + "/"}>{staticText['Home']}</a>
-                                    </li>
-                                    <li className="active"> {pageContent[0]?.title} </li>
-                                </ul>
+                                <Breadcrumb activeTitle={pageContent[0]?.title} middleTitle={""} middleURL={""} />
                             </div>
                         </div>
                     </div>

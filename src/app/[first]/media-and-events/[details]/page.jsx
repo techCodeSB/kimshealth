@@ -1,8 +1,20 @@
+import formatDate from '@/app/lib/formatDate'
+import { getBaseUrl } from '@/app/lib/getBaseUrl'
+import mediaData from '@/app/lib/getMediaEvent'
+import getStaticText from '@/app/lib/getStaticTextServer'
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
+import { marked } from 'marked'
 import React from 'react'
 
-const MediaAndEventsDetails = () => {
+const MediaAndEventsDetails = async ({ params }) => {
+    const basePath = await getBaseUrl(true, true);
+    const staticText = await getStaticText();
+    const data = await mediaData.getSingleMedia(params.details);
+    const recentMedia = await mediaData.getAll({ start: 0, limit: 10 })
+
+    console.log(data)
+
     return (
         <>
             <Header />
@@ -19,30 +31,29 @@ const MediaAndEventsDetails = () => {
                                                     <div className="col-12 px-0">
                                                         <ul className="breadcrumb mb-0">
                                                             <li>
-                                                                <a href="index.php">Home</a>
+                                                                <a href={basePath + "/"}>{staticText['Home']}</a>
                                                             </li>
                                                             <li>
-                                                                <a href="#">Media & Events</a>
+                                                                <a href={basePath + "/media-and-events"}>Media & Events</a>
                                                             </li>
-                                                            <li className="active"> CME session </li>
+                                                            <li className="active"> {data.title} </li>
                                                         </ul>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div className="details-banner">
                                                 <div className="details-heading">
-                                                    <h3 className="mb-2">CME Session</h3>
-                                                    <ul>
-                                                        <li className="hospital-doctor"> By: Dr. Shijukumar, Consultant & Chief Intensivist, Pediatric Critical Care </li>
-                                                        <li className="chat-ic">Topic: Fluid Management in Children</li>
-                                                        <li className="hospital-icon-custom"> KIMSHEALTH Trivandrum </li>
-                                                    </ul>
-                                                    <ul className="mt-3">
+                                                    <h3 className="mb-2">{data.speaker?.title}</h3>
 
-                                                        <li className="hospital-doctor"> By: Anu K Vasu, Associate Consultant – Pediatric Gastroenterology, Hepatology & Liver Transplantation</li>
-                                                        <li className="chat-ic">Topic: Acute Liver Failure in Children</li>
-                                                        <li className="hospital-icon-custom"> KIMSHEALTH Trivandrum </li>
-                                                    </ul>
+                                                    {
+                                                        data.speaker?.speaker?.map((sp, i) => {
+                                                            return <ul key={i} className={`${i > 0 ? "mt-3" : ""}`}>
+                                                                <li className="hospital-doctor"> By: {sp.by} </li>
+                                                                <li className="chat-ic">Topic: {sp.topic}</li>
+                                                                <li className="hospital-icon-custom">{sp.hospitalName} </li>
+                                                            </ul>
+                                                        })
+                                                    }
                                                 </div>
 
                                             </div>
@@ -50,12 +61,8 @@ const MediaAndEventsDetails = () => {
                                     </div>
 
                                     <div className="col-md-6 details-proceduce-banner-right-col">
-                                        <img src="/img/media-details-rigt-bg.png" className="img-fluid details-banner-image" alt="" />
+                                        <img src={data.featuredImage?.url ? process.env.NEXT_PUBLIC_IMAGE_URL + data.featuredImage?.url : '/img/no-image.jpg'} className="img-fluid details-banner-image" alt={data.title} />
                                     </div>
-
-                                    {/* <!-- <div className="col-md-6">
-                                        <img src="/img/details-banner.png" alt="" className="img-fluid w-100">
-                                    </div> --> */}
                                 </div>
                             </div>
                         </div>
@@ -66,14 +73,10 @@ const MediaAndEventsDetails = () => {
                         <div className="container">
                             <div className="date-heading main-heading sub-heading">
                                 <ul>
-                                    <li className="calender-doc mb-2">28th April 2025</li>
+                                    <li className="calender-doc mb-2">{formatDate(data.date)}</li>
                                 </ul>
-                                <h3 className="mb-4">KIMSHEALTH CME Session</h3>
-
-                                <p>KIMSHEALTH, Trivandrum, in association with IAP Kollam, successfully conducted a CME session featuring insightful discussions on critical pediatric topics.</p>
-                                <p>Dr. Shijukumar, Consultant & Chief Intensivist, Pediatric Critical Care, led a session on "Fluid Management in Children," while Dr. Anu K Vasu, Associate Consultant – Pediatric
-                                    Gastroenterology, Hepatology & Liver Transplantation, presented a case-based discussion on "Acute Liver Failure in Children."</p>
-                                <p>The event saw active participation from 37 doctors, making it a valuable knowledge-sharing platform.</p>
+                                <h3 className="mb-4">{data.title}</h3>
+                                <div dangerouslySetInnerHTML={{ __html: marked(data.details) || "" }}></div>
                             </div>
                         </div>
                     </section>
@@ -85,274 +88,104 @@ const MediaAndEventsDetails = () => {
                             <div className="row justify-content-between" data-aos="fade-right">
                                 <div className="col-md-6 col-8">
                                     <div className="main-heading">
-                                        <h2>Recent Media & Events </h2>
+                                        <h2>{data.mediaSection?.title}</h2>
                                     </div>
                                 </div>
                                 <div className="col-md-2 col-4">
                                     <div className="over-all-btn text-end">
-                                        <a href="#">View All <span><img src="/img/slider-right-arrow.svg" className="img-fluid"
+                                        <a href={basePath + "/media-and-events"}>{staticText['View All']} <span><img src="/img/slider-right-arrow.svg" className="img-fluid"
                                             alt="" /></span></a>
                                     </div>
                                 </div>
                             </div>
 
-                            <div className="row">
-                                <div className="col-xl-3 col-lg-3 col-md-3 col-12">
-                                    <div className="media-card" data-aos="fade-right" data-aos-duration="2200" data-aos-delay="100">
-                                        <div className="media-img">
-                                            <a href="#">
-                                                <img src="/img/media1.jpg" className="img-fluid w-100" alt="" />
-                                            </a>
-                                        </div>
-                                        <div className="media-content">
-                                            <p>At KIMSHEALTH, we believe in the power of prevention.Join us in recognizing National</p>
-                                            <div className="media-border-bottom">
-                                                <div className="d-flex align-items-center justify-content-between mt-3">
-                                                    <div className="media-name">
-                                                        <div>
-                                                            <img src="/img/kims-small-logo.png" className="img-fluid" alt="" />
+                            <div className="owl-carousel owl-theme blog">
+
+                                {
+                                    recentMedia.map((rm, i) => {
+                                        return <div className="media-card" data-aos="fade-right" data-aos-duration="2200" data-aos-delay="100" key={i}>
+                                            <div className="media-img">
+                                                <a href={basePath + "/media-and-events/" + rm.slug}>
+                                                    <img
+                                                        src={rm.featuredImage?.url ? process.env.NEXT_PUBLIC_IMAGE_URL + rm.featuredImage?.url : '/img/no-image.jpg'}
+                                                        className="img-fluid w-100"
+                                                        alt={rm.title}
+                                                    />
+                                                </a>
+                                            </div>
+                                            <div className="media-content">
+                                                <p>{rm.shortDetails}</p>
+                                                <div>
+                                                    <div className="d-flex align-items-center justify-content-between mt-3">
+                                                        <div className="media-name">
+                                                            <div>
+                                                                <img src="/img/kims-small-logo.png" className="img-fluid" alt="" />
+                                                            </div>
+                                                            <p>{rm.title} <br /> {formatDate(rm?.date)}</p>
                                                         </div>
-                                                        <p>KIMSHEALTH <br/> 10th June 2024</p>
-                                                    </div>
-                                                    <div className="media-social">
-                                                        <img src="/img/facebook.svg" className="img-fluid" alt="" />
                                                     </div>
                                                 </div>
-                                            </div>
 
-                                            <div className="d-flex align-items-center justify-content-between mt-2">
-                                                <div className="media-heart">
-                                                    <div>
-                                                        <p><span> <img src="/img/heart.png" className="img-fluid" alt="" /></span>8</p>
-                                                    </div>
-                                                    <img src="/img/chat.png" className="img-fluid" alt="" />
-                                                </div>
-                                                <div className="media-share">
-                                                    <p><span> <img src="/img/share.png" className="img-fluid" alt="" /></span> Share</p>
-                                                </div>
                                             </div>
 
                                         </div>
-                                    </div>
-                                </div>
-
-                                <div className="col-xl-3 col-lg-3 col-md-3 col-12">
-                                    <div className="media-card" data-aos="fade-right" data-aos-duration="1800" data-aos-delay="100">
-                                        <div className="media-img">
-                                            <a href="#">
-                                                <img src="/img/media2.jpg" className="img-fluid w-100" alt="" />
-                                            </a>
-                                        </div>
-                                        <div className="media-content">
-                                            <p>At KIMSHEALTH, our Cardiology Department specializes in electrophysiology, accurately </p>
-                                            <div className="media-border-bottom">
-                                                <div className="d-flex align-items-center justify-content-between mt-3">
-                                                    <div className="media-name">
-                                                        <div>
-                                                            <img src="/img/kims-small-logo.png" className="img-fluid" alt="" />
-                                                        </div>
-                                                        <p>KIMSHEALTH <br/> 10th June 2024</p>
-                                                    </div>
-                                                    <div className="media-social">
-                                                        <img src="/img/facebook.svg" className="img-fluid" alt="" />
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div className="d-flex align-items-center justify-content-between mt-2">
-                                                <div className="media-heart">
-                                                    <div>
-                                                        <p><span> <img src="/img/heart.png" className="img-fluid" alt="" /></span>8</p>
-                                                    </div>
-                                                    <img src="/img/chat.png" className="img-fluid" alt="" />
-                                                </div>
-                                                <div className="media-share">
-                                                    <p><span> <img src="/img/share.png" className="img-fluid" alt="" /></span> Share</p>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="col-xl-3 col-lg-3 col-md-3 col-12">
-                                    <div className="media-card" data-aos="fade-right" data-aos-duration="1400" data-aos-delay="100">
-                                        <div className="media-img">
-                                            <a href="#">
-                                                <img src="/img/media3.jpg" className="img-fluid w-100" alt="" />
-                                            </a>
-                                        </div>
-                                        <div className="media-content">
-                                            <p>Happy #DoctorsDay to all the amazing doctors who keep us healthy! Your dedication is a gift to our</p>
-                                            <div className="media-border-bottom">
-                                                <div className="d-flex align-items-center justify-content-between mt-3">
-                                                    <div className="media-name">
-                                                        <div>
-                                                            <img src="/img/kims-small-logo.png" className="img-fluid" alt="" />
-                                                        </div>
-                                                        <p>KIMSHEALTH <br/> 10th June 2024</p>
-                                                    </div>
-                                                    <div className="media-social">
-                                                        <img src="/img/facebook.svg" className="img-fluid" alt="" />
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div className="d-flex align-items-center justify-content-between mt-2">
-                                                <div className="media-heart">
-                                                    <div>
-                                                        <p><span> <img src="/img/heart.png" className="img-fluid" alt="" /></span>8</p>
-                                                    </div>
-                                                    <img src="/img/chat.png" className="img-fluid" alt="" />
-                                                </div>
-                                                <div className="media-share">
-                                                    <p><span> <img src="/img/share.png" className="img-fluid" alt="" /></span> Share</p>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="col-xl-3 col-lg-3 col-md-3 col-12">
-                                    <div className="media-card" data-aos="fade-right" data-aos-duration="1000" data-aos-delay="100">
-                                        <div className="media-img">
-                                            <a href="#">
-                                                <img src="/img/media4.jpg" className="img-fluid w-100" alt="" />
-                                            </a>
-                                        </div>
-                                        <div className="media-content">
-                                            <p>Don't let scoliosis go unnoticed. Look out for signs like uneven shoulders, a visible spine curve, or</p>
-                                            <div className="media-border-bottom">
-                                                <div className="d-flex align-items-center justify-content-between mt-3">
-                                                    <div className="media-name">
-                                                        <div>
-                                                            <img src="/img/kims-small-logo.png" className="img-fluid" alt="" />
-                                                        </div>
-                                                        <p>KIMSHEALTH <br/> 10th June 2024</p>
-                                                    </div>
-                                                    <div className="media-social">
-                                                        <img src="/img/facebook.svg" className="img-fluid" alt="" />
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div className="d-flex align-items-center justify-content-between mt-2">
-                                                <div className="media-heart">
-                                                    <div>
-                                                        <p><span> <img src="/img/heart.png" className="img-fluid" alt="" /></span>8</p>
-                                                    </div>
-                                                    <img src="/img/chat.png" className="img-fluid" alt="" />
-                                                </div>
-                                                <div className="media-share">
-                                                    <p><span> <img src="/img/share.png" className="img-fluid" alt="" /></span> Share</p>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
+                                    })
+                                }
+                            </div>
+                            <div className="row g-2">
 
                             </div>
 
                         </div>
                     </section>
 
+                    {/* Mobiel view */}
                     <section className="section d-lg-none d-block" data-aos="fade-up">
                         <div className="container">
                             <div className="row justify-content-between">
                                 <div className="col-md-4 col-8">
                                     <div className="main-heading">
-                                        <h2>Recent Media & Events</h2>
+                                        <h2>{data.mediaSection?.title}</h2>
                                     </div>
                                 </div>
                                 <div className="col-md-2 col-4">
                                     <div className="over-all-btn text-end">
-                                        <a href="#">View All <span><img src="/img/slider-right-arrow.svg" className="img-fluid"
+                                        <a href={basePath + "/media-and-events"}>{staticText['View All']} <span><img src="/img/slider-right-arrow.svg" className="img-fluid"
                                             alt="" /></span></a>
                                     </div>
                                 </div>
                             </div>
 
                             <div className="row g-2">
-                                <div className="col-xl-3 col-lg-3 col-md-3 col-6">
-                                    <div className="media-card">
-                                        <div className="media-img">
-                                            <a href="#">
-                                                <img src="/img/media1.jpg" className="img-fluid w-100" alt="" />
-                                            </a>
-                                        </div>
-                                        <div className="media-content">
-                                            <p>At KIMSHEALTH, we believe in the power of prevention.Join us in recognizing National</p>
-                                            <div className="media-border-bottom">
-                                                <div className="d-flex align-items-center justify-content-between mt-3">
-                                                    <div className="media-name">
-                                                        <div>
-                                                            <img src="/img/kims-small-logo.png" className="img-fluid" alt="" />
+
+                                {
+                                    recentMedia.map((e, i) => (
+                                        <div className="col-xl-3 col-lg-3 col-md-3 col-6 mb-2" key={i}>
+                                            <div className="media-card">
+                                                <div className="media-img">
+                                                    <a href={basePath + "/media-and-events/" + e.slug}>
+                                                        <img
+                                                            src={e.featuredImage?.url ? process.env.NEXT_PUBLIC_IMAGE_URL + e.featuredImage?.url : '/img/no-image.jpg'}
+                                                            className="img-fluid w-100"
+                                                            alt=""
+                                                        />
+                                                    </a>
+                                                </div>
+                                                <div className="media-content">
+                                                    <p>{e.shortDetails}</p>
+                                                    <div className="d-flex align-items-center justify-content-between mt-3">
+                                                        <div className="media-name">
+                                                            <div>
+                                                                <img src="/img/kims-small-logo.png" className="img-fluid" alt="" />
+                                                            </div>
+                                                            <p>{e.title} <br /> {formatDate(e?.date)}</p>
                                                         </div>
-                                                        <p>KIMSHEALTH <br/> 10th June 2024</p>
-                                                    </div>
-                                                    <div className="media-social">
-                                                        <img src="/img/facebook.svg" className="img-fluid" alt="" />
                                                     </div>
                                                 </div>
                                             </div>
-
-                                            <div className="d-flex align-items-center justify-content-between mt-2">
-                                                <div className="media-heart">
-                                                    <div>
-                                                        <p><span> <img src="/img/heart.png" className="img-fluid" alt="" /></span>8</p>
-                                                    </div>
-                                                    <img src="/img/chat.png" className="img-fluid" alt="" />
-                                                </div>
-                                                <div className="media-share">
-                                                    <p><span> <img src="/img/share.png" className="img-fluid" alt="" /></span> Share</p>
-                                                </div>
-                                            </div>
-
                                         </div>
-                                    </div>
-                                </div>
-
-                                <div className="col-xl-3 col-lg-3 col-md-3 col-6">
-                                    <div className="media-card">
-                                        <div className="media-img">
-                                            <a href="#">
-                                                <img src="/img/media2.jpg" className="img-fluid w-100" alt="" />
-                                            </a>
-                                        </div>
-                                        <div className="media-content">
-                                            <p>At KIMSHEALTH, our Cardiology Department specializes in electrophysiology, accurately</p>
-                                            <div className="media-border-bottom">
-                                                <div className="d-flex align-items-center justify-content-between mt-3">
-                                                    <div className="media-name">
-                                                        <div>
-                                                            <img src="/img/kims-small-logo.png" className="img-fluid" alt="" />
-                                                        </div>
-                                                        <p>KIMSHEALTH <br/> 10th June 2024</p>
-                                                    </div>
-                                                    <div className="media-social">
-                                                        <img src="/img/facebook.svg" className="img-fluid" alt="" />
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div className="d-flex align-items-center justify-content-between mt-2">
-                                                <div className="media-heart">
-                                                    <div>
-                                                        <p><span> <img src="/img/heart.png" className="img-fluid" alt="" /></span>8</p>
-                                                    </div>
-                                                    <img src="/img/chat.png" className="img-fluid" alt="" />
-                                                </div>
-                                                <div className="media-share">
-                                                    <p><span> <img src="/img/share.png" className="img-fluid" alt="" /></span> Share</p>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-
+                                    ))
+                                }
 
 
                             </div>

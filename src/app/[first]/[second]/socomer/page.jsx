@@ -30,15 +30,10 @@ const Socomer = async () => {
                                             <div className="breadcrumb-wrapper py-2 ps-2 ms-1">
                                                 <div className="row">
                                                     <div className="col-12 px-0">
-                                                        <ul className="breadcrumb mb-0">
-                                                            <li>
-                                                                <a href={basePath + "/"}>{staticText['Home']}</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#">Academics</a>
-                                                            </li>
-                                                            <li className="active">{pageContent[0].title} </li>
-                                                        </ul>
+                                                        <Breadcrumb activeTitle={pageContent[0]?.title}
+                                                            middleTitle={staticText['Academics']}
+                                                            middleURL={basePath + "#"}
+                                                        />
                                                     </div>
                                                 </div>
                                             </div>
@@ -73,7 +68,7 @@ const Socomer = async () => {
                             <div className="main-heading">
                                 <h2>{pageContent[3].title}</h2>
                             </div>
-                            
+
                             <div className="row">
                                 {
                                     pageContent[3].socomer.map((sp, i) => (
@@ -174,7 +169,6 @@ const Socomer = async () => {
                                         </div>
                                     ))
                                 }
-
 
                             </div>
                         </div>

@@ -6,12 +6,15 @@ import Header from '@/components/Header'
 import TestimonialSection from '@/components/TestimonialSection'
 import formatDate from '@/app/lib/formatDate'
 import { marked } from 'marked'
+import Breadcrumb from '@/components/Breadcrumb'
+import getStaticText from '@/app/lib/getStaticTextServer'
 
 
 const TestimonialDetails = async ({ params }) => {
     const basePath = await getBaseUrl();
     const data = await testimonialData.getSingleTestimonaial(params.details);
     const youtube = await youtubeData(data?.videoId);
+    const staticText = await getStaticText()
 
 
     const testimonialDataSet = {
@@ -37,15 +40,10 @@ const TestimonialDetails = async ({ params }) => {
                         <div className="container">
                             <div className="row">
                                 <div className="col-12">
-                                    <ul className="breadcrumb mb-0">
-                                        <li>
-                                            <a href={basePath + "/"}>Home</a>
-                                        </li>
-                                        <li>
-                                            <a href={basePath + "/testimonial"}>Testimonial</a>
-                                        </li>
-                                        <li className="active">{data.title}</li>
-                                    </ul>
+                                    <Breadcrumb activeTitle={pageContent[0]?.title}
+                                        middleTitle={staticText['Testimonial']}
+                                        middleURL={basePath + "/testimonial"}
+                                    />
                                 </div>
                             </div>
                         </div>
@@ -77,7 +75,7 @@ const TestimonialDetails = async ({ params }) => {
                                                         : null
                                                 }
                                             </h3>
-                                            <div className='main-list' dangerouslySetInnerHTML={{__html: marked(data.details || "") || ""}}>
+                                            <div className='main-list' dangerouslySetInnerHTML={{ __html: marked(data.details || "") || "" }}>
                                             </div>
                                         </div>
                                         <div className="d-flex align-items-center justify-content-between mt-3">

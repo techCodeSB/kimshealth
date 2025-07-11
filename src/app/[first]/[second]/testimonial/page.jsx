@@ -6,6 +6,7 @@ import { getBaseUrl } from '@/app/lib/getBaseUrl'
 import { getStaticPageContent } from '@/app/lib/getStaticPageContent';
 import getStaticText from '@/app/lib/getStaticTextServer'
 import TestimonialListing from '@/components/TestimonialListing'
+import Breadcrumb from '@/components/Breadcrumb'
 
 
 
@@ -32,18 +33,13 @@ const Testimonial = async () => {
                         <div className="container">
                             <div className="row">
                                 <div className="col-12">
-                                    <ul className="breadcrumb mb-0">
-                                        <li>
-                                            <a href={basePath+"/"}>{staticText['Home']}</a>
-                                        </li>
-                                        <li className="active"> {pageContent[0]?.title} </li>
-                                    </ul>
+                                    <Breadcrumb activeTitle={pageContent[0]?.title} middleTitle={""} middleURL={""} />
                                 </div>
                             </div>
                         </div>
                     </section>
 
-                    <TestimonialListing basePath={basePath}/>
+                    <TestimonialListing basePath={basePath} />
                 </div>
             </div>
             <Footer />

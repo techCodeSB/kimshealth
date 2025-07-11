@@ -16,13 +16,20 @@ import getSpecialityData from '@/app/lib/getSpeciality'
 import getAwardData from '@/app/lib/getAward'
 import doctorTalkData from '@/app/lib/getDoctorTalk'
 import hospitalData from '@/app/lib/getHospital'
-import staticPage from '@/app/lib/getStaticPage'
+import checkLocation from '@/app/lib/checkLocation'
+import Hospital from '@/app/hospital/page'
 
 
 
 
-const Home = async () => {
+const Home = async ({ params }) => {
   const basePath = await getBaseUrl(true, true);
+  const check = await checkLocation(params.first)
+
+  if (check) {
+    return <Hospital />
+
+  }
   const field = "populate[0]=pageContent&populate[1]=pageContent.bannerItem&populate[2]=pageContent.bannerItem.bannerImageDesktop&populate[3]=pageContent.bannerItem.bannerImageMobile&populate[4]=metaSection&populate[5]=pageContent.highlightButtonItem&populate[6]=pageContent.highlightButtonItem.iconImage";
   const data = await getStaticPageContent("home", field);
   const pageContent = data?.data[0]?.pageContent;
@@ -30,14 +37,14 @@ const Home = async () => {
 
   const specialityDataSet = {
     sectionTitle: pageContent[2]?.title,
-    buttonText: 'View All', buttonURL: `${basePath+"/speciality"}`,
+    buttonText: 'View All', buttonURL: `${basePath + "/speciality"}`,
     data: await getSpecialityData.getAll(),
     baseUrl: basePath
   };
 
   const expertDataSet = {
     sectionTitle: pageContent[3]?.title,
-    buttonText: 'View All', buttonURL: `${basePath+"/doctor"}`,
+    buttonText: 'View All', buttonURL: `${basePath + "/doctor"}`,
     data: await doctorData.getDoctorAll(10),
     baseUrl: basePath
   };
@@ -51,30 +58,32 @@ const Home = async () => {
 
   const testimonialDataSet = {
     sectionTitle: pageContent[5]?.title,
-    buttonText: 'View All', buttonURL: `${basePath+"/testimonial"}`,
+    buttonText: 'View All', buttonURL: `${basePath + "/testimonial"}`,
     data: await testimonialData.getAll(10),
     baseUrl: basePath
   }
 
   const blogDataSet = {
     sectionTitle: pageContent[6]?.title,
-    buttonText: 'View All', buttonURL: `${basePath+"/blog"}`,
+    buttonText: 'View All', buttonURL: `${basePath + "/blog"}`,
     data: await blogData.allBlog(10),
     baseUrl: basePath
   }
 
   const docTalkDataSet = {
     sectionTitle: pageContent[7]?.title,
-    buttonText: 'View All', buttonURL: `${basePath+"/doctor-talk"}`,
+    buttonText: 'View All', buttonURL: `${basePath + "/doctor-talk"}`,
     data: await doctorTalkData.allData(10),
     baseUrl: basePath
   }
 
 
 
+
+
   return (
     <>
-      <Header/>
+      <Header />
       <div role="main" className="main">
         <section className="d-lg-block d-none">
           <div className="container-wrapper">
@@ -247,7 +256,7 @@ const Home = async () => {
 
       </div>
 
-      <Footer/>
+      <Footer />
     </>
   )
 }

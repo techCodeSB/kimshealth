@@ -54,7 +54,6 @@ const Header = () => {
     }, [])
 
 
-
     // Get all languages
     useEffect(() => {
         const getLang = async () => {
@@ -130,7 +129,7 @@ const Header = () => {
                     <div className="container">
                         <nav className="header-menu-container justify-content-lg-end">
                             <div className="navbar-brand">
-                                <a href="#" className="text-decoration-none">
+                                <a href={"/"} className="text-decoration-none">
                                     <img src="/img/logo.png" height="55" className="img-fluid" />
                                 </a>
                             </div>
@@ -157,7 +156,7 @@ const Header = () => {
                                                                 <li key={i}>
                                                                     <a href={basePath + "/speciality/" + s?.speciality.slug}>
                                                                         <span>
-                                                                            <img src={s.speciality.iconImage?.url ? process.env.NEXT_PUBLIC_IMAGE_URL+s.speciality.iconImage.url : "/img/no-image.jpg"} alt={s?.title} className="img-fluid" />
+                                                                            <img src={s.speciality.iconImage?.url ? process.env.NEXT_PUBLIC_IMAGE_URL + s.speciality.iconImage.url : "/img/no-image.jpg"} alt={s?.title} className="img-fluid" />
                                                                         </span>
                                                                         {s?.title}
                                                                     </a>
@@ -229,7 +228,7 @@ const Header = () => {
                                                                     <div id={"tab" + index} className={`tab-content ${index === 0 ? 'active' : ''}`} key={index}>
                                                                         <div className="row">
                                                                             <div className="col-md-6 mb-3">
-                                                                                <h3>{staticTexts['Hospital']}</h3>
+                                                                                {onlyHospitals.length > 0 && <h3>{staticTexts['Hospital']}</h3>}
                                                                                 <ul>
                                                                                     {onlyHospitals.map((hospital, i) => (
                                                                                         <li key={`hospital-${i}`}>
@@ -240,7 +239,9 @@ const Header = () => {
                                                                             </div>
 
                                                                             <div className="col-md-6 mb-3">
-                                                                                <h3>{staticTexts["Medical Centers"]}</h3>
+                                                                                {
+                                                                                    onlyMedicalCenters.length > 0 && <h3>{staticTexts["Medical Centers"]}</h3>
+                                                                                }
                                                                                 <ul>
                                                                                     {onlyMedicalCenters.map((center, i) => (
                                                                                         <li key={`medcenter-${i}`}>
@@ -262,7 +263,7 @@ const Header = () => {
                                     </li>
 
                                     <li className="menu-item-has-children show-submenu d-lg-none d-block">
-                                        <a href="#">Locations</a>
+                                        <a href={basePath+"/hospital"}>Locations</a>
                                         <div className="sub-menu">
                                             <div className="sub-menu-details">
                                                 <div className="accordion">
@@ -287,7 +288,7 @@ const Header = () => {
                                                                         <div className="content-inner">
                                                                             <div className="row">
                                                                                 <div className="col-md-6 mb-3">
-                                                                                    <h3>{staticTexts['Hospital']}</h3>
+                                                                                    {onlyHospitals.length > 0 && <h3>{staticTexts['Hospital']}</h3>}
                                                                                     <ul>
                                                                                         {onlyHospitals.map((hospital, i) => (
                                                                                             <li key={`hospital-${i}`}>
@@ -299,7 +300,9 @@ const Header = () => {
                                                                                     </ul>
                                                                                 </div>
                                                                                 <div className="col-md-6">
-                                                                                    <h3>{staticTexts["Medical Centers"]}</h3>
+                                                                                    {
+                                                                                        onlyMedicalCenters.length > 0 && <h3>{staticTexts["Medical Centers"]}</h3>
+                                                                                    }
                                                                                     <ul>
                                                                                         {onlyMedicalCenters.map((center, i) => (
                                                                                             <li key={`medcenter-${i}`}>

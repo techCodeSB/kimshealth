@@ -1,5 +1,5 @@
 const doctorData = {
-    getDoctorAll: async (start=0, limit=12) => {
+    getDoctorAll: async (start = 0, limit = 12) => {
         let url = process.env.NEXT_PUBLIC_CMS_API_URL + `/doctor-details?populate=*&pagination[start]=${start}&pagination[limit]=${limit}&sort=name:asc`;
         const req = await fetch(url);
         const res = await req.json();
