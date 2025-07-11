@@ -8,6 +8,7 @@ import getStaticText from '@/app/lib/getStaticTextServer';
 import DoctorListing from '@/components/DoctorListing'
 import langLoc from '@/helper/getLangLoc'
 import getSpecialityData from '@/app/lib/getSpeciality'
+import Breadcrumb from '@/components/Breadcrumb'
 
 
 
@@ -39,12 +40,11 @@ const Doctor = async () => {
                         <div className="container">
                             <div className="row">
                                 <div className="col-12">
-                                    <ul className="breadcrumb mb-0">
-                                        <li>
-                                            <a href="/">{staticText['Home']}</a>
-                                        </li>
-                                        <li className="active"> {pageContent[0]?.title}</li>
-                                    </ul>
+                                    <Breadcrumb
+                                        activeTitle={pageContent[0]?.title}
+                                        middleTitle={''}
+                                        middleURL={""}
+                                    />
                                 </div>
                             </div>
                         </div>

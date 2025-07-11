@@ -4,6 +4,7 @@ import React from 'react'
 import { getBaseUrl } from '@/app/lib/getBaseUrl'
 import getStaticText from '@/app/lib/getStaticTextServer'
 import { getStaticPageContent } from '@/app/lib/getStaticPageContent'
+import Breadcrumb from '@/components/Breadcrumb'
 
 const Socomer = async () => {
     const basePath = await getBaseUrl(true, true)

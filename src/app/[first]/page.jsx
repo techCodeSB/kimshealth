@@ -187,38 +187,31 @@ const Home = async ({ params }) => {
           <div className="container-fluid ps-0">
             <div className="row">
               <div className="cta-col ctn-left-col">
-                <div className="cta-diff">
-                  <div className="d-flex align-items-center justify-content-center">
-                    <img src="/img/appointment-mb.png" alt="" />
-                    <h3>Book an <br /> Appointment</h3>
-                    {/* <!-- <div className="cta-right-arrow">
-                        <img src="/img/right-arrow.svg" className="img-fluid" alt=""/>
-                      </div> --> */}
-                  </div>
-                </div>
-              </div>
-              <div className="cta-col">
-                <a href="#">
+                <a href={basePath + "/book-an-appointment"}>
                   <div className="cta-diff">
                     <div className="d-flex align-items-center justify-content-center">
-                      <img src="/img/doctor.png" alt="" />
-                      <h3>Find a <br /> <span>Doctor</span></h3>
-                      {/* <!-- <div className="cta-right-arrow">
-                          <img src="/img/right-arrow.svg" className="img-fluid" alt=""/>
-                        </div> --> */}
+                      <img src="/img/appointment-mb.png" alt="" />
+                      <h3>Book an <br /> Appointment</h3>
                     </div>
                   </div>
                 </a>
               </div>
               <div className="cta-col">
-                <a href="#">
+                <a href={basePath + "/doctor"}>
+                  <div className="cta-diff">
+                    <div className="d-flex align-items-center justify-content-center">
+                      <img src="/img/doctor.png" alt="" />
+                      <h3>Find a <br /> <span>Doctor</span></h3>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div className="cta-col">
+                <a href={basePath + "/health-package"}>
                   <div className="cta-diff">
                     <div className="d-flex align-items-center justify-content-center">
                       <img src="/img/opinion.png" alt="" />
                       <h3>Health <br /> <span> Check-up</span></h3>
-                      {/* <!-- <div className="cta-right-arrow">
-                          <img src="/img/right-arrow.svg" className="img-fluid" alt=""/>
-                        </div> --> */}
                     </div>
                   </div>
                 </a>

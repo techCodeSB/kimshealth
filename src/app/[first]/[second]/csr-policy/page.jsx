@@ -3,6 +3,7 @@ import Header from '@/components/Header'
 import { getStaticPageContent } from '@/app/lib/getStaticPageContent';
 import getStaticText from '@/app/lib/getStaticTextServer';
 import Form1 from '@/components/Forms/Form1';
+import Breadcrumb from '@/components/Breadcrumb';
 
 const CsrPolicy = async () => {
     const field = "populate[0]=pageContent&populate[1]=pageContent.bannerItem&populate[2]=pageContent.bannerItem.bannerImageDesktop&populate[3]=pageContent.bannerItem.bannerImageMobile&populate[4]=metaSection";
@@ -27,12 +28,11 @@ const CsrPolicy = async () => {
                                             <div className="breadcrumb-wrapper py-2 ps-2 ms-1">
                                                 <div className="row">
                                                     <div className="col-12 px-0">
-                                                        <ul className="breadcrumb mb-0">
-                                                            <li>
-                                                                <a href="/">{statictText['Home']}</a>
-                                                            </li>
-                                                            <li className="active"> {pageContent[0]?.title} </li>
-                                                        </ul>
+                                                        <Breadcrumb
+                                                            activeTitle={pageContent[0]?.title}
+                                                            middleTitle={''}
+                                                            middleURL={''}
+                                                        />
                                                     </div>
                                                 </div>
                                             </div>
@@ -61,12 +61,11 @@ const CsrPolicy = async () => {
                                             <div className="breadcrumb-wrapper py-2 ps-2 ms-1">
                                                 <div className="row">
                                                     <div className="col-12">
-                                                        <ul className="breadcrumb mb-0">
-                                                            <li>
-                                                                <a href="/">{statictText['Home']}</a>
-                                                            </li>
-                                                            <li className="active"> {pageContent[0]?.title} </li>
-                                                        </ul>
+                                                        <Breadcrumb
+                                                            activeTitle={pageContent[0]?.title}
+                                                            middleTitle={''}
+                                                            middleURL={''}
+                                                        />
                                                     </div>
                                                 </div>
                                             </div>

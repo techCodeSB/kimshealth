@@ -1,8 +1,24 @@
+import Breadcrumb from '@/components/Breadcrumb'
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import React from 'react'
+import getStaticText from '../lib/getStaticTextServer'
+import getCurrentLangLoc from '../lib/getCurrentLangLoc'
+import hospitalData from '../lib/getHospital'
+import { getStaticPageContent } from '../lib/getStaticPageContent'
 
-const ContactUs = () => {
+
+
+const ContactUs = async () => {
+    const data = await getStaticPageContent("contact-us");
+    const pageContent = data?.data[0]?.pageContent;
+    const pageMeta = data?.data[0]?.metaSection;
+    const getLangLoc = await getCurrentLangLoc()
+    const staticText = await getStaticText();
+    const hospitals = await hospitalData.getAllByType({ type: "Hospital", langLoc: getLangLoc });
+    const medicalCenter = await hospitalData.getAllByType({ type: "Medical Center", langLoc: getLangLoc })
+    const allHospital = [...hospitals, ...medicalCenter];
+
     return (
         <>
             <Header />
@@ -10,19 +26,18 @@ const ContactUs = () => {
                 <div className="Contact-us-main-page">
                     <div className="page-header">
                         <div className="container">
-                            <h2>Contact Us</h2>
+                            <h2>{pageContent[0]?.title}</h2>
                         </div>
                     </div>
                     <section className="breadcrumb-wrapper py-2">
                         <div className="container">
                             <div className="row">
                                 <div className="col-12">
-                                    <ul className="breadcrumb mb-0">
-                                        <li>
-                                            <a href="index.php">Home</a>
-                                        </li>
-                                        <li className="active"> Contact Us </li>
-                                    </ul>
+                                    <Breadcrumb
+                                        activeTitle={pageContent[0]?.title}
+                                        middleTitle={''}
+                                        middleURL={''}
+                                    />
                                 </div>
                             </div>
                         </div>
@@ -32,275 +47,51 @@ const ContactUs = () => {
                         <div className="container">
                             <div className="row">
                                 <div className="col-md-6 ps-lg-0  order-lg-1 order-2">
-                                    <section className="section pt-0">
-                                        <div className="container">
-                                            <div className="main-heading sub-heading">
-                                                <h2>KIMSHEALTH Trivandrum</h2>
+                                    {
+                                        allHospital.map((h, i) => {
+                                            return <div key={i}>
+                                                {i > 0 && <div className="line-divider"></div>}
+                                                <section className="section">
+                                                    <div className="container">
+                                                        <div className="main-heading sub-heading">
+                                                            <h2>{h.title}</h2>
+                                                        </div>
+                                                        <div className="contact-details">
+                                                            <div className="contact-icon location-icon"><i className="fa-solid fa-location-dot"></i>
+                                                            </div>
+                                                            <div className="contact-content">
+                                                                <h3>Location</h3>
+                                                                <p>{h.address}</p>
+                                                            </div>
+                                                        </div>
+
+
+                                                        <div className="contact-details">
+                                                            <div className="contact-icon"><i className="fa-solid fa-envelope-open"></i></div>
+                                                            <div className="contact-content">
+                                                                <h3>Email:</h3>
+                                                                <p>{h.email}</p>
+                                                            </div>
+                                                        </div>
+
+
+                                                        <div className="contact-details">
+                                                            <div className="contact-icon"><i className="fa-solid fa-phone"></i></div>
+                                                            <div className="contact-content">
+                                                                <h3>Phone:</h3>
+                                                                <p>{h.contactNo}</p>
+                                                            </div>
+                                                        </div>
+                                                        <a href={h.mapURL} target='_blank' className="btn-tab treat-tab form-btn w-auto active mt-2 d-inline-block"><i class="fa-solid fa-diamond-turn-right"></i> Get Direction</a>
+                                                    </div>
+                                                </section>
                                             </div>
-                                            <div className="contact-details">
-                                                <div className="contact-icon location-icon"><i className="fa-solid fa-location-dot"></i>
-                                                </div>
-                                                <div className="contact-content">
-                                                    <h3>Location</h3>
-                                                    <p>P.B.No.1, Anayara P.O, Trivandrum – 695029, Kerala, India</p>
-                                                </div>
-                                            </div>
-
-
-                                            <div className="contact-details">
-                                                <div className="contact-icon"><i className="fa-solid fa-envelope-open"></i></div>
-                                                <div className="contact-content">
-                                                    <h3>Email:</h3>
-                                                    <p>feedback.tvm@kimshealth.org</p>
-                                                </div>
-                                            </div>
-
-
-                                            <div className="contact-details">
-                                                <div className="contact-icon"><i className="fa-solid fa-phone"></i></div>
-                                                <div className="contact-content">
-                                                    <h3>Phone:</h3>
-                                                    <p>+91 471 294 1101</p>
-                                                </div>
-                                            </div>
-                                            <a href="#" className="btn-tab treat-tab form-btn w-auto active mt-2 d-inline-block"><i class="fa-solid fa-diamond-turn-right"></i> Get Direction</a>
-                                        </div>
-                                    </section>
-                                    <div className="line-divider"></div>
-                                    <section className="section">
-                                        <div className="container">
-                                            <div className="main-heading sub-heading">
-                                                <h2>KIMSHEALTH Trivandrum</h2>
-                                            </div>
-                                            <div className="contact-details">
-                                                <div className="contact-icon location-icon"><i className="fa-solid fa-location-dot"></i>
-                                                </div>
-                                                <div className="contact-content">
-                                                    <h3>Location</h3>
-                                                    <p>P.B.No.1, Anayara P.O, Trivandrum – 695029, Kerala, India</p>
-                                                </div>
-                                            </div>
-
-
-                                            <div className="contact-details">
-                                                <div className="contact-icon"><i className="fa-solid fa-envelope-open"></i></div>
-                                                <div className="contact-content">
-                                                    <h3>Email:</h3>
-                                                    <p>feedback.tvm@kimshealth.org</p>
-                                                </div>
-                                            </div>
-
-
-                                            <div className="contact-details">
-                                                <div className="contact-icon"><i className="fa-solid fa-phone"></i></div>
-                                                <div className="contact-content">
-                                                    <h3>Phone:</h3>
-                                                    <p>+91 471 294 1101</p>
-                                                </div>
-                                            </div>
-                                            <a href="#" className="btn-tab treat-tab form-btn w-auto active mt-2 d-inline-block"><i class="fa-solid fa-diamond-turn-right"></i> Get Direction</a>
-                                        </div>
-                                    </section>
-
-
-                                    <div className="line-divider"></div>
-                                    <section className="section">
-                                        <div className="container">
-                                            <div className="main-heading sub-heading">
-                                                <h2>KIMSHEALTH Trivandrum</h2>
-                                            </div>
-                                            <div className="contact-details">
-                                                <div className="contact-icon location-icon"><i className="fa-solid fa-location-dot"></i>
-                                                </div>
-                                                <div className="contact-content">
-                                                    <h3>Location</h3>
-                                                    <p>P.B.No.1, Anayara P.O, Trivandrum – 695029, Kerala, India</p>
-                                                </div>
-                                            </div>
-
-
-                                            <div className="contact-details">
-                                                <div className="contact-icon"><i className="fa-solid fa-envelope-open"></i></div>
-                                                <div className="contact-content">
-                                                    <h3>Email:</h3>
-                                                    <p>feedback.tvm@kimshealth.org</p>
-                                                </div>
-                                            </div>
-
-
-                                            <div className="contact-details">
-                                                <div className="contact-icon"><i className="fa-solid fa-phone"></i></div>
-                                                <div className="contact-content">
-                                                    <h3>Phone:</h3>
-                                                    <p>+91 471 294 1101</p>
-                                                </div>
-                                            </div>
-                                            <a href="#" className="btn-tab treat-tab form-btn w-auto active mt-2 d-inline-block"><i class="fa-solid fa-diamond-turn-right"></i> Get Direction</a>
-                                        </div>
-                                    </section>
-
-
-
-
-                                    <div className="line-divider"></div>
-                                    <section className="section">
-                                        <div className="container">
-                                            <div className="main-heading sub-heading">
-                                                <h2>KIMSHEALTH Trivandrum</h2>
-                                            </div>
-                                            <div className="contact-details">
-                                                <div className="contact-icon location-icon"><i className="fa-solid fa-location-dot"></i>
-                                                </div>
-                                                <div className="contact-content">
-                                                    <h3>Location</h3>
-                                                    <p>P.B.No.1, Anayara P.O, Trivandrum – 695029, Kerala, India</p>
-                                                </div>
-                                            </div>
-
-
-                                            <div className="contact-details">
-                                                <div className="contact-icon"><i className="fa-solid fa-envelope-open"></i></div>
-                                                <div className="contact-content">
-                                                    <h3>Email:</h3>
-                                                    <p>feedback.tvm@kimshealth.org</p>
-                                                </div>
-                                            </div>
-
-
-                                            <div className="contact-details">
-                                                <div className="contact-icon"><i className="fa-solid fa-phone"></i></div>
-                                                <div className="contact-content">
-                                                    <h3>Phone:</h3>
-                                                    <p>+91 471 294 1101</p>
-                                                </div>
-                                            </div>
-                                            <a href="#" className="btn-tab treat-tab form-btn w-auto active mt-2 d-inline-block"><i class="fa-solid fa-diamond-turn-right"></i> Get Direction</a>
-                                        </div>
-                                    </section>
-
-
-
-
-                                    <div className="line-divider"></div>
-                                    <section className="section">
-                                        <div className="container">
-                                            <div className="main-heading sub-heading">
-                                                <h2>KIMSHEALTH Trivandrum</h2>
-                                            </div>
-                                            <div className="contact-details">
-                                                <div className="contact-icon location-icon"><i className="fa-solid fa-location-dot"></i>
-                                                </div>
-                                                <div className="contact-content">
-                                                    <h3>Location</h3>
-                                                    <p>P.B.No.1, Anayara P.O, Trivandrum – 695029, Kerala, India</p>
-                                                </div>
-                                            </div>
-
-
-                                            <div className="contact-details">
-                                                <div className="contact-icon"><i className="fa-solid fa-envelope-open"></i></div>
-                                                <div className="contact-content">
-                                                    <h3>Email:</h3>
-                                                    <p>feedback.tvm@kimshealth.org</p>
-                                                </div>
-                                            </div>
-
-
-                                            <div className="contact-details">
-                                                <div className="contact-icon"><i className="fa-solid fa-phone"></i></div>
-                                                <div className="contact-content">
-                                                    <h3>Phone:</h3>
-                                                    <p>+91 471 294 1101</p>
-                                                </div>
-                                            </div>
-                                            <a href="#" className="btn-tab treat-tab form-btn w-auto active mt-2 d-inline-block"><i class="fa-solid fa-diamond-turn-right"></i> Get Direction</a>
-                                        </div>
-                                    </section>
-
-
-
-
-                                    <div className="line-divider"></div>
-                                    <section className="section">
-                                        <div className="container">
-                                            <div className="main-heading sub-heading">
-                                                <h2>KIMSHEALTH Trivandrum</h2>
-                                            </div>
-                                            <div className="contact-details">
-                                                <div className="contact-icon location-icon"><i className="fa-solid fa-location-dot"></i>
-                                                </div>
-                                                <div className="contact-content">
-                                                    <h3>Location</h3>
-                                                    <p>P.B.No.1, Anayara P.O, Trivandrum – 695029, Kerala, India</p>
-                                                </div>
-                                            </div>
-
-
-                                            <div className="contact-details">
-                                                <div className="contact-icon"><i className="fa-solid fa-envelope-open"></i></div>
-                                                <div className="contact-content">
-                                                    <h3>Email:</h3>
-                                                    <p>feedback.tvm@kimshealth.org</p>
-                                                </div>
-                                            </div>
-
-
-                                            <div className="contact-details">
-                                                <div className="contact-icon"><i className="fa-solid fa-phone"></i></div>
-                                                <div className="contact-content">
-                                                    <h3>Phone:</h3>
-                                                    <p>+91 471 294 1101</p>
-                                                </div>
-                                            </div>
-                                            <a href="#" className="btn-tab treat-tab form-btn w-auto active mt-2 d-inline-block"><i class="fa-solid fa-diamond-turn-right"></i> Get Direction</a>
-                                        </div>
-                                    </section>
-
-
-
-
-                                    <div className="line-divider"></div>
-                                    <section className="section">
-                                        <div className="container">
-                                            <div className="main-heading sub-heading">
-                                                <h2>KIMSHEALTH Trivandrum</h2>
-                                            </div>
-                                            <div className="contact-details">
-                                                <div className="contact-icon location-icon"><i className="fa-solid fa-location-dot"></i>
-                                                </div>
-                                                <div className="contact-content">
-                                                    <h3>Location</h3>
-                                                    <p>P.B.No.1, Anayara P.O, Trivandrum – 695029, Kerala, India</p>
-                                                </div>
-                                            </div>
-
-
-                                            <div className="contact-details">
-                                                <div className="contact-icon"><i className="fa-solid fa-envelope-open"></i></div>
-                                                <div className="contact-content">
-                                                    <h3>Email:</h3>
-                                                    <p>feedback.tvm@kimshealth.org</p>
-                                                </div>
-                                            </div>
-
-
-                                            <div className="contact-details">
-                                                <div className="contact-icon"><i className="fa-solid fa-phone"></i></div>
-                                                <div className="contact-content">
-                                                    <h3>Phone:</h3>
-                                                    <p>+91 471 294 1101</p>
-                                                </div>
-                                            </div>
-                                            <a href="#" className="btn-tab treat-tab form-btn w-auto active mt-2 d-inline-block"><i class="fa-solid fa-diamond-turn-right"></i> Get Direction</a>
-                                        </div>
-                                    </section>
-
-
-
-
+                                        })
+                                    }
                                 </div>
 
 
+                                {/* :::::::::::::: Contact FORM:::::::::::: */}
                                 <div className="col-md-6 contact-right-col order-lg-2 order-1">
                                     <div className="association-form-card mb-5 sticky-from">
                                         <div className="tab-group text-start mb-3">
@@ -363,15 +154,6 @@ const ContactUs = () => {
 
 
                                                         </div>
-
-
-
-
-
-
-
-
-
 
                                                         <div className="col-xl-6 col-lg-6 col-md-6 col-12 mb-3">
                                                             <div className="from-btn">
@@ -443,11 +225,12 @@ const ContactUs = () => {
 
                     <section className="section pt-0">
                         <div className="container-fluid px-0">
-                            <div className="contact-us-map">
-                                <iframe
+                            <div className="contact-us-map" dangerouslySetInnerHTML={{__html: pageContent[1]?.content}}>
+                                {/* <iframe
                                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3945.852365339009!2d76.90677017505996!3d8.51371179152848!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b05bc0578a58de1%3A0x1171d7b1d8b4145a!2sKIMSHEALTH%20Hospital%20Trivandrum!5e0!3m2!1sen!2sin!4v1750846766725!5m2!1sen!2sin"
                                     width="100%" height="450" style={{ "border": 0 }} allowFullScreen="" loading="lazy"
-                                    referrerPolicy="no-referrer-when-downgrade"></iframe>
+                                    referrerPolicy="no-referrer-when-downgrade"></iframe> */}
+
                             </div>
                         </div>
                     </section>

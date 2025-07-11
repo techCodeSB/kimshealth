@@ -7,6 +7,7 @@ import getSpecialityData from '@/app/lib/getSpeciality';
 import getStaticText from '@/app/lib/getStaticTextServer';
 import testimonialData from '@/app/lib/getTestimonial';
 import BlogCarousel from '@/components/BlogCarousel';
+import Breadcrumb from '@/components/Breadcrumb';
 import ExcellenceCarousel from '@/components/ExcellenceCarousel';
 import ExpertCarousel from '@/components/ExpertCarousel';
 import Footer from '@/components/Footer';
@@ -23,6 +24,8 @@ const HospitalDetails = async ({ params }) => {
     const hptData = await hospitalData.getSingleHospital(params.details);
     const hospitals = await hospitalData.getAll(10);
     const staticText = await getStaticText()
+
+    console.log(hptData)
 
     const specialityDataSet = {
         sectionTitle: hptData.specialitySection.title,
@@ -70,15 +73,11 @@ const HospitalDetails = async ({ params }) => {
                                 <div className="breadcrumb-wrapper py-2 ps-2 ms-1">
                                     <div className="row">
                                         <div className="col-12 px-0">
-                                            <ul className="breadcrumb mb-0">
-                                                <li>
-                                                    <a href={basePath + "/"}>{staticText['Home']}</a>
-                                                </li>
-                                                <li>
-                                                    <a href={basePath + "/hospital"}>{staticText['Our Hospital']}</a>
-                                                </li>
-                                                <li className="active"> {hptData.title} </li>
-                                            </ul>
+                                            <Breadcrumb
+                                                activeTitle={hptData.title}
+                                                middleTitle={staticText['Our Hospital']}
+                                                middleURL={basePath + "/hospital"}
+                                            />
                                         </div>
                                     </div>
                                 </div>
@@ -194,9 +193,6 @@ const HospitalDetails = async ({ params }) => {
                     </div>
                 </section>
 
-
-
-
                 <section className="section py-4 d-lg-block d-none">
                     <div className="container">
                         <div className="custom-from">
@@ -289,48 +285,39 @@ const HospitalDetails = async ({ params }) => {
                     </div>
                 </section>
 
-                <section className="section pt-lg-0 pt-2 pb-0 d-lg-none d-block" data-aos="fade-up">
+                <section className="section pt-lg-0 pt-2 pb-2 d-lg-none d-block" data-aos="fade-up">
                     <div className="container-fluid ps-0">
                         <div className="row">
                             <div className="cta-col ctn-left-col">
-                                <div className="cta-diff">
-                                    <div className="d-flex align-items-center justify-content-center">
-                                        <img src="/img/appointment-mb.png" alt="" />
-                                        <h3>Book an <br /> Appointment</h3>
-                                        {/* <!-- <div className="cta-right-arrow">
-                                    <img src="/img/right-arrow.svg" className="img-fluid" alt="" />
-                                </div> --> */}
+                                <a href={basePath + "/book-an-appointment"}>
+                                    <div className="cta-diff">
+                                        <div className="d-flex align-items-center justify-content-center">
+                                            <img src="/img/appointment-mb.png" alt="" />
+                                            <h3>Book an <br /> Appointment</h3>
+                                        </div>
                                     </div>
-                                </div>
+                                </a>
                             </div>
                             <div className="cta-col">
-                                <a href="#">
+                                <a href={basePath + "/doctor"}>
                                     <div className="cta-diff">
                                         <div className="d-flex align-items-center justify-content-center">
                                             <img src="/img/doctor.png" alt="" />
                                             <h3>Find a <br /> <span>Doctor</span></h3>
-                                            {/* <!-- <div className="cta-right-arrow">
-                                        <img src="/img/right-arrow.svg" className="img-fluid" alt="" />
-                                    </div> --> */}
                                         </div>
                                     </div>
                                 </a>
                             </div>
                             <div className="cta-col">
-                                <a href="#">
+                                <a href={basePath + "/health-package"}>
                                     <div className="cta-diff">
                                         <div className="d-flex align-items-center justify-content-center">
                                             <img src="/img/opinion.png" alt="" />
                                             <h3>Health <br /> <span> Check-up</span></h3>
-                                            {/* <!-- <div className="cta-right-arrow">
-                                        <img src="/img/right-arrow.svg" className="img-fluid" alt="" />
-                                    </div> --> */}
                                         </div>
                                     </div>
                                 </a>
                             </div>
-
-
                         </div>
                     </div>
                 </section>
@@ -338,8 +325,8 @@ const HospitalDetails = async ({ params }) => {
                 <section className="section hospital-details-overview-section">
                     <div className="container">
                         <div className="row">
-                            <div className="col-md-5 my-auto order-lg-1 order-2">
-                                <div className="details-right-col text-center">
+                            <div className="col-md-5 order-lg-1 order-2">
+                                <div className="details-right-col text-center sticky-from">
                                     <img src={process.env.NEXT_PUBLIC_IMAGE_URL + hptData.featuredImage.url} alt="" className="img-fluid w-100" />
                                     <h5>{hptData.title}</h5>
                                     <p>An Integrated Healthcare Destination </p>

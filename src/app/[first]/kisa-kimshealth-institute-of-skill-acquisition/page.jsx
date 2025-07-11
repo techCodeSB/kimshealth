@@ -6,14 +6,18 @@ import { getBaseUrl } from '@/app/lib/getBaseUrl'
 import { getStaticPageContent } from '@/app/lib/getStaticPageContent'
 import Form1 from '@/components/Forms/Form1'
 import courseData from '@/app/lib/getCourse'
+import getStaticText from '../lib/getStaticTextServer'
+import Breadcrumb from '@/components/Breadcrumb'
 
 const KisaHealth = async () => {
+    const statiText = await getStaticText();
     const field = "populate[0]=pageContent&populate[1]=pageContent.bannerItem&populate[2]=pageContent.bannerItem.bannerImageDesktop&populate[3]=pageContent.bannerItem.bannerImageMobile&populate[4]=metaSection&populate[5]=pageContent.journal&populate[6]=pageContent.journal.thumbnailImage&populate[7]=pageContent.journal.file&populate[8]=pageContent.file&populate[9]=pageContent.courseCategory";
     const basePath = await getBaseUrl(true, true);
     const data = await getStaticPageContent("kisa-kimshealth-institute-of-skill-acquisition", field);
     const pageContent = data?.data[0]?.pageContent;
     const pageMeta = data?.data[0]?.metaSection;
     let allKisaCourse = await courseData.getAll(pageContent[4].courseCategory?.id);
+
 
 
 
@@ -31,15 +35,11 @@ const KisaHealth = async () => {
                                             <div className="breadcrumb-wrapper py-2 ps-2 ms-1">
                                                 <div className="row">
                                                     <div className="col-12 px-0">
-                                                        <ul className="breadcrumb mb-0">
-                                                            <li>
-                                                                <a href={basePath + "/"}>Home</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#">Academics</a>
-                                                            </li>
-                                                            <li className="active">{pageContent[0].title}</li>
-                                                        </ul>
+                                                        <Breadcrumb
+                                                            activeTitle={pageContent[0]?.title}
+                                                            middleTitle={statiText['Academics']}
+                                                            middleURL={"#"}
+                                                        />
                                                     </div>
                                                 </div>
                                             </div>

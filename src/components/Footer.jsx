@@ -250,7 +250,7 @@ const Footer = () => {
                                     {
                                         speciality?.map((sp, index) => {
                                             return <li key={index}>
-                                                <a href={basePath + "/speciality/" + sp?.speciality.slug}>{sp?.speciality.title}</a>
+                                                <a href={basePath + "/speciality/" + sp?.speciality?.slug}>{sp?.speciality?.title}</a>
                                             </li>
                                         })
                                     }
@@ -352,7 +352,7 @@ const Footer = () => {
                                     {
                                         speciality?.map((sp, index) => {
                                             return <li key={index}>
-                                                <a href={basePath + "/speciality/" + sp?.speciality.slug}>{sp?.speciality.title}</a>
+                                                <a href={basePath + "/speciality/" + sp?.speciality?.slug}>{sp?.speciality?.title}</a>
                                             </li> 
                                         })
                                     }

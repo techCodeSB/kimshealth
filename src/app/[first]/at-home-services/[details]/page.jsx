@@ -2,6 +2,7 @@ import { getBaseUrl } from '@/app/lib/getBaseUrl';
 import homeServices from '@/app/lib/getHomeServices';
 import getStaticText from '@/app/lib/getStaticTextServer';
 import testimonialData from '@/app/lib/getTestimonial';
+import Breadcrumb from '@/components/Breadcrumb';
 import Footer from '@/components/Footer';
 import Form1 from '@/components/Forms/Form1';
 import Header from '@/components/Header';
@@ -39,15 +40,11 @@ const HomeServiceDetails = async ({ params }) => {
                                             <div className="breadcrumb-wrapper py-2 ps-2 ms-1">
                                                 <div className="row">
                                                     <div className="col-12 px-0">
-                                                        <ul className="breadcrumb mb-0">
-                                                            <li>
-                                                                <a href="/">{staticTexts['Home']}</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href={basePath + "/at-home-services"}>{staticTexts['At Home Services']}</a>
-                                                            </li>
-                                                            <li className="active"> {data.title} </li>
-                                                        </ul>
+                                                        <Breadcrumb
+                                                            activeTitle={data.title}
+                                                            middleTitle={staticTexts['At Home Services']}
+                                                            middleURL={basePath + "/at-home-services"}
+                                                        />
                                                     </div>
                                                 </div>
                                             </div>
@@ -85,15 +82,11 @@ const HomeServiceDetails = async ({ params }) => {
                                             <div className="breadcrumb-wrapper py-2 ps-2 ms-1">
                                                 <div className="row">
                                                     <div className="col-12 px-0">
-                                                        <ul className="breadcrumb mb-0">
-                                                            <li>
-                                                                <a href="/">{staticTexts['Home']}</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href={basePath + "/at-home-services"}>{staticTexts['At Home Services']}</a>
-                                                            </li>
-                                                            <li className="active"> {data.title} </li>
-                                                        </ul>
+                                                        <Breadcrumb
+                                                            activeTitle={data.title}
+                                                            middleTitle={staticTexts['At Home Services']}
+                                                            middleURL={basePath + "/at-home-services"}
+                                                        />
                                                     </div>
                                                 </div>
                                             </div>

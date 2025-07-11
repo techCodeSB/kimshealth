@@ -7,6 +7,7 @@ import { marked } from 'marked';
 import leaderData from '@/app/lib/getLeader';
 import awardData from '@/app/lib/getAward';
 import getStaticText from '@/app/lib/getStaticTextServer';
+import Breadcrumb from '@/components/Breadcrumb';
 
 
 
@@ -28,7 +29,7 @@ const AboutUs = async () => {
             <Header />
             <div role="main" className="main">
                 <div className="about-us-main-page">
-                   
+
 
                     <section className="section details-page-before py-0 d-lg-block d-none">
                         <div className="procedures-details-page-header">
@@ -41,12 +42,11 @@ const AboutUs = async () => {
                                             <div className="breadcrumb-wrapper py-2 ps-2 ms-1">
                                                 <div className="row">
                                                     <div className="col-12 px-0">
-                                                        <ul className="breadcrumb mb-0">
-                                                            <li>
-                                                                <a href={basePath + "/"}>{staticText['Home']}</a>
-                                                            </li>
-                                                            <li className="active"> {staticText['About Us']} </li>
-                                                        </ul>
+                                                        <Breadcrumb
+                                                            activeTitle={staticText['About Us']}
+                                                            middleTitle={''}
+                                                            middleURL={''}
+                                                        />
                                                     </div>
                                                 </div>
                                             </div>
@@ -152,12 +152,11 @@ const AboutUs = async () => {
                                             <div className="breadcrumb-wrapper py-2 ps-2 ms-1">
                                                 <div className="row">
                                                     <div className="col-12 px-0">
-                                                        <ul className="breadcrumb mb-0">
-                                                            <li>
-                                                                <a href={basePath + "/"}>{staticText['Home']}</a>
-                                                            </li>
-                                                            <li className="active"> {staticText['About Us']} </li>
-                                                        </ul>
+                                                        <Breadcrumb
+                                                            activeTitle={staticText['About Us']}
+                                                            middleTitle={''}
+                                                            middleURL={''}
+                                                        />
                                                     </div>
                                                 </div>
                                             </div>
@@ -168,13 +167,13 @@ const AboutUs = async () => {
 
 
                                                     {
-                                                pageContent[1]?.bannerItem?.map((b, i) => {
-                                                    return <div className="item" key={i}>
-                                                        <img src={process.env.NEXT_PUBLIC_IMAGE_URL + b.bannerImageDesktop?.url}
-                                                            alt="" className="img-fluid w-100" />
-                                                    </div>
-                                                })
-                                            }
+                                                        pageContent[1]?.bannerItem?.map((b, i) => {
+                                                            return <div className="item" key={i}>
+                                                                <img src={process.env.NEXT_PUBLIC_IMAGE_URL + b.bannerImageDesktop?.url}
+                                                                    alt="" className="img-fluid w-100" />
+                                                            </div>
+                                                        })
+                                                    }
                                                 </div>
                                             </div>
 

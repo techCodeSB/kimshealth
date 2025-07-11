@@ -5,6 +5,7 @@ import { getStaticPageContent } from '@/app/lib/getStaticPageContent';
 import getStaticText from '@/app/lib/getStaticTextServer';
 import { getBaseUrl } from '@/app/lib/getBaseUrl';
 import Form1 from '@/components/Forms/Form1';
+import Breadcrumb from '@/components/Breadcrumb';
 
 const EmergencyMedicine = async () => {
     const basePath = await getBaseUrl(true, true);
@@ -30,12 +31,11 @@ const EmergencyMedicine = async () => {
                                             <div className="breadcrumb-wrapper py-2 ps-2 ms-1">
                                                 <div className="row">
                                                     <div className="col-12 px-0">
-                                                        <ul className="breadcrumb mb-0">
-                                                            <li>
-                                                                <a href={basePath + "/"}>{staticText['Home']}</a>
-                                                            </li>
-                                                            <li className="active"> {pageContent[0]?.title} </li>
-                                                        </ul>
+                                                        <Breadcrumb
+                                                            activeTitle={pageContent[0]?.title}
+                                                            middleTitle={''}
+                                                            middleURL={""}
+                                                        />
                                                     </div>
                                                 </div>
                                             </div>

@@ -7,6 +7,7 @@ import hospitalData from '@/app/lib/getHospital';
 import getStaticText from '@/app/lib/getStaticTextServer';
 import HospitalFilter from '@/components/HospitalFilter';
 import getCurrentLangLoc from '@/app/lib/getCurrentLangLoc';
+import Breadcrumb from '@/components/Breadcrumb';
 
 
 const Hospital = async () => {
@@ -17,11 +18,8 @@ const Hospital = async () => {
     const data = await getStaticPageContent("hospital");
     const pageContent = data?.data[0]?.pageContent;
     const pageMeta = data?.data[0]?.metaSection;
-
     const hospitals = await hospitalData.getAllByType({ type: "Hospital", langLoc: getLangLoc });
-    const medicalCenter = await hospitalData.getAllByType({ type: "Medical Center", langLoc:getLangLoc })
-
-
+    const medicalCenter = await hospitalData.getAllByType({ type: "Medical Center", langLoc: getLangLoc })
 
 
 
@@ -39,12 +37,11 @@ const Hospital = async () => {
                         <div className="container">
                             <div className="row">
                                 <div className="col-12">
-                                    <ul className="breadcrumb mb-0">
-                                        <li>
-                                            <a href={baseURL + "/"}>{staticText['Home']}</a>
-                                        </li>
-                                        <li className="active"> {pageContent[0]?.title} </li>
-                                    </ul>
+                                    <Breadcrumb
+                                        activeTitle={pageContent[0]?.title}
+                                        middleTitle={''}
+                                        middleURL={""}
+                                    />
                                 </div>
                             </div>
                         </div>
@@ -53,7 +50,7 @@ const Hospital = async () => {
                     {
                         hospitals && <section className="section pt-lg-4 pt-0">
                             <div className="container">
-                                <HospitalFilter title={pageContent[1]?.title} />
+                                <HospitalFilter title={pageContent[1]?.title} selectedLocation={getLangLoc.loc} />
                                 <div className="row">
                                     {
                                         hospitals.map((h, index) => {

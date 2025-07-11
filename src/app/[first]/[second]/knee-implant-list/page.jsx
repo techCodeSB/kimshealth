@@ -1,11 +1,14 @@
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import { getStaticPageContent } from '@/app/lib/getStaticPageContent';
+import Breadcrumb from '@/components/Breadcrumb';
+import getStaticText from '../lib/getStaticTextServer';
 
 const KneeImplementList = async () => {
     const data = await getStaticPageContent("knee-implant-list");
     const pageContent = data?.data[0]?.pageContent;
     const pageMeta = data?.data[0]?.metaSection;
+    const staticText = await getStaticText();
 
 
     return (
@@ -22,12 +25,11 @@ const KneeImplementList = async () => {
                         <div className="container">
                             <div className="row">
                                 <div className="col-12">
-                                    <ul className="breadcrumb mb-0">
-                                        <li>
-                                            <a href="/">Home</a>
-                                        </li>
-                                        <li className="active"> {pageContent[0]?.title}</li>
-                                    </ul>
+                                    <Breadcrumb
+                                        activeTitle={pageContent[0]?.title}
+                                        middleTitle={""}
+                                        middleURL={""}
+                                    />
                                 </div>
                             </div>
                         </div>

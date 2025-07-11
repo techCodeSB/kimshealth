@@ -3,6 +3,7 @@ import Header from '@/components/Header'
 import React from 'react';
 import { getBaseUrl } from '@/app/lib/getBaseUrl';
 import getStaticText from '@/app/lib/getStaticTextServer';
+import Breadcrumb from '@/components/Breadcrumb';
 
 
 
@@ -25,12 +26,11 @@ const HealthPackage = async () => {
                         <div className="container">
                             <div className="row">
                                 <div className="col-12">
-                                    <ul className="breadcrumb mb-0">
-                                        <li>
-                                            <a href={basePath+"/"}>{staticText['Home']}</a>
-                                        </li>
-                                        <li className="active"> Health Packages </li>
-                                    </ul>
+                                    <Breadcrumb
+                                        activeTitle={staticText['Health Packages']}
+                                        middleTitle={''}
+                                        middleURL={""}
+                                    />
                                 </div>
                             </div>
                         </div>

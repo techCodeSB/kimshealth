@@ -2,6 +2,7 @@ import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 import { getStaticPageContent } from '@/app/lib/getStaticPageContent';
 import Breadcrumb from '@/components/Breadcrumb';
+import getStaticText from '../lib/getStaticTextServer';
 
 
 
@@ -9,6 +10,7 @@ const StentsPriceList = async () => {
     const data = await getStaticPageContent("stents-price-list");
     const pageContent = data?.data[0]?.pageContent;
     const pageMeta = data?.data[0]?.metaSection;
+     const staticText = await getStaticText();
 
 
     return (
@@ -25,7 +27,7 @@ const StentsPriceList = async () => {
                         <div className="container">
                             <div className="row">
                                 <div className="col-12">
-                                    <Breadcrumb activeTitle={pageContent[0]?.title} middleTitle={""} middleURL={""} />
+                                    <Breadcrumb activeTitle={pageContent[0]?.title} />
                                 </div>
                             </div>
                         </div>
@@ -34,7 +36,7 @@ const StentsPriceList = async () => {
                     <section className="section">
                         <div className="container">
                             <div className="main-heading main-list sub-heading">
-                               <h2>{pageContent[1]?.title}</h2>
+                                <h2>{pageContent[1]?.title}</h2>
                             </div>
 
                             <div

@@ -4,12 +4,15 @@ import React from 'react'
 import { getStaticPageContent } from '@/app/lib/getStaticPageContent';
 import { getBaseUrl } from '@/app/lib/getBaseUrl';
 import investorDAta from '@/app/lib/getInvestor';
+import Breadcrumb from '@/components/Breadcrumb';
+import getStaticText from '../lib/getStaticTextServer';
 
 const Investor = async () => {
     const basePath = await getBaseUrl(true, true);
     const data = await getStaticPageContent("investor");
     const pageContent = data?.data[0]?.pageContent;
     const pageMeta = data?.data[0]?.metaSection;
+    const staticText = await getStaticText();
 
     const getAllInvestorDirector = await investorDAta.getAll('Directors & Advisory Board')
     const getAllInvestorPatrons = await investorDAta.getAll('Patrons')
@@ -28,12 +31,11 @@ const Investor = async () => {
                         <div className="container">
                             <div className="row">
                                 <div className="col-12">
-                                    <ul className="breadcrumb mb-0">
-                                        <li>
-                                            <a href={basePath + "/"}>Home</a>
-                                        </li>
-                                        <li className="active"> {pageContent[0].title} </li>
-                                    </ul>
+                                    <Breadcrumb
+                                        activeTitle={pageContent[0]?.title}
+                                        middleTitle={''}
+                                        middleURL={""}
+                                    />
                                 </div>
                             </div>
                         </div>

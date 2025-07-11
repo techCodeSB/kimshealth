@@ -5,6 +5,7 @@ import getStaticText from '@/app/lib/getStaticTextServer';
 import { getBaseUrl } from '@/app/lib/getBaseUrl';
 import { getStaticPageContent } from '@/app/lib/getStaticPageContent';
 import diseaseData from '@/app/lib/getDisease';
+import Breadcrumb from '@/components/Breadcrumb';
 
 const Disease = async () => {
     const staticText = await getStaticText();
@@ -14,9 +15,8 @@ const Disease = async () => {
     const data = await getStaticPageContent("disease");
     const pageContent = data?.data[0]?.pageContent;
     const pageMeta = data?.data[0]?.metaSection;
-
     const getAllDisease = await diseaseData.getDisease();
-    console.log(getAllDisease);
+
 
 
     return (
@@ -33,12 +33,11 @@ const Disease = async () => {
                     <div className="container">
                         <div className="row">
                             <div className="col-12">
-                                <ul className="breadcrumb mb-0">
-                                    <li>
-                                        <a href="/">{staticText['Home']}</a>
-                                    </li>
-                                    <li className="active"> {pageContent[0]?.title} </li>
-                                </ul>
+                                <Breadcrumb
+                                    activeTitle={pageContent[0]?.title}
+                                    middleTitle={''}
+                                    middleURL={""}
+                                />
                             </div>
                         </div>
                     </div>
@@ -87,7 +86,7 @@ const Disease = async () => {
                                             {
                                                 getAllDisease.slice(0, getAllDisease.length / 2).map((d, index) => {
                                                     return <div className="speciality-masterpage-card-content" key={index}>
-                                                        <a href={baseUrlOnlyLang +"/disease/"+ d.diseases[0]?.slug}>
+                                                        <a href={baseUrlOnlyLang + "/disease/" + d.diseases[0]?.slug}>
                                                             <div className="key-master-row">
                                                                 <div className="key-master-image">
                                                                     <img src="img/key-proce1.png" alt="" className="img-fluid" />
@@ -105,9 +104,9 @@ const Disease = async () => {
 
                                         <div className="col-md-6">
                                             {
-                                               getAllDisease.slice(0, getAllDisease.length / 2).map((d, index) => {
+                                                getAllDisease.slice(0, getAllDisease.length / 2).map((d, index) => {
                                                     return <div className="speciality-masterpage-card-content" key={index}>
-                                                        <a href={baseUrlOnlyLang +"/disease/"+ d.diseases[0]?.slug}>
+                                                        <a href={baseUrlOnlyLang + "/disease/" + d.diseases[0]?.slug}>
                                                             <div className="key-master-row">
                                                                 <div className="key-master-image">
                                                                     <img src="img/key-proce1.png" alt="" className="img-fluid" />

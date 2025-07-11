@@ -2,10 +2,12 @@ import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import React from 'react'
 import { getStaticPageContent } from '@/app/lib/getStaticPageContent';
+import getStaticText from '../lib/getStaticTextServer';
+import Breadcrumb from '@/components/Breadcrumb';
 
 const AmbulanceServices = async () => {
+    const staticText = await getStaticText();
     const field = "populate[0]=pageContent&populate[1]=pageContent.bannerItem&populate[2]=pageContent.bannerItem.bannerImageDesktop&populate[3]=pageContent.bannerItem.bannerImageMobile&populate[4]=metaSection";
-
     const data = await getStaticPageContent("ambulance-services", field);
     const pageContent = data?.data[0]?.pageContent;
     const pageMeta = data?.data[0]?.metaSection;
@@ -26,19 +28,18 @@ const AmbulanceServices = async () => {
                                             <div className="breadcrumb-wrapper py-2 ps-2 ms-1">
                                                 <div className="row">
                                                     <div className="col-12 px-0">
-                                                        <ul className="breadcrumb mb-0">
-                                                            <li>
-                                                                <a href="/">Home</a>
-                                                            </li>
-                                                            <li className="active"> {pageContent[0]?.title} </li>
-                                                        </ul>
+                                                        <Breadcrumb
+                                                            activeTitle={pageContent[0]?.title}
+                                                            middleTitle={''}
+                                                            middleURL={''}
+                                                        />
                                                     </div>
                                                 </div>
                                             </div>
                                             <div className="details-banner">
                                                 <div className="details-heading">
                                                     <h3>{pageContent[0]?.title}</h3>
-                                                    <div class="ambulace-number"><a href={"tel:"+pageContent[0]?.subTitle}><i class="fa-solid fa-phone"></i> {pageContent[0]?.subTitle} </a></div>
+                                                    <div class="ambulace-number"><a href={"tel:" + pageContent[0]?.subTitle}><i class="fa-solid fa-phone"></i> {pageContent[0]?.subTitle} </a></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -61,12 +62,11 @@ const AmbulanceServices = async () => {
                                             <div className="breadcrumb-wrapper py-2 ps-2 ms-1">
                                                 <div className="row">
                                                     <div className="col-12">
-                                                        <ul className="breadcrumb mb-0">
-                                                            <li>
-                                                                <a href="/">Home</a>
-                                                            </li>
-                                                            <li className="active"> {pageContent[0]?.title} </li>
-                                                        </ul>
+                                                        <Breadcrumb
+                                                            activeTitle={pageContent[0]?.title}
+                                                            middleTitle={''}
+                                                            middleURL={''}
+                                                        />
                                                     </div>
                                                 </div>
                                             </div>

@@ -11,7 +11,7 @@ import Breadcrumb from '@/components/Breadcrumb'
 
 
 const Testimonial = async () => {
-    const basePath = await getBaseUrl();
+    const basePath = await getBaseUrl(true, true);
     const testimoData = await testimonialData.getAll();
     const data = await getStaticPageContent("testimonial");
     const pageContent = data?.data[0]?.pageContent;

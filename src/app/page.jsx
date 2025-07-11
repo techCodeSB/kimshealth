@@ -17,6 +17,7 @@ import getAwardData from '@/app/lib/getAward'
 import doctorTalkData from '@/app/lib/getDoctorTalk'
 import hospitalData from '@/app/lib/getHospital'
 import staticPage from '@/app/lib/getStaticPage'
+import BookAnAppoinmentShort from '@/components/Forms/BookAnAppoinmentShort'
 
 
 
@@ -28,16 +29,18 @@ const Home = async () => {
   const pageContent = data?.data[0]?.pageContent;
   const pageMeta = data?.data[0]?.metaSection;
 
+  console.log(pageContent)
+
   const specialityDataSet = {
     sectionTitle: pageContent[2]?.title,
-    buttonText: 'View All', buttonURL: `${basePath+"/speciality"}`,
+    buttonText: 'View All', buttonURL: `${basePath + "/speciality"}`,
     data: await getSpecialityData.getAll(),
     baseUrl: basePath
   };
 
   const expertDataSet = {
     sectionTitle: pageContent[3]?.title,
-    buttonText: 'View All', buttonURL: `${basePath+"/doctor"}`,
+    buttonText: 'View All', buttonURL: `${basePath + "/doctor"}`,
     data: await doctorData.getDoctorAll(10),
     baseUrl: basePath
   };
@@ -51,21 +54,21 @@ const Home = async () => {
 
   const testimonialDataSet = {
     sectionTitle: pageContent[5]?.title,
-    buttonText: 'View All', buttonURL: `${basePath+"/testimonial"}`,
+    buttonText: 'View All', buttonURL: `${basePath + "/testimonial"}`,
     data: await testimonialData.getAll(10),
     baseUrl: basePath
   }
 
   const blogDataSet = {
     sectionTitle: pageContent[6]?.title,
-    buttonText: 'View All', buttonURL: `${basePath+"/blog"}`,
+    buttonText: 'View All', buttonURL: `${basePath + "/blog"}`,
     data: await blogData.allBlog(10),
     baseUrl: basePath
   }
 
   const docTalkDataSet = {
     sectionTitle: pageContent[7]?.title,
-    buttonText: 'View All', buttonURL: `${basePath+"/doctor-talk"}`,
+    buttonText: 'View All', buttonURL: `${basePath + "/doctor-talk"}`,
     data: await doctorTalkData.allData(10),
     baseUrl: basePath
   }
@@ -74,7 +77,7 @@ const Home = async () => {
 
   return (
     <>
-      <Header/>
+      <Header />
       <div role="main" className="main">
         <section className="d-lg-block d-none">
           <div className="container-wrapper">
@@ -106,40 +109,7 @@ const Home = async () => {
         </section>
 
         {/* <!-- ======= homepage start ========== --> */}
-        <section className="section py-4 d-lg-block d-none">
-          <div className="container">
-            <div className="custom-from">
-              <div className="row justify-content-between">
-                <div className="col-xl-3 col-lg-3 col-md-3 col-12">
-                  <div className="input-group mb-lg-0 mb-3">
-                    <span className="input-group-text" id="from-icon"><i
-                      className="fa-solid icon-location-pin"></i></span>
-                    <select className="form-select from-location">
-                      <option >Select hospital location</option>
-                      <option value="1">One</option>
-                      <option value="2">Two</option>
-                      <option value="3">Three</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div className="col-xl-3 col-lg-3 col-md-3 col-12">
-                  <div className="input-group mb-lg-0 mb-3">
-                    <span className="input-group-text" id="from-icon"><i
-                      className="fa-solid fa-magnifying-glass"></i></span>
-                    <input type="text" className="form-control pe-0" placeholder="Search doctor/specialities"
-                      aria-label="Username" aria-describedby="basic-addon1" />
-                  </div>
-                </div>
-                <div className="col-xl-3 col-lg-3 col-md-3 col-12">
-                  <div className="from-btn">
-                    <button type="button" className="btn">Book An Appointment</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+          <BookAnAppoinmentShort/>
 
         {/* <!--=========== fromsection end =======--> */}
         <section className="section py-0 d-lg-block d-none">
@@ -178,38 +148,31 @@ const Home = async () => {
           <div className="container-fluid ps-0">
             <div className="row">
               <div className="cta-col ctn-left-col">
-                <div className="cta-diff">
-                  <div className="d-flex align-items-center justify-content-center">
-                    <img src="/img/appointment-mb.png" alt="" />
-                    <h3>Book an <br /> Appointment</h3>
-                    {/* <!-- <div className="cta-right-arrow">
-                        <img src="/img/right-arrow.svg" className="img-fluid" alt=""/>
-                      </div> --> */}
-                  </div>
-                </div>
-              </div>
-              <div className="cta-col">
-                <a href="#">
+                <a href={basePath + "/book-an-appointment"}>
                   <div className="cta-diff">
                     <div className="d-flex align-items-center justify-content-center">
-                      <img src="/img/doctor.png" alt="" />
-                      <h3>Find a <br /> <span>Doctor</span></h3>
-                      {/* <!-- <div className="cta-right-arrow">
-                          <img src="/img/right-arrow.svg" className="img-fluid" alt=""/>
-                        </div> --> */}
+                      <img src="/img/appointment-mb.png" alt="" />
+                      <h3>Book an <br /> Appointment</h3>
                     </div>
                   </div>
                 </a>
               </div>
               <div className="cta-col">
-                <a href="#">
+                <a href={basePath + "/doctor"}>
+                  <div className="cta-diff">
+                    <div className="d-flex align-items-center justify-content-center">
+                      <img src="/img/doctor.png" alt="" />
+                      <h3>Find a <br /> <span>Doctor</span></h3>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div className="cta-col">
+                <a href={basePath + "/health-package"}>
                   <div className="cta-diff">
                     <div className="d-flex align-items-center justify-content-center">
                       <img src="/img/opinion.png" alt="" />
                       <h3>Health <br /> <span> Check-up</span></h3>
-                      {/* <!-- <div className="cta-right-arrow">
-                          <img src="/img/right-arrow.svg" className="img-fluid" alt=""/>
-                        </div> --> */}
                     </div>
                   </div>
                 </a>
@@ -247,7 +210,7 @@ const Home = async () => {
 
       </div>
 
-      <Footer/>
+      <Footer />
     </>
   )
 }

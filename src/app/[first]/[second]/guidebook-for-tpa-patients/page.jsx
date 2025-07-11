@@ -4,6 +4,7 @@ import React from 'react'
 import { getStaticPageContent } from '@/app/lib/getStaticPageContent';
 import getStaticText from '@/app/lib/getStaticTextServer';
 import { getBaseUrl } from '@/app/lib/getBaseUrl';
+import Breadcrumb from '@/components/Breadcrumb';
 
 const GuidebookTpa = async () => {
     const basePath = await getBaseUrl(true, true);
@@ -11,7 +12,7 @@ const GuidebookTpa = async () => {
     const data = await getStaticPageContent("guidebook-for-tpa-patients");
     const pageContent = data?.data[0]?.pageContent;
     const pageMeta = data?.data[0]?.metaSection;
-    
+
 
 
     return (
@@ -28,12 +29,11 @@ const GuidebookTpa = async () => {
                         <div className="container">
                             <div className="row">
                                 <div className="col-12">
-                                    <ul className="breadcrumb mb-0">
-                                        <li>
-                                            <a href={basePath+"/"}>{staticText['Home']}</a>
-                                        </li>
-                                        <li className="active"> {pageContent[0]?.title}</li>
-                                    </ul>
+                                    <Breadcrumb
+                                        activeTitle={staticText[pageContent[0]?.title]}
+                                        middleTitle={''}
+                                        middleURL={""}
+                                    />
                                 </div>
                             </div>
                         </div>

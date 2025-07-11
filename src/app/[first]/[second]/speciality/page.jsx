@@ -33,7 +33,7 @@ const Speciality = async () => {
                     <div className="container">
                         <div className="row">
                             <div className="col-12">
-                                <Breadcrumb activeTitle={pageContent[0]?.title} middleTitle={""} middleURL={""} />
+                                <Breadcrumb activeTitle={pageContent[0]?.title} />
                             </div>
                         </div>
                     </div>

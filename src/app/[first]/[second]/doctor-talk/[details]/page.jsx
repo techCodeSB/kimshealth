@@ -3,6 +3,7 @@ import { getBaseUrl } from '@/app/lib/getBaseUrl';
 import doctorTalkData from '@/app/lib/getDoctorTalk';
 import getStaticText from '@/app/lib/getStaticTextServer';
 import youtubeData from '@/app/lib/getYoutubeData';
+import Breadcrumb from '@/components/Breadcrumb';
 import Footer from '@/components/Footer';
 import FromDoctor from '@/components/FromDoctor';
 import Header from '@/components/Header';
@@ -12,7 +13,7 @@ const DoctorTalkDetails = async ({ params }) => {
     const data = await doctorTalkData.getSingleDoctor(params.details);
     const staticText = await getStaticText();
     const youtube = await youtubeData(data.videoId);
-    
+
     const docTalkDataSet = {
         sectionTitle: data.title,
         buttonText: 'View All', buttonURL: '#',
@@ -34,15 +35,11 @@ const DoctorTalkDetails = async ({ params }) => {
                         <div className="container">
                             <div className="row">
                                 <div className="col-12">
-                                    <ul className="breadcrumb mb-0">
-                                        <li>
-                                            <a href={basePath+"/"}>{staticText['Home']}</a>
-                                        </li>
-                                        <li>
-                                            <a href={basePath + "/doctor-talk"}>{staticText['Doctor Talk']}</a>
-                                        </li>
-                                        <li className="active"> {data.title} </li>
-                                    </ul>
+                                    <Breadcrumb
+                                        activeTitle={data.title}
+                                        middleTitle={staticText['Doctor Talk']}
+                                        middleURL={basePath + "/doctor-talk"}
+                                    />
                                 </div>
                             </div>
                         </div>
@@ -98,7 +95,7 @@ const DoctorTalkDetails = async ({ params }) => {
                     </section>
 
                     <div className="line-divider"></div>
-                    <FromDoctor dataSet={docTalkDataSet}/>
+                    <FromDoctor dataSet={docTalkDataSet} />
                 </div>
             </div>
             <Footer />

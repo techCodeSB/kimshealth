@@ -4,6 +4,7 @@ import doctorData from '@/app/lib/getDoctor';
 import doctorTalkData from '@/app/lib/getDoctorTalk';
 import getStaticText from '@/app/lib/getStaticTextServer';
 import BlogCarousel from '@/components/BlogCarousel';
+import Breadcrumb from '@/components/Breadcrumb';
 import Footer from '@/components/Footer';
 import FromDoctor from '@/components/FromDoctor';
 import Header from '@/components/Header';
@@ -20,14 +21,14 @@ const DoctorDetails = async ({ params }) => {
 
     const docTalkDataSet = {
         sectionTitle: data.doctorTalk.title,
-        buttonText: 'View All', buttonURL: basePath+"/doctor-talk",
+        buttonText: 'View All', buttonURL: basePath + "/doctor-talk",
         data: await doctorTalkData.getByDoctor(data.id),
         baseUrl: basePath
     }
 
     const blogDataSet = {
         sectionTitle: data.blogSection.title,
-        buttonText: 'View All', buttonURL: basePath+"/blog",
+        buttonText: 'View All', buttonURL: basePath + "/blog",
         data: await blogData.getByDoctor(data.id),
         baseUrl: basePath
     }
@@ -47,15 +48,11 @@ const DoctorDetails = async ({ params }) => {
                         <div className="container">
                             <div className="row">
                                 <div className="col-12">
-                                    <ul className="breadcrumb mb-0">
-                                        <li>
-                                            <a href="/">{staticText['Home']}</a>
-                                        </li>
-                                        <li>
-                                            <a href="/doctor">{staticText['Find a Doctor']}</a>
-                                        </li>
-                                        <li className="active"> {data.name}</li>
-                                    </ul>
+                                    <Breadcrumb
+                                        activeTitle={data.name}
+                                        middleTitle={staticText['Find a Doctor']}
+                                        middleURL={basePath+"/doctor"}
+                                    />
                                 </div>
                             </div>
                         </div>

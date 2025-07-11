@@ -5,6 +5,7 @@ import { getBaseUrl } from '@/app/lib/getBaseUrl'
 import getStaticText from '@/app/lib/getStaticTextServer'
 import courseData from '@/app/lib/getCourse';
 import Form1 from '@/components/Forms/Form1';
+import Breadcrumb from '@/components/Breadcrumb'
 
 const DoctoralCourseDetails = async ({ params }) => {
     const basePath = await getBaseUrl(true, true);
@@ -12,7 +13,6 @@ const DoctoralCourseDetails = async ({ params }) => {
 
     let courseDetails = await courseData.getSingleCourse(params.details);
     let otherCourse = await courseData.getAll(courseDetails.courseCategory.id);
-    console.log(otherCourse)
     return (
         <>
             <Header />
@@ -27,12 +27,11 @@ const DoctoralCourseDetails = async ({ params }) => {
                         <div className="container">
                             <div className="row">
                                 <div className="col-12">
-                                    <ul className="breadcrumb mb-0">
-                                        <li>
-                                            <a href={basePath + "/"}>{staticText['Home']}</a>
-                                        </li>
-                                        <li className="active"> Course Details</li>
-                                    </ul>
+                                    <Breadcrumb
+                                        activeTitle={staticText['Course Details']}
+                                        middleTitle={''}
+                                        middleURL={''}
+                                    />
                                 </div>
                             </div>
                         </div>
@@ -60,7 +59,7 @@ const DoctoralCourseDetails = async ({ params }) => {
 
                                     </div>
                                     <div className="association-form-card mb-5">
-                                         <Form1 title={"Request a Call Back"} />
+                                        <Form1 title={"Request a Call Back"} />
                                     </div>
                                 </div>
                             </div>
