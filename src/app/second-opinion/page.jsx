@@ -2,11 +2,16 @@ import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import React from 'react'
 import { getStaticPageContent } from '@/app/lib/getStaticPageContent';
+import Breadcrumb from '@/components/Breadcrumb';
+import { getBaseUrl } from '@/app/lib/getBaseUrl';
 
 const SecondOpinion = async () => {
+    const basePath = getBaseUrl(true, true,)
     const data = await getStaticPageContent("second-opinion");
-        const pageContent = data?.data[0]?.pageContent;
-        const pageMeta = data?.data[0]?.metaSection;
+    const pageContent = data?.data[0]?.pageContent;
+    const pageMeta = data?.data[0]?.metaSection;
+
+
     return (
         <>
             <Header />
@@ -27,6 +32,10 @@ const SecondOpinion = async () => {
                                         </li>
                                         <li className="active">{pageContent[0]?.title}</li>
                                     </ul>
+                                    <Breadcrumb activeTitle={pageContent[0]?.title}
+                                        middleTitle={""}
+                                        middleURL={""}
+                                    />
                                 </div>
                             </div>
                         </div>
@@ -46,14 +55,13 @@ const SecondOpinion = async () => {
                                             <button type="button" className="btn-tab treat-tab " >
                                                 {pageContent[2]?.title}</button>
 
-
                                         </div>
 
                                     </div>
                                 </div>
 
                                 <div className="col-md-8 expert-section">
-                                    <div className="treat-box" id="omega" style={{display: "block"}}>
+                                    <div className="treat-box" id="omega" style={{ display: "block" }}>
 
                                         <div className="main-heading sub-heading main-list mb-4">
                                             <h2>{pageContent[1]?.title}</h2>
@@ -126,7 +134,7 @@ const SecondOpinion = async () => {
 
 
 
-                                    <div className="treat-box" id="omega1" style={{display: "none"}}>
+                                    <div className="treat-box" id="omega1" style={{ display: "none" }}>
                                         <div className="main-heading sub-heading main-list mb-4">
                                             <h2>{pageContent[2]?.title}</h2>
 
