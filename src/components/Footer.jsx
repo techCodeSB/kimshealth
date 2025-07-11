@@ -27,7 +27,6 @@ const Footer = () => {
 
         const getLoc = async () => {
             const loc = await langLoc.getLocations();
-            console.log(loc)
             setAllLocations([...loc]);
         }
 
@@ -42,7 +41,6 @@ const Footer = () => {
             } catch (error) {
                 console.error("Error fetching titles:", error);
             }
-
 
         };
 

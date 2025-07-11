@@ -13,7 +13,7 @@ import getCurrentLangLocClient from '@/helper/getCurrentLangLocClient';
 
 
 const Header = () => {
-
+    const [selectedLangLoc, setselectedLangLoc] = useState([]);
     const [allLanguages, setAllLanguage] = useState([]); // Store all language;
     const [allLocations, setAllLocations] = useState([]); // Store all locations;
     const [selectedLang, setSelectedLang] = useState(null);
@@ -44,8 +44,10 @@ const Header = () => {
     useEffect(() => {
         const get = async () => {
             const LangLoc = await getCurrentLangLocClient()
+            console.log(langLoc)
             setSpeciality(await getSpecialityData.getHeaderSpeciality({ LangLoc }))
             setLocationData(await getLocation());
+            setselectedLangLoc(LangLoc);
 
             // await hospitalData.getHospitalByLocationId();
             setAllHospital(await hospitalData.getAllHospitalAndMedicalCenter());
@@ -628,10 +630,19 @@ const Header = () => {
                                     </select>
                                 </div> */}
                                 <div className="mobile-location-dropdown d-md-none d-block">
-                                    <select aria-label="Default select example">
-                                        <option value={""}>Location</option>
-                                        <option value="1">Ar</option>
-                                        <option value="2">Ml</option>
+
+
+                                    <select value={basePathOnlyLang + "/" + selectedLangLoc?.loc?.slug} aria-label="Default select example" onChange={(e) => {
+                                        const url = e.target.value;
+                                        window.open(url, '_self', 'noreferrer');
+                                    }}>
+                                        <option value={basePathOnlyLang + "/hospital"}>Location</option>
+                                        {
+                                            allLocations?.map((loc, i) => {
+                                                return <option value={basePathOnlyLang + "/" + loc.slug} key={i}>{loc.title}</option>
+                                            })
+                                        }
+
                                     </select>
                                 </div>
                                 <div className="menu-button">
