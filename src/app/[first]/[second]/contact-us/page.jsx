@@ -2,10 +2,10 @@ import Breadcrumb from '@/components/Breadcrumb'
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import React from 'react'
-import getStaticText from '../lib/getStaticTextServer'
-import getCurrentLangLoc from '../lib/getCurrentLangLoc'
-import hospitalData from '../lib/getHospital'
-import { getStaticPageContent } from '../lib/getStaticPageContent'
+import getStaticText from '@/app/lib/getStaticTextServer'
+import getCurrentLangLoc from '@/app/lib/getCurrentLangLoc'
+import hospitalData from '@/app/lib/getHospital'
+import { getStaticPageContent } from '@/app/lib/getStaticPageContent'
 
 
 

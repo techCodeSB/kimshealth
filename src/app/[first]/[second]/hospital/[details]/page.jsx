@@ -11,6 +11,7 @@ import Breadcrumb from '@/components/Breadcrumb';
 import ExcellenceCarousel from '@/components/ExcellenceCarousel';
 import ExpertCarousel from '@/components/ExpertCarousel';
 import Footer from '@/components/Footer';
+import BookAnAppoinmentShort from '@/components/Forms/BookAnAppoinmentShort';
 import FromDoctor from '@/components/FromDoctor';
 import Header from '@/components/Header';
 import TestimonialSection from '@/components/TestimonialSection';
@@ -193,44 +194,7 @@ const HospitalDetails = async ({ params }) => {
                     </div>
                 </section>
 
-                <section className="section py-4 d-lg-block d-none">
-                    <div className="container">
-                        <div className="custom-from">
-                            <div className="row justify-content-between">
-
-                                <div className="col-xl-3 col-lg-3 col-md-3 col-12">
-                                    <div className="input-group mb-lg-0 mb-3">
-                                        <span className="input-group-text" id="from-icon"><i
-                                            className="fa-solid icon-location-pin"></i></span>
-                                        <select className="form-select from-location">
-                                            <option >Select Trivandrum</option>
-                                            <option value="1">One</option>
-                                            <option value="2">Two</option>
-                                            <option value="3">Three</option>
-                                        </select>
-
-                                    </div>
-                                </div>
-
-                                <div className="col-xl-3 col-lg-3 col-md-3 col-12">
-                                    <div className="input-group mb-lg-0 mb-3">
-                                        <span className="input-group-text" id="from-icon"><i
-                                            className="fa-solid fa-magnifying-glass"></i></span>
-                                        <input type="text" className="form-control pe-0" placeholder="Search doctor/specialities"
-                                            aria-label="Username" aria-describedby="basic-addon1" />
-                                    </div>
-                                </div>
-                                <div className="col-xl-3 col-lg-3 col-md-3 col-12">
-                                    <div className="from-btn">
-                                        <a href={basePath + "/book-an-appointment"} className='btn'>
-                                            Book An Appointment
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+                <BookAnAppoinmentShort/>
 
                 {/* <!--=========== fromsection end =======--> */}
                 <section className="section py-0 d-lg-block d-none">

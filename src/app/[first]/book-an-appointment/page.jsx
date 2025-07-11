@@ -2,7 +2,7 @@ import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import { getStaticPageContent } from '@/app/lib/getStaticPageContent';
 import Breadcrumb from '@/components/Breadcrumb';
-import getStaticText from '../lib/getStaticTextServer';
+import getStaticText from '@/app/lib/getStaticTextServer';
 
 const BookAnAppoinment = async () => {
     const data = await getStaticPageContent("book-an-appointment");

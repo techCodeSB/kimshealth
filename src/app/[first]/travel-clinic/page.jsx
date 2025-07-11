@@ -4,7 +4,7 @@ import Header from '@/components/Header'
 import React from 'react'
 import { getStaticPageContent } from '@/app/lib/getStaticPageContent'
 import Breadcrumb from '@/components/Breadcrumb'
-import getStaticText from '../lib/getStaticTextServer'
+import getStaticText from '@/app/lib/getStaticTextServer'
 
 const TravelClinic = async () => {
     const data = await getStaticPageContent("travel-clinic");

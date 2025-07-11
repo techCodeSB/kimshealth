@@ -6,7 +6,7 @@ import { getBaseUrl } from '@/app/lib/getBaseUrl'
 import { getStaticPageContent } from '@/app/lib/getStaticPageContent'
 import Form1 from '@/components/Forms/Form1'
 import courseData from '@/app/lib/getCourse'
-import getStaticText from '../lib/getStaticTextServer'
+import getStaticText from '@/app/lib/getStaticTextServer'
 import Breadcrumb from '@/components/Breadcrumb'
 
 const KisaHealth = async () => {

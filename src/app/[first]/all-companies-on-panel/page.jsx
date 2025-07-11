@@ -3,7 +3,7 @@ import Header from '@/components/Header'
 import React from 'react'
 import { getStaticPageContent } from '@/app/lib/getStaticPageContent';
 import Breadcrumb from '@/components/Breadcrumb';
-import getStaticText from '../lib/getStaticTextServer';
+import getStaticText from '@/app/lib/getStaticTextServer';
 
 const AllCompaniesPanel = async () => {
     const field = "populate[0]=pageContent&populate[1]=pageContent.logoSlider&populate[2]=pageContent.logoSlider.image&populate[3]=metaSection";

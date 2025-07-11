@@ -5,7 +5,7 @@ import { getStaticPageContent } from '@/app/lib/getStaticPageContent';
 import { getBaseUrl } from '@/app/lib/getBaseUrl';
 import investorDAta from '@/app/lib/getInvestor';
 import Breadcrumb from '@/components/Breadcrumb';
-import getStaticText from '../lib/getStaticTextServer';
+import getStaticText from '@/app/lib/getStaticTextServer';
 
 const Investor = async () => {
     const basePath = await getBaseUrl(true, true);

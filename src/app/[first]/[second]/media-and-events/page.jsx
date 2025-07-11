@@ -5,7 +5,7 @@ import { getBaseUrl } from '@/app/lib/getBaseUrl';
 import { getStaticPageContent } from '@/app/lib/getStaticPageContent';
 import MediaEventListing from '@/components/MediaEventListing';
 import Breadcrumb from '@/components/Breadcrumb';
-import getStaticText from '../lib/getStaticTextServer';
+import getStaticText from '@/app/lib/getStaticTextServer';
 
 const MediaAndEvents = async () => {
     const basePath = await getBaseUrl(true, true);
