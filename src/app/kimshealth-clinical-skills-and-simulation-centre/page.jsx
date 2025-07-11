@@ -2,6 +2,7 @@ import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 import { getStaticPageContent } from '@/app/lib/getStaticPageContent';
 import Breadcrumb from '@/components/Breadcrumb';
+import getStaticText from '@/app/lib/getStaticTextServer';
 
 const ClinicalSkills = async () => {
     const staticText = await getStaticText();

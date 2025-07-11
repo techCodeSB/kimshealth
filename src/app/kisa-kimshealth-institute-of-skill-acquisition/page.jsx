@@ -10,7 +10,7 @@ import getStaticText from '@/app/lib/getStaticTextServer'
 import Breadcrumb from '@/components/Breadcrumb'
 
 const KisaHealth = async () => {
-    const statiText = await getStaticText();
+    const staticText = await getStaticText();
     const field = "populate[0]=pageContent&populate[1]=pageContent.bannerItem&populate[2]=pageContent.bannerItem.bannerImageDesktop&populate[3]=pageContent.bannerItem.bannerImageMobile&populate[4]=metaSection&populate[5]=pageContent.journal&populate[6]=pageContent.journal.thumbnailImage&populate[7]=pageContent.journal.file&populate[8]=pageContent.file&populate[9]=pageContent.courseCategory";
     const basePath = await getBaseUrl(true, true);
     const data = await getStaticPageContent("kisa-kimshealth-institute-of-skill-acquisition", field);
@@ -37,7 +37,7 @@ const KisaHealth = async () => {
                                                     <div className="col-12 px-0">
                                                         <Breadcrumb
                                                             activeTitle={pageContent[0]?.title}
-                                                            middleTitle={statiText['Academics']}
+                                                            middleTitle={staticText['Academics']}
                                                             middleURL={"#"}
                                                         />
                                                     </div>
