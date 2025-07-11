@@ -1,20 +1,10 @@
-"use client"
-import { getBaseUrl } from '@/helper/getBaseUrl';
-import getStaticText from '@/helper/getStaticText';
-import React, { useEffect, useState } from 'react';
+import { getBaseUrl } from "@/app/lib/getBaseUrl";
+import getStaticText from "@/app/lib/getStaticTextServer";
 
-const Breadcrumb = ({ activeTitle, middleTitle, middleURL }) => {
-    const [staticText, setStaticTexts] = useState({});
+
+const Breadcrumb = async ({ activeTitle, middleTitle, middleURL }) => {
+    const staticText = await getStaticText();
     const baseUrl = getBaseUrl(true, true);
-
-    useEffect(() => {
-        const fetchTexts = async () => {
-            setStaticTexts({ ...await getStaticText() })
-        };
-
-        fetchTexts();
-
-    }, []);
 
     return (
         <ul className="breadcrumb mb-0">
