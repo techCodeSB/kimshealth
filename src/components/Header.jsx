@@ -9,9 +9,11 @@ import getLocation from '@/app/lib/getLocation';
 import getSpecialityData from '@/app/lib/getSpeciality';
 import hospitalData from '@/app/lib/getHospital';
 import getStaticText from '@/helper/getStaticText';
+import getCurrentLangLocClient from '@/helper/getCurrentLangLocClient';
 
 
 const Header = () => {
+
     const [allLanguages, setAllLanguage] = useState([]); // Store all language;
     const [allLocations, setAllLocations] = useState([]); // Store all locations;
     const [selectedLang, setSelectedLang] = useState(null);
@@ -41,7 +43,8 @@ const Header = () => {
 
     useEffect(() => {
         const get = async () => {
-            setSpeciality(await getSpecialityData.getHeaderSpeciality())
+            const LangLoc = await getCurrentLangLocClient()
+            setSpeciality(await getSpecialityData.getHeaderSpeciality({ LangLoc }))
             setLocationData(await getLocation());
 
             // await hospitalData.getHospitalByLocationId();
@@ -84,6 +87,8 @@ const Header = () => {
         const sidebar = document.getElementById('sidebar');
         const overlay = document.getElementById('overlay');
         const menuItems = document.querySelectorAll('.menu-item');
+        const dropdownItems = document.querySelectorAll('.has-dropdown');
+
 
         // Toggle sidebar
         hamburger?.addEventListener('click', function () {
@@ -92,10 +97,12 @@ const Header = () => {
             overlay.classList.toggle('active');
 
 
+            // Prevent scrolling when sidebar is open
             document.body.style.overflow = sidebar.classList.contains('active') ? 'hidden' : '';
         });
 
 
+        // Close sidebar when clicking on overlay
         overlay?.addEventListener('click', function () {
             hamburger.classList.remove('active');
             sidebar.classList.remove('active');
@@ -104,12 +111,52 @@ const Header = () => {
         });
 
 
-        menuItems?.forEach(item => {
-            item.addEventListener('click', function () {
+        // Menu item click effect
+        menuItems.forEach(item => {
+            item.addEventListener('click', function (e) {
+                // Check if this item is part of a dropdown
+                const parentLi = this.closest('.has-dropdown');
+
+
+                if (parentLi) {
+                    e.stopPropagation();
+
+
+                    // Close all other dropdowns first
+                    dropdownItems.forEach(dropdown => {
+                        if (dropdown !== parentLi) {
+                            dropdown.classList.remove('open');
+                            const otherSubmenu = dropdown.querySelector('.submenu');
+                            if (otherSubmenu) {
+                                otherSubmenu.classList.remove('open');
+                            }
+                        }
+                    });
+
+
+                    // Toggle current dropdown
+                    parentLi.classList.toggle('open');
+
+
+                    // Find the submenu element
+                    const submenu = parentLi.querySelector('.submenu');
+                    if (submenu) {
+                        submenu.classList.toggle('open');
+                    }
+
+
+                    // Prevent other actions for dropdown items
+                    return;
+                }
+
+
+                // Remove active class from all items
                 menuItems.forEach(i => i.classList.remove('active'));
+
 
                 // Add active class to clicked item
                 this.classList.add('active');
+
 
                 // Close sidebar on mobile after selection
                 if (window.innerWidth <= 768) {
@@ -123,8 +170,9 @@ const Header = () => {
             });
         });
 
+
         // Close sidebar when window is resized to desktop
-        window.addEventListener('resize', function () {
+        window?.addEventListener('resize', function () {
             if (window.innerWidth > 768 && sidebar.classList.contains('active')) {
                 hamburger.classList.remove('active');
                 sidebar.classList.remove('active');
@@ -133,7 +181,47 @@ const Header = () => {
             }
         });
 
+
+        // Submenu item click handling
+        document.querySelectorAll('.submenu-item').forEach(item => {
+            item.addEventListener('click', function (e) {
+                e.stopPropagation();
+
+
+                // Remove active class from all items
+                menuItems.forEach(i => i.classList.remove('active'));
+
+
+                // Add active class to parent menu item
+                const parentMenuItem = this.closest('.has-dropdown').querySelector('.menu-item');
+                if (parentMenuItem) {
+                    parentMenuItem.classList.add('active');
+                }
+
+
+                // Highlight this submenu item
+                document.querySelectorAll('.submenu-item').forEach(i => {
+                    i.classList.remove('active');
+                });
+                this.classList.add('active');
+
+
+                // Close sidebar on mobile after selection
+                if (window.innerWidth <= 768) {
+                    setTimeout(() => {
+                        hamburger.classList.remove('active');
+                        sidebar.classList.remove('active');
+                        overlay.classList.remove('active');
+                        document.body.style.overflow = '';
+                    }, 300);
+                }
+            });
+        });
+
+
     }, [])
+
+
 
 
     return (
@@ -148,13 +236,23 @@ const Header = () => {
                         </div>
                         <div className="header-contact d-flex align-items-center justify-content-center">
                             <ul>
-                                <li><a href={`${basePath}/about-us`}>About Us</a></li>
-                                <li><a href={`${basePath}/at-home-services`}>Home Care</a></li>
-                                <li><a href={`${basePath}/second-opinion`}>Second Opinion</a></li>
-                                {/* <li><a href="#">My Reports</a></li> */}
-                                <li><a href={`${basePath}/ambulance-services`}>Call Ambulance</a></li>
-                                <li><a href={`${basePath}/contact-us`}>Contact Us</a></li>
-                                <li><a href={"https://healthcheckup.kimshealthcare.com/p/kims-trivandrum-1/"} target='_blank'>Health Checkup</a></li>
+                                <li><a href={`${basePath}/about-us`}>{staticTexts['About Us']}</a></li>
+                                <li><a href={`${basePath}/at-home-services`}>{staticTexts['Home Care']}</a></li>
+                                <li><a href={`${basePath}/second-opinion`}>{staticTexts['Second Opinion']}</a></li>
+                                <li><a href={`${basePath}/ambulance-services`}>{staticTexts['Call Ambulance']}</a></li>
+                                <li className="menu-item-has-children show-submenu">
+                                    <a href={`${basePath}/contact-us`}>{staticTexts['Contact Us']}</a>
+                                    <div className="sub-menu sub-menu-single">
+                                        <div className="sub-menu-details">
+                                            <ul>
+                                                <li>
+                                                    <a href={"tel:" + locationData?.phone}><i className="fa-solid fa-phone"></i>   {locationData?.phone}</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li><a href={"https://healthcheckup.kimshealthcare.com/p/kims-trivandrum-1/"} target='_blank'>{staticTexts['Health Checkup']}</a></li>
                             </ul>
 
                             <div className="top-bar-icon d-flex align-items-center">
@@ -191,14 +289,10 @@ const Header = () => {
                                 </a>
                             </div>
                             <div className="mobile_primary" id="primary-nav">
-                                {/* <!-- <div className="navbar-brand navbar-logo d-none d-lg-block">
-                                <a href="#">
-                                    <img src="/img/imi-logo.png" alt="" className="img-fluid"/>
-                                </a>
-                            </div> --> */}
+
                                 <ul className="menu-navigation" id="menu-main-navigation-1">
                                     <li className="menu-item-has-children show-submenu">
-                                        <a href={basePath + "/speciality"} className="anchor-menu">Specialities & Treatments</a>
+                                        <a href={basePath + "/speciality"} className="anchor-menu">{staticTexts['Specialities']}</a>
                                         <div className="sub-menu">
                                             <div className="row">
                                                 {
@@ -235,12 +329,12 @@ const Header = () => {
 
                                         </div>
                                     </li>
-                                    <li><a href={`${basePath}/doctor`} className="anchor-menu">Find a Doctor</a></li>
-                                    {/* <!-- <li><a href="" className="anchor-menu">Health Checkup</a></li> --> */}
-                                    <li><a href={`${basePath}/visa-medical`} className="anchor-menu">Visa Medical</a></li>
-                                    <li><a href={`${basePath}/international-patient`} className="anchor-menu">International Patients</a></li>
+                                    <li><a href={`${basePath}/doctor`} className="anchor-menu">{staticTexts['Find a Doctor']}</a></li>
+                                    <li><a href={`${basePath}/visa-medical`} className="anchor-menu">{staticTexts['Visa Medical']}</a></li>
+                                    <li><a href={`${basePath}/international-patient`} className="anchor-menu">
+                                        {staticTexts['International Patients']}</a></li>
                                     <li className="menu-item-has-children show-submenu d-lg-inline-block d-none">
-                                        <a href={basePathOnlyLang + "/hospital"} className="anchor-menu">Locations</a>
+                                        <a href={basePathOnlyLang + "/hospital"} className="anchor-menu">{staticTexts['Locations']}</a>
                                         <div className="sub-menu ">
                                             <div className="row">
                                                 <div className="col-md-4">
@@ -272,7 +366,7 @@ const Header = () => {
                                                 </div>
 
                                                 <div className="col-lg-8">
-                                                    <div className="sub-menu-details">
+                                                    <div className="sub-menu-details location-menu-red-color">
                                                         {
                                                             allLocations.map((l, index) => {
                                                                 // Filter once per location
@@ -397,21 +491,8 @@ const Header = () => {
                                     Book An Appointment
                                 </button>
                             </div>
-                            <div className="mobile-location-dropdown d-md-none d-block">
-                                <select aria-label="Default select example">
-                                    <option value={""}>Location</option>
-                                    <option value="1">Ar</option>
-                                    <option value="2">Ml</option>
-                                </select>
-                            </div>
-                            <div className="mobile-location-dropdown d-md-none d-block">
-                                <select aria-label="Default select example">
-                                    <option value={""}>En</option>
-                                    <option value="1">Ar</option>
-                                    <option value="2">Ml</option>
-                                </select>
-                            </div>
-                            
+
+
                             <div className="desktop-humberger-menu">
                                 <div className="hamburger" id="hamburger">
                                     <span></span>
@@ -420,39 +501,146 @@ const Header = () => {
                                 </div>
                                 <div className="sidebar" id="sidebar">
                                     <div className="menu-items">
-                                        <div className="sub-menu-details">
-                                            <ul>
-                                                <li>
-                                                    <a href="#">Kuravankonam</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">Manacaud</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">Attingal</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">Pothencode</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">Ayoor</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">Vedivachankoil</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">Vattiyoorkavu</a>
-                                                </li>
-                                            </ul>
-                                        </div>
+                                        <ul className="sub-menu-details">
+                                            <li className="has-dropdown">
+                                                <a href={basePath + "/about-us"} className="menu-item">{staticTexts['About Us']}</a>
+                                                <i className="fa-solid fa-angle-down"></i>
+                                                <ul className="submenu">
+                                                    <li className="submenu-item">
+                                                        <a href={basePath + "/about-us"}>{staticTexts['Overview']}</a>
+                                                    </li>
+                                                    <li className="submenu-item">
+                                                        <a href={basePath + "/leadership"}>{staticTexts['Leadership']}</a>
+                                                    </li>
+                                                    <li className="submenu-item">
+                                                        <a href={basePath + "/milestone"}>{staticTexts['Milestones']}</a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                <a target='_blank' href="https://consult.bestdocapp.com/home/KIMSTVM?version=new" className="menu-item mt-2">{staticTexts['Telehealth']}</a>
+                                            </li>
+                                            <li>
+                                                <a href={basePath + "/investor"} className="menu-item">{staticTexts['Corporate']}</a>
+                                            </li>
+
+                                            <li className="has-dropdown">
+                                                <a href="#" className="menu-item">{staticTexts['CSR']}</a>
+                                                <i className="fa-solid fa-angle-down"></i>
+                                                <ul className="submenu">
+                                                    <li className="submenu-item">
+                                                        <a href={basePath + "/csr-policy"}>{staticTexts['CSR Policy']}</a>
+                                                    </li>
+                                                    <li className="submenu-item">
+                                                        <a href={basePath + "/csr-initiative"}>{staticTexts['CSR Initiative']}</a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+
+                                            <li className="has-dropdown">
+                                                <a href="#" className="menu-item">{staticTexts['Patients and Visitors']}</a>
+                                                <i className="fa-solid fa-angle-down"></i>
+                                                <ul className="submenu">
+                                                    <li className="submenu-item">
+                                                        <a href={basePath + "/patient-stories"}>{staticTexts['Patient Stories']}</a>
+                                                    </li>
+                                                    <li className="submenu-item">
+                                                        <a href={basePath + "/patients-rights-and-responsibilities"} >
+                                                            {staticTexts['Patient Rights']}
+                                                        </a>
+                                                    </li>
+                                                    <li className="submenu-item">
+                                                        <a href={basePath + "/guidebook-for-tpa-patients"}>{staticTexts['Guidelines']}</a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+
+
+                                            <li>
+                                                <a href={basePath + "/ethics-committee"} className="menu-item mt-2">{staticTexts['Ethics Committee']}</a>
+                                            </li>
+                                            <li className="has-dropdown">
+                                                <a href="#" className="menu-item">{staticTexts['Academics']}</a>
+                                                <i className="fa-solid fa-angle-down"></i>
+                                                <ul className="submenu">
+                                                    <li className="submenu-item">
+                                                        <a href={basePath + "/kisa-kimshealth-institute-of-skill-acquisition"}>{staticTexts['KISA (KIMSHEALTH Institute of Skill Acquisition)']}</a>
+                                                    </li>
+                                                    <li className="submenu-item">
+                                                        <a href={basePath + "/internal-medicine-training-imt"}>{staticTexts['Internal Medicine Training (IMT)']}</a>
+                                                    </li>
+                                                    <li className="submenu-item">
+                                                        <a href={basePath + "/emergency-medicine-program"}>{staticTexts['Emergency Medicine Program']}</a>
+                                                    </li>
+                                                    <li className="submenu-item">
+                                                        <a href={basePath + "/american-heart-association"}>{staticTexts['American Heart Association']}</a>
+                                                    </li>
+                                                    <li className="submenu-item">
+                                                        <a href={basePath + "/doctoral-courses"}>{staticTexts['Doctoral Courses']}</a>
+                                                    </li>
+                                                    <li className="submenu-item">
+                                                        <a href={basePath + "/socomer"}>{staticTexts['SOCOMER']}</a>
+                                                    </li>
+                                                    <li className="submenu-item">
+                                                        <a href={basePath + "#"}>{staticTexts['Nursing Recruitment']}</a>
+                                                    </li>
+                                                    <li className="submenu-item">
+                                                        <a href={basePath + "/paramedical-courses"}>{staticTexts['Paramedical Courses']}</a>
+                                                    </li>
+                                                    <li className="submenu-item">
+                                                        <a href={basePath + "/kimshealth-clinical-skills-and-simulation-centre"}>{staticTexts['KIMSHEALTH Clinical Skills and Simulation Centre']}</a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                <a href={basePath + "#"} className="menu-item mt-2">{staticTexts['Facilities']}</a>
+                                            </li>
+                                            <li>
+                                                <a href={basePath + "#"} className="menu-item mt-2">{staticTexts['Quality Focus']}</a>
+                                            </li>
+                                            <li>
+                                                <a href={basePath + "/all-companies-on-panel"} className="menu-item mt-2">{staticTexts['Insurance Providers']}</a>
+                                            </li>
+                                            <li>
+                                                <a href={basePath + "#"} className="menu-item mt-2">{staticTexts['Careers']}</a>
+                                            </li>
+                                            <li>
+                                                <a href={basePath + "/blog"} className="menu-item mt-2">{staticTexts['Blogs']}</a>
+                                            </li>
+                                            <li>
+                                                <a href={basePath + "/doctor-talk"} className="menu-item mt-2">{staticTexts[' Videos']}</a>
+                                            </li>
+                                            <li>
+                                                <a href={basePath + "/ethics-committee"} className="menu-item mt-2">{staticTexts['Ethics Committee']}</a>
+                                            </li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
-                            <div className="menu-button">
-                                <span className="toggle-bar"></span>
-                                <span className="toggle-bar"></span>
-                                <span className="toggle-bar"></span>
+
+
+                            <div className="mobile-spacing-nav">
+                                {/* <div className="mobile-location-dropdown d-md-none d-block">
+                                    <select aria-label="Default select example">
+                                        <option value={""}>En</option>
+                                        <option value="1">Ar</option>
+                                        <option value="2">Ml</option>
+                                    </select>
+                                </div> */}
+                                <div className="mobile-location-dropdown d-md-none d-block">
+                                    <select aria-label="Default select example">
+                                        <option value={""}>Location</option>
+                                        <option value="1">Ar</option>
+                                        <option value="2">Ml</option>
+                                    </select>
+                                </div>
+                                <div className="menu-button">
+                                    <span className="toggle-bar"></span>
+                                    <span className="toggle-bar"></span>
+                                    <span className="toggle-bar"></span>
+                                </div>
                             </div>
+
                         </nav>
 
                     </div>

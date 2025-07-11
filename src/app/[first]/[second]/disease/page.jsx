@@ -6,8 +6,10 @@ import { getBaseUrl } from '@/app/lib/getBaseUrl';
 import { getStaticPageContent } from '@/app/lib/getStaticPageContent';
 import diseaseData from '@/app/lib/getDisease';
 import Breadcrumb from '@/components/Breadcrumb';
+import getCurrentLangLoc from '@/app/lib/getCurrentLangLoc';
 
 const Disease = async () => {
+    const getLangLoc = await getCurrentLangLoc()
     const staticText = await getStaticText();
     const baseURL = await getBaseUrl(true, true);
     const baseUrlOnlyLang = await getBaseUrl(true, false);

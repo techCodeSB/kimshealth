@@ -126,7 +126,7 @@ const TestimonialListing = ({basePath}) => {
                             })
                         }
                     </div>
-                    {loading && <p className='text-center p-3'>Loading more doctors...</p>}
+                    {loading && <p className='text-center p-3'>Loading...</p>}
                     <div ref={observerRef} style={{ height: "1px" }}></div>
                 </div>
             </div>

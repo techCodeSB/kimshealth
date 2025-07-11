@@ -8,10 +8,12 @@ import formatDate from '@/app/lib/formatDate';
 import getStaticText from '@/app/lib/getStaticTextServer';
 import DoctorTalkListing from '@/components/DoctorTalkListing';
 import Breadcrumb from '@/components/Breadcrumb';
+import getCurrentLangLoc from '@/app/lib/getCurrentLangLoc';
 
 
 
 const DoctorTalk = async () => {
+    const getLangLoc = await getCurrentLangLoc()
     const baseURL = await getBaseUrl(true, true);
     const data = await getStaticPageContent("doctor-talk");
     const pageContent = data?.data[0]?.pageContent;

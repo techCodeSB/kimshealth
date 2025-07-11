@@ -8,8 +8,10 @@ import formatDate from '@/app/lib/formatDate';
 import getStaticText from '@/app/lib/getStaticTextServer';
 import BlogListing from '@/components/BlogListing';
 import Breadcrumb from '@/components/Breadcrumb';
+import getCurrentLangLoc from '@/app/lib/getCurrentLangLoc';
 
 const Blog = async ({ searchParams }) => {
+    const getLangLoc = await getCurrentLangLoc()
     const basePath = await getBaseUrl()
     const data = await getStaticPageContent("blog");
     const pageContent = data?.data[0]?.pageContent;

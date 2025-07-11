@@ -1,9 +1,11 @@
+import getCurrentLangLoc from '@/app/lib/getCurrentLangLoc';
 import getStaticText from '@/app/lib/getStaticTextServer';
 import Breadcrumb from '@/components/Breadcrumb';
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 
 const HealthPackageDetails = async () => {
+    const getLangLoc = await getCurrentLangLoc()
     const staticText = await getStaticText();
     return (
         <>

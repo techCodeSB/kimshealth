@@ -16,10 +16,12 @@ import diseaseData from '@/app/lib/getDisease'
 import procedureData from '@/app/lib/getProcedure'
 import getStaticText from '@/app/lib/getStaticTextServer'
 import Breadcrumb from '@/components/Breadcrumb'
+import getCurrentLangLoc from '@/app/lib/getCurrentLangLoc'
 
 
 
 const InternationalPage = async () => {
+    const getLangLoc = await getCurrentLangLoc()
     const basePath = await getBaseUrl(true, true);
     const field = "populate[0]=pageContent&populate[1]=pageContent.bannerItem&populate[2]=pageContent.bannerItem.bannerImageDesktop&populate[3]=pageContent.bannerItem.bannerImageMobile&populate[4]=metaSection&populate[5]=pageContent.highlightButtonItem&populate[6]=pageContent.highlightButtonItem.iconImage&populate[7]=pageContent.logoSlider&populate[8]=pageContent.logoSlider.image&populate[9]=pageContent.uspItem&populate[10]=pageContent.uspItem.image&populate[11]=pageContent.uspItem.icon&populate[12]=pageContent.contentCard&populate[13]=pageContent.contentCard.image&populate[14]=pageContent.thumbnail&populate[15]=pageContent.file";
     const data = await getStaticPageContent("international-patient", field);

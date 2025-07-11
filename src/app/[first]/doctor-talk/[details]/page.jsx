@@ -1,5 +1,6 @@
 import formatDate from '@/app/lib/formatDate';
 import { getBaseUrl } from '@/app/lib/getBaseUrl';
+import getCurrentLangLoc from '@/app/lib/getCurrentLangLoc';
 import doctorTalkData from '@/app/lib/getDoctorTalk';
 import getStaticText from '@/app/lib/getStaticTextServer';
 import youtubeData from '@/app/lib/getYoutubeData';
@@ -9,6 +10,7 @@ import FromDoctor from '@/components/FromDoctor';
 import Header from '@/components/Header';
 
 const DoctorTalkDetails = async ({ params }) => {
+    const getLangLoc = await getCurrentLangLoc()
     const basePath = await getBaseUrl();
     const data = await doctorTalkData.getSingleDoctor(params.details);
     const staticText = await getStaticText();

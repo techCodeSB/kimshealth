@@ -6,8 +6,10 @@ import { getBaseUrl } from '@/app/lib/getBaseUrl';
 import investorDAta from '@/app/lib/getInvestor';
 import Breadcrumb from '@/components/Breadcrumb';
 import getStaticText from '@/app/lib/getStaticTextServer';
+import getCurrentLangLoc from '@/app/lib/getCurrentLangLoc';
 
 const Investor = async () => {
+    const getLangLoc = await getCurrentLangLoc()
     const basePath = await getBaseUrl(true, true);
     const data = await getStaticPageContent("investor");
     const pageContent = data?.data[0]?.pageContent;

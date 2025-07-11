@@ -1,5 +1,6 @@
 import { getBaseUrl } from '@/app/lib/getBaseUrl';
 import blogData from '@/app/lib/getBlog';
+import getCurrentLangLoc from '@/app/lib/getCurrentLangLoc';
 import doctorData from '@/app/lib/getDoctor';
 import doctorTalkData from '@/app/lib/getDoctorTalk';
 import hospitalData from '@/app/lib/getHospital';
@@ -21,6 +22,7 @@ import { marked } from 'marked';
 
 
 const HospitalDetails = async ({ params }) => {
+    const getLangLoc = await getCurrentLangLoc()
     const basePath = await getBaseUrl(true, true);
     const hptData = await hospitalData.getSingleHospital(params.details);
     const hospitals = await hospitalData.getAll(10);
@@ -67,7 +69,9 @@ const HospitalDetails = async ({ params }) => {
         <>
             <Header />
             <div role="main" className="main">
-                <section className="section pt-3 hospital-details-page-section d-lg-block  d-none">
+                <section className="section this-text pt-3 hospital-details-page-section d-lg-block  d-none"
+                    style={hptData?.pageBanner?.[0]?.bannerImageDesktop?.url ? { backgroundImage: `url(${process.env.NEXT_PUBLIC_IMAGE_URL}${hptData?.pageBanner?.[0]?.bannerImageDesktop?.url})` } : {}}
+                >
                     <div className="container">
                         <div className="row">
                             <div className="col-md-5 pt-4">
@@ -194,7 +198,7 @@ const HospitalDetails = async ({ params }) => {
                     </div>
                 </section>
 
-                <BookAnAppoinmentShort/>
+                <BookAnAppoinmentShort />
 
                 {/* <!--=========== fromsection end =======--> */}
                 <section className="section py-0 d-lg-block d-none">

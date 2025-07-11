@@ -1837,6 +1837,27 @@
     .about-us-main-page .expert-section .card{
     min-height: auto;
 }
+
+.milestone-main-page .timeline-item::after {
+            content: attr(data-date);
+            position: absolute;
+            right: calc(var ↳ calc(100%) ↳ calc(898px) ↳ 898px (--item-width) + 40px);
+            top: 1px;
+            left: 7%;
+            font-weight: bold;
+            white-space: nowrap;
+            color: #000;
+        }
+
+        .milestone-main-page .timeline-item .main-list-black {
+            padding-top: 30px;
+        }
+
+        .milestone-main-page .inner-container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 0px 20px;
+        }
 }
 
 @media only screen and (max-width: 480px) {

@@ -1,4 +1,5 @@
 import { getBaseUrl } from '@/app/lib/getBaseUrl'
+import getCurrentLangLoc from '@/app/lib/getCurrentLangLoc'
 import getStaticText from '@/app/lib/getStaticTextServer'
 import Breadcrumb from '@/components/Breadcrumb'
 import ExpertCarousel from '@/components/ExpertCarousel'
@@ -10,6 +11,7 @@ import TestimonialSection from '@/components/TestimonialSection'
 import React from 'react'
 
 const DiseaseDetails = async () => {
+    const getLangLoc = await getCurrentLangLoc()
     const staticText = await getStaticText();
     const basePath = await getBaseUrl();
 

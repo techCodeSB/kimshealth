@@ -5,8 +5,10 @@ import { getStaticPageContent } from '@/app/lib/getStaticPageContent';
 import getStaticText from '@/app/lib/getStaticTextServer';
 import { getBaseUrl } from '@/app/lib/getBaseUrl';
 import Breadcrumb from '@/components/Breadcrumb';
+import getCurrentLangLoc from '@/app/lib/getCurrentLangLoc';
 
 const GuidebookTpa = async () => {
+    const getLangLoc = await getCurrentLangLoc()
     const basePath = await getBaseUrl(true, true);
     const staticText = await getStaticText();
     const data = await getStaticPageContent("guidebook-for-tpa-patients");

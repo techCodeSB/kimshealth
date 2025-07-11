@@ -9,10 +9,12 @@ import DoctorListing from '@/components/DoctorListing'
 import langLoc from '@/helper/getLangLoc'
 import getSpecialityData from '@/app/lib/getSpeciality'
 import Breadcrumb from '@/components/Breadcrumb'
+import getCurrentLangLoc from '@/app/lib/getCurrentLangLoc'
 
 
 
 const Doctor = async () => {
+    const getLangLoc = await getCurrentLangLoc()
     const baseURL = await getBaseUrl(true, true);
     const data = await getStaticPageContent("doctor");
     const pageContent = data?.data[0]?.pageContent;

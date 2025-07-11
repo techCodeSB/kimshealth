@@ -1,4 +1,5 @@
 import { getBaseUrl } from '@/app/lib/getBaseUrl';
+import getCurrentLangLoc from '@/app/lib/getCurrentLangLoc';
 import investorData from '@/app/lib/getInvestor';
 import getStaticText from '@/app/lib/getStaticTextServer';
 import Breadcrumb from '@/components/Breadcrumb';
@@ -9,6 +10,7 @@ import { marked } from 'marked';
 
 
 const DoctorDetails = async ({ params }) => {
+    const getLangLoc = await getCurrentLangLoc()
     const basePath = await getBaseUrl(true, true)
     const imgUrl = process.env.NEXT_PUBLIC_IMAGE_URL;
     const slug = params.details;

@@ -6,8 +6,10 @@ import getStaticText from '@/app/lib/getStaticTextServer'
 import courseData from '@/app/lib/getCourse';
 import Form1 from '@/components/Forms/Form1';
 import Breadcrumb from '@/components/Breadcrumb'
+import getCurrentLangLoc from '@/app/lib/getCurrentLangLoc'
 
 const DoctoralCourseDetails = async ({ params }) => {
+    const getLangLoc = await getCurrentLangLoc()
     const basePath = await getBaseUrl(true, true);
     const staticText = await getStaticText();
 

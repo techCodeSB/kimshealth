@@ -7,10 +7,12 @@ import { getStaticPageContent } from '@/app/lib/getStaticPageContent';
 import getStaticText from '@/app/lib/getStaticTextServer'
 import TestimonialListing from '@/components/TestimonialListing'
 import Breadcrumb from '@/components/Breadcrumb'
+import getCurrentLangLoc from '@/app/lib/getCurrentLangLoc'
 
 
 
 const Testimonial = async () => {
+    const getLangLoc = await getCurrentLangLoc()
     const basePath = await getBaseUrl(true, true);
     const testimoData = await testimonialData.getAll();
     const data = await getStaticPageContent("testimonial");

@@ -4,10 +4,12 @@ import { getStaticPageContent } from '@/app/lib/getStaticPageContent';
 import getStaticText from '@/app/lib/getStaticTextServer';
 import { getBaseUrl } from '@/app/lib/getBaseUrl';
 import Breadcrumb from '@/components/Breadcrumb';
+import getCurrentLangLoc from '@/app/lib/getCurrentLangLoc';
 
 
 
 const DonorInfo = async () => {
+    const getLangLoc = await getCurrentLangLoc()
     const basePath = await getBaseUrl(true, true)
     const data = await getStaticPageContent("donor-information");
     const pageContent = data?.data[0]?.pageContent;

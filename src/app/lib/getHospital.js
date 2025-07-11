@@ -56,7 +56,6 @@ const hospitalData = {
 
         return data;
 
-
     },
 
     getSingleHospital: async (slug) => {

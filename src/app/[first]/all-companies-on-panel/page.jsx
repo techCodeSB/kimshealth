@@ -4,8 +4,10 @@ import React from 'react'
 import { getStaticPageContent } from '@/app/lib/getStaticPageContent';
 import Breadcrumb from '@/components/Breadcrumb';
 import getStaticText from '@/app/lib/getStaticTextServer';
+import getCurrentLangLoc from '@/app/lib/getCurrentLangLoc';
 
 const AllCompaniesPanel = async () => {
+    const getLangLoc = await getCurrentLangLoc()
     const field = "populate[0]=pageContent&populate[1]=pageContent.logoSlider&populate[2]=pageContent.logoSlider.image&populate[3]=metaSection";
     const data = await getStaticPageContent("all-companies-on-panel", field);
     const pageContent = data?.data[0]?.pageContent;

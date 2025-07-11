@@ -3,10 +3,12 @@ import Header from '@/components/Header';
 import { getStaticPageContent } from '@/app/lib/getStaticPageContent';
 import Breadcrumb from '@/components/Breadcrumb';
 import getStaticText from '@/app/lib/getStaticTextServer';
+import getCurrentLangLoc from '@/app/lib/getCurrentLangLoc';
 
 
 
 const StentsPriceList = async () => {
+    const getLangLoc = await getCurrentLangLoc()
     const data = await getStaticPageContent("stents-price-list");
     const pageContent = data?.data[0]?.pageContent;
     const pageMeta = data?.data[0]?.metaSection;

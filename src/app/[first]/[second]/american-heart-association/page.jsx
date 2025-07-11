@@ -5,8 +5,10 @@ import getStaticText from '@/app/lib/getStaticTextServer'
 import { getBaseUrl } from '@/app/lib/getBaseUrl'
 import { getStaticPageContent } from '@/app/lib/getStaticPageContent'
 import Breadcrumb from '@/components/Breadcrumb'
+import getCurrentLangLoc from '@/app/lib/getCurrentLangLoc'
 
 const AmericanHeartAssoc = async () => {
+    const getLangLoc = await getCurrentLangLoc()
     const basePath = await getBaseUrl(true, true);
     const field = "populate[0]=pageContent&populate[1]=pageContent.bannerItem&populate[2]=pageContent.bannerItem.bannerImageDesktop&populate[3]=pageContent.bannerItem.bannerImageMobile&populate[4]=metaSection&populate[5]=pageContent.journal&populate[6]=pageContent.journal.thumbnailImage&populate[7]=pageContent.journal.file&populate[8]=pageContent.file";
     const data = await getStaticPageContent("american-heart-association", field);

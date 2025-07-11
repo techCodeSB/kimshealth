@@ -1,7 +1,9 @@
 "use client"
 import hospitalData from '@/app/lib/getHospital';
+import getLocation from '@/app/lib/getLocation';
 import getSpecialityData from '@/app/lib/getSpeciality';
 import { getBaseUrl } from '@/helper/getBaseUrl';
+import langLoc from '@/helper/getLangLoc';
 import getStaticText from '@/helper/getStaticText';
 import React, { useEffect, useState } from 'react'
 
@@ -10,15 +12,26 @@ const Footer = () => {
     const [speciality, setSpeciality] = useState();
     const [hospitals, setHospitals] = useState();
     const [staticTexts, setStaticTexts] = useState({});
+    const [allLocations, setAllLocations] = useState([]);
+    const [locationData, setLocationData] = useState();
 
 
 
     useEffect(() => {
         const fetchTexts = async () => {
             setStaticTexts({ ...await getStaticText() })
+            setLocationData(await getLocation());
         };
 
         fetchTexts();
+
+        const getLoc = async () => {
+            const loc = await langLoc.getLocations();
+            console.log(loc)
+            setAllLocations([...loc]);
+        }
+
+        getLoc()
     }, []);
 
     useEffect(() => {
@@ -353,7 +366,7 @@ const Footer = () => {
                                         speciality?.map((sp, index) => {
                                             return <li key={index}>
                                                 <a href={basePath + "/speciality/" + sp?.speciality?.slug}>{sp?.speciality?.title}</a>
-                                            </li> 
+                                            </li>
                                         })
                                     }
                                 </ul>
@@ -486,7 +499,7 @@ const Footer = () => {
             </div>
 
             <div className="fixed-lg-footer d-none d-lg-block">
-                <a href="#">EMERGENCY</a>
+                <a href={"tel:" + locationData?.emergency}>EMERGENCY</a>
             </div>
 
             <button id="scrolltoButton" className=""></button>
@@ -494,18 +507,18 @@ const Footer = () => {
             <div className="fixed-footer d-block d-lg-none">
                 <div className="row">
                     <div className="col-3 fixed-footer-img">
-                        <a href="#"><img src="/img/calendar.png" className="img-fluid" alt="" />
-                            <p>Appointment</p>
-                        </a>
-
-                    </div>
-                    <div className="col-3 fixed-footer-img">
-                        <a href="#"><img src="/img/doctors.png" className="img-fluid" alt="" />
+                        <a href={basePath + "/doctor"}><img src="/img/doctors.png" className="img-fluid" alt="" />
                             <p>Doctors</p>
                         </a>
                     </div>
                     <div className="col-3 fixed-footer-img">
-                        <a href="#"><img src="/img/ambulance.png" className="img-fluid" alt="" />
+                        <a href={basePath + "/book-an-appointment"}><img src="/img/calendar.png" className="img-fluid" alt="" />
+                            <p>Appointment</p>
+                        </a>
+                    </div>
+
+                    <div className="col-3 fixed-footer-img">
+                        <a href={basePath + "/ambulance-services"}><img src="/img/ambulance.png" className="img-fluid" alt="" />
                             <p>Ambulance</p>
                         </a>
                     </div>

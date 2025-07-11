@@ -2,9 +2,13 @@ import Script from "next/script";
 import { headers } from "next/headers";
 
 
-// ******************
-// JAY JAGANNATH O!O;
-// ******************
+      // ******************
+      // JAY JAGANNATH O!O;
+      // ******************
+// *******************************
+// Developed by Techinnovator team
+// ********************************
+
 export default function RootLayout({ children }) {
 
   return (

@@ -1,5 +1,6 @@
 import formatDate from '@/app/lib/formatDate'
 import { getBaseUrl } from '@/app/lib/getBaseUrl'
+import getCurrentLangLoc from '@/app/lib/getCurrentLangLoc'
 import mediaData from '@/app/lib/getMediaEvent'
 import getStaticText from '@/app/lib/getStaticTextServer'
 import Breadcrumb from '@/components/Breadcrumb'
@@ -9,6 +10,7 @@ import { marked } from 'marked'
 import React from 'react'
 
 const MediaAndEventsDetails = async ({ params }) => {
+    const getLangLoc = await getCurrentLangLoc()
     const basePath = await getBaseUrl(true, true);
     const staticText = await getStaticText();
     const data = await mediaData.getSingleMedia(params.details);

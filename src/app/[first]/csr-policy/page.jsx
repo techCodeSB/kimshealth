@@ -4,8 +4,10 @@ import { getStaticPageContent } from '@/app/lib/getStaticPageContent';
 import getStaticText from '@/app/lib/getStaticTextServer';
 import Form1 from '@/components/Forms/Form1';
 import Breadcrumb from '@/components/Breadcrumb';
+import getCurrentLangLoc from '@/app/lib/getCurrentLangLoc';
 
 const CsrPolicy = async () => {
+    const getLangLoc = await getCurrentLangLoc()
     const field = "populate[0]=pageContent&populate[1]=pageContent.bannerItem&populate[2]=pageContent.bannerItem.bannerImageDesktop&populate[3]=pageContent.bannerItem.bannerImageMobile&populate[4]=metaSection";
     const data = await getStaticPageContent("csr-policy", field);
     const pageContent = data?.data[0]?.pageContent;

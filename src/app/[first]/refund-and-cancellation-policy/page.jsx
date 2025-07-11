@@ -4,8 +4,10 @@ import React from 'react'
 import { getStaticPageContent } from '@/app/lib/getStaticPageContent';
 import Breadcrumb from '@/components/Breadcrumb';
 import getStaticText from '@/app/lib/getStaticTextServer';
+import getCurrentLangLoc from '@/app/lib/getCurrentLangLoc';
 
 const RefundAndCancellation = async () => {
+    const getLangLoc = await getCurrentLangLoc()
     const data = await getStaticPageContent("refund-and-cancellation-policy");
     const pageContent = data?.data[0]?.pageContent;
     const pageMeta = data?.data[0]?.metaSection;

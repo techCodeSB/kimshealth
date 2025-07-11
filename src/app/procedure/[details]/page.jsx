@@ -1,4 +1,5 @@
 import { getBaseUrl } from '@/app/lib/getBaseUrl'
+import getCurrentLangLoc from '@/app/lib/getCurrentLangLoc'
 import Breadcrumb from '@/components/Breadcrumb'
 import ExpertCarousel from '@/components/ExpertCarousel'
 import Footer from '@/components/Footer'
@@ -9,8 +10,10 @@ import getStaticText from '@/helper/getStaticText'
 import React from 'react'
 
 const ProcedureDetails = async () => {
-     const staticText = await getStaticText();
+    const getLangLoc = await getCurrentLangLoc()
+    const staticText = await getStaticText();
     const basePathOnlyLang = await getBaseUrl(true, false)
+    
     return (
         <>
             <Header />

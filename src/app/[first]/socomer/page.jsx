@@ -5,8 +5,10 @@ import { getBaseUrl } from '@/app/lib/getBaseUrl'
 import getStaticText from '@/app/lib/getStaticTextServer'
 import { getStaticPageContent } from '@/app/lib/getStaticPageContent'
 import Breadcrumb from '@/components/Breadcrumb'
+import getCurrentLangLoc from '@/app/lib/getCurrentLangLoc'
 
 const Socomer = async () => {
+    const getLangLoc = await getCurrentLangLoc()
     const basePath = await getBaseUrl(true, true)
     const staticText = await getStaticText();
     const field = "populate[0]=pageContent&populate[1]=pageContent.bannerItem&populate[2]=pageContent.bannerItem.bannerImageDesktop&populate[3]=pageContent.bannerItem.bannerImageMobile&populate[4]=metaSection&populate[5]=pageContent.journal&populate[6]=pageContent.journal.thumbnailImage&populate[7]=pageContent.journal.file&populate[8]=pageContent.file&populate[9]=pageContent.courseCategory&populate[10]=pageContent.socomer&populate[11]=pageContent.socomer.socomerItem&populate[12]=pageContent.socomer.socomerItem.file";
@@ -15,7 +17,6 @@ const Socomer = async () => {
     const pageMeta = data?.data[0]?.metaSection;
 
 
-    console.log(pageContent)
     return (
         <>
             <Header />

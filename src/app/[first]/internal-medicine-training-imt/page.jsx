@@ -4,8 +4,10 @@ import JournalCarousel from '@/components/JournalCarousel';
 import { getStaticPageContent } from '@/app/lib/getStaticPageContent';
 import getStaticText from '@/app/lib/getStaticTextServer';
 import Breadcrumb from '@/components/Breadcrumb';
+import getCurrentLangLoc from '@/app/lib/getCurrentLangLoc';
 
 const InternalMedicine = async () => {
+    const getLangLoc = await getCurrentLangLoc()
     const staticText = await getStaticText();
     const field = "populate[0]=pageContent&populate[1]=pageContent.bannerItem&populate[2]=pageContent.bannerItem.bannerImageDesktop&populate[3]=pageContent.bannerItem.bannerImageMobile&populate[4]=metaSection&populate[5]=pageContent.journal&populate[6]=pageContent.journal.thumbnailImage&populate[7]=pageContent.journal.file&populate[8]=pageContent.file";
     const data = await getStaticPageContent("internal-medicine-training-imt", field);

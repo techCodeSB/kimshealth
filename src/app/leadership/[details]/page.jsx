@@ -1,4 +1,5 @@
 import { getBaseUrl } from '@/app/lib/getBaseUrl';
+import getCurrentLangLoc from '@/app/lib/getCurrentLangLoc';
 import leaderData from '@/app/lib/getLeader';
 import getStaticText from '@/app/lib/getStaticTextServer';
 import Breadcrumb from '@/components/Breadcrumb';
@@ -9,6 +10,7 @@ import { marked } from 'marked';
 
 
 const DoctorDetails = async ({ params }) => {
+    const getLangLoc = await getCurrentLangLoc()
     const basePath = await getBaseUrl(true, true)
     const imgUrl = process.env.NEXT_PUBLIC_IMAGE_URL;
     const slug = params.details;
@@ -32,8 +34,8 @@ const DoctorDetails = async ({ params }) => {
                                 <div className="col-12">
                                     <Breadcrumb
                                         activeTitle={data.name}
-                                        middleTitle={staticText['About Us ']}
-                                        middleURL={basePath + "/about-us"}
+                                        middleTitle={staticText['Leadership']}
+                                        middleURL={basePath + "/leadership"}
                                     />
                                 </div>
                             </div>

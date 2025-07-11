@@ -6,8 +6,10 @@ import { getStaticPageContent } from '@/app/lib/getStaticPageContent';
 import MediaEventListing from '@/components/MediaEventListing';
 import Breadcrumb from '@/components/Breadcrumb';
 import getStaticText from '@/app/lib/getStaticTextServer';
+import getCurrentLangLoc from '@/app/lib/getCurrentLangLoc';
 
 const MediaAndEvents = async () => {
+    const getLangLoc = await getCurrentLangLoc()
     const basePath = await getBaseUrl(true, true);
     const data = await getStaticPageContent("media-and-events");
     const pageContent = data?.data[0]?.pageContent;

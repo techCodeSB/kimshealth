@@ -8,9 +8,11 @@ import formatDate from '@/app/lib/formatDate'
 import { marked } from 'marked'
 import Breadcrumb from '@/components/Breadcrumb'
 import getStaticText from '@/app/lib/getStaticTextServer'
+import getCurrentLangLoc from '@/app/lib/getCurrentLangLoc'
 
 
 const TestimonialDetails = async ({ params }) => {
+    const getLangLoc = await getCurrentLangLoc()
     const basePath = await getBaseUrl();
     const data = await testimonialData.getSingleTestimonaial(params.details);
     const youtube = await youtubeData(data?.videoId);
@@ -40,7 +42,7 @@ const TestimonialDetails = async ({ params }) => {
                         <div className="container">
                             <div className="row">
                                 <div className="col-12">
-                                    <Breadcrumb activeTitle={pageContent[0]?.title}
+                                    <Breadcrumb activeTitle={data.title}
                                         middleTitle={staticText['Testimonial']}
                                         middleURL={basePath + "/testimonial"}
                                     />
@@ -53,7 +55,7 @@ const TestimonialDetails = async ({ params }) => {
                         <div className="container">
                             <div className="testimonial-details-card">
                                 <div className="row">
-                                    <div className="col-md-7 mb-lg-0 mb-3">
+                                    {data.videoId && <div className="col-md-7 mb-lg-0 mb-3">
                                         {
                                             data.videoSource === "Youtube" ?
                                                 <iframe width="560" height="315" src={`https://www.youtube.com/embed/${data.videoId}?si=uQi_tVy9LN6UaOhE`} title={youtube.items[0].snippet.title} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
@@ -61,8 +63,8 @@ const TestimonialDetails = async ({ params }) => {
                                                 : <iframe src={`https://www.facebook.com/plugins/video.php?height=476&amp;href=https://www.facebook.com/watch/?v=${data.videoId}`} width="560" height="315" style={{ border: 'none', overflow: 'hidden' }} scrolling="no" frameBorder="0" allowFullScreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
                                         }
 
-                                    </div>
-                                    <div className="col-md-5 testi-rightbox my-auto">
+                                    </div>}
+                                    <div className={`${data.videoId?'col-md-5':'col-md-12'} col-md-5 testi-rightbox my-auto`}>
                                         <div className="main-heading">
                                             <h3>{data.videoSource === "Youtube" ? youtube.items[0].statistics.viewCount + "views, " : null} {formatDate(data.date)} </h3>
                                             <h3>

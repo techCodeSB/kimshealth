@@ -4,10 +4,12 @@ import React from 'react';
 import { getBaseUrl } from '@/app/lib/getBaseUrl';
 import getStaticText from '@/app/lib/getStaticTextServer';
 import Breadcrumb from '@/components/Breadcrumb';
+import getCurrentLangLoc from '@/app/lib/getCurrentLangLoc';
 
 
 
 const HealthPackage = async () => {
+    const getLangLoc = await getCurrentLangLoc()
     const basePath = await getBaseUrl(true, true);
     const staticText = await getStaticText();
 

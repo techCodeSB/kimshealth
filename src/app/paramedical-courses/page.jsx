@@ -7,9 +7,11 @@ import getStaticText from '@/app/lib/getStaticTextServer'
 import courseData from '@/app/lib/getCourse';
 import Form1 from '@/components/Forms/Form1';
 import Breadcrumb from '@/components/Breadcrumb';
+import getCurrentLangLoc from '@/app/lib/getCurrentLangLoc';
 
 
 const ParamedicalCourse = async () => {
+    const getLangLoc = await getCurrentLangLoc()
     const basePath = await getBaseUrl(true, true);
     const field = "populate[0]=pageContent&populate[1]=pageContent.bannerItem&populate[2]=pageContent.bannerItem.bannerImageDesktop&populate[3]=pageContent.bannerItem.bannerImageMobile&populate[4]=metaSection&populate[5]=pageContent.courseCategory";
     const data = await getStaticPageContent("paramedical-courses", field);

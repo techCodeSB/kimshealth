@@ -3,8 +3,10 @@ import Header from '@/components/Header';
 import { getStaticPageContent } from '@/app/lib/getStaticPageContent';
 import Breadcrumb from '@/components/Breadcrumb';
 import getStaticText from '@/app/lib/getStaticTextServer';
+import getCurrentLangLoc from '@/app/lib/getCurrentLangLoc';
 
 const ClinicalSkills = async () => {
+    const getLangLoc = await getCurrentLangLoc()
     const staticText = await getStaticText();
     const field = "populate[0]=pageContent&populate[1]=pageContent.bannerItem&populate[2]=pageContent.bannerItem.bannerImageDesktop&populate[3]=pageContent.bannerItem.bannerImageMobile&populate[4]=metaSection&populate[5]=pageContent.journal&populate[6]=pageContent.journal.thumbnailImage&populate[7]=pageContent.journal.file";
     const data = await getStaticPageContent("kimshealth-clinical-skills-and-simulation-centre", field);

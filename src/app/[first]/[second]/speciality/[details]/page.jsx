@@ -1,5 +1,6 @@
 import { getBaseUrl } from '@/app/lib/getBaseUrl'
 import blogData from '@/app/lib/getBlog'
+import getCurrentLangLoc from '@/app/lib/getCurrentLangLoc'
 import diseaseData from '@/app/lib/getDisease'
 import doctorData from '@/app/lib/getDoctor'
 import doctorTalkData from '@/app/lib/getDoctorTalk'
@@ -20,6 +21,7 @@ import { marked } from 'marked'
 import React from 'react'
 
 const SpecialityDetails = async ({ params }) => {
+    const getLangLoc = await getCurrentLangLoc()
     const staticText = await getStaticText()
     const baseUrl = await getBaseUrl(true, true);
     const baseUrlLangOnly = await getBaseUrl(true, false)

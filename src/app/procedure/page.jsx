@@ -3,8 +3,10 @@ import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import React from 'react'
 import getStaticText from '@/app/lib/getStaticTextServer'
+import getCurrentLangLoc from '@/app/lib/getCurrentLangLoc'
 
 const Procedure =async () => {
+    const getLangLoc = await getCurrentLangLoc()
      const staticText = await getStaticText();
     return (
         <>

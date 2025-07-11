@@ -1,5 +1,6 @@
 import { getBaseUrl } from '@/app/lib/getBaseUrl';
 import blogData from '@/app/lib/getBlog';
+import getCurrentLangLoc from '@/app/lib/getCurrentLangLoc';
 import doctorData from '@/app/lib/getDoctor';
 import getStaticText from '@/app/lib/getStaticTextServer';
 import BlogCarousel from '@/components/BlogCarousel';
@@ -11,6 +12,7 @@ import { marked } from 'marked';
 
 
 const BlogDetails = async ({ params }) => {
+    const getLangLoc = await getCurrentLangLoc()
     const basePath = await getBaseUrl(true, true);
     const data = await blogData.getSingleBlog(params.details);
     const docData = await doctorData.getSingleDoctor(data.doctor[0]?.slug);

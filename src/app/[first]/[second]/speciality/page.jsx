@@ -6,9 +6,11 @@ import { getStaticPageContent } from '@/app/lib/getStaticPageContent';
 import getSpecialityData from '@/app/lib/getSpeciality';
 import getStaticText from '@/app/lib/getStaticTextServer';
 import Breadcrumb from '@/components/Breadcrumb';
+import getCurrentLangLoc from '@/app/lib/getCurrentLangLoc';
 
 
 const Speciality = async () => {
+    const getLangLoc = await getCurrentLangLoc()
     const baseURL = await getBaseUrl(true, true);
     const baseUrlOnlyLang = await getBaseUrl(true, false);
     const data = await getStaticPageContent("speciality");

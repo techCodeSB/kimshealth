@@ -1,4 +1,5 @@
 import { getBaseUrl } from '@/app/lib/getBaseUrl';
+import getCurrentLangLoc from '@/app/lib/getCurrentLangLoc';
 import homeServices from '@/app/lib/getHomeServices';
 import getStaticText from '@/app/lib/getStaticTextServer';
 import testimonialData from '@/app/lib/getTestimonial';
@@ -12,6 +13,7 @@ import { marked } from 'marked';
 
 
 const HomeServiceDetails = async ({ params }) => {
+    const getLangLoc = await getCurrentLangLoc()
     const basePath = await getBaseUrl();
     const data = await homeServices.getSingleHomeService(params.details);
     const homeServiceData = await homeServices.getAll(10);

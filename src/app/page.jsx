@@ -18,23 +18,23 @@ import doctorTalkData from '@/app/lib/getDoctorTalk'
 import hospitalData from '@/app/lib/getHospital'
 import staticPage from '@/app/lib/getStaticPage'
 import BookAnAppoinmentShort from '@/components/Forms/BookAnAppoinmentShort'
+import getCurrentLangLoc from './lib/getCurrentLangLoc';
 
 
 
 
 const Home = async () => {
+  const getLangLoc = await getCurrentLangLoc()
   const basePath = await getBaseUrl(true, true);
   const field = "populate[0]=pageContent&populate[1]=pageContent.bannerItem&populate[2]=pageContent.bannerItem.bannerImageDesktop&populate[3]=pageContent.bannerItem.bannerImageMobile&populate[4]=metaSection&populate[5]=pageContent.highlightButtonItem&populate[6]=pageContent.highlightButtonItem.iconImage";
   const data = await getStaticPageContent("home", field);
   const pageContent = data?.data[0]?.pageContent;
   const pageMeta = data?.data[0]?.metaSection;
 
-  console.log(pageContent)
-
   const specialityDataSet = {
     sectionTitle: pageContent[2]?.title,
     buttonText: 'View All', buttonURL: `${basePath + "/speciality"}`,
-    data: await getSpecialityData.getAll(),
+    data: await getSpecialityData.getAllFeatured({ langLoc: getLangLoc }),
     baseUrl: basePath
   };
 
@@ -109,10 +109,10 @@ const Home = async () => {
         </section>
 
         {/* <!-- ======= homepage start ========== --> */}
-          <BookAnAppoinmentShort/>
+        <BookAnAppoinmentShort />
 
         {/* <!--=========== fromsection end =======--> */}
-        <section className="section py-0 d-lg-block d-none">
+        {/* <section className="section py-0 d-lg-block d-none">
           <div className="container-fluid ps-0">
             <div className="row">
               <div className="cta-col ctn-left-col">
@@ -129,9 +129,6 @@ const Home = async () => {
                         <div className="d-flex align-items-center justify-content-center">
                           <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${h.iconImage?.url}`} alt={h.title} />
                           <h3>{h.title} <br /> <span>{h.subTitle}</span></h3>
-                          {/* <!-- <div className="cta-right-arrow">
-                          <img src="/img/right-arrow.svg" className="img-fluid" alt=""/>
-                        </div> --> */}
                         </div>
                       </div>
                     </a>
@@ -140,6 +137,57 @@ const Home = async () => {
 
               }
 
+            </div>
+          </div>
+        </section> */}
+        <section className="section py-0 d-lg-block d-none">
+          <div className="container-fluid ps-0">
+            <div className="row">
+              <div className="cta-col ctn-left-col">
+                <div className="cta-diff">
+                  <h3>I am here to <i className="icon-arrow-right"></i></h3>
+                </div>
+              </div>
+              <div className="cta-col">
+                <a href={basePath + "/doctor"}>
+                  <div className="cta-diff">
+                    <div className="d-flex align-items-center justify-content-center">
+                      <img src="/img/doctor.png" alt="" />
+                      <h3>Find a <br /> <span>Doctor</span></h3>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div className="cta-col">
+                <a href={basePath + "/book-an-appointment"}>
+                  <div className="cta-diff">
+                    <div className="d-flex align-items-center justify-content-center">
+                      <img src="/img/appointment.png" alt="" />
+                      <h3>Book an <br /> <span>Appointment</span></h3>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div className="cta-col">
+                <a href={basePath + "/health-package"}>
+                  <div className="cta-diff">
+                    <div className="d-flex align-items-center justify-content-center">
+                      <img src="/img/health.png" alt="" />
+                      <h3>Book a <br /> <span>Health Checkup</span></h3>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div className="cta-col">
+                <a href={basePath + "/second-opinion"}>
+                  <div className="cta-diff">
+                    <div className="d-flex align-items-center justify-content-center">
+                      <img src="/img/opinion.png" alt="" />
+                      <h3>Get <br /> <span>Second Opinion</span></h3>
+                    </div>
+                  </div>
+                </a>
+              </div>
             </div>
           </div>
         </section>

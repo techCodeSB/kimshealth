@@ -9,9 +9,11 @@ import blogData from '@/app/lib/getBlog';
 import homeServices from '@/app/lib/getHomeServices';
 import getStaticText from '@/app/lib/getStaticTextServer';
 import Breadcrumb from '@/components/Breadcrumb';
+import getCurrentLangLoc from '@/app/lib/getCurrentLangLoc';
 
 
 const HomeServices = async () => {
+    const getLangLoc = await getCurrentLangLoc()
     const basePath = await getBaseUrl()
     const data = await getStaticPageContent("at-home-services");
     const pageContent = data?.data[0]?.pageContent;

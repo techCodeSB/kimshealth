@@ -5,8 +5,10 @@ import { getStaticPageContent } from '@/app/lib/getStaticPageContent';
 import Breadcrumb from '@/components/Breadcrumb';
 import { getBaseUrl } from '@/app/lib/getBaseUrl';
 import getStaticText from '@/app/lib/getStaticTextServer';
+import getCurrentLangLoc from '@/app/lib/getCurrentLangLoc';
 
 const SecondOpinion = async () => {
+    const getLangLoc = await getCurrentLangLoc()
     const basePath = getBaseUrl(true, true,)
     const data = await getStaticPageContent("second-opinion");
     const pageContent = data?.data[0]?.pageContent;
@@ -28,12 +30,6 @@ const SecondOpinion = async () => {
                         <div className="container">
                             <div className="row">
                                 <div className="col-12">
-                                    <ul className="breadcrumb mb-0">
-                                        <li>
-                                            <a href="/">Home</a>
-                                        </li>
-                                        <li className="active">{pageContent[0]?.title}</li>
-                                    </ul>
                                     <Breadcrumb activeTitle={pageContent[0]?.title}
                                         middleTitle={""}
                                         middleURL={""}

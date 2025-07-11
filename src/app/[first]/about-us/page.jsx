@@ -8,16 +8,21 @@ import leaderData from '@/app/lib/getLeader';
 import awardData from '@/app/lib/getAward';
 import getStaticText from '@/app/lib/getStaticTextServer';
 import Breadcrumb from '@/components/Breadcrumb';
+import getCurrentLangLoc from '@/app/lib/getCurrentLangLoc';
 
 
 
 const AboutUs = async () => {
+    const getLangLoc = await getCurrentLangLoc()
     const basePath = await getBaseUrl(true, true);
-    const field = "populate[0]=pageContent&populate[1]=pageContent.bannerItem&populate[2]=pageContent.bannerItem.bannerImageDesktop&populate[3]=pageContent.bannerItem.bannerImageMobile&populate[4]=metaSection&populate[5]=pageContent.highlightButtonItem&populate[6]=pageContent.highlightButtonItem.iconImage&populate[7]=pageContent.image";
+    const field = "populate[0]=pageContent&populate[1]=pageContent.bannerItem&populate[2]=pageContent.bannerItem.bannerImageDesktop&populate[3]=pageContent.bannerItem.bannerImageMobile&populate[4]=metaSection&populate[5]=pageContent.highlightButtonItem&populate[6]=pageContent.highlightButtonItem.iconImage&populate[7]=pageContent.image&populate[8]=pageContent.uspItem&populate[9]=pageContent.uspItem.icon";
     const data = await getStaticPageContent("about-us", field);
     const pageContent = data?.data[0]?.pageContent;
     const pageMeta = data?.data[0]?.metaSection;
     const staticText = await getStaticText();
+
+
+    console.log(data);
 
     let allLeader = await leaderData.getAll('Promoters');
     let awards = await awardData.getAll()
@@ -189,34 +194,24 @@ const AboutUs = async () => {
                                             <div className="details-heading">
                                                 <div className="hospital-content">
                                                     <div className="row">
-                                                        <div className="col-md-6 col-6 mb-3">
-                                                            <div className="d-flex align-items-center">
-                                                                <div>
-                                                                    <img src="/img/about-hospital-ic.png" alt=""
-                                                                        className="img-fluid" />
-                                                                </div>
-                                                                <div>
-                                                                    <h3>5</h3>
-                                                                    <p>Hospitals</p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
 
-
-                                                        <div className="col-md-6 col-6 mb-3">
-                                                            <div className="d-flex align-items-center">
-                                                                <div>
-                                                                    <img src="/img/about-hospital-ic.png" alt=""
-                                                                        className="img-fluid" />
+                                                        {
+                                                            pageContent[10]?.uspItem?.map((u, i) => {
+                                                                return <div className="col-md-6 col-6 mb-3">
+                                                                    <div className="d-flex align-items-center">
+                                                                        <div>
+                                                                            <img src={u?.icon?.url ? process.env.NEXT_PUBLIC_IMAGE_URL + u?.icon?.url : "/img/no-image.jpg"} alt="" className="img-fluid" />
+                                                                        </div>
+                                                                        <div>
+                                                                            <h3>{u?.number} {u?.suffix}</h3>
+                                                                            <p>{u.title}</p>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
-                                                                <div>
-                                                                    <h3>7</h3>
-                                                                    <p>Medical Centres</p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                            })
+                                                        }
 
-
+                                                        {/* 
                                                         <div className="col-md-6 col-6 mb-3">
                                                             <div className="d-flex align-items-center">
                                                                 <div>
@@ -242,9 +237,9 @@ const AboutUs = async () => {
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                    </div> */}
+
                                                     </div>
-
-
                                                 </div>
                                             </div>
                                         </div>
@@ -339,7 +334,7 @@ const AboutUs = async () => {
                                             <div className="expert-card" data-aos="fade-right">
                                                 <div className="card border-0 p-lg-4 p-0">
                                                     <div className="card-top">
-                                                        <a href={basePath + "/about-us/" + l.slug}>
+                                                        <a href={basePath + "/leadership/" + l.slug}>
                                                             <img src={l.image ? process.env.NEXT_PUBLIC_IMAGE_URL + l.image.url : "/img/no-image.jpg"}
                                                                 className="img-fluid w-100" alt={l.name} />
                                                         </a>
