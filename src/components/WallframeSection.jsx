@@ -59,7 +59,7 @@ const WallframeSection = ({ dataSet }) => {
                                             <h5>{staticTexts['Date']}: {formatDate(a.date)}</h5>
                                             <h2>{a.title}</h2>
                                             <p>{a.shortDetails}</p>
-                                            <p className="d-lg-block d-none">{a.details.slice(0, 120)}</p>
+                                            <p className="d-lg-block d-none">{a.details?.slice(0, 120)}</p>
                                         </div>
 
                                     </div>
