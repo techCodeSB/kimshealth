@@ -44,7 +44,7 @@ const WallframeSection = ({ dataSet }) => {
 
                     <div className="owl-carousel owl-theme wall-frame">
                         {
-                            dataSet.data.map((a, index) => {
+                            dataSet?.data?.map((a, index) => {
                                 return <div className="row justify-content-between" key={index}>
                                     <div className="col-xl-4 col-lg-4 col-md-4 col-6">
                                         <div className="frame-left-col" data-aos="slide-right">

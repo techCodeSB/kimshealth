@@ -38,7 +38,7 @@ const ParamedicalCourse = async () => {
                                                         <Breadcrumb
                                                             activeTitle={pageContent[0]?.title}
                                                             middleTitle={"Academics"}
-                                                            middleURL={"#"}
+                                                            middleURL={basePath + "#"}
                                                         />
                                                     </div>
                                                 </div>
@@ -52,7 +52,7 @@ const ParamedicalCourse = async () => {
                                     </div>
 
                                     <div className="col-md-6 details-proceduce-banner-right-col">
-                                        <img src={pageContent[1].bannerItem.length > 0 ? process.env.NEXT_PUBLIC_IMAGE_URL + pageContent[1].bannerItem[0].bannerImageDesktop.url : "/img/no-image.jpg"} className="img-fluid details-banner-image" alt={pageContent[0].title} />
+                                        <img src={pageContent[1].bannerItem.length > 0 ? process.env.NEXT_PUBLIC_IMAGE_URL + pageContent[1].bannerItem[0]?.bannerImageDesktop?.url : "/img/no-image.jpg"} className="img-fluid details-banner-image" alt={pageContent[0].title} />
                                     </div>
                                 </div>
                             </div>
@@ -69,9 +69,6 @@ const ParamedicalCourse = async () => {
                                             <h2>{pageContent[2].title}</h2>
                                             <div dangerouslySetInnerHTML={{ __html: pageContent[2].details || "" }}></div>
                                         </div>
-
-
-
                                     </section>
                                     <div className="line-divider"></div>
 
@@ -108,8 +105,6 @@ const ParamedicalCourse = async () => {
                                     <div className="association-left-col sticky-left">
                                         <div className="association-form-card mb-5">
                                             <Form1 title={"Request a Call Back"} />
-
-
                                         </div>
                                         <h4>{pageContent[4].sectionTitle}</h4>
                                         <p><strong>{pageContent[4].contactPerson}</strong></p>

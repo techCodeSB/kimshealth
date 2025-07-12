@@ -20,8 +20,6 @@ const Blog = async ({ searchParams }) => {
     const staticText = await getStaticText();
     const slug = await searchParams.spciality
 
-    console.log(slug)
-
 
     return (
         <>

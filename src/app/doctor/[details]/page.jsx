@@ -43,7 +43,7 @@ const DoctorDetails = async ({ params }) => {
                 <div className="doctor-details-main-page">
                     <div className="page-header">
                         <div className="container">
-                            <h2>{data.name}</h2>
+                            <h2>{data?.name}</h2>
                         </div>
                     </div>
                     <section className="breadcrumb-wrapper py-2">
@@ -53,28 +53,29 @@ const DoctorDetails = async ({ params }) => {
                                     <Breadcrumb
                                         activeTitle={data.name}
                                         middleTitle={staticText['Find a Doctor']}
-                                        middleURL={basePath+"/doctor"}
+                                        middleURL={basePath + "/doctor"}
                                     />
                                 </div>
                             </div>
                         </div>
                     </section>
-                    <section className="section">
+
+                    {data && <section className="section">
                         <div className="container">
                             <div className="row">
                                 <div className="col-md-3 mb-4">
                                     <div className="left-col-img">
-                                        <img src={imgUrl + data.doctorImage.url} alt={data.name} className="img-fluid" />
+                                        <img src={data.doctorImage?.url ? imgUrl + data.doctorImage?.url : "/img/no-image.jpg"} alt={data.name} className="img-fluid" />
                                         <div className="main-heading sub-heading mt-3">
                                             <h3>{data.name}</h3>
                                         </div>
                                         <div className="left-details-list mt-3">
                                             <ul>
                                                 <li className="details-doc-ic">{data.doctorDesignation}</li>
-                                                <li className="details-liver-ic"><strong>{data.specialities[0].title}</strong></li>
-                                                <li className="details-hospital-ic">{data.hospitals[0].address}</li>
+                                                <li className="details-liver-ic"><strong>{data.specialities[0]?.title}</strong></li>
+                                                <li className="details-hospital-ic">{data.hospitals[0]?.address}</li>
                                             </ul>
-                                            <a href="#" className="form-btn mt-3 d-block text-center text-light">{staticText['Book An Appointment']}</a>
+                                            <a href={basePath + "/book-an-appointment"} className="form-btn mt-3 d-block text-center text-light">{staticText['Book An Appointment']}</a>
                                         </div>
 
                                         {/* <div className="calendar mt-5">
@@ -105,7 +106,7 @@ const DoctorDetails = async ({ params }) => {
                                     <div className="right-col-details">
                                         <div className="main-heading main-list sub-heading">
 
-                                            {data?.workExperience ?
+                                            {data.workExperience ?
                                                 <div className="d-flex align-items-center gap-2 mb-2">
                                                     <img src="/img/briefcase.png" alt="" className="img-fluid" />
                                                     <h3>{staticText['Work Experience']}</h3>
@@ -114,33 +115,33 @@ const DoctorDetails = async ({ params }) => {
                                             <div dangerouslySetInnerHTML={{ __html: data?.workExperience ? marked(data.workExperience) : "" }}></div>
 
 
-                                            {data?.areaOfExpertise ? <div className="d-flex align-items-center gap-2 mb-2">
+                                            {data.areaOfExpertise ? <div className="d-flex align-items-center gap-2 mb-2">
                                                 <img src="/img/badge.png" alt="" className="img-fluid" />
                                                 <h3>{staticText['Area of Expertise']}</h3>
                                             </div> : null}
                                             <div dangerouslySetInnerHTML={{ __html: data?.areaOfExpertise ? marked(data.areaOfExpertise) : "" }}></div>
 
 
-                                            {data?.educationAndTraning ? <div className="d-flex align-items-center gap-2 mb-2">
+                                            {data.educationAndTraning ? <div className="d-flex align-items-center gap-2 mb-2">
                                                 <img src="/img/mortarboard.png" alt="" className="img-fluid" />
                                                 <h3>{staticText['Education & Tranning']}</h3>
                                             </div> : null}
                                             <div dangerouslySetInnerHTML={{ __html: data?.educationAndTraning ? marked(data.educationAndTraning) : "" }}></div>
 
-                                            {data?.membership ? <div className="d-flex align-items-center gap-2 mb-2">
+                                            {data.membership ? <div className="d-flex align-items-center gap-2 mb-2">
                                                 <img src="/img/recommendation.png" alt="" className="img-fluid" />
                                                 <h3>{staticText['Membership']}</h3>
                                             </div> : null}
                                             <div dangerouslySetInnerHTML={{ __html: data?.membership ? marked(data.membership) : "" }}></div>
 
-                                            {data?.awards ? <div className="d-flex align-items-center gap-2 mb-2">
+                                            {data.awards ? <div className="d-flex align-items-center gap-2 mb-2">
                                                 <img src="/img/award.png" alt="" className="img-fluid" />
                                                 <h3>{staticText['Awards']}</h3>
                                             </div> : null}
                                             <div dangerouslySetInnerHTML={{ __html: data?.awards ? marked(data.awards) : "" }}></div>
 
 
-                                            {data?.languagesKnown ? <div className="d-flex align-items-center gap-2 mb-2">
+                                            {data.languagesKnown ? <div className="d-flex align-items-center gap-2 mb-2">
                                                 <img src="/img/internet.png" alt="" className="img-fluid" />
                                                 <h3>{staticText['Languages Known']}</h3>
                                             </div> : null}
@@ -150,7 +151,7 @@ const DoctorDetails = async ({ params }) => {
                                 </div>
                             </div>
                         </div>
-                    </section>
+                    </section>}
 
 
                     <div className="line-divider"></div>

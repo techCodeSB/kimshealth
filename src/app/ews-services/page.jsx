@@ -13,7 +13,7 @@ const EwsServices = async () => {
     const data = await getStaticPageContent("ews-services");
     const pageContent = data?.data[0]?.pageContent;
     const pageMeta = data?.data[0]?.metaSection;
-    const staticText = await getStaticText()
+    const staticText = await getStaticText();
 
 
 
@@ -47,7 +47,8 @@ const EwsServices = async () => {
                                 <h2>{pageContent[1]?.title}</h2>
                                 <div
                                     dangerouslySetInnerHTML={{ __html: pageContent[1]?.details || "" }}
-                                ></div>
+                                >
+                                </div>
 
                             </div>
                         </div>

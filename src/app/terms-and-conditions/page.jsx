@@ -13,7 +13,7 @@ const TermsAndConditions = async () => {
     const data = await getStaticPageContent("terms-and-conditions");
     const pageContent = data?.data[0]?.pageContent;
     const pageMeta = data?.data[0]?.metaSection;
-     const staticText = await getStaticText();
+    const staticText = await getStaticText();
 
     return (
         <>

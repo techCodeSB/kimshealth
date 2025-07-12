@@ -46,7 +46,7 @@ const DoctorDetails = async ({ params }) => {
                             <div className="row">
                                 <div className="col-md-3 mb-4">
                                     <div className="left-col-img">
-                                        <img src={imgUrl + data.image.url} alt={data.name} className="img-fluid" />
+                                        <img src={imgUrl + data?.image?.url} alt={data.name} className="img-fluid" />
                                         <div className="main-heading sub-heading mt-3">
                                             <h3>{data.name}</h3>
                                         </div>
@@ -68,7 +68,6 @@ const DoctorDetails = async ({ params }) => {
                             </div>
                         </div>
                     </section>
-
                 </div>
             </div>
             <Footer />

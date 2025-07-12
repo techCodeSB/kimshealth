@@ -49,7 +49,7 @@ const Faqs = async () => {
                             <div className="faq-card p-4">
                                 <div className="accordion" id="accordionExample">
                                     {
-                                        pageContent[1]?.faqData.map((data, index) => {
+                                        pageContent[1]?.faqData?.map((data, index) => {
                                             return <div className="accordion-item" key={index}>
                                                 <h2 className="accordion-header">
                                                     <button className={`accordion-button ${index === 0 ? "" : "collapsed"}`} type="button" data-bs-toggle="collapse" data-bs-target={`#collapse${index}`}

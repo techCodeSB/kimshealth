@@ -90,8 +90,10 @@ const DoctorListing = ({ baseURL, allLocation, allSpeciality, allDoctor }) => {
                             </div>
                         </div>
                         <div className="col-6 d-lg-none d-block">
-                            <button type="button" className="btn-tab form-btn mx-2 filter-box-mobile">{staticText['Filters']} <i
-                                className="fa-solid fa-filter"></i></button>
+                            <button type="button" className="btn-tab form-btn mx-2 filter-box-mobile">
+                                {staticText['Filters']}
+                                <i className="fa-solid fa-filter"></i>
+                            </button>
                         </div>
                     </div>
                     <div className="row">
@@ -99,7 +101,7 @@ const DoctorListing = ({ baseURL, allLocation, allSpeciality, allDoctor }) => {
                             <div className="find-doctor-left-col filter-form mt-3">
                                 <h4>{staticText['Select Filters']}</h4>
                                 <div className="find-doc-box">
-                                    <h3>By City</h3>
+                                    <h3>{staticText['By City']}</h3>
                                     <div className="rounded-field-form mb-3">
                                         {/* <form action=""> */}
                                         <div className="row">
@@ -128,7 +130,7 @@ const DoctorListing = ({ baseURL, allLocation, allSpeciality, allDoctor }) => {
                                     </div>
                                 </div>
                                 <div className="find-doc-box">
-                                    <h3>By Departments</h3>
+                                    <h3>{staticText['By Departments']}</h3>
                                     <div className="rounded-field-form mb-3">
                                         <form action="">
                                             <div className="row">
@@ -157,7 +159,7 @@ const DoctorListing = ({ baseURL, allLocation, allSpeciality, allDoctor }) => {
                                     </div>
                                 </div>
                                 <div className="find-doc-box">
-                                    <h3>By Gender</h3>
+                                    <h3>{staticText['By Gender']}</h3>
                                     <div className="rounded-field-form mb-3">
                                         <form action="">
                                             <div className="row">
@@ -225,7 +227,7 @@ const DoctorListing = ({ baseURL, allLocation, allSpeciality, allDoctor }) => {
                                                 <div className="card border-0 p-lg-4 p-0">
                                                     <div className="card-top">
                                                         <a href="#">
-                                                            <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${d.doctorImage.url}`} className="img-fluid w-100" alt="" />
+                                                            <img src={d.doctorImage?.url ? `${process.env.NEXT_PUBLIC_IMAGE_URL}${d.doctorImage.url}` : "/img/no-image.jpg"} className="img-fluid w-100" alt="" />
                                                         </a>
                                                     </div>
                                                     <div className="card-content">

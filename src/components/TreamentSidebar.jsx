@@ -35,7 +35,7 @@ const TreamentSidebar = ({ title, procedures, baseUrlOnlyLang, allSpeciality }) 
                         <select className="form-select" onChange={selectSpeciality}>
                             <option value={""}>Select by Speciality</option>
                             {
-                                allSpeciality.map((sp, index) => {
+                                allSpeciality?.map((sp, index) => {
                                     return <option value={sp.speciality?.documentId} key={index}>
                                         {sp.title}
                                     </option>

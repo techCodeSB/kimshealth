@@ -195,7 +195,6 @@ const SecondOpinion = async () => {
                                                             <button type="button" className="btn d-inline-block w-auto">Submit</button>
                                                         </div>
                                                     </div>
-
                                                 </div>
                                             </form>
                                         </div>
@@ -206,11 +205,6 @@ const SecondOpinion = async () => {
                         </div>
                     </section>
                 </div>
-
-
-
-
-
             </div>
             <Footer />
         </>

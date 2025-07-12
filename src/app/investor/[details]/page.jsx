@@ -17,8 +17,6 @@ const DoctorDetails = async ({ params }) => {
     const data = await investorData.getSingleInvestor(slug);
     const staticText = await getStaticText();
 
-    console.log(data)
-
 
     return (
         <>
@@ -49,7 +47,7 @@ const DoctorDetails = async ({ params }) => {
                             <div className="row">
                                 <div className="col-md-3 mb-4">
                                     <div className="left-col-img">
-                                        <img src={imgUrl + data.image.url} alt={data.name} className="img-fluid" />
+                                        <img src={imgUrl + data.image?.url} alt={data.name} className="img-fluid" />
                                         <div className="main-heading sub-heading mt-3">
                                             <h3>{data.name}</h3>
                                         </div>
@@ -64,7 +62,6 @@ const DoctorDetails = async ({ params }) => {
                                 <div className="col-md-9">
                                     <div className="right-col-details">
                                         <div className="main-heading main-list" dangerouslySetInnerHTML={{ __html: marked(data.details) }}>
-
                                         </div>
                                     </div>
                                 </div>

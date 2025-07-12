@@ -49,11 +49,11 @@ const AllCompaniesPanel = async () => {
 
                             <div className="row">
                                 {
-                                    pageContent[2]?.logoSlider.map((img, index) => {
+                                    pageContent[2]?.logoSlider?.map((img, index) => {
                                         return <div className="col-md-3 col-6 mb-3" key={index}>
                                             <div className="insurance-card">
                                                 <div className="insurance-img">
-                                                    <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${img.image.url}`} alt={img.title} className="img-fluid" />
+                                                    <img src={img.image?.url ? `${process.env.NEXT_PUBLIC_IMAGE_URL}${img.image.url}` : '/img/no-image.jpg'} alt={img.title} className="img-fluid" />
                                                 </div>
                                                 <p>{img.title}</p>
                                             </div>
@@ -61,46 +61,33 @@ const AllCompaniesPanel = async () => {
                                     })
                                 }
 
-
                             </div>
                         </div>
                     </section>
-                    <div className="line-divider"></div>
 
+                    <div className="line-divider"></div>
                     <section className="section">
                         <div className="container">
                             <div className="main-heading">
                                 <h2>{pageContent[3]?.title}</h2>
                             </div>
-
                             <div className="row">
                                 {
-                                    pageContent[4]?.logoSlider.map((img, index) => {
+                                    pageContent[4]?.logoSlider?.map((img, index) => {
                                         return <div className="col-md-3 col-6 mb-3" key={index}>
                                             <div className="insurance-card">
                                                 <div className="insurance-img">
-                                                    <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${img.image.url}`} alt={img.title} className="img-fluid" />
+                                                    <img src={img.image?.url ? `${process.env.NEXT_PUBLIC_IMAGE_URL}${img.image.url}` : '/img/no-image.jpg'} alt={img.title} className="img-fluid" />
                                                 </div>
                                                 <p>{img.title}</p>
                                             </div>
                                         </div>
                                     })
                                 }
-
-
                             </div>
                         </div>
                     </section>
-
-
-
-
                 </div>
-
-
-
-
-
             </div>
             <Footer />
         </>

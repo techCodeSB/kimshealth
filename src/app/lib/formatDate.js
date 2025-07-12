@@ -15,5 +15,5 @@ export default function formatDate(dateString) {
         }
     };
 
-    return `${getOrdinal(day)} ${month} ${year}`;
+    return `${getOrdinal(day)} ${month.slice(0,3)} ${year}`;
 }

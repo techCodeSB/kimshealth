@@ -69,9 +69,9 @@ const HomeServices = async () => {
                                         <iframe width="100%" height="315" src={`https://www.youtube.com/embed/${pageContent[1].videoId}?si=uQi_tVy9LN6UaOhE`} title={"KIMSHEALTH"} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
                                         <h5>{pageContent[1].title}</h5>
                                         <p>{pageContent[1].subTitle}</p>
-                                        <div className="main-btn">
+                                        {/* <div className="main-btn">
                                             <a href="#">{staticTexts['Watch Video']} <span><i className="fa-solid fa-arrow-right"></i></span></a>
-                                        </div>
+                                        </div> */}
                                     </div>
                                 </div>
 
@@ -86,11 +86,11 @@ const HomeServices = async () => {
 
                             <div className="row">
                                 {
-                                    homeServiceData.map((h, index) => {
+                                    homeServiceData?.map((h, index) => {
                                         return <div className="col-md-4" key={index}>
                                             <div className="home-service-card">
                                                 <div className="home-service-card-image text-start">
-                                                    <img src={process.env.NEXT_PUBLIC_IMAGE_URL + h.icon.url} alt={h.title} className="img-fluid" />
+                                                    <img src={process.env.NEXT_PUBLIC_IMAGE_URL + h.icon?.url} alt={h.title} className="img-fluid" />
                                                 </div>
                                                 <div className="home-service-content text-start">
                                                     <h3>{h.title}</h3>
@@ -115,7 +115,6 @@ const HomeServices = async () => {
 
                     <div className="line-divider"></div>
                     <BlogCarousel dataSet={blogDataSet} /> */}
-
                 </div>
             </div>
             <Footer />

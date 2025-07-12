@@ -21,7 +21,7 @@ const PatientStoriesListing = ({basePath}) => {
             setStaticTexts({ ...await getStaticText() })
         };
         const getFstLoad = async () => {
-            const data = await testimonialData.getAll(count, limit);
+            const data = await testimonialData.getAllPatientStories(count, limit);
             setallTestimonial(data);
         }
 
@@ -34,7 +34,7 @@ const PatientStoriesListing = ({basePath}) => {
         if (loading) return; // prevent multiple triggers
         setLoading(true);
 
-        const data = await testimonialData.getAll(count, limit);
+        const data = await testimonialData.getAllPatientStories(count, limit);
         if (data.length < 1) {
             setEndData(true)
         }
@@ -107,7 +107,7 @@ const PatientStoriesListing = ({basePath}) => {
                                         <div className="col-md-9 my-auto">
                                             <div className="testi-rightbox">
                                                 <h3>{t.title}</h3>
-                                                <p>{`${t.shortDetails.slice(0, 80)}...`}
+                                                <p>{`${t.shortDetails?.slice(0, 80)}...`}
                                                     <a href={basePath + "/testimonial/" + t.slug}>{staticText['Read More']}</a>
                                                 </p>
 

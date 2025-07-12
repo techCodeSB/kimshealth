@@ -13,7 +13,6 @@ const Disease = async () => {
     const staticText = await getStaticText();
     const baseURL = await getBaseUrl(true, true);
     const baseUrlOnlyLang = await getBaseUrl(true, false);
-    const fields = "populate[0]="
     const data = await getStaticPageContent("disease");
     const pageContent = data?.data[0]?.pageContent;
     const pageMeta = data?.data[0]?.metaSection;

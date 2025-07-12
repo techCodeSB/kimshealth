@@ -14,18 +14,18 @@ import { marked } from 'marked';
 
 const HomeServiceDetails = async ({ params }) => {
     const getLangLoc = await getCurrentLangLoc()
-    const basePath = await getBaseUrl();
+    const basePath = await getBaseUrl(true, true);
     const data = await homeServices.getSingleHomeService(params.details);
     const homeServiceData = await homeServices.getAll(10);
     const staticTexts = await getStaticText()
 
-    console.log(data);
+
 
     const testimonialDataSet = {
-        sectionTitle: data.testimonialSection.title,
-        buttonText: 'View All', buttonURL: '#',
+        sectionTitle: data.testimonialSection?.title,
+        buttonText: 'View All', buttonURL: basePath + "/testimonial",
         data: await testimonialData.getAll(10),
-        baseUrl: await getBaseUrl(true, true)
+        baseUrl: basePath
     }
 
     return (
@@ -67,8 +67,8 @@ const HomeServiceDetails = async ({ params }) => {
                                     </div>
 
                                     <div className="col-md-6 details-proceduce-banner-right-col">
-                                        <img src={data.banner.bannerItem[0].bannerImageDesktop.url ?
-                                            process.env.NEXT_PUBLIC_IMAGE_URL + data.banner.bannerItem[0].bannerImageDesktop.url : "/img/no-image.jpg"} className="img-fluid details-banner-image" alt="" />
+                                        <img src={data.banner?.bannerItem[0]?.bannerImageDesktop?.url ?
+                                            process.env.NEXT_PUBLIC_IMAGE_URL + data.banner?.bannerItem[0]?.bannerImageDesktop?.url : "/img/no-image.jpg"} className="img-fluid details-banner-image" alt="" />
                                     </div>
                                 </div>
                             </div>
@@ -94,8 +94,8 @@ const HomeServiceDetails = async ({ params }) => {
                                             </div>
 
                                             <div className="details-proceduce-banner-right-col">
-                                                <img src={data.banner.bannerItem[0].bannerImageMobile.url ?
-                                                    process.env.NEXT_PUBLIC_IMAGE_URL + data.banner.bannerItem[0].bannerImageMobile.url : "/img/no-image.jpg"} className="img-fluid details-banner-image" alt="" />
+                                                <img src={data.banner?.bannerItem[0]?.bannerImageMobile?.url ?
+                                                    process.env.NEXT_PUBLIC_IMAGE_URL + data.banner?.bannerItem[0]?.bannerImageMobile?.url : "/img/no-image.jpg"} className="img-fluid details-banner-image" alt="" />
                                             </div>
 
                                         </div>
@@ -128,9 +128,9 @@ const HomeServiceDetails = async ({ params }) => {
                             <div className="row">
                                 <div className="col-md-8">
                                     <div className="main-heading sub-heading">
-                                        <h2 className="mb-1">{data.overviewSection.title}</h2>
-                                        <h3 className="mb-4">{data.overviewSection.subTitle}</h3>
-                                        <div dangerouslySetInnerHTML={{ __html: marked(data.overviewSection.details) }}>
+                                        <h2 className="mb-1">{data.overviewSection?.title}</h2>
+                                        <h3 className="mb-4">{data.overviewSection?.subTitle}</h3>
+                                        <div dangerouslySetInnerHTML={{ __html: marked(data.overviewSection?.details || "") }}>
                                         </div>
                                     </div>
                                 </div>
@@ -150,15 +150,15 @@ const HomeServiceDetails = async ({ params }) => {
                                 <div className="col-md-5 mb-lg-0 mb-3">
                                     <div className="details-right-col text-center">
                                         <img src={
-                                            data.whyChooseUs.image.url ?
-                                                process.env.NEXT_PUBLIC_IMAGE_URL + data.whyChooseUs.image.url : "/img/no-image.jpg"} alt={data.whyChooseUs.title} className="img-fluid w-100" />
+                                            data.whyChooseUs?.image.url ?
+                                                process.env.NEXT_PUBLIC_IMAGE_URL + data.whyChooseUs?.image?.url : "/img/no-image.jpg"} alt={data.whyChooseUs.title} className="img-fluid w-100" />
                                     </div>
                                 </div>
                                 <div className="col-md-7">
                                     <div className="main-heading sub-heading main-list">
-                                        <h2 className="mb-1">{data.whyChooseUs.title}</h2>
-                                        <h3 className="mb-lg-4 mb-2">{data.whyChooseUs.subTitle}</h3>
-                                        <div dangerouslySetInnerHTML={{ __html: marked(data.whyChooseUs.content) }}></div>
+                                        <h2 className="mb-1">{data.whyChooseUs?.title}</h2>
+                                        <h3 className="mb-lg-4 mb-2">{data.whyChooseUs?.subTitle}</h3>
+                                        <div dangerouslySetInnerHTML={{ __html: marked(data.whyChooseUs?.content) }}></div>
                                     </div>
                                 </div>
                             </div>
@@ -175,12 +175,12 @@ const HomeServiceDetails = async ({ params }) => {
                             <div className="row justify-content-between">
                                 <div className="col-md-4 col-8">
                                     <div className="main-heading">
-                                        <h2>{data.homeServiceSection.title}</h2>
+                                        <h2>{data.homeServiceSection?.title}</h2>
                                     </div>
                                 </div>
                                 <div className="col-md-2 col-4">
                                     <div className="over-all-btn text-end">
-                                        <a href="#">{staticTexts['View All']} <span><img src="/img/slider-right-arrow.svg" className="img-fluid"
+                                        <a href={basePath + "/at-home-services"}>{staticTexts['View All']} <span><img src="/img/slider-right-arrow.svg" className="img-fluid"
                                             alt="" /></span></a>
                                     </div>
                                 </div>
@@ -188,12 +188,12 @@ const HomeServiceDetails = async ({ params }) => {
 
                             <div className="owl-carousel owl-theme exellence">
                                 {
-                                    homeServiceData.map((h, index) => {
+                                    homeServiceData?.map((h, index) => {
                                         return <div className="item" key={index}>
                                             <div className="card border-0">
                                                 <div className="card-top">
                                                     <img src={h.featuredImage?.url ?
-                                                        process.env.NEXT_PUBLIC_IMAGE_URL + h.featuredImage.url : "/img/no-image.jpg"} className="img-fluid w-100" alt={h.title} />
+                                                        process.env.NEXT_PUBLIC_IMAGE_URL + h.featuredImage?.url : "/img/no-image.jpg"} className="img-fluid w-100" alt={h.title} />
                                                 </div>
                                                 <div className="card-content">
                                                     <h4>{h.title}</h4>

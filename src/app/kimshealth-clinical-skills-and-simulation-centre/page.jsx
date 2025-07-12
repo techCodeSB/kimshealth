@@ -46,13 +46,15 @@ const ClinicalSkills = async () => {
                                     </div>
 
                                     <div className="col-md-6 details-proceduce-banner-right-col mt-lg-0 mt-4">
-                                        <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${pageContent[1]?.bannerItem[0].bannerImageDesktop.url}`} className="img-fluid details-banner-image" alt={pageContent[1]?.bannerItem[0].title} />
+                                        <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${pageContent[1]?.bannerItem[0].bannerImageDesktop?.url}`} className="img-fluid details-banner-image" alt={pageContent[1]?.bannerItem[0]?.title} />
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </section>
-                    {/* mobile section */}
+
+
+                    {/* :::::: Mobile section :::::: */}
                     <section className="section details-page-before py-0 d-lg-none d-block">
                         <div className="procedures-details-page-header inner-pages-header">
                             <div className="container-fluid px-0">
@@ -62,18 +64,17 @@ const ClinicalSkills = async () => {
                                             <div className="breadcrumb-wrapper py-2 ps-2 ms-1">
                                                 <div className="row">
                                                     <div className="col-12">
-                                                        <ul className="breadcrumb mb-0">
-                                                            <li>
-                                                                <a href="/">Home</a>
-                                                            </li>
-                                                            <li className="active"> {pageContent[0]?.title} </li>
-                                                        </ul>
+                                                        <Breadcrumb
+                                                            activeTitle={pageContent[0]?.title}
+                                                            middleTitle={''}
+                                                            middleURL={""}
+                                                        />
                                                     </div>
                                                 </div>
                                             </div>
                                             <div className="details-proceduce-banner-right-col mt-lg-0 mt-4">
-                                                <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${pageContent[1]?.bannerItem[0].bannerImageDesktop.url}`}
-                                                    className="img-fluid details-banner-image" alt={pageContent[1]?.bannerItem[0].title} />
+                                                <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${pageContent[1]?.bannerItem[0].bannerImageDesktop?.url}`}
+                                                    className="img-fluid details-banner-image" alt={pageContent[1]?.bannerItem[0]?.title} />
                                             </div>
                                         </div>
                                     </div>
@@ -131,8 +132,6 @@ const ClinicalSkills = async () => {
                                             </div>
                                         </div>
                                     </section>
-
-
                                 </div>
 
                                 <div className="col-md-4 association-left-col">
@@ -170,6 +169,8 @@ const ClinicalSkills = async () => {
                             </div>
                         </div>
                     </section>
+
+                    {/* ::::::: JOURNAL :::::: */}
                     <div className="line-divider"></div>
                     <section className="section journal-section">
                         <div className="container">
@@ -178,12 +179,12 @@ const ClinicalSkills = async () => {
                             </div>
                             <div className="owl-carousel owl-theme journal-slider">
                                 {
-                                    pageContent[7]?.journal.map((j, index) => {
+                                    pageContent[7]?.journal?.map((j, index) => {
                                         return <div className="expert-card" data-aos="fade-right" key={index}>
                                             <a download href={`${process.env.NEXT_PUBLIC_IMAGE_URL}${j.file.url}`} >
                                                 <div className="card border-0">
                                                     <div className="card-top">
-                                                        <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${j.thumbnailImage.url}`} className="img-fluid w-100" alt={j.title} />
+                                                        <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${j.thumbnailImage?.url}`} className="img-fluid w-100" alt={j.title} />
                                                     </div>
                                                     <div className="card-content">
                                                         <h5>{j.title}</h5>

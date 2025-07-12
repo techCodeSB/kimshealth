@@ -43,11 +43,11 @@ const BlogCarousel = ({ dataSet }) => {
 
                     <div className="owl-carousel owl-theme blog">
                         {
-                            dataSet.data.map((blog, index) => {
+                            dataSet.data?.map((blog, index) => {
                                 return <div className="card border-0" data-aos="slide-down" data-aos-duration="1000" key={index}>
                                     <div className="card-top">
                                         <a href={dataSet.baseUrl + "/blog/" + blog.slug}>
-                                            <img src={blog.featuredImage?.url ? process.env.NEXT_PUBLIC_IMAGE_URL + blog.featuredImage.url : '/img/no-image.jpg'}
+                                            <img src={blog.featuredImage?.url ? process.env.NEXT_PUBLIC_IMAGE_URL + blog.featuredImage?.url : '/img/no-image.jpg'}
                                                 className="img-fluid w-100" alt={blog?.name} />
                                         </a>
                                     </div>
@@ -62,7 +62,8 @@ const BlogCarousel = ({ dataSet }) => {
                                             </div>
                                             <div className="main-btn">
                                                 <a href={dataSet.baseUrl + "/blog/" + blog.slug}>
-                                                    Read More <span><i className="fa-solid fa-arrow-right"></i></span>
+                                                    {staticTexts['Read More']}
+                                                    <span><i className="fa-solid fa-arrow-right"></i></span>
                                                 </a>
                                             </div>
                                         </div>
@@ -70,7 +71,6 @@ const BlogCarousel = ({ dataSet }) => {
                                 </div>
                             })
                         }
-
                     </div>
                 </div>
             </section>
@@ -98,7 +98,7 @@ const BlogCarousel = ({ dataSet }) => {
                     <div className="row">
                         <div className="col-12">
                             {
-                                dataSet.data.map((blog, index) => {
+                                dataSet.data?.map((blog, index) => {
                                     return index < 2
                                         ? <div className="blog-card" data-aos="fade-up" key={index}>
                                             <div className="row">
@@ -121,7 +121,7 @@ const BlogCarousel = ({ dataSet }) => {
                                                 </div>
                                                 <div className="col-6">
                                                     <a href={dataSet.baseUrl + "/blog/" + blog.slug} >
-                                                        <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${blog.featuredImage.url}`}
+                                                        <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${blog.featuredImage?.url}`}
                                                             className="img-fluid w-100" alt={blog.title} />
                                                     </a>
                                                 </div>

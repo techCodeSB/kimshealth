@@ -7,6 +7,8 @@ import { getBaseUrl } from '@/app/lib/getBaseUrl';
 import Breadcrumb from '@/components/Breadcrumb';
 import getCurrentLangLoc from '@/app/lib/getCurrentLangLoc';
 
+
+
 const GuidebookTpa = async () => {
     const getLangLoc = await getCurrentLangLoc()
     const basePath = await getBaseUrl(true, true);
@@ -27,6 +29,7 @@ const GuidebookTpa = async () => {
                             <h2>{pageContent[0]?.title}</h2>
                         </div>
                     </div>
+                    
                     <section className="breadcrumb-wrapper py-2">
                         <div className="container">
                             <div className="row">
@@ -46,7 +49,6 @@ const GuidebookTpa = async () => {
                             <div className="main-heading main-list sub-heading">
                                 <h2>{pageContent[1]?.title}</h2>
                                 <div dangerouslySetInnerHTML={{ __html: pageContent[1]?.details || "" }}></div>
-
                             </div>
                         </div>
                     </section>

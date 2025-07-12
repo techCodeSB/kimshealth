@@ -12,7 +12,7 @@ const CsrInitiative = async () => {
     const data = await getStaticPageContent("csr-initiative");
     const pageContent = data?.data[0]?.pageContent;
     const pageMeta = data?.data[0]?.metaSection;
-     const staticText = await getStaticText();
+    const staticText = await getStaticText();
 
     return (
         <>

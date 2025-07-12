@@ -18,9 +18,10 @@ const TestimonialSection = ({ dataSet }) => {
     if (dataSet.data.length < 1) {
         return;
     }
+
     return (
         <>
-        
+
             <section className="section d-lg-block d-none testimonial-section overflow-hidden">
                 <div className="container">
                     <div className="row justify-content-between" data-aos="fade-right">
@@ -32,8 +33,11 @@ const TestimonialSection = ({ dataSet }) => {
                         <div className="col-md-2 col-4">
                             <div className="over-all-btn text-end">
                                 <a href={dataSet.buttonURL}>{staticTexts[dataSet.buttonText]}
-                                    <span><img src="/img/slider-right-arrow.svg" className="img-fluid"
-                                        alt="" /></span></a>
+                                    <span>
+                                        <img src="/img/slider-right-arrow.svg" className="img-fluid"
+                                            alt="" />
+                                    </span>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -41,7 +45,7 @@ const TestimonialSection = ({ dataSet }) => {
 
                     <div className="row">
                         {
-                            dataSet.data.slice(0, 4).map((t, index) => {
+                            dataSet.data?.slice(0, 4).map((t, index) => {
                                 return <div className="col-xl-6 col-lg-6 col-md-6 col-12"
                                     data-aos={index === 0 || index === 2 ? "fade-right" : "fade-left"} key={index}>
                                     <div className={`row testi-card ${index === 0 ? 'active' : ""}`}>
@@ -98,17 +102,17 @@ const TestimonialSection = ({ dataSet }) => {
 
                     <div className="owl-carousel owl-theme testimonial">
                         {
-                            dataSet.data.map((t, index) => {
+                            dataSet?.data?.map((t, index) => {
                                 return <div className="card border-0" key={index}>
                                     <div className="card-top">
                                         <a href="#">
-                                            <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${t.thumbnailImage.url}`} alt="" className="img-fluid w-100" />
+                                            <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${t.thumbnailImage?.url}`} alt="" className="img-fluid w-100" />
                                         </a>
                                         <div className="play-icon"> <img src="/img/play-icon-small.png" alt="" /> </div>
                                     </div>
                                     <div className="testi-rightbox card-content">
                                         <h3>{t.title}</h3>
-                                        <p>{`${t.shortDetails.slice(0, 80)}...`}</p>
+                                        <p>{`${t.shortDetails?.slice(0, 80)}...`}</p>
 
 
                                         <div className="d-block mt-lg-3 mt-2">
@@ -124,13 +128,9 @@ const TestimonialSection = ({ dataSet }) => {
                             })
                         }
 
-
                     </div>
                 </div>
             </section>
-
-
-
 
         </>
     )

@@ -143,8 +143,6 @@ const BlogDetails = async ({ params }) => {
                     </section> */}
 
 
-
-
                     <section className="section details-page-before py-0 d-lg-block d-none">
                         <div className="procedures-details-page-header inner-pages-header">
                             <div className="container-fluid px-0">
@@ -167,18 +165,18 @@ const BlogDetails = async ({ params }) => {
                                                     <div className="row">
                                                         <div className="col-md-4 ">
 
-                                                            <img src={docData.doctorImage.url ? process.env.NEXT_PUBLIC_IMAGE_URL + docData.doctorImage.url : "/img/no-image.jpg"} alt="" className="img-fluid" />
+                                                            <img src={docData.doctorImage.url ? process.env.NEXT_PUBLIC_IMAGE_URL + docData.doctorImage?.url : "/img/no-image.jpg"} alt="" className="img-fluid" />
                                                         </div>
                                                         <div className="col-md-8 my-auto">
                                                             <h3>{docData?.name}</h3>
                                                             <p>
-                                                                {docData?.hospitals.map((data, _) => {
-                                                                    return data.title + (docData?.hospitals.length - 1 !== _ ? "," : "");
+                                                                {docData?.hospitals?.map((data, _) => {
+                                                                    return data.title + (docData?.hospitals?.length - 1 !== _ ? "," : "");
                                                                 })}
                                                             </p>
                                                             <h4>
-                                                                {docData?.specialities.map((data, _) => {
-                                                                    return data.title + (docData?.specialities.length - 1 !== _ ? "," : "");
+                                                                {docData?.specialities?.map((data, _) => {
+                                                                    return data.title + (docData?.specialities?.length - 1 !== _ ? "," : "");
                                                                 })}
                                                             </h4>
                                                             <div className="mt-4">
@@ -193,7 +191,7 @@ const BlogDetails = async ({ params }) => {
 
 
                                     <div className="col-md-6 details-proceduce-banner-right-col mt-lg-0 mt-4">
-                                        <img src={data.featuredImage.url ? process.env.NEXT_PUBLIC_IMAGE_URL + data.featuredImage.url : "/img/no-image.jpg"} className="img-fluid details-banner-image" alt="" />
+                                        <img src={data.featuredImage?.url ? process.env.NEXT_PUBLIC_IMAGE_URL + data.featuredImage.url : "/img/no-image.jpg"} className="img-fluid details-banner-image" alt="" />
                                     </div>
                                 </div>
                             </div>
@@ -217,7 +215,7 @@ const BlogDetails = async ({ params }) => {
                                                 </div>
                                             </div>
                                             <div className="details-proceduce-banner-right-col mt-lg-0 mt-4">
-                                                <img src={process.env.NEXT_PUBLIC_IMAGE_URL + data.featuredImage.url} className="img-fluid details-banner-image"
+                                                <img src={process.env.NEXT_PUBLIC_IMAGE_URL + data.featuredImage?.url} className="img-fluid details-banner-image"
                                                     alt={data.title} />
                                             </div>
                                         </div>
@@ -231,12 +229,12 @@ const BlogDetails = async ({ params }) => {
                                             <div className="row">
                                                 <div className="col-12 my-auto pe-3">
                                                     <h3>{data.title}</h3>
-                                                    <p>{docData?.hospitals.map((data, _) => {
-                                                        return data.title + (docData?.hospitals.length - 1 !== _ ? "," : "");
+                                                    <p>{docData?.hospitals?.map((data, _) => {
+                                                        return data.title + (docData?.hospitals?.length - 1 !== _ ? "," : "");
                                                     })}</p>
                                                     <h4>
                                                         {docData?.specialities.map((data, _) => {
-                                                            return data.title + (docData?.specialities.length - 1 !== _ ? "," : "");
+                                                            return data.title + (docData?.specialities?.length - 1 !== _ ? "," : "");
                                                         })}
                                                     </h4>
                                                     <div className="mt-4 mb-4">
@@ -244,7 +242,7 @@ const BlogDetails = async ({ params }) => {
                                                     </div>
                                                 </div>
                                                 <div className="col-12 mb-3">
-                                                    <img src={process.env.NEXT_PUBLIC_IMAGE_URL + data.featuredImage.url} alt={data.title} className="img-fluid" />
+                                                    <img src={process.env.NEXT_PUBLIC_IMAGE_URL + data.featuredImage?.url} alt={data.title} className="img-fluid" />
                                                 </div>
 
                                             </div>
@@ -254,11 +252,6 @@ const BlogDetails = async ({ params }) => {
                             </div>
                         </div>
                     </section>
-
-
-
-
-
 
                     <section className="section blog-details-section">
                         <div className="container">

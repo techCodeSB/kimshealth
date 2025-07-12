@@ -134,9 +134,9 @@ const BlogListing = ({ basePath, slug }) => {
                                 ) : noData ? (
                                     <p>No data found</p>
                                 ) : (
-                                    filterSplty.map((splty, i) => {
-                                        return splty.speciality ? <p key={i}>
-                                            <Link href={basePath + "/blog?spciality=" + splty.speciality?.slug}>{splty.title}</Link>
+                                    filterSplty?.map((splty, i) => {
+                                        return splty?.speciality ? <p key={i}>
+                                            <Link href={basePath + "/blog?spciality=" + splty?.speciality?.slug}>{splty.title}</Link>
                                         </p> : null
                                     })
                                 )}
@@ -166,7 +166,7 @@ const BlogListing = ({ basePath, slug }) => {
                                             </p>
                                             <div className="d-flex align-items-center justify-content-between">
                                                 <div>
-                                                    <strong> By: {allBlog[0].doctor[0]?.name}</strong>
+                                                    <strong> {staticText['By']}: {allBlog[0].doctor[0]?.name}</strong>
                                                 </div>
                                                 <div className="main-btn">
                                                     <p>{formatDate(allBlog[0].date)}</p>
@@ -180,7 +180,7 @@ const BlogListing = ({ basePath, slug }) => {
                                     <div className="card border-0">
                                         <div className="card-top">
                                             <a href={basePath + "/blog/" + allBlog[1].slug}>
-                                                <img src={process.env.NEXT_PUBLIC_IMAGE_URL + allBlog[1].featuredImage.url} className="img-fluid w-100" alt="" />
+                                                <img src={process.env.NEXT_PUBLIC_IMAGE_URL + allBlog[1].featuredImage?.url} className="img-fluid w-100" alt="" />
                                             </a>
                                         </div>
                                         <div className="card-content">
@@ -188,7 +188,7 @@ const BlogListing = ({ basePath, slug }) => {
                                                 <h4>{allBlog[1].title} </h4>
                                             </a>
                                             <p>
-                                                {allBlog[1].shortDetails.slice(0, 90)}
+                                                {allBlog[1].shortDetails?.slice(0, 90)}
                                                 <span>{staticText['Read More']}</span>
                                             </p>
                                             <div className="d-flex align-items-center justify-content-between">
@@ -207,7 +207,7 @@ const BlogListing = ({ basePath, slug }) => {
                                 <div className="col-md-12 my-3">
                                     <div className="owl-carousel owl-theme blog-page-slider">
                                         {
-                                            allBlog.slice(0, 4).map((b, index) => {
+                                            allBlog?.slice(0, 4).map((b, index) => {
                                                 return <div className="card border-0" key={index}>
                                                     <div className="card-content">
                                                         <h4>{b.title}</h4>
@@ -247,7 +247,7 @@ const BlogListing = ({ basePath, slug }) => {
 
 
                                 {
-                                    allBlog.map((b, index) => {
+                                    allBlog?.map((b, index) => {
                                         return <div className="col-md-6 mb-4" key={index}>
                                             <div className="card border-0">
                                                 <div className="card-top">
@@ -260,7 +260,7 @@ const BlogListing = ({ basePath, slug }) => {
                                                         <h4>{b.title} </h4>
                                                     </a>
                                                     <p>
-                                                        {b?.shortDetails?.slice(0, 90)}
+                                                        {b.shortDetails?.slice(0, 90)}
                                                         <span>{staticText['Read More']}</span>
                                                     </p>
                                                     <div className="d-flex align-items-center justify-content-between">

@@ -42,17 +42,22 @@ const FromDoctor = ({ dataSet }) => {
                     <div className="row">
                         <div className="col-xl-8 col-lg-8 col-md-8 col-12 hear-doctor-img mb-lg-0 mb-3">
                             <div className="position-relative overflow-hidden hear-doc-overlay" data-aos="fade-up">
-                                <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${dataSet.data[0]?.thumbnailImage?.url}`} className="img-fluid d-lg-block d-none doc-image-hover w-100" alt={dataSet.data[0].title} />
-                                <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${dataSet.data[0].thumbnailImage?.url}`} className="img-fluid w-100 d-lg-none d-block doc-image-hover" alt={dataSet.data[0].title} />
+                                <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${dataSet.data[0]?.thumbnailImage?.url}`} className="img-fluid d-lg-block d-none doc-image-hover w-100" alt={dataSet.data[0]?.title} />
+                                <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${dataSet.data[0].thumbnailImage?.url}`} className="img-fluid w-100 d-lg-none d-block doc-image-hover" alt={dataSet.data[0]?.title} />
                                 <div className="play-icon"> <img src="/img/play-icon-small.png" alt="" /> </div>
                                 <div className="hear-doctor-content hear-doc-left-btn">
                                     <div className="d-flex align-items-center justify-content-between">
                                         <div>
-                                            <p>{dataSet.data[0].title}</p>
+                                            <p>{dataSet.data[0]?.title}</p>
                                         </div>
                                         <div className="main-btn d-lg-block d-none">
-                                            <span><img src="/img/play-button.png" className="img-fluid" alt="" /> </span>
-                                            <a href={dataSet.baseUrl + "/doctor-talk/" + dataSet.data[0].slug}>{staticTexts['Watch Video']} <span><i className="fa-solid fa-arrow-right"></i></span></a>
+                                            <span>
+                                                <img src="/img/play-button.png" className="img-fluid" alt="" />
+                                            </span>
+                                            <a href={dataSet.baseUrl + "/doctor-talk/" + dataSet.data[0]?.slug}>
+                                                {staticTexts['Watch Video']}
+                                                <span><i className="fa-solid fa-arrow-right"></i></span>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
@@ -101,7 +106,8 @@ const FromDoctor = ({ dataSet }) => {
                                                 </div>
                                                 <div className="main-btn d-lg-block d-none">
                                                     <span><img src="/img/play-button.png" className="img-fluid" alt="" /> </span>
-                                                    <a href={dataSet.baseUrl + "/doctor-talk/" + dataSet.data[2].slug}>{staticTexts['Watch Video']} <span><i
+                                                    <a href={dataSet.baseUrl + "/doctor-talk/" + dataSet.data[2].slug}>
+                                                    {staticTexts['Watch Video']} <span><i
                                                         className="fa-solid fa-arrow-right"></i></span></a>
                                                 </div>
                                             </div>

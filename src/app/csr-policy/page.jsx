@@ -47,12 +47,14 @@ const CsrPolicy = async () => {
                                     </div>
 
                                     <div className="col-md-6 details-proceduce-banner-right-col mt-lg-0 mt-4">
-                                        <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${pageContent[1]?.bannerItem[0].bannerImageDesktop.url}`} className="img-fluid details-banner-image" alt={pageContent[1]?.bannerItem[0].title} />
+                                        <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${pageContent[1]?.bannerItem[0]?.bannerImageDesktop?.url}`} className="img-fluid details-banner-image" alt={pageContent[1]?.bannerItem[0].title} />
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </section>
+
+
                     {/* mobile section */}
                     <section className="section details-page-before py-0 d-lg-none d-block">
                         <div className="procedures-details-page-header inner-pages-header">
@@ -72,7 +74,7 @@ const CsrPolicy = async () => {
                                                 </div>
                                             </div>
                                             <div className="details-proceduce-banner-right-col mt-lg-0 mt-4">
-                                                <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${pageContent[1]?.bannerItem[0].bannerImageDesktop.url}`}
+                                                <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${pageContent[1]?.bannerItem[0]?.bannerImageDesktop?.url}`}
                                                     className="img-fluid details-banner-image" alt={pageContent[1]?.bannerItem[0].title} />
                                             </div>
                                         </div>
@@ -91,7 +93,6 @@ const CsrPolicy = async () => {
 
                     <section className="section doctor-line-divider">
                         <div className="container">
-
                             <div className="row">
                                 <div className="col-md-8 ps-lg-0 ">
                                     <section className="section pt-0">
@@ -138,7 +139,6 @@ const CsrPolicy = async () => {
                                             <div className="main-heading sub-heading main-list-black">
                                                 <h2>{pageContent[7]?.title}</h2>
                                                 <div dangerouslySetInnerHTML={{ __html: pageContent[7]?.details || "" }}></div>
-
                                             </div>
                                         </div>
                                     </section>
@@ -148,7 +148,6 @@ const CsrPolicy = async () => {
                                             <div className="main-heading sub-heading main-list-black">
                                                 <h2>{pageContent[8]?.title}</h2>
                                                 <div dangerouslySetInnerHTML={{ __html: pageContent[8]?.details || "" }}></div>
-
                                             </div>
                                         </div>
                                     </section>
@@ -158,7 +157,6 @@ const CsrPolicy = async () => {
                                             <div className="main-heading sub-heading main-list-black">
                                                 <h2>{pageContent[9]?.title}</h2>
                                                 <div dangerouslySetInnerHTML={{ __html: pageContent[9]?.details || "" }}></div>
-
                                             </div>
                                         </div>
                                     </section>
@@ -180,7 +178,6 @@ const CsrPolicy = async () => {
                                             <div className="main-heading sub-heading main-list-black">
                                                 <h2>{pageContent[11]?.title}</h2>
                                                 <div dangerouslySetInnerHTML={{ __html: pageContent[11]?.details || "" }}></div>
-
                                             </div>
                                         </div>
                                     </section>
@@ -217,7 +214,6 @@ const CsrPolicy = async () => {
                                             className="table-responsive">
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
                         </div>

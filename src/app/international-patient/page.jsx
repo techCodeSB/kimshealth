@@ -118,7 +118,7 @@ const InternationalPage = async () => {
                                     </div>
 
                                     <div className="col-md-6 details-proceduce-banner-right-col">
-                                        <img src={pageContent[1].bannerItem.length > 0 ? process.env.NEXT_PUBLIC_IMAGE_URL + pageContent[1].bannerItem[0].bannerImageDesktop.url : "/img/no-image.jpg"} className="img-fluid details-banner-image" alt={pageContent[0].title} />
+                                        <img src={pageContent[1].bannerItem?.length > 0 ? process.env.NEXT_PUBLIC_IMAGE_URL + pageContent[1].bannerItem[0].bannerImageDesktop?.url : "/img/no-image.jpg"} className="img-fluid details-banner-image" alt={pageContent[0].title} />
                                     </div>
                                 </div>
                             </div>
@@ -181,7 +181,7 @@ const InternationalPage = async () => {
 
 
                                     <div className="col-md-6 details-proceduce-banner-right-col">
-                                        <img src={pageContent[1].bannerItem.length > 0 ? process.env.NEXT_PUBLIC_IMAGE_URL + pageContent[1].bannerItem[0].bannerImageDesktop.url : "/img/no-image.jpg"} className="img-fluid details-banner-image" alt="" />
+                                        <img src={pageContent[1].bannerItem?.length > 0 ? process.env.NEXT_PUBLIC_IMAGE_URL + pageContent[1].bannerItem[0].bannerImageDesktop?.url : "/img/no-image.jpg"} className="img-fluid details-banner-image" alt="" />
                                     </div>
                                 </div>
                             </div>
@@ -196,8 +196,6 @@ const InternationalPage = async () => {
                             <div className="container pe-0">
                                 <div className="row">
                                     <div className="col-md-6 details-proceduce-banner-left-col">
-
-
                                         <div className="hospital-banner-container">
                                             <div className="breadcrumb-wrapper py-2 ps-2 ms-1">
                                                 <div className="row">
@@ -212,7 +210,7 @@ const InternationalPage = async () => {
                                                 </div>
                                             </div>
                                             <div className="details-proceduce-banner-right-col">
-                                                <img src={pageContent[1].bannerItem.length > 0 ? process.env.NEXT_PUBLIC_IMAGE_URL + pageContent[1].bannerItem[0].bannerImageDesktop.url : "/img/no-image.jpg"} className="img-fluid details-banner-image" alt="" />
+                                                <img src={pageContent[1].bannerItem?.length > 0 ? process.env.NEXT_PUBLIC_IMAGE_URL + pageContent[1].bannerItem[0].bannerImageDesktop?.url : "/img/no-image.jpg"} className="img-fluid details-banner-image" alt="" />
                                             </div>
 
                                         </div>
@@ -243,8 +241,6 @@ const InternationalPage = async () => {
                                                                         name="search" />
                                                                 </div>
                                                             </div>
-
-
                                                             <div className="col-md-6 col-12 mb-3">
                                                                 <button className="form-btn w-auto px-5">Submit</button>
                                                             </div>
@@ -257,10 +253,7 @@ const InternationalPage = async () => {
                                 </div>
                             </div>
                         </div>
-
-
                     </section>
-
 
 
                     <section className="section">
@@ -268,7 +261,7 @@ const InternationalPage = async () => {
                             <div className="row">
                                 <div className="col-md-5 my-auto order-lg-1 order-2">
                                     <div className="details-right-col text-center">
-                                        <img src={process.env.NEXT_PUBLIC_IMAGE_URL + pageContent[2].thumbnail.url} alt={pageContent[2].caption} className="img-fluid w-100" />
+                                        <img src={process.env.NEXT_PUBLIC_IMAGE_URL + pageContent[2].thumbnail?.url} alt={pageContent[2].caption} className="img-fluid w-100" />
                                         <h5>{pageContent[2].caption}</h5>
                                         <p>{pageContent[2].shortDetails}</p>
                                         <div className="main-btn">
@@ -371,7 +364,7 @@ const InternationalPage = async () => {
                                     <div className="faq-card p-4">
                                         <div className="accordion" id="accordionExample">
                                             {
-                                                featuredDisease.map((fd, i) => {
+                                                featuredDisease?.map((fd, i) => {
                                                     return <div className="accordion-item" key={i}>
                                                         <h2 className="accordion-header">
                                                             <button className={`accordion-button ${i === 0 ? "" : 'collapsed'}`} type="button" data-bs-toggle="collapse"
@@ -382,7 +375,7 @@ const InternationalPage = async () => {
                                                         <div id={"collapse" + i} className={`accordion-collapse collapse ${i === 0 ? "show" : ''}`}
                                                             data-bs-parent="#accordionExample">
                                                             <div className="accordion-body">
-                                                                {fd.overviewSection.details}
+                                                                {fd?.overviewSection?.details}
                                                             </div>
                                                         </div>
                                                     </div>
@@ -445,7 +438,7 @@ const InternationalPage = async () => {
                                                         <div id={"collapse" + i} className={`accordion-collapse collapse ${i === 0 ? "show" : ''}`}
                                                             data-bs-parent="#accordionExample">
                                                             <div className="accordion-body">
-                                                                {fd.overviewSection.details}
+                                                                {fd?.overviewSection?.details}
                                                             </div>
                                                         </div>
                                                     </div>
@@ -489,24 +482,23 @@ const InternationalPage = async () => {
                     <div className="line-divider"></div>
                     <section className="section logo-slider-section">
                         <div className="container-fluid">
-                            <div class="heading-container">
-                                <div class="row justify-content-between">
-                                    <div class="col-md-8 col-6">
-                                        <div class="main-heading">
+                            <div className="heading-container">
+                                <div className="row justify-content-between">
+                                    <div className="col-md-8 col-6">
+                                        <div className="main-heading">
                                             <h2>{pageContent[7].title} </h2>
                                         </div>
                                     </div>
-                                    <div class="col-md-2 col-4">
-                                        <div class="over-all-btn text-end">
+                                    <div className="col-md-2 col-4">
+                                        <div className="over-all-btn text-end">
 
-                                            <a download target='_blank' href={process.env.NEXT_PUBLIC_IMAGE_URL + pageContent[7].file?.url} >{pageContent[7].buttonText} <span><img src="/img/slider-right-arrow.svg" class="img-fluid" alt="" /></span></a>
+                                            <a download target='_blank' href={process.env.NEXT_PUBLIC_IMAGE_URL + pageContent[7].file?.url} >{pageContent[7].buttonText} <span><img src="/img/slider-right-arrow.svg" className="img-fluid" alt="" /></span></a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div id="exampleSlider">
                                 <div className="MS-content">
-
                                     {
                                         pageContent[8].logoSlider.map((l, i) => {
                                             return <div className="item slider-item text-center py-0" key={i}>
@@ -545,9 +537,6 @@ const InternationalPage = async () => {
                                     </div>
                                 </div>
                             </div>
-
-
-
                         </div>
                     </section>
 
@@ -594,4 +583,4 @@ const InternationalPage = async () => {
     )
 }
 
-export default InternationalPage
+export default InternationalPage;

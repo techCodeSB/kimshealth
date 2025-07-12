@@ -50,6 +50,20 @@ const doctorData = {
     },
 
 
+    getFilterDoctor: async ({ langLoc, limit = 12 }) => {
+        let baseUrl = process.env.NEXT_PUBLIC_CMS_API_URL;
+        const url = baseUrl + `/doctor-details?populate=*&filters[locations][id][$eq]=${langLoc.loc.id}&filters[manageAppearance][showInFeaturedList][$eq]=true&sort=name:asc&pagination[limit]=${limit}`;
+
+        const req = await fetch(url);
+        const res = await req.json();
+
+        console.log(res)
+
+        return res.data;
+
+    }
+
+
 };
 
 

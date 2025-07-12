@@ -14,7 +14,7 @@ const EthicsCommittee = async () => {
     const data = await getStaticPageContent("ethics-committee");
     const pageContent = data?.data[0]?.pageContent;
     const pageMeta = data?.data[0]?.metaSection;
-    const staticText = await getStaticText()
+    const staticText = await getStaticText();
 
 
     return (
@@ -90,7 +90,7 @@ const EthicsCommittee = async () => {
                                     </div>
                                 </div>
                                 <div className="col-md-6 my-lg-auto mb-3">
-                                    <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${pageContent[5]?.image.url}`}
+                                    <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${pageContent[5]?.image?.url}`}
                                         className="img-fluid" alt={pageContent[5]?.title} />
                                 </div>
                             </div>
@@ -145,7 +145,6 @@ const EthicsCommittee = async () => {
                                 className="table-responsive services-table mt-4">
                             </div>
                             <div dangerouslySetInnerHTML={{ __html: pageContent[10]?.details || "" }} className="sub-heading">
-
                             </div>
                         </div>
                     </section>

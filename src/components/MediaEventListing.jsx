@@ -100,14 +100,13 @@ const MediaEventListing = ({ basePath }) => {
 
         if (!hospitalId) {
             // Show all loaded events (or reload from API if needed)
-            const all = await mediaData.getAll({start: 0, limit: 6 });
+            const all = await mediaData.getAll({ start: 0, limit: 6 });
             setallEvents(all);
             setNoData(false);
             return;
         }
 
-        const all = await mediaData.getAll({start: 0, limit: 6 }); // Or fetch fresh data if needed
-console.log(all)
+        const all = await mediaData.getAll({ start: 0, limit: 6 }); // Or fetch fresh data if needed
         const filtered = all.filter(event => event.hospital[0]?.id === hospitalId);
         if (filtered.length > 0) {
             setallEvents(filtered);
@@ -232,12 +231,13 @@ console.log(all)
                 </div>
             </section>
 
+
             {/* Mobile View */}
             <section className="section d-lg-none d-block pt-0" data-aos="fade-up">
                 <div className="container">
                     <div className="row g-2">
                         {
-                            allEvents.map((e, i) => (
+                            allEvents?.map((e, i) => (
                                 <div className="col-xl-3 col-lg-3 col-md-3 col-6 mb-2" key={i}>
                                     <div className="media-card">
                                         <div className="media-img">

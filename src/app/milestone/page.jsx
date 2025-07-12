@@ -8,7 +8,8 @@ import Breadcrumb from '@/components/Breadcrumb'
 
 const MileStone = async () => {
     const getLangLoc = await getCurrentLangLoc()
-    const data = await getStaticPageContent("milestone");
+    const field = "populate[0]=pageContent.item.events"
+    const data = await getStaticPageContent("milestone", field);
     const pageContent = data?.data[0]?.pageContent;
     const pageMeta = data?.data[0]?.metaSection;
     const staticText = await getStaticText();
@@ -39,131 +40,25 @@ const MileStone = async () => {
                         <div className="container">
                             <div className="inner-container">
                                 <ul className="timeline">
-                                    <li className="timeline-item active" data-date="2002">
-                                        <div className="main-list-black">
-                                            <ul>
-                                                <li>The first bus route was established from Trivandrum City to KIMSHEALTH</li>
-                                                <li>First ACLS course started in association with University of Kentucky, USA and
-                                                    Osmania Medical Association of America</li>
-                                                <li>National Live workshop on Hoarseness and Stridor Kimsy, the first baby at
-                                                    KIMSHEALTH was born</li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li className="timeline-item" data-date="2003">
-                                        <div className="main-list-black">
-                                            <ul>
-                                                <li>KIMSHEALTH received the ISO 9001 : 2000 award for Quality</li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li className="timeline-item active" data-date="2002">
-                                        <div className="main-list-black">
-                                            <ul>
-                                                <li>The first bus route was established from Trivandrum City to KIMSHEALTH</li>
-                                                <li>First ACLS course started in association with University of Kentucky, USA and
-                                                    Osmania Medical Association of America</li>
-                                                <li>National Live workshop on Hoarseness and Stridor Kimsy, the first baby at
-                                                    KIMSHEALTH was born</li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li className="timeline-item" data-date="2003">
-                                        <div className="main-list-black">
-                                            <ul>
-                                                <li>KIMSHEALTH received the ISO 9001 : 2000 award for Quality</li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li className="timeline-item active" data-date="2002">
-                                        <div className="main-list-black">
-                                            <ul>
-                                                <li>The first bus route was established from Trivandrum City to KIMSHEALTH</li>
-                                                <li>First ACLS course started in association with University of Kentucky, USA and
-                                                    Osmania Medical Association of America</li>
-                                                <li>National Live workshop on Hoarseness and Stridor Kimsy, the first baby at
-                                                    KIMSHEALTH was born</li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li className="timeline-item" data-date="2003">
-                                        <div className="main-list-black">
-                                            <ul>
-                                                <li>KIMSHEALTH received the ISO 9001 : 2000 award for Quality</li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li className="timeline-item active" data-date="2002">
-                                        <div className="main-list-black">
-                                            <ul>
-                                                <li>The first bus route was established from Trivandrum City to KIMSHEALTH</li>
-                                                <li>First ACLS course started in association with University of Kentucky, USA and
-                                                    Osmania Medical Association of America</li>
-                                                <li>National Live workshop on Hoarseness and Stridor Kimsy, the first baby at
-                                                    KIMSHEALTH was born</li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li className="timeline-item" data-date="2003">
-                                        <div className="main-list-black">
-                                            <ul>
-                                                <li>KIMSHEALTH received the ISO 9001 : 2000 award for Quality</li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li className="timeline-item active" data-date="2002">
-                                        <div className="main-list-black">
-                                            <ul>
-                                                <li>The first bus route was established from Trivandrum City to KIMSHEALTH</li>
-                                                <li>First ACLS course started in association with University of Kentucky, USA and
-                                                    Osmania Medical Association of America</li>
-                                                <li>National Live workshop on Hoarseness and Stridor Kimsy, the first baby at
-                                                    KIMSHEALTH was born</li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li className="timeline-item" data-date="2003">
-                                        <div className="main-list-black">
-                                            <ul>
-                                                <li>KIMSHEALTH received the ISO 9001 : 2000 award for Quality</li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li className="timeline-item active" data-date="2002">
-                                        <div className="main-list-black">
-                                            <ul>
-                                                <li>The first bus route was established from Trivandrum City to KIMSHEALTH</li>
-                                                <li>First ACLS course started in association with University of Kentucky, USA and
-                                                    Osmania Medical Association of America</li>
-                                                <li>National Live workshop on Hoarseness and Stridor Kimsy, the first baby at
-                                                    KIMSHEALTH was born</li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li className="timeline-item" data-date="2003">
-                                        <div className="main-list-black">
-                                            <ul>
-                                                <li>KIMSHEALTH received the ISO 9001 : 2000 award for Quality</li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li className="timeline-item active" data-date="2002">
-                                        <div className="main-list-black">
-                                            <ul>
-                                                <li>The first bus route was established from Trivandrum City to KIMSHEALTH</li>
-                                                <li>First ACLS course started in association with University of Kentucky, USA and
-                                                    Osmania Medical Association of America</li>
-                                                <li>National Live workshop on Hoarseness and Stridor Kimsy, the first baby at
-                                                    KIMSHEALTH was born</li>
-                                            </ul>
-                                        </div>
-                                    </li>
+                                    {
+                                        pageContent[1]?.item?.map((item, index) => {
+                                            return <li className={`timeline-item ${index % 2 === 0 ? 'active' : ''}`} data-date={item.title} key={index}>
+                                                <div className="main-list-black">
+                                                    <ul>
+                                                        {
+                                                            item.events.map((e, j)=>{
+                                                                return <li key={j}>{e.title}</li>
+                                                            })
+                                                        }
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                        })
+                                    }
                                 </ul>
-
                             </div>
                         </div>
                     </section>
-
                 </div>
 
             </div>

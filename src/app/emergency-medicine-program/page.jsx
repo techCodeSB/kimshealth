@@ -50,12 +50,14 @@ const EmergencyMedicine = async () => {
                                     </div>
 
                                     <div className="col-md-6 details-proceduce-banner-right-col mt-lg-0 mt-4">
-                                        <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${pageContent[1]?.bannerItem[0].bannerImageDesktop.url}`} className="img-fluid details-banner-image" alt={pageContent[1]?.bannerItem[0].title} />
+                                        <img src={pageContent[1]?.bannerItem[0].bannerImageDesktop?.url ? `${process.env.NEXT_PUBLIC_IMAGE_URL}${pageContent[1]?.bannerItem[0].bannerImageDesktop?.url}` : '/img/no-image.jpg'} className="img-fluid details-banner-image" alt={pageContent[1]?.bannerItem[0]?.title} />
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </section>
+
+
                     {/* mobile section */}
                     <section className="section details-page-before py-0 d-lg-none d-block">
                         <div className="procedures-details-page-header inner-pages-header">
@@ -76,7 +78,7 @@ const EmergencyMedicine = async () => {
                                                 </div>
                                             </div>
                                             <div className="details-proceduce-banner-right-col mt-lg-0 mt-4">
-                                                <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${pageContent[1]?.bannerItem[0].bannerImageDesktop.url}`}
+                                                <img src={pageContent[1]?.bannerItem[0].bannerImageDesktop?.url ? `${process.env.NEXT_PUBLIC_IMAGE_URL}${pageContent[1]?.bannerItem[0].bannerImageDesktop?.url}` : "/img/no-image.jpg"}
                                                     className="img-fluid details-banner-image" alt={pageContent[1]?.bannerItem[0].title} />
                                             </div>
                                         </div>
@@ -133,7 +135,6 @@ const EmergencyMedicine = async () => {
                                             </div>
                                         </div>
                                     </section>
-
                                     <div className="line-divider"></div>
                                     <section className="section">
                                         <div className="container">
@@ -152,22 +153,19 @@ const EmergencyMedicine = async () => {
                                             </div>
                                         </div>
                                     </section>
-
                                 </div>
 
                                 <div className="col-md-4">
-
                                     <div className="association-left-col">
                                         <div className="association-form-card mb-5">
                                             <Form1 title={"Request a Call Back"} />
-
                                         </div>
                                         <div className="em-sticky-ele">
                                             <h4>{pageContent[8]?.sectionTitle}</h4>
                                             <p><strong>{pageContent[8]?.contactPerson}</strong></p>
-                                            <p> SOCOMER</p>
+                                            <p>SOCOMER</p>
                                             <p> {pageContent[8]?.address}</p>
-                                            <a href="#">
+                                            <a href={"tel:" + pageContent[8]?.phone}>
                                                 {pageContent[8]?.phone && <i className="fa-solid fa-phone"></i>}
                                                 {pageContent[8]?.phone}
                                             </a>

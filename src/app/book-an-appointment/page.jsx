@@ -75,10 +75,6 @@ const BookAnAppoinment = async () => {
                                                         <option value="3">Three</option>
                                                     </select>
                                                 </div>
-
-
-
-
                                             </div>
                                         </div>
                                     </div>
@@ -183,19 +179,13 @@ const BookAnAppoinment = async () => {
                                                                             <div className="col-xl-6 col-lg-6 col-md-6 col-12 mb-3">
                                                                                 <label htmlFor=''>Last Name</label>
                                                                                 <input type="text" className="form-control pe-0" />
-
-
                                                                             </div>
 
 
                                                                             <div className="col-xl-12 col-lg-12 col-md-12 col-12 mb-3">
                                                                                 <label htmlFor=''>Mobile Number*</label>
                                                                                 <input type="text" id="phone" defaultValue="+91" className="form-control pe-0" />
-
-
                                                                             </div>
-
-
 
                                                                             <div className="col-xl-12 col-lg-12 col-md-12 col-12 mb-3">
                                                                                 <label htmlFor=''>Hospitals*</label>
@@ -212,18 +202,7 @@ const BookAnAppoinment = async () => {
                                                                                 <label htmlFor=''>Query*</label>
                                                                                 <textarea className="form-control" placeholder="Leave a comment here"
                                                                                     id="floatingTextarea"></textarea>
-
-
                                                                             </div>
-
-
-
-
-
-
-
-
-
 
                                                                             <div className="col-xl-6 col-lg-6 col-md-6 col-12 mb-3">
                                                                                 <div className="from-btn">
@@ -236,8 +215,6 @@ const BookAnAppoinment = async () => {
                                                                         </div>
                                                                     </form>
                                                                 </div>
-
-
                                                             </div>
 
 
@@ -252,14 +229,10 @@ const BookAnAppoinment = async () => {
                                                                             <div className="col-xl-6 col-lg-6 col-md-6 col-12 mb-3">
                                                                                 <label htmlFor=''>First Name*</label>
                                                                                 <input type="text" className="form-control pe-0" />
-
-
                                                                             </div>
                                                                             <div className="col-xl-6 col-lg-6 col-md-6 col-12 mb-3">
                                                                                 <label htmlFor=''>Last Name</label>
                                                                                 <input type="text" className="form-control pe-0" />
-
-
                                                                             </div>
 
 

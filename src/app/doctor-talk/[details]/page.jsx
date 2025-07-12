@@ -9,6 +9,8 @@ import Footer from '@/components/Footer';
 import FromDoctor from '@/components/FromDoctor';
 import Header from '@/components/Header';
 
+
+
 const DoctorTalkDetails = async ({ params }) => {
     const getLangLoc = await getCurrentLangLoc()
     const basePath = await getBaseUrl();
@@ -49,7 +51,6 @@ const DoctorTalkDetails = async ({ params }) => {
 
                     <section className="section">
                         <div className="container">
-
                             <div className="testimonial-details-card">
                                 <div className="row">
                                     <div className="col-md-7 mb-lg-0 mb-3">
@@ -63,10 +64,10 @@ const DoctorTalkDetails = async ({ params }) => {
                                     </div>
                                     <div className="col-md-5 testi-rightbox my-auto">
                                         <div className="main-heading">
-                                            <h3>{data.videoSource === "Youtube" ? youtube.items[0].statistics.viewCount + "views," : null} {formatDate(data.date)} </h3>
+                                            <h3>{data.videoSource === "Youtube" ? youtube.items[0].statistics?.viewCount + "views," : null} {formatDate(data.date)} </h3>
                                             <h3>
                                                 {
-                                                    data.videoSource === "Youtube" ? youtube.items[0].snippet.tags.map((tag, _) => {
+                                                    data.videoSource === "Youtube" ? youtube?.items[0]?.snippet?.tags?.map((tag, _) => {
                                                         return <span className='me-2'>
                                                             #<a href={`https://www.youtube.com/results?search_query=${tag}`} target='_blank'>{tag}</a>
                                                         </span>
@@ -78,13 +79,14 @@ const DoctorTalkDetails = async ({ params }) => {
                                         </div>
                                         <div className="d-flex align-items-center justify-content-between mt-3">
                                             <div className="doctor-name">
-                                                <p><span><img src="/img/doctor.png" className="img-fluid" alt="" /></span>{data.doctor?.name}</p>
+                                                <p><span><img src="/img/doctor.png" className="img-fluid" alt="" /></span>
+                                                {data.doctor?.name}</p>
                                             </div>
                                             <div className="doctor-catagory">
                                                 <p>
                                                     {
-                                                        data.specialities.map((st, _) => (
-                                                            st.title + (data.specialities.length - 1 !== _ ? ", " : '')
+                                                        data.specialities?.map((st, _) => (
+                                                            st.title + (data.specialities?.length - 1 !== _ ? ", " : '')
                                                         ))
                                                     }
                                                 </p>

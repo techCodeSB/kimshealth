@@ -40,7 +40,7 @@ const KisaHealth = async () => {
                                                         <Breadcrumb
                                                             activeTitle={pageContent[0]?.title}
                                                             middleTitle={staticText['Academics']}
-                                                            middleURL={"#"}
+                                                            middleURL={basePath+ "#"}
                                                         />
                                                     </div>
                                                 </div>
@@ -49,7 +49,7 @@ const KisaHealth = async () => {
                                                 <div className="details-heading">
                                                     <h3 className="mb-2">{pageContent[0].title}</h3>
                                                     <p>{pageContent[0].subTitle}</p>
-                                                    <a download={process.env.NEXT_PUBLIC_IMAGE_URL + pageContent[2].file.url} href={process.env.NEXT_PUBLIC_IMAGE_URL + pageContent[2].file.url} className="mb-3 mt-2 d-block"><i
+                                                    <a download={process.env.NEXT_PUBLIC_IMAGE_URL + pageContent[2].file?.url} href={process.env.NEXT_PUBLIC_IMAGE_URL + pageContent[2].file?.url} className="mb-3 mt-2 d-block"><i
                                                         className="custom-download"></i>{pageContent[2].buttonText}</a>
                                                 </div>
                                             </div>
@@ -57,7 +57,7 @@ const KisaHealth = async () => {
                                     </div>
 
                                     <div className="col-md-6 details-proceduce-banner-right-col">
-                                        <img src={pageContent[1].bannerItem[0].bannerImageDesktop.url ? process.env.NEXT_PUBLIC_IMAGE_URL + pageContent[1].bannerItem[0].bannerImageDesktop.url : "/img/no-image.jpg"} className="img-fluid details-banner-image" alt="" />
+                                        <img src={pageContent[1]?.bannerItem[0].bannerImageDesktop.url ? process.env.NEXT_PUBLIC_IMAGE_URL + pageContent[1]?.bannerItem[0].bannerImageDesktop.url : "/img/no-image.jpg"} className="img-fluid details-banner-image" alt="" />
                                     </div>
                                 </div>
                             </div>
@@ -93,7 +93,7 @@ const KisaHealth = async () => {
 
                                             <div className="row">
                                                 {
-                                                    allKisaCourse.slice(0, 8).map((l, i) => {
+                                                    allKisaCourse?.slice(0, 8).map((l, i) => {
                                                         return <div className="col-md-4" key={i}>
                                                             <div className="procedure-acc-card mb-3">
                                                                 <div className="accordion" id="accordionExample">
@@ -125,7 +125,6 @@ const KisaHealth = async () => {
                                                         </div>
                                                     })
                                                 }
-
                                             </div>
                                         </div>
                                     </div>
@@ -147,12 +146,12 @@ const KisaHealth = async () => {
                             </div>
                             <div className="owl-carousel owl-theme journal-slider">
                                 {
-                                    pageContent[5]?.journal.map((j, index) => {
+                                    pageContent[5]?.journal?.map((j, index) => {
                                         return <div className="expert-card" data-aos="fade-right" key={index}>
-                                            <a download href={`${process.env.NEXT_PUBLIC_IMAGE_URL}${j.file.url}`} >
+                                            <a download href={`${process.env.NEXT_PUBLIC_IMAGE_URL}${j.file?.url}`} >
                                                 <div className="card border-0">
                                                     <div className="card-top">
-                                                        <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${j.thumbnailImage.url}`} className="img-fluid w-100" alt={j.title} />
+                                                        <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${j.thumbnailImage?.url}`} className="img-fluid w-100" alt={j.title} />
                                                     </div>
                                                     <div className="card-content">
                                                         <h5>{j.title}</h5>

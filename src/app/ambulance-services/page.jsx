@@ -48,12 +48,13 @@ const AmbulanceServices = async () => {
                                     </div>
 
                                     <div className="col-md-6 details-proceduce-banner-right-col mt-lg-0 mt-4">
-                                        <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${pageContent[1]?.bannerItem[0].bannerImageDesktop.url}`} className="img-fluid details-banner-image" alt={pageContent[1]?.bannerItem[0].title} />
+                                        <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${pageContent[1]?.bannerItem[0].bannerImageDesktop?.url}`} className="img-fluid details-banner-image" alt={pageContent[1]?.bannerItem[0]?.title} />
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </section>
+
                     {/* mobile section */}
                     <section className="section details-page-before py-0 d-lg-none d-block">
                         <div className="procedures-details-page-header inner-pages-header">
@@ -73,8 +74,9 @@ const AmbulanceServices = async () => {
                                                 </div>
                                             </div>
                                             <div className="details-proceduce-banner-right-col mt-lg-0 mt-4">
-                                                <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${pageContent[1]?.bannerItem[0].bannerImageDesktop.url}`}
-                                                    className="img-fluid details-banner-image" alt={pageContent[1]?.bannerItem[0].title} />
+                                                <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${pageContent[1]?.bannerItem[0].bannerImageDesktop?.url}`}
+                                                    className="img-fluid details-banner-image" 
+                                                    alt={pageContent[1].bannerItem[0]?.title} />
                                             </div>
                                         </div>
                                     </div>
@@ -82,7 +84,7 @@ const AmbulanceServices = async () => {
                                 <div className="col-md-6 mt-lg-0 mt-4">
                                     <div className="details-banner">
                                         <div className="details-heading">
-                                            <h3>{pageContent[0]?.title}</h3>
+                                            <h3>{pageContent[0].title}</h3>
                                         </div>
                                     </div>
                                 </div>

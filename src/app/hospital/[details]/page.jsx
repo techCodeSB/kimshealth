@@ -139,7 +139,7 @@ const HospitalDetails = async ({ params }) => {
                     <div className="container">
                         <div className="row">
                             <div className="col-12 px-0">
-                                <img src={process.env.NEXT_PUBLIC_IMAGE_URL + hptData.featuredImage.url} alt="" className="img-fluid hospital-details-mobile-banner" />
+                                <img src={process.env.NEXT_PUBLIC_IMAGE_URL + hptData.featuredImage?.url} alt="" className="img-fluid hospital-details-mobile-banner" />
                             </div>
                             <div className="col-12">
                                 <div className="row">
@@ -170,7 +170,7 @@ const HospitalDetails = async ({ params }) => {
                                                                 <li className="hospital-icon-custom">{hptData.title} </li>
                                                                 <li>{hptData.address}</li>
                                                                 <li className="telephone-icon-custom"><a href={`tel:${hptData.contactNo}`}> Appointment Number- {hptData.contactNo}</a></li>
-                                                                <li className="send-custom-icon"><a href="#"> Get Direction</a></li>
+                                                                <li className="send-custom-icon"><a href={hptData.mapURL}> Get Direction</a></li>
                                                             </ul>
 
                                                             <div className="d-flex align-items-center mt-2">
@@ -295,33 +295,34 @@ const HospitalDetails = async ({ params }) => {
                         <div className="row">
                             <div className="col-md-5 order-lg-1 order-2">
                                 <div className="details-right-col text-center sticky-from">
-                                    <img src={process.env.NEXT_PUBLIC_IMAGE_URL + hptData.featuredImage.url} alt="" className="img-fluid w-100" />
+                                    <img src={process.env.NEXT_PUBLIC_IMAGE_URL + hptData.featuredImage?.url} alt="" className="img-fluid w-100" />
                                     <h5>{hptData.caption || ""}</h5>
                                     <p>{hptData.overviewSection?.subTitle || ""}</p>
                                     {
-                                        hptData.overviewSection.videoId ?
-                                            <WatchVideoButton txt={"Watch Video"} id={hptData.overviewSection.videoId} />
+                                        hptData.overviewSection?.videoId ?
+                                            <WatchVideoButton txt={"Watch Video"} id={hptData.overviewSection?.videoId} />
                                             : null
                                     }
                                 </div>
                             </div>
                             <div className="col-md-7 sub-heading order-lg-2 order-1 mb-lg-0 mb-3">
                                 <div className="main-heading">
-                                    <h2 className="mb-1">{hptData.overviewSection.title}</h2>
-                                    <h4 className="mb-3">{hptData.overviewSection.subTitle}</h4>
+                                    <h2 className="mb-1">{hptData.overviewSection?.title}</h2>
+                                    <h4 className="mb-3">{hptData.overviewSection?.subTitle}</h4>
                                 </div>
 
                                 <div
                                     className='main-list'
-                                    dangerouslySetInnerHTML={{ __html: marked(hptData.overviewSection.details) }}></div>
+                                    dangerouslySetInnerHTML={{ __html: marked(hptData.overviewSection?.details) }}></div>
 
                                 {hptData.USPSection.uspItem.length > 1 ? <div className="details-counter-section">
                                     <div className="row">
                                         {
-                                            hptData.USPSection.uspItem.map((upsec, index) => {
+                                            hptData.USPSection?.uspItem?.map((upsec, index) => {
                                                 return <div className="col-md-3 col-6 mb-lg-0 mb-3" key={index}>
                                                     <div className="details-counter-box">
-                                                        <h2><span className="counter">{upsec.number}</span> <span>{upsec.suffix}</span></h2>
+                                                        <h2><span className="counter">{upsec.number}</span> <span>{upsec.suffix}
+                                                            </span></h2>
                                                         <p>{upsec.title}</p>
                                                     </div>
                                                 </div>
@@ -337,7 +338,6 @@ const HospitalDetails = async ({ params }) => {
 
                 <div className="line-divider"></div>
                 <ExcellenceCarousel dataSet={specialityDataSet} />
-
 
                 <div className="line-divider"> </div>
                 <ExpertCarousel dataSet={expertDataSet} />
@@ -357,7 +357,7 @@ const HospitalDetails = async ({ params }) => {
                         <div className="row justify-content-between" data-aos="fade-up">
                             <div className="col-md-6 col-8">
                                 <div className="main-heading">
-                                    <h2>{hptData.hospitalsSection.title} </h2>
+                                    <h2>{hptData.hospitalsSection?.title} </h2>
                                 </div>
                             </div>
                             <div className="col-md-2 col-4">
@@ -374,11 +374,10 @@ const HospitalDetails = async ({ params }) => {
                                         <div className="custom-hospital-top-card">
                                             <div className="hospital-img">
                                                 <a href={basePath + "/hospital/" + h.slug}>
-                                                    <img src={process.env.NEXT_PUBLIC_IMAGE_URL + h.featuredImage.url} alt="" className="img-fluid w-100" />
+                                                    <img src={process.env.NEXT_PUBLIC_IMAGE_URL + h.featuredImage?.url} alt="" className="img-fluid w-100" />
                                                 </a>
                                             </div>
                                             <div className="hospital-content">
-
                                                 <ul>
                                                     <li className="hospital-icon-custom">{h.title}</li>
                                                     <li className="location-icon-custom">{h.address}</li>
@@ -415,13 +414,11 @@ const HospitalDetails = async ({ params }) => {
                                         </div>
                                     </div>
 
-
                                 })
                             }
                         </div>
                     </div>
                 </section>
-
 
             </div>
             <Footer />
@@ -429,4 +426,4 @@ const HospitalDetails = async ({ params }) => {
     )
 }
 
-export default HospitalDetails
+export default HospitalDetails;

@@ -8,6 +8,8 @@ import courseData from '@/app/lib/getCourse';
 import Breadcrumb from '@/components/Breadcrumb';
 import getCurrentLangLoc from '@/app/lib/getCurrentLangLoc';
 
+
+
 const DoctoralCourse = async () => {
     const getLangLoc = await getCurrentLangLoc()
     const basePath = await getBaseUrl(true, true)
@@ -54,7 +56,7 @@ const DoctoralCourse = async () => {
                                     </div>
 
                                     <div className="col-md-6 details-proceduce-banner-right-col">
-                                        <img src={pageContent[1].bannerItem[0].bannerImageDesktop.url ? process.env.NEXT_PUBLIC_IMAGE_URL + pageContent[1].bannerItem[0].bannerImageDesktop.url : "/img/no-image.jpg"} className="img-fluid details-banner-image" alt="" />
+                                        <img src={pageContent[1]?.bannerItem[0]?.bannerImageDesktop?.url ? process.env.NEXT_PUBLIC_IMAGE_URL + pageContent[1].bannerItem[0].bannerImageDesktop.url : "/img/no-image.jpg"} className="img-fluid details-banner-image" alt="" />
                                     </div>
                                 </div>
                             </div>
@@ -103,20 +105,16 @@ const DoctoralCourse = async () => {
                                                     </div>
                                                 })
                                             }
-
                                         </div>
-
                                     </section>
                                     <div className="line-divider"></div>
-
-
                                     <section className="section">
                                         <div className="main-heading">
                                             <h2>{pageContent[3].title}</h2>
                                         </div>
                                         <div className="row">
                                             {
-                                                allPhdCourses.slice(0, 8).map((l, i) => {
+                                                allPhdCourses?.slice(0, 8).map((l, i) => {
                                                     return <div className="col-md-4 mb-3" key={i}>
                                                         <div className="procedure-acc-card mb-3">
                                                             <div className="accordion" id="accordionExample">
@@ -133,7 +131,8 @@ const DoctoralCourse = async () => {
                                                                             <p>Certified by: {l.affiliation}</p>
                                                                             <ul>
                                                                                 <li className="hourglass">Duration : {l.duration}</li>
-                                                                                <li className="luxury">Eligibility : {l.eligibility}</li>
+                                                                                <li className="luxury">Eligibility : {l.eligibility}
+                                                                                </li>
                                                                                 <li className="calender-doc">Commencement : {l.commencement}</li>
                                                                             </ul>
                                                                             <a href={basePath + "/course/" + l.slug} className="doctotal-btn">View More</a>
@@ -146,7 +145,6 @@ const DoctoralCourse = async () => {
                                                     </div>
                                                 })
                                             }
-
                                         </div>
                                     </section>
 
@@ -181,13 +179,11 @@ const DoctoralCourse = async () => {
                                                                         </div>
                                                                     </div>
                                                                 </div>
-
                                                             </div>
                                                         </div>
                                                     </div>
                                                 })
                                             }
-
                                         </div>
                                     </section>
                                     <div className="line-divider"></div>
@@ -198,7 +194,7 @@ const DoctoralCourse = async () => {
                                             </div>
                                             <div className="row">
                                                 {
-                                                    allBroadCourses.slice(0, 8).map((l, i) => {
+                                                    allBroadCourses?.slice(0, 8).map((l, i) => {
                                                         return <div className="col-md-4 mb-3" key={i}>
                                                             <div className="procedure-acc-card mb-3">
                                                                 <div className="accordion" id="accordionExample">
@@ -228,10 +224,10 @@ const DoctoralCourse = async () => {
                                                         </div>
                                                     })
                                                 }
-
                                             </div>
                                         </div>
                                     </section>
+
                                     <div className="line-divider"></div>
                                     <section className="section">
                                         <div className="container">
@@ -240,7 +236,7 @@ const DoctoralCourse = async () => {
                                             </div>
                                             <div className="row">
                                                 {
-                                                    alltFelowshipCourses.slice(0, 8).map((l, i) => {
+                                                    alltFelowshipCourses?.slice(0, 8).map((l, i) => {
                                                         return <div className="col-md-4 mb-3" key={i}>
                                                             <div className="procedure-acc-card mb-3">
                                                                 <div className="accordion" id="accordionExample">
@@ -264,7 +260,6 @@ const DoctoralCourse = async () => {
                                                                             </div>
                                                                         </div>
                                                                     </div>
-
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -273,7 +268,6 @@ const DoctoralCourse = async () => {
                                             </div>
                                         </div>
                                     </section>
-
                                 </div>
 
                                 <div className="col-md-4">

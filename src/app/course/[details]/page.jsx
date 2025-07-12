@@ -15,6 +15,8 @@ const DoctoralCourseDetails = async ({ params }) => {
 
     let courseDetails = await courseData.getSingleCourse(params.details);
     let otherCourse = await courseData.getAll(courseDetails.courseCategory.id);
+
+
     return (
         <>
             <Header />
@@ -76,7 +78,7 @@ const DoctoralCourseDetails = async ({ params }) => {
                             </div>
                             <div className="owl-carousel owl-theme hospital-slider">
                                 {
-                                    otherCourse.map((l, i) => {
+                                    otherCourse?.map((l, i) => {
                                         return <div className="doctoral-card-content sub-heading m-3" key={i}>
                                             <h3>{l.title}</h3>
                                             <p>{l.affiliation}</p>
@@ -87,7 +89,6 @@ const DoctoralCourseDetails = async ({ params }) => {
                                                 <li className="car-seat">No of seat: {l.noOfSeat}</li>
                                             </ul>
                                             <a href={basePath + "/course/" + l.slug} className="doctotal-btn">View More</a>
-
                                         </div>
                                     })
                                 }
@@ -101,4 +102,4 @@ const DoctoralCourseDetails = async ({ params }) => {
     )
 }
 
-export default DoctoralCourseDetails
+export default DoctoralCourseDetails;

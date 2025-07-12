@@ -7,6 +7,8 @@ import langLoc from '@/helper/getLangLoc';
 import getStaticText from '@/helper/getStaticText';
 import React, { useEffect, useState } from 'react'
 
+
+
 const Footer = () => {
     const [basePath, setBasePath] = useState(null);
     const [speciality, setSpeciality] = useState();
@@ -33,11 +35,14 @@ const Footer = () => {
         getLoc()
     }, []);
 
+
+
     useEffect(() => {
         const fetchAllTitles = async () => {
             try {
                 setSpeciality(await getSpecialityData.getFooterSpeciality());
                 setHospitals(await hospitalData.getFooterHospital());
+
             } catch (error) {
                 console.error("Error fetching titles:", error);
             }
@@ -170,27 +175,24 @@ const Footer = () => {
                                     <div className="address-item d-flex mb-3">
                                         <i className="fa-solid fa-location-dot"></i>
                                         <div className="ms-3">
-                                            <strong><u>INDIA</u></strong>
-                                            <p>
-                                                KIMSHEALTH, P.B.No.1, Anayara
-                                                P.O, Trivandrum – 695029,
-                                                Kerala, India</p>
+                                            <strong><u>{locationData?.country}</u></strong>
+                                            <p>{locationData?.address}</p>
                                         </div>
                                     </div>
-                                    <a href="mailto:feedback.tvm@kimshealth.org">
+                                    <a href={"mailto:" + locationData?.email}>
                                         <div className="address-item d-flex align-items-center mb-3">
                                             <i className="fa-regular fa-envelope mt-0 ms-0 fw-bold"></i>
                                             <div className="ms-2">
-                                                <strong className="fw-normal">feedback.tvm@kimshealth.org</strong>
+                                                <strong className="fw-normal">{locationData?.email}</strong>
                                             </div>
                                         </div>
                                     </a>
 
-                                    <a href="tel:4712941400">
+                                    <a href={"tel:" + locationData?.phone}>
                                         <div className="address-item d-flex align-items-center mb-3">
                                             <i className="fa-solid fa-phone"></i>
                                             <div className="ms-2">
-                                                <strong className="fw-normal">+91 471 294 1400</strong>
+                                                <strong className="fw-normal">{locationData?.phone}</strong>
                                             </div>
                                         </div>
                                     </a>
@@ -199,15 +201,24 @@ const Footer = () => {
                             </div>
 
                             <div className="social-media-icon mt-4">
-                                <img src="/img/facebook.png" className="img-fluid" alt="" />
-                                <img src="/img/instagram.png" className="img-fluid" alt="" />
-                                <img src="/img/linkedin.png" className="img-fluid" alt="" />
-                                <img src="/img/youtube.png" className="img-fluid" alt="" />
+                                {/* <img src="/img/facebook.png" className="img-fluid" alt="Facebook" /> */}
+                                <a href={locationData?.facebook} target="_blank" rel="noopener noreferrer">
+                                    <img src="/img/facebook.png" className="img-fluid" alt="Facebook" />
+                                </a>
+                                <a href={locationData?.instagram} target="_blank" rel="noopener noreferrer">
+                                    <img src="/img/instagram.png" className="img-fluid" alt="Instagram" />
+                                </a>
+                                <a href={locationData?.linkedin} target="_blank" rel="noopener noreferrer">
+                                    <img src="/img/linkedin.png" className="img-fluid" alt="LinkedIn" />
+                                </a>
+                                <a href={locationData?.youtube} target="_blank" rel="noopener noreferrer">
+                                    <img src="/img/youtube.png" className="img-fluid" alt="YouTube" />
+                                </a>
                             </div>
 
                             <div className="newsletter mt-5">
-                                <h3>Newsletter</h3>
-                                <p>Exclusive Content. Delivered to Your Inbox</p>
+                                <h3>{staticTexts['Newsletter']}</h3>
+                                <p>{staticTexts['Exclusive Content. Delivered to Your Inbox']}</p>
                                 <div className="custom-from m-0">
                                     <div className="row">
                                         <div className="col-xl-12 col-lg-12 col-md-12 col-12">
@@ -231,24 +242,26 @@ const Footer = () => {
                             <div className="link-part">
                                 <h3>{staticTexts['Important Link']}</h3>
                                 <ul>
-                                    <li><a href={basePath + "/about-us"}>About Us</a></li>
-                                    <li><a href={basePath + "/doctor"}>Find a Doctor</a></li>
-                                    <li><a href={basePath + "/book-an-appointment"}>Book an Appointment</a></li>
-                                    <li><a href={basePath + "/health-package"}>Book a Health Check-up</a></li>
-                                    <li><a href={basePath + "/at-home-services"}>Home Care Services</a></li>
-                                    <li><a href={basePath + "/second-opinion"}>Get Second Opinion</a></li>
-                                    <li><a href={basePath + "/visa-medical"}>Visa Medicals</a></li>
-                                    <li><a href={"https://consult.bestdocapp.com/home/KIMSTVM?version=new"} target='_blank'>Telehealth</a></li>
-                                    <li><a href={basePath + "/bmw-report"}>Lab Reports</a></li>
-                                    <li><a href={basePath + "/all-companies-on-panel"}>TPA and Insurance</a></li>
-                                    <li><a href={basePath + "/"}>Corporate</a></li>
-                                    <li><a href={basePath + "/csr-policy"}>CSR</a></li>
-                                    <li><a href={basePath + "/media-and-events"}>News and Media</a></li>
-                                    <li><a href={basePath + "/patients-rights-and-responsibilities"}>Rights &amp; Responsibilities</a></li>
-                                    <li><a href={basePath + "/"}>Health Tips</a></li>
-                                    <li><a href={basePath + "/"}>Career</a></li>
-                                    <li><a href={basePath + "/"}>Sitemap</a></li>
-                                    <li><a href={basePath + "/contact-us"}>Contact Us</a></li>
+                                    <li><a href={basePath + "/about-us"}>{staticTexts['About Us']}</a></li>
+                                    <li><a href={basePath + "/blog"}>{staticTexts['Blog']}</a></li>
+                                    <li><a href={basePath + "/book-an-appointment"}>{staticTexts['Book an Appointment']}</a></li>
+                                    <li>
+                                        <a target='_blank'
+                                            href={"https://healthcheckup.kimshealthcare.com/p/kims-trivandrum-1/"}>
+                                            {staticTexts['Book a Health Check-up']}
+                                        </a>
+                                    </li>
+                                    <li><a href={basePath + "#"}>{staticTexts['Career']}</a></li>
+                                    <li><a href={basePath + "/contact-us"}>{staticTexts['Contact Us']}</a></li>
+                                    <li><a href={basePath + "/media-and-events"}>{staticTexts['Events']}</a></li>
+                                    <li><a href={basePath + "/doctor"}>{staticTexts['Find a Doctor']}</a></li>
+                                    <li><a href={basePath + "#"}>{staticTexts['Gallery']}</a></li>
+                                    <li><a href={basePath + "/at-home-services"}>{staticTexts['Home Care']}</a></li>
+                                    <li><a href={basePath + "/second-opinion"}>{staticTexts['In-Patient Deposit']}</a></li>
+                                    <li>
+                                        <a href={basePath + "/international-patient"}>{staticTexts['International Care']}</a>
+                                    </li>
+                                    <li><a href={basePath + "#"}>{staticTexts['Specialist']}</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -265,6 +278,10 @@ const Footer = () => {
                                             </li>
                                         })
                                     }
+                                    <div className="from-btn">
+                                        <a href={basePath + "/speciality"} className="btn w-100 mt-4">
+                                            {staticTexts['View All Specialities']}</a>
+                                    </div>
                                 </ul>
                             </div>
                         </div>
@@ -304,13 +321,13 @@ const Footer = () => {
                                     </div>
                                 </div>
                             </div>
-
                         </div>
-
                     </div>
-
                 </div>
             </footer>
+
+
+            {/* :::::::::: MOBILE MENU :::::::::: */}
 
             <footer className="footer d-lg-none d-block">
                 <div className="container">
@@ -367,6 +384,10 @@ const Footer = () => {
                                             </li>
                                         })
                                     }
+                                    <div className="from-btn">
+                                        <a href={basePath + "/speciality"} className="btn w-100 mt-2 mb-2">
+                                            {staticTexts['View All Specialities']}</a>
+                                    </div>
                                 </ul>
                             </div>
                         </div>
@@ -376,24 +397,24 @@ const Footer = () => {
                             <div className="footer-menu expanded link-part">
                                 <h3 className="accordian-footer position-relative d-lg-none">{staticTexts['Important Link']}</h3>
                                 <ul className="first-child">
-                                    <li><a href={basePath + "/about-us"}>About Us</a></li>
-                                    <li><a href={basePath + "/doctor"}>Find a Doctor</a></li>
-                                    <li><a href={basePath + "/book-an-appointment"}>Book an Appointment</a></li>
-                                    <li><a href={basePath + "/health-package"}>Book a Health Check-up</a></li>
-                                    <li><a href={basePath + "/at-home-services"}>Home Care Services</a></li>
-                                    <li><a href={basePath + "/second-opinion"}>Get Second Opinion</a></li>
-                                    <li><a href={basePath + "/visa-medical"}>Visa Medicals</a></li>
-                                    <li><a href={"https://consult.bestdocapp.com/home/KIMSTVM?version=new"} target='_blank'>Telehealth</a></li>
-                                    <li><a href={basePath + "#"}>Lab Reports</a></li>
-                                    <li><a href={basePath + "/all-companies-on-panel"}>TPA and Insurance</a></li>
-                                    <li><a href={basePath + "#"}>Corporate</a></li>
-                                    <li><a href={basePath + "/csr-policy"}>CSR</a></li>
-                                    <li><a href={basePath + "/media-and-events"}>News and Media</a></li>
-                                    <li><a href={basePath + "/patients-rights-and-responsibilities"}>Rights &amp; Responsibilities</a></li>
-                                    <li><a href={basePath + "#"}>Health Tips</a></li>
-                                    <li><a href={basePath + "#"}>Career</a></li>
-                                    <li><a href={basePath + "#"}>Sitemap</a></li>
-                                    <li><a href={basePath + "/contact-us"}>Contact Us</a></li>
+                                    <li><a href={basePath + "/about-us"}>{staticTexts['About Us']}</a></li>
+                                    <li><a href={basePath + "/blog"}>{staticTexts['Blog']}</a></li>
+                                    <li><a href={basePath + "/book-an-appointment"}>{staticTexts['Book an Appointment']}</a></li>
+                                    <li>
+                                        <a target='_blank'
+                                            href={"https://healthcheckup.kimshealthcare.com/p/kims-trivandrum-1/"}>
+                                            {staticTexts['Book a Health Check-up']}
+                                        </a>
+                                    </li>
+                                    <li><a href={basePath + "#"}>{staticTexts['Career']}</a></li>
+                                    <li><a href={basePath + "/contact-us"}>{staticTexts['Contact Us']}</a></li>
+                                    <li><a href={basePath + "/media-and-events"}>{staticTexts['Events']}</a></li>
+                                    <li><a href={basePath + "/doctor"}>{staticTexts['Find a Doctor']}</a></li>
+                                    <li><a href={basePath + "#"}>{staticTexts['Gallery']}</a></li>
+                                    <li><a href={basePath + "/at-home-services"}>{staticTexts['Home Care']}</a></li>
+                                    <li><a href={basePath + "/second-opinion"}>{staticTexts['In-Patient Deposit']}</a></li>
+                                    <li><a href={basePath + "/international-patient"}>{staticTexts['International Care']}</a></li>
+                                    <li><a href={basePath + "#"}>{staticTexts['Specialist']}</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -404,27 +425,24 @@ const Footer = () => {
                                     <div className="address-item d-flex mb-3">
                                         <i className="fa-solid fa-location-dot"></i>
                                         <div className="ms-2">
-                                            <strong style={{ color: '#b71c2b' }}><u>INDIA</u></strong>
-                                            <p>
-                                                KIMSHEALTH, P.B.No.1, Anayara
-                                                P.O, Trivandrum – 695029,
-                                                Kerala, India</p>
+                                            <strong style={{ color: '#b71c2b' }}><u>{locationData?.country}</u></strong>
+                                            <p>{locationData?.address}</p>
                                         </div>
                                     </div>
-                                    <a href="mailto:feedback.tvm@kimshealth.org">
+                                    <a href={"mailto:" + locationData?.email}>
                                         <div className="address-item d-flex align-items-center mb-3">
                                             <i className="fa-regular fa-envelope mt-0 ms-0 fw-bold"></i>
                                             <div className="ms-2">
-                                                <strong>feedback.tvm@kimshealth.org</strong>
+                                                <strong>{locationData?.email}</strong>
                                             </div>
                                         </div>
                                     </a>
 
-                                    <a href="tel:4712941400">
+                                    <a href={"tel:" + locationData?.phone}>
                                         <div className="address-item d-flex align-items-center mb-3">
                                             <i className="fa-solid fa-phone"></i>
                                             <div className="ms-2">
-                                                <strong>+91 471 294 1400</strong>
+                                                <strong>{locationData?.phone}</strong>
                                             </div>
                                         </div>
                                     </a>
@@ -433,15 +451,23 @@ const Footer = () => {
                             </div>
 
                             <div className="social-media-icon mt-4">
-                                <img src="/img/facebook.png" className="img-fluid" alt="" />
-                                <img src="/img/instagram.png" className="img-fluid" alt="" />
-                                <img src="/img/linkedin.png" className="img-fluid" alt="" />
-                                <img src="/img/youtube.png" className="img-fluid" alt="" />
+                                <a href={locationData?.facebook} target="_blank" rel="noopener noreferrer">
+                                    <img src="/img/facebook.png" className="img-fluid" alt="Facebook" />
+                                </a>
+                                <a href={locationData?.instagram} target="_blank" rel="noopener noreferrer">
+                                    <img src="/img/instagram.png" className="img-fluid" alt="Instagram" />
+                                </a>
+                                <a href={locationData?.linkedin} target="_blank" rel="noopener noreferrer">
+                                    <img src="/img/linkedin.png" className="img-fluid" alt="LinkedIn" />
+                                </a>
+                                <a href={locationData?.youtube} target="_blank" rel="noopener noreferrer">
+                                    <img src="/img/youtube.png" className="img-fluid" alt="YouTube" />
+                                </a>
                             </div>
 
                             <div className="newsletter mt-4">
-                                <h3>Newsletter</h3>
-                                <p>Exclusive Content. Delivered to Your Inbox</p>
+                                <h3>{staticTexts['Newsletter']}</h3>
+                                <p>{staticTexts['Exclusive Content. Delivered to Your Inbox']}</p>
                                 <div className="custom-from m-0">
                                     <div className="row">
                                         <div className="col-xl-12 col-lg-12 col-md-12 col-12">
@@ -463,6 +489,19 @@ const Footer = () => {
                     </div>
                 </div>
             </footer>
+
+
+            {/* white links area */}
+            <div className="midle-footer py-2 my-3">
+                <div className="container">
+                    <div className="d-flex justify-content-center gap-4 align-items-center main-btn">
+                        <a href={basePath+"/bmw-report"}>{staticTexts['BMW Reports']}</a>
+                        <a href={basePath+"/terms-and-conditions"}>{staticTexts['Term & Conditions']}</a>
+                        <a href={basePath+"/privacy-policy"}>{staticTexts['Privacy Policies']}</a>
+                    </div>
+                </div>
+            </div>
+
 
 
             <div className="midle-footer py-2">
@@ -490,14 +529,14 @@ const Footer = () => {
             <div className="bottom-footer mb-lg-0 mb-5">
                 <div className="container">
                     <div className="d-lg-flex d-block align-items-center justify-content-between">
-                        <p>Copyright © 2024. KIMSHEALTH. All Rights Reserved</p>
+                        <p>Copyright © {new Date().getFullYear()}. KIMSHEALTH. All Rights Reserved</p>
                         <p>Designed & Developed by Healthcare Martech</p>
                     </div>
                 </div>
             </div>
 
             <div className="fixed-lg-footer d-none d-lg-block">
-                <a href={"tel:" + locationData?.emergency}>EMERGENCY</a>
+                <a href={"tel:" + locationData?.emergency}>{staticTexts['EMERGENCY']}</a>
             </div>
 
             <button id="scrolltoButton" className=""></button>
@@ -506,24 +545,24 @@ const Footer = () => {
                 <div className="row">
                     <div className="col-3 fixed-footer-img">
                         <a href={basePath + "/doctor"}><img src="/img/doctors.png" className="img-fluid" alt="" />
-                            <p>Doctors</p>
+                            <p>{staticTexts['Doctors']}</p>
                         </a>
                     </div>
                     <div className="col-3 fixed-footer-img">
                         <a href={basePath + "/book-an-appointment"}><img src="/img/calendar.png" className="img-fluid" alt="" />
-                            <p>Appointment</p>
+                            <p>{staticTexts['Appointment']}</p>
                         </a>
                     </div>
 
                     <div className="col-3 fixed-footer-img">
                         <a href={basePath + "/ambulance-services"}><img src="/img/ambulance.png" className="img-fluid" alt="" />
-                            <p>Ambulance</p>
+                            <p>{staticTexts['Ambulance']}</p>
                         </a>
                     </div>
 
                     <div className="col-3 fixed-footer-img">
                         <a href="#"><img src="/img/telephone.png" className="img-fluid" alt="" />
-                            <p>Call Us</p>
+                            <p>{staticTexts['Call Us']}</p>
                         </a>
                     </div>
 

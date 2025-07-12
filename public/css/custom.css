@@ -1486,6 +1486,11 @@ footer.footer {
     margin-right: 10px;
 }
 
+.footer .social-media-icon a img{
+    width: 52% ;
+    margin-right: 10px ;
+}
+
 .footer .custom-from .input-group-text#from-icon {
     background: #fff;
     border-bottom: 1px solid #ccc;
@@ -5274,8 +5279,9 @@ li.chat-ic::before {
 }
 
 .desktop-humberger-menu .menu-items {
-    padding: 25px 0px 25px 35px;
+    padding: 25px 0px 75px 35px;
     flex-grow: 1;
+    z-index: 9999;
 }
 
 .play-icon img {

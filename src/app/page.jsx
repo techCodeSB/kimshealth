@@ -41,7 +41,7 @@ const Home = async () => {
   const expertDataSet = {
     sectionTitle: pageContent[3]?.title,
     buttonText: 'View All', buttonURL: `${basePath + "/doctor"}`,
-    data: await doctorData.getDoctorAll(10),
+    data: await doctorData.getFilterDoctor({langLoc: getLangLoc}),
     baseUrl: basePath
   };
 

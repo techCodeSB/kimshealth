@@ -2,7 +2,8 @@
 import doctorTalkData from '@/app/lib/getDoctorTalk';
 import getStaticText from '@/helper/getStaticText';
 import formatDate from '@/app/lib/formatDate';
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react';
+
 
 // infinite scroll;
 const DoctorTalkListing = ({ baseURL }) => {
@@ -13,6 +14,7 @@ const DoctorTalkListing = ({ baseURL }) => {
     const [loading, setLoading] = useState(false);
     const [count, setCount] = useState(12);
     const [endData, setEndData] = useState(false);
+
 
     useEffect(() => {
         const fetchTexts = async () => {
@@ -59,6 +61,7 @@ const DoctorTalkListing = ({ baseURL }) => {
         };
     }, [count]);
 
+
     return (
         <>
             <section className="section">
@@ -102,8 +105,8 @@ const DoctorTalkListing = ({ baseURL }) => {
                                                 </div>
                                                 <div className="main-btn ">
                                                     <span><img src="/img/play-button.png" className="img-fluid" alt="" /> </span>
-                                                    <a href={baseURL + "/doctor-talk/" + dt.slug}>{staticText['Watch Video']} <span><i
-                                                        className="fa-solid fa-arrow-right"></i></span></a>
+                                                    <a href={baseURL + "/doctor-talk/" + dt.slug}>{staticText['Watch Video']} <span>
+                                                        <i className="fa-solid fa-arrow-right"></i></span></a>
                                                 </div>
                                             </div>
                                         </div>

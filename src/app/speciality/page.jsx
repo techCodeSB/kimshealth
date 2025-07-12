@@ -51,7 +51,7 @@ const Speciality = async () => {
                                     </div>
                                     <div className="row">
                                         {
-                                            coeSpecility.map((cs, index) => {
+                                            coeSpecility?.map((cs, index) => {
                                                 return <div className="col-md-6" key={index}>
                                                     <div className="speciality-masterpage-card-content">
                                                         <a href={baseURL + "/speciality/" + cs.speciality?.slug}>
@@ -69,7 +69,7 @@ const Speciality = async () => {
                                     </div>
                                     <div className='row'>
                                         {
-                                            otherSpecility.map((os, index) => {
+                                            otherSpecility?.map((os, index) => {
                                                 return <div className="col-md-6" key={index}>
                                                     <div className="speciality-masterpage-card-content">
                                                         <a href={baseURL + "/speciality/" + os.speciality?.slug}>

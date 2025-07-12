@@ -87,7 +87,7 @@ const SpecialityDetails = async ({ params }) => {
 
                                     <div className="col-md-6 details-proceduce-banner-right-col">
                                         <img src={
-                                            data.pageBanner[0].bannerImageDesktop ? process.env.NEXT_PUBLIC_IMAGE_URL + data.pageBanner[0].bannerImageDesktop.url : "/img/no-image.jpg"}
+                                            data.pageBanner[0].bannerImageDesktop?.url ? process.env.NEXT_PUBLIC_IMAGE_URL + data.pageBanner[0].bannerImageDesktop.url : "/img/no-image.jpg"}
                                             className="img-fluid details-banner-image" alt={data.title} />
                                     </div>
                                 </div>
@@ -125,7 +125,6 @@ const SpecialityDetails = async ({ params }) => {
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
                         </div>
@@ -136,7 +135,7 @@ const SpecialityDetails = async ({ params }) => {
                             <div className="row justify-content-between">
                                 <div className="col-md-7  mb-lg-0 mb-3 pe-lg-5">
                                     <div className="main-heading sub-heading">
-                                        <h2>{data.overviewSection.title}</h2>
+                                        <h2>{data.overviewSection?.title}</h2>
                                     </div>
                                     <div dangerouslySetInnerHTML={{ __html: marked(data.overviewSection?.details || "") || "" }}>
                                     </div>
@@ -148,7 +147,7 @@ const SpecialityDetails = async ({ params }) => {
                                         <h5>{data.overviewSection?.caption}</h5>
                                         <p>{data.overviewSection?.shortDetails} </p>
                                         <div className="main-btn">
-                                            <WatchVideoButton txt={"Watch Video"} id={data.overviewSection.videoId} />
+                                            <WatchVideoButton txt={"Watch Video"} id={data.overviewSection?.videoId} />
                                         </div>
                                     </div>
                                 </div>

@@ -48,7 +48,7 @@ const AmericanHeartAssoc = async () => {
                                     </div>
 
                                     <div className="col-md-6 details-proceduce-banner-right-col">
-                                        <img src={pageContent[1].bannerItem.length > 0 ? process.env.NEXT_PUBLIC_IMAGE_URL + pageContent[1].bannerItem[0].bannerImageDesktop.url : "/img/no-image.jpg"} className="img-fluid details-banner-image" alt="" />
+                                        <img src={pageContent[1].bannerItem.length > 0 ? process.env.NEXT_PUBLIC_IMAGE_URL + pageContent[1].bannerItem[0].bannerImageDesktop?.url : "/img/no-image.jpg"} className="img-fluid details-banner-image" alt="" />
                                     </div>
                                 </div>
                             </div>
@@ -61,7 +61,7 @@ const AmericanHeartAssoc = async () => {
                                 <div className="col-md-8">
                                     <div className="main-heading sub-heading">
                                         <h2>{pageContent[2].title}</h2>
-                                        <div dangerouslySetInnerHTML={{ __html: pageContent[2].details }}></div>
+                                        <div dangerouslySetInnerHTML={{ __html: pageContent[2].details || "" } || ""}></div>
                                     </div>
 
                                 </div>
@@ -86,8 +86,8 @@ const AmericanHeartAssoc = async () => {
                         </div>
                     </section>
 
-                    <div className="line-divider"> </div>
 
+                    <div className="line-divider"> </div>
                     <section className="section journal-section">
                         <div className="container">
                             <div className="main-heading">
@@ -95,9 +95,9 @@ const AmericanHeartAssoc = async () => {
                             </div>
                             <div className="owl-carousel owl-theme journal-slider">
                                 {
-                                    pageContent[4]?.journal.map((j, index) => {
+                                    pageContent[4]?.journal?.map((j, index) => {
                                         return <div className="expert-card" data-aos="fade-right" key={index}>
-                                            <a download href={`${process.env.NEXT_PUBLIC_IMAGE_URL}${j.file.url}`} >
+                                            <a download href={`${process.env.NEXT_PUBLIC_IMAGE_URL}${j.file?.url}`} >
                                                 <div className="card border-0">
                                                     <div className="card-top">
                                                         <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${j.thumbnailImage.url}`} className="img-fluid w-100" alt={j.title} />

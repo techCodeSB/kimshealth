@@ -73,7 +73,7 @@ const Socomer = async () => {
 
                             <div className="row">
                                 {
-                                    pageContent[3].socomer.map((sp, i) => (
+                                    pageContent[3].socomer?.map((sp, i) => (
                                         <div className="col-md-4" key={i}>
                                             <div className="socomer-tab">
                                                 <div className="procedure-acc-card mb-3">
@@ -97,7 +97,7 @@ const Socomer = async () => {
                                                             >
                                                                 <div className="accordion-body px-0 pt-0">
                                                                     <ul>
-                                                                        {sp.socomerItem.map((spI, j) => (
+                                                                        {sp?.socomerItem?.map((spI, j) => (
                                                                             <li key={j}>
                                                                                 - {spI.title}
                                                                                 <a href={`${process.env.NEXT_PUBLIC_IMAGE_URL}${spI.file?.url}`} target="_blank" rel="noopener noreferrer">
@@ -116,7 +116,6 @@ const Socomer = async () => {
                                     ))
                                 }
 
-
                             </div>
                         </div>
                     </section>
@@ -129,7 +128,7 @@ const Socomer = async () => {
                             </div>
                             <div className="row">
                                 {
-                                    pageContent[4].socomer.map((sp, i) => (
+                                    pageContent[4].socomer?.map((sp, i) => (
                                         <div className="col-md-4" key={i}>
                                             <div className="socomer-tab">
                                                 <div className="procedure-acc-card mb-3">
@@ -185,7 +184,8 @@ const Socomer = async () => {
                             </div>
                             <div className="row">
                                 <div className="col-md-8">
-                                    <div className="table-responsive hear-associations-table" dangerouslySetInnerHTML={{ __html: pageContent[5].details }}></div>
+                                    <div className="table-responsive hear-associations-table" 
+                                    dangerouslySetInnerHTML={{ __html: pageContent[5].details }}></div>
                                 </div>
                             </div>
                         </div>

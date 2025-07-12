@@ -61,6 +61,8 @@ const TestimonialListing = ({basePath}) => {
             if (currentRef) observer.unobserve(currentRef);
         };
     }, [count]);
+
+
     return (
         <>
             <section className="section">
@@ -107,7 +109,7 @@ const TestimonialListing = ({basePath}) => {
                                         <div className="col-md-9 my-auto">
                                             <div className="testi-rightbox">
                                                 <h3>{t.title}</h3>
-                                                <p>{`${t.shortDetails.slice(0, 80)}...`}
+                                                <p>{`${t.shortDetails?.slice(0, 80)}...`}
                                                     <a href={basePath + "/testimonial/" + t.slug}>{staticText['Watch Video']}</a>
                                                 </p>
 
