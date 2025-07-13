@@ -148,7 +148,7 @@ const DoctorListing = ({ baseURL, allLocation, allSpeciality, allDoctorCount, la
                                         <ul>
                                             {specialityList?.map((s, index) => (
                                                 <li key={index + "1"}>
-                                                    <a href={`${baseURL}/doctor?speciality=${s.speciality.slug}${URLParams.location ? `&location=${URLParams.location}` : ''}${URLParams.gender ? `&gender=${URLParams.gender}` : ''}${URLParams.hospital ? `&hospital=${URLParams.hospital}` : ''}`}>
+                                                    <a href={`${baseURL}/doctor?speciality=${s.speciality?.slug}${URLParams.location ? `&location=${URLParams.location}` : ''}${URLParams.gender ? `&gender=${URLParams.gender}` : ''}${URLParams.hospital ? `&hospital=${URLParams.hospital}` : ''}`}>
                                                         {s.title}
                                                     </a>
                                                 </li>
