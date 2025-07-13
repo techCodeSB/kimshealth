@@ -1,6 +1,6 @@
 const investorData = {
-    getAll: async (type) => {
-        const url = process.env.NEXT_PUBLIC_CMS_API_URL + `/investors?populate=*&filters[type][$contains]=${type}`;
+    getAll: async ({type, langLoc}) => {
+        const url = process.env.NEXT_PUBLIC_CMS_API_URL + `/investors?populate=*&filters[type][$contains]=${type}&filters[locations][id][$eq]=${langLoc.loc.id}&sort=manageAppearance.orderInMasterList:asc,name:asc`;
         const req = await fetch(url);
         const res = await req.json();
 

@@ -1,4 +1,5 @@
-import { NextResponse } from 'next/server'
+import { NextResponse } from 'next/server';
+
 
 export async function middleware(request) {
     const { nextUrl } = request;
@@ -102,7 +103,6 @@ export async function middleware(request) {
     response.cookies.set("systemLang", JSON.stringify(lang), { path: "/", maxAge: 60 * 60 * 24 * 365 });
     response.cookies.set("systemLocation", JSON.stringify(loc), { path: "/", maxAge: 60 * 60 * 24 * 365 });
 
-    console.log(loc)
     return response;
 }
 

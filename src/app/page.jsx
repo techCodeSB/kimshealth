@@ -41,35 +41,35 @@ const Home = async () => {
   const expertDataSet = {
     sectionTitle: pageContent[3]?.title,
     buttonText: 'View All', buttonURL: `${basePath + "/doctor"}`,
-    data: await doctorData.getFilterDoctor({langLoc: getLangLoc}),
+    data: await doctorData.getFeturedDoctor({langLoc: getLangLoc}),
     baseUrl: basePath
   };
 
   const awardDataSet = {
     sectionTitle: pageContent[4]?.title,
     buttonText: 'View All', buttonURL: `${basePath}`,
-    data: await getAwardData.getAll(),
+    data: await getAwardData.getFeatured({langLoc: getLangLoc}),
     baseUrl: basePath
   };
 
   const testimonialDataSet = {
     sectionTitle: pageContent[5]?.title,
     buttonText: 'View All', buttonURL: `${basePath + "/testimonial"}`,
-    data: await testimonialData.getAll(10),
+    data: await testimonialData.getFeaturedAll({langLoc: getLangLoc}),
     baseUrl: basePath
   }
 
   const blogDataSet = {
     sectionTitle: pageContent[6]?.title,
     buttonText: 'View All', buttonURL: `${basePath + "/blog"}`,
-    data: await blogData.allBlog(10),
+    data: await blogData.getRecentBlog({langLoc: getLangLoc}),
     baseUrl: basePath
   }
 
   const docTalkDataSet = {
     sectionTitle: pageContent[7]?.title,
     buttonText: 'View All', buttonURL: `${basePath + "/doctor-talk"}`,
-    data: await doctorTalkData.allData(10),
+    data: await doctorTalkData.getFeaturedAll({langLoc: getLangLoc}),
     baseUrl: basePath
   }
 

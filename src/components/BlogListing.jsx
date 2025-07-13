@@ -5,11 +5,12 @@ import React, { useEffect, useRef, useState } from 'react';
 import formatDate from '@/app/lib/formatDate';
 import getSpecialityData from '@/app/lib/getSpeciality';
 import Link from 'next/link';
+import JournalCarousel from './JournalCarousel';
 
 
-const BlogListing = ({ basePath, slug }) => {
-    const [allBlog, setallBlog] = useState([]); //Doctors
-    const [count, setCount] = useState(12)
+const BlogListing = ({ basePath, speciality, langLoc, URLParams }) => {
+    const [allBlog, setallBlog] = useState([]);
+    const [count, setCount] = useState(0)
     const [staticText, setStaticTexts] = useState({});
     const limit = 12;
     const observerRef = useRef(null);
@@ -26,27 +27,26 @@ const BlogListing = ({ basePath, slug }) => {
             setStaticTexts({ ...await getStaticText() })
         };
         const getFstLoad = async () => {
-            const tempStoreBlog = await blogData.allBlog(count, limit, slug);
-            const tempStoreSpeciality = await getSpecialityData.getAllSpeciality();
-            console.log(tempStoreSpeciality)
+            // const tempStoreBlog = await blogData.allBlog(count, limit, speciality);
+            const tempStoreSpeciality = await getSpecialityData.getAllSpeciality({ langLoc });
 
 
             setAllSpeciality(tempStoreSpeciality);
             setFilterSplty(tempStoreSpeciality);
-            setallBlog(tempStoreBlog);
+            // setallBlog(tempStoreBlog);
         }
 
 
         getFstLoad();
         fetchTexts();
-    }, [slug]);
+    }, [speciality]);
 
 
-    const loadDoctor = async () => {
+    const loadBlogs = async () => {
         if (loading) return; // prevent multiple triggers
         setLoading(true);
 
-        const data = await blogData.allBlog(count, limit, slug);
+        const data = await blogData.allBlog({start:count, limit:limit, speciality:speciality, langLoc: langLoc});
         if (data.length < 1) {
             setEndData(true)
         }
@@ -60,7 +60,7 @@ const BlogListing = ({ basePath, slug }) => {
         const observer = new IntersectionObserver(
             entries => {
                 if (entries[0].isIntersecting && !endData) {
-                    loadDoctor();
+                    loadBlogs();
                 }
             },
             { threshold: 1 }
@@ -72,7 +72,7 @@ const BlogListing = ({ basePath, slug }) => {
         return () => {
             if (currentRef) observer.unobserve(currentRef);
         };
-    }, [count]);
+    }, [count, loading, endData]);
 
 
 
@@ -247,7 +247,7 @@ const BlogListing = ({ basePath, slug }) => {
 
 
                                 {
-                                    allBlog?.map((b, index) => {
+                                    allBlog?.slice(2,).map((b, index) => {
                                         return <div className="col-md-6 mb-4" key={index}>
                                             <div className="card border-0">
                                                 <div className="card-top">

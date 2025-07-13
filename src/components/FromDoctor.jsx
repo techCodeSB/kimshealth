@@ -16,7 +16,7 @@ const FromDoctor = ({ dataSet }) => {
 
     }, []);
 
-    if (dataSet.data.length < 1) {
+    if (!dataSet.data || dataSet.data.length < 1) {
         return;
     }
 

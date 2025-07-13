@@ -1,9 +1,9 @@
 const mediaData = {
-    getAll: async ({ start = 0, limit = 12, all = false }) => {
+    getAll: async ({ start = 0, limit = 12, all = false, langLoc }) => {
         const baseUrl = process.env.NEXT_PUBLIC_CMS_API_URL;
 
         if (!all) {
-            let url = baseUrl + `/media-and-events?populate=*&pagination[start]=${start}&pagination[limit]=${limit}`;
+            let url = baseUrl + `/media-and-events?populate=*&pagination[start]=${start}&pagination[limit]=${limit}&filters[locations][id][$eq]=${langLoc.loc.id}&sort=date:desc,manageAppearance.orderInMasterList:asc,title:asc`;
             const req = await fetch(url);
             const res = await req.json();
 
@@ -22,7 +22,7 @@ const mediaData = {
             // Actual Data
             for (let i = 0; i < pages; i++) {
                 const start = i * limit;
-                const url = `${baseUrl}/media-and-events?populate=*&pagination[start]=${start}&pagination[limit]=${limit}`;
+                const url = `${baseUrl}/media-and-events?populate=*&pagination[start]=${start}&pagination[limit]=${limit}&filters[locations][id][$eq]=${langLoc.loc.id}&sort=date:desc,manageAppearance.orderInMasterList:asc,title:asc`;
                 const res = await fetch(url);
                 const json = await res.json();
                 data = [...data, ...json.data];
@@ -33,12 +33,20 @@ const mediaData = {
     },
 
     getSingleMedia: async (slug) => {
-        let url = process.env.NEXT_PUBLIC_CMS_API_URL + `/media-and-events/?filters[slug][$eq]=${slug}&populate[0]=speaker&populate[1]=speaker.speaker&populate[3]=featuredImage`;
+        let url = process.env.NEXT_PUBLIC_CMS_API_URL + `/media-and-events/?filters[slug][$eq]=${slug}&populate[0]=speaker&populate[1]=speaker.speaker&populate[3]=featuredImage&populate[4]=mediaSection`;
         const req = await fetch(url);
         const res = await req.json();
 
         return res.data[0];
 
+    },
+
+    getRecentMedia: async ({ langLoc }) => {
+        const url = process.env.NEXT_PUBLIC_CMS_API_URL + `/media-and-events?populate=*&filters[locations][id][$eq]=${langLoc.loc.id}&sort=date:desc,title:asc`;
+        const req = await fetch(url);
+        const res = await req.json();
+
+        return res.data;
     },
 
 

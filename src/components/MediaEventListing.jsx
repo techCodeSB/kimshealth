@@ -6,11 +6,11 @@ import getSpecialityData from '@/app/lib/getSpeciality';
 import getStaticText from '@/helper/getStaticText';
 import React, { useEffect, useRef, useState } from 'react'
 
-const MediaEventListing = ({ basePath }) => {
+const MediaEventListing = ({ basePath, langLoc, URLParams }) => {
     const [allEvents, setallEvents] = useState([]);
     const [count, setCount] = useState(0);
     const [staticText, setStaticTexts] = useState({});
-    const limit = 6;
+    const limit = 8;
     const observerRef = useRef(null);
     const [loading, setLoading] = useState(false);
     const [endData, setEndData] = useState(false);
@@ -27,8 +27,7 @@ const MediaEventListing = ({ basePath }) => {
         };
 
         const getFstLoad = async () => {
-            console.log(await getSpecialityData.getAllSpeciality())
-            setallEvents(await mediaData.getAll({ start: 0, limit: count }));
+            // setallEvents(await mediaData.getAll({ start: 0, limit: count }));
             setAllSpeciality(await getSpecialityData.getAllSpeciality());
             setAllMedaiEvents(await mediaData.getAll({ all: true }))
             setAllHospital(await hospitalData.getAll(false, true))
@@ -44,7 +43,7 @@ const MediaEventListing = ({ basePath }) => {
         setLoading(true);
 
         const newCount = count;
-        const data = await mediaData.getAll({ start: newCount, limit: limit });
+        const data = await mediaData.getAll({ start: newCount, limit: limit, langLoc: langLoc });
 
         if (data.length < 1) {
             setEndData(true);

@@ -1,14 +1,12 @@
 "use client"
-import blogData from '@/app/lib/getBlog';
 import getStaticText from '@/helper/getStaticText';
 import React, { useEffect, useRef, useState } from 'react';
-import formatDate from '@/app/lib/formatDate';
 import testimonialData from '@/app/lib/getTestimonial';
 
 
-const TestimonialListing = ({basePath}) => {
-    const [allTestimonial, setallTestimonial] = useState() //Doctors
-    const [count, setCount] = useState(12)
+const TestimonialListing = ({basePath, langLoc, URLParams}) => {
+    const [allTestimonial, setallTestimonial] = useState([]) //Doctors
+    const [count, setCount] = useState(0)
     const [staticText, setStaticTexts] = useState({});
     const limit = 12;
     const observerRef = useRef(null);
@@ -20,21 +18,21 @@ const TestimonialListing = ({basePath}) => {
         const fetchTexts = async () => {
             setStaticTexts({ ...await getStaticText() })
         };
-        const getFstLoad = async () => {
-            const data = await testimonialData.getAll(count, limit);
-            setallTestimonial(data);
-        }
+        // const getFstLoad = async () => {
+        //     const data = await testimonialData.getAll(count, limit);
+        //     setallTestimonial(data);
+        // }
 
-        getFstLoad();
+        // getFstLoad();
         fetchTexts();
     }, []);
 
 
-    const loadDoctor = async () => {
+    const loadMore = async () => {
         if (loading) return; // prevent multiple triggers
         setLoading(true);
 
-        const data = await testimonialData.getAll(count, limit);
+        const data = await testimonialData.getAll({start:count,  limit: limit, langLoc: langLoc});
         if (data.length < 1) {
             setEndData(true)
         }
@@ -48,7 +46,7 @@ const TestimonialListing = ({basePath}) => {
         const observer = new IntersectionObserver(
             entries => {
                 if (entries[0].isIntersecting && !endData) {
-                    loadDoctor();
+                    loadMore();
                 }
             },
             { threshold: 1 }
@@ -60,7 +58,7 @@ const TestimonialListing = ({basePath}) => {
         return () => {
             if (currentRef) observer.unobserve(currentRef);
         };
-    }, [count]);
+    }, [count, endData, loading]);
 
 
     return (

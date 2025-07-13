@@ -1,7 +1,7 @@
 "use client"
 
 import getStaticText from "@/helper/getStaticText";
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 
 const ExpertCarousel = ({ dataSet }) => {
     const [staticTexts, setStaticTexts] = useState({});
@@ -13,6 +13,8 @@ const ExpertCarousel = ({ dataSet }) => {
 
         fetchTexts();
     }, []);
+
+
 
 
     if (dataSet.data.length < 1) {
@@ -57,7 +59,7 @@ const ExpertCarousel = ({ dataSet }) => {
                                             <p>{d.doctorDesignation}</p>
                                             <h5>{d.specialities[0]?.title}</h5>
                                             <div className="from-btn">
-                                                <a href="#" className="btn">{staticTexts['Appointment']}</a>
+                                                <a href={dataSet.baseUrl + "/book-an-appointment/?doctor=" + d.slug} className="btn">{staticTexts['Appointment']}</a>
                                             </div>
                                         </div>
                                     </div>

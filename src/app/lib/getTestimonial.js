@@ -1,6 +1,6 @@
 const testimonialData = {
-    getAll: async (start = 0, limit = 12) => {
-        const url = process.env.NEXT_PUBLIC_CMS_API_URL + `/testimonials?populate=*&pagination[start]=${start}&pagination[limit]=${limit}&filters[testimonialType][$contain]=Video`;
+    getAll: async ({start, limit, langLoc}) => {
+        const url = process.env.NEXT_PUBLIC_CMS_API_URL + `/testimonials?populate=*&filters[locations][id][$eq]=${langLoc.loc.id}&pagination[start]=${start}&pagination[limit]=${limit}&filters[testimonialType][$contains]=Video&sort=date:desc,manageAppearance.orderInMasterList:asc,title:asc`;
 
         console.log(url)
         const req = await fetch(url);
@@ -18,21 +18,53 @@ const testimonialData = {
 
     },
 
-    getBySpeciality: async (id) => {
-        const url = process.env.NEXT_PUBLIC_CMS_API_URL + `/testimonials?populate=*&filters[specialities][id][$eq]=${id}&filters[testimonialType][$contain]=Video`;
+    getBySpeciality: async ({ id, langLoc }) => {
+        const url = process.env.NEXT_PUBLIC_CMS_API_URL + `/testimonials?populate=*&filters[testimonialType][$contains]=Video&filters[specialities][id][$eq]=${id}&pagination[start]=0&pagination[limit]=4&filters[locations][id][$eq]=${langLoc.loc.id}&sort=manageAppearance.orderInMasterList:asc,title:asc`;
         const req = await fetch(url);
         const res = await req.json();
 
         return res.data;
     },
 
-    getAllPatientStories: async (start = 0, limit = 12) => {
-        const url = process.env.NEXT_PUBLIC_CMS_API_URL + `/testimonials?populate=*&pagination[start]=${start}&pagination[limit]=${limit}&filters[testimonialType][$contain]=Text`;
+    getFeaturedAll: async ({langLoc}) => {
+        const url = process.env.NEXT_PUBLIC_CMS_API_URL + `/testimonials?populate=*&pagination[start]=0&pagination[limit]=4&filters[testimonialType][$contains]=Video&filters[locations][id][$eq]=${langLoc.loc.id}&filters[manageAppearance][showInFeaturedList][$eq]=true&sort=manageAppearance.orderInFeaturedList:asc,title:asc`;
+
         const req = await fetch(url);
         const res = await req.json();
 
         return res.data;
     },
+
+     getTestimonialByHospital: async ({langLoc, hospitalId}) => {
+        const url = process.env.NEXT_PUBLIC_CMS_API_URL + `/testimonials?populate=*&filters[hospitals][$eq]=${hospitalId}&pagination[start]=0&pagination[limit]=4&filters[testimonialType][$contains]=Video&filters[locations][id][$eq]=${langLoc.loc.id}&sort=manageAppearance.orderInMasterList:asc,title:asc`;
+
+        const req = await fetch(url);
+        const res = await req.json();
+
+        return res.data;
+    },
+
+     getRecent: async ({langLoc}) => {
+        const url = process.env.NEXT_PUBLIC_CMS_API_URL + `/testimonials?populate=*&pagination[start]=0&pagination[limit]=4&filters[testimonialType][$contains]=Video&filters[locations][id][$eq]=${langLoc.loc.id}&sort=date:desc,manageAppearance.orderInMasterList:asc,title:asc`;
+
+        const req = await fetch(url);
+        const res = await req.json();
+
+        return res.data;
+    },
+
+
+     getAllPatientStories: async ({start, limit, langLoc}) => {
+        const url = process.env.NEXT_PUBLIC_CMS_API_URL + `/testimonials?populate=*&filters[locations][id][$eq]=${langLoc.loc.id}&pagination[start]=${start}&pagination[limit]=${limit}&filters[testimonialType][$contains]=Text&sort=date:desc,manageAppearance.orderInMasterList:asc,title:asc`;
+
+        console.log(url)
+        const req = await fetch(url);
+        const res = await req.json();
+
+        return res.data;
+    },
+
+
 }
 
 export default testimonialData;

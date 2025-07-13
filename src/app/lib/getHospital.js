@@ -1,35 +1,12 @@
 const hospitalData = {
-    getAll: async ({ limit, all = false, langLoc }) => {
+    getAll: async ({ langLoc }) => {
         const baseUrl = process.env.NEXT_PUBLIC_CMS_API_URL;
+        let url = baseUrl + `/hospitals?populate=*&pagination[limit]=100&filters[location][id][$eq]=${langLoc.loc.id}&sort=manageAppearance.orderInMasterList:asc,title:asc`;
+        const req = await fetch(url);
+        const res = await req.json();
 
-        if (!all) {
-            let url = baseUrl + `/hospitals?populate=*${limit ? '&pagination[limit]=' + limit : ''}`;
-            const req = await fetch(url);
-            const res = await req.json();
+        return res.data;
 
-            return res.data;
-
-        } else {
-            // Get total count
-            const initialReq = await fetch(`${baseUrl}/hospitals`);
-            const initialRes = await initialReq.json();
-            const totalCount = initialRes.meta.pagination.total;
-
-            const limit = 100;
-            const pages = Math.ceil(totalCount / limit);
-            let data = [];
-
-            // Actual Data
-            for (let i = 0; i < pages; i++) {
-                const start = i * limit;
-                const url = `${baseUrl}/hospitals?populate=*&pagination[start]=${start}&pagination[limit]=${limit}`;
-                const res = await fetch(url);
-                const json = await res.json();
-                data = [...data, ...json.data];
-            }
-
-            return data;
-        }
     },
 
 
@@ -47,7 +24,7 @@ const hospitalData = {
         // Actual Data
         for (let i = 0; i < pages; i++) {
             const start = i * limit;
-            const url = `${baseUrl}/hospitals?populate=*&pagination[start]=${start}&pagination[limit]=${limit}&filters[type][$eq]=${type}${!langLoc.loc.default ? `&filters[location][id][$eq]=${langLoc.loc.id}` : ''}`;
+            const url = `${baseUrl}/hospitals?populate=*&pagination[start]=${start}&pagination[limit]=${limit}&filters[type][$eq]=${type}${!langLoc.loc.default ? `&filters[location][id][$eq]=${langLoc.loc.id}` : ''}&sort=manageAppearance.orderInMasterList:asc,title:asc`;
             const res = await fetch(url);
             const json = await res.json();
             data = [...data, ...json.data];
@@ -67,7 +44,7 @@ const hospitalData = {
 
     },
 
-    getFooterHospital: async () => {
+    getFooterHospital: async ({langLoc}) => {
         const baseUrl = process.env.NEXT_PUBLIC_CMS_API_URL;
         // Get total count
         const initialReq = await fetch(`${baseUrl}/hospitals`);
@@ -106,7 +83,7 @@ const hospitalData = {
         // Actual Data
         for (let i = 0; i < pages; i++) {
             const start = i * limit;
-            const url = `${baseUrl}/hospitals?fields=title&fields=slug&fields=type&filters[manageAppearance][showingHeader][$eq]=true&pagination[start]=${start}&pagination[limit]=${limit}&populate[0]=location`;
+            const url = `${baseUrl}/hospitals?fields=title&fields=slug&fields=type&filters[manageAppearance][showingHeader][$eq]=true&pagination[start]=${start}&pagination[limit]=${limit}&populate[0]=location&sort=manageAppearance.orderInMasterList:asc,title:asc`;
 
             const res = await fetch(url);
             const json = await res.json();

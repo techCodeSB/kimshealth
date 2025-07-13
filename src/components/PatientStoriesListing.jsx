@@ -1,14 +1,12 @@
 "use client"
-import blogData from '@/app/lib/getBlog';
 import getStaticText from '@/helper/getStaticText';
 import React, { useEffect, useRef, useState } from 'react';
-import formatDate from '@/app/lib/formatDate';
 import testimonialData from '@/app/lib/getTestimonial';
 
 
-const PatientStoriesListing = ({basePath}) => {
-    const [allTestimonial, setallTestimonial] = useState() //Doctors
-    const [count, setCount] = useState(12)
+const PatientStoriesListing = ({ basePath, langLoc, URLParams }) => {
+    const [allTestimonial, setallTestimonial] = useState([]) //Doctors
+    const [count, setCount] = useState(0)
     const [staticText, setStaticTexts] = useState({});
     const limit = 12;
     const observerRef = useRef(null);
@@ -20,21 +18,21 @@ const PatientStoriesListing = ({basePath}) => {
         const fetchTexts = async () => {
             setStaticTexts({ ...await getStaticText() })
         };
-        const getFstLoad = async () => {
-            const data = await testimonialData.getAllPatientStories(count, limit);
-            setallTestimonial(data);
-        }
+        // const getFstLoad = async () => {
+        //     const data = await testimonialData.getAll(count, limit);
+        //     setallTestimonial(data);
+        // }
 
-        getFstLoad();
+        // getFstLoad();
         fetchTexts();
     }, []);
 
 
-    const loadDoctor = async () => {
+    const loadMore = async () => {
         if (loading) return; // prevent multiple triggers
         setLoading(true);
 
-        const data = await testimonialData.getAllPatientStories(count, limit);
+        const data = await testimonialData.getAllPatientStories({ start: count, limit: limit, langLoc: langLoc });
         if (data.length < 1) {
             setEndData(true)
         }
@@ -48,7 +46,7 @@ const PatientStoriesListing = ({basePath}) => {
         const observer = new IntersectionObserver(
             entries => {
                 if (entries[0].isIntersecting && !endData) {
-                    loadDoctor();
+                    loadMore();
                 }
             },
             { threshold: 1 }
@@ -60,7 +58,9 @@ const PatientStoriesListing = ({basePath}) => {
         return () => {
             if (currentRef) observer.unobserve(currentRef);
         };
-    }, [count]);
+    }, [count, endData, loading]);
+
+
     return (
         <>
             <section className="section">
@@ -68,10 +68,10 @@ const PatientStoriesListing = ({basePath}) => {
                     <div className="row justify-content-between">
                         <div className="col-md-6 mb-3">
                             <div className="main-heading">
-                                <h2 className="mb-0">Patient Stories</h2>
+                                <h2 className="mb-0">{staticText['Patient Stories']}</h2>
                             </div>
                         </div>
-                        {/* <div className="col-md-4 details-key-row">
+                        <div className="col-md-4 details-key-row">
                             <form action="">
                                 <div className="input-group p-0 position-relative justify-content-center">
                                     <select className="form-select diseases-page-search">
@@ -83,7 +83,7 @@ const PatientStoriesListing = ({basePath}) => {
                                     <button className="input-group-text border-0 search-btn-page"><i className="fa-solid fa-magnifying-glass"></i></button>
                                 </div>
                             </form>
-                        </div> */}
+                        </div>
                     </div>
                 </div>
             </section>
@@ -100,7 +100,6 @@ const PatientStoriesListing = ({basePath}) => {
                                             <div className="overflow-hidden position-relative">
                                                 <a href={basePath + "/testimonial/" + t.slug}>
                                                     <img src={t.thumbnailImage?.url ? `${process.env.NEXT_PUBLIC_IMAGE_URL}${t.thumbnailImage?.url}` : "/img/no-image.jpg"} alt={t.title} className="img-fluid w-100" />
-                                                     <div className="play-icon"> <img src="/img/play-icon-small.png" alt="" /> </div>
                                                 </a>
                                             </div>
                                         </div>

@@ -6,9 +6,9 @@ import React, { useEffect, useRef, useState } from 'react';
 
 
 // infinite scroll;
-const DoctorTalkListing = ({ baseURL }) => {
+const DoctorTalkListing = ({ baseURL, langLoc, URLParams }) => {
     const [staticText, setStaticTexts] = useState({});
-    const [data, setData] = useState();
+    const [data, setData] = useState([]);
     const limit = 12;
     const observerRef = useRef(null);
     const [loading, setLoading] = useState(false);
@@ -20,12 +20,12 @@ const DoctorTalkListing = ({ baseURL }) => {
         const fetchTexts = async () => {
             setStaticTexts({ ...await getStaticText() })
         };
-        const getFstLoad = async () => {
-            const data = await doctorTalkData.allData(0, count)
-            setData(data);
-        }
+        // const getFstLoad = async () => {
+        //     const data = await doctorTalkData.allData(0, count)
+        //     setData(data);
+        // }
 
-        getFstLoad();
+        // getFstLoad();
         fetchTexts();
     }, []);
 
@@ -33,7 +33,7 @@ const DoctorTalkListing = ({ baseURL }) => {
         if (loading) return; // prevent multiple triggers
         setLoading(true);
 
-        const data = await doctorTalkData.allData(count, limit);
+        const data = await doctorTalkData.allData({start: count, limit, langLoc: langLoc});
         if(data.length < 1){
             setEndData(true)
         }
@@ -59,7 +59,7 @@ const DoctorTalkListing = ({ baseURL }) => {
         return () => {
             if (currentRef) observer.unobserve(currentRef);
         };
-    }, [count]);
+    }, [count, loading, endData]);
 
 
     return (

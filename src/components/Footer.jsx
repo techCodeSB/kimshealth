@@ -3,6 +3,7 @@ import hospitalData from '@/app/lib/getHospital';
 import getLocation from '@/app/lib/getLocation';
 import getSpecialityData from '@/app/lib/getSpeciality';
 import { getBaseUrl } from '@/helper/getBaseUrl';
+import getCurrentLangLocClient from '@/helper/getCurrentLangLocClient';
 import langLoc from '@/helper/getLangLoc';
 import getStaticText from '@/helper/getStaticText';
 import React, { useEffect, useState } from 'react'
@@ -10,6 +11,7 @@ import React, { useEffect, useState } from 'react'
 
 
 const Footer = () => {
+    const [selectedLangLoc, setselectedLangLoc] = useState();
     const [basePath, setBasePath] = useState(null);
     const [speciality, setSpeciality] = useState();
     const [hospitals, setHospitals] = useState();
@@ -32,6 +34,7 @@ const Footer = () => {
             setAllLocations([...loc]);
         }
 
+
         getLoc()
     }, []);
 
@@ -40,8 +43,11 @@ const Footer = () => {
     useEffect(() => {
         const fetchAllTitles = async () => {
             try {
-                setSpeciality(await getSpecialityData.getFooterSpeciality());
-                setHospitals(await hospitalData.getFooterHospital());
+                const LangLoc = await getCurrentLangLocClient() //GET LOCATION AND LANGUAGE;
+
+                setSpeciality(await getSpecialityData.getFooterSpeciality({ langLoc: LangLoc }));
+
+                setHospitals(await hospitalData.getFooterHospital({langLoc: langLoc}));
 
             } catch (error) {
                 console.error("Error fetching titles:", error);
@@ -495,9 +501,9 @@ const Footer = () => {
             <div className="midle-footer py-2 my-3">
                 <div className="container">
                     <div className="d-flex justify-content-center gap-4 align-items-center main-btn">
-                        <a href={basePath+"/bmw-report"}>{staticTexts['BMW Reports']}</a>
-                        <a href={basePath+"/terms-and-conditions"}>{staticTexts['Term & Conditions']}</a>
-                        <a href={basePath+"/privacy-policy"}>{staticTexts['Privacy Policies']}</a>
+                        <a href={basePath + "/bmw-report"}>{staticTexts['BMW Reports']}</a>
+                        <a href={basePath + "/terms-and-conditions"}>{staticTexts['Term & Conditions']}</a>
+                        <a href={basePath + "/privacy-policy"}>{staticTexts['Privacy Policies']}</a>
                     </div>
                 </div>
             </div>
