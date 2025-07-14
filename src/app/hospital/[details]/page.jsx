@@ -28,10 +28,11 @@ const HospitalDetails = async ({ params }) => {
     const hospitals = await hospitalData.getAll({ langLoc: getLangLoc });
     const staticText = await getStaticText()
 
+
     const specialityDataSet = {
         sectionTitle: hptData.specialitySection.title,
         buttonText: 'View All', buttonURL: `${basePath + "/speciality?hospital=" + hptData.slug}`,
-        data: await getSpecialityData.getAllByHospital({ langLoc: getLangLoc }),
+        data: await getSpecialityData.getAllByHospital({ langLoc: getLangLoc, hospitalId: hptData.id }),
         baseUrl: basePath
     };
 
@@ -294,9 +295,9 @@ const HospitalDetails = async ({ params }) => {
                         <div className="row">
                             <div className="col-md-5 order-lg-1 order-2">
                                 <div className="details-right-col text-center sticky-from">
-                                    <img src={process.env.NEXT_PUBLIC_IMAGE_URL + hptData.featuredImage?.url} alt="" className="img-fluid w-100" />
-                                    <h5>{hptData.caption || ""}</h5>
-                                    <p>{hptData.overviewSection?.subTitle || ""}</p>
+                                    <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${hptData.overviewSection?.thumbnail?.url ? hptData.overviewSection?.thumbnail?.url : hptData.featuredImage?.url}`} alt="" className="img-fluid w-100" />
+                                    <h5>{hptData.overviewSection?.caption || hptData.title}</h5>
+                                    <p>{hptData.overviewSection?.shortDetails || hptData.overviewSection?.subTitle}</p>
                                     {
                                         hptData.overviewSection?.videoId ?
                                             <WatchVideoButton txt={"Watch Video"} id={hptData.overviewSection?.videoId} />
@@ -310,9 +311,15 @@ const HospitalDetails = async ({ params }) => {
                                     <h4 className="mb-3">{hptData.overviewSection?.subTitle}</h4>
                                 </div>
 
-                                <div
-                                    className='main-list'
-                                    dangerouslySetInnerHTML={{ __html: marked(hptData.overviewSection?.details) }}></div>
+                                <div className="main-list">
+                                    <input type="checkbox" id="read-more-toggle" className="read-more-toggle" />
+                                    <div
+                                        className="clamped-content"
+                                        dangerouslySetInnerHTML={{ __html: marked(hptData.overviewSection?.details) }}
+                                    />
+                                    <label htmlFor="read-more-toggle" className="read-more-label"></label>
+                                </div>
+
 
                                 {hptData.USPSection.uspItem.length > 1 ? <div className="details-counter-section">
                                     <div className="row">

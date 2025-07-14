@@ -10,6 +10,7 @@ import hospitalData from '@/app/lib/getHospital';
 import getStaticText from '@/helper/getStaticText';
 import getCurrentLangLocClient from '@/helper/getCurrentLangLocClient';
 import InternationalMenu from './InternationalMenu';
+import SearchBox from './Forms/SearchBox';
 
 
 const Header = () => {
@@ -25,6 +26,7 @@ const Header = () => {
   const [allHospital, setAllHospital] = useState();
   const [activeIndex, setActiveIndex] = useState(null);
   const [staticTexts, setStaticTexts] = useState({});
+  const [showSearch, setShowSearch] = useState(false); // FOR SEARCH TOGGLE
 
 
   useEffect(() => {
@@ -261,15 +263,13 @@ const Header = () => {
                   <a href={"https://wa.me/" + locationData?.whatsapp} target='_blank'> <img src="/img/whatsapp.svg" className="img-fluid" alt="" /></a>
                 </div>
                 <div className="search-icon ms-3 me-2">
-                  <a href="#" className="search-button"><i className="fa-solid fa-magnifying-glass"></i></a>
-                  {/* <div class="sidebar" id="sidebar">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-                      <h3>Search Panel</h3>
-                      <button onclick="closeSidebar()" style="background: #eee; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;">✕ Close</button>
-                    </div>
-                    <div id="searchResults" >
-                    </div>
-                  </div> */}
+                  <a href="#" className="search-button" onClick={() => {
+                    setShowSearch(!showSearch);
+                  }}>
+                    <i className="fa-solid fa-magnifying-glass"></i></a>
+                  <div className={`search-box input-group p-0 my-lg-3 my-3 ${showSearch ? "d-flex" : "d-none"}`} >
+                    <SearchBox />
+                  </div>
                 </div>
                 <div className="top-drop-down">
                   <select value={selectedLang?.slug || ""} className="border-0 " onChange={onLangChangeRedirection}>
@@ -391,7 +391,7 @@ const Header = () => {
                                   <div id={"tab" + index} className={`tab-content ${index === 0 ? 'active' : ''}`} key={index}>
                                     {l?.slug !== "ip" ? <div className="row">
                                       <div className="col-md-6 mb-3">
-                                        {onlyHospitals?.length > 0 && <h3>{staticTexts['Hospital']}</h3>}
+                                        {onlyHospitals?.length > 0 && <h3>{staticTexts['Hospitals']}</h3>}
                                         <ul>
                                           {onlyHospitals.map((hospital, i) => (
                                             <li key={`hospital-${i}`}>
@@ -451,7 +451,7 @@ const Header = () => {
                                     <div className="content-inner">
                                       {l.slug !== "ip" ? <div className="row">
                                         <div className="col-md-6 mb-3">
-                                          {onlyHospitals?.length > 0 && <h3>{staticTexts['Hospital']}</h3>}
+                                          {onlyHospitals?.length > 0 && <h3>{staticTexts['Hospitals']}</h3>}
                                           <ul>
                                             {onlyHospitals.map((hospital, i) => (
                                               <li key={`hospital-${i}`}>
@@ -721,7 +721,7 @@ const Header = () => {
                     <ul className="sub-menu-details">
                       <li className="has-dropdown">
                         <a href={basePath + "#"} className="menu-item">{staticTexts['About Us']}<i className="fa-solid fa-angle-down"></i></a>
-                        
+
                         <ul className="submenu">
                           <li className="submenu-item">
                             <a href={basePath + "/about-us"}>{staticTexts['Overview']}</a>
@@ -743,7 +743,7 @@ const Header = () => {
 
                       <li className="has-dropdown">
                         <a href="#" className="menu-item">{staticTexts['CSR']}<i className="fa-solid fa-angle-down"></i></a>
-                        
+
                         <ul className="submenu">
                           <li className="submenu-item">
                             <a href={basePath + "/csr-policy"}>{staticTexts['CSR Policy']}</a>
@@ -756,7 +756,7 @@ const Header = () => {
 
                       <li className="has-dropdown">
                         <a href="#" className="menu-item">{staticTexts['Patients and Visitors']}<i className="fa-solid fa-angle-down"></i></a>
-                        
+
                         <ul className="submenu">
                           <li className="submenu-item">
                             <a href={basePath + "/testimonial"}>{staticTexts['Patient Testimonials']}</a>
@@ -781,7 +781,7 @@ const Header = () => {
                       </li>
                       <li className="has-dropdown">
                         <a href="#" className="menu-item">{staticTexts['Academics']}<i className="fa-solid fa-angle-down"></i></a>
-                        
+
                         <ul className="submenu">
                           <li className="submenu-item">
                             <a href={basePath + "/kisa-kimshealth-institute-of-skill-acquisition"}>{staticTexts['KISA (KIMSHEALTH Institute of Skill Acquisition)']}</a>
@@ -838,7 +838,7 @@ const Header = () => {
                       {/* OTHERS */}
                       <li className="has-dropdown">
                         <a href="#" className="menu-item">{staticTexts['Others']} <i className="fa-solid fa-angle-down"></i></a>
-                       
+
                         <ul className="submenu">
                           <li className="submenu-item">
                             <a href={basePath + "/media-and-events"}>{staticTexts['Events']}</a>

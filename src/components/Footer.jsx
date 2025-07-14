@@ -6,7 +6,8 @@ import { getBaseUrl } from '@/helper/getBaseUrl';
 import getCurrentLangLocClient from '@/helper/getCurrentLangLocClient';
 import langLoc from '@/helper/getLangLoc';
 import getStaticText from '@/helper/getStaticText';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
+import SearchBox from '@/components/Forms/SearchBox';
 
 
 
@@ -248,15 +249,10 @@ const Footer = () => {
                                 <div className="custom-from m-0">
                                     <div className="row">
                                         <div className="col-xl-12 col-lg-12 col-md-12 col-12">
-                                            <form action="">
-                                                <div className="input-group p-0 my-lg-3 my-3">
 
-                                                    <input type="text" className="form-control border-0"
-                                                        placeholder="Enter Text ...." aria-label="Username"
-                                                        aria-describedby="basic-addon1" />
-                                                    <button className="input-group-text border-0" id="from-icon"><i className="fa-solid icon-magnifier"></i></button>
-                                                </div>
-                                            </form>
+                                            <div className="input-group p-0 my-lg-3 my-3">
+                                                <SearchBox />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -524,36 +520,30 @@ const Footer = () => {
                                 <div className="custom-from m-0">
                                     <div className="row">
                                         <div className="col-xl-12 col-lg-12 col-md-12 col-12">
-                                            <form action="">
-                                                <div className="input-group p-0 my-lg-3 mt-2">
-
-                                                    <input type="text" className="form-control border-0"
-                                                        placeholder="Enter Text ...." aria-label="Username"
-                                                        aria-describedby="basic-addon1" />
-                                                    <button className="input-group-text border-0" id="from-icon"><i className="fa-solid icon-magnifier"></i></button>
-                                                </div>
-                                            </form>
+                                            <div className="input-group p-0 my-lg-3 mt-2">
+                                                <SearchBox />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    
+
                 </div>
                 <div className="midle-footer mt-3">
-                        <div className="container">
-                            <div className="d-flex justify-content-center gap-4 align-items-center main-btn">
-                                <a href={basePath + "/bmw-report"}>{staticTexts['BMW Reports']}</a>
-                                <a href={basePath + "/terms-and-conditions"}>{staticTexts['Term & Conditions']}</a>
-                                <a href={basePath + "/privacy-policy"}>{staticTexts['Privacy Policies']}</a>
-                            </div>
+                    <div className="container">
+                        <div className="d-flex justify-content-center gap-4 align-items-center main-btn">
+                            <a href={basePath + "/bmw-report"}>{staticTexts['BMW Reports']}</a>
+                            <a href={basePath + "/terms-and-conditions"}>{staticTexts['Term & Conditions']}</a>
+                            <a href={basePath + "/privacy-policy"}>{staticTexts['Privacy Policies']}</a>
                         </div>
                     </div>
+                </div>
             </footer>
 
 
-          
+
 
 
 

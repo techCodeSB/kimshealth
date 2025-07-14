@@ -19,7 +19,7 @@ const doctorData = {
             ? `&filters[hospitals][slug][$eq]=${URLParams.hospital}`
             : ``;
 
-        const url = `${base}/doctor-details?populate=*${locationFilter}${specialityFilter}${genderFilter}${hospitalFilter}&pagination[start]=${start}&pagination[limit]=${limit}&sort=manageAppearance.orderInMasterList:asc,name:asc`;
+        const url = `${base}/doctor-details?populate=*${locationFilter}${specialityFilter}${genderFilter}${hospitalFilter}&pagination[start]=${start}&pagination[limit]=${limit}&sort=name:asc,manageAppearance.orderInMasterList:asc`;
 
         const req = await fetch(url);
         const res = await req.json();

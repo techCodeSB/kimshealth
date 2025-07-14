@@ -60,7 +60,9 @@ const HomeServiceDetails = async ({ params }) => {
                                                             className="fa-solid fa-envelope"></i>
                                                             {data.contactEmail}</a></li>
                                                     </ul>
-                                                    <a href="#" className="hospital-primarybtn">{staticTexts['Book Now']}</a>
+                                                    <a href="#bookNowForm" className="hospital-primarybtn">
+                                                        {staticTexts['Book Now']}
+                                                    </a>
                                                 </div>
                                             </div>
                                         </div>
@@ -123,7 +125,7 @@ const HomeServiceDetails = async ({ params }) => {
                         </div>
                     </section>
 
-                    <section className="section">
+                    <section className="section" id='bookNowForm'>
                         <div className="container">
                             <div className="row">
                                 <div className="col-md-8">
@@ -135,7 +137,7 @@ const HomeServiceDetails = async ({ params }) => {
                                     </div>
                                 </div>
                                 <div className="col-md-4">
-                                    <div className="association-form-card mb-0">
+                                    <div className="association-form-card mb-0" >
                                         <Form1 title={"GET A CALLBACK FROM OUR HEALTH ADVISOR"} />
                                     </div>
                                 </div>

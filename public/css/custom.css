@@ -1026,11 +1026,13 @@ header {
     border-radius: 30px;
     transition: .5s ease;
 }
-.from-btn a:hover{
+
+.from-btn a:hover {
     border: 1px solid #b71c2b;
     color: #b71c2b;
     background: transparent;
 }
+
 /* ===== wal frame sction ======= */
 .wallframe-section {
     background: url('../img/wall-frame-bg.jpg');
@@ -1397,7 +1399,7 @@ header {
 }
 
 
-.media-img img{
+.media-img img {
     height: 210px;
     object-fit: cover;
     transition: .3s ease-in;
@@ -1566,7 +1568,8 @@ footer.footer {
     color: #fff;
     font-style: 16px;
 }
-.instagram-logo{
+
+.instagram-logo {
     width: 16% !important;
 }
 
@@ -3683,13 +3686,17 @@ li.hospital-doctor::before {
 
 .blog-tagging span {
     color: #616161;
-    background: #f3f3f3;
+    background: transparent;
     padding: 10px 0px;
     border-radius: 30px;
     font-size: 16px;
     display: inline-block;
     width: 171px;
     text-align: center;
+}
+
+.scroll-container.custom-tab-button-wrapper a {
+    display: inline-block;
 }
 
 .find-doctor-left-col {
@@ -4452,7 +4459,8 @@ li.chat-ic::before {
 }
 
 .custom-from.bg-field .input-group input,
-.custom-from.bg-field .input-group select {
+.custom-from.bg-field .input-group select,
+.custom-from.bg-field .input-group textarea {
     background: transparent;
     border: none;
 }
@@ -4832,8 +4840,12 @@ li.chat-ic::before {
     object-fit: cover;
 }
 
-.blog-tagging span.active {
+.blog-tagging .blog-listing-scroll-tab.active {
     background: #b71c2b;
+    color: #fff;
+}
+
+.blog-tagging .blog-listing-scroll-tab.active a {
     color: #fff;
 }
 
@@ -5428,8 +5440,7 @@ li.chat-ic::before {
     border-radius: 30px;
 }
 
-
-.scroll-container::-webkit-scrollbar-track {
+.blog-listing-scroll-tab .scroll-container::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
     background-color: #F5F5F5;
     border-radius: 10px;
@@ -5514,20 +5525,188 @@ li.chat-ic::before {
 .milestone-main-page .timeline-item .main-list-black ul li {
     color: #000;
 }
+
 .doctor-details-main-page .left-details-list ul li {
     min-height: 25px;
 }
-.form-select{
+
+.form-select {
     border-radius: 30px;
     border: 1px solid #b71c2b;
 }
-.form-select:focus{
+
+.form-select:focus {
     border: 1px solid #b71c2b;
 }
+
 select option:hover {
-  background-color: #b71c2b !important;
-  color: white;
+    background-color: #b71c2b !important;
+    color: white;
 }
-.has-dropdown.open i{
+
+.has-dropdown.open i {
     transform: rotate(180deg);
 }
+
+/* Outer scroll container */
+.custom-tab-scroll-wrapper {
+    width: 100%;
+    max-width: 52rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    padding: 10px 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+
+
+    /* Prevent outer page from scrolling */
+    display: block;
+}
+
+/* Inline layout for buttons */
+.custom-tab-button-wrapper {
+    display: inline-flex;
+}
+
+/* Ensure items don't shrink */
+.treat-tab {
+    flex-shrink: 0;
+}
+
+.custom-tab-scroll-wrapper::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: #ccc;
+}
+
+.custom-tab-scroll-wrapper::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    /* -webkit-box-shadow: inset 0 0 6px #888888; */
+    background-color: #b71c2b;
+}
+
+
+.custom-tab-scroll-wrapper::-webkit-scrollbar {
+    width: 2px;
+    background-color: #b71c2b;
+    height: 5px;
+    border-radius: 10px;
+}
+
+a.active {
+    color: #b71c2b;
+}
+
+
+.search-box {
+    padding: 15px;
+    background-color: #fff;
+    position: absolute;
+    box-shadow: 0 0 20px -3px rgb(183 28 43);
+    z-index: 99999;
+    top: 46px;
+    right: 267px;
+    max-width: 350px;
+    border-radius: 3px;
+    height: 55px;
+    display: none;
+}
+
+.generic-search {
+    border: 1px solid #b71c2b;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+
+.generic-search button {
+    background-color: #b71c2b;
+    color: #fff;
+    width: 75px;
+}
+
+.generic-search button i {
+    font-weight: 600;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 30px;
+}
+
+/* not found */
+.not-found-section {
+    min-height: 80vh;
+    padding: 60px 20px;
+    background: #f9f9f9;
+}
+
+.error-code {
+    font-size: 120px;
+    font-weight: 800;
+    color: #b71c2b;
+    animation: pulse 1.5s infinite;
+}
+
+.error-title {
+    font-size: 32px;
+    font-weight: 600;
+    margin-top: -20px;
+    color: #333;
+}
+
+.error-description {
+    color: #555;
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+
+
+/* ::::::::::::::::: hospital details toggle :::::::::::::: */
+.read-more-toggle {
+    display: none;
+}
+
+.clamped-content {
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    max-height: 8em;
+    transition: all 0.3s ease-in-out;
+}
+
+.read-more-toggle:checked~.clamped-content {
+    -webkit-line-clamp: unset;
+    max-height: none;
+    overflow: visible;
+}
+
+.read-more-label {
+    display: inline-block;
+    color: #b71c2b;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.read-more-toggle:not(:checked)~.read-more-label::after {
+    content: "Read More";
+}
+
+/* .read-more-toggle:checked~.read-more-label::after {
+    content: "Read Less";
+} */

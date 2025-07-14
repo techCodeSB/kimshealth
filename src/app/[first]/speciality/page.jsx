@@ -9,7 +9,8 @@ import Breadcrumb from '@/components/Breadcrumb';
 import getCurrentLangLoc from '@/app/lib/getCurrentLangLoc';
 
 
-const Speciality = async () => {
+const Speciality = async ({ searchParams }) => {
+    const URLParams = await searchParams;
     const getLangLoc = await getCurrentLangLoc()
     const baseURL = await getBaseUrl(true, true);
     const baseUrlOnlyLang = await getBaseUrl(true, false);
@@ -18,8 +19,12 @@ const Speciality = async () => {
     const pageMeta = data?.data[0]?.metaSection;
     const staticText = await getStaticText()
 
-    const otherSpecility = await getSpecialityData.getSpeciality({field:'Other Specialties', langLoc: getLangLoc});
-    const coeSpecility = await getSpecialityData.getSpeciality({field:'Center of Excellence', langLoc: getLangLoc});
+    const otherSpecility = await getSpecialityData.getSpeciality({
+        field: 'Other Specialties', langLoc: getLangLoc, URLParams: URLParams
+    });
+    const coeSpecility = await getSpecialityData.getSpeciality({
+        field: 'Center of Excellence', langLoc: getLangLoc, URLParams: URLParams
+    });
 
 
     return (

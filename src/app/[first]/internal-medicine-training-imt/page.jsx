@@ -6,6 +6,7 @@ import getStaticText from '@/app/lib/getStaticTextServer';
 import Breadcrumb from '@/components/Breadcrumb';
 import getCurrentLangLoc from '@/app/lib/getCurrentLangLoc';
 import { getBaseUrl } from '@/app/lib/getBaseUrl';
+import Form1 from '@/components/Forms/Form1';
 
 const InternalMedicine = async () => {
     const getLangLoc = await getCurrentLangLoc()
@@ -15,7 +16,7 @@ const InternalMedicine = async () => {
     const pageContent = data?.data[0]?.pageContent;
     const pageMeta = data?.data[0]?.metaSection;
     const basePath = await getBaseUrl(true, true);
-    
+
 
     return (
         <>
@@ -47,7 +48,7 @@ const InternalMedicine = async () => {
                                                     <a download href={`${process.env.NEXT_PUBLIC_IMAGE_URL}${pageContent[2]?.file?.url}`}
                                                         className="mb-3 mt-2 d-block"><i className="custom-download"></i>
                                                         {pageContent[2]?.buttonText}</a>
-                                                    <a href="#" className="hospital-primarybtn">{staticText['Apply Now']}</a>
+                                                    <a href="#imtApply" className="hospital-primarybtn">{staticText['Apply Now']}</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -101,7 +102,11 @@ const InternalMedicine = async () => {
                                             className="main-list">
                                         </div>
                                     </div>
+                                    <div className="association-form-card mb-0 mt-2" id='imtApply'>
+                                        <Form1 title={"GET A CALLBACK FROM OUR HEALTH ADVISOR"} />
+                                    </div>
                                 </div>
+
                             </div>
                         </div>
                     </section>

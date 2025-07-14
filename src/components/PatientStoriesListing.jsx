@@ -2,6 +2,7 @@
 import getStaticText from '@/helper/getStaticText';
 import React, { useEffect, useRef, useState } from 'react';
 import testimonialData from '@/app/lib/getTestimonial';
+import getSpecialityData from '@/app/lib/getSpeciality';
 
 
 const PatientStoriesListing = ({ basePath, langLoc, URLParams }) => {
@@ -12,18 +13,22 @@ const PatientStoriesListing = ({ basePath, langLoc, URLParams }) => {
     const observerRef = useRef(null);
     const [loading, setLoading] = useState(false);
     const [endData, setEndData] = useState(false);
+        const [allSpeciality, setAllSpeciality] = useState([]);
 
 
     useEffect(() => {
         const fetchTexts = async () => {
             setStaticTexts({ ...await getStaticText() })
         };
-        // const getFstLoad = async () => {
-        //     const data = await testimonialData.getAll(count, limit);
-        //     setallTestimonial(data);
-        // }
+        const getFstLoad = async () => {
+            // const data = await testimonialData.getAll(count, limit);
+            // setallTestimonial(data);
+            
+            const tempStoreSpeciality = await getSpecialityData.getAllSpeciality({ langLoc });
+            setAllSpeciality(tempStoreSpeciality);
+        }
 
-        // getFstLoad();
+        getFstLoad();
         fetchTexts();
     }, []);
 
@@ -32,7 +37,7 @@ const PatientStoriesListing = ({ basePath, langLoc, URLParams }) => {
         if (loading) return; // prevent multiple triggers
         setLoading(true);
 
-        const data = await testimonialData.getAllPatientStories({ start: count, limit: limit, langLoc: langLoc });
+        const data = await testimonialData.getAllPatientStories({ start: count, limit: limit, langLoc: langLoc, URLParams: URLParams });
         if (data.length < 1) {
             setEndData(true)
         }
@@ -72,17 +77,19 @@ const PatientStoriesListing = ({ basePath, langLoc, URLParams }) => {
                             </div>
                         </div>
                         <div className="col-md-4 details-key-row">
-                            <form action="">
-                                <div className="input-group p-0 position-relative justify-content-center">
-                                    <select className="form-select diseases-page-search">
-                                        <option value="">Search for Speciality </option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                    </select>
-                                    <button className="input-group-text border-0 search-btn-page"><i className="fa-solid fa-magnifying-glass"></i></button>
-                                </div>
-                            </form>
+                            <select className="form-control form-select" onChange={(e) => {
+                                location.href = basePath + "/patient-stories?speciality=" + e.target.value;
+                            }} value={URLParams.speciality ? URLParams.speciality : ''}>
+
+                                <option value={''}>Search for Speciality </option>
+                                {
+                                    allSpeciality?.map((spl, i) => {
+                                        return <option value={spl.speciality?.slug} key={i}>
+                                            {spl.title}
+                                        </option>
+                                    })
+                                }
+                            </select>
                         </div>
                     </div>
                 </div>

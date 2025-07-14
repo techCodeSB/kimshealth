@@ -120,7 +120,7 @@ const MediaAndEventsDetails = async ({ params }) => {
                                                             <div>
                                                                 <img src="/img/kims-small-logo.png" className="img-fluid" alt="" />
                                                             </div>
-                                                            <p>{rm.title} <br /> {formatDate(rm?.date)}</p>
+                                                            <p><a href={basePath + "/media-and-events/" + rm.slug}><strong>{rm.title}</strong></a> <br /> {formatDate(rm?.date)}</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -172,13 +172,14 @@ const MediaAndEventsDetails = async ({ params }) => {
                                                 </div>
                                                 <div className="media-content">
                                                     <p>{e.shortDetails}</p>
-                                                    <div className="d-flex align-items-center justify-content-between mt-3">
+                                                    <div className="d-block align-items-center justify-content-between mt-3">
                                                         <div className="media-name">
                                                             <div>
                                                                 <img src="/img/kims-small-logo.png" className="img-fluid" alt="" />
                                                             </div>
-                                                            <p>{e.title} <br /> {formatDate(e?.date)}</p>
+                                                            <p><a href={basePath + "/media-and-events/" + e.slug}><strong>{e.title}</strong></a></p>
                                                         </div>
+                                                        <p className="mt-2 ms-4 ps-3">{formatDate(e?.date)}</p>
                                                     </div>
                                                 </div>
                                             </div>

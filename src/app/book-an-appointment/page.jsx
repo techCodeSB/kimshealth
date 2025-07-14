@@ -4,13 +4,16 @@ import { getStaticPageContent } from '@/app/lib/getStaticPageContent';
 import Breadcrumb from '@/components/Breadcrumb';
 import getStaticText from '@/app/lib/getStaticTextServer';
 import getCurrentLangLoc from '@/app/lib/getCurrentLangLoc';
+import doctorData from '@/app/lib/getDoctor';
 
-const BookAnAppoinment = async () => {
+const BookAnAppoinment = async ({searchParams}) => {
+    const URLParams=await searchParams;
     const getLangLoc = await getCurrentLangLoc()
     const data = await getStaticPageContent("book-an-appointment");
     const pageContent = data?.data[0]?.pageContent;
     const pageMeta = data?.data[0]?.metaSection;
     const staticText = await getStaticText();
+    const docData = await doctorData.getSingleDoctor(URLParams.doctor);
 
 
     return (
@@ -145,7 +148,6 @@ const BookAnAppoinment = async () => {
 
                     <section className="section ">
                         <div className="container">
-                            <form action="">
                                 <div className="row justify-content-center">
                                     <div className="col-md-12 mb-3">
                                         <div className="main-heading text-center">
@@ -159,7 +161,6 @@ const BookAnAppoinment = async () => {
                                                             
 
                                                             <div className="custom-from bg-field mx-0">
-                                                                <form action="">
                                                                     <div className="row justify-content-between">
                                                                         <div className="col-xl-6 col-lg-6 col-md-6 col-12 mb-3">
                                                                             <label htmlFor=''> Name*</label>
@@ -169,7 +170,7 @@ const BookAnAppoinment = async () => {
                                                                         </div>
                                                                         <div className="col-xl-6 col-lg-6 col-md-6 col-12 mb-3">
                                                                             <label htmlFor=''>Doctor Name</label>
-                                                                            <input type="text" className="form-control pe-0" />
+                                                                            <input type="text" className="form-control pe-0" defaultValue={docData.name} />
                                                                         </div>
 
 
@@ -204,7 +205,6 @@ const BookAnAppoinment = async () => {
 
 
                                                                     </div>
-                                                                </form>
                                                             </div>
 
 
@@ -329,7 +329,6 @@ const BookAnAppoinment = async () => {
                                     </div> */}
                                 </div>
 
-                            </form>
                         </div>
                     </section>
 

@@ -3,6 +3,7 @@ import doctorData from '@/app/lib/getDoctor';
 import getStaticText from '@/helper/getStaticText';
 import Link from 'next/link';
 import React, { useEffect, useState, useRef } from 'react';
+import Form3 from './Forms/Form3';
 
 const DoctorListing = ({ baseURL, allLocation, allSpeciality, allDoctorCount, langLoc, URLParams }) => {
     const [docData, setDocData] = useState([]);
@@ -81,6 +82,23 @@ const DoctorListing = ({ baseURL, allLocation, allSpeciality, allDoctorCount, la
         setLocationList(filtered);
     };
 
+    const onSpecialityChange = (e) => {
+        const search = e.target.value.toLowerCase();
+
+        if (!search) {
+            setSpecialityList(allSpeciality);
+            return;
+        }
+
+        const filtered = allSpeciality.filter(spl =>
+            spl.title.toLowerCase().includes(search)
+        );
+
+        setSpecialityList(filtered);
+    };
+
+
+
     return (
         <section className="section">
             <div className="container">
@@ -122,7 +140,7 @@ const DoctorListing = ({ baseURL, allLocation, allSpeciality, allDoctorCount, la
                                         <ul>
                                             {locationList?.map((loc, index) => (
                                                 <li key={index + "1"} >
-                                                    <a href={`${baseURL}/doctor?location=${loc.slug}${URLParams.speciality ? `&speciality=${URLParams.speciality}` : ''}${URLParams.gender ? `&gender=${URLParams.gender}` : ''}${URLParams.hospital ? `&hospital=${URLParams.hospital}` : ''}`}>
+                                                    <a href={`${baseURL}/doctor?location=${loc.slug}${URLParams.speciality ? `&speciality=${URLParams.speciality}` : ''}${URLParams.gender ? `&gender=${URLParams.gender}` : ''}${URLParams.hospital ? `&hospital=${URLParams.hospital}` : ''}`} className={loc.slug === URLParams.location ? 'active' : ''}>
                                                         {loc.title}
                                                     </a>
                                                 </li>
@@ -139,7 +157,11 @@ const DoctorListing = ({ baseURL, allLocation, allSpeciality, allDoctorCount, la
                                     <div className="row">
                                         <div className="col-12">
                                             <div className="input-group">
-                                                <input type="text" className="form-control" placeholder="Search ....." />
+                                                <input type="text"
+                                                    className="form-control"
+                                                    placeholder="Search ....."
+                                                    onChange={onSpecialityChange}
+                                                />
                                                 <span className="input-group-text"><i className="fa-solid fa-magnifying-glass"></i></span>
                                             </div>
                                         </div>
@@ -148,7 +170,7 @@ const DoctorListing = ({ baseURL, allLocation, allSpeciality, allDoctorCount, la
                                         <ul>
                                             {specialityList?.map((s, index) => (
                                                 <li key={index + "1"}>
-                                                    <a href={`${baseURL}/doctor?speciality=${s.speciality?.slug}${URLParams.location ? `&location=${URLParams.location}` : ''}${URLParams.gender ? `&gender=${URLParams.gender}` : ''}${URLParams.hospital ? `&hospital=${URLParams.hospital}` : ''}`}>
+                                                    <a href={`${baseURL}/doctor?speciality=${s.speciality?.slug}${URLParams.location ? `&location=${URLParams.location}` : ''}${URLParams.gender ? `&gender=${URLParams.gender}` : ''}${URLParams.hospital ? `&hospital=${URLParams.hospital}` : ''}`} className={s.speciality?.slug === URLParams.speciality ? 'active' : ''}>
                                                         {s.title}
                                                     </a>
                                                 </li>
@@ -165,7 +187,7 @@ const DoctorListing = ({ baseURL, allLocation, allSpeciality, allDoctorCount, la
                                     <div className="row">
                                         <div className="col-12">
                                             <div className="input-group">
-                                                <select className="form-select" aria-label="Select Gender" onChange={(e) => {
+                                                <select className="form-select" value={URLParams.gender ? URLParams.gender : ""} aria-label="Select Gender" onChange={(e) => {
                                                     location.href = `${baseURL}/doctor?gender=${e.target.value}${URLParams.speciality ? `&speciality=${URLParams.speciality}` : ''}${URLParams.location ? `&location=${URLParams.location}` : ''}${URLParams.hospital ? `&hospital=${URLParams.hospital}` : ''}`;
                                                 }}>
                                                     <option value="">Gender</option>
@@ -182,24 +204,7 @@ const DoctorListing = ({ baseURL, allLocation, allSpeciality, allDoctorCount, la
 
                             {/* Help Form */}
                             <div className="find-doc-box">
-                                <h3>Need Help Making an Appointment?</h3>
-                                <div className="rounded-field-form mb-3">
-                                    <form>
-                                        <div className="row">
-                                            <div className="col-12 mb-3">
-                                                <label className="form-label">Name <span>*</span></label>
-                                                <input type="text" className="form-control" placeholder="Enter your name" name="name" />
-                                            </div>
-                                            <div className="col-12 mb-3">
-                                                <label className="form-label">Mobile Number <span>*</span></label>
-                                                <input type="text" className="form-control" placeholder="Enter Mobile No." name="mobile" />
-                                            </div>
-                                            <div className="col-12 mb-3">
-                                                <button type="submit" className="form-btn">Submit</button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
+                                <Form3 title={staticText['Need Help Making an Appointment?']}/>
                             </div>
                         </div>
                     </div>

@@ -4,7 +4,6 @@ import { getBaseUrl } from '@/app/lib/getBaseUrl';
 import { getStaticPageContent } from '@/app/lib/getStaticPageContent';
 import blogData from '@/app/lib/getBlog';
 import getSpecialityData from '@/app/lib/getSpeciality';
-import formatDate from '@/app/lib/formatDate';
 import getStaticText from '@/app/lib/getStaticTextServer';
 import BlogListing from '@/components/BlogListing';
 import Breadcrumb from '@/components/Breadcrumb';
@@ -49,7 +48,8 @@ const Blog = async ({ searchParams }) => {
                     </section>
 
                     <BlogListing
-                        basePath={basePath} speciality={speciality}
+                        basePath={basePath} 
+                        speciality={speciality}
                         langLoc={getLangLoc}
                         URLParams={URLParams}
                     />

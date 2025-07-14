@@ -119,38 +119,15 @@ const MediaEventListing = ({ basePath, langLoc, URLParams }) => {
 
     return (
         <>
-            <section className="section">
+            {/* <section className="section">
                 <div className="container">
                     <div className="row justify-content-between">
 
                         <div className="col-md-4  mb-3">
-                            {/* <form action="">
-                            <div className="input-group p-0 position-relative justify-content-center">
-                                <input type="text" name="" id="" className='diseases-page-search' onChange={onMdiaSearch} />
-                                <button className="input-group-text border-0 search-btn-page">
-                                    <i className="fa-solid fa-magnifying-glass"></i>
-                                </button>
-                            </div>
-                            </form> */}
-
                             <input type="text" name="" id="" className='form-control' onChange={onMediaSearch} />
                         </div>
 
                         <div className="col-md-4 mb-3">
-                            {/* <form action="">
-                                <div className="input-group p-0 position-relative justify-content-center">
-                                    <select className="form-select diseases-page-search">
-                                        <option value={''}>Select by Hospital </option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                    </select>
-                                    <button className="input-group-text border-0 search-btn-page">
-                                        <i className="fa-solid fa-chevron-down"></i>
-                                    </button>
-                                </div>
-                            </form> */}
-
                             <select className="form-select" onChange={onHospitalChange}>
                                 <option value={''}>Select by Hospital </option>
                                 {
@@ -164,20 +141,6 @@ const MediaEventListing = ({ basePath, langLoc, URLParams }) => {
                         </div>
 
                         <div className="col-md-4 mb-3">
-                            {/* <form action="">
-                                <div className="input-group p-0 position-relative justify-content-center">
-                                    <select className="form-select diseases-page-search">
-                                        <option value={''}>Search for Speciality </option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                    </select>
-                                    <button className="input-group-text border-0 search-btn-page">
-                                        <i className="fa-solid fa-chevron-down"></i>
-                                    </button>
-                                </div>
-                            </form> */}
-
                             <select className="form-select ">
                                 <option value={''}>Select by Speciality </option>
                                 {
@@ -189,10 +152,9 @@ const MediaEventListing = ({ basePath, langLoc, URLParams }) => {
                                 }
                             </select>
                         </div>
-
                     </div>
                 </div>
-            </section>
+            </section> */}
 
             {/* Desktop View */}
             <section className="section d-lg-block d-none pt-0">

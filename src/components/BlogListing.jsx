@@ -4,22 +4,21 @@ import getStaticText from '@/helper/getStaticText';
 import React, { useEffect, useRef, useState } from 'react';
 import formatDate from '@/app/lib/formatDate';
 import getSpecialityData from '@/app/lib/getSpeciality';
-import Link from 'next/link';
-import JournalCarousel from './JournalCarousel';
 
 
 const BlogListing = ({ basePath, speciality, langLoc, URLParams }) => {
     const [allBlog, setallBlog] = useState([]);
-    const [count, setCount] = useState(0)
+    const [count, setCount] = useState(0);
     const [staticText, setStaticTexts] = useState({});
     const limit = 12;
     const observerRef = useRef(null);
     const [loading, setLoading] = useState(false);
     const [endData, setEndData] = useState(false);
-
+    const [blogCatgory, setBlogCategory] = useState([])
     const [allSpeciality, setAllSpeciality] = useState([]);
     const [filterSplty, setFilterSplty] = useState([]);
     const [noData, setNoData] = useState(false);
+
 
 
     useEffect(() => {
@@ -29,8 +28,9 @@ const BlogListing = ({ basePath, speciality, langLoc, URLParams }) => {
         const getFstLoad = async () => {
             // const tempStoreBlog = await blogData.allBlog(count, limit, speciality);
             const tempStoreSpeciality = await getSpecialityData.getAllSpeciality({ langLoc });
+            const category = await blogData.getCategory({ langLoc });
 
-
+            setBlogCategory(category);
             setAllSpeciality(tempStoreSpeciality);
             setFilterSplty(tempStoreSpeciality);
             // setallBlog(tempStoreBlog);
@@ -46,7 +46,7 @@ const BlogListing = ({ basePath, speciality, langLoc, URLParams }) => {
         if (loading) return; // prevent multiple triggers
         setLoading(true);
 
-        const data = await blogData.allBlog({start:count, limit:limit, speciality:speciality, langLoc: langLoc});
+        const data = await blogData.allBlog({ start: count, limit: limit, speciality: speciality, langLoc: langLoc, URLParams: URLParams });
         if (data.length < 1) {
             setEndData(true)
         }
@@ -136,7 +136,7 @@ const BlogListing = ({ basePath, speciality, langLoc, URLParams }) => {
                                 ) : (
                                     filterSplty?.map((splty, i) => {
                                         return splty?.speciality ? <p key={i}>
-                                            <Link href={basePath + "/blog?spciality=" + splty?.speciality?.slug}>{splty.title}</Link>
+                                            <a href={`${basePath + "/blog?speciality=" + splty?.speciality?.slug}${URLParams.doctor ? `&doctor=${URLParams.doctor}` : ''}${URLParams.category ? `&category=${URLParams.category}` : ''}`} className={splty?.speciality?.slug===URLParams.speciality?'active':''}>{splty.title}</a>
                                         </p> : null
                                     })
                                 )}
@@ -176,7 +176,7 @@ const BlogListing = ({ basePath, speciality, langLoc, URLParams }) => {
                                     </div>
                                 </div>
 
-                                <div className="col-md-6 mb-4">
+                                {allBlog?.length > 1 && <div className="col-md-6 mb-4">
                                     <div className="card border-0">
                                         <div className="card-top">
                                             <a href={basePath + "/blog/" + allBlog[1].slug}>
@@ -201,7 +201,7 @@ const BlogListing = ({ basePath, speciality, langLoc, URLParams }) => {
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div>}
 
 
                                 <div className="col-md-12 my-3">
@@ -231,16 +231,18 @@ const BlogListing = ({ basePath, speciality, langLoc, URLParams }) => {
                                 <div className="col-md-12 mb-4">
                                     <div className="blog-tagging">
                                         <h3>{staticText['Trending']}</h3>
-                                        <div className="scroll-container ms-3">
-                                            <div className="blog-listing-scroll-tab active"><span>COVID 19</span></div>
-                                            <div className="blog-listing-scroll-tab"><span>Fever</span></div>
-                                            <div className="blog-listing-scroll-tab"><span>Kne Replacement</span></div>
-                                            <div className="blog-listing-scroll-tab"><span>Malaria</span></div>
-                                            <div className="blog-listing-scroll-tab"><span>Medication</span></div>
-                                            <div className="blog-listing-scroll-tab"><span>Cardiology</span></div>
-                                            <div className="blog-listing-scroll-tab"><span>Cardiology</span></div>
-                                            <div className="blog-listing-scroll-tab"><span>Cardiology</span></div>
-                                            <div className="blog-listing-scroll-tab"><span>Cardiology</span></div>
+
+                                        <div class="custom-tab-scroll-wrapper">
+                                            <div className="custom-tab-button-wrapper ms-3">
+
+                                                {
+                                                    blogCatgory?.map((c, i) => {
+                                                        return <a href={`${basePath + "/blog?category=" + c.slug}${URLParams.doctor ? `&doctor=${URLParams.doctor}` : ''}${URLParams.speciality ? `&speciality=${URLParams.speciality}` : ''}`} class={`treat-tab w-auto form-btn ${c.slug===URLParams.speciality?'active':''} mx-2`}>{c.title}</a>
+                                                    })
+
+                                                }
+
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

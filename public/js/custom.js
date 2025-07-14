@@ -372,11 +372,12 @@ $(".filter-box-mobile").click(function () {
 
 
 
-function showBox(element, id) {
+function showBox(id) {
     $(".treat-tab").removeClass("active");
-    $(element).addClass("active");
+    $("." + id).addClass("active");
     $('.treat-box').hide();
     $("#" + id).show();
+
 }
 
 // All comment code write inside of useEffect in Footer.jsx file

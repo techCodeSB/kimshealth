@@ -20,7 +20,8 @@ import WatchVideoButton from '@/components/WatchVideoButton'
 import { marked } from 'marked'
 import React from 'react'
 
-const SpecialityDetails = async ({ params }) => {
+const SpecialityDetails = async ({ params, searchParams }) => {
+     const URLParams = await searchParams;
     const getLangLoc = await getCurrentLangLoc()
     const staticText = await getStaticText()
     const baseUrl = await getBaseUrl(true, true);
@@ -32,25 +33,25 @@ const SpecialityDetails = async ({ params }) => {
 
     const expertDataSet = {
         sectionTitle: data.expertSection?.title,
-        buttonText: 'View All', buttonURL: `${baseUrl + "/doctor?speciality=" + data.slug}`,
+        buttonText: 'View All', buttonURL: `${baseUrl + "/doctor?speciality=" + data.speciality?.slug}`,
         data: await doctorData.getBySpeciality({id: data.speciality.id, langLoc: getLangLoc}),
         baseUrl: baseUrl
     };
     const testimonialDataSet = {
         sectionTitle: data.testimonialSection?.title,
-        buttonText: 'View All', buttonURL: `${baseUrl + "/testimonial?speciality=" + data.slug}`,
+        buttonText: 'View All', buttonURL: `${baseUrl + "/testimonial?speciality=" + data.speciality?.slug}`,
         data: await testimonialData.getBySpeciality({id: data.speciality.id, langLoc: getLangLoc}),
         baseUrl: baseUrl
     }
     const blogDataSet = {
         sectionTitle: data.blogSection?.title,
-        buttonText: 'View All', buttonURL: `${baseUrl + "/blog?speciality=" + data.slug}`,
+        buttonText: 'View All', buttonURL: `${baseUrl + "/blog?speciality=" + data.speciality?.slug}`,
         data: await blogData.getBySpeciality({id: data.speciality.id, langLoc: getLangLoc}),
         baseUrl: baseUrl
     }
     const docTalkDataSet = {
         sectionTitle: data.doctorTalk?.title,
-        buttonText: 'View All', buttonURL: `${baseUrl + "/doctor-talk?speciality=" + data.slug}`,
+        buttonText: 'View All', buttonURL: `${baseUrl + "/doctor-talk?speciality=" + data.speciality?.slug}`,
         data: await doctorTalkData.getBySpeciality({id: data.speciality.id, langLoc: getLangLoc}),
         baseUrl: baseUrl
     }
