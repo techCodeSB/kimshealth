@@ -47,7 +47,7 @@ const Footer = () => {
 
                 setSpeciality(await getSpecialityData.getFooterSpeciality({ langLoc: LangLoc }));
 
-                setHospitals(await hospitalData.getFooterHospital({langLoc: langLoc}));
+                setHospitals(await hospitalData.getFooterHospital({ langLoc: langLoc }));
 
             } catch (error) {
                 console.error("Error fetching titles:", error);
@@ -211,7 +211,7 @@ const Footer = () => {
                                 <a href={locationData?.facebook} target="_blank" rel="noopener noreferrer">
                                     <img src="/img/facebook.png" className="img-fluid" alt="Facebook" />
                                 </a>
-                                <a href={locationData?.instagram} target="_blank" rel="noopener noreferrer">
+                                <a href={locationData?.instagram} target="_blank" rel="noopener noreferrer" className="instagram-logo">
                                     <img src="/img/instagram.png" className="img-fluid" alt="Instagram" />
                                 </a>
                                 <a href={locationData?.linkedin} target="_blank" rel="noopener noreferrer">
@@ -222,7 +222,7 @@ const Footer = () => {
                                 </a>
                             </div>
 
-                            <div className="newsletter mt-5">
+                            {/* <div className="newsletter mt-5">
                                 <h3>{staticTexts['Newsletter']}</h3>
                                 <p>{staticTexts['Exclusive Content. Delivered to Your Inbox']}</p>
                                 <div className="custom-from m-0">
@@ -236,6 +236,25 @@ const Footer = () => {
                                                         aria-describedby="basic-addon1" />
                                                     <button className="input-group-text border-0" id="from-icon"><i
                                                         className="fa-regular fa-envelope"></i></button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> */}
+
+
+                            <div className="newsletter mt-5">
+                                <div className="custom-from m-0">
+                                    <div className="row">
+                                        <div className="col-xl-12 col-lg-12 col-md-12 col-12">
+                                            <form action="">
+                                                <div className="input-group p-0 my-lg-3 my-3">
+
+                                                    <input type="text" className="form-control border-0"
+                                                        placeholder="Enter Text ...." aria-label="Username"
+                                                        aria-describedby="basic-addon1" />
+                                                    <button className="input-group-text border-0" id="from-icon"><i className="fa-solid icon-magnifier"></i></button>
                                                 </div>
                                             </form>
                                         </div>
@@ -326,6 +345,15 @@ const Footer = () => {
                                         </ul>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="midle-footer py-2">
+                        <div className="container">
+                            <div className="d-flex justify-content-center gap-4 align-items-center main-btn">
+                                <a href={basePath + "/bmw-report"}>{staticTexts['BMW Reports']}</a>
+                                <a href={basePath + "/terms-and-conditions"}>{staticTexts['Term & Conditions']}</a>
+                                <a href={basePath + "/privacy-policy"}>{staticTexts['Privacy Policies']}</a>
                             </div>
                         </div>
                     </div>
@@ -471,7 +499,7 @@ const Footer = () => {
                                 </a>
                             </div>
 
-                            <div className="newsletter mt-4">
+                            {/* <div className="newsletter mt-4">
                                 <h3>{staticTexts['Newsletter']}</h3>
                                 <p>{staticTexts['Exclusive Content. Delivered to Your Inbox']}</p>
                                 <div className="custom-from m-0">
@@ -490,23 +518,43 @@ const Footer = () => {
                                         </div>
                                     </div>
                                 </div>
+                            </div> */}
+
+                            <div className="newsletter mt-4">
+                                <div className="custom-from m-0">
+                                    <div className="row">
+                                        <div className="col-xl-12 col-lg-12 col-md-12 col-12">
+                                            <form action="">
+                                                <div className="input-group p-0 my-lg-3 mt-2">
+
+                                                    <input type="text" className="form-control border-0"
+                                                        placeholder="Enter Text ...." aria-label="Username"
+                                                        aria-describedby="basic-addon1" />
+                                                    <button className="input-group-text border-0" id="from-icon"><i className="fa-solid icon-magnifier"></i></button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    
                 </div>
+                <div className="midle-footer mt-3">
+                        <div className="container">
+                            <div className="d-flex justify-content-center gap-4 align-items-center main-btn">
+                                <a href={basePath + "/bmw-report"}>{staticTexts['BMW Reports']}</a>
+                                <a href={basePath + "/terms-and-conditions"}>{staticTexts['Term & Conditions']}</a>
+                                <a href={basePath + "/privacy-policy"}>{staticTexts['Privacy Policies']}</a>
+                            </div>
+                        </div>
+                    </div>
             </footer>
 
 
-            {/* white links area */}
-            <div className="midle-footer py-2 my-3">
-                <div className="container">
-                    <div className="d-flex justify-content-center gap-4 align-items-center main-btn">
-                        <a href={basePath + "/bmw-report"}>{staticTexts['BMW Reports']}</a>
-                        <a href={basePath + "/terms-and-conditions"}>{staticTexts['Term & Conditions']}</a>
-                        <a href={basePath + "/privacy-policy"}>{staticTexts['Privacy Policies']}</a>
-                    </div>
-                </div>
-            </div>
+          
+
 
 
 

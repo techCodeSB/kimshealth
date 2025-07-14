@@ -501,8 +501,8 @@ header {
     transition: all 0.2s;
 }
 
-.mobile_primary .sub-menu, 
-.header-contact .sub-menu{
+.mobile_primary .sub-menu,
+.header-contact .sub-menu {
     box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
     background: #f0f2f1;
     text-align: left;
@@ -533,15 +533,15 @@ header {
     transition: all 800ms cubic-bezier(0.680, -0.550, 0.265, 1.550);
 }
 
-.mobile_primary .sub-menu.sub-menu-single, 
-.header-contact .sub-menu.sub-menu-single{
+.mobile_primary .sub-menu.sub-menu-single,
+.header-contact .sub-menu.sub-menu-single {
     top: 100%;
     left: auto;
     width: max-content;
     padding: 10px 15px 10px 15px;
 }
 
-.mobile_primary li:hover>.sub-menu, 
+.mobile_primary li:hover>.sub-menu,
 .header-contact li:hover>.sub-menu {
     opacity: 1;
     visibility: visible;
@@ -553,6 +553,7 @@ header {
     -webkit-transform: rotateX(0);
     transition: all 0.4s;
 }
+
 .header-contact .sub-menu.sub-menu-single {
     top: 50px;
     left: auto;
@@ -561,22 +562,27 @@ header {
     border-top: 2px solid #ffffff;
 
 }
-.header-contact .sub-menu{
+
+.header-contact .sub-menu {
     border-radius: 0;
 }
+
 .header-contact li:hover>.sub-menu {
     z-index: 99999;
 }
+
 .sub-menu-details ul {
     margin: 0;
     padding: 0;
 }
-.sub-menu-details ul li{
+
+.sub-menu-details ul li {
     display: block;
     position: relative;
     padding: 0;
     margin: 0;
 }
+
 .show-submenu ul li a {
     color: #000;
     display: block;
@@ -585,7 +591,8 @@ header {
     border-bottom: 1px solid #ccc;
     margin-bottom: 4px;
 }
-.header-contact li .sub-menu{
+
+.header-contact li .sub-menu {
     z-index: 9999;
 }
 
@@ -1019,7 +1026,11 @@ header {
     border-radius: 30px;
     transition: .5s ease;
 }
-
+.from-btn a:hover{
+    border: 1px solid #b71c2b;
+    color: #b71c2b;
+    background: transparent;
+}
 /* ===== wal frame sction ======= */
 .wallframe-section {
     background: url('../img/wall-frame-bg.jpg');
@@ -1378,13 +1389,17 @@ header {
 .media-name {
     display: flex;
     align-items: center;
+    gap: 10px;
 }
 
 .media-img {
     overflow: hidden;
 }
 
-.media-img img {
+
+.media-img img{
+    height: 210px;
+    object-fit: cover;
     transition: .3s ease-in;
 }
 
@@ -1393,9 +1408,9 @@ header {
 }
 
 .media-name p {
-    font-size: 14px;
+    font-size: 14px !important;
     color: #000000;
-    line-height: 15px;
+    line-height: 20px;
     font-weight: 500;
     display: -webkit-box;
     -webkit-line-clamp: 3;
@@ -1486,9 +1501,14 @@ footer.footer {
     margin-right: 10px;
 }
 
-.footer .social-media-icon a img{
-    width: 52% ;
-    margin-right: 10px ;
+.footer .social-media-icon a img {
+    width: auto;
+    margin-right: 10px;
+}
+
+.footer .social-media-icon a {
+    width: 13%;
+    margin-right: 10px;
 }
 
 .footer .custom-from .input-group-text#from-icon {
@@ -1545,6 +1565,9 @@ footer.footer {
 .bottom-footer p {
     color: #fff;
     font-style: 16px;
+}
+.instagram-logo{
+    width: 16% !important;
 }
 
 .footer .custom-from .input-group-text#from-icon {
@@ -3175,8 +3198,10 @@ i.custom-download {
 }
 
 .home-service-card-image img {
-    width: 60px;
+    width: 100%;
     margin-bottom: 20px;
+    height: 245px;
+    object-fit: cover;
 }
 
 .home-service-card .home-service-content h3 {
@@ -3221,7 +3246,7 @@ i.custom-download {
 
 .home-service-card {
     background: #fff;
-    padding: 30px;
+    padding: 0px;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     margin-bottom: 20px;
 }
@@ -3479,7 +3504,7 @@ li.hospital-doctor::before {
     position: relative;
     min-height: 90px;
     display: flex;
-    justify-content: center;
+    justify-content: start;
 }
 
 .about-us-main-page .awards-box::before {
@@ -3744,6 +3769,31 @@ li.hospital-doctor::before {
     border-bottom: none;
 }
 
+.custom-tab-button-wrapper .form-btn.active {
+    background: #b71c2b;
+    color: #fff;
+    border-radius: 30px;
+    padding: 8px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: .3s ease-in-out;
+    border: none;
+    width: 100%;
+}
+
+.custom-tab-button-wrapper .form-btn {
+    background: #ffffff;
+    color: #b71c2b;
+    border-radius: 30px;
+    padding: 8px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: .3s ease-in-out;
+    border: none;
+    width: 100%;
+    border: 1px solid #b71c2b;
+}
+
 .form-btn {
     background: #b71c2b;
     color: #fff;
@@ -3755,6 +3805,7 @@ li.hospital-doctor::before {
     border: none;
     width: 100%;
 }
+
 
 .doctor-details-main-page .left-col-img .sub-heading p {
     margin-bottom: 0;
@@ -4172,6 +4223,10 @@ li.details-hospital-ic::before {
     min-height: 290px;
 }
 
+.home-service-content {
+    padding: 30px;
+}
+
 .hospital-details-page-section {
     background: url('../img/hospital-detailsbg.jpg');
     background-repeat: no-repeat;
@@ -4574,8 +4629,10 @@ li.chat-ic::before {
 }
 
 .book-appointment-main-page .custom-from label {
-    font-size: 16px;
+    font-size: 15px;
     margin-bottom: 7px;
+    font-weight: 500;
+    color: #000;
 }
 
 .book-appointment-main-page input,
@@ -5008,11 +5065,11 @@ li.chat-ic::before {
     margin: auto;
     height: 20px;
     transition: transform 0.2s ease-in-out;
-    transform: rotate(180deg);
+    transform: rotate(0deg);
 }
 
 .menu-item-has-children .accordion-item.active .accordion-icon::before {
-    transform: rotate(0deg);
+    transform: rotate(180deg);
 }
 
 .menu-item-has-children .accordion-icon::after {
@@ -5036,7 +5093,7 @@ li.chat-ic::before {
 }
 
 .menu-item-has-children .accordion-item.active .accordion-content {
-    max-height: 500px;
+    max-height: fit-content;
 }
 
 .menu-item-has-children .content-inner {
@@ -5135,7 +5192,7 @@ li.chat-ic::before {
     display: flex;
     flex-direction: column;
     transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    z-index: 99;
+    z-index: 9999;
     border-right: 1px solid rgba(255, 255, 255, 0.1);
     transition: .5s;
 }
@@ -5199,21 +5256,26 @@ li.chat-ic::before {
     opacity: 1;
     visibility: visible;
 }
-.desktop-humberger-menu .has-dropdown.open a.menu-item{
+
+.desktop-humberger-menu .has-dropdown.open a.menu-item {
     color: #b71c2b;
 }
-.desktop-humberger-menu a.menu-item{
+
+.desktop-humberger-menu a.menu-item {
     display: flex;
     align-items: center;
     gap: 10px;
 }
-.sub-menu-details.location-menu-red-color ul li:first-child a{
+
+.sub-menu-details.location-menu-red-color ul li:first-child a {
     color: #b71c2b;
 }
+
 .sub-menu-details .tabs .tab a {
     text-align: left;
 }
-.menu-item-has-children .sub-menu-details .tab{
+
+.menu-item-has-children .sub-menu-details .tab {
     display: block;
 }
 
@@ -5228,12 +5290,14 @@ li.chat-ic::before {
     opacity: 0.8;
 
 }
+
 .desktop-humberger-menu li a.menu-item:nth-child(1) {
     margin-bottom: 10px;
 }
-.desktop-humberger-menu li a.menu-item{
+
+.desktop-humberger-menu li a.menu-item {
     display: inline-block;
-    
+
 }
 
 .desktop-humberger-menu .submenu-item:first-child {
@@ -5272,10 +5336,11 @@ li.chat-ic::before {
     color: #ffffff;
     background: #b71c2b;
 }
-.mobile-spacing-nav{
+
+.mobile-spacing-nav {
     display: flex;
     align-items: center;
-    gap: 25px;
+    gap: 30px;
 }
 
 .desktop-humberger-menu .menu-items {
@@ -5303,10 +5368,11 @@ li.chat-ic::before {
 
 .mobile-location-dropdown select {
     border: none;
+    font-size: 14px;
 }
 
 .mobile-location-dropdown {
-    margin: 0px 0px 0px 22px;
+    margin: 0px 0px 0px 0px;
 }
 
 .quicklink-header {
@@ -5390,60 +5456,74 @@ li.chat-ic::before {
 }
 
 .milestone-main-page .inner-container {
-        max-width: 1050px;
-        margin: 0 auto;
-    }
+    max-width: 1050px;
+    margin: 0 auto;
+}
 
-    .milestone-main-page .timeline {
-        margin: 0 auto;
-        position: relative;
-        margin-top: 16px;
-    }
+.milestone-main-page .timeline {
+    margin: 0 auto;
+    position: relative;
+    margin-top: 16px;
+}
 
 
 
-    .milestone-main-page .timeline-item {
-        color: #ffffff;
-        padding: 0 0 2rem 1.5rem;
-        border-left: 2px solid #a39d9d;
-        position: relative;
-        list-style-type: none;
-        --item-width: calc(100%);
-    }
+.milestone-main-page .timeline-item {
+    color: #ffffff;
+    padding: 0 0 2rem 1.5rem;
+    border-left: 2px solid #a39d9d;
+    position: relative;
+    list-style-type: none;
+    --item-width: calc(100%);
+}
 
-    .milestone-main-page .timeline-item:last-child {
-        border-left: none;
-    }
+.milestone-main-page .timeline-item:last-child {
+    border-left: none;
+}
 
-    /* .timeline-item.active::before {
+/* .timeline-item.active::before {
         outline: 2px solid #b61c2b;
     } */
 
-    .milestone-main-page .timeline-item::before {
-        content: "";
-        content: "";
-        border-radius: 50%;
-        width: 30px;
-        height: 30px;
-        background: url(/img/mile-li.jpg);
-        background-size: cover;
-        background-repeat: no-repeat;
-        position: absolute;
-        left: -16px;
-        top: -2px;
-    }
+.milestone-main-page .timeline-item::before {
+    content: "";
+    content: "";
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    background: url(/img/mile-li.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: absolute;
+    left: -16px;
+    top: -2px;
+}
 
-    .milestone-main-page .timeline-item::after {
-        content: attr(data-date);
-        position: absolute;
-        right: calc(var ↳ calc(100%) ↳ calc(898px) ↳ 898px (--item-width) + 40px);
-        top: 1px;
-        left: -8%;
-        font-weight: bold;
-        white-space: nowrap;
-        color: #000;
-    }
+.milestone-main-page .timeline-item::after {
+    content: attr(data-date);
+    position: absolute;
+    right: calc(var ↳ calc(100%) ↳ calc(898px) ↳ 898px (--item-width) + 40px);
+    top: 1px;
+    left: -8%;
+    font-weight: bold;
+    white-space: nowrap;
+    color: #000;
+}
 
-    .milestone-main-page .timeline-item .main-list-black ul li {
-        color:#000;
+.milestone-main-page .timeline-item .main-list-black ul li {
+    color: #000;
+}
+.doctor-details-main-page .left-details-list ul li {
+    min-height: 25px;
+}
+.form-select{
+    border-radius: 30px;
+    border: 1px solid #b71c2b;
+}
+.form-select:focus{
+    border: 1px solid #b71c2b;
+}
+select option:hover {
+  background-color: #b71c2b !important;
+  color: white;
 }

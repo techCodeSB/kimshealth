@@ -76,7 +76,9 @@ const AboutUs = async () => {
                                             </div>
                                         </div>
 
-                                        <div className="col-md-6 details-proceduce-banner-right-col">
+                                       
+                                    </div>
+                                     <div className="col-md-6 details-proceduce-banner-right-col">
                                             <div className="owl-carousel owl-theme hospital-details-slider">
                                                 {
                                                     pageContent[1]?.bannerItem?.map((b, i) => {
@@ -88,7 +90,6 @@ const AboutUs = async () => {
                                                 }
                                             </div>
                                         </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -178,7 +179,7 @@ const AboutUs = async () => {
                                             <div dangerouslySetInnerHTML={{ __html: marked(pageContent[3]?.details || "") || "" }}></div>
                                         </div>
 
-                                        <div className="col-md-4 mb-3 main-heading sub-heading mission-box" data-aos="slide-up" data-aos-duration="1500">
+                                        <div className="col-md-4 mb-3 main-heading sub-heading mission-box" data-aos="slide-up" data-aos-duration="1000">
                                             <div className="d-flex align-items-center mb-2">
                                                 <img src="/img/vision.png" alt="" className="img-fluid me-2" />
                                                 <h3 className="mb-0">{pageContent[4].title}</h3>
@@ -186,7 +187,7 @@ const AboutUs = async () => {
                                             <div dangerouslySetInnerHTML={{ __html: marked(pageContent[4]?.details || "") || "" }}></div>
                                         </div>
 
-                                        <div className="col-md-4 mb-3 main-heading sub-heading mission-box" data-aos="slide-up" data-aos-duration="2000">
+                                        <div className="col-md-4 mb-3 main-heading sub-heading mission-box" data-aos="slide-up" data-aos-duration="1000">
                                             <div className="d-flex align-items-center mb-2">
                                                 <img src="/img/values.png" alt="" className="img-fluid me-2" />
                                                 <h3 className="mb-0">{pageContent[5].title}</h3>

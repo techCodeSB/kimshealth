@@ -50,10 +50,10 @@ const VisaMedical = async () => {
                                                 </div>
                                                 <div className="visa-select d-md-none d-block">
                                                     <select className="form-select" aria-label="Default select example">
-                                                        <option value={""}>Australia</option>
-                                                        <option value="1">New Zeeland</option>
-                                                        <option value="2">Canada</option>
-                                                        <option value="3">United Kingdom</option>
+                                                        <option value="0">{pageContent[1]?.title}</option>
+                                                        <option value="1">{pageContent[2]?.title}</option>
+                                                        <option value="2">{pageContent[3]?.title}</option>
+                                                        <option value="3">{pageContent[4]?.title}</option>
                                                     </select>
                                                 </div>
                                             </div>

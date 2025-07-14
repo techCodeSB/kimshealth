@@ -261,7 +261,15 @@ const Header = () => {
                   <a href={"https://wa.me/" + locationData?.whatsapp} target='_blank'> <img src="/img/whatsapp.svg" className="img-fluid" alt="" /></a>
                 </div>
                 <div className="search-icon ms-3 me-2">
-                  <i className="fa-solid fa-magnifying-glass"></i>
+                  <a href="#" className="search-button"><i className="fa-solid fa-magnifying-glass"></i></a>
+                  {/* <div class="sidebar" id="sidebar">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                      <h3>Search Panel</h3>
+                      <button onclick="closeSidebar()" style="background: #eee; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;">✕ Close</button>
+                    </div>
+                    <div id="searchResults" >
+                    </div>
+                  </div> */}
                 </div>
                 <div className="top-drop-down">
                   <select value={selectedLang?.slug || ""} className="border-0 " onChange={onLangChangeRedirection}>
@@ -280,6 +288,9 @@ const Header = () => {
             </div>
           </div>
         </section>
+
+
+
 
         {/* ::::::::: Mobile menu bar :::::::::: */}
 

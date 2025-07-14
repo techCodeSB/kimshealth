@@ -92,12 +92,12 @@ const ContactUs = async () => {
 
 
                                 {/* :::::::::::::: Contact FORM:::::::::::: */}
-                                <div className="col-md-6 contact-right-col order-lg-2 order-1">
+                                <div className="col-md-6 contact-right-col order-lg-2 order-1 custom-tab-button-wrapper">
                                     <div className="association-form-card mb-5 sticky-from">
                                         <div className="tab-group text-start mb-3">
                                             <button type="button" className="btn-tab treat-tab form-btn w-auto active mx-2">
                                                 {/* onClick="showBox(this,'omega')"> */}
-                                                Queries</button>
+                                                Appointment Queries</button>
 
 
                                             <button type="button" className="btn-tab form-btn  w-auto treat-tab mx-2">

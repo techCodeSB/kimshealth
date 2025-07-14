@@ -154,7 +154,7 @@ $('.exellence').owlCarousel({
 // expert slider
 
 $('.expert').owlCarousel({
-    loop: true,
+    loop: false,
     margin: 15,
     nav: true,
     navText: ["<img src='/img/left-arrow.svg'>", "<img src='/img/slider-right-arrow.svg'>"],

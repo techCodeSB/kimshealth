@@ -218,7 +218,7 @@ const MediaEventListing = ({ basePath, langLoc, URLParams }) => {
                                                     <div>
                                                         <img src="/img/kims-small-logo.png" className="img-fluid" alt="" />
                                                     </div>
-                                                    <p>{av.title.slice(0, 25) + "..."} <br /> {formatDate(av?.date)}</p>
+                                                    <p><a href={basePath + "/media-and-events/" + av.slug}><strong>{av.title.slice(0, 20) + "..."}</strong></a> <br /> {formatDate(av?.date)}</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -250,13 +250,15 @@ const MediaEventListing = ({ basePath, langLoc, URLParams }) => {
                                         </div>
                                         <div className="media-content">
                                             <p>{e.shortDetails}</p>
-                                            <div className="d-flex align-items-center justify-content-between mt-3">
+                                            <div className="d-block align-items-center justify-content-between mt-3">
                                                 <div className="media-name">
                                                     <div>
                                                         <img src="/img/kims-small-logo.png" className="img-fluid" alt="" />
                                                     </div>
-                                                    <p>{e.title} <br /> {formatDate(e?.date)}</p>
+                                                    <p><a href={basePath + "/media-and-events/" + e.slug}><strong>{e.title.slice(0, 20) + "..."}</strong></a></p>
+                                                    
                                                 </div>
+                                                <p className="mt-2 ms-4 ps-3">{formatDate(e?.date)}</p>
                                             </div>
                                         </div>
                                     </div>

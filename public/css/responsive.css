@@ -10,14 +10,15 @@
 }
 
 @media only screen and (max-width: 1024px) {
-.menu-button{
-    display: block;
-}
+    .menu-button {
+        display: block;
+    }
+
     .mobile_primary {
         width: 100%;
         height: 100vh;
         position: absolute;
-        top: 65px;
+        top: 60px;
         left: -100%;
         background-color: #fff;
         transition: .5s;
@@ -50,8 +51,12 @@
         margin: 0;
     }
 
+    .mobile_primary li:last-child {
+        margin-bottom: 20px;
+    }
+
     .mobile_primary ul li a {
-        padding: 12px 8px;
+        padding: 15px 8px;
         text-align: left;
         color: #000;
         font-size: 15px;
@@ -64,7 +69,7 @@
         display: inline-flex;
         justify-content: center;
         align-items: center;
-        height: 39px;
+        height: 45px;
         position: absolute;
         right: 0;
         top: 0;
@@ -119,6 +124,7 @@
 
     .mobile_primary .sub-menu li {
         border: 0;
+        margin-bottom: 0;
     }
 
     .mobile_primary li:first-child {
@@ -134,15 +140,18 @@
         padding: 10px 0;
         top: 0;
     }
-    .header-menu-container{
+
+    .header-menu-container {
         position: inherit;
     }
-    .quicklink-header{
-    display: block !important;
-}
-.mobile_primary ul li a:hover{
-    color: #b71c2b;
-}
+
+    .quicklink-header {
+        display: block !important;
+    }
+
+    .mobile_primary ul li a:hover {
+        color: #b71c2b;
+    }
 
 
 }
@@ -475,6 +484,7 @@
     .media-img img {
         border-top-left-radius: 13px;
         border-top-right-radius: 13px;
+        height: 144px;
 
     }
 
@@ -588,7 +598,7 @@
     }
 
     .navbar-brand a img {
-        width: 150px;
+        width: 200px;
     }
 
     .card:hover .card-top img {
@@ -904,11 +914,13 @@
         width: 100%;
         border-radius: 0px 0px 10px 10px;
     }
-.mobile-hear-doc-bottom-image{
-    height: 209px;
-    object-fit: cover;
-    border-radius: 10px;
-}
+
+    .mobile-hear-doc-bottom-image {
+        height: 209px;
+        object-fit: cover;
+        border-radius: 10px;
+    }
+
     .hear-doctor-img img {
         border-radius: 10px;
     }
@@ -1073,7 +1085,7 @@
         bottom: 0;
         width: 100%;
         text-align: center;
-        z-index: 9999;
+        z-index: 999;
         padding: 5px 0px;
         border-top: 1px solid #fff;
     }
@@ -1110,7 +1122,7 @@
     }
 
     .navbar-brand a img {
-        width: 150px;
+        width: 200px;
     }
 
     .card:hover .card-top img {
@@ -1811,53 +1823,83 @@
         margin-top: 10px;
         justify-content: center;
     }
-    .filter-form{
+
+    .filter-form {
         display: none;
     }
-    .menu-item-has-children .tabs{
+
+    .menu-item-has-children .tabs {
         padding: 0;
     }
 
-    .mobile_primary li .sub-menu ul li a{
+    .mobile_primary li .sub-menu ul li a {
         font-size: 15px;
     }
-    .menu-item-has-children .tab-content h3{
+
+    .menu-item-has-children .tab-content h3 {
         font-size: 18px;
         padding: 0 0 1px;
     }
-    .menu-item-has-children .tab-content li a{
-            padding: 6px 0 !important;
+
+    .menu-item-has-children .tab-content li a {
+        padding: 6px 0 !important;
     }
-    .speciality-details-page{
+
+    .speciality-details-page {
         overflow: hidden;
     }
-    .expert-section .card .card-top img{
+
+    .expert-section .card .card-top img {
         height: 210px;
     }
-    .about-us-main-page .expert-section .card{
-    min-height: auto;
-}
 
-.milestone-main-page .timeline-item::after {
-            content: attr(data-date);
-            position: absolute;
-            right: calc(var ↳ calc(100%) ↳ calc(898px) ↳ 898px (--item-width) + 40px);
-            top: 1px;
-            left: 7%;
-            font-weight: bold;
-            white-space: nowrap;
-            color: #000;
-        }
+    .about-us-main-page .expert-section .card {
+        min-height: auto;
+    }
 
-        .milestone-main-page .timeline-item .main-list-black {
-            padding-top: 30px;
-        }
+    .milestone-main-page .timeline-item::after {
+        content: attr(data-date);
+        position: absolute;
+        right: calc(var ↳ calc(100%) ↳ calc(898px) ↳ 898px (--item-width) + 40px);
+        top: 1px;
+        left: 7%;
+        font-weight: bold;
+        white-space: nowrap;
+        color: #000;
+    }
 
-        .milestone-main-page .inner-container {
-            max-width: 100%;
-            margin: 0 auto;
-            padding: 0px 20px;
-        }
+    .milestone-main-page .timeline-item .main-list-black {
+        padding-top: 30px;
+    }
+
+    .milestone-main-page .inner-container {
+        max-width: 100%;
+        margin: 0 auto;
+        padding: 0px 20px;
+    }
+
+    .home-service-card-image img {
+        height: auto;
+    }
+
+    .home-service-content {
+        padding: 15px;
+    }
+
+    .footer .social-media-icon a {
+        width: 10%;
+    }
+
+    .desktop-humberger-menu {
+        display: none;
+    }
+
+    .media-img img {
+        transition: .3s ease-in;
+        height: 288px;
+        object-fit: cover;
+    }
+
 }
 
 @media only screen and (max-width: 480px) {
