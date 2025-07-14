@@ -5182,7 +5182,7 @@ li.chat-ic::before {
 
 .desktop-humberger-menu .sidebar {
     position: fixed;
-    top: 110px;
+    top: 107px;
     right: -300px;
     width: 0;
     height: 100vh;
@@ -5325,6 +5325,7 @@ li.chat-ic::before {
     font-size: 16px;
     color: #b71c2b;
     margin-left: 10px;
+    transition: .5s;
 }
 
 .menu-item-has-children .tab a {
@@ -5526,4 +5527,7 @@ li.chat-ic::before {
 select option:hover {
   background-color: #b71c2b !important;
   color: white;
+}
+.has-dropdown.open i{
+    transform: rotate(180deg);
 }

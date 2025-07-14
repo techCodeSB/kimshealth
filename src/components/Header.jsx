@@ -720,8 +720,8 @@ const Header = () => {
                   <div className="menu-items">
                     <ul className="sub-menu-details">
                       <li className="has-dropdown">
-                        <a href={basePath + "#"} className="menu-item">{staticTexts['About Us']}</a>
-                        <i className="fa-solid fa-angle-down"></i>
+                        <a href={basePath + "#"} className="menu-item">{staticTexts['About Us']}<i className="fa-solid fa-angle-down"></i></a>
+                        
                         <ul className="submenu">
                           <li className="submenu-item">
                             <a href={basePath + "/about-us"}>{staticTexts['Overview']}</a>
@@ -742,8 +742,8 @@ const Header = () => {
                       </li>
 
                       <li className="has-dropdown">
-                        <a href="#" className="menu-item">{staticTexts['CSR']}</a>
-                        <i className="fa-solid fa-angle-down"></i>
+                        <a href="#" className="menu-item">{staticTexts['CSR']}<i className="fa-solid fa-angle-down"></i></a>
+                        
                         <ul className="submenu">
                           <li className="submenu-item">
                             <a href={basePath + "/csr-policy"}>{staticTexts['CSR Policy']}</a>
@@ -755,8 +755,8 @@ const Header = () => {
                       </li>
 
                       <li className="has-dropdown">
-                        <a href="#" className="menu-item">{staticTexts['Patients and Visitors']}</a>
-                        <i className="fa-solid fa-angle-down"></i>
+                        <a href="#" className="menu-item">{staticTexts['Patients and Visitors']}<i className="fa-solid fa-angle-down"></i></a>
+                        
                         <ul className="submenu">
                           <li className="submenu-item">
                             <a href={basePath + "/testimonial"}>{staticTexts['Patient Testimonials']}</a>
@@ -780,8 +780,8 @@ const Header = () => {
                         <a href={basePath + "/ethics-committee"} className="menu-item mt-2">{staticTexts['Ethics Committee']}</a>
                       </li>
                       <li className="has-dropdown">
-                        <a href="#" className="menu-item">{staticTexts['Academics']}</a>
-                        <i className="fa-solid fa-angle-down"></i>
+                        <a href="#" className="menu-item">{staticTexts['Academics']}<i className="fa-solid fa-angle-down"></i></a>
+                        
                         <ul className="submenu">
                           <li className="submenu-item">
                             <a href={basePath + "/kisa-kimshealth-institute-of-skill-acquisition"}>{staticTexts['KISA (KIMSHEALTH Institute of Skill Acquisition)']}</a>
@@ -837,8 +837,8 @@ const Header = () => {
 
                       {/* OTHERS */}
                       <li className="has-dropdown">
-                        <a href="#" className="menu-item">{staticTexts['Others']}</a>
-                        <i className="fa-solid fa-angle-down"></i>
+                        <a href="#" className="menu-item">{staticTexts['Others']} <i className="fa-solid fa-angle-down"></i></a>
+                       
                         <ul className="submenu">
                           <li className="submenu-item">
                             <a href={basePath + "/media-and-events"}>{staticTexts['Events']}</a>
