@@ -29,9 +29,9 @@ const SearchBox = ({query}) => {
     }, [])
     return (
         <>
-            <input type="text" ref={searchData} className="form-control border-0 "
+            <input type="text" ref={searchData} className="form-control "
                 placeholder="Search Text ...." defaultValue={query} />
-            <button onClick={() => searchWeb()} className="input-group-text border-0" id="from-icon">
+            <button onClick={() => searchWeb()} className="input-group-text" id="from-icon">
                 <i className="fa-solid icon-magnifier"></i>
             </button>
         </>

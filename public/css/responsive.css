@@ -1899,6 +1899,9 @@
         height: 288px;
         object-fit: cover;
     }
+    .custom-tab-scroll-wrapper{
+        max-width: 25rem;
+    }
 
 }
 

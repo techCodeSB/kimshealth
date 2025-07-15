@@ -262,7 +262,7 @@ const Header = () => {
                 <div className="whatapp-icon">
                   <a href={"https://wa.me/" + locationData?.whatsapp} target='_blank'> <img src="/img/whatsapp.svg" className="img-fluid" alt="" /></a>
                 </div>
-                <div className="search-icon ms-3 me-2">
+                <div className="search-icon ms-3 me-2 rounded-field-form">
                   <a href="#" className="search-button" onClick={() => {
                     setShowSearch(!showSearch);
                   }}>
