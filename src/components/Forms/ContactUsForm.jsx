@@ -1,17 +1,29 @@
 "use client"
+import getStaticText from "@/helper/getStaticText";
+import { useEffect, useState } from "react";
 
 const ContactUsForm = () => {
+    const [staticTexts, setStaticTexts] = useState({});
+
+
+    useEffect(() => {
+        const fetchTexts = async () => {
+            setStaticTexts({ ...await getStaticText() })
+        };
+
+        fetchTexts();
+    }, []);
     return (
-        <div className="col-md-6 contact-right-col order-lg-2 order-1 custom-tab-button-wrapper">
-            <div className="association-form-card mb-5 sticky-from">
+        <div className="col-md-6 contact-right-col order-lg-2 order-1 ">
+            <div className="association-form-card mb-5 sticky-from custom-tab-button-wrapper">
                 <div className="tab-group text-start mb-3">
                     <button type="button" className="btn-tab treat-tab form-btn w-auto active mx-2 omega"
                         onClick={() => showBox('omega')}>
-                        Appointment Queries
+                        {staticTexts['Appointment Queries']}
                     </button>
 
                     <button type="button" className="btn-tab form-btn w-auto treat-tab mx-2 omega1" onClick={() => showBox('omega1')}>
-                        Feedback/Complaints
+                        {staticTexts['Feedback/Complaints']}
                     </button>
                 </div>
                 <div className="treat-box" id="omega" style={{ 'display': 'block' }}>

@@ -1,7 +1,6 @@
 "use client";
 import doctorData from '@/app/lib/getDoctor';
 import getStaticText from '@/helper/getStaticText';
-import Link from 'next/link';
 import React, { useEffect, useState, useRef } from 'react';
 import Form3 from './Forms/Form3';
 
@@ -190,10 +189,10 @@ const DoctorListing = ({ baseURL, allLocation, allSpeciality, allDoctorCount, la
                                                 <select className="form-select" value={URLParams.gender ? URLParams.gender : ""} aria-label="Select Gender" onChange={(e) => {
                                                     location.href = `${baseURL}/doctor?gender=${e.target.value}${URLParams.speciality ? `&speciality=${URLParams.speciality}` : ''}${URLParams.location ? `&location=${URLParams.location}` : ''}${URLParams.hospital ? `&hospital=${URLParams.hospital}` : ''}`;
                                                 }}>
-                                                    <option value="">Gender</option>
-                                                    <option value="Male">Male</option>
-                                                    <option value="Female">Female</option>
-                                                    <option value="Others">Others</option>
+                                                    <option value="">{staticText['Gender']}</option>
+                                                    <option value="Male">{staticText['Male']}</option>
+                                                    <option value="Female">{staticText['Female']}</option>
+                                                    <option value="Others">{staticText['Others']}</option>
                                                 </select>
                                                 <span className="input-group-text"><i className="fa-solid fa-chevron-down"></i></span>
                                             </div>

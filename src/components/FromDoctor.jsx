@@ -3,6 +3,8 @@ import formatDate from "@/app/lib/formatDate";
 import getStaticText from "@/helper/getStaticText";
 import { useEffect, useState } from "react";
 
+
+
 const FromDoctor = ({ dataSet }) => {
     const [staticTexts, setStaticTexts] = useState({});
 

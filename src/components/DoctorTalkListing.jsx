@@ -96,7 +96,7 @@ const DoctorTalkListing = ({ baseURL, langLoc, URLParams, speciality }) => {
                                 location.href = baseURL + "/doctor-talk?speciality=" + e.target.value;
                             }} value={URLParams.speciality ? URLParams.speciality : ''}>
 
-                                <option value={''}>Search for Speciality </option>
+                                <option value={''}>{staticText['Search for Speciality']}</option>
                                 {
                                     allSpeciality?.map((spl, i) => {
                                         return <option value={spl.speciality?.slug} key={i}>

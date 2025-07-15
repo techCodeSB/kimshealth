@@ -3703,8 +3703,9 @@ li.hospital-doctor::before {
     background: #f3f3f3;
     padding: 20px;
     position: sticky;
-    top: -57.5px;
+    top: -575px;
 }
+
 
 .find-doctor-left-col h4 {
     font-size: 17px;
@@ -5569,10 +5570,9 @@ select option:hover {
     display: block;
 }
 
-/* Inline layout for buttons */
-.custom-tab-button-wrapper {
+/* .custom-tab-button-wrapper {
     display: inline-flex;
-}
+} */
 
 /* Ensure items don't shrink */
 .treat-tab {

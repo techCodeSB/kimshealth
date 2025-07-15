@@ -13,7 +13,7 @@ const PatientStoriesListing = ({ basePath, langLoc, URLParams }) => {
     const observerRef = useRef(null);
     const [loading, setLoading] = useState(false);
     const [endData, setEndData] = useState(false);
-        const [allSpeciality, setAllSpeciality] = useState([]);
+    const [allSpeciality, setAllSpeciality] = useState([]);
 
 
     useEffect(() => {
@@ -23,7 +23,7 @@ const PatientStoriesListing = ({ basePath, langLoc, URLParams }) => {
         const getFstLoad = async () => {
             // const data = await testimonialData.getAll(count, limit);
             // setallTestimonial(data);
-            
+
             const tempStoreSpeciality = await getSpecialityData.getAllSpeciality({ langLoc });
             setAllSpeciality(tempStoreSpeciality);
         }
@@ -81,7 +81,7 @@ const PatientStoriesListing = ({ basePath, langLoc, URLParams }) => {
                                 location.href = basePath + "/patient-stories?speciality=" + e.target.value;
                             }} value={URLParams.speciality ? URLParams.speciality : ''}>
 
-                                <option value={''}>Search for Speciality </option>
+                                <option value={''}>{staticText['Search for Speciality']} </option>
                                 {
                                     allSpeciality?.map((spl, i) => {
                                         return <option value={spl.speciality?.slug} key={i}>

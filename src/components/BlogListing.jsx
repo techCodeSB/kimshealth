@@ -165,7 +165,7 @@ const BlogListing = ({ basePath, speciality, langLoc, URLParams }) => {
                                             </a>
                                             <p>
                                                 {allBlog[0].shortDetails.slice(0, 90)}
-                                                <span> {staticText['Read More']}</span>
+                                                <span>...{staticText['Read More']}</span>
                                             </p>
                                             <div className="d-flex align-items-center justify-content-between">
                                                 <div>
@@ -192,7 +192,7 @@ const BlogListing = ({ basePath, speciality, langLoc, URLParams }) => {
                                             </a>
                                             <p>
                                                 {allBlog[1].shortDetails?.slice(0, 90)}
-                                                <span>{staticText['Read More']}</span>
+                                                <span>...{staticText['Read More']}</span>
                                             </p>
                                             <div className="d-flex align-items-center justify-content-between">
                                                 <div>
@@ -266,7 +266,7 @@ const BlogListing = ({ basePath, speciality, langLoc, URLParams }) => {
                                                     </a>
                                                     <p>
                                                         {b.shortDetails?.slice(0, 90)}
-                                                        <span>{staticText['Read More']}</span>
+                                                        <span>...{staticText['Read More']}</span>
                                                     </p>
                                                     <div className="d-flex align-items-center justify-content-between">
                                                         <div>

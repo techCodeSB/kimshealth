@@ -1,9 +1,20 @@
 "use client"
 import langLoc from '@/helper/getLangLoc'
+import getStaticText from '@/helper/getStaticText'
 import React, { useEffect, useState } from 'react'
 
 const BookAnAppoinmentShort = () => {
     const [locationList, setLocationList] = useState()
+    const [staticTexts, setStaticTexts] = useState({});
+
+
+    useEffect(() => {
+        const fetchTexts = async () => {
+            setStaticTexts({ ...await getStaticText() })
+        };
+
+        fetchTexts();
+    }, []);
 
 
 

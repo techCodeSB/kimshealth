@@ -22,7 +22,7 @@ const BlogDetails = async ({ params }) => {
     const blogDataSet = {
         sectionTitle: data.blogSection?.title || "Related Blogs",
         buttonText: 'View All', buttonURL: `${basePath + "/blog"}`,
-          data: await blogData.getRecentBlog({langLoc: getLangLoc}),
+        data: await blogData.getRecentBlog({ langLoc: getLangLoc }),
         baseUrl: basePath
     }
 
@@ -151,7 +151,7 @@ const BlogDetails = async ({ params }) => {
                                             <div className="breadcrumb-wrapper py-2 ps-2 ms-1">
                                                 <div className="row">
                                                     <div className="col-12 px-0">
-                                                         <Breadcrumb
+                                                        <Breadcrumb
                                                             activeTitle={data.title}
                                                             middleTitle={staticText['Blogs']}
                                                             middleURL={basePath + "/blog"}
@@ -163,8 +163,7 @@ const BlogDetails = async ({ params }) => {
                                                 <div className="details-heading">
                                                     <div className="row">
                                                         <div className="col-md-4 ">
-
-                                                            <img src={docData.doctorImage.url ? process.env.NEXT_PUBLIC_IMAGE_URL + docData.doctorImage?.url : "/img/no-image.jpg"} alt="" className="img-fluid" />
+                                                            <img src={docData.doctorImage.url ? process.env.NEXT_PUBLIC_IMAGE_URL + docData.doctorImage?.url : "/img/no-image.jpg"} alt={docData?.name}className="img-fluid" />
                                                         </div>
                                                         <div className="col-md-8 my-auto">
                                                             <h3>{docData?.name}</h3>
@@ -196,6 +195,7 @@ const BlogDetails = async ({ params }) => {
                             </div>
                         </div>
                     </section>
+                    {/* ::::: MOBILE SECTION :::::: */}
                     <section className="section details-page-before py-0 d-lg-none d-block">
                         <div className="procedures-details-page-header inner-pages-header">
                             <div className="container pe-0">
@@ -205,7 +205,7 @@ const BlogDetails = async ({ params }) => {
                                             <div className="breadcrumb-wrapper py-2 ps-2 ms-1">
                                                 <div className="row">
                                                     <div className="col-12">
-                                                         <Breadcrumb
+                                                        <Breadcrumb
                                                             activeTitle={data.title}
                                                             middleTitle={staticText['Blogs']}
                                                             middleURL={basePath + "/blog"}
@@ -241,7 +241,7 @@ const BlogDetails = async ({ params }) => {
                                                     </div>
                                                 </div>
                                                 <div className="col-12 mb-3">
-                                                    <img src={process.env.NEXT_PUBLIC_IMAGE_URL + data.featuredImage?.url} alt={data.title} className="img-fluid" />
+                                                   <img src={docData.doctorImage.url ? process.env.NEXT_PUBLIC_IMAGE_URL + docData.doctorImage?.url : "/img/no-image.jpg"} alt={docData?.name}className="img-fluid" />
                                                 </div>
 
                                             </div>
@@ -280,4 +280,4 @@ const BlogDetails = async ({ params }) => {
     )
 }
 
-export default BlogDetails
+export default BlogDetails;

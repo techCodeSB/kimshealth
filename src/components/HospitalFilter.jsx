@@ -6,7 +6,17 @@ import React, { useEffect, useState } from 'react'
 const HospitalFilter = ({ title, selectedLocation }) => {
     const [allLocation, setAllLocation] = useState();
     const [basePathOnlyLang, setBasePathOnlyLang] = useState()
+    const [staticTexts, setStaticTexts] = useState({});
 
+
+
+    useEffect(() => {
+        const fetchTexts = async () => {
+            setStaticTexts({ ...await getStaticText() })
+        };
+
+        fetchTexts();
+    }, []);
 
     useEffect(() => {
         const get = async () => {
@@ -44,7 +54,7 @@ const HospitalFilter = ({ title, selectedLocation }) => {
 
                     </form> */}
                     <select value={basePathOnlyLang + "/" + selectedLocation.slug} className="form-select " onChange={onLocationChange}>
-                        <option value={basePathOnlyLang + "/hospital"}>All Hospital</option>
+                        <option value={basePathOnlyLang + "/hospital"}>{staticTexts['All Hospital']}</option>
                         {
                             allLocation?.map((loc, i) => {
                                 return <option value={basePathOnlyLang + "/" + loc.slug} key={i}>{loc.title}</option>

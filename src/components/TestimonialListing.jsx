@@ -76,18 +76,6 @@ const TestimonialListing = ({ basePath, langLoc, URLParams }) => {
                             </div>
                         </div>
                         <div className="col-md-4 details-key-row">
-                            {/* <form action="">
-                                <div className="input-group p-0 position-relative justify-content-center">
-                                    <select className="form-select diseases-page-search">
-                                        <option value="">Search for Speciality </option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                    </select>
-                                    <button className="input-group-text border-0 search-btn-page"><i className="fa-solid fa-magnifying-glass"></i></button>
-                                </div>
-                            </form> */}
-
                             <select className="form-control form-select" onChange={(e) => {
                                 location.href = basePath + "/testimonial?speciality=" + e.target.value;
                             }} value={URLParams.speciality ? URLParams.speciality : ''}>
