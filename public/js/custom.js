@@ -119,7 +119,7 @@ $('.homepage-slider').owlCarousel({
 // })
 
 $('.exellence').owlCarousel({
-    loop: false,
+    loop: true,
     margin: 10,
     autoplay: false,
     nav: true,

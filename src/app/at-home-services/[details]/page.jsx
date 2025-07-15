@@ -77,7 +77,7 @@ const HomeServiceDetails = async ({ params }) => {
                         </div>
                     </section>
 
-                    <section className="section details-page-before py-0 d-lg-none d-block">
+                    <section className="section details-page-before py-0 d-lg-none d-block" >
                         <div className="procedures-details-page-header inner-pages-header">
                             <div className="container-fluid px-0">
                                 <div className="row">
@@ -125,7 +125,7 @@ const HomeServiceDetails = async ({ params }) => {
                         </div>
                     </section>
 
-                    <section className="section"  id="bookNowForm">
+                    <section className="section">
                         <div className="container">
                             <div className="row">
                                 <div className="col-md-8">
@@ -137,7 +137,7 @@ const HomeServiceDetails = async ({ params }) => {
                                     </div>
                                 </div>
                                 <div className="col-md-4">
-                                    <div className="association-form-card mb-0" >
+                                    <div className="association-form-card mb-0"  id="bookNowForm" >
                                         <Form1 title={"GET A CALLBACK FROM OUR HEALTH ADVISOR"} />
                                     </div>
                                 </div>

@@ -8,6 +8,7 @@ html {
     scroll-behavior: smooth;
     box-sizing: border-box;
     font-family: "Open Sans", sans-serif;
+    scroll-padding-top: 250px;
 }
 
 ::after,
@@ -5256,7 +5257,7 @@ li.chat-ic::before {
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.4s ease-out;
-    border-left: 2px solid rgba(255, 107, 107, 0.3);
+    border-left: 2px solid transparent;
     background: #f7f7f7;
     margin-top: 0px !important;
     opacity: 0;

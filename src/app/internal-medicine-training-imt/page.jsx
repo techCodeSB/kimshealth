@@ -64,7 +64,7 @@ const InternalMedicine = async () => {
                     </section>
 
 
-                    <section className="section doctor-line-divider">
+                    <section className="section doctor-line-divider" >
                         <div className="container">
                             <div className="row">
                                 <div className="col-md-8">
@@ -95,15 +95,13 @@ const InternalMedicine = async () => {
                                     </section>
                                 </div>
                                 <div className="col-md-4">
-                                    <div className="association-form-card">
-                                        <h3>{pageContent[7]?.title}</h3>
+                                    <div className="association-form-card mb-0 mt-2 sticky-from" id='imtApply'>
+                                        <Form1 title={"GET A CALLBACK FROM OUR HEALTH ADVISOR"} />
+                                        <h3 className="mt-3">{pageContent[7]?.title}</h3>
                                         <div
                                             dangerouslySetInnerHTML={{ __html: pageContent[7]?.details || "" }}
                                             className="main-list">
                                         </div>
-                                    </div>
-                                    <div className="association-form-card mb-0 mt-2" id='imtApply'>
-                                        <Form1 title={"GET A CALLBACK FROM OUR HEALTH ADVISOR"} />
                                     </div>
                                 </div>
 
