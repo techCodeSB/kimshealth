@@ -20,7 +20,7 @@ const Form3 = ({ title }) => {
                 <div className="row">
                     <div className="col-12 mb-3">
                         <label className="form-label">{staticTexts['Name']} <span>*</span></label>
-                        <input type="text" className="form-control" placeholder={staticTexts['Enter your name']} name="name" />
+                        <input type="text" className="form-control" placeholder={staticTexts['Enter Your Name']} name="name" />
                     </div>
 
                     <div className="col-12 mb-3">

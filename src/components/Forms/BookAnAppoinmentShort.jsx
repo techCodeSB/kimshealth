@@ -51,7 +51,7 @@ const BookAnAppoinmentShort = () => {
                             <div className="input-group mb-lg-0 mb-3">
                                 <span className="input-group-text" id="from-icon"><i
                                     className="fa-solid fa-magnifying-glass"></i></span>
-                                <input type="text" className="form-control pe-0" placeholder="Search doctor/specialities"
+                                <input type="text" className="form-control pe-0" placeholder={staticTexts["Search doctor/specialities"]}
                                     aria-label="Username" aria-describedby="basic-addon1" />
                             </div>
                         </div>

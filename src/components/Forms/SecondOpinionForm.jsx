@@ -1,6 +1,19 @@
 "use client"
+import getStaticText from "@/helper/getStaticText";
+import { useEffect, useState } from "react";
+
 
 const SecondOpinionForm = ({ pageContent }) => {
+    const [staticTexts, setStaticTexts] = useState({});
+
+
+    useEffect(() => {
+        const fetchTexts = async () => {
+            setStaticTexts({ ...await getStaticText() })
+        };
+
+        fetchTexts();
+    }, []);
     return (
         <section className="section second-opinion-section">
             <div className="container">
@@ -36,7 +49,7 @@ const SecondOpinionForm = ({ pageContent }) => {
                                             <div className="input-group mb-3">
                                                 <span className="input-group-text" id="from-icon"><i
                                                     className="icon-user"></i></span>
-                                                <input type="text" className="form-control pe-0" placeholder="Name*"
+                                                <input type="text" className="form-control pe-0" placeholder={staticTexts['Name'] + "*"}
                                                     aria-label="Username" aria-describedby="basic-addon1" />
                                             </div>
                                         </div>
@@ -46,7 +59,8 @@ const SecondOpinionForm = ({ pageContent }) => {
                                             <div className="input-group mb-3">
                                                 <span className="input-group-text" id="from-icon"><i
                                                     className="icon-phone"></i></span>
-                                                <input type="text" className="form-control pe-0" placeholder="Mobile Number*"
+                                                <input type="text" className="form-control pe-0"
+                                                    placeholder={staticTexts['Mobile Number'] + "*"}
                                                     aria-label="Username" aria-describedby="basic-addon1" />
                                             </div>
                                         </div>
@@ -56,7 +70,7 @@ const SecondOpinionForm = ({ pageContent }) => {
                                                 <span className="input-group-text" id="from-icon"><i
                                                     className="icon-settings"></i></span>
                                                 <select className="form-select from-location">
-                                                    <option value={""}>Select Speciality</option>
+                                                    <option value={""}>{staticTexts['Select Speciality']}</option>
                                                     <option value="1">One</option>
                                                     <option value="2">Two</option>
                                                     <option value="3">Three</option>
@@ -78,7 +92,7 @@ const SecondOpinionForm = ({ pageContent }) => {
                                                     className="form-control file-input__input" name="report" />
                                                 <label htmlFor="file-input" className="file-input-label">
                                                     <i className="icon-docs"></i>
-                                                    <span>Attach Report</span>
+                                                    <span>{staticTexts['Attach Report']}</span>
                                                 </label>
                                             </div>
                                         </div>
@@ -89,12 +103,15 @@ const SecondOpinionForm = ({ pageContent }) => {
                                             <div className="input-group mb-3">
                                                 <span className="input-group-text" id="from-icon"><i
                                                     className="fa fa-pencil-square"></i></span>
-                                                <textarea className="form-control pe-0" name='message' placeholder='Type your query'></textarea>
+                                                <textarea className="form-control pe-0" name='message'
+                                                    placeholder={staticTexts['Type your query']}></textarea>
                                             </div>
                                         </div>
                                         <div className="col-xl-6 col-lg-6 col-md-6 col-12 mb-3">
                                             <div className="from-btn">
-                                                <button type="button" className="btn d-inline-block w-auto">Submit</button>
+                                                <button type="button" className="btn d-inline-block w-auto">
+                                                    {staticTexts['Submit']}
+                                                </button>
                                             </div>
                                         </div>
 
@@ -118,7 +135,7 @@ const SecondOpinionForm = ({ pageContent }) => {
                                             <div className="input-group mb-3">
                                                 <span className="input-group-text" id="from-icon"><i
                                                     className="icon-user"></i></span>
-                                                <input type="text" className="form-control pe-0" placeholder="Name*"
+                                                <input type="text" className="form-control pe-0" placeholder={staticTexts['Name']+"*"}
                                                     aria-label="Username" aria-describedby="basic-addon1" />
                                             </div>
                                         </div>
@@ -128,7 +145,8 @@ const SecondOpinionForm = ({ pageContent }) => {
                                             <div className="input-group mb-3">
                                                 <span className="input-group-text" id="from-icon"><i
                                                     className="icon-phone"></i></span>
-                                                <input type="text" className="form-control pe-0" placeholder="Mobile Number*"
+                                                <input type="text" className="form-control pe-0"
+                                                    placeholder={staticTexts['Mobile Number'] + "*"}
                                                     aria-label="Username" aria-describedby="basic-addon1" />
                                             </div>
                                         </div>
@@ -147,7 +165,7 @@ const SecondOpinionForm = ({ pageContent }) => {
                                                     className="form-control file-input__input" name="report" />
                                                 <label htmlFor="file-input" className="file-input-label">
                                                     <i className="icon-docs"></i>
-                                                    <span>Attach Report</span>
+                                                    <span>{staticTexts['Attach Report']}</span>
                                                 </label>
                                             </div>
                                         </div>
@@ -155,19 +173,21 @@ const SecondOpinionForm = ({ pageContent }) => {
                                             <div className="input-group mb-3">
                                                 <span className="input-group-text" id="from-icon"><i
                                                     className="fa fa-pencil-square"></i></span>
-                                                <textarea className="form-control pe-0" name='message' placeholder='Type your query'></textarea>
+                                                <textarea className="form-control pe-0" name='message'
+                                                    placeholder={staticTexts['Type your query']}></textarea>
                                             </div>
                                         </div>
                                         <div className="col-xl-6 col-lg-6 col-md-6 col-12">
                                             <div className="from-btn">
-                                                <button type="button" className="btn d-inline-block w-auto">Submit</button>
+                                                <button type="button" className="btn d-inline-block w-auto">
+                                                    {staticTexts['Submit']}
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
                                 </form>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>

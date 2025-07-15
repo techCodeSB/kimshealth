@@ -107,7 +107,7 @@ const ContactUsForm = () => {
                             </div>
                             <div className="col-xl-12 col-lg-12 col-md-12 col-12 mb-3">
                                 <label htmlFor=''>{staticTexts['Query']}*</label>
-                                <textarea className="form-control" placeholder="Leave a comment here"
+                                <textarea className="form-control" placeholder={staticTexts["Leave a comment here"]}
                                     id="floatingTextarea"></textarea>
                             </div>
                             <div className="col-xl-6 col-lg-6 col-md-6 col-12 mb-3">

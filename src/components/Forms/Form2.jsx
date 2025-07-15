@@ -40,4 +40,4 @@ const Form2 = ({title}) => {
   )
 }
 
-export default Form2
+export default Form2;
