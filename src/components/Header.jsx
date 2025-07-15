@@ -897,7 +897,7 @@ const Header = () => {
                                         <option value="2">Ml</option>
                                     </select>
                                 </div> */}
-                <div className="mobile-location-dropdown d-md-none d-block">
+                {/* <div className="mobile-location-dropdown d-md-none d-block">
                   <select value={basePathOnlyLang + "/" + selectedLangLoc?.loc?.slug} aria-label="Default select example" onChange={(e) => {
                     const url = e.target.value;
                     window.open(url, '_self', 'noreferrer');
@@ -910,6 +910,15 @@ const Header = () => {
                     }
 
                   </select>
+                </div> */}
+                <div className="search-icon ms-3 me-2 rounded-field-form d-md-none d-block">
+                  <a href="#" className="search-button" onClick={() => {
+                    setShowSearch(!showSearch);
+                  }}>
+                    <i className="fa-solid fa-magnifying-glass"></i></a>
+                  <div className={`search-box input-group p-0 my-lg-3 my-3 ${showSearch ? "d-flex" : "d-none"}`} >
+                    <SearchBox />
+                  </div>
                 </div>
                 <div className="menu-button">
                   <span className="toggle-bar"></span>

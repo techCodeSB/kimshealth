@@ -3703,7 +3703,7 @@ li.hospital-doctor::before {
     background: #f3f3f3;
     padding: 20px;
     position: sticky;
-    top: -57.5px;
+    top: -575px;
 }
 
 .find-doctor-left-col h4 {
@@ -5610,12 +5610,13 @@ a.active {
     box-shadow: 0 0 20px -3px rgb(183 28 43);
     z-index: 99999;
     top: 46px;
-    right: 267px;
+    /* right: 267px; */
     max-width: 350px;
     border-radius: 55px;
     height: 45px;
     display: none;
     transition: .5s;
+    right: 21rem;
 }
 
 
