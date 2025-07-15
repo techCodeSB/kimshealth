@@ -5,15 +5,26 @@ import { useEffect, useState } from "react";
 
 const TreamentSidebar = ({ title, procedures, baseUrlOnlyLang, allSpeciality }) => {
     const [allProcedures, setAllProcedures] = useState([])
+    const [staticTexts, setStaticTexts] = useState({});
 
 
-    useEffect(()=>{
+
+    useEffect(() => {
+        const fetchTexts = async () => {
+            setStaticTexts({ ...await getStaticText() })
+        };
+
+        fetchTexts();
+    }, []);
+
+
+    useEffect(() => {
         setAllProcedures([...procedures]);
     }, [procedures])
 
     const selectSpeciality = async (e) => {
         const speltyId = e.target.value;
-        if(!speltyId){
+        if (!speltyId) {
             setAllProcedures([...procedures]);
             return;
         }
@@ -33,7 +44,7 @@ const TreamentSidebar = ({ title, procedures, baseUrlOnlyLang, allSpeciality }) 
                     <div className="input-group p-0 my-lg-3 my-3 position-relative justify-content-center">
                         {/* speciality-page-search */}
                         <select className="form-select" onChange={selectSpeciality}>
-                            <option value={""}>Select by Speciality</option>
+                            <option value={""}>{staticTexts['Select by Speciality']}</option>
                             {
                                 allSpeciality?.map((sp, index) => {
                                     return <option value={sp.speciality?.documentId} key={index}>

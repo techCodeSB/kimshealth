@@ -72,7 +72,7 @@ const TestimonialListing = ({ basePath, langLoc, URLParams }) => {
                     <div className="row justify-content-between">
                         <div className="col-md-6 mb-3">
                             <div className="main-heading">
-                                <h2 className="mb-0">Patient Testimonials </h2>
+                                <h2 className="mb-0">{staticText['Patient Testimonials']}</h2>
                             </div>
                         </div>
                         <div className="col-md-4 details-key-row">
@@ -92,7 +92,7 @@ const TestimonialListing = ({ basePath, langLoc, URLParams }) => {
                                 location.href = basePath + "/testimonial?speciality=" + e.target.value;
                             }} value={URLParams.speciality ? URLParams.speciality : ''}>
 
-                                <option value={''}>Search for Speciality </option>
+                                <option value={''}>{staticText['Search for Speciality']}</option>
                                 {
                                     allSpeciality?.map((spl, i) => {
                                         return <option value={spl.speciality?.slug} key={i}>

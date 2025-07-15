@@ -46,7 +46,10 @@ const BlogListing = ({ basePath, speciality, langLoc, URLParams }) => {
         if (loading) return; // prevent multiple triggers
         setLoading(true);
 
-        const data = await blogData.allBlog({ start: count, limit: limit, speciality: speciality, langLoc: langLoc, URLParams: URLParams });
+        const data = await blogData.allBlog({
+            start: count, limit: limit, speciality: speciality,
+            langLoc: langLoc, URLParams: URLParams
+        });
         if (data.length < 1) {
             setEndData(true)
         }
@@ -136,7 +139,7 @@ const BlogListing = ({ basePath, speciality, langLoc, URLParams }) => {
                                 ) : (
                                     filterSplty?.map((splty, i) => {
                                         return splty?.speciality ? <p key={i}>
-                                            <a href={`${basePath + "/blog?speciality=" + splty?.speciality?.slug}${URLParams.doctor ? `&doctor=${URLParams.doctor}` : ''}${URLParams.category ? `&category=${URLParams.category}` : ''}`} className={splty?.speciality?.slug===URLParams.speciality?'active':''}>{splty.title}</a>
+                                            <a href={`${basePath + "/blog?speciality=" + splty?.speciality?.slug}${URLParams.doctor ? `&doctor=${URLParams.doctor}` : ''}${URLParams.category ? `&category=${URLParams.category}` : ''}`} className={splty?.speciality?.slug === URLParams.speciality ? 'active' : ''}>{splty.title}</a>
                                         </p> : null
                                     })
                                 )}
@@ -232,12 +235,12 @@ const BlogListing = ({ basePath, speciality, langLoc, URLParams }) => {
                                     <div className="blog-tagging">
                                         <h3>{staticText['Trending']}</h3>
 
-                                        <div class="custom-tab-scroll-wrapper">
+                                        <div className="custom-tab-scroll-wrapper">
                                             <div className="custom-tab-button-wrapper ms-3">
 
                                                 {
                                                     blogCatgory?.map((c, i) => {
-                                                        return <a href={`${basePath + "/blog?category=" + c.slug}${URLParams.doctor ? `&doctor=${URLParams.doctor}` : ''}${URLParams.speciality ? `&speciality=${URLParams.speciality}` : ''}`} class={`treat-tab w-auto form-btn ${c.slug===URLParams.speciality?'active':''} mx-2`}>{c.title}</a>
+                                                        return <a key={i} href={`${basePath + "/blog?category=" + c.slug}${URLParams.doctor ? `&doctor=${URLParams.doctor}` : ''}${URLParams.speciality ? `&speciality=${URLParams.speciality}` : ''}`} className={`treat-tab w-auto form-btn ${c.slug === URLParams.speciality ? 'active' : ''} mx-2`}>{c.title}</a>
                                                     })
 
                                                 }

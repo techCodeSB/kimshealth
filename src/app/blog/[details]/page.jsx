@@ -18,12 +18,11 @@ const BlogDetails = async ({ params }) => {
     const docData = await doctorData.getSingleDoctor(data.doctor[0]?.slug);
     const staticText = await getStaticText();
 
-    console.log(docData)
 
     const blogDataSet = {
         sectionTitle: data.blogSection?.title || "Related Blogs",
         buttonText: 'View All', buttonURL: `${basePath + "/blog"}`,
-        data: await blogData.allBlog(10),
+          data: await blogData.getRecentBlog({langLoc: getLangLoc}),
         baseUrl: basePath
     }
 
