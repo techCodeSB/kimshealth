@@ -4,6 +4,7 @@ import { getStaticPageContent } from '@/app/lib/getStaticPageContent';
 import Breadcrumb from '@/components/Breadcrumb';
 import getStaticText from '@/app/lib/getStaticTextServer';
 import getCurrentLangLoc from '@/app/lib/getCurrentLangLoc';
+import Form1 from '@/components/Forms/Form1';
 
 const ClinicalSkills = async () => {
     const getLangLoc = await getCurrentLangLoc()
@@ -134,37 +135,22 @@ const ClinicalSkills = async () => {
                                     </section>
                                 </div>
 
-                                <div className="col-md-4 association-left-col">
-                                    <div className="association-form-card mb-5">
-                                        <h3>Request a Call Back</h3>
-                                        <form action="">
-                                            <div className="row">
-                                                <div className="col-md-12 mb-3">
-                                                    <input type="text" className="form-control" placeholder="Name" name="name" />
-                                                </div>
-                                                <div className="col-md-12 mb-3">
-                                                    <input type="text" className="form-control" placeholder="Enter 10 Digit Mobile Number" name="name" />
-                                                </div>
-                                                <div className="col-md-12 mb-3">
-                                                    <textarea className="form-control" placeholder="Message" id="floatingTextarea"></textarea>
-                                                </div>
-                                                <div className="col-md-12 mb-3 text-center">
-                                                    <button className="btn mb-lg-0 mb-2 hospital-primarybtn px-5 py-2">Submit</button>
-                                                </div>
-                                            </div>
-                                        </form>
+                                <div className="col-md-4">
+                                    <div className="association-left-col">
+                                        <div className="association-form-card mb-5">
+                                            <Form1 title={"Request a Call Back"}/>
+                                            <h4>{pageContent[3]?.sectionTitle}</h4>
+                                            <p><strong>{pageContent[3]?.contactPerson}</strong></p>
+                                            <p> {pageContent[3]?.designation}</p>
+                                            <a href={pageContent[3]?.phone}><i className="fa-solid fa-phone"></i>
+                                                {pageContent[3]?.phone}</a>
+                                            {
+                                                pageContent[3]?.email ?
+                                                    <a href={`mailto:${pageContent[3]?.email}`}><i className="fa-solid fa-envelope"></i> {pageContent[3]?.email}</a> : null
+                                            }
 
-
+                                        </div>
                                     </div>
-                                    <h4>{pageContent[3]?.sectionTitle}</h4>
-                                    <p><strong>{pageContent[3]?.contactPerson}</strong></p>
-                                    <p> {pageContent[3]?.designation}</p>
-                                    <a href={pageContent[3]?.phone}><i className="fa-solid fa-phone"></i>
-                                        {pageContent[3]?.phone}</a>
-                                    {
-                                        pageContent[3]?.email ?
-                                            <a href={`mailto:${pageContent[3]?.email}`}><i className="fa-solid fa-envelope"></i> {pageContent[3]?.email}</a> : null
-                                    }
                                 </div>
                             </div>
                         </div>

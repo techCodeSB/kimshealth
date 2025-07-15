@@ -4858,12 +4858,12 @@ li.chat-ic::before {
 
 .emergency-medicine-main-page .association-left-col {
     position: sticky;
-    top: -100px;
+    top: 140px;
 }
 
 .heart-associations-main-page .association-left-col {
     position: sticky;
-    top: -100px;
+    top: 140px;
 }
 
 .csr-policy-main-page .association-left-col {
@@ -5607,15 +5607,15 @@ a.active {
     padding: 15px;
     background-color: #fff;
     position: absolute;
-    box-shadow: 0 0 20px -3px rgb(183 28 43);
+    box-shadow: 0 0 20px -3px rgb(107 107 107 / 54%);
     z-index: 99999;
-    top: 46px;
-    right: 267px;
+    top: 33px;
     max-width: 350px;
     border-radius: 55px;
     height: 45px;
     display: none;
     transition: .5s;
+    right: 0;
 }
 
 
@@ -5720,4 +5720,7 @@ a.active {
 .details-key-row.rounded-field-form .input-group input,
 .details-key-row.rounded-field-form .input-group select {
     border: 1px solid #bbbbbb;
+}
+.patients-stories-section .testi-rightbox p{
+    display: block;
 }

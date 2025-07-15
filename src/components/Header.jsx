@@ -237,7 +237,7 @@ const Header = () => {
                 <img src="/img/logo.png" alt="" className="img-fluid" />
               </a>
             </div>
-            <div className="header-contact d-flex align-items-center justify-content-center">
+            <div className="header-contact d-flex align-items-center justify-content-center position-relative">
               <ul>
                 <li><a href={`${basePath}/about-us`}>{staticTexts['About Us']}</a></li>
                 <li><a href={`${basePath}/at-home-services`}>{staticTexts['Home Care']}</a></li>
@@ -623,18 +623,18 @@ const Header = () => {
                       </div>
                     </div>
                   </li>
-                  <li className="quicklink-header">
+                  {/* <li className="quicklink-header">
                     <a href={basePath + "#"}>{staticTexts['Facilities']}</a>
-                  </li>
-                  <li className="quicklink-header">
+                  </li> */}
+                  {/* <li className="quicklink-header">
                     <a href={basePath + "#"}>{staticTexts['Quality Focus']}</a>
-                  </li>
+                  </li> */}
                   <li className="quicklink-header">
                     <a href={basePath + "/all-companies-on-panel"}>{staticTexts['Insurance Providers']}</a>
                   </li>
-                  <li className="quicklink-header">
+                  {/* <li className="quicklink-header">
                     <a href={basePath + "#"}>{staticTexts['Careers']}</a>
-                  </li>
+                  </li> */}
                   <li className="quicklink-header">
                     <a href={basePath + "/blog"}>{staticTexts['Blogs']}</a>
                   </li>
@@ -642,9 +642,7 @@ const Header = () => {
                     <a href={basePath + "/doctor-talk"}>
                       {staticTexts['Videos']}</a>
                   </li>
-                  <li className="quicklink-header">
-                    <a href={basePath + "/ethics-committee"}>{staticTexts['Ethics Committee']}</a>
-                  </li>
+                
 
                   <li className="menu-item-has-children show-submenu quicklink-header">
                     <a href="#" className="anchor-menu">{staticTexts['Others']}</a>
@@ -671,9 +669,9 @@ const Header = () => {
                                 <a href={basePath + "/bmw-report"}>{staticTexts['BMW Reports']}</a>
                               </li>
 
-                              <li>
+                              {/* <li>
                                 <a href={basePath + "/faqs"}>{staticTexts['FAQs']}</a>
-                              </li>
+                              </li> */}
                               <li>
                                 <a href={basePath + "/stents-price-list"}>{staticTexts['Stents Price List']}</a>
                               </li>
@@ -719,7 +717,7 @@ const Header = () => {
                 <div className="sidebar pb-5" id="sidebar" style={{ overflowY: 'auto' }}>
                   <div className="menu-items">
                     <ul className="sub-menu-details">
-                      <li className="has-dropdown">
+                      {/* <li className="has-dropdown">
                         <a href={basePath + "#"} className="menu-item">{staticTexts['About Us']}<i className="fa-solid fa-angle-down"></i></a>
 
                         <ul className="submenu">
@@ -733,7 +731,7 @@ const Header = () => {
                             <a href={basePath + "/milestone"}>{staticTexts['Milestones']}</a>
                           </li>
                         </ul>
-                      </li>
+                      </li> */}
                       <li>
                         <a target='_blank' href="https://consult.bestdocapp.com/home/KIMSTVM?version=new" className="menu-item mt-2">{staticTexts['Telehealth']}</a>
                       </li>
@@ -775,10 +773,6 @@ const Header = () => {
                         </ul>
                       </li>
 
-
-                      <li>
-                        <a href={basePath + "/ethics-committee"} className="menu-item mt-2">{staticTexts['Ethics Committee']}</a>
-                      </li>
                       <li className="has-dropdown">
                         <a href="#" className="menu-item">{staticTexts['Academics']}<i className="fa-solid fa-angle-down"></i></a>
 
@@ -801,9 +795,9 @@ const Header = () => {
                           <li className="submenu-item">
                             <a href={basePath + "/socomer"}>{staticTexts['SOCOMER']}</a>
                           </li>
-                          <li className="submenu-item">
+                          {/* <li className="submenu-item">
                             <a href={basePath + "#"}>{staticTexts['Nursing Recruitment']}</a>
-                          </li>
+                          </li> */}
                           <li className="submenu-item">
                             <a href={basePath + "/paramedical-courses"}>{staticTexts['Paramedical Courses']}</a>
                           </li>
@@ -812,18 +806,18 @@ const Header = () => {
                           </li>
                         </ul>
                       </li>
-                      <li>
+                      {/* <li>
                         <a href={basePath + "#"} className="menu-item mt-2">{staticTexts['Facilities']}</a>
-                      </li>
-                      <li>
+                      </li> */}
+                      {/* <li>
                         <a href={basePath + "#"} className="menu-item mt-2">{staticTexts['Quality Focus']}</a>
-                      </li>
+                      </li> */}
                       <li>
                         <a href={basePath + "/all-companies-on-panel"} className="menu-item mt-2">{staticTexts['Insurance Providers']}</a>
                       </li>
-                      <li>
+                      {/* <li>
                         <a href={basePath + "#"} className="menu-item mt-2">{staticTexts['Careers']}</a>
-                      </li>
+                      </li> */}
                       <li>
                         <a href={basePath + "/blog"} className="menu-item mt-2">{staticTexts['Blogs']}</a>
                       </li>
@@ -858,9 +852,9 @@ const Header = () => {
                             <a href={basePath + "/bmw-report"}>{staticTexts['BMW Reports']}</a>
                           </li>
 
-                          <li className="submenu-item">
+                          {/* <li className="submenu-item">
                             <a href={basePath + "/faqs"}>{staticTexts['FAQs']}</a>
-                          </li>
+                          </li> */}
                           <li className="submenu-item">
                             <a href={basePath + "/stents-price-list"}>{staticTexts['Stents Price List']}</a>
                           </li>
@@ -897,7 +891,7 @@ const Header = () => {
                                         <option value="2">Ml</option>
                                     </select>
                                 </div> */}
-                <div className="mobile-location-dropdown d-md-none d-block">
+                {/* <div className="mobile-location-dropdown d-md-none d-block">
                   <select value={basePathOnlyLang + "/" + selectedLangLoc?.loc?.slug} aria-label="Default select example" onChange={(e) => {
                     const url = e.target.value;
                     window.open(url, '_self', 'noreferrer');
@@ -910,6 +904,15 @@ const Header = () => {
                     }
 
                   </select>
+                </div> */}
+                <div className="search-icon ms-3 me-2 rounded-field-form d-md-none d-block">
+                  <a href="#" className="search-button" onClick={() => {
+                    setShowSearch(!showSearch);
+                  }}>
+                    <i className="fa-solid fa-magnifying-glass"></i></a>
+                  <div className={`search-box input-group p-0 my-lg-3 my-3 ${showSearch ? "d-flex" : "d-none"}`} >
+                    <SearchBox />
+                  </div>
                 </div>
                 <div className="menu-button">
                   <span className="toggle-bar"></span>

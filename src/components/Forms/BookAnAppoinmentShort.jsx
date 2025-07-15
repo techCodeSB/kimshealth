@@ -37,13 +37,12 @@ const BookAnAppoinmentShort = () => {
                                 <span className="input-group-text" id="from-icon"><i
                                     className="fa-solid icon-location-pin"></i></span>
                                 <select className="form-select from-location">
-                                    <option value={""}>Select hospital location</option>
+                                    <option value={""}>{staticTexts['Select hospital location']}</option>
                                     {
                                         locationList?.map((loc, i) => {
                                             return <option value={loc.id} key={i}>{loc.title}</option>
                                         })
                                     }
-
                                 </select>
                             </div>
                         </div>
@@ -58,7 +57,7 @@ const BookAnAppoinmentShort = () => {
                         </div>
                         <div className="col-xl-3 col-lg-3 col-md-3 col-12">
                             <div className="from-btn">
-                                <button type="button" className="btn">Book An Appointment</button>
+                                <button type="button" className="btn">{staticTexts['Book An Appointment']}</button>
                             </div>
                         </div>
                     </div>
@@ -68,4 +67,4 @@ const BookAnAppoinmentShort = () => {
     )
 }
 
-export default BookAnAppoinmentShort
+export default BookAnAppoinmentShort;

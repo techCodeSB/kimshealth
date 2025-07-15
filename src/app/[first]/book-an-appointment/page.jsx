@@ -170,7 +170,7 @@ const BookAnAppoinment = async ({searchParams}) => {
                                                                         </div>
                                                                         <div className="col-xl-6 col-lg-6 col-md-6 col-12 mb-3">
                                                                             <label htmlFor=''>Doctor Name</label>
-                                                                            <input type="text" className="form-control pe-0" defaultValue={docData.name} />
+                                                                            <input type="text" className="form-control pe-0" defaultValue={docData?.name} />
                                                                         </div>
 
 
@@ -202,17 +202,9 @@ const BookAnAppoinment = async ({searchParams}) => {
                                                                                     className="btn d-inline-block w-auto">Submit</button>
                                                                             </div>
                                                                         </div>
-
-
                                                                     </div>
                                                             </div>
-
-
                                                         </div>
-
-
-
-
                                                     </div>
                                                     {/* <div className="row justify-content-between">
                                                 <div className="col-xl-12 col-lg-12 col-md-12 col-12 mb-3">

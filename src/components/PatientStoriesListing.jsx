@@ -95,7 +95,8 @@ const PatientStoriesListing = ({ basePath, langLoc, URLParams }) => {
                 </div>
             </section>
 
-            <div className="section section pt-0">
+
+            <div className="section section pt-0 patients-stories-section">
                 <div className="container">
                     <div className="row">
                         {
@@ -103,28 +104,28 @@ const PatientStoriesListing = ({ basePath, langLoc, URLParams }) => {
                                 return <div className="col-xl-6 col-lg-6 col-md-6 col-12"
                                     data-aos={index % 2 == 0 ? "fade-right" : "fade-left"} key={index}>
                                     <div className="row testi-card">
-                                        <div className="col-md-3">
+                                        {/* <div className="col-md-3">
                                             <div className="overflow-hidden position-relative">
                                                 <a href={basePath + "/testimonial/" + t.slug}>
                                                     <img src={t.thumbnailImage?.url ? `${process.env.NEXT_PUBLIC_IMAGE_URL}${t.thumbnailImage?.url}` : "/img/no-image.jpg"} alt={t.title} className="img-fluid w-100" />
                                                 </a>
                                             </div>
-                                        </div>
-                                        <div className="col-md-9 my-auto">
+                                        </div> */}
+                                        <div className="col-md-12 my-auto">
                                             <div className="testi-rightbox">
                                                 <h3>{t.title}</h3>
-                                                <p>{`${t.shortDetails?.slice(0, 80)}...`}
-                                                    <a href={basePath + "/testimonial/" + t.slug}>{staticText['Read More']}</a>
+                                                <p>{`${t.shortDetails}`}
+                                                    {/* <a href={basePath + "/testimonial/" + t.slug}>{staticText['Read More']}</a> */}
                                                 </p>
 
-                                                <div className="d-flex align-items-center justify-content-between mt-3">
+                                                {/* <div className="d-flex align-items-center justify-content-between mt-3">
                                                     <div className="doctor-name">
                                                         <p><span><img src="/img/doctor.png" className="img-fluid" alt="" /></span> {t.doctor?.name} </p>
                                                     </div>
                                                     <div className="doctor-catagory">
                                                         <p>{t.specialities[0]?.title}</p>
                                                     </div>
-                                                </div>
+                                                </div> */}
                                             </div>
                                         </div>
                                     </div>

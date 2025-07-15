@@ -52,7 +52,7 @@ const BlogCarousel = ({ dataSet }) => {
                                         </a>
                                     </div>
                                     <div className="card-content">
-                                        <a href="#">
+                                        <a href={dataSet.baseUrl + "/blog/" + blog.slug}>
                                             <h4>{blog.title}</h4>
                                         </a>
                                         <p>{blog.shortDetails}</p>
@@ -104,7 +104,7 @@ const BlogCarousel = ({ dataSet }) => {
                                             <div className="row">
                                                 <div className="col-6 my-auto">
                                                     <div className="testi-rightbox">
-                                                        <a href="#">
+                                                        <a href={dataSet.baseUrl + "/blog/" + blog.slug}>
                                                             <h3>{blog.title}</h3>
                                                         </a>
                                                         <p>{blog.shortDetails}</p>
@@ -120,7 +120,7 @@ const BlogCarousel = ({ dataSet }) => {
                                                     </div>
                                                 </div>
                                                 <div className="col-6">
-                                                    <a href={dataSet.baseUrl + "/blog/" + blog.slug} >
+                                                    <a href={dataSet.baseUrl + "/blog/" + blog.slug}>
                                                         <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${blog.featuredImage?.url}`}
                                                             className="img-fluid w-100" alt={blog.title} />
                                                     </a>

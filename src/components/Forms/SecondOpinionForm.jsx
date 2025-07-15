@@ -133,21 +133,8 @@ const SecondOpinionForm = ({ pageContent }) => {
                                             </div>
                                         </div>
 
-                                        <div className="col-xl-6 col-lg-6 col-md-6 col-12">
-                                            <div className="input-group mb-3">
-                                                <span className="input-group-text" id="from-icon"><i
-                                                    className="icon-settings"></i></span>
-                                                <select className="form-select from-location">
-                                                    <option value={""}>Select Speciality</option>
-                                                    <option value="1">One</option>
-                                                    <option value="2">Two</option>
-                                                    <option value="3">Three</option>
-                                                </select>
 
-                                            </div>
-                                        </div>
-
-                                        <div className="col-xl-6 col-lg-6 col-md-6 col-12">
+                                        <div className="col-xl-12 col-lg-12 col-md-12 col-12 mb-3">
                                             {/* <!-- <div className="input-group mb-3">
                                                             <span className="input-group-text" id="from-icon"><i
                                                                 className="fa-solid fa-magnifying-glass"></i></span>

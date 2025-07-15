@@ -145,8 +145,6 @@ const BlogListing = ({ basePath, speciality, langLoc, URLParams }) => {
                                 )}
                             </div>
                         </div>
-
-
                     </div>
 
                     <div className="col-md-9 blog-page-right-col mb-3">

@@ -1899,8 +1899,15 @@
         height: 288px;
         object-fit: cover;
     }
-    .custom-tab-scroll-wrapper{
+
+    .custom-tab-scroll-wrapper {
         max-width: 23rem;
+    }
+
+    .search-box {
+        right: 0;
+        max-width: 100%;
+        top: 47px;
     }
 
 }

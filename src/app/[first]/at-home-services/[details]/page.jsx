@@ -103,7 +103,7 @@ const HomeServiceDetails = async ({ params }) => {
                                         </div>
                                     </div>
 
-                                    <div className="col-md-6">
+                                    <div className="col-md-6" >
                                         <div className="details-banner">
                                             <div className="details-heading">
                                                 <h3 className="mb-2">{data.title}</h3>
@@ -125,7 +125,7 @@ const HomeServiceDetails = async ({ params }) => {
                         </div>
                     </section>
 
-                    <section className="section" id='bookNowForm'>
+                    <section className="section"  id="bookNowForm">
                         <div className="container">
                             <div className="row">
                                 <div className="col-md-8">

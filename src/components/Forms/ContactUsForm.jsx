@@ -30,30 +30,30 @@ const ContactUsForm = () => {
                     <div className="custom-from bg-field mx-0">
                         <div className="row justify-content-between">
                             <div className="col-xl-6 col-lg-6 col-md-6 col-12 mb-3">
-                                <label htmlFor=''>First Name*</label>
+                                <label htmlFor=''>{staticTexts['First Name']}*</label>
                                 <input type="text" className="form-control pe-0" />
 
                             </div>
                             <div className="col-xl-6 col-lg-6 col-md-6 col-12 mb-3">
-                                <label htmlFor=''>Last Name*</label>
+                                <label htmlFor=''>{staticTexts['Last Name']}*</label>
                                 <input type="text" className="form-control pe-0" />
                             </div>
 
 
                             <div className="col-xl-6 col-lg-6 col-md-6 col-12 mb-3">
-                                <label htmlFor=''>Mobile Number*</label>
+                                <label htmlFor=''>{staticTexts['Mobile Number']}*</label>
                                 <input type="text" id="phone" defaultValue="+91" className="form-control pe-0" />
                             </div>
 
 
                             <div className="col-xl-6 col-lg-6 col-md-6 col-12 mb-3">
-                                <label htmlFor=''>Email*</label>
+                                <label htmlFor=''>{staticTexts['Email']}*</label>
                                 <input type="text" className="form-control pe-0" />
                             </div>
                             <div className="col-xl-12 col-lg-12 col-md-12 col-12 mb-3">
-                                <label htmlFor=''>Hospitals*</label>
+                                <label htmlFor=''>{staticTexts['Hospitals']}*</label>
                                 <select className="form-select from-location">
-                                    <option>Select Hospital</option>
+                                    <option>{staticTexts['Select Hospital']}</option>
                                     <option value="1">One</option>
                                     <option value="2">Two</option>
                                     <option value="3">Three</option>
@@ -61,7 +61,7 @@ const ContactUsForm = () => {
                             </div>
 
                             <div className="col-xl-12 col-lg-12 col-md-12 col-12 mb-3">
-                                <label htmlFor=''>Query*</label>
+                                <label htmlFor=''>{staticTexts['Query']}*</label>
                                 <textarea className="form-control" placeholder="Leave a comment here"
                                     id="floatingTextarea"></textarea>
                             </div>
@@ -69,7 +69,7 @@ const ContactUsForm = () => {
                             <div className="col-xl-6 col-lg-6 col-md-6 col-12 mb-3">
                                 <div className="from-btn">
                                     <button type="button"
-                                        className="btn d-inline-block w-auto">Submit</button>
+                                        className="btn d-inline-block w-auto">{staticTexts['Submit']}</button>
                                 </div>
                             </div>
                         </div>
@@ -81,39 +81,39 @@ const ContactUsForm = () => {
                     <div className="custom-from bg-field mx-0">
                         <div className="row justify-content-between">
                             <div className="col-xl-6 col-lg-6 col-md-6 col-12 mb-3">
-                                <label htmlFor=''>First Name*</label>
+                                <label htmlFor=''>{staticTexts['First Name']}*</label>
                                 <input type="text" className="form-control pe-0" />
                             </div>
                             <div className="col-xl-6 col-lg-6 col-md-6 col-12 mb-3">
-                                <label htmlFor=''>Last Name*</label>
+                                <label htmlFor=''>{staticTexts['Last Name']}*</label>
                                 <input type="text" className="form-control pe-0" />
                             </div>
                             <div className="col-xl-6 col-lg-6 col-md-6 col-12 mb-3">
-                                <label htmlFor=''>Mobile Number*</label>
+                                <label htmlFor=''>{staticTexts['Mobile Number']}*</label>
                                 <input type="text" id="tel" defaultValue="+91" className="form-control pe-0" />
                             </div>
                             <div className="col-xl-6 col-lg-6 col-md-6 col-12 mb-3">
-                                <label htmlFor=''>Email*</label>
+                                <label htmlFor=''>{staticTexts['Email']}*</label>
                                 <input type="text" className="form-control pe-0" />
                             </div>
                             <div className="col-xl-12 col-lg-12 col-md-12 col-12 mb-3">
-                                <label htmlFor=''>Hospitals*</label>
+                                <label htmlFor=''>{staticTexts['Hospitals']}*</label>
                                 <select className="form-select from-location">
-                                    <option >Select Hospital</option>
+                                    <option >{staticTexts['Select Hospital']}</option>
                                     <option value="1">One</option>
                                     <option value="2">Two</option>
                                     <option value="3">Three</option>
                                 </select>
                             </div>
                             <div className="col-xl-12 col-lg-12 col-md-12 col-12 mb-3">
-                                <label htmlFor=''>Query*</label>
+                                <label htmlFor=''>{staticTexts['Query']}*</label>
                                 <textarea className="form-control" placeholder="Leave a comment here"
                                     id="floatingTextarea"></textarea>
                             </div>
                             <div className="col-xl-6 col-lg-6 col-md-6 col-12 mb-3">
                                 <div className="from-btn">
                                     <button type="button"
-                                        className="btn d-inline-block w-auto">Submit</button>
+                                        className="btn d-inline-block w-auto">{staticTexts['Submit']}</button>
                                 </div>
                             </div>
                         </div>

@@ -178,7 +178,7 @@ const BlogDetails = async ({ params }) => {
                                                                 })}
                                                             </h4>
                                                             <div className="mt-4">
-                                                                <a href={basePath + "/book-an-appointment"} className="hospital-primarybtn ">{staticText['Book An Appointment']}</a>
+                                                                <a href={basePath + "/book-an-appointment?doctor="+docData?.slug} className="hospital-primarybtn ">{staticText['Book An Appointment']}</a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -237,7 +237,7 @@ const BlogDetails = async ({ params }) => {
                                                         })}
                                                     </h4>
                                                     <div className="mt-4 mb-4">
-                                                        <a href={basePath + "/book-an-appointment"} className="hospital-primarybtn ">{staticText['Book An Appointment']}</a>
+                                                        <a href={basePath + "/book-an-appointment?doctor="+docData?.slug} className="hospital-primarybtn ">{staticText['Book An Appointment']}</a>
                                                     </div>
                                                 </div>
                                                 <div className="col-12 mb-3">

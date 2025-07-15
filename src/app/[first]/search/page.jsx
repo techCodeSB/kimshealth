@@ -59,7 +59,7 @@ const SearchPage = async ({ searchParams }) => {
                                         <h2 className="mb-0">{staticText["Search Result"]}</h2>
                                     </div>
                                 </div>
-                                <div className="col-md-4 details-key-row custom-form">
+                                <div className="col-md-4 details-key-row rounded-field-form">
                                     <div className="input-group p-0 my-lg-3 my-3">
                                         <SearchBox query={URLParams.query?URLParams.query:""} />
                                     </div>

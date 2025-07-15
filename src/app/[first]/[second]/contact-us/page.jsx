@@ -83,7 +83,7 @@ const ContactUs = async () => {
                                                                 <p>{h.contactNo}</p>
                                                             </div>
                                                         </div>
-                                                        <a href={h.mapURL} target='_blank' className="btn-tab treat-tab form-btn w-auto active mt-2 d-inline-block"><i className="fa-solid fa-diamond-turn-right"></i> Get Direction</a>
+                                                        <a href={h.mapURL} target='_blank' className="btn-tab treat-tab form-btn w-auto  mt-2 d-inline-block"><i className="fa-solid fa-diamond-turn-right"></i> Get Direction</a>
                                                     </div>
                                                 </section>
                                             </div>
