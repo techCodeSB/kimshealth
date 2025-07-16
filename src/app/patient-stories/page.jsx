@@ -12,7 +12,7 @@ import PatientStoriesListing from '@/components/PatientStoriesListing'
 
 
 
-const PtientStories = async ({searchParams}) => {
+const PtientStories = async ({ searchParams }) => {
     const getLangLoc = await getCurrentLangLoc()
     const basePath = await getBaseUrl(true, true);
     const data = await getStaticPageContent("patient-stories");
@@ -36,7 +36,11 @@ const PtientStories = async ({searchParams}) => {
                         <div className="container">
                             <div className="row">
                                 <div className="col-12">
-                                    <Breadcrumb activeTitle={pageContent[0]?.title} middleTitle={""} middleURL={""} />
+                                    <Breadcrumb
+                                        activeTitle={pageContent[0]?.title}
+                                        middleTitle={""}
+                                        middleURL={""}
+                                    />
                                 </div>
                             </div>
                         </div>

@@ -97,21 +97,21 @@ const Header = () => {
 
     // Toggle sidebar
     hamburger?.addEventListener('click', function () {
-      this.classList.toggle('active');
-      sidebar.classList.toggle('active');
-      overlay.classList.toggle('active');
+      this?.classList.toggle('active');
+      sidebar?.classList.toggle('active');
+      overlay?.classList.toggle('active');
 
 
       // Prevent scrolling when sidebar is open
-      document.body.style.overflow = sidebar.classList.contains('active') ? 'hidden' : '';
+      document.body.style.overflow = sidebar?.classList.contains('active') ? 'hidden' : '';
     });
 
 
     // Close sidebar when clicking on overlay
     overlay?.addEventListener('click', function () {
-      hamburger.classList.remove('active');
-      sidebar.classList.remove('active');
-      this.classList.remove('active');
+      hamburger?.classList.remove('active');
+      sidebar?.classList.remove('active');
+      this?.classList.remove('active');
       document.body.style.overflow = '';
     });
 
@@ -131,20 +131,20 @@ const Header = () => {
               dropdown.classList.remove('open');
               const otherSubmenu = dropdown.querySelector('.submenu');
               if (otherSubmenu) {
-                otherSubmenu.classList.remove('open');
+                otherSubmenu?.classList.remove('open');
               }
             }
           });
 
 
           // Toggle current dropdown
-          parentLi.classList.toggle('open');
+          parentLi?.classList.toggle('open');
 
 
           // Find the submenu element
           const submenu = parentLi.querySelector('.submenu');
           if (submenu) {
-            submenu.classList.toggle('open');
+            submenu?.classList.toggle('open');
           }
 
 
@@ -154,19 +154,19 @@ const Header = () => {
 
 
         // Remove active class from all items
-        menuItems.forEach(i => i.classList.remove('active'));
+        menuItems.forEach(i => i?.classList.remove('active'));
 
 
         // Add active class to clicked item
-        this.classList.add('active');
+        this?.classList.add('active');
 
 
         // Close sidebar on mobile after selection
         if (window.innerWidth <= 768) {
           setTimeout(() => {
-            hamburger.classList.remove('active');
-            sidebar.classList.remove('active');
-            overlay.classList.remove('active');
+            hamburger?.classList.remove('active');
+            sidebar?.classList.remove('active');
+            overlay?.classList.remove('active');
             document.body.style.overflow = '';
           }, 300);
         }
@@ -176,10 +176,10 @@ const Header = () => {
 
     // Close sidebar when window is resized to desktop
     window?.addEventListener('resize', function () {
-      if (window.innerWidth > 768 && sidebar.classList.contains('active')) {
-        hamburger.classList.remove('active');
-        sidebar.classList.remove('active');
-        overlay.classList.remove('active');
+      if (window.innerWidth > 768 && sidebar?.classList.contains('active')) {
+        hamburger?.classList.remove('active');
+        sidebar?.classList.remove('active');
+        overlay?.classList.remove('active');
         document.body.style.overflow = '';
       }
     });
@@ -192,29 +192,29 @@ const Header = () => {
 
 
         // Remove active class from all items
-        menuItems.forEach(i => i.classList.remove('active'));
+        menuItems.forEach(i => i?.classList.remove('active'));
 
 
         // Add active class to parent menu item
         const parentMenuItem = this.closest('.has-dropdown').querySelector('.menu-item');
         if (parentMenuItem) {
-          parentMenuItem.classList.add('active');
+          parentMenuItem?.classList.add('active');
         }
 
 
         // Highlight this submenu item
         document.querySelectorAll('.submenu-item').forEach(i => {
-          i.classList.remove('active');
+          i?.classList.remove('active');
         });
-        this.classList.add('active');
+        this?.classList.add('active');
 
 
         // Close sidebar on mobile after selection
         if (window.innerWidth <= 768) {
           setTimeout(() => {
-            hamburger.classList.remove('active');
-            sidebar.classList.remove('active');
-            overlay.classList.remove('active');
+            hamburger?.classList.remove('active');
+            sidebar?.classList.remove('active');
+            overlay?.classList.remove('active');
             document.body.style.overflow = '';
           }, 300);
         }
@@ -262,15 +262,17 @@ const Header = () => {
                 <div className="whatapp-icon">
                   <a href={"https://wa.me/" + locationData?.whatsapp} target='_blank'> <img src="/img/whatsapp.svg" className="img-fluid" alt="" /></a>
                 </div>
+
                 <div className="search-icon ms-3 me-2 rounded-field-form">
                   <a href="#" className="search-button" onClick={() => {
                     setShowSearch(!showSearch);
                   }}>
                     <i className="fa-solid fa-magnifying-glass"></i></a>
-                  <div className={`search-box input-group p-0 my-lg-3 my-3 ${showSearch ? "d-flex" : "d-none"}`} >
+                  <div className={`search-box input-group p-0 my-lg-3 my-3 ${showSearch ? "d-flex" : "d-none"}`}>
                     <SearchBox />
                   </div>
                 </div>
+
                 <div className="top-drop-down">
                   <select value={selectedLang?.slug || ""} className="border-0 " onChange={onLangChangeRedirection}>
                     {
@@ -642,7 +644,7 @@ const Header = () => {
                     <a href={basePath + "/doctor-talk"}>
                       {staticTexts['Videos']}</a>
                   </li>
-                
+
 
                   <li className="menu-item-has-children show-submenu quicklink-header">
                     <a href="#" className="anchor-menu">{staticTexts['Others']}</a>

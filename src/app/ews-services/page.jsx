@@ -49,7 +49,6 @@ const EwsServices = async () => {
                                     dangerouslySetInnerHTML={{ __html: pageContent[1]?.details || "" }}
                                 >
                                 </div>
-
                             </div>
                         </div>
                     </section>
@@ -60,7 +59,6 @@ const EwsServices = async () => {
                             <div className="main-heading">
                                 <h2>{pageContent[2]?.title}</h2>
                             </div>
-
                             <div
                                 dangerouslySetInnerHTML={{ __html: pageContent[2]?.details || "" }}
                                 className="table-responsive services-table mt-4">

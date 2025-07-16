@@ -5725,3 +5725,11 @@ a.active {
 .patients-stories-section .testi-rightbox p{
     display: block;
 }
+
+.internation-patients-main-page .home-service-card-image img{
+    width: 60px;
+    height: auto;
+}
+.internation-patients-main-page .home-service-content{
+    padding: 0;
+}

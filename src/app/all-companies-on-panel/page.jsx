@@ -60,7 +60,6 @@ const AllCompaniesPanel = async () => {
                                         </div>
                                     })
                                 }
-
                             </div>
                         </div>
                     </section>

@@ -131,7 +131,9 @@ const DoctorListing = ({ baseURL, allLocation, allSpeciality, allDoctorCount, la
                                                     placeholder="Search ...."
                                                     onChange={onLocationChange}
                                                 />
-                                                <span className="input-group-text"><i className="fa-solid fa-magnifying-glass"></i></span>
+                                                <span className="input-group-text">
+                                                    <i className="fa-solid fa-magnifying-glass"></i>
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
@@ -158,7 +160,7 @@ const DoctorListing = ({ baseURL, allLocation, allSpeciality, allDoctorCount, la
                                             <div className="input-group">
                                                 <input type="text"
                                                     className="form-control"
-                                                    placeholder="Search ....."
+                                                    placeholder={staticText['Search']+" ....."}
                                                     onChange={onSpecialityChange}
                                                 />
                                                 <span className="input-group-text"><i className="fa-solid fa-magnifying-glass"></i></span>
@@ -218,7 +220,7 @@ const DoctorListing = ({ baseURL, allLocation, allSpeciality, allDoctorCount, la
                                             <div className="card-top">
                                                 <a href="#">
                                                     <img
-                                                        src={d.doctorImage?.url ? `${process.env.NEXT_PUBLIC_IMAGE_URL}${d.doctorImage.url}` : "/img/no-image.jpg"}
+                                                        src={d.doctorImage?.url ? `${process.env.NEXT_PUBLIC_IMAGE_URL}${d.doctorImage?.url}` : "/img/no-image.jpg"}
                                                         className="img-fluid w-100"
                                                         alt={d.name}
                                                     />

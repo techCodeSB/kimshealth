@@ -4,11 +4,14 @@ import JournalCarousel from '@/components/JournalCarousel'
 import React from 'react'
 import { getBaseUrl } from '@/app/lib/getBaseUrl'
 import { getStaticPageContent } from '@/app/lib/getStaticPageContent'
-import Form1 from '@/components/Forms/Form1'
-import courseData from '@/app/lib/getCourse'
-import getStaticText from '@/app/lib/getStaticTextServer'
-import Breadcrumb from '@/components/Breadcrumb'
-import getCurrentLangLoc from '@/app/lib/getCurrentLangLoc'
+import Form1 from '@/components/Forms/Form1';
+import courseData from '@/app/lib/getCourse';
+import getStaticText from '@/app/lib/getStaticTextServer';
+import Breadcrumb from '@/components/Breadcrumb';
+import getCurrentLangLoc from '@/app/lib/getCurrentLangLoc';
+
+
+
 
 const KisaHealth = async () => {
     const getLangLoc = await getCurrentLangLoc()
@@ -57,7 +60,7 @@ const KisaHealth = async () => {
                                     </div>
 
                                     <div className="col-md-6 details-proceduce-banner-right-col">
-                                        <img src={pageContent[1]?.bannerItem[0].bannerImageDesktop.url ? process.env.NEXT_PUBLIC_IMAGE_URL + pageContent[1]?.bannerItem[0].bannerImageDesktop.url : "/img/no-image.jpg"} className="img-fluid details-banner-image" alt="" />
+                                        <img src={pageContent[1]?.bannerItem[0].bannerImageDesktop.url ? process.env.NEXT_PUBLIC_IMAGE_URL + pageContent[1]?.bannerItem[0].bannerImageDesktop.url : "/img/no-image.jpg"} className="img-fluid details-banner-image" alt={pageContent[0].title}/>
                                     </div>
                                 </div>
                             </div>
@@ -108,14 +111,18 @@ const KisaHealth = async () => {
                                                                         <div id={"collapse" + i} className={`accordion-collapse collapse ${i <= 2 ? "show" : ""}`}>
                                                                             <div className="accordion-body main-list px-0 pt-0">
                                                                                 <ul>
-                                                                                    <li>Affiliation: {l.affiliation}</li>
-                                                                                    <li>Entry Level: {l.entryLevel}</li>
-                                                                                    <li>Course Duration: {l.duration}</li>
-                                                                                    <li>Fees: {l.fees}</li>
-                                                                                    <li>Course period (stipend): {l.coursePeriodStipend}</li>
-                                                                                    <li>Internship (stipend): {l.internshipStipend}</li>
+                                                                                    <li>{staticText['Affiliation']}: {l.affiliation}</li>
+                                                                                    <li>{staticText['Entry Level']}: {l.entryLevel}</li>
+                                                                                    <li>
+                                                                                        {staticText['Course Duration']}: {l.duration}
+                                                                                    </li>
+                                                                                    <li>{staticText['Fees']}: {l.fees}</li>
+                                                                                    <li>
+                                                                                        {staticText['Course period (stipend)']}: {l.coursePeriodStipend}
+                                                                                    </li>
+                                                                                    <li>{staticText['Internship (stipend)']}: {l.internshipStipend}</li>
                                                                                 </ul>
-                                                                                <a href={basePath + "/course/" + l.slug} className="doctotal-btn">View More</a>
+                                                                                <a href={basePath + "/course/" + l.slug} className="doctotal-btn">{staticText['View More']}</a>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -164,7 +171,6 @@ const KisaHealth = async () => {
                             </div>
                         </div>
                     </section>
-
                 </div>
             </div>
             <Footer />

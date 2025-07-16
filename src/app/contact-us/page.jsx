@@ -20,6 +20,7 @@ const ContactUs = async () => {
     const medicalCenter = await hospitalData.getAllByType({ type: "Medical Center", langLoc: getLangLoc })
     const allHospital = [...hospitals, ...medicalCenter];
 
+
     return (
         <>
             <Header />
@@ -61,7 +62,7 @@ const ContactUs = async () => {
                                                             <div className="contact-icon location-icon"><i className="fa-solid fa-location-dot"></i>
                                                             </div>
                                                             <div className="contact-content">
-                                                                <h3>Location</h3>
+                                                                <h3>{staticText['Location']}</h3>
                                                                 <p>{h.address}</p>
                                                             </div>
                                                         </div>
@@ -70,7 +71,7 @@ const ContactUs = async () => {
                                                         <div className="contact-details">
                                                             <div className="contact-icon"><i className="fa-solid fa-envelope-open"></i></div>
                                                             <div className="contact-content">
-                                                                <h3>Email:</h3>
+                                                                <h3>{staticText['Email']}:</h3>
                                                                 <p>{h.email}</p>
                                                             </div>
                                                         </div>
@@ -79,11 +80,13 @@ const ContactUs = async () => {
                                                         <div className="contact-details">
                                                             <div className="contact-icon"><i className="fa-solid fa-phone"></i></div>
                                                             <div className="contact-content">
-                                                                <h3>Phone:</h3>
+                                                                <h3>{staticText['Phone']}:</h3>
                                                                 <p>{h.contactNo}</p>
                                                             </div>
                                                         </div>
-                                                        <a href={h.mapURL} target='_blank' className="btn-tab treat-tab form-btn w-auto  mt-2 d-inline-block"><i className="fa-solid fa-diamond-turn-right"></i> Get Direction</a>
+                                                        <a href={h.mapURL} target='_blank' className="btn-tab treat-tab form-btn w-auto  mt-2 d-inline-block"><i className="fa-solid fa-diamond-turn-right"></i>
+                                                        {staticText['Get Direction']}
+                                                        </a>
                                                     </div>
                                                 </section>
                                             </div>

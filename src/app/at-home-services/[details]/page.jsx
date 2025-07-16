@@ -70,7 +70,7 @@ const HomeServiceDetails = async ({ params }) => {
 
                                     <div className="col-md-6 details-proceduce-banner-right-col">
                                         <img src={data.banner?.bannerItem[0]?.bannerImageDesktop?.url ?
-                                            process.env.NEXT_PUBLIC_IMAGE_URL + data.banner?.bannerItem[0]?.bannerImageDesktop?.url : "/img/no-image.jpg"} className="img-fluid details-banner-image" alt="" />
+                                            process.env.NEXT_PUBLIC_IMAGE_URL + data.banner?.bannerItem[0]?.bannerImageDesktop?.url : "/img/no-image.jpg"} className="img-fluid details-banner-image" alt={data.title}/>
                                     </div>
                                 </div>
                             </div>
@@ -97,7 +97,7 @@ const HomeServiceDetails = async ({ params }) => {
 
                                             <div className="details-proceduce-banner-right-col">
                                                 <img src={data.banner?.bannerItem[0]?.bannerImageMobile?.url ?
-                                                    process.env.NEXT_PUBLIC_IMAGE_URL + data.banner?.bannerItem[0]?.bannerImageMobile?.url : "/img/no-image.jpg"} className="img-fluid details-banner-image" alt="" />
+                                                    process.env.NEXT_PUBLIC_IMAGE_URL + data.banner?.bannerItem[0]?.bannerImageMobile?.url : "/img/no-image.jpg"} className="img-fluid details-banner-image" alt={data.title} />
                                             </div>
 
                                         </div>

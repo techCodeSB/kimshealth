@@ -132,8 +132,6 @@ const Speciality = async ({ searchParams }) => {
                                             <h5>{pageContent[3].card4Title}</h5>
                                             <h4><i className="fa-solid fa-phone"></i> {pageContent[3].card4Contact}</h4>
                                         </div>
-
-
                                     </div>
                                 </a>
                             </div>
@@ -141,7 +139,6 @@ const Speciality = async ({ searchParams }) => {
                         </div>
                     </div>
                 </section>
-
             </div>
             <Footer />
         </>

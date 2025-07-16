@@ -20,7 +20,10 @@ const ParamedicalCourse = async () => {
     const pageMeta = data?.data[0]?.metaSection;
     const staticText = await getStaticText();
 
-    let allDiplomaCourses = await courseData.getAll({ id: pageContent[3].courseCategory?.id, langLoc: getLangLoc });
+    let allDiplomaCourses = await courseData.getAll({
+        id: pageContent[3].courseCategory?.id,
+        langLoc: getLangLoc
+    });
 
 
     return (
@@ -87,20 +90,21 @@ const ParamedicalCourse = async () => {
                                                         <div className="doctoral-card-content">
                                                             <h3 className="text-dark">{l.title}</h3>
                                                             <ul>
-                                                                <li className="hourglass">Duration: {l.duration}</li>
-                                                                <li className="luxury">Eligibility: {l.eligibility} </li>
-                                                                <li className="calender-doc">Commencement: {l.commencement}</li>
-                                                                <li className="car-seat">No of seat: {l.noOfSeat}</li>
+                                                                <li className="hourglass">{staticText['Duration']}: {l.duration}</li>
+                                                                <li className="luxury">{staticText['Eligibility']}: {l.eligibility} </li>
+                                                                <li className="calender-doc">
+                                                                    {staticText['Commencement']}: {l.commencement}</li>
+                                                                <li className="car-seat">{staticText['No of seat']}: {l.noOfSeat}</li>
                                                             </ul>
-                                                            <a href={basePath + "/course/" + l.slug} className="doctotal-btn">View More</a>
+                                                            <a href={basePath + "/course/" + l.slug} className="doctotal-btn">
+                                                                {staticText['View More']}
+                                                            </a>
                                                         </div>
                                                     </div>
                                                 })
                                             }
                                         </div>
                                     </section>
-
-
                                 </div>
 
                                 <div className="col-md-4">
@@ -112,14 +116,15 @@ const ParamedicalCourse = async () => {
                                         <p><strong>{pageContent[4].contactPerson}</strong></p>
                                         <p>{pageContent[4].designation}</p>
                                         <p>{pageContent[4].address}</p>
-                                        <a href={"tel:" + pageContent[4].phone}><i className="fa-solid fa-phone"></i> {pageContent[4].phone}</a>
-                                        <a href={"mailto:" + pageContent[4].email}><i className="fa-solid fa-envelope"></i>
-                                            {pageContent[4].email}</a>
+                                        <a href={"tel:" + pageContent[4].phone}>
+                                            <i className="fa-solid fa-phone"></i> {pageContent[4].phone}
+                                        </a>
+                                        <a href={"mailto:" + pageContent[4].email}>
+                                            <i className="fa-solid fa-envelope"></i>{pageContent[4].email}
+                                        </a>
                                     </div>
-
                                 </div>
                             </div>
-
                         </div>
                     </section>
                 </div>

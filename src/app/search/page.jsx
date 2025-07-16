@@ -49,8 +49,6 @@ const SearchPage = async ({ searchParams }) => {
                         </div>
                     </section>
 
-
-
                     <section className="section">
                         <div className="container">
                             <div className="row justify-content-between">
@@ -73,7 +71,7 @@ const SearchPage = async ({ searchParams }) => {
                         <section className="section">
                             <div className="container">
                                 <div className="main-heading main-list sub-heading">
-                                    <h2>Pages</h2>
+                                    <h2>{staticText['Pages']}</h2>
                                     <div>
                                         <ul>
                                             {
@@ -97,7 +95,7 @@ const SearchPage = async ({ searchParams }) => {
                         <section className="section">
                             <div className="container">
                                 <div className="main-heading main-list sub-heading">
-                                    <h2>Speciality</h2>
+                                    <h2>{staticText['Speciality']}</h2>
                                     <div>
                                         <ul>
                                             {
@@ -121,7 +119,7 @@ const SearchPage = async ({ searchParams }) => {
                         <section className="section">
                             <div className="container">
                                 <div className="main-heading main-list sub-heading">
-                                    <h2>Doctor</h2>
+                                    <h2>{staticText['Doctors']}</h2>
                                     <div>
                                         <ul>
                                             {
@@ -145,7 +143,7 @@ const SearchPage = async ({ searchParams }) => {
                         <section className="section">
                             <div className="container">
                                 <div className="main-heading main-list sub-heading">
-                                    <h2>Blog</h2>
+                                    <h2>{staticText['Blog']}</h2>
                                     <div>
                                         <ul>
                                             {
@@ -162,9 +160,6 @@ const SearchPage = async ({ searchParams }) => {
                         </section>
                     </>
                     }
-
-
-
 
                 </div>
             </div>

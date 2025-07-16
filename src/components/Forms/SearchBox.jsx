@@ -3,7 +3,7 @@ import { getBaseUrl } from '@/helper/getBaseUrl';
 import getStaticText from '@/helper/getStaticText';
 import React, { useEffect, useRef, useState } from 'react'
 
-const SearchBox = ({query}) => {
+const SearchBox = ({ query }) => {
     const [basePath, setBasePath] = useState();
     const [basePathOnlyLang, setBasePathOnlyLang] = useState();
     const searchData = useRef(null);
@@ -37,11 +37,14 @@ const SearchBox = ({query}) => {
         setBasePath(getBaseUrl(true, true));
         setBasePathOnlyLang(getBaseUrl(true, false));
 
+
     }, [])
+
+
     return (
         <>
             <input type="text" ref={searchData} className="form-control "
-                placeholder={staticTexts['Search Text']+" ...."} defaultValue={query} />
+                placeholder={staticTexts['Search Text'] + " ...."} defaultValue={query} id='headerSearchIcon' />
             <button onClick={() => searchWeb()} className="input-group-text" id="from-icon">
                 <i className="fa-solid icon-magnifier"></i>
             </button>

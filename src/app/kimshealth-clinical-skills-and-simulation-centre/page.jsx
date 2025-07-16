@@ -20,6 +20,7 @@ const ClinicalSkills = async () => {
             <Header />
             <div role="main" className="main">
                 <div className="emergency-medicine-main-page">
+                    
                     {/* Desktop section */}
                     <section className="section details-page-before py-0 d-lg-block d-none">
                         <div className="procedures-details-page-header inner-pages-header">
