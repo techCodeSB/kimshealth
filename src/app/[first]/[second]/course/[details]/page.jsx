@@ -14,7 +14,7 @@ const DoctoralCourseDetails = async ({ params }) => {
     const staticText = await getStaticText();
 
     let courseDetails = await courseData.getSingleCourse(params.details);
-    let otherCourse = await courseData.getAll({id:courseDetails.courseCategory.id, langLoc:getLangLoc});
+    let otherCourse = await courseData.getAll({ id: courseDetails.courseCategory.id, langLoc: getLangLoc });
 
 
     return (
@@ -55,10 +55,10 @@ const DoctoralCourseDetails = async ({ params }) => {
                                     <div className="doctoral-card-content sub-heading mb-4">
                                         <p>Certified by: {courseDetails.affiliation}</p>
                                         <ul>
-                                            <li className="hourglass">Duration : {courseDetails.affiliation}</li>
-                                            <li className="luxury">Eligibility : {courseDetails.eligibility}</li>
-                                            <li className="calender-doc">Commencement : {courseDetails.commencement}</li>
-                                            <li className="car-seat">No of seat: {courseDetails.noOfSeat}</li>
+                                            <li className="hourglass">{staticText['Duration']} : {courseDetails.affiliation}</li>
+                                            <li className="luxury">{staticText['Eligibility']} : {courseDetails.eligibility}</li>
+                                            <li className="calender-doc">{staticText['Commencement']} : {courseDetails.commencement}</li>
+                                            <li className="car-seat">{staticText['No of seat']}: {courseDetails.noOfSeat}</li>
                                         </ul>
 
                                     </div>
@@ -83,12 +83,14 @@ const DoctoralCourseDetails = async ({ params }) => {
                                             <h3>{l.title}</h3>
                                             <p>{l.affiliation}</p>
                                             <ul>
-                                                <li className="hourglass">Duration: {l.duration}</li>
-                                                <li className="luxury">Eligibility: {l.eligibility} </li>
-                                                <li className="calender-doc">Commencement: {l.commencement}</li>
-                                                <li className="car-seat">No of seat: {l.noOfSeat}</li>
+                                                <li className="hourglass">{staticText['Duration']}: {l.duration}</li>
+                                                <li className="luxury">{staticText['Eligibility']}: {l.eligibility} </li>
+                                                <li className="calender-doc">{staticText['Commencement']}: {l.commencement}</li>
+                                                <li className="car-seat">{staticText['No of seat']}: {l.noOfSeat}</li>
                                             </ul>
-                                            <a href={basePath + "/course/" + l.slug} className="doctotal-btn">View More</a>
+                                            <a href={basePath + "/course/" + l.slug} className="doctotal-btn">
+                                                {staticText['View More']}
+                                            </a>
                                         </div>
                                     })
                                 }

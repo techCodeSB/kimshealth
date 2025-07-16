@@ -107,7 +107,7 @@ const HospitalDetails = async ({ params }) => {
                                             <div className="details-heading">
                                                 <div className="hospital-content">
                                                     <ul>
-                                                        <li className="telephone-icon-custom"><a href={`tel:${hptData.contactNo}`}> Appointment Number- {hptData.contactNo} </a></li>
+                                                        <li className="telephone-icon-custom"><a href={`tel:${hptData.contactNo}`}> {staticText['Appointment Number']}- {hptData.contactNo} </a></li>
                                                         <li className="send-custom-icon">
                                                             <a href={hptData.mapURL} target='_blank'> {staticText['Get Direction']}</a>
                                                         </li>
@@ -149,10 +149,10 @@ const HospitalDetails = async ({ params }) => {
                                                 <div className="col-12 px-0">
                                                     <ul className="breadcrumb mb-0">
                                                         <li>
-                                                            <a href={basePath + "/"}>Home</a>
+                                                            <a href={basePath + "/"}>{staticText['Home']}</a>
                                                         </li>
                                                         <li>
-                                                            <a href={basePath + "/hospital"}>Our Hospital</a>
+                                                            <a href={basePath + "/hospital"}>{staticText['Our Hospital']}</a>
                                                         </li>
                                                         <li className="active"> {hptData.title} </li>
                                                     </ul>
@@ -169,8 +169,10 @@ const HospitalDetails = async ({ params }) => {
                                                             <ul>
                                                                 <li className="hospital-icon-custom">{hptData.title} </li>
                                                                 <li>{hptData.address}</li>
-                                                                <li className="telephone-icon-custom"><a href={`tel:${hptData.contactNo}`}> Appointment Number- {hptData.contactNo}</a></li>
-                                                                <li className="send-custom-icon"><a href={hptData.mapURL}> Get Direction</a></li>
+                                                                <li className="telephone-icon-custom"><a href={`tel:${hptData.contactNo}`}>{staticText['Appointment Number']}- {hptData.contactNo}</a></li>
+                                                                <li className="send-custom-icon">
+                                                                    <a href={hptData.mapURL}>{staticText['Get Direction']}</a>
+                                                                </li>
                                                             </ul>
 
                                                             <div className="d-flex align-items-center mt-2">
@@ -206,7 +208,7 @@ const HospitalDetails = async ({ params }) => {
                         <div className="row">
                             <div className="cta-col ctn-left-col">
                                 <div className="cta-diff">
-                                    <h3>I am here to <i className="icon-arrow-right"></i></h3>
+                                    <h3>{staticText['I am here to']} <i className="icon-arrow-right"></i></h3>
                                 </div>
                             </div>
                             <div className="cta-col">
@@ -214,7 +216,7 @@ const HospitalDetails = async ({ params }) => {
                                     <div className="cta-diff">
                                         <div className="d-flex align-items-center justify-content-center">
                                             <img src="/img/doctor.png" alt="" />
-                                            <h3>Find a <br /> <span>Doctor</span></h3>
+                                            <h3>{staticText['Find a']} <br /> <span>{staticText['Doctor']}</span></h3>
                                         </div>
                                     </div>
                                 </a>
@@ -224,7 +226,7 @@ const HospitalDetails = async ({ params }) => {
                                     <div className="cta-diff">
                                         <div className="d-flex align-items-center justify-content-center">
                                             <img src="/img/appointment.png" alt="" />
-                                            <h3>Book an <br /> <span>Appointment</span></h3>
+                                            <h3>{staticText['Book an']} <br /> <span>{staticText['Appointment']}</span></h3>
                                         </div>
                                     </div>
                                 </a>
@@ -234,7 +236,7 @@ const HospitalDetails = async ({ params }) => {
                                     <div className="cta-diff">
                                         <div className="d-flex align-items-center justify-content-center">
                                             <img src="/img/health.png" alt="" />
-                                            <h3>Book a <br /> <span>Health Checkup</span></h3>
+                                            <h3>{staticText['Book a']} <br /> <span>{staticText['Health Checkup']}</span></h3>
                                         </div>
                                     </div>
                                 </a>
@@ -244,7 +246,7 @@ const HospitalDetails = async ({ params }) => {
                                     <div className="cta-diff">
                                         <div className="d-flex align-items-center justify-content-center">
                                             <img src="/img/opinion.png" alt="" />
-                                            <h3>Get <br /> <span>Second Opinion</span></h3>
+                                            <h3>{staticText['Get']} <br /> <span>{staticText['Second Opinion']}</span></h3>
                                         </div>
                                     </div>
                                 </a>
@@ -261,7 +263,7 @@ const HospitalDetails = async ({ params }) => {
                                     <div className="cta-diff">
                                         <div className="d-flex align-items-center justify-content-center">
                                             <img src="/img/appointment-mb.png" alt="" />
-                                            <h3>Book an <br /> Appointment</h3>
+                                            <h3>{staticText['Book an']} <br /> {staticText['Appointment']}</h3>
                                         </div>
                                     </div>
                                 </a>
@@ -271,7 +273,7 @@ const HospitalDetails = async ({ params }) => {
                                     <div className="cta-diff">
                                         <div className="d-flex align-items-center justify-content-center">
                                             <img src="/img/doctor.png" alt="" />
-                                            <h3>Find a <br /> <span>Doctor</span></h3>
+                                            <h3>{staticText['Find a']} <br /> <span>{staticText['Doctor']}</span></h3>
                                         </div>
                                     </div>
                                 </a>
@@ -281,7 +283,7 @@ const HospitalDetails = async ({ params }) => {
                                     <div className="cta-diff">
                                         <div className="d-flex align-items-center justify-content-center">
                                             <img src="/img/opinion.png" alt="" />
-                                            <h3>Health <br /> <span> Check-up</span></h3>
+                                            <h3>{staticText['Health']} <br /> <span>{staticText['Check-up']}</span></h3>
                                         </div>
                                     </div>
                                 </a>
@@ -368,7 +370,7 @@ const HospitalDetails = async ({ params }) => {
                             </div>
                             <div className="col-md-2 col-4">
                                 <div className="over-all-btn text-end">
-                                    <a href={basePath + "/hospital"}>View All <span><img src="/img/slider-right-arrow.svg" className="img-fluid"
+                                    <a href={basePath + "/hospital"}>{staticText['View All']}<span><img src="/img/slider-right-arrow.svg" className="img-fluid"
                                         alt="" /></span></a>
                                 </div>
                             </div>
@@ -380,7 +382,7 @@ const HospitalDetails = async ({ params }) => {
                                         <div className="custom-hospital-top-card">
                                             <div className="hospital-img">
                                                 <a href={basePath + "/hospital/" + h.slug}>
-                                                    <img src={process.env.NEXT_PUBLIC_IMAGE_URL + h.featuredImage?.url} alt="" className="img-fluid w-100" />
+                                                    <img src={process.env.NEXT_PUBLIC_IMAGE_URL + h.featuredImage?.url} alt={h.title} className="img-fluid w-100" />
                                                 </a>
                                             </div>
                                             <div className="hospital-content">
@@ -393,7 +395,7 @@ const HospitalDetails = async ({ params }) => {
                                                     <div className="hospital-content mb-lg-0 mb-3 p-0">
                                                         <ul>
                                                             <li className="mb-0 send-custom-icon">
-                                                                <a href={h.mapURL} target='_blank'>Get Direction</a>
+                                                                <a href={h.mapURL} target='_blank'>{staticText['Get Direction']}</a>
                                                             </li>
                                                         </ul>
                                                     </div>
@@ -413,13 +415,12 @@ const HospitalDetails = async ({ params }) => {
                                                 </div>
 
                                                 <div className="d-lg-flex d-block align-items-center justify-content-between pt-3">
-                                                    <a href={basePath + "/hospital/" + h.slug} className="btn mb-lg-0 mb-2 hospital-primarybtn">View Details</a>
-                                                    <a href={basePath + "/book-an-appointment"} className="btn mb-lg-0 mb-3 hospital-secondarybtn">Appointment</a>
+                                                    <a href={basePath + "/hospital/" + h.slug} className="btn mb-lg-0 mb-2 hospital-primarybtn">{staticText['View Details']}</a>
+                                                    <a href={basePath + "/book-an-appointment"} className="btn mb-lg-0 mb-3 hospital-secondarybtn">{staticText['Appointment']}</a>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-
                                 })
                             }
                         </div>

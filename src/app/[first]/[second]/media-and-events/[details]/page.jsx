@@ -16,7 +16,6 @@ const MediaAndEventsDetails = async ({ params }) => {
     const data = await mediaData.getSingleMedia(params.details);
     const recentMedia = await mediaData.getRecentMedia({langLoc: getLangLoc})
 
-    console.log(data)
 
     return (
         <>
@@ -47,8 +46,8 @@ const MediaAndEventsDetails = async ({ params }) => {
                                                     {
                                                         data.speaker?.speaker?.map((sp, i) => {
                                                             return <ul key={i} className={`${i > 0 ? "mt-3" : ""}`}>
-                                                                <li className="hospital-doctor"> By: {sp.by} </li>
-                                                                <li className="chat-ic">Topic: {sp.topic}</li>
+                                                                <li className="hospital-doctor">{staticText['By']}: {sp.by} </li>
+                                                                <li className="chat-ic">{staticText['Topic']}: {sp.topic}</li>
                                                                 <li className="hospital-icon-custom">{sp.hospitalName} </li>
                                                             </ul>
                                                         })
@@ -177,7 +176,10 @@ const MediaAndEventsDetails = async ({ params }) => {
                                                             <div>
                                                                 <img src="/img/kims-small-logo.png" className="img-fluid" alt="" />
                                                             </div>
-                                                            <p><a href={basePath + "/media-and-events/" + e.slug}><strong>{e.title}</strong></a></p>
+                                                            <p>
+                                                                <a href={basePath + "/media-and-events/" + e.slug}><strong>{e.title}
+                                                                </strong></a>
+                                                            </p>
                                                         </div>
                                                         <p className="mt-2 ms-4 ps-3">{formatDate(e?.date)}</p>
                                                     </div>

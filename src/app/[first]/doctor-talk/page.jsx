@@ -3,7 +3,6 @@ import Header from '@/components/Header'
 import React from 'react'
 import { getBaseUrl } from '@/app/lib/getBaseUrl';
 import { getStaticPageContent } from '@/app/lib/getStaticPageContent';
-import doctorTalkData from '@/app/lib/getDoctorTalk';
 import getStaticText from '@/app/lib/getStaticTextServer';
 import DoctorTalkListing from '@/components/DoctorTalkListing';
 import Breadcrumb from '@/components/Breadcrumb';

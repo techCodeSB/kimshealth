@@ -163,7 +163,7 @@ const EmergencyMedicine = async () => {
                                         <div className="em-sticky-ele">
                                             <h4>{pageContent[8]?.sectionTitle}</h4>
                                             <p><strong>{pageContent[8]?.contactPerson}</strong></p>
-                                            <p>SOCOMER</p>
+                                            <p>{staticText['SOCOMER']}</p>
                                             <p> {pageContent[8]?.address}</p>
                                             <a href={"tel:" + pageContent[8]?.phone}>
                                                 {pageContent[8]?.phone && <i className="fa-solid fa-phone"></i>}

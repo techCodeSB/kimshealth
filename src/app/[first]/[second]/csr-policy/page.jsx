@@ -132,7 +132,6 @@ const CsrPolicy = async () => {
                                         </div>
                                     </section>
 
-
                                     <div className="line-divider"></div>
                                     <section className="section">
                                         <div className="container">
@@ -167,7 +166,6 @@ const CsrPolicy = async () => {
                                             <div className="main-heading sub-heading main-list-black">
                                                 <h2>{pageContent[10]?.title}</h2>
                                                 <div dangerouslySetInnerHTML={{ __html: pageContent[10]?.details || "" }}></div>
-
                                             </div>
                                         </div>
                                     </section>

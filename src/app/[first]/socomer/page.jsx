@@ -6,6 +6,7 @@ import getStaticText from '@/app/lib/getStaticTextServer'
 import { getStaticPageContent } from '@/app/lib/getStaticPageContent'
 import Breadcrumb from '@/components/Breadcrumb'
 import getCurrentLangLoc from '@/app/lib/getCurrentLangLoc'
+import Form1 from '@/components/Forms/Form1'
 
 const Socomer = async () => {
     const getLangLoc = await getCurrentLangLoc()
@@ -56,140 +57,165 @@ const Socomer = async () => {
                         </div>
 
                     </section>
-                    <section className="section">
+
+                    <section class="section doctor-line-divider">
                         <div className="container">
-                            <div className="main-heading sub-heading main-list" dangerouslySetInnerHTML={{ __html: pageContent[2].details }}>
-                            </div>
-                        </div>
-                    </section>
-
-
-                    <div className="line-divider"> </div>
-                    <section className="section">
-                        <div className="container">
-                            <div className="main-heading">
-                                <h2>{pageContent[3].title}</h2>
-                            </div>
-
                             <div className="row">
-                                {
-                                    pageContent[3].socomer?.map((sp, i) => (
-                                        <div className="col-md-4" key={i}>
-                                            <div className="socomer-tab">
-                                                <div className="procedure-acc-card mb-3">
-                                                    <div className="accordion" id={`accordionExample_f${i}`}>
-                                                        <div className="accordion-item">
-                                                            <h2 className="accordion-header">
-                                                                <button
-                                                                    className={`accordion-button ${i === 0 ? "" : "collapsed"}`}
-                                                                    type="button"
-                                                                    data-bs-toggle="collapse"
-                                                                    data-bs-target={`#collapse_f${i}`}
-                                                                    aria-expanded={i === 0 ? "true" : "false"}
-                                                                    aria-controls={`collapse_f${i}`}
-                                                                >
-                                                                    <span>{sp.title}</span>
-                                                                </button>
-                                                            </h2>
-                                                            <div
-                                                                id={`collapse_f${i}`}
-                                                                className={`accordion-collapse collapse ${i === 0 ? "show" : ""}`}
-                                                            >
-                                                                <div className="accordion-body px-0 pt-0">
-                                                                    <ul>
-                                                                        {sp?.socomerItem?.map((spI, j) => (
-                                                                            <li key={j}>
-                                                                                - {spI.title}
-                                                                                <a href={`${process.env.NEXT_PUBLIC_IMAGE_URL}${spI.file?.url}`} target="_blank" rel="noopener noreferrer">
-                                                                                    <i className="custom-download"></i>{spI.buttonText}
-                                                                                </a>
-                                                                            </li>
-                                                                        ))}
-                                                                    </ul>
+                                <div className="col-md-8 ps-lg-0">
+                                    <section className="section">
+                                        <div className="container">
+                                            <div className="main-heading sub-heading main-list" dangerouslySetInnerHTML={{ __html: pageContent[2].details }}>
+                                            </div>
+                                        </div>
+                                    </section>
+
+
+                                    <div className="line-divider"> </div>
+                                    <section className="section">
+                                        <div className="container">
+                                            <div className="main-heading">
+                                                <h2>{pageContent[3].title}</h2>
+                                            </div>
+
+                                            <div className="row">
+                                                {
+                                                    pageContent[3].socomer?.map((sp, i) => (
+                                                        <div className="col-md-6" key={i}>
+                                                            <div className="socomer-tab">
+                                                                <div className="procedure-acc-card mb-3">
+                                                                    <div className="accordion" id={`accordionExample_f${i}`}>
+                                                                        <div className="accordion-item">
+                                                                            <h2 className="accordion-header">
+                                                                                <button
+                                                                                    className={`accordion-button ${i === 0 ? "" : "collapsed"}`}
+                                                                                    type="button"
+                                                                                    data-bs-toggle="collapse"
+                                                                                    data-bs-target={`#collapse_f${i}`}
+                                                                                    aria-expanded={i === 0 ? "true" : "false"}
+                                                                                    aria-controls={`collapse_f${i}`}
+                                                                                >
+                                                                                    <span>{sp.title}</span>
+                                                                                </button>
+                                                                            </h2>
+                                                                            <div
+                                                                                id={`collapse_f${i}`}
+                                                                                className={`accordion-collapse collapse ${i === 0 ? "show" : ""}`}
+                                                                            >
+                                                                                <div className="accordion-body px-0 pt-0">
+                                                                                    <ul>
+                                                                                        {sp?.socomerItem?.map((spI, j) => (
+                                                                                            <li key={j}>
+                                                                                                - {spI.title}
+                                                                                                <a href={`${process.env.NEXT_PUBLIC_IMAGE_URL}${spI.file?.url}`} target="_blank" rel="noopener noreferrer">
+                                                                                                    <i className="custom-download"></i>{spI.buttonText}
+                                                                                                </a>
+                                                                                            </li>
+                                                                                        ))}
+                                                                                    </ul>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </div>
+                                                    ))
+                                                }
+
                                             </div>
                                         </div>
-                                    ))
-                                }
+                                    </section>
 
-                            </div>
-                        </div>
-                    </section>
-
-                    <div className="line-divider"> </div>
-                    <section className="section">
-                        <div className="container">
-                            <div className="main-heading">
-                                <h2>{pageContent[4].title}</h2>
-                            </div>
-                            <div className="row">
-                                {
-                                    pageContent[4].socomer?.map((sp, i) => (
-                                        <div className="col-md-4" key={i}>
-                                            <div className="socomer-tab">
-                                                <div className="procedure-acc-card mb-3">
-                                                    <div className="accordion" id={`accordionExample${i}`}>
-                                                        <div className="accordion-item">
-                                                            <h2 className="accordion-header">
-                                                                <button
-                                                                    className={`accordion-button ${i === 0 ? "" : "collapsed"}`}
-                                                                    type="button"
-                                                                    data-bs-toggle="collapse"
-                                                                    data-bs-target={`#collapse${i}`}
-                                                                    aria-expanded={i === 0 ? "true" : "false"}
-                                                                    aria-controls={`collapse${i}`}
-                                                                >
-                                                                    <span>{sp.title}</span>
-                                                                </button>
-                                                            </h2>
-                                                            <div
-                                                                id={`collapse${i}`}
-                                                                className={`accordion-collapse collapse ${i === 0 ? "show" : ""}`}
-                                                            >
-                                                                <div className="accordion-body px-0 pt-0">
-                                                                    <ul>
-                                                                        {sp.socomerItem.map((spI, j) => (
-                                                                            <li key={j}>
-                                                                                - {spI.title}
-                                                                                <a href={`${process.env.NEXT_PUBLIC_IMAGE_URL}${spI.file?.url}`} target="_blank" rel="noopener noreferrer">
-                                                                                    <i className="custom-download"></i>{spI.buttonText}
-                                                                                </a>
-                                                                            </li>
-                                                                        ))}
-                                                                    </ul>
+                                    <div className="line-divider"> </div>
+                                    <section className="section">
+                                        <div className="container">
+                                            <div className="main-heading">
+                                                <h2>{pageContent[4].title}</h2>
+                                            </div>
+                                            <div className="row">
+                                                {
+                                                    pageContent[4].socomer?.map((sp, i) => (
+                                                        <div className="col-md-6" key={i}>
+                                                            <div className="socomer-tab">
+                                                                <div className="procedure-acc-card mb-3">
+                                                                    <div className="accordion" id={`accordionExample${i}`}>
+                                                                        <div className="accordion-item">
+                                                                            <h2 className="accordion-header">
+                                                                                <button
+                                                                                    className={`accordion-button ${i === 0 ? "" : "collapsed"}`}
+                                                                                    type="button"
+                                                                                    data-bs-toggle="collapse"
+                                                                                    data-bs-target={`#collapse${i}`}
+                                                                                    aria-expanded={i === 0 ? "true" : "false"}
+                                                                                    aria-controls={`collapse${i}`}
+                                                                                >
+                                                                                    <span>{sp.title}</span>
+                                                                                </button>
+                                                                            </h2>
+                                                                            <div
+                                                                                id={`collapse${i}`}
+                                                                                className={`accordion-collapse collapse ${i === 0 ? "show" : ""}`}
+                                                                            >
+                                                                                <div className="accordion-body px-0 pt-0">
+                                                                                    <ul>
+                                                                                        {sp.socomerItem.map((spI, j) => (
+                                                                                            <li key={j}>
+                                                                                                - {spI.title}
+                                                                                                <a href={`${process.env.NEXT_PUBLIC_IMAGE_URL}${spI.file?.url}`} target="_blank" rel="noopener noreferrer">
+                                                                                                    <i className="custom-download"></i>{spI.buttonText}
+                                                                                                </a>
+                                                                                            </li>
+                                                                                        ))}
+                                                                                    </ul>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                    ))
+                                                }
+
+                                            </div>
+                                        </div>
+                                    </section>
+
+                                    <div className="line-divider"> </div>
+
+                                    <section className="section">
+                                        <div className="container">
+                                            <div className="main-heading">
+                                                <h2>{pageContent[5].title}</h2>
+                                            </div>
+                                            <div className="row">
+                                                <div className="col-md-12">
+                                                    <div className="table-responsive hear-associations-table"
+                                                        dangerouslySetInnerHTML={{ __html: pageContent[5].details }}></div>
                                                 </div>
                                             </div>
                                         </div>
-                                    ))
-                                }
+                                    </section>
 
-                            </div>
-                        </div>
-                    </section>
+                                </div>
 
-                    <div className="line-divider"> </div>
-
-                    <section className="section">
-                        <div className="container">
-                            <div className="main-heading">
-                                <h2>{pageContent[5].title}</h2>
-                            </div>
-                            <div className="row">
-                                <div className="col-md-8">
-                                    <div className="table-responsive hear-associations-table" 
-                                    dangerouslySetInnerHTML={{ __html: pageContent[5].details }}></div>
+                                <div className="col-md-4">
+                                    <div className="association-left-col sticky-from">
+                                        <div className="association-form-card mb-5">
+                                            <Form1 title={"Request a Call Back"}/>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </section>
+
+
+
+
+
+
+
 
 
                 </div>

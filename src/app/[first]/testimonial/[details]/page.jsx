@@ -69,7 +69,7 @@ const TestimonialDetails = async ({ params }) => {
                                                 {
                                                     data.videoSource === "Youtube" ? youtube.items[0]?.snippet?.tags?.map((tag, _) => {
                                                         return <span className='me-2'>
-                                                            #<a href={`https://www.youtube.com/results?search_query=${tag}`} target='_blank'>{tag}</a>
+                                                            <a href={`https://www.youtube.com/results?search_query=${tag}`} target='_blank'>{tag}</a>
                                                         </span>
                                                     })
                                                         : null

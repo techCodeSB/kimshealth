@@ -63,7 +63,6 @@ const Hospital = async () => {
                                                             </a>
                                                         </div>
                                                         <div className="hospital-content">
-
                                                             <ul>
                                                                 <li className="hospital-icon-custom">{h.title}</li>
                                                                 <li className="location-icon-custom">{h.address}</li>
@@ -112,7 +111,8 @@ const Hospital = async () => {
                                                 <div className="custom-hospital-top-card">
                                                     <div className="hospital-img">
                                                         <a href={baseURL + "/" + h.location?.slug + "/hospital/" + h.slug}>
-                                                            <img src={process.env.NEXT_PUBLIC_IMAGE_URL + h.featuredImage?.url} alt="" className="img-fluid w-100" />
+                                                            <img src={process.env.NEXT_PUBLIC_IMAGE_URL + h.featuredImage?.url} 
+                                                            alt={h.title}className="img-fluid w-100" />
                                                         </a>
                                                     </div>
                                                     <div className="hospital-content">
@@ -229,11 +229,11 @@ const Hospital = async () => {
                                                     <div className="custom-hospital-top-card">
                                                         <div className="hospital-img">
                                                             <a href={baseURL + "/" + h.location?.slug + "/hospital/" + h.slug}>
-                                                                <img src={process.env.NEXT_PUBLIC_IMAGE_URL + h.featuredImage.url} alt="" className="img-fluid w-100" />
+                                                                <img src={process.env.NEXT_PUBLIC_IMAGE_URL + h.featuredImage.url} 
+                                                                alt={h.title} className="img-fluid w-100" />
                                                             </a>
                                                         </div>
                                                         <div className="hospital-content">
-
                                                             <ul>
                                                                 <li className="hospital-icon-custom">{h.title}</li>
                                                                 <li className="location-icon-custom">{h.address}</li>

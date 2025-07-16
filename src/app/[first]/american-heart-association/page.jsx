@@ -48,7 +48,7 @@ const AmericanHeartAssoc = async () => {
                                     </div>
 
                                     <div className="col-md-6 details-proceduce-banner-right-col">
-                                        <img src={pageContent[1].bannerItem.length > 0 ? process.env.NEXT_PUBLIC_IMAGE_URL + pageContent[1].bannerItem[0].bannerImageDesktop?.url : "/img/no-image.jpg"} className="img-fluid details-banner-image" alt="" />
+                                        <img src={pageContent[1].bannerItem.length > 0 ? process.env.NEXT_PUBLIC_IMAGE_URL + pageContent[1].bannerItem[0].bannerImageDesktop?.url : "/img/no-image.jpg"} className="img-fluid details-banner-image" alt={pageContent[0]?.title}/>
                                     </div>
                                 </div>
                             </div>
@@ -80,7 +80,6 @@ const AmericanHeartAssoc = async () => {
                                         {pageContent[3].email && <a href={"mailto:" + pageContent[3].email}><i className="fa-solid fa-envelope"></i>
                                             {pageContent[3].email}</a>}
                                     </div>
-
                                 </div>
                             </div>
                         </div>

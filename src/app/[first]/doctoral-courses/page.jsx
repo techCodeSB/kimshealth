@@ -56,7 +56,7 @@ const DoctoralCourse = async () => {
                                     </div>
 
                                     <div className="col-md-6 details-proceduce-banner-right-col">
-                                        <img src={pageContent[1]?.bannerItem[0]?.bannerImageDesktop?.url ? process.env.NEXT_PUBLIC_IMAGE_URL + pageContent[1].bannerItem[0].bannerImageDesktop.url : "/img/no-image.jpg"} className="img-fluid details-banner-image" alt="" />
+                                        <img src={pageContent[1]?.bannerItem[0]?.bannerImageDesktop?.url ? process.env.NEXT_PUBLIC_IMAGE_URL + pageContent[1].bannerItem[0].bannerImageDesktop.url : "/img/no-image.jpg"} className="img-fluid details-banner-image" alt={pageContent[0].title}/>
                                     </div>
                                 </div>
                             </div>
@@ -89,13 +89,15 @@ const DoctoralCourse = async () => {
                                                                     </h2>
                                                                     <div id={"collapse" + i} className={`accordion-collapse collapse ${i <= 2 ? "show" : ""}`}>
                                                                         <div className="accordion-body main-list px-0 pt-0">
-                                                                            <p>Certified by: {l.affiliation}</p>
+                                                                            <p>{staticText['Certified by']}: {l.affiliation}</p>
                                                                             <ul>
-                                                                                <li className="hourglass">Duration : {l.duration}</li>
-                                                                                <li className="luxury">Eligibility : {l.eligibility}</li>
-                                                                                <li className="calender-doc">Commencement : {l.commencement}</li>
+                                                                                <li className="hourglass">{staticText['Duration']} : {l.duration}</li>
+                                                                                <li className="luxury">{staticText['Eligibility']} : {l.eligibility}</li>
+                                                                                <li className="calender-doc">
+                                                                                    {staticText['Commencement']} : {l.commencement}
+                                                                                </li>
                                                                             </ul>
-                                                                            <a href={basePath + "/course/" + l.slug} className="doctotal-btn">View More</a>
+                                                                            <a href={basePath + "/course/" + l.slug} className="doctotal-btn">{staticText['View More']}</a>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -128,18 +130,19 @@ const DoctoralCourse = async () => {
                                                                     </h2>
                                                                     <div id={"collapse1" + i} className={`accordion-collapse collapse ${i <= 2 ? "show" : ""}`}>
                                                                         <div className="accordion-body main-list px-0 pt-0">
-                                                                            <p>Certified by: {l.affiliation}</p>
+                                                                            <p>{staticText['Certified by']}: {l.affiliation}</p>
                                                                             <ul>
-                                                                                <li className="hourglass">Duration : {l.duration}</li>
-                                                                                <li className="luxury">Eligibility : {l.eligibility}
+                                                                                <li className="hourglass">{staticText['Duration']} : {l.duration}</li>
+                                                                                <li className="luxury">{staticText['Eligibility']} : {l.eligibility}
                                                                                 </li>
-                                                                                <li className="calender-doc">Commencement : {l.commencement}</li>
+                                                                                <li className="calender-doc">
+                                                                                    {staticText['Commencement']} : {l.commencement}
+                                                                                </li>
                                                                             </ul>
-                                                                            <a href={basePath + "/course/" + l.slug} className="doctotal-btn">View More</a>
+                                                                            <a href={basePath + "/course/" + l.slug} className="doctotal-btn">{staticText['View More']}</a>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-
                                                             </div>
                                                         </div>
                                                     </div>
@@ -169,13 +172,19 @@ const DoctoralCourse = async () => {
                                                                     </h2>
                                                                     <div id={"collapse2" + i} className={`accordion-collapse collapse ${i <= 2 ? "show" : ""}`}>
                                                                         <div className="accordion-body main-list px-0 pt-0">
-                                                                            <p>Certified by: {l.affiliation}</p>
+                                                                            <p>{staticText['Certified by']}: {l.affiliation}</p>
                                                                             <ul>
-                                                                                <li className="hourglass">Duration : {l.duration}</li>
-                                                                                <li className="luxury">Eligibility : {l.eligibility}</li>
-                                                                                <li className="calender-doc">Commencement : {l.commencement}</li>
+                                                                                <li className="hourglass">
+                                                                                    {staticText['Duration']} : {l.duration}
+                                                                                </li>
+                                                                                <li className="luxury">
+                                                                                    {staticText['Eligibility']} : {l.eligibility}
+                                                                                </li>
+                                                                                <li className="calender-doc">
+                                                                                    {staticText['Commencement']} : {l.commencement}
+                                                                                </li>
                                                                             </ul>
-                                                                            <a href={basePath + "/course/" + l.slug} className="doctotal-btn">View More</a>
+                                                                            <a href={basePath + "/course/" + l.slug} className="doctotal-btn">{staticText['View More']}</a>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -208,13 +217,19 @@ const DoctoralCourse = async () => {
                                                                         </h2>
                                                                         <div id={"collapse3" + i} className={`accordion-collapse collapse ${i <= 2 ? "show" : ""}`}>
                                                                             <div className="accordion-body main-list px-0 pt-0">
-                                                                                <p>Certified by: {l.affiliation}</p>
+                                                                                <p>{staticText['Certified by']}: {l.affiliation}</p>
                                                                                 <ul>
-                                                                                    <li className="hourglass">Duration : {l.duration}</li>
-                                                                                    <li className="luxury">Eligibility : {l.eligibility}</li>
-                                                                                    <li className="calender-doc">Commencement : {l.commencement}</li>
+                                                                                    <li className="hourglass">
+                                                                                        {staticText['Duration']} : {l.duration}
+                                                                                    </li>
+                                                                                    <li className="luxury">
+                                                                                        {staticText['Eligibility']} : {l.eligibility}
+                                                                                    </li>
+                                                                                    <li className="calender-doc">
+                                                                                        {staticText['Commencement']} : {l.commencement}
+                                                                                    </li>
                                                                                 </ul>
-                                                                                <a href={basePath + "/course/" + l.slug} className="doctotal-btn">View More</a>
+                                                                                <a href={basePath + "/course/" + l.slug} className="doctotal-btn">{staticText['View More']}</a>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -250,13 +265,13 @@ const DoctoralCourse = async () => {
                                                                         </h2>
                                                                         <div id={"collapse4" + i} className={`accordion-collapse collapse ${i <= 2 ? "show" : ""}`}>
                                                                             <div className="accordion-body main-list px-0 pt-0">
-                                                                                <p>Certified by: {l.affiliation}</p>
+                                                                                <p>{staticText['Certified by']}: {l.affiliation}</p>
                                                                                 <ul>
-                                                                                    <li className="hourglass">Duration : {l.duration}</li>
-                                                                                    <li className="luxury">Eligibility : {l.eligibility}</li>
-                                                                                    <li className="calender-doc">Commencement : {l.commencement}</li>
+                                                                                    <li className="hourglass">{staticText['Duration']} : {l.duration}</li>
+                                                                                    <li className="luxury">{staticText['Eligibility']} : {l.eligibility}</li>
+                                                                                    <li className="calender-doc">{staticText['Commencement']} : {l.commencement}</li>
                                                                                 </ul>
-                                                                                <a href={basePath + "/course/" + l.slug} className="doctotal-btn">View More</a>
+                                                                                <a href={basePath + "/course/" + l.slug} className="doctotal-btn">{staticText['View More']}</a>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -311,7 +326,6 @@ const DoctoralCourse = async () => {
                                                         </div>
                                                     </div>
                                                 </div>
-
                                             </div>
                                         </div>
 
@@ -326,7 +340,8 @@ const DoctoralCourse = async () => {
                                                         </button>
                                                     </h2>
                                                     <div id="collapse34" className="accordion-collapse collapse  ">
-                                                        <div className="accordion-body px-0 pt-0" dangerouslySetInnerHTML={{ __html: pageContent[10].details || "" }}>
+                                                        <div className="accordion-body px-0 pt-0" 
+                                                        dangerouslySetInnerHTML={{ __html: pageContent[10].details || "" }}>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -336,7 +351,6 @@ const DoctoralCourse = async () => {
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </section>
 

@@ -17,6 +17,7 @@ import procedureData from '@/app/lib/getProcedure'
 import getStaticText from '@/app/lib/getStaticTextServer'
 import Breadcrumb from '@/components/Breadcrumb'
 import getCurrentLangLoc from '@/app/lib/getCurrentLangLoc'
+import Form4 from '@/components/Forms/Form4'
 
 
 
@@ -90,27 +91,7 @@ const InternationalPage = async () => {
                                                     <h3>{pageContent[0].title}</h3>
                                                     <p>{pageContent[0].subTitle}</p>
                                                     <div className="rounded-field-form mb-3">
-                                                        <form action="">
-                                                            <div className="row">
-                                                                <div className="col-md-6 col-12 mb-3">
-                                                                    <div className="input-group">
-                                                                        <input type="text" className="form-control"
-                                                                            placeholder="Enter Your Name" name="search" />
-                                                                    </div>
-                                                                </div>
-                                                                <div className="col-md-6 col-12 mb-3">
-                                                                    <div className="input-group">
-                                                                        <input type="text" id="phone" defaultValue="+91"
-                                                                            className="form-control" placeholder="Enter Mobile Number"
-                                                                            name="search" />
-                                                                    </div>
-                                                                </div>
-
-                                                                <div className="col-md-6 col-12 mb-3">
-                                                                    <button className="form-btn w-auto px-5">Submit</button>
-                                                                </div>
-                                                            </div>
-                                                        </form>
+                                                        <Form4/>
                                                     </div>
                                                 </div>
                                             </div>

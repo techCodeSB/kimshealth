@@ -30,8 +30,6 @@ const AboutUs = async () => {
             <Header />
             <div role="main" className="main">
                 <div className="about-us-main-page">
-
-
                     <section className="section details-page-before py-0 d-lg-block d-none">
                         <div className="procedures-details-page-header">
                             <div className="container-fluid px-0">
@@ -161,7 +159,6 @@ const AboutUs = async () => {
                     <section className="section">
                         <div className="container">
                             <div className="row">
-
                                 <div className="col-md-12 sub-heading order-lg-2 order-1 mb-lg-0 mb-3">
                                     <div className="main-heading">
                                         <h2 className="mb-lg-1">{pageContent[2]?.title}</h2>

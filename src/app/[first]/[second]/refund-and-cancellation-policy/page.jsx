@@ -11,7 +11,8 @@ const RefundAndCancellation = async () => {
     const data = await getStaticPageContent("refund-and-cancellation-policy");
     const pageContent = data?.data[0]?.pageContent;
     const pageMeta = data?.data[0]?.metaSection;
-     const staticText = await getStaticText();
+    const staticText = await getStaticText();
+
 
     return (
         <>
@@ -27,7 +28,7 @@ const RefundAndCancellation = async () => {
                         <div className="container">
                             <div className="row">
                                 <div className="col-12">
-                                    <Breadcrumb activeTitle={pageContent[0]?.title}/>
+                                    <Breadcrumb activeTitle={pageContent[0]?.title} />
                                 </div>
                             </div>
                         </div>
@@ -37,7 +38,7 @@ const RefundAndCancellation = async () => {
                         <div className="container">
                             <div className="main-heading main-list sub-heading">
                                 <h2>{pageContent[1]?.title}</h2>
-                                <div dangerouslySetInnerHTML={{__html: pageContent[1]?.details}}></div>
+                                <div dangerouslySetInnerHTML={{ __html: pageContent[1]?.details }}></div>
                             </div>
                         </div>
                     </section>

@@ -138,7 +138,7 @@ const SpecialityDetails = async ({ params, searchParams }) => {
                                     <div className="main-heading sub-heading">
                                         <h2>{data.overviewSection?.title}</h2>
                                     </div>
-                                    <div dangerouslySetInnerHTML={{ __html: marked(data.overviewSection?.details || "") || "" }}>
+                                    <div className='main-heading sub-heading main-list' dangerouslySetInnerHTML={{ __html: marked(data.overviewSection?.details || "") || "" }}>
                                     </div>
                                 </div>
                                 <div className="col-md-5">

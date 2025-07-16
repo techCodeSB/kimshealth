@@ -132,7 +132,8 @@ const DoctorDetails = async ({ params }) => {
                                                 <img src="/img/recommendation.png" alt="" className="img-fluid" />
                                                 <h3>{staticText['Membership']}</h3>
                                             </div> : null}
-                                            <div dangerouslySetInnerHTML={{ __html: data?.membership ? marked(data.membership) : "" }}></div>
+                                            <div dangerouslySetInnerHTML={{ __html: data?.membership ? marked(data.membership) : "" }}>
+                                            </div>
 
                                             {data.awards ? <div className="d-flex align-items-center gap-2 mb-2">
                                                 <img src="/img/award.png" alt="" className="img-fluid" />
