@@ -6,7 +6,7 @@ import getStaticText from '@/app/lib/getStaticTextServer';
 import youtubeData from '@/app/lib/getYoutubeData';
 import Breadcrumb from '@/components/Breadcrumb';
 import Footer from '@/components/Footer';
-import FromDoctor from '@/components/FromDoctor';
+import DocTalk from '@/components/DocTalk';
 import Header from '@/components/Header';
 
 
@@ -101,7 +101,7 @@ const DoctorTalkDetails = async ({ params }) => {
                     </section>
 
                     <div className="line-divider"></div>
-                    <FromDoctor dataSet={docTalkDataSet} />
+                    <DocTalk dataSet={docTalkDataSet} />
                 </div>
             </div>
             <Footer />

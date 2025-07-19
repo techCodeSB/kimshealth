@@ -17,12 +17,12 @@ const ContactUsForm = () => {
         <div className="col-md-6 contact-right-col order-lg-2 order-1 ">
             <div className="association-form-card mb-5 sticky-from custom-tab-button-wrapper">
                 <div className="tab-group text-start mb-3">
-                    <button type="button" className="btn-tab treat-tab form-btn w-auto active mx-2 omega"
+                    <button type="button" className="btn-tab treat-tab form-btn w-auto w-md-100 mb-lg-auto mb-1 active mx-2 omega d-inline-block"
                         onClick={() => showBox('omega')}>
                         {staticTexts['Appointment Queries']}
                     </button>
 
-                    <button type="button" className="btn-tab form-btn w-auto treat-tab mx-2 omega1" onClick={() => showBox('omega1')}>
+                    <button type="button" className="btn-tab form-btn w-auto w-md-100 treat-tab mx-2 omega1" onClick={() => showBox('omega1')}>
                         {staticTexts['Feedback/Complaints']}
                     </button>
                 </div>

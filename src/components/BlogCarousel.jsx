@@ -3,7 +3,7 @@
 import getStaticText from "@/helper/getStaticText";
 import { useEffect, useState } from "react";
 
-const BlogCarousel = ({ dataSet }) => {
+const BlogCarousel = ({ dataSet, tab }) => {
     const [staticTexts, setStaticTexts] = useState({});
 
 
@@ -21,7 +21,7 @@ const BlogCarousel = ({ dataSet }) => {
 
     return (
         <>
-            <section className="section blog-section d-lg-block d-none">
+            <section className={`${!tab?'blog-section':''} section d-lg-block d-none`}>
                 <div className="container">
                     <div className="row justify-content-between" data-aos="fade-down">
                         <div className="col-md-3 col-8">
@@ -140,4 +140,4 @@ const BlogCarousel = ({ dataSet }) => {
     )
 }
 
-export default BlogCarousel
+export default BlogCarousel;

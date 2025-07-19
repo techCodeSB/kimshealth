@@ -736,7 +736,7 @@ header {
 }
 
 .cta-col {
-    width: 20%;
+    width: 25%;
     padding: 20px 0;
     text-align: center;
     background: #f7f7f7;
@@ -1012,15 +1012,15 @@ header {
     width: 25px;
 }
 
-.expert-section .card:hover .from-btn a {
+/* .expert-section .card:hover .from-btn a {
     border: 1px solid #b71c2b;
     background: #f5f5f5;
-    color: #b71c2b;
-}
+    color: #b71c2b !important;
+} */
 
 .from-btn a {
     font-size: 15px;
-    color: #fff;
+    color: #fff !important;
     background: #b71c2b;
     padding: 11px 30px;
     font-weight: 500;
@@ -1030,7 +1030,7 @@ header {
 
 .from-btn a:hover {
     border: 1px solid #b71c2b;
-    color: #b71c2b;
+    color: #b71c2b !important;
     background: transparent;
 }
 
@@ -1591,7 +1591,7 @@ footer.footer {
     position: fixed;
     right: 0px;
     top: 34%;
-    z-index: 99;
+    z-index: 999;
     width: 40px;
     background-color: #c13434;
     transition: background-color .3s, opacity .5s, visibility .5s;
@@ -1673,9 +1673,10 @@ footer.footer {
     -webkit-box-orient: vertical;
     overflow: hidden;
     position: relative;
-    padding: 10px 0px;
+    padding: 10px 15px;
     border-bottom: 1px solid #fff;
     transition: .3s ease;
+    line-height: 32px;
 }
 
 .speciality-masterpage-card-content a::before {
@@ -2116,7 +2117,7 @@ footer.footer {
     content: '';
     display: block;
     width: 350px;
-    height: 350px;
+    height: 375px;
     background: url(../img/pro-banner-bef.png);
     top: 0;
     left: 50%;
@@ -2581,7 +2582,7 @@ footer.footer {
 
 .details-banner-image {
     width: 100% !important;
-    height: 350px;
+    height: 375px;
     object-fit: cover;
     object-position: top;
     position: relative;
@@ -3704,7 +3705,7 @@ li.hospital-doctor::before {
     background: #f3f3f3;
     padding: 20px;
     position: sticky;
-    top: -575px;
+    top: 140px;
 }
 
 
@@ -3780,7 +3781,7 @@ li.hospital-doctor::before {
 
 .custom-tab-button-wrapper .form-btn.active {
     background: #b71c2b;
-    color: #fff;
+    color: #fff !important;
     border-radius: 30px;
     padding: 8px 20px;
     font-size: 14px;
@@ -5405,7 +5406,8 @@ li.chat-ic::before {
 .blog-details-banner-image {
     margin-top: 95px;
 }
-.blog-details-banner-image .details-heading img{
+
+.blog-details-banner-image .details-heading img {
     width: 100%;
     height: 207px;
     object-fit: cover;
@@ -5599,9 +5601,9 @@ select option:hover {
     border-radius: 10px;
 }
 
-a.active {
+/* a.active {
     color: #b71c2b;
-}
+} */
 
 
 .search-box {
@@ -5722,14 +5724,264 @@ a.active {
 .details-key-row.rounded-field-form .input-group select {
     border: 1px solid #bbbbbb;
 }
-.patients-stories-section .testi-rightbox p{
+
+.patients-stories-section .testi-rightbox p {
     display: block;
 }
 
-.internation-patients-main-page .home-service-card-image img{
+.internation-patients-main-page .home-service-card-image img {
     width: 60px;
     height: auto;
 }
-.internation-patients-main-page .home-service-content{
+
+.internation-patients-main-page .home-service-content {
     padding: 0;
+}
+
+.doctor__searchlist {
+    overflow-y: auto;
+    max-height: 300px;
+    /* box-shadow: 0px 0px 5px #891c1c; */
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+    /* border-radius: 10px !important; */
+    position: absolute;
+    top: 60px;
+    z-index: 99;
+    background-color: #fff;
+    padding: 15px 10px;
+}
+
+.doctor__searchlist ul li {
+    padding: 10px;
+}
+
+.doctor__searchlist ul li:hover {
+    background-color: #b71c2b;
+    color: white;
+    cursor: pointer;
+
+}
+
+/* .doctor__searchlist::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: #ccc;
+}
+
+.doctor__searchlist::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #b71c2b;
+}
+
+
+.doctor__searchlist::-webkit-scrollbar {
+    width: 5px;
+    background-color: #b71c2b;
+    height: 5px;
+    border-radius: 10px;
+} */
+
+.desktop-doc-top-bar-from .find-doctor-left-col.filter-form {
+    padding: 0;
+    border-radius: 30px;
+}
+
+.speciality-masterpage-card-content a span {
+    position: relative;
+}
+
+.speciality-masterpage-card-content a span img {
+    width: 27px;
+    margin-right: 15px;
+    transition: .3s;
+    position: relative;
+    z-index: 2;
+}
+
+.speciality-masterpage-card-content a span::after {
+    position: absolute;
+    top: -6px;
+    left: -8px;
+    background-color: #ffffff;
+    width: 40px;
+    height: 40px;
+    content: '';
+    z-index: 1;
+    border-radius: 100%;
+    transition: .3s;
+}
+
+.speciality-masterpage-card-content a:hover span::after {
+    background: #b71c2b;
+}
+
+.speciality-masterpage-card-content a:hover span img {
+    filter: invert(100%) sepia(94%) saturate(15%) hue-rotate(338deg) brightness(130%) contrast(100%);
+}
+
+.book-appointment-card {
+    padding: 20px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+
+/* FOR GALLERY IMAGE VIEWER */
+.PhotoView-Portal {
+    z-index: 99999 !important;
+}
+
+.gallery-slider .card-top img {
+    height: 265px;
+    object-fit: cover;
+}
+
+.from-btn a.vice-btn {
+    background: #fff;
+    color: #b71c2b !important;
+    border: 1px solid #b71c2b;
+    transition: .5s;
+}
+
+.from-btn a.vice-btn:hover {
+    color: #fff !important;
+    background: #b71c2b;
+    border: 1px solid #b71c2b;
+}
+
+.expert .from-btn {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.expert .from-btn a {
+    font-size: 13px;
+    padding: 8px 12px;
+}
+
+.expert-doc-listing-box .from-btn {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.expert-doc-listing-box .from-btn a {
+    font-size: 13px;
+    padding: 8px 12px;
+}
+
+.video-iconfor-doc {
+    position: relative;
+}
+
+.video-iconfor-doc .video-iconfor-listing {
+    background: #b71c2b;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    height: 40px;
+    width: 40px;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+
+.video-iconfor-doc .video-iconfor-listing i {
+    color: #FFF;
+}
+
+.form-btn.vice-btn {
+    background: #fff;
+    color: #b71c2b !important;
+    border: 1px solid #b71c2b;
+    transition: .5s;
+}
+
+.form-btn.vice-btn:hover {
+    color: #fff !important;
+    background: #b71c2b;
+    border: 1px solid #b71c2b;
+}
+
+.form-btn:hover {
+    color: #b71c2b !important;
+    background: #fff;
+    border: 1px solid #b71c2b;
+}
+
+.speciality-details-page .rounded-field-form .form-select,
+.speciality-details-page .rounded-field-form .form-control {
+    background-color: #fff;
+    padding: 8px 30px;
+}
+
+.speciality-details-page .rounded-field-form {
+    padding: 15px 20px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    border-radius: 8px;
+}
+
+/* ::::: Career ::::: */
+.career-main-page .rounded-field-form .input-group {
+    background: #f7f7f7;
+    border-radius: 35px;
+}
+
+.career-card {
+    background: #ffffff;
+    border: 1px solid #e8e8e8;
+}
+
+.career-main-page .rounded-field-form .input-group select {
+    border: none;
+}
+
+.career-card .career-card-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 15px;
+    background: #f7f7f7;
+}
+
+.career-card .career-card-heading h3 {
+    color: #b61c2b;
+    font-size: 16px;
+    margin-bottom: 0;
+    font-weight: 600;
+}
+
+.career-card .career-card-heading p {
+    margin-bottom: 0;
+    color: #000;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.career-card .sub-heading p,
+.career-card .main-list-black ul li {
+    font-size: 14px;
+}
+
+.career-card .sub-heading.main-list-black.main-heading {
+    padding: 20px 15px;
+}
+
+.career-details-main-page .file-input-label {
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    border-radius: 40px;
+    color: #21283c;
+    padding: 7px 32px;
+    line-height: 1.85;
+    background-color: #ffffff;
+    width: 100%;
+    justify-content: start;
+    border: 1px solid #f3f3f3;
+}
+
+.career-details-main-page .file-input-label span {
+    color: #a8a9a9;
 }

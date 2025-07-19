@@ -13,9 +13,9 @@ let headerSticky = document.getElementById('header-sticky');
 
 window.addEventListener('scroll', function () {
     if (window.scrollY > 50) { // Fixed threshold for stickiness
-        headerSticky.classList.add('sticky-nav', 'animated', 'fadeInDown');
+        headerSticky?.classList.add('sticky-nav', 'animated', 'fadeInDown');
     } else {
-        headerSticky.classList.remove('sticky-nav', 'animated', 'fadeInDown');
+        headerSticky?.classList.remove('sticky-nav', 'animated', 'fadeInDown');
     }
 });
 
@@ -221,6 +221,26 @@ $('.testimonial').owlCarousel({
 
 // blog
 $('.blog').owlCarousel({
+    loop: true,
+    margin: 15,
+    nav: false,
+    navText: ["<img src='/img/left-arrow.svg'>", "<img src='/img/slider-right-arrow.svg'>"],
+    dots: false,
+    responsive: {
+        0: {
+            items: 1
+        },
+        600: {
+            items: 2
+        },
+        1000: {
+            items: 4
+        }
+    }
+})
+
+// Gallery Slider
+$('.gallery-slider').owlCarousel({
     loop: true,
     margin: 15,
     nav: false,

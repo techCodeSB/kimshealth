@@ -5,7 +5,7 @@ import Breadcrumb from '@/components/Breadcrumb'
 import ExpertCarousel from '@/components/ExpertCarousel'
 import Footer from '@/components/Footer'
 import Form2 from '@/components/Forms/Form2'
-import FromDoctor from '@/components/FromDoctor'
+import DocTalk from '@/components/DocTalk'
 import Header from '@/components/Header'
 import TestimonialSection from '@/components/TestimonialSection'
 import React from 'react'
@@ -364,7 +364,7 @@ const DiseaseDetails = async () => {
 
 
                 <div className="line-divider"></div>
-                {/* <FromDoctor/> */}
+                {/* <DocTalk/> */}
             </div>
             <Footer />
         </>

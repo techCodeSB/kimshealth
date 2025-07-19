@@ -1910,6 +1910,27 @@
         top: 47px;
     }
 
+    .expert .from-btn {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        justify-content: center;
+    }
+
+    .expert-doc-listing-box .from-btn {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        justify-content: center;
+    }
+
+    .w-md-100 {
+        width: 100% !important;
+    }
+    .w-sm-50{
+        width: 45% !important;
+    }
+
 }
 
 @media only screen and (max-width: 480px) {
@@ -1927,4 +1948,5 @@
     .expert-section .main-btn a {
         border-bottom: none;
     }
+
 }

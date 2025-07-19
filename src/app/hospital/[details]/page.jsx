@@ -13,7 +13,7 @@ import ExcellenceCarousel from '@/components/ExcellenceCarousel';
 import ExpertCarousel from '@/components/ExpertCarousel';
 import Footer from '@/components/Footer';
 import BookAnAppoinmentShort from '@/components/Forms/BookAnAppoinmentShort';
-import FromDoctor from '@/components/FromDoctor';
+import DocTalk from '@/components/DocTalk';
 import Header from '@/components/Header';
 import TestimonialSection from '@/components/TestimonialSection';
 import WatchVideoButton from '@/components/WatchVideoButton';
@@ -200,17 +200,16 @@ const HospitalDetails = async ({ params }) => {
                     </div>
                 </section>
 
-                <BookAnAppoinmentShort />
 
                 {/* <!--=========== fromsection end =======--> */}
                 <section className="section py-0 d-lg-block d-none">
                     <div className="container-fluid ps-0">
                         <div className="row">
-                            <div className="cta-col ctn-left-col">
+                            {/* <div className="cta-col ctn-left-col">
                                 <div className="cta-diff">
                                     <h3>{staticText['I am here to']} <i className="icon-arrow-right"></i></h3>
                                 </div>
-                            </div>
+                            </div> */}
                             <div className="cta-col">
                                 <a href={basePath + "/doctor"}>
                                     <div className="cta-diff">
@@ -241,7 +240,7 @@ const HospitalDetails = async ({ params }) => {
                                     </div>
                                 </a>
                             </div>
-                            <div className="cta-col">
+                            {/* <div className="cta-col">
                                 <a href={basePath + "/second-opinion"}>
                                     <div className="cta-diff">
                                         <div className="d-flex align-items-center justify-content-center">
@@ -250,10 +249,22 @@ const HospitalDetails = async ({ params }) => {
                                         </div>
                                     </div>
                                 </a>
+                            </div> */}
+                            <div className="cta-col">
+                                <a target='_blank' href={"https://consult.bestdocapp.com/home/KIMSTVM?version=new"}>
+                                    <div className="cta-diff">
+                                        <div className="d-flex align-items-center justify-content-center">
+                                            <img src="/img/opinion.png" alt="" />
+                                            <h3>Get <br /> <span>Tele Medicine</span></h3>
+                                        </div>
+                                    </div>
+                                </a>
                             </div>
                         </div>
                     </div>
                 </section>
+
+                <BookAnAppoinmentShort basePath={basePath} />
 
                 <section className="section pt-lg-0 pt-2 pb-2 d-lg-none d-block" data-aos="fade-up">
                     <div className="container-fluid ps-0">
@@ -354,7 +365,7 @@ const HospitalDetails = async ({ params }) => {
                 <TestimonialSection dataSet={testimonialDataSet} />
 
                 <div className="line-divider"></div>
-                <FromDoctor dataSet={docTalkDataSet} />
+                <DocTalk dataSet={docTalkDataSet} />
 
                 <div className="line-divider"></div>
                 <BlogCarousel dataSet={blogDataSet} />

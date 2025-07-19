@@ -1,6 +1,6 @@
 import BlogCarousel from '@/components/BlogCarousel'
 import Footer from '@/components/Footer'
-import FromDoctor from '@/components/FromDoctor'
+import DocTalk from '@/components/DocTalk'
 import Header from '@/components/Header'
 import TestimonialSection from '@/components/TestimonialSection'
 import { getStaticPageContent } from '@/app/lib/getStaticPageContent'
@@ -552,7 +552,7 @@ const InternationalPage = async () => {
                     <TestimonialSection dataSet={testimonialDataSet} />
 
                     <div className="line-divider"></div>
-                    <FromDoctor dataSet={docTalkDataSet} />
+                    <DocTalk dataSet={docTalkDataSet} />
 
                     <div className="line-divider"></div>
                     <BlogCarousel dataSet={blogDataSet} />

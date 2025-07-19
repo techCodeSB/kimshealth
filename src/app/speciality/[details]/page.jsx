@@ -12,8 +12,8 @@ import BlogCarousel from '@/components/BlogCarousel'
 import Breadcrumb from '@/components/Breadcrumb'
 import ExpertCarousel from '@/components/ExpertCarousel'
 import Footer from '@/components/Footer'
-import Form2 from '@/components/Forms/Form2'
-import FromDoctor from '@/components/FromDoctor'
+import FormSpeciality from '@/components/Forms/FormSpeciality'
+import DocTalk from '@/components/DocTalk'
 import Header from '@/components/Header'
 import TestimonialSection from '@/components/TestimonialSection'
 import WatchVideoButton from '@/components/WatchVideoButton'
@@ -78,9 +78,9 @@ const SpecialityDetails = async ({ params, searchParams }) => {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div className="details-banner pt-lg-5 pt-4">
+                                            <div className="details-banner pt-2">
                                                 <div className="details-heading">
-                                                    <Form2 title={"Have a query?"} />
+                                                    <FormSpeciality title={"Have a query?"} />
                                                 </div>
                                             </div>
                                         </div>
@@ -121,7 +121,8 @@ const SpecialityDetails = async ({ params, searchParams }) => {
 
                                             <div className="details-banner pt-lg-5 pt-4">
                                                 <div className="details-heading">
-                                                    <Form2 title={"Have a query?"} />
+                                                    <FormSpeciality title={"Have a query?"} />
+                                                   
                                                 </div>
                                             </div>
                                         </div>
@@ -309,7 +310,7 @@ const SpecialityDetails = async ({ params, searchParams }) => {
 
 
                     <div className="line-divider"></div>
-                    <FromDoctor dataSet={docTalkDataSet} />
+                    <DocTalk dataSet={docTalkDataSet} />
 
 
                     <div className="line-divider"></div>

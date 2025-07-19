@@ -276,7 +276,7 @@ const Footer = () => {
                                     <li><a href={basePath + "/contact-us"}>{staticTexts['Contact Us']}</a></li>
                                     <li><a href={basePath + "/media-and-events"}>{staticTexts['Events']}</a></li>
                                     <li><a href={basePath + "/doctor"}>{staticTexts['Find a Doctor']}</a></li>
-                                    <li><a href={basePath + "#"}>{staticTexts['Gallery']}</a></li>
+                                    <li><a href={basePath + "/gallery"}>{staticTexts['Gallery']}</a></li>
                                     <li><a href={basePath + "/at-home-services"}>{staticTexts['Home Care']}</a></li>
                                     <li><a href={basePath + "/second-opinion"}>{staticTexts['In-Patient Deposit']}</a></li>
                                     <li>
@@ -440,7 +440,7 @@ const Footer = () => {
                                     <li><a href={basePath + "/contact-us"}>{staticTexts['Contact Us']}</a></li>
                                     <li><a href={basePath + "/media-and-events"}>{staticTexts['Events']}</a></li>
                                     <li><a href={basePath + "/doctor"}>{staticTexts['Find a Doctor']}</a></li>
-                                    <li><a href={basePath + "#"}>{staticTexts['Gallery']}</a></li>
+                                    <li><a href={basePath + "/gallery"}>{staticTexts['Gallery']}</a></li>
                                     <li><a href={basePath + "/at-home-services"}>{staticTexts['Home Care']}</a></li>
                                     <li><a href={basePath + "/second-opinion"}>{staticTexts['In-Patient Deposit']}</a></li>
                                     <li><a href={basePath + "/international-patient"}>{staticTexts['International Care']}</a></li>

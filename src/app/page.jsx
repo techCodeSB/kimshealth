@@ -2,7 +2,7 @@ import BlogCarousel from '@/components/BlogCarousel'
 import ExcellenceCarousel from '@/components/ExcellenceCarousel'
 import ExpertCarousel from '@/components/ExpertCarousel'
 import Footer from '@/components/Footer'
-import FromDoctor from '@/components/FromDoctor'
+import DocTalk from '@/components/DocTalk'
 import Header from '@/components/Header'
 import SocialMedia from '@/components/SocialMedia'
 import TestimonialSection from '@/components/TestimonialSection'
@@ -19,6 +19,10 @@ import hospitalData from '@/app/lib/getHospital'
 import staticPage from '@/app/lib/getStaticPage'
 import BookAnAppoinmentShort from '@/components/Forms/BookAnAppoinmentShort'
 import getCurrentLangLoc from './lib/getCurrentLangLoc';
+import TabHome from '@/components/TabHome'
+import galleryData from './lib/getGallery'
+import mediaCoverData from './lib/getMediaCoverage'
+import mediaData from './lib/getMediaEvent'
 
 
 
@@ -26,7 +30,7 @@ import getCurrentLangLoc from './lib/getCurrentLangLoc';
 const Home = async () => {
   const getLangLoc = await getCurrentLangLoc()
   const basePath = await getBaseUrl(true, true);
-  const field = "populate[0]=pageContent&populate[1]=pageContent.bannerItem&populate[2]=pageContent.bannerItem.bannerImageDesktop&populate[3]=pageContent.bannerItem.bannerImageMobile&populate[4]=metaSection&populate[5]=pageContent.highlightButtonItem&populate[6]=pageContent.highlightButtonItem.iconImage";
+  const field = "populate[0]=pageContent&populate[1]=pageContent.bannerItem&populate[2]=pageContent.bannerItem.bannerImageDesktop&populate[3]=pageContent.bannerItem.bannerImageMobile&populate[4]=metaSection&populate[5]=pageContent.highlightButtonItem&populate[6]=pageContent.highlightButtonItem.iconImage&populate[7]=pageContent.uspItem&populate[8]=pageContent.uspItem.image&populate[9]=pageContent.uspItem.icon";
   const data = await getStaticPageContent("home", field);
   const pageContent = data?.data[0]?.pageContent;
   const pageMeta = data?.data[0]?.metaSection;
@@ -41,35 +45,56 @@ const Home = async () => {
   const expertDataSet = {
     sectionTitle: pageContent[3]?.title,
     buttonText: 'View All', buttonURL: `${basePath + "/doctor"}`,
-    data: await doctorData.getFeturedDoctor({langLoc: getLangLoc}),
+    data: await doctorData.getFeturedDoctor({ langLoc: getLangLoc }),
     baseUrl: basePath
   };
 
   const awardDataSet = {
     sectionTitle: pageContent[4]?.title,
     buttonText: 'View All', buttonURL: `${basePath}`,
-    data: await getAwardData.getFeatured({langLoc: getLangLoc}),
+    data: await getAwardData.getFeatured({ langLoc: getLangLoc }),
     baseUrl: basePath
   };
 
   const testimonialDataSet = {
     sectionTitle: pageContent[5]?.title,
     buttonText: 'View All', buttonURL: `${basePath + "/testimonial"}`,
-    data: await testimonialData.getFeaturedAll({langLoc: getLangLoc}),
+    data: await testimonialData.getFeaturedAll({ langLoc: getLangLoc }),
     baseUrl: basePath
   }
 
   const blogDataSet = {
     sectionTitle: pageContent[6]?.title,
     buttonText: 'View All', buttonURL: `${basePath + "/blog"}`,
-    data: await blogData.getRecentBlog({langLoc: getLangLoc}),
+    data: await blogData.getRecentBlog({ langLoc: getLangLoc }),
     baseUrl: basePath
   }
 
   const docTalkDataSet = {
     sectionTitle: pageContent[7]?.title,
     buttonText: 'View All', buttonURL: `${basePath + "/doctor-talk"}`,
-    data: await doctorTalkData.getFeaturedAll({langLoc: getLangLoc}),
+    data: await doctorTalkData.getFeaturedAll({ langLoc: getLangLoc }),
+    baseUrl: basePath
+  }
+
+  const galleryDataSet = {
+    sectionTitle: "Gallery",
+    buttonText: 'View All', buttonURL: `${basePath + "/gallery"}`,
+    data: await galleryData.getGalleryImage({ langLoc: getLangLoc }),
+    baseUrl: basePath
+  }
+
+  const mediaEventDataSet = {
+    sectionTitle: "Media & Events",
+    buttonText: 'View All', buttonURL: `${basePath + "/media-and-events"}`,
+    data: await mediaData.getRecentMedia({langLoc: getLangLoc}),
+    baseUrl: basePath
+  }
+
+  const mediaCoverageDataSet = {
+    sectionTitle: "News",
+    buttonText: 'View All', buttonURL: `${basePath + "/media-coverage"}`,
+    data: await mediaCoverData.getRecentMedia({langLoc: getLangLoc}),
     baseUrl: basePath
   }
 
@@ -109,7 +134,7 @@ const Home = async () => {
         </section>
 
         {/* <!-- ======= homepage start ========== --> */}
-        <BookAnAppoinmentShort />
+
 
         {/* <!--=========== fromsection end =======--> */}
         {/* <section className="section py-0 d-lg-block d-none">
@@ -143,11 +168,11 @@ const Home = async () => {
         <section className="section py-0 d-lg-block d-none">
           <div className="container-fluid ps-0">
             <div className="row">
-              <div className="cta-col ctn-left-col">
+              {/* <div className="cta-col ctn-left-col">
                 <div className="cta-diff">
                   <h3>I am here to <i className="icon-arrow-right"></i></h3>
                 </div>
-              </div>
+              </div> */}
               <div className="cta-col">
                 <a href={basePath + "/doctor"}>
                   <div className="cta-diff">
@@ -178,7 +203,7 @@ const Home = async () => {
                   </div>
                 </a>
               </div>
-              <div className="cta-col">
+              {/* <div className="cta-col">
                 <a href={basePath + "/second-opinion"}>
                   <div className="cta-diff">
                     <div className="d-flex align-items-center justify-content-center">
@@ -187,10 +212,22 @@ const Home = async () => {
                     </div>
                   </div>
                 </a>
+              </div> */}
+              <div className="cta-col">
+                <a target='_blank' href={"https://consult.bestdocapp.com/home/KIMSTVM?version=new"}>
+                  <div className="cta-diff">
+                    <div className="d-flex align-items-center justify-content-center">
+                      <img src="/img/opinion.png" alt="" />
+                      <h3>Get <br /> <span>Tele Medicine</span></h3>
+                    </div>
+                  </div>
+                </a>
               </div>
             </div>
           </div>
         </section>
+
+        <BookAnAppoinmentShort basePath={basePath} />
 
         <section className="section pt-lg-0 pt-2 pb-2 d-lg-none d-block" data-aos="fade-up">
           <div className="container-fluid ps-0">
@@ -231,11 +268,38 @@ const Home = async () => {
         {/* <!-- ====== cta section ==== --> */}
         <ExcellenceCarousel dataSet={specialityDataSet} />
 
-        <div className="line-divider"> </div>
 
-        <ExpertCarousel dataSet={expertDataSet} />
 
-        <div className="line-divider"> </div>
+        {/* <div className="line-divider"> </div> */}
+
+        {/* <ExpertCarousel dataSet={expertDataSet} /> */}
+
+        <section className="section international-counter-section">
+          <div className="container">
+            <div className="row">
+              {
+                pageContent[9].uspItem.map((u, i) => {
+                  return <div className="col-md-3 col-6 mb-3" key={i}>
+                    <div className="international-counter-box text-lg-start text-center">
+                      <h2><span className="counter">{u.number}</span> <span>{u.suffix}</span></h2>
+                      <div className="international-counter-bottom-content">
+                        <div>
+                          <img src={u.icon?.url ? process.env.NEXT_PUBLIC_IMAGE_URL + u.icon?.url : "no-image.jpg"} alt="" className="img-fluid" />
+                        </div>
+                        <div>
+                          <h3>{u.title}</h3>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                })
+              }
+            </div>
+          </div>
+        </section>
+
+        {/* <div className="line-divider"> </div> */}
 
         <WallframeSection dataSet={awardDataSet} />
 
@@ -243,16 +307,16 @@ const Home = async () => {
         <TestimonialSection dataSet={testimonialDataSet} />
 
 
-        {/* <!-- ========== testimonial section end ============ --> */}
+        {/*::::: Tab ::::  */}
+        <TabHome blogDataSet={blogDataSet} galleryDataSet={galleryDataSet} mediaEventDataSet={mediaEventDataSet} mediaCoverageDataSet={mediaCoverageDataSet}/>
+
+        {/* <div className="line-divider"></div>
+        <BlogCarousel dataSet={blogDataSet} /> */}
+
 
         <div className="line-divider"></div>
-        <BlogCarousel dataSet={blogDataSet} />
 
-        {/* <!-- ========== blog section end =========== --> */}
-
-        <div className="line-divider"></div>
-
-        <FromDoctor dataSet={docTalkDataSet} />
+        <DocTalk dataSet={docTalkDataSet} />
 
         <SocialMedia />
 

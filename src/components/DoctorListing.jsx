@@ -102,11 +102,11 @@ const DoctorListing = ({ baseURL, allLocation, allSpeciality, allDoctorCount, la
         <section className="section">
             <div className="container">
                 <div className="row">
-                    <div className="col-md-12 col-6">
+                    {/* <div className="col-md-12 col-6">
                         <div className="main-heading">
                             <h2>{allDoctorCount} {staticText['Doctors Found']}</h2>
                         </div>
-                    </div>
+                    </div> */}
                     <div className="col-6 d-lg-none d-block">
                         <button type="button" className="btn-tab form-btn mx-2 filter-box-mobile">
                             {staticText['Filters']} <i className="fa-solid fa-filter"></i>
@@ -115,22 +115,17 @@ const DoctorListing = ({ baseURL, allLocation, allSpeciality, allDoctorCount, la
                 </div>
                 <div className="row">
                     <div className="col-md-3 mb-4">
-                        <div className="find-doctor-left-col filter-form mt-3">
-                            <h4>{staticText['Select Filters']}</h4>
+                        <div className="find-doctor-left-col filter-form">
+                            <h4 className=" d-md-none d-block">{staticText['Select Filters']}</h4>
 
                             {/* By City */}
-                            <div className="find-doc-box">
+                            <div className="find-doc-box d-md-none d-block">
                                 <h3>{staticText['By City']}</h3>
                                 <div className="rounded-field-form mb-3">
                                     <div className="row">
                                         <div className="col-12">
                                             <div className="input-group">
-                                                <input
-                                                    type="text"
-                                                    className="form-control"
-                                                    placeholder="Search ...."
-                                                    onChange={onLocationChange}
-                                                />
+                                                <input type="text" className="form-control" placeholder="Search ...." onChange={onLocationChange} />
                                                 <span className="input-group-text">
                                                     <i className="fa-solid fa-magnifying-glass"></i>
                                                 </span>
@@ -152,7 +147,7 @@ const DoctorListing = ({ baseURL, allLocation, allSpeciality, allDoctorCount, la
                             </div>
 
                             {/* By Departments */}
-                            <div className="find-doc-box">
+                            <div className="find-doc-box d-md-none d-block">
                                 <h3>{staticText['By Departments']}</h3>
                                 <div className="rounded-field-form mb-3">
                                     <div className="row">
@@ -160,7 +155,7 @@ const DoctorListing = ({ baseURL, allLocation, allSpeciality, allDoctorCount, la
                                             <div className="input-group">
                                                 <input type="text"
                                                     className="form-control"
-                                                    placeholder={staticText['Search']+" ....."}
+                                                    placeholder={staticText['Search'] + " ....."}
                                                     onChange={onSpecialityChange}
                                                 />
                                                 <span className="input-group-text"><i className="fa-solid fa-magnifying-glass"></i></span>
@@ -182,7 +177,7 @@ const DoctorListing = ({ baseURL, allLocation, allSpeciality, allDoctorCount, la
                             </div>
 
                             {/* By Gender */}
-                            <div className="find-doc-box">
+                            {/* <div className="find-doc-box">
                                 <h3>{staticText['By Gender']}</h3>
                                 <div className="rounded-field-form mb-3">
                                     <div className="row">
@@ -201,43 +196,102 @@ const DoctorListing = ({ baseURL, allLocation, allSpeciality, allDoctorCount, la
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> */}
 
                             {/* Help Form */}
                             <div className="find-doc-box">
-                                <Form3 title={staticText['Need Help Making an Appointment?']}/>
+                                <Form3 title={staticText['Need Help Making an Appointment?']} />
                             </div>
                         </div>
                     </div>
 
                     {/* Doctor Cards */}
                     <div className="col-md-9 expert-section">
-                        <div className="row">
+                        <div className="row desktop-doc-top-bar-from d-md-flex d-none">
+                            <div className="col-md-6">
+                                <div className="find-doctor-left-col filter-form">
+                                    <div className="rounded-field-form">
+                                        <div className="row">
+                                            <div className="col-12">
+                                                <div className="input-group">
+                                                    <select value={URLParams.location} className="form-select" aria-label="Default select example" onChange={(e) => {
+                                                        location.href = `${baseURL}/doctor?location=${e.target.value}${URLParams.speciality ? `&speciality=${URLParams.speciality}` : ''}${URLParams.gender ? `&gender=${URLParams.gender}` : ''}${URLParams.hospital ? `&hospital=${URLParams.hospital}` : ''}`;
+                                                    }}>
+                                                        <option value={''}>Select Location</option>
+
+                                                        {locationList?.map((loc, index) => (
+                                                            <option value={loc.slug} key={index + "1"}>{loc.title}</option>
+                                                        ))}
+                                                    </select>
+                                                    <span className="input-group-text">
+                                                        <i className="fa-solid fa-angle-down"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="col-md-6">
+                                <div className="find-doctor-left-col filter-form">
+                                    <div className="rounded-field-form">
+                                        <div className="row">
+                                            <div className="col-12">
+                                                <div className="input-group">
+                                                    <select value={URLParams.speciality} className="form-select" aria-label="Default select example" onChange={(e) => {
+                                                        location.href = `${baseURL}/doctor?speciality=${e.target.value}${URLParams.location ? `&location=${URLParams.location}` : ''}${URLParams.gender ? `&gender=${URLParams.gender}` : ''}${URLParams.hospital ? `&hospital=${URLParams.hospital}` : ''}`;
+                                                    }}>
+                                                        <option value={''}>Select Speciality</option>
+
+                                                        {specialityList?.map((s, index) => (
+                                                            <option value={s.speciality?.slug} key={index + "1"}>{s.title}</option>
+                                                        ))}
+                                                    </select>
+                                                    <span className="input-group-text">
+                                                        <i className="fa-solid fa-angle-down"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="row expert-doc-listing-box ">
                             {docData?.map((d, index) => (
                                 <div className="col-md-4 col-6 mb-3" key={d.slug + index}>
                                     <div className="expert-card">
                                         <div className="card border-0 p-lg-4 p-0">
-                                            <div className="card-top">
-                                                <a href="#">
+                                            <div className="card-top video-iconfor-doc">
+                                                <a href={baseURL + "/doctor/" + d.slug}>
                                                     <img
                                                         src={d.doctorImage?.url ? `${process.env.NEXT_PUBLIC_IMAGE_URL}${d.doctorImage?.url}` : "/img/no-image.jpg"}
                                                         className="img-fluid w-100"
                                                         alt={d.name}
                                                     />
+
                                                 </a>
+                                                {d.teleConsultationAvailable && <a href='https://consult.bestdocapp.com/home/KIMSTVM?version=new' target='_blank'>
+                                                    <span className="video-iconfor-listing"><i className="fa-solid fa-video"></i></span>
+                                                </a>}
                                             </div>
-                                            <div className="card-content">
+                                            <div className="card-content px-0">
                                                 <h4>{d.name}</h4>
                                                 <p>{d.doctorDesignation}</p>
                                                 <h5>{d.specialities[0]?.title}</h5>
-                                                <div className="from-btn">
+                                                {/* <div className="from-btn">
                                                     <a href={`${baseURL}/book-an-appointment/?doctor=${d.slug}`} className="btn">{staticText['Appointment']}</a>
+                                                </div> */}
+                                                <div className="from-btn">
+                                                    {d.appointmentAvailable && <a href={baseURL + "/book-an-appointment/?doctor=" + d.slug} className="btn">{staticText['Appointment']}</a>}
+                                                    <a href={baseURL + "/doctor/" + d.slug} className="btn vice-btn">{staticText['View Profile']}</a>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="main-btn text-lg-center text-start ms-lg-0 ms-2 mt-2">
-                                            <a href={`${baseURL}/doctor/${d.slug}`}>{staticText['View Profile']}</a>
-                                        </div>
+                                        {/* <div className="main-btn text-lg-center text-start ms-lg-0 ms-2 mt-2">
+                                                <a href={`${baseURL}/doctor/${d.slug}`}>{staticText['View Profile']}</a>
+                                            </div> */}
+
                                     </div>
                                 </div>
                             ))}

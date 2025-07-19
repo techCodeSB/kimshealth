@@ -7,7 +7,7 @@ import getStaticText from '@/app/lib/getStaticTextServer';
 import BlogCarousel from '@/components/BlogCarousel';
 import Breadcrumb from '@/components/Breadcrumb';
 import Footer from '@/components/Footer';
-import FromDoctor from '@/components/FromDoctor';
+import DocTalk from '@/components/DocTalk';
 import Header from '@/components/Header';
 import { marked } from 'marked';
 
@@ -24,14 +24,14 @@ const DoctorDetails = async ({ params }) => {
     const docTalkDataSet = {
         sectionTitle: data.doctorTalk.title,
         buttonText: 'View All', buttonURL: basePath + "/doctor-talk?doctor=" + data.slug,
-        data: await doctorTalkData.getByDoctor({id:data.id, langLoc:getLangLoc}),
+        data: await doctorTalkData.getByDoctor({ id: data.id, langLoc: getLangLoc }),
         baseUrl: basePath
     }
 
     const blogDataSet = {
         sectionTitle: data.blogSection.title,
         buttonText: 'View All', buttonURL: basePath + "/blog?doctor=" + data.slug,
-        data: await blogData.getByDoctor({id:data.id, langLoc:getLangLoc}),
+        data: await blogData.getByDoctor({ id: data.id, langLoc: getLangLoc }),
         baseUrl: basePath
     }
 
@@ -64,8 +64,16 @@ const DoctorDetails = async ({ params }) => {
                         <div className="container">
                             <div className="row">
                                 <div className="col-md-3 mb-4">
-                                    <div className="left-col-img">
-                                        <img src={data.doctorImage?.url ? imgUrl + data.doctorImage?.url : "/img/no-image.jpg"} alt={data.name} className="img-fluid" />
+                                    <div className="left-col-img  ">
+                                        <div className="video-iconfor-doc">
+                                            <img src={data.doctorImage?.url ? imgUrl + data.doctorImage?.url : "/img/no-image.jpg"} alt={data.name} className="img-fluid w-100" />
+
+                                            {data.teleConsultationAvailable && <a href='https://consult.bestdocapp.com/home/KIMSTVM?version=new' target='_blank'>
+                                                <span className="video-iconfor-listing"><i class="fa-solid fa-video"></i></span>
+                                            </a>}
+                                        </div>
+
+
                                         <div className="main-heading sub-heading mt-3">
                                             <h3>{data.name}</h3>
                                         </div>
@@ -75,7 +83,10 @@ const DoctorDetails = async ({ params }) => {
                                                 <li className="details-liver-ic"><strong>{data.specialities[0]?.title}</strong></li>
                                                 <li className="details-hospital-ic">{data.hospitals[0]?.address}</li>
                                             </ul>
-                                            <a href={basePath + "/book-an-appointment/?doctor=" + data.slug} className="form-btn mt-3 d-block text-center text-light">{staticText['Book An Appointment']}</a>
+                                            {data.appointmentAvailable && <a href={basePath + "/book-an-appointment/?doctor=" + data.slug} className="form-btn mt-3 d-block text-center text-light">{staticText['Book An Appointment']}</a>}
+
+                                            
+                                            {data.teleConsultationAvailable && <a href='https://consult.bestdocapp.com/home/KIMSTVM?version=new' className="form-btn mt-3 d-block text-center text-light vice-btn">{staticText['Book a Telemedicine']}</a>}
                                         </div>
 
                                         {/* <div className="calendar mt-5">
@@ -156,7 +167,7 @@ const DoctorDetails = async ({ params }) => {
 
 
                     <div className="line-divider"></div>
-                    <FromDoctor dataSet={docTalkDataSet} />
+                    <DocTalk dataSet={docTalkDataSet} />
 
                     <div className="line-divider"></div>
                     <BlogCarousel dataSet={blogDataSet} />

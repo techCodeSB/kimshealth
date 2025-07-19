@@ -22,7 +22,7 @@ const ExpertCarousel = ({ dataSet }) => {
     }
     return (
         <>
-            <section className="section expert-section">
+            <section className="section expert-section ">
                 <div className="container">
                     <div className="row justify-content-between" data-aos="fade-right">
                         <div className="col-md-3 col-8">
@@ -46,26 +46,30 @@ const ExpertCarousel = ({ dataSet }) => {
                             dataSet?.data?.map((d, index) => {
                                 return <div className={`expert-card `} data-aos="fade-right" key={index}>
                                     <div className={`card border-0 p-lg-4 p-0 ${index === 0 ? 'active' : ""}`}>
-                                        <div className="card-top">
+                                        <div className="card-top video-iconfor-doc">
                                             <a href={dataSet.baseUrl + "/doctor/" + d.slug}>
                                                 <img
                                                     src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${d.doctorImage?.url}`}
                                                     className="img-fluid w-100" alt={d.name}
                                                 />
                                             </a>
+                                            {d.teleConsultationAvailable && <a href='https://consult.bestdocapp.com/home/KIMSTVM?version=new' target='_blank'>
+                                                <span className="video-iconfor-listing"><i class="fa-solid fa-video"></i></span>
+                                            </a>}
                                         </div>
                                         <div className="card-content">
                                             <h4>{d.name}</h4>
                                             <p>{d.doctorDesignation}</p>
                                             <h5>{d.specialities[0]?.title}</h5>
                                             <div className="from-btn">
-                                                <a href={dataSet.baseUrl + "/book-an-appointment/?doctor=" + d.slug} className="btn">{staticTexts['Appointment']}</a>
+                                                {d.appointmentAvailable && <a href={dataSet.baseUrl + "/book-an-appointment/?doctor=" + d.slug} className="btn">{staticTexts['Appointment']}</a>}
+                                                <a href={dataSet.baseUrl + "/doctor/" + d.slug} className="btn vice-btn">{staticTexts['View Profile']}</a>
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="main-btn  text-lg-center text-start ms-lg-0 ms-2 mt-2">
+                                    {/* <div className="main-btn  text-lg-center text-start ms-lg-0 ms-2 mt-2">
                                         <a href={dataSet.baseUrl + "/doctor/" + d.slug}>{staticTexts['View Profile']}</a>
-                                    </div>
+                                    </div> */}
                                 </div>
                             })
                         }

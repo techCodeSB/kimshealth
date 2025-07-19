@@ -26,6 +26,8 @@ const Speciality = async ({ searchParams }) => {
         field: 'Center of Excellence', langLoc: getLangLoc, URLParams: URLParams
     });
 
+    console.log(coeSpecility)
+
 
     return (
         <>
@@ -60,7 +62,7 @@ const Speciality = async ({ searchParams }) => {
                                                 return <div className="col-md-6" key={index}>
                                                     <div className="speciality-masterpage-card-content">
                                                         <a href={baseURL + "/speciality/" + cs.speciality?.slug}>
-                                                            {cs.title}
+                                                            <span><img src={cs.speciality?.iconImage?.url ? process.env.NEXT_PUBLIC_IMAGE_URL + cs.speciality?.iconImage.url : "/img/no-image.jpg"} alt={cs?.title} className="img-fluid" /></span> {cs.title}
                                                         </a>
                                                     </div>
                                                 </div>
@@ -78,7 +80,7 @@ const Speciality = async ({ searchParams }) => {
                                                 return <div className="col-md-6" key={index}>
                                                     <div className="speciality-masterpage-card-content">
                                                         <a href={baseURL + "/speciality/" + os.speciality?.slug}>
-                                                            {os.title}
+                                                            <span><img src={os.speciality?.iconImage?.url ? process.env.NEXT_PUBLIC_IMAGE_URL + os.speciality?.iconImage.url : "/img/no-image.jpg"} alt={os?.title} className="img-fluid" /></span> {os.title}
                                                         </a>
                                                     </div>
                                                 </div>
