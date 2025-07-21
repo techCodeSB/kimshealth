@@ -26,7 +26,7 @@ const SpecialityDetails = async ({ params, searchParams }) => {
     const staticText = await getStaticText()
     const baseUrl = await getBaseUrl(true, true);
     const baseUrlLangOnly = await getBaseUrl(true, false)
-    const data = await getSpecialityData.getSingleSpeciality(params.details);
+    const data = await getSpecialityData.getSingleSpeciality({slug:params.details, langLoc: getLangLoc});
     const allProcedure = await procedureData.getAll(5)
     const allDiseas = await diseaseData.getAll(10);
     const allSubSpeciality = await getSpecialityData.getAllSubSpeciality(data.speciality?.id)
