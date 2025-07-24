@@ -94,7 +94,7 @@ const Hospital = async () => {
 
                                                             <div className="d-lg-flex d-block align-items-center justify-content-between pt-3">
                                                                 <a href={baseURLOnlyLang + "/" + h.location?.slug + "/hospital/" + h.slug} className="btn mb-lg-0 mb-2 hospital-primarybtn">{staticText['View Details']}</a>
-                                                                <a href={baseURL + "/book-an-appointment?hospital="+h.slug} className="btn mb-lg-0 mb-3 hospital-secondarybtn">{staticText['Appointment']}</a>
+                                                                <a href={baseURL + "/book-an-appointment?location="+h.location?.slug} className="btn mb-lg-0 mb-3 hospital-secondarybtn">{staticText['Appointment']}</a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -147,7 +147,7 @@ const Hospital = async () => {
 
                                                         <div className="d-lg-flex d-block align-items-center justify-content-between pt-3">
                                                             <a href={baseURLOnlyLang + "/" + h.location?.slug + "/hospital/" + h.slug} className="btn mb-lg-0 mb-2 hospital-primarybtn">{staticText['View Details']}</a>
-                                                            <a href={baseURL + "/book-an-appointment?hospital="+h.slug} className="btn mb-lg-0 mb-3 hospital-secondarybtn">{staticText['Appointment']}</a>
+                                                            <a href={baseURL + "/book-an-appointment?location="+h.location?.slug} className="btn mb-lg-0 mb-3 hospital-secondarybtn">{staticText['Appointment']}</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -215,7 +215,7 @@ const Hospital = async () => {
 
                                                             <div className="d-lg-flex d-block align-items-center justify-content-between pt-3">
                                                                 <a href={baseURLOnlyLang + "/" + h.location?.slug + "/hospital/" + h.slug} className="btn mb-lg-0 mb-2 hospital-primarybtn">{staticText['View Details']}</a>
-                                                                <a href={baseURL + "/book-an-appointment?hospital="+h.slug} className="btn mb-lg-0 mb-3 hospital-secondarybtn">{staticText['Appointment']}</a>
+                                                                <a href={baseURL + "/book-an-appointment?location="+h.location?.slug} className="btn mb-lg-0 mb-3 hospital-secondarybtn">{staticText['Appointment']}</a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -265,7 +265,7 @@ const Hospital = async () => {
 
                                                             <div className="d-lg-flex d-block align-items-center justify-content-between pt-3">
                                                                 <a href={baseURLOnlyLang + "/" + h.location?.slug + "/hospital/" + h.slug} className="btn mb-lg-0 mb-2 hospital-primarybtn">{staticText['View Details']}</a>
-                                                                <a href={baseURL + "/book-an-appointment?hospital="+h.slug} className="btn mb-lg-0 mb-3 hospital-secondarybtn">{staticText['Appointment']}</a>
+                                                                <a href={baseURL + "/book-an-appointment?location="+h.location?.slug} className="btn mb-lg-0 mb-3 hospital-secondarybtn">{staticText['Appointment']}</a>
                                                             </div>
                                                         </div>
                                                     </div>

@@ -13,7 +13,7 @@ const MediaAndEventsDetails = async ({ params }) => {
     const getLangLoc = await getCurrentLangLoc()
     const basePath = await getBaseUrl(true, true);
     const staticText = await getStaticText();
-    const data = await mediaData.getSingleMedia(params.details);
+    const data = await mediaData.getSingleMedia({slug: params.details, langLoc: getLangLoc});
     const recentMedia = await mediaData.getRecentMedia({langLoc: getLangLoc})
 
 

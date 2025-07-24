@@ -4,6 +4,8 @@ import getStaticText from '@/helper/getStaticText';
 import React, { useEffect, useState, useRef } from 'react';
 import Form3 from './Forms/Form3';
 
+
+
 const DoctorListing = ({ baseURL, allLocation, allSpeciality, allDoctorCount, langLoc, URLParams }) => {
     const [docData, setDocData] = useState([]);
     const [count, setCount] = useState(0);
@@ -20,8 +22,8 @@ const DoctorListing = ({ baseURL, allLocation, allSpeciality, allDoctorCount, la
     useEffect(() => {
         setLocationList(allLocation);
         setSpecialityList(allSpeciality);
-        console.log(URLParams)
     }, [allLocation, allSpeciality]);
+
 
     useEffect(() => {
         const fetchTexts = async () => {
@@ -101,24 +103,23 @@ const DoctorListing = ({ baseURL, allLocation, allSpeciality, allDoctorCount, la
     return (
         <section className="section">
             <div className="container">
-                <div className="row">
-                    {/* <div className="col-md-12 col-6">
+                {/* <div className="row">
+                    <div className="col-md-12 col-6">
                         <div className="main-heading">
                             <h2>{allDoctorCount} {staticText['Doctors Found']}</h2>
                         </div>
-                    </div> */}
+                    </div>
                     <div className="col-6 d-lg-none d-block">
                         <button type="button" className="btn-tab form-btn mx-2 filter-box-mobile">
                             {staticText['Filters']} <i className="fa-solid fa-filter"></i>
                         </button>
                     </div>
-                </div>
+                </div> */}
                 <div className="row">
-                    <div className="col-md-3 mb-4">
+                    {/* <div className="col-md-3 mb-4">
                         <div className="find-doctor-left-col filter-form">
                             <h4 className=" d-md-none d-block">{staticText['Select Filters']}</h4>
 
-                            {/* By City */}
                             <div className="find-doc-box d-md-none d-block">
                                 <h3>{staticText['By City']}</h3>
                                 <div className="rounded-field-form mb-3">
@@ -146,7 +147,6 @@ const DoctorListing = ({ baseURL, allLocation, allSpeciality, allDoctorCount, la
                                 </div>
                             </div>
 
-                            {/* By Departments */}
                             <div className="find-doc-box d-md-none d-block">
                                 <h3>{staticText['By Departments']}</h3>
                                 <div className="rounded-field-form mb-3">
@@ -176,8 +176,7 @@ const DoctorListing = ({ baseURL, allLocation, allSpeciality, allDoctorCount, la
                                 </div>
                             </div>
 
-                            {/* By Gender */}
-                            {/* <div className="find-doc-box">
+                            <div className="find-doc-box">
                                 <h3>{staticText['By Gender']}</h3>
                                 <div className="rounded-field-form mb-3">
                                     <div className="row">
@@ -196,20 +195,19 @@ const DoctorListing = ({ baseURL, allLocation, allSpeciality, allDoctorCount, la
                                         </div>
                                     </div>
                                 </div>
-                            </div> */}
+                            </div> 
 
-                            {/* Help Form */}
                             <div className="find-doc-box">
                                 <Form3 title={staticText['Need Help Making an Appointment?']} />
                             </div>
                         </div>
-                    </div>
+                    </div> */}
 
                     {/* Doctor Cards */}
-                    <div className="col-md-9 expert-section">
-                        <div className="row desktop-doc-top-bar-from d-md-flex d-none">
-                            <div className="col-md-6">
-                                <div className="find-doctor-left-col filter-form">
+                    <div className="col-md-12 expert-section">
+                        <div className="row desktop-doc-top-bar-from">
+                            <div className="col-md-6 mb-3">
+                                <div className="find-doctor-left-col filter-form d-block">
                                     <div className="rounded-field-form">
                                         <div className="row">
                                             <div className="col-12">
@@ -232,8 +230,8 @@ const DoctorListing = ({ baseURL, allLocation, allSpeciality, allDoctorCount, la
                                     </div>
                                 </div>
                             </div>
-                            <div className="col-md-6">
-                                <div className="find-doctor-left-col filter-form">
+                            <div className="col-md-6 mb-3">
+                                <div className="find-doctor-left-col filter-form d-block">
                                     <div className="rounded-field-form">
                                         <div className="row">
                                             <div className="col-12">
@@ -259,7 +257,7 @@ const DoctorListing = ({ baseURL, allLocation, allSpeciality, allDoctorCount, la
                         </div>
                         <div className="row expert-doc-listing-box ">
                             {docData?.map((d, index) => (
-                                <div className="col-md-4 col-6 mb-3" key={d.slug + index}>
+                                <div className="col-md-3 col-6 mb-3" key={d.slug + index}>
                                     <div className="expert-card">
                                         <div className="card border-0 p-lg-4 p-0">
                                             <div className="card-top video-iconfor-doc">

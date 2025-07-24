@@ -5,14 +5,18 @@ import { getBaseUrl } from '@/app/lib/getBaseUrl';
 import getStaticText from '@/app/lib/getStaticTextServer';
 import Breadcrumb from '@/components/Breadcrumb';
 import getCurrentLangLoc from '@/app/lib/getCurrentLangLoc';
+import getHealthPackageData from '@/app/lib/getHealthPackage';
+import { marked } from 'marked';
 
 
 
-const HealthPackage = async () => {
+const HealthPackage = async ({ searchParams }) => {
+    const URLParams = await searchParams;
     const getLangLoc = await getCurrentLangLoc()
     const basePath = await getBaseUrl(true, true);
     const staticText = await getStaticText();
 
+    const allHealthPackage = await getHealthPackageData.getAll({ langLoc: getLangLoc, URLParams: URLParams });
 
     return (
         <>
@@ -43,7 +47,7 @@ const HealthPackage = async () => {
                             <div className="row">
                                 <div className="col-md-12 col-6">
                                     <div className="main-heading">
-                                        <h2>25 Health Packages Found</h2>
+                                        <h2>{allHealthPackage.length} {staticText['Health Packages Found']}</h2>
                                     </div>
                                 </div>
                                 <div className="col-6 d-lg-none d-block">
@@ -263,511 +267,48 @@ const HealthPackage = async () => {
 
                                 <div className="col-md-9 health-pack-details-main-page">
                                     <div className="row">
-                                        <div className="col-md-4 col-6 mb-3">
-                                            <div className="custom-hospital-top-card">
-                                                <div className="hospital-img">
-                                                    <a href="#"><img src="/img/health-pack-master.jpg" alt=""
-                                                        className="img-fluid w-100" /></a>
-                                                </div>
-                                                <div className="hospital-content">
-                                                    <h3>Executive Health Check Up</h3>
-                                                    <p>11 tests included</p>
-                                                    <div className="main-list">
-                                                        <ul>
-                                                            <li>CBC</li>
-                                                            <li>Blood Grouping</li>
-                                                            <li>FBS & PPBS</li>
-                                                        </ul>
-                                                    </div>
-                                                    <p><u>+5 More</u></p>
-                                                    <div className="d-lg-flex d-block align-items-center justify-content-between py-2 ">
-                                                        <div className="hospital-content p-0">
-                                                            <ul>
-                                                                <li className="location-icon-custom h-auto">KIMSHEALTH Trivandrum</li>
-                                                            </ul>
+                                        {
+                                            allHealthPackage.map((data, index) => {
+                                                return <div className="col-md-4 col-6 mb-3" key={index}>
+                                                    <div className="custom-hospital-top-card">
+                                                        <div className="hospital-img">
+                                                            <a href={basePath + "/health-package/" + data.slug}><img src={data.featuredImage ? process.env.NEXT_PUBLIC_IMAGE_URL + data.featuredImage.url : "/img/no-image.jpg"} alt={data?.title}
+                                                                className="img-fluid w-100" /></a>
                                                         </div>
-                                                        <div className="d-flex align-items-center">
-                                                            <ul>
-                                                                <li>6,500/-</li>
-                                                            </ul>
+                                                        <div className="hospital-content">
+                                                            <h3>{data?.title}</h3>
+                                                            <p>{data?.noOfTest} {staticText['tests included']}</p>
+                                                            <div className="main-list" dangerouslySetInnerHTML={{ __html: marked(data?.shortDetails || "") || "" }}>
+                                                            </div>
+                                                            <div className="d-lg-flex d-block align-items-center justify-content-between py-2 ">
+                                                                <div className="hospital-content p-0">
+                                                                    <ul>
+                                                                        <li className="location-icon-custom h-auto">{data?.hospitals[0]?.title}</li>
+                                                                    </ul>
+                                                                </div>
+                                                                <div className="d-flex align-items-center">
+                                                                    <ul>
+                                                                        <li>{data?.price}/-</li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+
+                                                            <div className="d-lg-flex d-block align-items-center justify-content-between pt-3">
+                                                                <a href={basePath + "/health-package/" + data.slug} className="btn mb-lg-0 mb-2 hospital-primarybtn">{staticText['View Details']}</a>
+                                                                <a href="#" className="btn mb-lg-0 mb-3 hospital-secondarybtn">{staticText['Book Now']}</a>
+                                                            </div>
                                                         </div>
+
+
+
                                                     </div>
 
-                                                    <div className="d-lg-flex d-block align-items-center justify-content-between pt-3">
-                                                        <a href="#" className="btn mb-lg-0 mb-2 hospital-primarybtn">View Details</a>
-                                                        <a href="#" className="btn mb-lg-0 mb-3 hospital-secondarybtn">Book Now</a>
-                                                    </div>
                                                 </div>
+                                            })
 
+                                        }
 
 
-                                            </div>
-
-                                        </div>
-
-                                        <div className="col-md-4 col-6 mb-3">
-                                            <div className="custom-hospital-top-card">
-                                                <div className="hospital-img">
-                                                    <a href="#"><img src="/img/health-pack-master.jpg" alt=""
-                                                        className="img-fluid w-100" /></a>
-                                                </div>
-                                                <div className="hospital-content">
-                                                    <h3>Executive Health Check Up</h3>
-                                                    <p>11 tests included</p>
-                                                    <div className="main-list">
-                                                        <ul>
-                                                            <li>CBC</li>
-                                                            <li>Blood Grouping</li>
-                                                            <li>FBS & PPBS</li>
-                                                        </ul>
-                                                    </div>
-                                                    <p><u>+5 More</u></p>
-                                                    <div className="d-lg-flex d-block align-items-center justify-content-between py-2 ">
-                                                        <div className="hospital-content p-0">
-                                                            <ul>
-                                                                <li className="location-icon-custom h-auto">KIMSHEALTH Trivandrum</li>
-                                                            </ul>
-                                                        </div>
-                                                        <div className="d-flex align-items-center">
-                                                            <ul>
-                                                                <li>6,500/-</li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-
-                                                    <div className="d-lg-flex d-block align-items-center justify-content-between pt-3">
-                                                        <a href="#" className="btn mb-lg-0 mb-2 hospital-primarybtn">View Details</a>
-                                                        <a href="#" className="btn mb-lg-0 mb-3 hospital-secondarybtn">Book Now</a>
-                                                    </div>
-                                                </div>
-
-
-
-                                            </div>
-
-                                        </div>
-
-
-                                        <div className="col-md-4 col-6 mb-3">
-                                            <div className="custom-hospital-top-card">
-                                                <div className="hospital-img">
-                                                    <a href="#"><img src="/img/health-pack-master.jpg" alt=""
-                                                        className="img-fluid w-100" /></a>
-                                                </div>
-                                                <div className="hospital-content">
-                                                    <h3>Executive Health Check Up</h3>
-                                                    <p>11 tests included</p>
-                                                    <div className="main-list">
-                                                        <ul>
-                                                            <li>CBC</li>
-                                                            <li>Blood Grouping</li>
-                                                            <li>FBS & PPBS</li>
-                                                        </ul>
-                                                    </div>
-                                                    <p><u>+5 More</u></p>
-                                                    <div className="d-lg-flex d-block align-items-center justify-content-between py-2 ">
-                                                        <div className="hospital-content p-0">
-                                                            <ul>
-                                                                <li className="location-icon-custom h-auto">KIMSHEALTH Trivandrum</li>
-                                                            </ul>
-                                                        </div>
-                                                        <div className="d-flex align-items-center">
-                                                            <ul>
-                                                                <li>6,500/-</li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-
-                                                    <div className="d-lg-flex d-block align-items-center justify-content-between pt-3">
-                                                        <a href="#" className="btn mb-lg-0 mb-2 hospital-primarybtn">View Details</a>
-                                                        <a href="#" className="btn mb-lg-0 mb-3 hospital-secondarybtn">Book Now</a>
-                                                    </div>
-                                                </div>
-
-
-
-                                            </div>
-
-                                        </div>
-
-                                        <div className="col-md-4 col-6 mb-3">
-                                            <div className="custom-hospital-top-card">
-                                                <div className="hospital-img">
-                                                    <a href="#"><img src="/img/health-pack-master.jpg" alt=""
-                                                        className="img-fluid w-100" /></a>
-                                                </div>
-                                                <div className="hospital-content">
-                                                    <h3>Executive Health Check Up</h3>
-                                                    <p>11 tests included</p>
-                                                    <div className="main-list">
-                                                        <ul>
-                                                            <li>CBC</li>
-                                                            <li>Blood Grouping</li>
-                                                            <li>FBS & PPBS</li>
-                                                        </ul>
-                                                    </div>
-                                                    <p><u>+5 More</u></p>
-                                                    <div className="d-lg-flex d-block align-items-center justify-content-between py-2 ">
-                                                        <div className="hospital-content p-0">
-                                                            <ul>
-                                                                <li className="location-icon-custom h-auto">KIMSHEALTH Trivandrum</li>
-                                                            </ul>
-                                                        </div>
-                                                        <div className="d-flex align-items-center">
-                                                            <ul>
-                                                                <li>6,500/-</li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-
-                                                    <div className="d-lg-flex d-block align-items-center justify-content-between pt-3">
-                                                        <a href="#" className="btn mb-lg-0 mb-2 hospital-primarybtn">View Details</a>
-                                                        <a href="#" className="btn mb-lg-0 mb-3 hospital-secondarybtn">Book Now</a>
-                                                    </div>
-                                                </div>
-
-
-
-                                            </div>
-
-                                        </div>
-
-                                        <div className="col-md-4 col-6 mb-3">
-                                            <div className="custom-hospital-top-card">
-                                                <div className="hospital-img">
-                                                    <a href="#"><img src="/img/health-pack-master.jpg" alt=""
-                                                        className="img-fluid w-100" /></a>
-                                                </div>
-                                                <div className="hospital-content">
-                                                    <h3>Executive Health Check Up</h3>
-                                                    <p>11 tests included</p>
-                                                    <div className="main-list">
-                                                        <ul>
-                                                            <li>CBC</li>
-                                                            <li>Blood Grouping</li>
-                                                            <li>FBS & PPBS</li>
-                                                        </ul>
-                                                    </div>
-                                                    <p><u>+5 More</u></p>
-                                                    <div className="d-lg-flex d-block align-items-center justify-content-between py-2 ">
-                                                        <div className="hospital-content p-0">
-                                                            <ul>
-                                                                <li className="location-icon-custom h-auto">KIMSHEALTH Trivandrum</li>
-                                                            </ul>
-                                                        </div>
-                                                        <div className="d-flex align-items-center">
-                                                            <ul>
-                                                                <li>6,500/-</li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-
-                                                    <div className="d-lg-flex d-block align-items-center justify-content-between pt-3">
-                                                        <a href="#" className="btn mb-lg-0 mb-2 hospital-primarybtn">View Details</a>
-                                                        <a href="#" className="btn mb-lg-0 mb-3 hospital-secondarybtn">Book Now</a>
-                                                    </div>
-                                                </div>
-
-
-
-                                            </div>
-
-                                        </div>
-
-                                        <div className="col-md-4 col-6 mb-3">
-                                            <div className="custom-hospital-top-card">
-                                                <div className="hospital-img">
-                                                    <a href="#"><img src="/img/health-pack-master.jpg" alt=""
-                                                        className="img-fluid w-100" /></a>
-                                                </div>
-                                                <div className="hospital-content">
-                                                    <h3>Executive Health Check Up</h3>
-                                                    <p>11 tests included</p>
-                                                    <div className="main-list">
-                                                        <ul>
-                                                            <li>CBC</li>
-                                                            <li>Blood Grouping</li>
-                                                            <li>FBS & PPBS</li>
-                                                        </ul>
-                                                    </div>
-                                                    <p><u>+5 More</u></p>
-                                                    <div className="d-lg-flex d-block align-items-center justify-content-between py-2 ">
-                                                        <div className="hospital-content p-0">
-                                                            <ul>
-                                                                <li className="location-icon-custom h-auto">KIMSHEALTH Trivandrum</li>
-                                                            </ul>
-                                                        </div>
-                                                        <div className="d-flex align-items-center">
-                                                            <ul>
-                                                                <li>6,500/-</li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-
-                                                    <div className="d-lg-flex d-block align-items-center justify-content-between pt-3">
-                                                        <a href="#" className="btn mb-lg-0 mb-2 hospital-primarybtn">View Details</a>
-                                                        <a href="#" className="btn mb-lg-0 mb-3 hospital-secondarybtn">Book Now</a>
-                                                    </div>
-                                                </div>
-
-
-
-                                            </div>
-
-                                        </div>
-
-                                        <div className="col-md-4 col-6 mb-3">
-                                            <div className="custom-hospital-top-card">
-                                                <div className="hospital-img">
-                                                    <a href="#"><img src="/img/health-pack-master.jpg" alt=""
-                                                        className="img-fluid w-100" /></a>
-                                                </div>
-                                                <div className="hospital-content">
-                                                    <h3>Executive Health Check Up</h3>
-                                                    <p>11 tests included</p>
-                                                    <div className="main-list">
-                                                        <ul>
-                                                            <li>CBC</li>
-                                                            <li>Blood Grouping</li>
-                                                            <li>FBS & PPBS</li>
-                                                        </ul>
-                                                    </div>
-                                                    <p><u>+5 More</u></p>
-                                                    <div className="d-lg-flex d-block align-items-center justify-content-between py-2 ">
-                                                        <div className="hospital-content p-0">
-                                                            <ul>
-                                                                <li className="location-icon-custom h-auto">KIMSHEALTH Trivandrum</li>
-                                                            </ul>
-                                                        </div>
-                                                        <div className="d-flex align-items-center">
-                                                            <ul>
-                                                                <li>6,500/-</li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-
-                                                    <div className="d-lg-flex d-block align-items-center justify-content-between pt-3">
-                                                        <a href="#" className="btn mb-lg-0 mb-2 hospital-primarybtn">View Details</a>
-                                                        <a href="#" className="btn mb-lg-0 mb-3 hospital-secondarybtn">Book Now</a>
-                                                    </div>
-                                                </div>
-
-
-
-                                            </div>
-
-                                        </div>
-
-                                        <div className="col-md-4 col-6 mb-3">
-                                            <div className="custom-hospital-top-card">
-                                                <div className="hospital-img">
-                                                    <a href="#"><img src="/img/health-pack-master.jpg" alt=""
-                                                        className="img-fluid w-100" /></a>
-                                                </div>
-                                                <div className="hospital-content">
-                                                    <h3>Executive Health Check Up</h3>
-                                                    <p>11 tests included</p>
-                                                    <div className="main-list">
-                                                        <ul>
-                                                            <li>CBC</li>
-                                                            <li>Blood Grouping</li>
-                                                            <li>FBS & PPBS</li>
-                                                        </ul>
-                                                    </div>
-                                                    <p><u>+5 More</u></p>
-                                                    <div className="d-lg-flex d-block align-items-center justify-content-between py-2 ">
-                                                        <div className="hospital-content p-0">
-                                                            <ul>
-                                                                <li className="location-icon-custom h-auto">KIMSHEALTH Trivandrum</li>
-                                                            </ul>
-                                                        </div>
-                                                        <div className="d-flex align-items-center">
-                                                            <ul>
-                                                                <li>6,500/-</li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-
-                                                    <div className="d-lg-flex d-block align-items-center justify-content-between pt-3">
-                                                        <a href="#" className="btn mb-lg-0 mb-2 hospital-primarybtn">View Details</a>
-                                                        <a href="#" className="btn mb-lg-0 mb-3 hospital-secondarybtn">Book Now</a>
-                                                    </div>
-                                                </div>
-
-
-
-                                            </div>
-
-                                        </div>
-
-
-                                        <div className="col-md-4 col-6 mb-3">
-                                            <div className="custom-hospital-top-card">
-                                                <div className="hospital-img">
-                                                    <a href="#"><img src="/img/health-pack-master.jpg" alt=""
-                                                        className="img-fluid w-100" /></a>
-                                                </div>
-                                                <div className="hospital-content">
-                                                    <h3>Executive Health Check Up</h3>
-                                                    <p>11 tests included</p>
-                                                    <div className="main-list">
-                                                        <ul>
-                                                            <li>CBC</li>
-                                                            <li>Blood Grouping</li>
-                                                            <li>FBS & PPBS</li>
-                                                        </ul>
-                                                    </div>
-                                                    <p><u>+5 More</u></p>
-                                                    <div className="d-lg-flex d-block align-items-center justify-content-between py-2 ">
-                                                        <div className="hospital-content p-0">
-                                                            <ul>
-                                                                <li className="location-icon-custom h-auto">KIMSHEALTH Trivandrum</li>
-                                                            </ul>
-                                                        </div>
-                                                        <div className="d-flex align-items-center">
-                                                            <ul>
-                                                                <li>6,500/-</li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-
-                                                    <div className="d-lg-flex d-block align-items-center justify-content-between pt-3">
-                                                        <a href="#" className="btn mb-lg-0 mb-2 hospital-primarybtn">View Details</a>
-                                                        <a href="#" className="btn mb-lg-0 mb-3 hospital-secondarybtn">Book Now</a>
-                                                    </div>
-                                                </div>
-
-
-
-                                            </div>
-
-                                        </div>
-
-                                        <div className="col-md-4 col-6 mb-3">
-                                            <div className="custom-hospital-top-card">
-                                                <div className="hospital-img">
-                                                    <a href="#"><img src="/img/health-pack-master.jpg" alt=""
-                                                        className="img-fluid w-100" /></a>
-                                                </div>
-                                                <div className="hospital-content">
-                                                    <h3>Executive Health Check Up</h3>
-                                                    <p>11 tests included</p>
-                                                    <div className="main-list">
-                                                        <ul>
-                                                            <li>CBC</li>
-                                                            <li>Blood Grouping</li>
-                                                            <li>FBS & PPBS</li>
-                                                        </ul>
-                                                    </div>
-                                                    <p><u>+5 More</u></p>
-                                                    <div className="d-lg-flex d-block align-items-center justify-content-between py-2 ">
-                                                        <div className="hospital-content p-0">
-                                                            <ul>
-                                                                <li className="location-icon-custom h-auto">KIMSHEALTH Trivandrum</li>
-                                                            </ul>
-                                                        </div>
-                                                        <div className="d-flex align-items-center">
-                                                            <ul>
-                                                                <li>6,500/-</li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-
-                                                    <div className="d-lg-flex d-block align-items-center justify-content-between pt-3">
-                                                        <a href="#" className="btn mb-lg-0 mb-2 hospital-primarybtn">View Details</a>
-                                                        <a href="#" className="btn mb-lg-0 mb-3 hospital-secondarybtn">Book Now</a>
-                                                    </div>
-                                                </div>
-
-
-
-                                            </div>
-
-                                        </div>
-
-                                        <div className="col-md-4 col-6 mb-3">
-                                            <div className="custom-hospital-top-card">
-                                                <div className="hospital-img">
-                                                    <a href="#"><img src="/img/health-pack-master.jpg" alt=""
-                                                        className="img-fluid w-100" /></a>
-                                                </div>
-                                                <div className="hospital-content">
-                                                    <h3>Executive Health Check Up</h3>
-                                                    <p>11 tests included</p>
-                                                    <div className="main-list">
-                                                        <ul>
-                                                            <li>CBC</li>
-                                                            <li>Blood Grouping</li>
-                                                            <li>FBS & PPBS</li>
-                                                        </ul>
-                                                    </div>
-                                                    <p><u>+5 More</u></p>
-                                                    <div className="d-lg-flex d-block align-items-center justify-content-between py-2 ">
-                                                        <div className="hospital-content p-0">
-                                                            <ul>
-                                                                <li className="location-icon-custom h-auto">KIMSHEALTH Trivandrum</li>
-                                                            </ul>
-                                                        </div>
-                                                        <div className="d-flex align-items-center">
-                                                            <ul>
-                                                                <li>6,500/-</li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-
-                                                    <div className="d-lg-flex d-block align-items-center justify-content-between pt-3">
-                                                        <a href="#" className="btn mb-lg-0 mb-2 hospital-primarybtn">View Details</a>
-                                                        <a href="#" className="btn mb-lg-0 mb-3 hospital-secondarybtn">Book Now</a>
-                                                    </div>
-                                                </div>
-
-
-
-                                            </div>
-
-                                        </div>
-
-                                        <div className="col-md-4 col-6 mb-3">
-                                            <div className="custom-hospital-top-card">
-                                                <div className="hospital-img">
-                                                    <a href="#"><img src="/img/health-pack-master.jpg" alt=""
-                                                        className="img-fluid w-100" /></a>
-                                                </div>
-                                                <div className="hospital-content">
-                                                    <h3>Executive Health Check Up</h3>
-                                                    <p>11 tests included</p>
-                                                    <div className="main-list">
-                                                        <ul>
-                                                            <li>CBC</li>
-                                                            <li>Blood Grouping</li>
-                                                            <li>FBS & PPBS</li>
-                                                        </ul>
-                                                    </div>
-                                                    <p><u>+5 More</u></p>
-                                                    <div className="d-lg-flex d-block align-items-center justify-content-between py-2 ">
-                                                        <div className="hospital-content p-0">
-                                                            <ul>
-                                                                <li className="location-icon-custom h-auto">KIMSHEALTH Trivandrum</li>
-                                                            </ul>
-                                                        </div>
-                                                        <div className="d-flex align-items-center">
-                                                            <ul>
-                                                                <li>6,500/-</li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-
-                                                    <div className="d-lg-flex d-block align-items-center justify-content-between pt-3">
-                                                        <a href="#" className="btn mb-lg-0 mb-2 hospital-primarybtn">View Details</a>
-                                                        <a href="#" className="btn mb-lg-0 mb-3 hospital-secondarybtn">Book Now</a>
-                                                    </div>
-                                                </div>
-
-
-
-                                            </div>
-
-                                        </div>
 
                                     </div>
 

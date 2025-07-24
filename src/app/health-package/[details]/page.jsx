@@ -12,11 +12,9 @@ const HealthPackageDetails = async ({ params }) => {
     const getLangLoc = await getCurrentLangLoc()
     const staticText = await getStaticText();
     const basePath = await getBaseUrl(true, true);
-
-    const data = await getHealthPackageData.getSingleHealthPackage(params.details);
+    const data = await getHealthPackageData.getSingleHealthPackage({slug: params.details, langLoc: getLangLoc});
     const limitedData = await getHealthPackageData.getLimited({ langLoc: getLangLoc });
 
-    console.log(data);
 
     return (
         <>

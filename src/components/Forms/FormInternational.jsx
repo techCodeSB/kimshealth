@@ -1,9 +1,8 @@
 "use client"
-
 import getStaticText from '@/helper/getStaticText';
 import React, { useEffect, useState } from 'react'
 
-const Form4 = () => {
+const FormInternational = () => {
     const [staticTexts, setStaticTexts] = useState({});
 
 
@@ -14,6 +13,7 @@ const Form4 = () => {
 
         fetchTexts();
     }, []);
+
 
 
     return (
@@ -27,8 +27,8 @@ const Form4 = () => {
                 </div>
                 <div className="col-md-6 col-12 mb-3">
                     <div className="input-group">
-                        <input type="text" id="phone" defaultValue="+91"
-                            className="form-control" placeholder={staticTexts["Enter Mobile Number"]}
+                        <input type="text"
+                            className="form-control phone-international" defaultValue={'+1'} placeholder={staticTexts["Enter Mobile Number"]}
                             name="search" />
                     </div>
                 </div>
@@ -41,4 +41,4 @@ const Form4 = () => {
     )
 }
 
-export default Form4
+export default FormInternational;

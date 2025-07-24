@@ -14,8 +14,8 @@ import { marked } from 'marked';
 const BlogDetails = async ({ params }) => {
     const getLangLoc = await getCurrentLangLoc()
     const basePath = await getBaseUrl(true, true);
-    const data = await blogData.getSingleBlog(params.details);
-    const docData = await doctorData.getSingleDoctor(data.doctor[0]?.slug);
+    const data = await blogData.getSingleBlog({slug: params.details, langLoc: getLangLoc});
+    const docData = await doctorData.getSingleDoctor({slug: data?.doctor[0]?.slug, langLoc: getLangLoc});
     const staticText = await getStaticText();
 
 

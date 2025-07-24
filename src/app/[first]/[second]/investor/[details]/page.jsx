@@ -13,8 +13,7 @@ const DoctorDetails = async ({ params }) => {
     const getLangLoc = await getCurrentLangLoc()
     const basePath = await getBaseUrl(true, true)
     const imgUrl = process.env.NEXT_PUBLIC_IMAGE_URL;
-    const slug = params.details;
-    const data = await investorData.getSingleInvestor(slug);
+    const data = await investorData.getSingleInvestor({slug:params.details, langLoc: getLangLoc});
     const staticText = await getStaticText();
 
 

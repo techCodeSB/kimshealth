@@ -15,7 +15,7 @@ import { marked } from 'marked';
 const HomeServiceDetails = async ({ params }) => {
     const getLangLoc = await getCurrentLangLoc()
     const basePath = await getBaseUrl(true, true);
-    const data = await homeServices.getSingleHomeService(params.details);
+    const data = await homeServices.getSingleHomeService({slug:params.details, langLoc: getLangLoc});
     const homeServiceData = await homeServices.getAll({ langLoc: getLangLoc });
     const staticTexts = await getStaticText()
 

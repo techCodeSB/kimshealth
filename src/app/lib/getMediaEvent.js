@@ -32,7 +32,7 @@ const mediaData = {
         }
     },
 
-    getSingleMedia: async (slug) => {
+    getSingleMedia: async ({slug, langLoc}) => {
         let url = process.env.NEXT_PUBLIC_CMS_API_URL + `/media-and-events/?filters[slug][$eq]=${slug}&populate[0]=speaker&populate[1]=speaker.speaker&populate[3]=featuredImage&populate[4]=mediaSection`;
         const req = await fetch(url);
         const res = await req.json();

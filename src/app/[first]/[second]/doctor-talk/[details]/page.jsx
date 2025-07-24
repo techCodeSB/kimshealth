@@ -14,18 +14,18 @@ import Header from '@/components/Header';
 const DoctorTalkDetails = async ({ params }) => {
     const getLangLoc = await getCurrentLangLoc()
     const basePath = await getBaseUrl();
-    const data = await doctorTalkData.getSingleDoctor(params.details);
+    const data = await doctorTalkData.getSingleDoctor({slug: params.details, langLoc: getLangLoc });
     const staticText = await getStaticText();
     const youtube = await youtubeData(data.videoId);
 
+
+    // :::: ALL DATA SET ::::
     const docTalkDataSet = {
         sectionTitle: data?.doctorTalkSection?.title,
         buttonText: 'View All', buttonURL: `${basePath + "/doctor-talk"}`,
         data: await doctorTalkData.getRecent({ langLoc: getLangLoc }),
         baseUrl: basePath
     }
-
-    
 
     return (
         <>

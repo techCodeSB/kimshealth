@@ -24,11 +24,12 @@ import { marked } from 'marked';
 const HospitalDetails = async ({ params }) => {
     const getLangLoc = await getCurrentLangLoc()
     const basePath = await getBaseUrl(true, true);
-    const hptData = await hospitalData.getSingleHospital(params.details);
+    const hptData = await hospitalData.getSingleHospital({ slug: params.details, langLoc: getLangLoc });
     const hospitals = await hospitalData.getAll({ langLoc: getLangLoc });
     const staticText = await getStaticText()
 
 
+    // ::::::::: ALL DATA SETS :::::::::
     const specialityDataSet = {
         sectionTitle: hptData.specialitySection.title,
         buttonText: 'View All', buttonURL: `${basePath + "/speciality?hospital=" + hptData.slug}`,
@@ -264,7 +265,7 @@ const HospitalDetails = async ({ params }) => {
                     </div>
                 </section>
 
-                <BookAnAppoinmentShort basePath={basePath} />
+                <BookAnAppoinmentShort basePath={basePath} extraClass={"py-5"} />
 
                 <section className="section pt-lg-0 pt-2 pb-2 d-lg-none d-block" data-aos="fade-up">
                     <div className="container-fluid ps-0">
@@ -316,6 +317,28 @@ const HospitalDetails = async ({ params }) => {
                                             <WatchVideoButton txt={"Watch Video"} id={hptData.overviewSection?.videoId} />
                                             : null
                                     }
+                                    <div className="hospital-content text-start">
+                                        <ul>
+                                            <li class="location-icon-custom">{hptData.address}</li>
+                                            <li className="telephone-icon-custom"><a href={`tel:${hptData.contactNo}`}> {staticText['Appointment Number']}- {hptData.contactNo} </a></li>
+                                            <li className="send-custom-icon underline-map">
+                                                <a href={hptData.mapURL} target='_blank'> {staticText['Get Direction']}</a>
+                                            </li>
+                                        </ul>
+                                        <div className="d-flex align-items-center mt-2">
+                                            <img src="/img/google.png" alt="Google Logo" className="me-2" />
+                                            <div className="star-rating" data-rating="4.7">
+                                                {
+                                                    Array.from({ length: hptData.rating }).map((r, index) => {
+                                                        return index + 1 < hptData.rating - 1 ?
+                                                            <i className="fa fa-solid fa-star ms-1" style={{ color: "#ffc107" }} key={index}></i>
+                                                            : <i key={index} className={`fa fa-solid ms-1 ${Number.isInteger(hptData.rating) ? 'fa-star' : 'fa-star-half'}`} style={{ color: "#ffc107" }}></i>
+                                                    })
+                                                }
+                                                {hptData.rating}
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div className="col-md-7 sub-heading order-lg-2 order-1 mb-lg-0 mb-3">

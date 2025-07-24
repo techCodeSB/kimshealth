@@ -545,18 +545,16 @@ $('.counter').counterUp({
     time: 1000
 });
 
-const input = document.querySelector("#phone");
-window.intlTelInput(input, {
-    utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@19.5.5/build/js/utils.js",
-    initialCountry: "in"
+// ...existing code...
+document.querySelectorAll(".phone-international").forEach(function(input) {
+    window.intlTelInput(input, {
+        utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@19.5.5/build/js/utils.js",
+        initialCountry: "us"
+    });
 });
+// ...existing code...
 
 
-const logofrom = document.querySelector("#tel");
-window.intlTelInput(logofrom, {
-    utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@19.5.5/build/js/utils.js",
-    initialCountry: "in"
-});
 
 
 {/* // ==== Multi Slider */ }

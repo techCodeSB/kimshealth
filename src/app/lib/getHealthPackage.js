@@ -44,7 +44,7 @@ const getHealthPackageData = {
 
 
     // FOR DETAILS PAGE;
-    getSingleHealthPackage: async (slug) => {
+    getSingleHealthPackage: async ({slug, langLoc}) => {
 
         const req = await fetch(process.env.NEXT_PUBLIC_CMS_API_URL + `/health-packages?populate[0]=banner.bannerItem.bannerImageDesktop&populate[1]=hospitals&populate[2]=healthPackage&populate[3]=banner.bannerItem.bannerImageMobile&&filters[slug][$eq]=${slug}`);
         const res = await req.json();

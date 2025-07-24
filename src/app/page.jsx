@@ -26,7 +26,6 @@ import mediaData from './lib/getMediaEvent'
 
 
 
-
 const Home = async () => {
   const getLangLoc = await getCurrentLangLoc()
   const basePath = await getBaseUrl(true, true);
@@ -34,6 +33,7 @@ const Home = async () => {
   const data = await getStaticPageContent("home", field);
   const pageContent = data?.data[0]?.pageContent;
   const pageMeta = data?.data[0]?.metaSection;
+
 
   const specialityDataSet = {
     sectionTitle: pageContent[2]?.title,
@@ -227,7 +227,7 @@ const Home = async () => {
           </div>
         </section>
 
-        <BookAnAppoinmentShort basePath={basePath} />
+        <BookAnAppoinmentShort basePath={basePath} extraClass={"pt-5 pb-0"}/>
 
         <section className="section pt-lg-0 pt-2 pb-2 d-lg-none d-block" data-aos="fade-up">
           <div className="container-fluid ps-0">

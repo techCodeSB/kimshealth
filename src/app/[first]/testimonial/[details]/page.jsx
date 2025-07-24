@@ -14,9 +14,11 @@ import getCurrentLangLoc from '@/app/lib/getCurrentLangLoc'
 const TestimonialDetails = async ({ params }) => {
     const getLangLoc = await getCurrentLangLoc()
     const basePath = await getBaseUrl();
-    const data = await testimonialData.getSingleTestimonaial(params.details);
+    const data = await testimonialData.getSingleTestimonaial({slug: params.details, langLoc: getLangLoc});
     const youtube = await youtubeData(data?.videoId);
     const staticText = await getStaticText()
+
+
 
     const testimonialDataSet = {
         sectionTitle: data?.testimonialSection?.title,

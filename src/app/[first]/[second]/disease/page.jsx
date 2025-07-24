@@ -7,16 +7,21 @@ import { getStaticPageContent } from '@/app/lib/getStaticPageContent';
 import diseaseData from '@/app/lib/getDisease';
 import Breadcrumb from '@/components/Breadcrumb';
 import getCurrentLangLoc from '@/app/lib/getCurrentLangLoc';
+import DiseaseListing from '@/components/DiseaseListing';
+import getSpecialityData from '@/app/lib/getSpeciality';
 
-const Disease = async () => {
+const Disease = async ({ searchParams }) => {
+    const URLParams = await searchParams;
     const getLangLoc = await getCurrentLangLoc()
     const staticText = await getStaticText();
-    const baseURL = await getBaseUrl(true, true);
+    const basePath = await getBaseUrl(true, true);
     const baseUrlOnlyLang = await getBaseUrl(true, false);
     const data = await getStaticPageContent("disease");
     const pageContent = data?.data[0]?.pageContent;
     const pageMeta = data?.data[0]?.metaSection;
-    const getAllDisease = await diseaseData.getDisease();
+
+    const getAllDisease = await diseaseData.getAll({ langLoc: getLangLoc, URLParams: URLParams });
+    const allSpeciality = await getSpecialityData.getAllBaseSpeciality()
 
 
 
@@ -47,85 +52,12 @@ const Disease = async () => {
                 <section className="section pt-lg-4 pt-0">
                     <div className="container">
                         <div className="row">
-                            <div className="col-md-9 mb-3">
-                                <div className="speciality-masterpage-card key-procedures-master-page">
-                                    <div className="details-key-row">
-                                        <div className="row justify-content-between">
-                                            <div className="col-md-6 mb-2">
-                                                <form action="">
-                                                    <div className="input-group p-0 my-lg-4 my-1 position-relative justify-content-center">
-                                                        <select className="form-select diseases-page-search">
-                                                            <option>Search for Conditions/Diseases</option>
-                                                            <option value="1">One</option>
-                                                            <option value="2">Two</option>
-                                                            <option value="3">Three</option>
-                                                        </select>
-                                                        <button className="input-group-text border-0 search-btn-page"><i className="fa-solid fa-magnifying-glass"></i></button>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                            <div className="col-md-6 mb-2">
-                                                <form action="">
-                                                    <div className="input-group p-0 my-lg-4 my-1 position-relative justify-content-center">
-
-                                                        <select className="form-select speciality-page-search">
-                                                            <option >Select by Speciality</option>
-                                                            <option value="1">One</option>
-                                                            <option value="2">Two</option>
-                                                            <option value="3">Three</option>
-                                                        </select>
-                                                        <button className="input-group-text border-0 search-btn-page"><i className="fa-solid fa-angle-down"></i></button>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <div className="row">
-                                        <div className="col-md-6">
-                                            {
-                                                getAllDisease.slice(0, getAllDisease.length / 2).map((d, index) => {
-                                                    return <div className="speciality-masterpage-card-content" key={index}>
-                                                        <a href={baseUrlOnlyLang + "/disease/" + d.diseases[0]?.slug}>
-                                                            <div className="key-master-row">
-                                                                <div className="key-master-image">
-                                                                    <img src="img/key-proce1.png" alt="" className="img-fluid" />
-                                                                </div>
-                                                                <div className="key-master-content">
-                                                                    <h5>{d.title}</h5>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                    </div>
-                                                })
-                                            }
-
-                                        </div>
-
-                                        <div className="col-md-6">
-                                            {
-                                                getAllDisease.slice(0, getAllDisease.length / 2).map((d, index) => {
-                                                    return <div className="speciality-masterpage-card-content" key={index}>
-                                                        <a href={baseUrlOnlyLang + "/disease/" + d.diseases[0]?.slug}>
-                                                            <div className="key-master-row">
-                                                                <div className="key-master-image">
-                                                                    <img src="img/key-proce1.png" alt="" className="img-fluid" />
-                                                                </div>
-                                                                <div className="key-master-content">
-                                                                    <h5>{d.title}</h5>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                    </div>
-                                                })
-                                            }
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
+                            <DiseaseListing
+                                allDisease={getAllDisease}
+                                baseUrlOnlyLang={baseUrlOnlyLang}
+                                allSpeciality={allSpeciality}
+                                URLParams={URLParams}
+                            />
 
                             <div className="col-md-3">
                                 <a href={baseUrlOnlyLang + "/" + pageContent[1].card1Hyperlink}>

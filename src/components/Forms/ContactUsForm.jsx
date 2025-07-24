@@ -1,9 +1,11 @@
 "use client"
 import getStaticText from "@/helper/getStaticText";
+import langLoc from '@/helper/getLangLoc';
 import { useEffect, useState } from "react";
 
 const ContactUsForm = () => {
     const [staticTexts, setStaticTexts] = useState({});
+    const [allLocation, setAllLocation] = useState();
 
 
     useEffect(() => {
@@ -13,6 +15,16 @@ const ContactUsForm = () => {
 
         fetchTexts();
     }, []);
+
+
+    useEffect(() => {
+        const get = async () => {
+            setAllLocation(await langLoc.getLocations())
+        }
+
+        get()
+
+    }, [])
     return (
         <div className="col-md-6 contact-right-col order-lg-2 order-1 ">
             <div className="association-form-card mb-5 sticky-from custom-tab-button-wrapper">
@@ -45,7 +57,6 @@ const ContactUsForm = () => {
                                 <input type="text" id="phone" defaultValue="+91" className="form-control pe-0" />
                             </div>
 
-
                             <div className="col-xl-6 col-lg-6 col-md-6 col-12 mb-3">
                                 <label htmlFor=''>{staticTexts['Email']}*</label>
                                 <input type="text" className="form-control pe-0" />
@@ -53,10 +64,12 @@ const ContactUsForm = () => {
                             <div className="col-xl-12 col-lg-12 col-md-12 col-12 mb-3">
                                 <label htmlFor=''>{staticTexts['Hospitals']}*</label>
                                 <select className="form-select from-location">
-                                    <option>{staticTexts['Select Hospital']}</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
+                                    <option value={""}>{staticTexts['Select Hospital']}</option>
+                                    {
+                                        allLocation?.map((loc, i) => {
+                                            return <option value={loc.title} key={i}>{loc.title}</option>
+                                        })
+                                    }
                                 </select>
                             </div>
 
@@ -99,10 +112,12 @@ const ContactUsForm = () => {
                             <div className="col-xl-12 col-lg-12 col-md-12 col-12 mb-3">
                                 <label htmlFor=''>{staticTexts['Hospitals']}*</label>
                                 <select className="form-select from-location">
-                                    <option >{staticTexts['Select Hospital']}</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
+                                    <option value={""}>{staticTexts['Select Hospital']}</option>
+                                    {
+                                        allLocation?.map((loc, i) => {
+                                            return <option value={loc.title} key={i}>{loc.title}</option>
+                                        })
+                                    }
                                 </select>
                             </div>
                             <div className="col-xl-12 col-lg-12 col-md-12 col-12 mb-3">

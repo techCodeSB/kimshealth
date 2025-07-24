@@ -21,7 +21,7 @@ const blogData = {
         return res.data;
     },
 
-    getSingleBlog: async (slug) => {
+    getSingleBlog: async ({slug, langLoc}) => {
         let url = process.env.NEXT_PUBLIC_CMS_API_URL + `/blog-posts/?filters[slug][$eq]=${slug}&populate=*`;
         const req = await fetch(url);
         const res = await req.json();

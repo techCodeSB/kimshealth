@@ -18,9 +18,11 @@ const DoctorDetails = async ({ params }) => {
     const basePath = await getBaseUrl(true, true)
     const imgUrl = process.env.NEXT_PUBLIC_IMAGE_URL;
     const slug = params.details;
-    const data = await doctorData.getSingleDoctor(slug);
+    const data = await doctorData.getSingleDoctor({slug, langLoc: getLangLoc});
     const staticText = await getStaticText();
 
+
+    // :::::: ALL DATA SETS ::::::
     const docTalkDataSet = {
         sectionTitle: data.doctorTalk.title,
         buttonText: 'View All', buttonURL: basePath + "/doctor-talk?doctor=" + data.slug,
@@ -69,7 +71,7 @@ const DoctorDetails = async ({ params }) => {
                                             <img src={data.doctorImage?.url ? imgUrl + data.doctorImage?.url : "/img/no-image.jpg"} alt={data.name} className="img-fluid w-100" />
 
                                             {data.teleConsultationAvailable && <a href='https://consult.bestdocapp.com/home/KIMSTVM?version=new' target='_blank'>
-                                                <span className="video-iconfor-listing"><i class="fa-solid fa-video"></i></span>
+                                                <span className="video-iconfor-listing"><i className="fa-solid fa-video"></i></span>
                                             </a>}
                                         </div>
 

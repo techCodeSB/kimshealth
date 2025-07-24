@@ -2417,6 +2417,7 @@ footer.footer {
     font-size: 16px;
     color: #000000;
     margin-bottom: 10px;
+    display: inline-block;
 }
 
 .send-custom-icon::before {
@@ -2662,7 +2663,8 @@ footer.footer {
 }
 
 .association-form-card input,
-.association-form-card textarea {
+.association-form-card textarea,
+.association-form-card select {
     border-radius: 40px;
     padding: 10px 30px;
     border: 1px solid #f3f3f3;
@@ -4588,7 +4590,7 @@ li.chat-ic::before {
     font-weight: 700;
 }
 
-.details-banner form input {
+.details-banner form input, .details-banner form select {
     padding: 10px 30px;
     border-radius: 40px;
 }
@@ -5984,4 +5986,15 @@ select option:hover {
 
 .career-details-main-page .file-input-label span {
     color: #a8a9a9;
+}
+
+
+.send-custom-icon.underline-map::after {
+    position: absolute;
+    content: '';
+    background: #c71d22;
+    bottom: 0;
+    left: 30px;
+    width: 78%;
+    height: 1px;
 }

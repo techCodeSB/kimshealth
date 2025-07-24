@@ -1,9 +1,11 @@
 "use client"
 import getStaticText from '@/helper/getStaticText';
 import React, { useEffect, useState } from 'react'
+import langLoc from '@/helper/getLangLoc';
 
 const Form1 = ({ title }) => {
   const [staticTexts, setStaticTexts] = useState({});
+  const [allLocation, setAllLocation] = useState();
 
   useEffect(() => {
     const fetchTexts = async () => {
@@ -13,6 +15,15 @@ const Form1 = ({ title }) => {
     fetchTexts();
   }, []);
 
+  useEffect(() => {
+    const get = async () => {
+      setAllLocation(await langLoc.getLocations())
+    }
+
+    get()
+
+  }, [])
+
 
   return (
     <>
@@ -21,6 +32,16 @@ const Form1 = ({ title }) => {
         <div className="row">
           <div className="col-md-12 mb-3">
             <input type="text" className="form-control" placeholder={staticTexts['Name']} name="name" />
+          </div>
+          <div className="col-md-12 mb-3">
+            <select className="form-control">
+              <option value={""}>{staticTexts['All Hospital']}</option>
+              {
+                allLocation?.map((loc, i) => {
+                  return <option value={loc.title} key={i}>{loc.title}</option>
+                })
+              }
+            </select>
           </div>
           <div className="col-md-12 mb-3">
             <input type="text" className="form-control"

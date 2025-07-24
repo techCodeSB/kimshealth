@@ -6,14 +6,47 @@ import Footer from '@/components/Footer'
 import DocTalk from '@/components/DocTalk'
 import Header from '@/components/Header'
 import TestimonialSection from '@/components/TestimonialSection'
-import getStaticText from '@/helper/getStaticText'
 import React from 'react'
+import getStaticText from '@/app/lib/getStaticTextServer'
+import procedureData from '@/app/lib/getProcedure'
+import WatchVideoButton from '@/components/WatchVideoButton'
+import doctorTalkData from '@/app/lib/getDoctorTalk'
+import testimonialData from '@/app/lib/getTestimonial'
+import doctorData from '@/app/lib/getDoctor'
+import Form2 from '@/components/Forms/Form2'
 
-const ProcedureDetails = async () => {
+const ProcedureDetails = async ({ params }) => {
     const getLangLoc = await getCurrentLangLoc()
     const staticText = await getStaticText();
-    const basePathOnlyLang = await getBaseUrl(true, false)
-    
+    const basePathOnlyLang = await getBaseUrl(true, false);
+    const basePath = await getBaseUrl(true, true);
+    const data = await procedureData.getSingleProcedure({ slug: params.details, langLoc: getLangLoc });
+
+    console.log(data)
+
+
+    // ::::::::: ALL DATA SETS :::::::::
+    const expertDataSet = {
+        sectionTitle: data.expertSection?.title,
+        buttonText: 'View All', buttonURL: `${basePath + "/doctor?procedure=" + data.procedure?.slug}`,
+        data: await doctorData.getByProcedure({ id: data.procedure.id, langLoc: getLangLoc }),
+        baseUrl: basePath
+    };
+    const testimonialDataSet = {
+        sectionTitle: data.testimonialSection?.title,
+        buttonText: 'View All', buttonURL: `${basePath + "/testimonial?procedure=" + data.procedure?.slug}`,
+        data: await testimonialData.getByProcedure({ id: data.procedure.id, langLoc: getLangLoc }),
+        baseUrl: basePath
+    }
+
+    const docTalkDataSet = {
+        sectionTitle: data.doctorTalk?.title,
+        buttonText: 'View All', buttonURL: `${basePath + "/doctor-talk?procedure=" + data.procedure?.slug}`,
+        data: await doctorTalkData.getByProcedure({ id: data.procedure.id, langLoc: getLangLoc }),
+        baseUrl: basePath
+    }
+
+
     return (
         <>
             <Header />
@@ -28,7 +61,7 @@ const ProcedureDetails = async () => {
                                         <div className="row">
                                             <div className="col-12 px-0">
                                                 <Breadcrumb
-                                                    activeTitle={"Coronary Artery Bypass Grafting (CABG)"}
+                                                    activeTitle={data.title}
                                                     middleTitle={"Procedures"}
                                                     middleURL={basePathOnlyLang + "/procedure"}
                                                 />
@@ -37,37 +70,18 @@ const ProcedureDetails = async () => {
                                     </div>
                                     <div className="details-banner pb-5">
                                         <div className="details-heading">
-                                            <h3>Have a query?</h3>
-                                            <form action="" method="">
-                                                <div className="row">
-                                                    <div className="col-xl-8 col-lg-8 col-md-8 col-12 mb-3">
-                                                        <input type="text" className="form-control border-0"
-                                                            placeholder="Enter Your Name *" aria-label="Username"
-                                                            aria-describedby="basic-addon1" />
-                                                    </div>
-                                                    <div className="col-xl-8 col-lg-8 col-md-8 col-12 mb-3">
-                                                        <input type="text" className="form-control border-0"
-                                                            placeholder="Enter 10 Digit Mobile Number *" aria-label="Username"
-                                                            aria-describedby="basic-addon1" />
-                                                    </div>
-                                                    <div className="col-xl-8 col-lg-8 col-md-8 col-12">
-                                                        <div className="from-btn">
-                                                            <button type="button" className="btn py-1">REQUEST A CALL BACK</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </form>
+                                            <Form2 title={"Have a query?"}/>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div className="col-md-6 details-proceduce-banner-right-col my-lg-auto pb-5">
                                     <div className="d-flex align-items-center justify-content-end mb-4">
-                                        <img src="/img/cardiology-proce.png" className="img-fluid" alt="" />
-                                        <h4>Coronary Artery Bypass Grafting (CABG)</h4>
+                                        <img src={process.env.NEXT_PUBLIC_IMAGE_URL + data.procedure?.iconImage?.url} className="img-fluid" alt={data.title}/>
+                                        <h4>{data.title}</h4>
                                     </div>
                                     <div className="d-flex align-items-center justify-content-lg-center">
-                                        <a href="#" className="procedure-btn-left">Get Second Opinion</a>
+                                        <a href={basePath+"/second-opinion"} className="procedure-btn-left">{staticText['Get Second Opinion']}</a>
                                         <a href="#" className="procedure-btn-right">Meet Our Cardiologist</a>
                                     </div>
                                 </div>
@@ -86,31 +100,20 @@ const ProcedureDetails = async () => {
                         <div className="row">
                             <div className="col-md-7 sub-heading mb-lg-0 mb-3 pe-lg-5">
                                 <div className="main-heading">
-                                    <h2>Overview</h2>
+                                    <h2>{data.overviewSection?.title}</h2>
                                 </div>
-
-                                <p>Coronary Artery Bypass Grafting (CABG) is a surgical procedure used to treat severe coronary
-                                    artery disease (CAD). It involves creating new pathways for blood to bypass blocked or narrowed
-                                    coronary arteries, ensuring proper blood flow to the heart.
-                                    Surgeons take a healthy blood vessel—usually from the leg (saphenous vein), chest
-                                    (internal mammary artery), or arm (radial artery)—and graft it onto the affected
-                                    coronary artery. This helps restore oxygen supply to the heart muscle, reducing
-                                    chest pain (angina) and lowering the risk of heart attacks. CABG is recommended for patients
-                                    with multiple blocked arteries or those who haven’t responded well to other treatments like
-                                    medications or angioplasty.</p>
-                                <p>KIMSHEALTH is a leading center for CABG, offering advanced cardiac surgery with high success
-                                    rates. With state-of-the-art operation theaters, a skilled team of cardiothoracic surgeons, and
-                                    world-class post-operative care, KIMSHEALTH ensures patient safety and speedy recovery. Their
-                                    expertise in minimally invasive and robotic-assisted CABG makes them a preferred choice for
-                                    heart patients seeking the best treatment options with a personalized approach.</p>
+                                <div dangerouslySetInnerHTML={{ __html: data.overviewSection?.details || "" }}></div>
                             </div>
                             <div className="col-md-5 my-auto">
                                 <div className="details-right-col text-center">
-                                    <img src="/img/details-rightcol.jpg" alt="" className="img-fluid w-100" />
-                                    <h5>Coronary Artery Bypass Grafting (CABG) at KIMSHEALTH</h5>
-                                    <p>Coronary Artery Bypass Grafting (CABG) is regarded . . . . </p>
+                                    <img src={process.env.NEXT_PUBLIC_IMAGE_URL + data.overviewSection?.thumbnail?.url} alt="" className="img-fluid w-100" />
+                                    <h5>{data.overviewSection?.caption}</h5>
+                                    <p>{data.overviewSection?.shortDetails&&data.overviewSection?.shortDetails?.slice(0,18)+"..."}</p>
                                     <div className="main-btn">
-                                        <a href="#">Watch Video <span><i className="fa-solid fa-arrow-right"></i></span></a>
+                                        <WatchVideoButton
+                                            id={data.overviewSection?.videoId}
+                                            txt={staticText['Watch Video']}
+                                        />
                                     </div>
                                 </div>
                             </div>
@@ -307,16 +310,16 @@ const ProcedureDetails = async () => {
 
 
                 <div className="line-divider"> </div>
-                {/* <ExpertCarousel/> */}
+                <ExpertCarousel dataSet={expertDataSet}/>
 
 
                 <div className="line-divider"></div>
-                {/* <TestimonialSection/> */}
+                <TestimonialSection dataSet={testimonialDataSet}/>
 
 
 
                 <div className="line-divider"></div>
-                {/* <DocTalk/> */}
+                <DocTalk dataSet={docTalkDataSet}/>
 
             </div>
             <Footer />

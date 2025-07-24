@@ -21,7 +21,7 @@ const ExcellenceCarousel = ({ dataSet }) => {
 
     return (
         <>
-            <section className="section exellence-section pt-0" data-aos="fade-up">
+            <section className="section exellence-section" data-aos="fade-up">
                 <div className="container">
                     <div className="row justify-content-between">
                         <div className="col-md-4 col-8">

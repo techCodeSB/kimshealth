@@ -12,7 +12,15 @@ const doctorTalkData = {
             ? `&filters[doctor][slug][$eq]=${URLParams.doctor}`
             : ``;
 
-        const url = process.env.NEXT_PUBLIC_CMS_API_URL + `/doctor-talks?populate=*${specialityFilter}${hospitalFilter}${doctorFilter}&pagination[start]=${start}&pagination[limit]=${limit}&filters[locations][id][$eq]=${langLoc.loc.id}&sort=date:desc,manageAppearance.orderInMasterList:asc,title:asc`;
+        const procedureFilter = URLParams?.procedure
+            ? `&filters[procedures][slug][$eq]=${URLParams.procedure}`
+            : ``;
+
+        const diseaseFilter = URLParams?.disease
+            ? `&filters[diseases][slug][$eq]=${URLParams.disease}`
+            : ``;
+
+        const url = process.env.NEXT_PUBLIC_CMS_API_URL + `/doctor-talks?populate=*${specialityFilter}${hospitalFilter}${doctorFilter}${procedureFilter}${diseaseFilter}&pagination[start]=${start}&pagination[limit]=${limit}&filters[locations][id][$eq]=${langLoc.loc.id}&sort=date:desc,manageAppearance.orderInMasterList:asc,title:asc`;
         console.log(url)
         const req = await fetch(url);
         const res = await req.json();
@@ -20,7 +28,7 @@ const doctorTalkData = {
         return res.data;
     },
 
-    getSingleDoctor: async (slug) => {
+    getSingleDoctor: async ({slug, langLoc}) => {
         let url = process.env.NEXT_PUBLIC_CMS_API_URL + `/doctor-talks/?filters[slug][$eq]=${slug}&populate=*`;
         const req = await fetch(url);
         const res = await req.json();
@@ -39,6 +47,22 @@ const doctorTalkData = {
 
     getBySpeciality: async ({ id, langLoc }) => {
         const url = process.env.NEXT_PUBLIC_CMS_API_URL + `/doctor-talks?populate=*&filters[specialities][id][$eq]=${id}&pagination[start]=0&pagination[limit]=3&filters[locations][id][$eq]=${langLoc.loc.id}&sort=manageAppearance.orderInMasterList:asc,title:asc`;
+        const req = await fetch(url);
+        const res = await req.json();
+
+        return res.data;
+    },
+
+    getByProcedure: async ({ id, langLoc }) => {
+        const url = process.env.NEXT_PUBLIC_CMS_API_URL + `/doctor-talks?populate=*&filters[procedures][id][$eq]=${id}&pagination[start]=0&pagination[limit]=3&sort=manageAppearance.orderInMasterList:asc,title:asc`;
+        const req = await fetch(url);
+        const res = await req.json();
+
+        return res.data;
+    },
+
+    getByDisease: async ({ id, langLoc }) => {
+        const url = process.env.NEXT_PUBLIC_CMS_API_URL + `/doctor-talks?populate=*&filters[diseases][id][$eq]=${id}&pagination[start]=0&pagination[limit]=3&sort=manageAppearance.orderInMasterList:asc,title:asc`;
         const req = await fetch(url);
         const res = await req.json();
 

@@ -12,9 +12,8 @@ const DoctoralCourseDetails = async ({ params }) => {
     const getLangLoc = await getCurrentLangLoc()
     const basePath = await getBaseUrl(true, true);
     const staticText = await getStaticText();
-
-    let courseDetails = await courseData.getSingleCourse(params.details);
-    let otherCourse = await courseData.getAll({ id: courseDetails.courseCategory.id, langLoc: getLangLoc });
+    const courseDetails = await courseData.getSingleCourse({slug: params.details, langLoc: getLangLoc});
+    const otherCourse = await courseData.getAll({ id: courseDetails.courseCategory.id, langLoc: getLangLoc });
 
 
     return (

@@ -16,9 +16,7 @@ const CareerDetails = async ({ params }) => {
     const imgUrl = process.env.NEXT_PUBLIC_IMAGE_URL;
     const statictText = await getStaticText();
     const basePath = await getBaseUrl(true, true);
-    const data = await jobData.getSingleJob(params.details);
-
-    console.log(data)
+    const data = await jobData.getSingleJob({slug:params.details, langLoc: getLangLoc});
 
 
     return (

@@ -17,7 +17,8 @@ import procedureData from '@/app/lib/getProcedure'
 import getStaticText from '@/app/lib/getStaticTextServer'
 import Breadcrumb from '@/components/Breadcrumb'
 import getCurrentLangLoc from '@/app/lib/getCurrentLangLoc'
-import Form4 from '@/components/Forms/Form4'
+import FormInternational from '@/components/Forms/FormInternational'
+import FormInternationalMiddle from '@/components/Forms/FormInternationalMiddle'
 
 
 
@@ -28,8 +29,8 @@ const InternationalPage = async () => {
     const data = await getStaticPageContent("international-patient", field);
     const pageContent = data?.data[0]?.pageContent;
     const pageMeta = data?.data[0]?.metaSection;
-    const featuredDisease = await diseaseData.getDisease()
-    const featuredProcedure = await procedureData.getFeturedProcedure()
+    const featuredDisease = await diseaseData.getFeturedDisease({ langLoc: getLangLoc })
+    const featuredProcedure = await procedureData.getFeturedProcedure({ langLoc: getLangLoc });
     const staticText = await getStaticText();
 
 
@@ -43,21 +44,21 @@ const InternationalPage = async () => {
     const testimonialDataSet = {
         sectionTitle: pageContent[11]?.title,
         buttonText: 'View All', buttonURL: `${basePath + "/testimonial"}`,
-        data: await testimonialData.getFeaturedAll({langLoc: getLangLoc}),
+        data: await testimonialData.getFeaturedAll({ langLoc: getLangLoc }),
         baseUrl: basePath
     }
 
     const blogDataSet = {
         sectionTitle: pageContent[13]?.title,
         buttonText: 'View All', buttonURL: `${basePath + "/blog"}`,
-        data: await blogData.getRecentBlog({langLoc: getLangLoc}),
+        data: await blogData.getRecentBlog({ langLoc: getLangLoc }),
         baseUrl: basePath
     }
 
     const docTalkDataSet = {
         sectionTitle: pageContent[12]?.title,
         buttonText: 'View All', buttonURL: `${basePath + "/doctor-talk"}`,
-        data: await doctorTalkData.getFeaturedAll({langLoc: getLangLoc}),
+        data: await doctorTalkData.getFeaturedAll({ langLoc: getLangLoc }),
         baseUrl: basePath
     }
 
@@ -91,7 +92,7 @@ const InternationalPage = async () => {
                                                     <h3>{pageContent[0].title}</h3>
                                                     <p>{pageContent[0].subTitle}</p>
                                                     <div className="rounded-field-form mb-3">
-                                                        <Form4/>
+                                                        <FormInternational />
                                                     </div>
                                                 </div>
                                             </div>
@@ -132,28 +133,7 @@ const InternationalPage = async () => {
                                                     <h3>{pageContent[0].title}</h3>
                                                     <p>{pageContent[0].subTitle}</p>
                                                     <div className="rounded-field-form mb-3">
-                                                        <form action="">
-                                                            <div className="row">
-                                                                <div className="col-md-6 col-12 mb-3">
-                                                                    <div className="input-group">
-                                                                        <input type="text" className="form-control"
-                                                                            placeholder="Enter Your Name" name="search" />
-                                                                    </div>
-                                                                </div>
-                                                                <div className="col-md-6 col-12 mb-3">
-                                                                    <div className="input-group">
-                                                                        <input type="text" id="phone" defaultValue="+91"
-                                                                            className="form-control" placeholder="Enter Mobile Number"
-                                                                            name="search" />
-                                                                    </div>
-                                                                </div>
-
-
-                                                                <div className="col-md-6 col-12 mb-3">
-                                                                    <button className="form-btn w-auto px-5">Submit</button>
-                                                                </div>
-                                                            </div>
-                                                        </form>
+                                                        <FormInternational />
                                                     </div>
                                                 </div>
                                             </div>
@@ -495,26 +475,8 @@ const InternationalPage = async () => {
                             <div className="row justify-content-center">
                                 <div className="col-md-8">
                                     <div className="rounded-field-form mt-4">
-                                        <form action="">
-                                            <div className="row justify-content-center">
-                                                <div className="col-md-4 col-12 mb-3">
-                                                    <div className="input-group">
-                                                        <input type="text" className="form-control" placeholder="Enter Your Name"
-                                                            name="search" />
-                                                    </div>
-                                                </div>
-                                                <div className="col-md-4 col-12 mb-3">
-                                                    <div className="input-group">
-                                                        <input type="text" id="tel" defaultValue="+91" className="form-control"
-                                                            placeholder="Enter Mobile Number" name="search" />
-                                                    </div>
-                                                </div>
 
-                                                <div className="col-lg-2 col-xl-3 col-md-3 col-12 mb-3 ">
-                                                    <button className="form-btn w-100 px-5">Enquire Now</button>
-                                                </div>
-                                            </div>
-                                        </form>
+                                        <FormInternationalMiddle />
                                     </div>
                                 </div>
                             </div>
