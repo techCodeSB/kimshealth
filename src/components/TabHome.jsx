@@ -45,19 +45,19 @@ const TabHome = ({ blogDataSet, galleryDataSet, mediaEventDataSet, mediaCoverage
                                 </button>
                             </div>
                             <div className="treat-box" id="omega" style={{ 'display': 'block' }}>
-                                <BlogCarousel dataSet={blogDataSet} tab={true} />
+                                <BlogCarousel dataSet={blogDataSet} tab={true} extraClass={"pt-1"} />
                             </div>
 
                             <div className="treat-box" id="omega1" style={{ display: 'none' }}>
-                                <MediaCoverageCarousel dataSet={mediaCoverageDataSet} tab={true} />
+                                <MediaCoverageCarousel dataSet={mediaCoverageDataSet} tab={true} extraClass={"pt-1"}/>
                             </div>
 
                             <div className="treat-box" id="omega2" style={{ display: 'none' }}>
-                                <MediaEventCarousel dataSet={mediaEventDataSet} tab={true} />
+                                <MediaEventCarousel dataSet={mediaEventDataSet} tab={true} extraClass={"pt-1"}/>
                             </div>
 
                             <div className="treat-box" id="omega3" style={{ display: 'none' }}>
-                                <GalleryCarousel dataSet={galleryDataSet} tab={true} />
+                                <GalleryCarousel dataSet={galleryDataSet} tab={true} extraClass={"pt-1"}/>
                             </div>
                         </div>
                     </div>

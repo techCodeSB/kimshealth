@@ -7,7 +7,7 @@ import 'react-photo-view/dist/react-photo-view.css';
 
 
 
-const GalleryCarousel = ({ dataSet }) => {
+const GalleryCarousel = ({ dataSet, extraClass }) => {
     const [staticTexts, setStaticTexts] = useState({});
 
 
@@ -26,7 +26,7 @@ const GalleryCarousel = ({ dataSet }) => {
     return (
         <>
             <PhotoProvider>
-                <section className="section  d-lg-block d-none">
+                <section className={`section  d-lg-block d-none  ${extraClass}`}>
                     <div className="container">
                         <div className="row justify-content-between">
                             <div className="col-md-3 col-8">

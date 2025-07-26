@@ -73,7 +73,7 @@ const HospitalDetails = async ({ params }) => {
                 <section className="section this-text pt-3 hospital-details-page-section d-lg-block  d-none"
                     style={hptData?.pageBanner?.[0]?.bannerImageDesktop?.url ? { backgroundImage: `url(${process.env.NEXT_PUBLIC_IMAGE_URL}${hptData?.pageBanner?.[0]?.bannerImageDesktop?.url})` } : {}}
                 >
-                    <div className="container">
+                    {/* <div className="container">
                         <div className="row">
                             <div className="col-md-5 pt-4">
                                 <div className="breadcrumb-wrapper py-2 ps-2 ms-1">
@@ -133,7 +133,7 @@ const HospitalDetails = async ({ params }) => {
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                 </section>
 
                 <section className="section hospital-details-page-md-section py-0  d-lg-none  d-block">

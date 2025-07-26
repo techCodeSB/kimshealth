@@ -5694,10 +5694,10 @@ select option:hover {
 
 .clamped-content {
     display: -webkit-box;
-    -webkit-line-clamp: 5;
+    -webkit-line-clamp: 30;
     -webkit-box-orient: vertical;
     overflow: hidden;
-    max-height: 8em;
+    max-height: 22em;
     transition: all 0.3s ease-in-out;
 }
 

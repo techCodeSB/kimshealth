@@ -51,7 +51,6 @@ const HospitalFilter = ({ title, selectedLocation }) => {
                                 <i className="fa-solid fa-angle-down"></i>
                             </button>
                         </div>
-
                     </form> */}
                     <select value={basePathOnlyLang + "/" + selectedLocation.slug} className="form-select " onChange={onLocationChange}>
                         <option value={basePathOnlyLang + "/hospital"}>{staticTexts['All Hospital']}</option>

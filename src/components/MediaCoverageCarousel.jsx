@@ -4,7 +4,7 @@ import formatDate from '@/app/lib/formatDate';
 import getStaticText from '@/helper/getStaticText';
 import React, { useEffect, useState } from 'react'
 
-function MediaCoverageCarousel({ dataSet }) {
+function MediaCoverageCarousel({ dataSet, extraClass }) {
     const [staticTexts, setStaticTexts] = useState({});
 
     useEffect(() => {
@@ -16,7 +16,7 @@ function MediaCoverageCarousel({ dataSet }) {
     }, []);
     return (
         <>
-            <section className="section d-lg-block d-none">
+            <section className={`section d-lg-block d-none  ${extraClass}`}>
                 <div className="container">
                     <div className="row justify-content-between">
                         <div className="col-md-6 col-8">

@@ -12,6 +12,7 @@ const BookAnAppoinmentForm = ({ pageContent, URLParams }) => {
   const [selectedDoctor, setSelectedDoctor] = useState(URLParams.doctor);
   const [allSpeciality, setAllSpeciality] = useState();
   const [allDoctors, setAllDoctors] = useState([]);
+  const [doctorLoading, setDoctorLoading] = useState(true);
 
   useEffect(() => {
     const fetchTexts = async () => {
@@ -49,6 +50,7 @@ const BookAnAppoinmentForm = ({ pageContent, URLParams }) => {
 
 
   const getDoctor = async ({ lang, loc, speciality }) => {
+    setDoctorLoading(true)
     const baseUrl = process.env.NEXT_PUBLIC_CMS_API_URL;
 
     const locationFilter = loc
@@ -77,9 +79,8 @@ const BookAnAppoinmentForm = ({ pageContent, URLParams }) => {
       data = [...data, ...json.data];
     }
 
-    console.log(data)
-
     setAllDoctors(data);
+    setDoctorLoading(false)
   }
 
 
@@ -95,7 +96,7 @@ const BookAnAppoinmentForm = ({ pageContent, URLParams }) => {
     }
     get()
 
-  }, [selectedLocation,selectedSpeciality])
+  }, [selectedLocation, selectedSpeciality])
 
   return (
     <>
@@ -164,15 +165,21 @@ const BookAnAppoinmentForm = ({ pageContent, URLParams }) => {
 
                             <div className="col-xl-12 col-lg-12 col-md-12 col-12 mb-3">
                               <label htmlFor=''>{staticText['Select Doctors']}*</label>
-                              <select className="form-select from-location" value={selectedDoctor}  onChange={(e) => {
+                              <select className="form-select from-location" value={selectedDoctor} onChange={(e) => {
                                 setSelectedDoctor(e.target.value)
                               }}>
-                                <option value={""} >Select a Doctor</option>
-                                {
-                                  allDoctors?.map((d, i) => {
-                                    return <option value={d?.slug} key={i}>{d.name}</option>
-                                  })
-                                }
+                                {!doctorLoading ? (
+                                  <>
+                                    <option value="">{staticText['Select a Doctor']}</option>
+                                    {allDoctors.map((d, i) => (
+                                      <option value={d?.slug} key={i}>
+                                        {d.name}
+                                      </option>
+                                    ))}
+                                  </>
+                                ) : (
+                                  <option value="">{staticText['Loading...'] || 'Loading...'}</option>
+                                )}
                               </select>
                             </div>
 
