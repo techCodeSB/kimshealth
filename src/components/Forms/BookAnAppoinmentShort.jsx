@@ -1,8 +1,8 @@
 "use client"
-import getCurrentLangLocClient from '@/helper/getCurrentLangLocClient'
-import langLoc from '@/helper/getLangLoc'
-import getStaticText from '@/helper/getStaticText'
-import React, { useEffect, useState } from 'react'
+import getCurrentLangLocClient from '@/helper/getCurrentLangLocClient';
+import langLoc from '@/helper/getLangLoc';
+import getStaticText from '@/helper/getStaticText';
+import React, { useEffect, useState } from 'react';
 
 const BookAnAppoinmentShort = ({ basePath, extraClass }) => {
     const [staticTexts, setStaticTexts] = useState({});
