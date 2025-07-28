@@ -89,7 +89,7 @@ const BookAnAppoinmentForm = ({ pageContent, URLParams }) => {
   useEffect(() => {
     const get = async () => {
       let currentLangLoc = await getCurrentLangLocClient();
-      setLocationList(await langLoc.getLocations())
+      setLocationList(await langLoc.getLocationsOnlyCMS())
       await getSpeciality({ loc: selectedLocation == "" ? currentLangLoc.loc.slug : selectedLocation });
       await getDoctor({ loc: selectedLocation == "" ? "" : selectedLocation, speciality: selectedSpeciality == "" ? "" : selectedSpeciality });
 

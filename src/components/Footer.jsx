@@ -14,6 +14,7 @@ import SearchBox from '@/components/Forms/SearchBox';
 const Footer = () => {
     const [selectedLangLoc, setselectedLangLoc] = useState();
     const [basePath, setBasePath] = useState(null);
+    const [basePathOnlyLang, setBasePathOnlyLang] = useState();
     const [speciality, setSpeciality] = useState();
     const [hospitals, setHospitals] = useState();
     const [staticTexts, setStaticTexts] = useState({});
@@ -58,6 +59,7 @@ const Footer = () => {
 
         fetchAllTitles();
         setBasePath(getBaseUrl(true, true));
+        setBasePathOnlyLang(getBaseUrl(true, false));
     }, []);
 
 
@@ -280,7 +282,7 @@ const Footer = () => {
                                     <li><a href={basePath + "/at-home-services"}>{staticTexts['Home Care']}</a></li>
                                     <li><a href={basePath + "/second-opinion"}>{staticTexts['In-Patient Deposit']}</a></li>
                                     <li>
-                                        <a href={basePath + "/international-patient"}>{staticTexts['International Care']}</a>
+                                        <a href={basePathOnlyLang + "/international-patient"}>{staticTexts['International Care']}</a>
                                     </li>
                                     <li><a href={basePath + "#"}>{staticTexts['Specialist']}</a></li>
                                 </ul>
@@ -443,7 +445,7 @@ const Footer = () => {
                                     <li><a href={basePath + "/gallery"}>{staticTexts['Gallery']}</a></li>
                                     <li><a href={basePath + "/at-home-services"}>{staticTexts['Home Care']}</a></li>
                                     <li><a href={basePath + "/second-opinion"}>{staticTexts['In-Patient Deposit']}</a></li>
-                                    <li><a href={basePath + "/international-patient"}>{staticTexts['International Care']}</a></li>
+                                    <li><a href={basePathOnlyLang + "/international-patient"}>{staticTexts['International Care']}</a></li>
                                     <li><a href={basePath + "#"}>{staticTexts['Specialist']}</a></li>
                                 </ul>
                             </div>

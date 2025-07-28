@@ -974,6 +974,7 @@ header {
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    min-height: 20px;
 }
 
 .owl-carousel.expert .owl-nav button.owl-prev {

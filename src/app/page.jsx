@@ -227,8 +227,6 @@ const Home = async () => {
           </div>
         </section>
 
-        <BookAnAppoinmentShort basePath={basePath} extraClass={"pt-5 pb-0"}/>
-
         <section className="section pt-lg-0 pt-2 pb-2 d-lg-none d-block" data-aos="fade-up">
           <div className="container-fluid ps-0">
             <div className="row">
@@ -265,7 +263,11 @@ const Home = async () => {
             </div>
           </div>
         </section>
+
         {/* <!-- ====== cta section ==== --> */}
+
+        <BookAnAppoinmentShort basePath={basePath} extraClass={"pt-5 pb-0"}/>
+        
         <ExcellenceCarousel dataSet={specialityDataSet} />
 
 

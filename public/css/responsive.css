@@ -1927,8 +1927,19 @@
     .w-md-100 {
         width: 100% !important;
     }
-    .w-sm-50{
+
+    .w-sm-50 {
         width: 45% !important;
+    }
+
+    
+
+    .book-form-mobile-card .custom-from {
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+        padding: 20px 30px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        margin: 0px 0px 20px;
     }
 
 }

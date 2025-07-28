@@ -18,6 +18,10 @@ import Header from '@/components/Header';
 import TestimonialSection from '@/components/TestimonialSection';
 import WatchVideoButton from '@/components/WatchVideoButton';
 import { marked } from 'marked';
+import TabHome from '@/components/TabHome';
+import mediaCoverData from '@/app/lib/getMediaCoverage';
+import mediaData from '@/app/lib/getMediaEvent';
+import galleryData from '@/app/lib/getGallery';
 
 
 
@@ -57,6 +61,28 @@ const HospitalDetails = async ({ params }) => {
         data: await blogData.getRecentBlog({ langLoc: getLangLoc }),
         baseUrl: basePath
     }
+
+    const galleryDataSet = {
+        sectionTitle: "Gallery",
+        buttonText: 'View All', buttonURL: `${basePath + "/gallery"}`,
+        data: await galleryData.getGalleryImage({ langLoc: getLangLoc }),
+        baseUrl: basePath
+    }
+
+    const mediaEventDataSet = {
+        sectionTitle: "Media & Events",
+        buttonText: 'View All', buttonURL: `${basePath + "/media-and-events"}`,
+        data: await mediaData.getRecentMedia({ langLoc: getLangLoc }),
+        baseUrl: basePath
+    }
+
+    const mediaCoverageDataSet = {
+        sectionTitle: "News",
+        buttonText: 'View All', buttonURL: `${basePath + "/media-coverage"}`,
+        data: await mediaCoverData.getRecentMedia({ langLoc: getLangLoc }),
+        baseUrl: basePath
+    }
+
 
     const docTalkDataSet = {
         sectionTitle: hptData.doctorTalk.title,
@@ -390,10 +416,14 @@ const HospitalDetails = async ({ params }) => {
                 <div className="line-divider"></div>
                 <DocTalk dataSet={docTalkDataSet} />
 
-                <div className="line-divider"></div>
-                <BlogCarousel dataSet={blogDataSet} />
+                {/* <div className="line-divider"></div>
+                <BlogCarousel dataSet={blogDataSet} /> */}
 
+                {/*::::: Tab ::::  */}
                 <div className="line-divider"></div>
+                <TabHome blogDataSet={blogDataSet} galleryDataSet={galleryDataSet} mediaEventDataSet={mediaEventDataSet} mediaCoverageDataSet={mediaCoverageDataSet} />
+
+                {/* <div className="line-divider"></div>
                 <section className="section">
                     <div className="container">
                         <div className="row justify-content-between" data-aos="fade-up">
@@ -459,7 +489,7 @@ const HospitalDetails = async ({ params }) => {
                             }
                         </div>
                     </div>
-                </section>
+                </section> */}
 
             </div>
             <Footer />
