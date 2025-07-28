@@ -88,7 +88,7 @@ const BookAnAppoinmentShort = ({ basePath, extraClass }) => {
     useEffect(() => {
         const get = async () => {
             let currentLangLoc = await getCurrentLangLocClient();
-            setLocationList(await langLoc.getLocations())
+            setLocationList(await langLoc.getLocationsOnlyCMS())
             setAllSpeciality(await getSpeciality({ loc: selectedLocation == "" ? currentLangLoc.loc.slug : selectedLocation }));
             await getDoctor({ loc: selectedLocation == "" ? "" : selectedLocation, speciality: selectedSpeciality == "" ? "" : selectedSpeciality });
 
@@ -100,7 +100,7 @@ const BookAnAppoinmentShort = ({ basePath, extraClass }) => {
 
 
     return (
-        <section className={'section d-lg-block d-none' + extraClass}>
+        <section className={'section book-form-mobile-card ' + extraClass}>
             <div className="container">
                 <div className="custom-from">
                     <div className="row justify-content-between">

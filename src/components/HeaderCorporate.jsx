@@ -207,7 +207,7 @@ const HeaderCorporate = () => {
                     </div>
                   </li>
                   <li><a href={`${basePath}/doctor`} className="anchor-menu">{staticTexts['Find a Doctor']}</a></li>
-                  {/* <li><a href={`${basePath}/visa-medical`} className="anchor-menu">{staticTexts['Visa Medical']}</a></li> */}
+                  {/* <li><a href={`${basePathOnlyLang}/visa-medical`} className="anchor-menu">{staticTexts['Visa Medical']}</a></li> */}
                   <li className="menu-item-has-children show-submenu d-lg-inline-block d-none">
                     <a href={basePathOnlyLang + "/hospital"} className="anchor-menu">{staticTexts['Locations']}</a>
                     <div className="sub-menu ">
@@ -287,7 +287,7 @@ const HeaderCorporate = () => {
                     </div>
                   </li>
                   
-                  <li><a href={`${basePath}/international-patient`} className="anchor-menu">
+                  <li><a href={`${basePathOnlyLang}/international-patient`} className="anchor-menu">
                     {staticTexts['International Patients']}</a></li>
 
                   <li className="menu-item-has-children show-submenu d-lg-none d-block">
