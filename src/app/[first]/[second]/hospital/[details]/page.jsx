@@ -345,7 +345,7 @@ const HospitalDetails = async ({ params }) => {
                                     }
                                     <div className="hospital-content text-start">
                                         <ul>
-                                            <li class="location-icon-custom">{hptData.address}</li>
+                                            <li className="location-icon-custom">{hptData.address}</li>
                                             <li className="telephone-icon-custom"><a href={`tel:${hptData.contactNo}`}> {staticText['Appointment Number']}- {hptData.contactNo} </a></li>
                                             <li className="send-custom-icon underline-map">
                                                 <a href={hptData.mapURL} target='_blank'> {staticText['Get Direction']}</a>

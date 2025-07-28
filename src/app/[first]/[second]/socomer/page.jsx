@@ -58,7 +58,7 @@ const Socomer = async () => {
 
                     </section>
 
-                    <section class="section doctor-line-divider">
+                    <section className="section doctor-line-divider">
                         <div className="container">
                             <div className="row">
                                 <div className="col-md-8 ps-lg-0">

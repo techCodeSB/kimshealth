@@ -17,8 +17,8 @@ export default function NotFound() {
                         <div className="input-group p-0 my-lg-3 my-3 generic-search">
                             <SearchBox />
                         </div>
-                        <div class="from-btn">
-                            <a href="/" class="btn w-50 mt-4">Go Back Home</a>
+                        <div className="from-btn">
+                            <a href="/" className="btn w-50 mt-4">Go Back Home</a>
                         </div>
                     </div>
                 </section>
