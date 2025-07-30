@@ -22,7 +22,7 @@ const Doctor = async ({ searchParams }) => {
     const pageMeta = data?.data[0]?.metaSection;
     const staticText = await getStaticText();
 
-    const allLocation = await langLoc.getLocations()
+    const allLocation = await langLoc.getLocationsOnlyCMS()
     const allSpeciality = await getSpecialityData.getAllSpeciality({langLoc: getLangLoc})
     const allDoctorCount = await doctorData.allDoctorCount({langLoc: getLangLoc, URLParams:URLParams});
 

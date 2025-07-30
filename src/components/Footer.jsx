@@ -206,6 +206,36 @@ const Footer = () => {
                                         </div>
                                     </a>
 
+                                    {locationData?.emergency && <a href={"tel:" + locationData?.emergency}>
+                                        <div className="address-item d-flex align-items-center mb-3">
+                                            <i className="fa-solid fa-phone"></i>
+                                            <div className="ms-2">
+                                                <strong><u>{staticTexts['Emergency']}</u></strong>
+                                                <p><strong className="fw-normal">{locationData?.emergency}</strong></p>
+                                            </div>
+                                        </div>
+                                    </a>}
+
+                                    {locationData?.strokeHelpline && <a href={"tel:" + locationData?.strokeHelpline}>
+                                        <div className="address-item d-flex align-items-center mb-3">
+                                            <i className="fa-solid fa-phone"></i>
+                                            <div className="ms-2">
+                                                <strong><u>{staticTexts['Stroke Helpline']}</u></strong>
+                                                <p><strong className="fw-normal">{locationData?.strokeHelpline}</strong></p>
+                                            </div>
+                                        </div>
+                                    </a>}
+
+                                    {locationData?.corporateEnquiries&& <a href={"tel:" + locationData?.corporateEnquiries}>
+                                        <div className="address-item d-flex align-items-center mb-3">
+                                            <i className="fa-solid fa-phone"></i>
+                                            <div className="ms-2">
+                                                <strong><u>{staticTexts['Corporate Enquiries']}</u></strong>
+                                                <p><strong className="fw-normal">{locationData?.corporateEnquiries}</strong></p>
+                                            </div>
+                                        </div>
+                                    </a>}
+
                                 </div>
                             </div>
 
@@ -478,6 +508,35 @@ const Footer = () => {
                                             </div>
                                         </div>
                                     </a>
+                                    {locationData?.emergency && <a href={"tel:" + locationData?.emergency}>
+                                        <div className="address-item d-flex align-items-center mb-3">
+                                            <i className="fa-solid fa-phone"></i>
+                                            <div className="ms-2">
+                                                <strong style={{ color: '#b71c2b' }}><u>{staticTexts['Emergency']}</u></strong>
+                                                <p><strong className="fw-normal">{locationData?.emergency}</strong></p>
+                                            </div>
+                                        </div>
+                                    </a>}
+
+                                    {locationData?.strokeHelpline && <a href={"tel:" + locationData?.strokeHelpline}>
+                                        <div className="address-item d-flex align-items-center mb-3">
+                                            <i className="fa-solid fa-phone"></i>
+                                            <div className="ms-2">
+                                                <strong style={{ color: '#b71c2b' }}><u>{staticTexts['Stroke Helpline']}</u></strong>
+                                                <p><strong className="fw-normal">{locationData?.strokeHelpline}</strong></p>
+                                            </div>
+                                        </div>
+                                    </a>}
+
+                                    {locationData?.corporateEnquiries&& <a href={"tel:" + locationData?.corporateEnquiries}>
+                                        <div className="address-item d-flex align-items-center mb-3">
+                                            <i className="fa-solid fa-phone"></i>
+                                            <div className="ms-2">
+                                                <strong style={{ color: '#b71c2b' }}><u>{staticTexts['Corporate Enquiries']}</u></strong>
+                                                <p><strong className="fw-normal">{locationData?.corporateEnquiries}</strong></p>
+                                            </div>
+                                        </div>
+                                    </a>}
 
                                 </div>
                             </div>
