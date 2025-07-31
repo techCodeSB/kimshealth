@@ -58,13 +58,13 @@ const hospitalData = {
         // Actual Data
         for (let i = 0; i < pages; i++) {
             const start = i * limit;
-            const url = `${baseUrl}/hospitals?fields=title&fields=slug&fields=type&filters[manageAppearance][showingHeader][$eq]=true&filters[manageAppearance][showingFooter][$eq]=true&populate[0]=manageAppearance&pagination[start]=${start}&pagination[limit]=${limit}`;
+            const url = `${baseUrl}/hospitals?fields=title&fields=slug&fields=type&filters[manageAppearance][showingHeader][$eq]=true&filters[manageAppearance][showingFooter][$eq]=true&populate[0]=manageAppearance&populate[1]=location&pagination[start]=${start}&pagination[limit]=${limit}`;
             const res = await fetch(url);
             const json = await res.json();
             data = [...data, ...json.data];
         }
 
-
+        console.log("Footer Hospital Data: ", data);
         return data;
     },
 

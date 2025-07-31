@@ -4,10 +4,10 @@ import langLoc from '@/helper/getLangLoc';
 import getStaticText from '@/helper/getStaticText';
 import React, { useEffect, useState } from 'react';
 
-const BookAnAppoinmentShort = ({ basePath, extraClass }) => {
+const BookAnAppoinmentShort = ({ basePath, extraClass,currentLangLoc }) => {
     const [staticTexts, setStaticTexts] = useState({});
     const [locationList, setLocationList] = useState()
-    const [selectedLocation, setSelectedLocation] = useState("")
+    const [selectedLocation, setSelectedLocation] = useState(currentLangLoc.loc.slug || "");
     const [selectedSpeciality, setSelectedSpeciality] = useState();
     const [selectedDoctor, setSelectedDoctor] = useState();
     const [allSpeciality, setAllSpeciality] = useState();
@@ -108,7 +108,7 @@ const BookAnAppoinmentShort = ({ basePath, extraClass }) => {
                             <div className="input-group mb-lg-0 mb-3">
                                 <span className="input-group-text" id="from-icon"><i
                                     className="fa-solid icon-location-pin"></i></span>
-                                <select className="form-select from-location" onChange={(e) => {
+                                <select className="form-select from-location" value={selectedLocation} onChange={(e) => {
                                     setSelectedLocation(e.target.value);
                                     setSelectedSpeciality("");
                                     setSelectedDoctor("");

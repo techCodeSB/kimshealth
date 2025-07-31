@@ -168,7 +168,7 @@ const HospitalDetails = async ({ params }) => {
                             <div className="col-12 px-0">
                                 <img src={process.env.NEXT_PUBLIC_IMAGE_URL + hptData.featuredImage?.url} alt="" className="img-fluid hospital-details-mobile-banner" />
                             </div>
-                            <div className="col-12">
+                            {/* <div className="col-12">
                                 <div className="row">
                                     <div className="col-12 pt-">
                                         <div className="breadcrumb-wrapper py-2 ps-2 ms-1">
@@ -222,7 +222,7 @@ const HospitalDetails = async ({ params }) => {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </section>
@@ -291,7 +291,7 @@ const HospitalDetails = async ({ params }) => {
                     </div>
                 </section>
 
-                <BookAnAppoinmentShort basePath={basePath} extraClass={"py-5"} />
+                <BookAnAppoinmentShort basePath={basePath} extraClass={"py-5"} currentLangLoc={getLangLoc} />
 
                 <section className="section pt-lg-0 pt-2 pb-2 d-lg-none d-block" data-aos="fade-up">
                     <div className="container-fluid ps-0">

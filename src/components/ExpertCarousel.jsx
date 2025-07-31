@@ -49,7 +49,7 @@ const ExpertCarousel = ({ dataSet }) => {
                                         <div className="card-top video-iconfor-doc">
                                             <a href={dataSet.baseUrl + "/doctor/" + d.slug}>
                                                 <img
-                                                    src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${d.doctorImage?.url}`}
+                                                    src={d.doctorImage?.url ? `${process.env.NEXT_PUBLIC_IMAGE_URL}${d.doctorImage?.url}` : "/img/no-image.jpg"}
                                                     className="img-fluid w-100" alt={d.name}
                                                 />
                                             </a>
