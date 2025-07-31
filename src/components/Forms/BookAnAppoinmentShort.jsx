@@ -7,7 +7,7 @@ import React, { useEffect, useState } from 'react';
 const BookAnAppoinmentShort = ({ basePath, extraClass,currentLangLoc }) => {
     const [staticTexts, setStaticTexts] = useState({});
     const [locationList, setLocationList] = useState()
-    const [selectedLocation, setSelectedLocation] = useState(currentLangLoc.loc.slug || "");
+    const [selectedLocation, setSelectedLocation] = useState(currentLangLoc?.loc.slug || "");
     const [selectedSpeciality, setSelectedSpeciality] = useState();
     const [selectedDoctor, setSelectedDoctor] = useState();
     const [allSpeciality, setAllSpeciality] = useState();
