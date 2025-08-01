@@ -155,8 +155,11 @@ const SpecialityDetails = async ({ params, searchParams }) => {
                                 </div>
                                 <div className="col-md-5">
                                     <div className="details-right-col text-center sticky-from">
-                                        <img src={
-                                            data.speciality?.featuredImage ? process.env.NEXT_PUBLIC_IMAGE_URL + data.speciality?.featuredImage.url : "/img/no-image.jpg"} alt="" className="img-fluid w-100" />
+                                        {/* <img src={
+                                            data.speciality?.featuredImage ? process.env.NEXT_PUBLIC_IMAGE_URL + data.speciality?.featuredImage.url : "/img/no-image.jpg"} alt="" className="img-fluid w-100" /> */}
+
+                                        <iframe width={'100%'} className='rounded-2' height="315" src={"https://www.youtube.com/embed/v=" + data.overviewSection?.videoId} title={data.overviewSection?.caption} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen=""></iframe>
+
                                         <h5>{data.overviewSection?.caption}</h5>
                                         <p>{data.overviewSection?.shortDetails} </p>
                                         <div className="main-btn">
