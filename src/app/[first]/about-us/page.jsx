@@ -54,7 +54,7 @@ const AboutUs = async () => {
                                                     <div className="hospital-content">
                                                         <div className="row">
                                                             {
-                                                                pageContent[10]?.uspItem?.map((u, i) => {
+                                                                pageContent[11]?.uspItem?.map((u, i) => {
                                                                     return <div className="col-md-6 col-6 mb-3">
                                                                         <div className="d-flex align-items-center">
                                                                             <div>

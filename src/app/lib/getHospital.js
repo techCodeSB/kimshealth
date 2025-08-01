@@ -64,7 +64,6 @@ const hospitalData = {
             data = [...data, ...json.data];
         }
 
-        console.log("Footer Hospital Data: ", data);
         return data;
     },
 
