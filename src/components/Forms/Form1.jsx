@@ -2,10 +2,12 @@
 import getStaticText from '@/helper/getStaticText';
 import React, { useEffect, useState } from 'react'
 import langLoc from '@/helper/getLangLoc';
+import getCurrentLangLocClient from '@/helper/getCurrentLangLocClient';
 
 const Form1 = ({ title }) => {
   const [staticTexts, setStaticTexts] = useState({});
   const [allLocation, setAllLocation] = useState();
+  const [selectedLocation, setSelectedLocation] = useState(null);
 
   useEffect(() => {
     const fetchTexts = async () => {
@@ -18,6 +20,9 @@ const Form1 = ({ title }) => {
   useEffect(() => {
     const get = async () => {
       setAllLocation(await langLoc.getLocations())
+
+      const loc = (await getCurrentLangLocClient()).loc;
+      setSelectedLocation(loc.slug);
     }
 
     get()
@@ -34,11 +39,13 @@ const Form1 = ({ title }) => {
             <input type="text" className="form-control" placeholder={staticTexts['Name']} name="name" />
           </div>
           <div className="col-md-12 mb-3">
-            <select className="form-control">
+            <select className="form-control" value={selectedLocation} onChange={(e)=>{
+              setSelectedLocation(e.target.value)
+            }}>
               <option value={""}>{staticTexts['All Hospital']}</option>
               {
                 allLocation?.map((loc, i) => {
-                  return <option value={loc.title} key={i}>{loc.title}</option>
+                  return <option value={loc.slug} key={i}>{loc.title}</option>
                 })
               }
             </select>

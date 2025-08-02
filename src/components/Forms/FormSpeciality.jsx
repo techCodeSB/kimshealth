@@ -2,10 +2,12 @@
 import langLoc from '@/helper/getLangLoc';
 import getStaticText from '@/helper/getStaticText';
 import React, { useEffect, useState } from 'react'
+import getCurrentLangLocClient from '@/helper/getCurrentLangLocClient';
 
 const FormSpeciality = ({ title }) => {
   const [allLocation, setAllLocation] = useState();
   const [staticTexts, setStaticTexts] = useState({});
+  const [selectedLocation, setSelectedLocation] = useState(null);
 
   useEffect(() => {
     const fetchTexts = async () => {
@@ -17,7 +19,10 @@ const FormSpeciality = ({ title }) => {
 
   useEffect(() => {
     const get = async () => {
-      setAllLocation(await langLoc.getLocations())
+      setAllLocation(await langLoc.getLocations());
+
+      const loc = (await getCurrentLangLocClient()).loc;
+      setSelectedLocation(loc.slug);
     }
 
     get()
@@ -35,14 +40,15 @@ const FormSpeciality = ({ title }) => {
             <div className="row">
               <div className="col-xl-12 col-lg-12 col-md-12 col-12 mb-3">
                 <div className="input-group">
-                  <select className="form-select ">
+                  <select className="form-select" value={selectedLocation} onChange={(e) => {
+                    setSelectedLocation(e.target.value)
+                  }}>
                     <option value={""}>{staticTexts['All Hospital']}</option>
                     {
                       allLocation?.map((loc, i) => {
-                        return <option value={loc.title} key={i}>{loc.title}</option>
+                        return <option value={loc.slug} key={i}>{loc.title}</option>
                       })
                     }
-
                   </select>
                   <span className="input-group-text"><i className="fa-solid fa-chevron-down"></i></span>
                 </div>

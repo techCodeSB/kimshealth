@@ -68,7 +68,7 @@ const HeaderUnit = () => {
     }
 
     const getLoc = async () => {
-      const loc = await langLoc.getLocations();
+      const loc = await langLoc.getLocations(true);
       setAllLocations([...loc]);
     }
 
