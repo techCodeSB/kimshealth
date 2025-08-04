@@ -96,10 +96,10 @@ const HospitalDetails = async ({ params }) => {
         <>
             <Header />
             <div role="main" className="main">
-                <section className="section this-text pt-3 hospital-details-page-section d-lg-block  d-none"
+                {/* <section className="section this-text pt-3 hospital-details-page-section d-lg-block  d-none"
                     style={hptData?.pageBanner?.[0]?.bannerImageDesktop?.url ? { backgroundImage: `url(${process.env.NEXT_PUBLIC_IMAGE_URL}${hptData?.pageBanner?.[0]?.bannerImageDesktop?.url})` } : {}}
                 >
-                    {/* <div className="container">
+                    <div className="container">
                         <div className="row">
                             <div className="col-md-5 pt-4">
                                 <div className="breadcrumb-wrapper py-2 ps-2 ms-1">
@@ -159,16 +159,45 @@ const HospitalDetails = async ({ params }) => {
                                 </div>
                             </div>
                         </div>
-                    </div> */}
+                    </div>
+                </section> */}
+
+                <section className="d-lg-block d-none">
+                    <div className="container-wrapper">
+                        <div className="owl-carousel owl-theme homepage-slider">
+                            {
+                                hptData?.pageBanner?.map((banner, index) => {
+                                    return <div className="item" key={index}>
+                                        <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${banner.bannerImageDesktop.url}`}
+                                            className="img-fluid" alt={banner.title} />
+                                    </div>
+                                })
+                            }
+                        </div>
+                    </div>
+                </section>
+                <section className="d-lg-none d-block">
+                    <div className="container-wrapper">
+                        <div className="owl-carousel owl-theme homepage-slider">
+                            {
+                                hptData?.pageBanner?.map((banner, index) => {
+                                    return <div className="item" key={index}>
+                                        <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${banner.bannerImageMobile.url}`}
+                                            className="img-fluid" alt={banner.title} />
+                                    </div>
+                                })
+                            }
+                        </div>
+                    </div>
                 </section>
 
                 <section className="section hospital-details-page-md-section py-0  d-lg-none  d-block">
                     <div className="container">
                         <div className="row">
-                            <div className="col-12 px-0">
+                            {/* <div className="col-12 px-0">
                                 <img src={process.env.NEXT_PUBLIC_IMAGE_URL + hptData.featuredImage?.url} alt="" className="img-fluid hospital-details-mobile-banner" />
                             </div>
-                            {/* <div className="col-12">
+                            <div className="col-12">
                                 <div className="row">
                                     <div className="col-12 pt-">
                                         <div className="breadcrumb-wrapper py-2 ps-2 ms-1">

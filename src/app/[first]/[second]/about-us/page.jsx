@@ -22,7 +22,10 @@ const AboutUs = async () => {
     const staticText = await getStaticText();
 
 
-    let allLeader = await leaderData.getAll({ type: 'Promoters', langLoc: getLangLoc });
+    let allLeaderPromoters = await leaderData.getAll({ type: 'Promoters', langLoc: getLangLoc });
+    let allLeaderBoardofDirectors = await leaderData.getAll({ type: 'Board of Directors', langLoc: getLangLoc });
+    let allLeaderSeniorManagement = await leaderData.getAll({ type: 'Senior Management', langLoc: getLangLoc });
+    let allLeaderClinicalLeaders = await leaderData.getAll({ type: 'Clinical Leaders', langLoc: getLangLoc });
     let awards = await awardData.getAll({ langLoc: getLangLoc })
 
     return (
@@ -226,28 +229,121 @@ const AboutUs = async () => {
                             <div className="main-heading">
                                 <h2>{pageContent[8].title}</h2>
                             </div>
-                            <div className="row">
-                                {
-                                    allLeader.slice(0, 8).map((l, i) => {
-                                        return <div className="col-md-3 col-6 mb-4" key={i}>
-                                            <div className="expert-card" data-aos="fade-right">
-                                                <div className="card border-0 p-lg-4 p-0">
-                                                    <div className="card-top">
-                                                        <a href={basePath + "/leadership/" + l.slug}>
-                                                            <img src={l.image ? process.env.NEXT_PUBLIC_IMAGE_URL + l.image.url : "/img/no-image.jpg"}
-                                                                className="img-fluid w-100" alt={l.name} />
-                                                        </a>
-                                                    </div>
-                                                    <div className="card-content">
-                                                        <h4>{l.name}</h4>
-                                                        <p>{l.designation}</p>
+                            {allLeaderPromoters.length > 0 && <>
+                                <div className="sub-heading mb-3">
+                                <h4>{staticText['Promoters']}</h4>
+                                </div>
+                                <div className="row mb-3">
+                                    {
+                                        allLeaderPromoters.slice(0, 8).map((l, i) => {
+                                            return <div className="col-md-3 col-6 mb-4" key={i}>
+                                                <div className="expert-card" data-aos="fade-right">
+                                                    <div className="card border-0 p-lg-4 p-0">
+                                                        <div className="card-top">
+                                                            <a href={basePath + "/leadership/" + l.slug}>
+                                                                <img src={l.image ? process.env.NEXT_PUBLIC_IMAGE_URL + l.image.url : "/img/no-image.jpg"}
+                                                                    className="img-fluid w-100" alt={l.name} />
+                                                            </a>
+                                                        </div>
+                                                        <div className="card-content">
+                                                            <h4>{l.name}</h4>
+                                                            <p>{l.designation}</p>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    })
-                                }
-                            </div>
+                                        })
+                                    }
+                                </div>
+                            </>
+                            }
+
+                            {allLeaderBoardofDirectors.length > 0 && <>
+                                <div className="sub-heading mb-3">
+                                <h4>{staticText['Board of Directors']}</h4>
+                                </div>
+                                <div className="row mb-3">
+                                    {
+                                        allLeaderBoardofDirectors.slice(0, 8).map((l, i) => {
+                                            return <div className="col-md-3 col-6 mb-4" key={i}>
+                                                <div className="expert-card" data-aos="fade-right">
+                                                    <div className="card border-0 p-lg-4 p-0">
+                                                        <div className="card-top">
+                                                            <a href={basePath + "/leadership/" + l.slug}>
+                                                                <img src={l.image ? process.env.NEXT_PUBLIC_IMAGE_URL + l.image.url : "/img/no-image.jpg"}
+                                                                    className="img-fluid w-100" alt={l.name} />
+                                                            </a>
+                                                        </div>
+                                                        <div className="card-content">
+                                                            <h4>{l.name}</h4>
+                                                            <p>{l.designation}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        })
+                                    }
+                                </div>
+                            </>
+                            }
+
+                            {allLeaderSeniorManagement.length > 0 && <>
+                                <div className="sub-heading mb-3">
+                                    <h4>{staticText['Senior Management']}</h4>
+                                </div>
+                                <div className="row mb-3">
+                                    {
+                                        allLeaderSeniorManagement.slice(0, 8).map((l, i) => {
+                                            return <div className="col-md-3 col-6 mb-4" key={i}>
+                                                <div className="expert-card" data-aos="fade-right">
+                                                    <div className="card border-0 p-lg-4 p-0">
+                                                        <div className="card-top">
+                                                            <a href={basePath + "/leadership/" + l.slug}>
+                                                                <img src={l.image ? process.env.NEXT_PUBLIC_IMAGE_URL + l.image.url : "/img/no-image.jpg"}
+                                                                    className="img-fluid w-100" alt={l.name} />
+                                                            </a>
+                                                        </div>
+                                                        <div className="card-content">
+                                                            <h4>{l.name}</h4>
+                                                            <p>{l.designation}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        })
+                                    }
+                                </div>
+                            </>
+                            }
+
+                            {allLeaderClinicalLeaders.length > 0 && <>
+                                <div className="sub-heading mb-3">
+                                    <h4>{staticText['Clinical Leaders']}</h4>
+                                </div>
+                                <div className="row mb-3">
+                                    {
+                                        allLeaderClinicalLeaders.slice(0, 8).map((l, i) => {
+                                            return <div className="col-md-3 col-6 mb-4" key={i}>
+                                                <div className="expert-card" data-aos="fade-right">
+                                                    <div className="card border-0 p-lg-4 p-0">
+                                                        <div className="card-top">
+                                                            <a href={basePath + "/leadership/" + l.slug}>
+                                                                <img src={l.image ? process.env.NEXT_PUBLIC_IMAGE_URL + l.image.url : "/img/no-image.jpg"}
+                                                                    className="img-fluid w-100" alt={l.name} />
+                                                            </a>
+                                                        </div>
+                                                        <div className="card-content">
+                                                            <h4>{l.name}</h4>
+                                                            <p>{l.designation}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        })
+                                    }
+                                </div>
+                            </>
+                            }
                         </div>
                     </section>
 
