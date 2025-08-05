@@ -56,7 +56,7 @@ const Investor = async () => {
                                             <div className="expert-card" data-aos="fade-right">
                                                 <div className="card border-0 p-lg-4 p-0">
                                                     <div className="card-top">
-                                                        <a href={basePath + "/investor/" + l.slug}>
+                                                        <a href="#">
                                                             <img src={l.image ? process.env.NEXT_PUBLIC_IMAGE_URL + l?.image?.url : "/img/no-image.jpg"}
                                                                 className="img-fluid w-100" alt={l.name} />
                                                         </a>
@@ -89,7 +89,7 @@ const Investor = async () => {
                                             <div className="expert-card" data-aos="fade-right">
                                                 <div className="card border-0 p-lg-4 p-0">
                                                     <div className="card-top">
-                                                        <a href={basePath + "/investor/" + l.slug}>
+                                                        <a href="#">
                                                             <img src={l.image ? process.env.NEXT_PUBLIC_IMAGE_URL + l?.image?.url : "/img/no-image.jpg"}
                                                                 className="img-fluid w-100" alt={l.name} />
                                                         </a>

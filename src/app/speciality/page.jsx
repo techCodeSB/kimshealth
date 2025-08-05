@@ -26,7 +26,9 @@ const Speciality = async ({ searchParams }) => {
         field: 'Center of Excellence', langLoc: getLangLoc, URLParams: URLParams
     });
 
-    console.log(coeSpecility)
+    const allSpecility = await getSpecialityData.getSpecialityAll({
+        langLoc: getLangLoc, URLParams: URLParams
+    });
 
 
     return (
@@ -52,7 +54,7 @@ const Speciality = async ({ searchParams }) => {
                     <div className="container">
                         <div className="row">
                             <div className="col-md-8 mb-3">
-                                <div className="speciality-masterpage-card">
+                                {/* <div className="speciality-masterpage-card">
                                     <div className="main-heading">
                                         <h2> {pageContent[1]?.title}</h2>
                                     </div>
@@ -69,14 +71,14 @@ const Speciality = async ({ searchParams }) => {
                                             })
                                         }
                                     </div>
-                                </div>
+                                </div> */}
                                 <div className="speciality-masterpage-card mt-3">
                                     <div className="main-heading">
                                         <h2>{pageContent[2]?.title}</h2>
                                     </div>
                                     <div className='row'>
                                         {
-                                            otherSpecility?.map((os, index) => {
+                                            allSpecility?.map((os, index) => {
                                                 return <div className="col-md-6" key={index}>
                                                     <div className="speciality-masterpage-card-content">
                                                         <a href={baseURL + "/speciality/" + os.speciality?.slug}>
