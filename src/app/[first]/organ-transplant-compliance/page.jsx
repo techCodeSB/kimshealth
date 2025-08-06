@@ -43,20 +43,28 @@ const CsrInitiative = async () => {
                             <div className='row'>
                                 <div className='col-12'>
                                     
-                                    <section className="section pt-0">
+                                    <section className="section primary-table pt-0">
                                         <div className="container">
                                             <div className="main-heading sub-heading">
                                                 <h2>{pageContent[1]?.title}</h2>
+                                                <div class="table-responsive">
+                                                    <figure class="table">
                                                 <div dangerouslySetInnerHTML={{ __html: pageContent[1]?.details || "" }}></div>
+                                                </figure>
+                                                </div>
                                             </div>
                                         </div>
                                     </section>
                                     <div className="line-divider"></div>
-                                    <section className="section">
+                                    <section className="section primary-table">
                                         <div className="container">
                                             <div className="main-heading sub-heading main-list-black">
                                                 <h2>{pageContent[2]?.title}</h2>
+                                                <div class="table-responsive">
+                                                    <figure class="table">
                                                 <div dangerouslySetInnerHTML={{ __html: pageContent[2]?.details || "" }}></div>
+                                                </figure>
+                                                </div>
 
                                             </div>
                                         </div>
