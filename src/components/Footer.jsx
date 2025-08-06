@@ -311,6 +311,7 @@ const Footer = () => {
                                     <li><a href={basePath + "/gallery"}>{staticTexts['Gallery']}</a></li>
                                     <li><a href={basePath + "/at-home-services"}>{staticTexts['Home Care']}</a></li>
                                     <li><a href={basePath + "/second-opinion"}>{staticTexts['In-Patient Deposit']}</a></li>
+                                    <li><a href={basePath + "/organ-transplant-compliance"}>{staticTexts['Organ Transplant Compliance']}</a></li>
                                     <li>
                                         <a href={basePathOnlyLang + "/international-patient"}>{staticTexts['International Care']}</a>
                                     </li>
@@ -475,6 +476,7 @@ const Footer = () => {
                                     <li><a href={basePath + "/gallery"}>{staticTexts['Gallery']}</a></li>
                                     <li><a href={basePath + "/at-home-services"}>{staticTexts['Home Care']}</a></li>
                                     <li><a href={basePath + "/second-opinion"}>{staticTexts['In-Patient Deposit']}</a></li>
+                                    <li><a href={basePath + "/organ-transplant-compliance"}>{staticTexts['Organ Transplant Compliance']}</a></li>
                                     <li><a href={basePathOnlyLang + "/international-patient"}>{staticTexts['International Care']}</a></li>
                                     <li><a href={basePath + "#"}>{staticTexts['Specialist']}</a></li>
                                 </ul>
