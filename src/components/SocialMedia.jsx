@@ -1,25 +1,56 @@
 "use client"
 
+import { useEffect, useState } from "react";
+
+import getStaticText from "@/helper/getStaticText";
+
 const SocialMedia = () => {
+    const [staticTexts, setStaticTexts] = useState({});
+    useEffect(() => {
+        const fetchTexts = async () => {
+            setStaticTexts({ ...await getStaticText() })
+        };
+
+        fetchTexts();
+    }, []);
+
+    useEffect(() => {
+        // Load Elfsight script once the component is mounted
+        const script = document.createElement('script');
+        script.src = 'https://static.elfsight.com/platform/platform.js';
+        script.async = true;
+        script.onload = () => {
+            // Script loaded
+        };
+
+        document.body.appendChild(script);
+
+        // Cleanup if necessary
+        return () => {
+            document.body.removeChild(script);
+        };
+    }, []);
+
+
     return (
         <>
-            <section className="section d-lg-block d-none">
+            <section className="section">
                 <div className="container">
                     <div className="row justify-content-between" data-aos="fade-right">
                         <div className="col-md-4 col-8">
                             <div className="main-heading">
-                                <h2>Social Media Updates </h2>
+                                <h2> {staticTexts['Social Media Updates']} </h2>
                             </div>
                         </div>
-                        <div className="col-md-2 col-4">
+                        {/* <div className="col-md-2 col-4">
                             <div className="over-all-btn text-end">
-                                <a href="#">View All <span><img src="img/slider-right-arrow.svg" className="img-fluid"
+                                <a href="#">{staticTexts['View All']} <span><img src="img/slider-right-arrow.svg" className="img-fluid"
                                     alt="" /></span></a>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
 
-                    <div className="row">
+                    {/* <div className="row">
                         <div className="col-xl-3 col-lg-3 col-md-3 col-12">
                             <div className="media-card" data-aos="fade-right" data-aos-duration="2200" data-aos-delay="100">
                                 <div className="media-img">
@@ -176,11 +207,17 @@ const SocialMedia = () => {
                             </div>
                         </div>
 
+                    </div> */}
+
+                    <div className="row">
+                        <div className="col-xl-12 col-lg-12 col-md-12 col-12">
+                            <div className="elfsight-app-ee9a0b8c-7785-49ab-be28-50eff9d278a3" data-elfsight-app-lazy></div>
+                        </div>
                     </div>
 
                 </div>
             </section>
-            <section className="section d-lg-none d-block" data-aos="fade-up">
+            {/* <section className="section d-lg-none d-block" data-aos="fade-up">
                 <div className="container">
                     <div className="row justify-content-between">
                         <div className="col-md-4 col-8">
@@ -276,7 +313,7 @@ const SocialMedia = () => {
                     </div>
 
                 </div>
-            </section>
+            </section> */}
         </>
     )
 }
