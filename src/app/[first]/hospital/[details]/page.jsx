@@ -168,7 +168,7 @@ const HospitalDetails = async ({ params }) => {
                             {
                                 hptData?.pageBanner?.map((banner, index) => {
                                     return <div className="item" key={index}>
-                                        <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${banner.bannerImageDesktop.url}`}
+                                        <img src={banner.bannerImageDesktop?.urll ? process.env.NEXT_PUBLIC_IMAGE_URL + banner.bannerImageDesktop?.url : "/img/no-image.jpg"} 
                                             className="img-fluid" alt={banner.title} />
                                     </div>
                                 })
@@ -182,7 +182,7 @@ const HospitalDetails = async ({ params }) => {
                             {
                                 hptData?.pageBanner?.map((banner, index) => {
                                     return <div className="item" key={index}>
-                                        <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${banner.bannerImageMobile.url}`}
+                                        <img src={banner.bannerImageMobile?.urll ? process.env.NEXT_PUBLIC_IMAGE_URL + banner.bannerImageMobile?.url : "/img/no-image.jpg"} 
                                             className="img-fluid" alt={banner.title} />
                                     </div>
                                 })
