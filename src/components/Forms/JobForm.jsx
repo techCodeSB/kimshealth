@@ -31,7 +31,7 @@ const JobForm = ({ title }) => {
                 id="file-input" className="form-control file-input__input"
                 name="report" />
               <label htmlFor="file-input" className="file-input-label"><i
-                className="icon-docs"></i><span>{staticTexts['Attach Report']}</span>
+                className="icon-docs"></i><span>{staticTexts['Attach CV']}</span>
               </label>
             </div>
           </div>
