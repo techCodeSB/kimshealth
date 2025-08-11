@@ -158,7 +158,7 @@ const SpecialityDetails = async ({ params, searchParams }) => {
                                         {/* <img src={
                                             data.speciality?.featuredImage ? process.env.NEXT_PUBLIC_IMAGE_URL + data.speciality?.featuredImage.url : "/img/no-image.jpg"} alt="" className="img-fluid w-100" /> */}
 
-                                        <iframe width={'100%'} className='rounded-2' height="315" src={"https://www.youtube.com/embed/v=" + data.overviewSection?.videoId} title={data.overviewSection?.caption} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen=""></iframe>
+                                        <iframe width={'100%'} className='rounded-2' height="315" src={`https://www.youtube.com/embed/${data.overviewSection?.videoId}?si=uQi_tVy9LN6UaOhE`} title={data.overviewSection?.caption} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
 
                                         <h5>{data.overviewSection?.caption}</h5>
                                         <p>{data.overviewSection?.shortDetails} </p>

@@ -5309,9 +5309,9 @@ li.chat-ic::before {
 
 }
 
-.desktop-humberger-menu li a.menu-item:nth-child(1) {
+/* .desktop-humberger-menu li a.menu-item:nth-child(1) {
     margin-bottom: 10px;
-}
+} */
 
 .desktop-humberger-menu li a.menu-item {
     display: inline-block;
@@ -5998,4 +5998,9 @@ select option:hover {
     left: 30px;
     width: 78%;
     height: 1px;
+}
+
+.desktop-humberger-menu .menu-items li {
+    margin-bottom: 12px;
+    padding-bottom:8px;
 }

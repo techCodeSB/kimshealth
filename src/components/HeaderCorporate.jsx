@@ -599,7 +599,7 @@ const HeaderCorporate = () => {
                         </ul>
                       </li> */}
                       <li>
-                        <a target='_blank' href="https://consult.bestdocapp.com/home/KIMSTVM?version=new" className="menu-item mt-2">{staticTexts['Telehealth']}</a>
+                        <a target='_blank' href="https://consult.bestdocapp.com/home/KIMSTVM?version=new" className="menu-item ">{staticTexts['Telehealth']}</a>
                       </li>
                       <li>
                         <a href={basePath + "/investor"} className="menu-item">{staticTexts['Corporate']}</a>
@@ -673,26 +673,26 @@ const HeaderCorporate = () => {
                         </ul>
                       </li>
                       {/* <li>
-                        <a href={basePath + "#"} className="menu-item mt-2">{staticTexts['Facilities']}</a>
+                        <a href={basePath + "#"} className="menu-item ">{staticTexts['Facilities']}</a>
                       </li> */}
                       {/* <li>
-                        <a href={basePath + "#"} className="menu-item mt-2">{staticTexts['Quality Focus']}</a>
+                        <a href={basePath + "#"} className="menu-item ">{staticTexts['Quality Focus']}</a>
                       </li> */}
                       <li>
-                        <a href={basePath + "/all-companies-on-panel"} className="menu-item mt-2">{staticTexts['Insurance Providers']}</a>
+                        <a href={basePath + "/all-companies-on-panel"} className="menu-item ">{staticTexts['Insurance Providers']}</a>
                       </li>
                       {/* <li>
-                        <a href={basePath + "#"} className="menu-item mt-2">{staticTexts['Careers']}</a>
+                        <a href={basePath + "#"} className="menu-item ">{staticTexts['Careers']}</a>
                       </li> */}
                       <li>
-                        <a href={basePath + "/blog"} className="menu-item mt-2">{staticTexts['Blogs']}</a>
+                        <a href={basePath + "/blog"} className="menu-item ">{staticTexts['Blogs']}</a>
                       </li>
                       <li>
-                        <a href={basePath + "/doctor-talk"} className="menu-item mt-2">
+                        <a href={basePath + "/doctor-talk"} className="menu-item ">
                           {staticTexts['Videos']}</a>
                       </li>
                       <li>
-                        <a href={basePath + "/ethics-committee"} className="menu-item mt-2">{staticTexts['Ethics Committee']}</a>
+                        <a href={basePath + "/ethics-committee"} className="menu-item ">{staticTexts['Ethics Committee']}</a>
                       </li>
 
                       {/* OTHERS */}

@@ -87,14 +87,14 @@ const Home = async () => {
   const mediaEventDataSet = {
     sectionTitle: "Media & Events",
     buttonText: 'View All', buttonURL: `${basePath + "/media-and-events"}`,
-    data: await mediaData.getRecentMedia({langLoc: getLangLoc}),
+    data: await mediaData.getRecentMedia({ langLoc: getLangLoc }),
     baseUrl: basePath
   }
 
   const mediaCoverageDataSet = {
     sectionTitle: "News",
     buttonText: 'View All', buttonURL: `${basePath + "/media-coverage"}`,
-    data: await mediaCoverData.getRecentMedia({langLoc: getLangLoc}),
+    data: await mediaCoverData.getRecentMedia({ langLoc: getLangLoc }),
     baseUrl: basePath
   }
 
@@ -110,8 +110,10 @@ const Home = async () => {
               {
                 pageContent[0]?.bannerItem.map((banner, index) => {
                   return <div className="item" key={index}>
-                    <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${banner.bannerImageDesktop.url}`}
-                      className="img-fluid" alt={banner.title} />
+                    <a href={banner.hyperlink}>
+                      <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${banner.bannerImageDesktop.url}`}
+                        className="img-fluid" alt={banner.title} />
+                    </a>
                   </div>
                 })
               }
@@ -124,8 +126,10 @@ const Home = async () => {
               {
                 pageContent[0]?.bannerItem.map((banner, index) => {
                   return <div className="item" key={index}>
-                    <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${banner.bannerImageMobile.url}`}
-                      className="img-fluid" alt={banner.title} />
+                    <a href={banner.hyperlink}>
+                      <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${banner.bannerImageMobile.url}`}
+                        className="img-fluid" alt={banner.title} />
+                    </a>
                   </div>
                 })
               }
@@ -266,8 +270,8 @@ const Home = async () => {
 
         {/* <!-- ====== cta section ==== --> */}
 
-        <BookAnAppoinmentShort basePath={basePath} extraClass={"pt-5 pb-0"}/>
-        
+        <BookAnAppoinmentShort basePath={basePath} extraClass={"pt-5 pb-0"} />
+
         <ExcellenceCarousel dataSet={specialityDataSet} />
 
 
@@ -310,7 +314,7 @@ const Home = async () => {
 
 
         {/*::::: Tab ::::  */}
-        <TabHome blogDataSet={blogDataSet} galleryDataSet={galleryDataSet} mediaEventDataSet={mediaEventDataSet} mediaCoverageDataSet={mediaCoverageDataSet}/>
+        <TabHome blogDataSet={blogDataSet} galleryDataSet={galleryDataSet} mediaEventDataSet={mediaEventDataSet} mediaCoverageDataSet={mediaCoverageDataSet} />
 
         {/* <div className="line-divider"></div>
         <BlogCarousel dataSet={blogDataSet} /> */}

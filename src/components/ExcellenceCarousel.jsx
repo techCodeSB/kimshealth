@@ -15,7 +15,7 @@ const ExcellenceCarousel = ({ dataSet }) => {
     }, []);
 
 
-     if (dataSet.data.length < 1) {
+    if (dataSet.data.length < 1) {
         return;
     }
 
@@ -42,19 +42,21 @@ const ExcellenceCarousel = ({ dataSet }) => {
                             dataSet.data.map((e, index) => {
                                 return <div className="item" key={index}>
                                     <div className="card border-0">
-                                        <div className="card-top">
-                                            <img src={e.speciality?.featuredImage?.url ? `${process.env.NEXT_PUBLIC_IMAGE_URL}${e.speciality?.featuredImage?.url}` : '/img/no-image.jpg'}
-                                                className="img-fluid w-100" alt={e.title} />
-                                        </div>
-                                        <div className="card-content">
-                                            <h4>{e.title}</h4>
-                                            <p>{e.overviewSection.details}</p>
-                                            <div className="main-btn">
-                                                <a href={dataSet.baseUrl + "/speciality/" + e.speciality?.slug}>
-                                                    {staticTexts['Read More']} <span><i className="fa-solid fa-arrow-right"></i></span>
-                                                </a>
+                                        <a href={dataSet.baseUrl + "/speciality/" + e.speciality?.slug}>
+                                            <div className="card-top">
+                                                <img src={e.speciality?.featuredImage?.url ? `${process.env.NEXT_PUBLIC_IMAGE_URL}${e.speciality?.featuredImage?.url}` : '/img/no-image.jpg'}
+                                                    className="img-fluid w-100" alt={e.title} />
                                             </div>
-                                        </div>
+                                            <div className="card-content">
+                                                <h4>{e.title}</h4>
+                                                <p>{e.overviewSection.details}</p>
+                                                <div className="main-btn">
+                                                    <a href={dataSet.baseUrl + "/speciality/" + e.speciality?.slug}>
+                                                        {staticTexts['Read More']} <span><i className="fa-solid fa-arrow-right"></i></span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </a>
                                     </div>
                                 </div>
                             })

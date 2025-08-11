@@ -113,7 +113,7 @@ const BookAnAppoinmentShort = ({ basePath, extraClass,currentLangLoc }) => {
                                     setSelectedSpeciality("");
                                     setSelectedDoctor("");
                                 }}>
-                                    <option value={""}>{staticTexts['Select hospital location']}</option>
+                                    <option value={""}>{staticTexts['Select location']}</option>
                                     {
                                         locationList?.map((loc, i) => {
                                             return <option value={loc.slug} key={i}>{loc.title}</option>
