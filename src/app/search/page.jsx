@@ -125,7 +125,7 @@ const SearchPage = async ({ searchParams }) => {
                                             {
                                                 allDoctor.map((data, index) => {
                                                     return <li key={"doctor" + index}>
-                                                        <a href={basePath + "/doctor/" + data.slug}>{data.name}</a>
+                                                        <a href={basePath + "/doctor/" + data.slug}>{`${data.salutation?data.salutation+" ":""}${data.name}`}</a>
                                                     </li>
                                                 })
                                             }

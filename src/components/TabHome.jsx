@@ -21,7 +21,7 @@ const TabHome = ({ blogDataSet, galleryDataSet, mediaEventDataSet, mediaCoverage
     }, []);
 
     return (
-        <section className="section blog-section">
+        <section className="section blog-section pb-1">
             <div className="container">
                 <div className="row">
                     <div className="col-md-12">

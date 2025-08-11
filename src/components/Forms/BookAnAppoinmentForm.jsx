@@ -173,7 +173,7 @@ const BookAnAppoinmentForm = ({ pageContent, URLParams }) => {
                                     <option value="">{staticText['Select a Doctor']}</option>
                                     {allDoctors.map((d, i) => (
                                       <option value={d?.slug} key={i}>
-                                        {d.name}
+                                        {`${d?.salutation?d?.salutation+" ":""}${d?.name}`}
                                       </option>
                                     ))}
                                   </>

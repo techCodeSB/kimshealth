@@ -21,7 +21,7 @@ const BlogCarousel = ({ dataSet, tab, extraClass }) => {
 
     return (
         <>
-            <section className={`${!tab ? 'blog-section' : ''} ${extraClass}  section d-lg-block d-none`}>
+            <section className={`${!tab ? 'blog-section' : ''} ${extraClass} pb-1  section d-lg-block d-none`}>
                 <div className="container">
                     <div className="row justify-content-between" data-aos="fade-down">
                         <div className="col-md-3 col-8">
@@ -58,7 +58,7 @@ const BlogCarousel = ({ dataSet, tab, extraClass }) => {
                                         <p>{blog.shortDetails}</p>
                                         <div className="d-flex align-items-center justify-content-between">
                                             <div>
-                                                <strong>{blog.doctor[0]?.name}</strong>
+                                                {blog.doctor[0]?.name && <strong>{`${blog.doctor[0]?.salutation?blog.doctor[0]?.salutation+" ":""}${blog.doctor[0]?.name}`}</strong>}
                                             </div>
                                             <div className="main-btn">
                                                 <a href={dataSet.baseUrl + "/blog/" + blog.slug}>

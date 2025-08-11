@@ -26,7 +26,7 @@ const GalleryCarousel = ({ dataSet, extraClass }) => {
     return (
         <>
             <PhotoProvider>
-                <section className={`section  d-lg-block d-none  ${extraClass}`}>
+                <section className={`section  d-lg-block d-none pb-1  ${extraClass}`}>
                     <div className="container">
                         <div className="row justify-content-between">
                             <div className="col-md-3 col-8">

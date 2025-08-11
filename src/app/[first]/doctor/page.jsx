@@ -23,7 +23,7 @@ const Doctor = async ({ searchParams }) => {
     const staticText = await getStaticText();
 
     const allLocation = await langLoc.getLocationsOnlyCMS()
-    const allSpeciality = await getSpecialityData.getAllSpeciality({langLoc: getLangLoc})
+    const allSpeciality = await getSpecialityData.getAllSpecialityForFilter({langLoc: getLangLoc})
     const allDoctorCount = await doctorData.allDoctorCount({langLoc: getLangLoc, URLParams:URLParams});
 
 

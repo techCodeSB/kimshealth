@@ -53,7 +53,7 @@ const DoctorDetails = async ({ params }) => {
                             <div className="row">
                                 <div className="col-12">
                                     <Breadcrumb
-                                        activeTitle={data.name}
+                                        activeTitle={`${data.salutation?data.salutation+" ":""}${data.name}`}
                                         middleTitle={staticText['Find a Doctor']}
                                         middleURL={basePath + "/doctor"}
                                     />
@@ -68,7 +68,7 @@ const DoctorDetails = async ({ params }) => {
                                 <div className="col-md-3 mb-4">
                                     <div className="left-col-img  ">
                                         <div className="video-iconfor-doc">
-                                            <img src={data.doctorImage?.url ? imgUrl + data.doctorImage?.url : "/img/no-image.jpg"} alt={data.name} className="img-fluid w-100" />
+                                            <img src={data.doctorImage?.url ? imgUrl + data.doctorImage?.url : "/img/no-image.jpg"} alt={`${data.salutation?data.salutation+" ":""}${data.name}`} className="img-fluid w-100" />
 
                                             {data.teleConsultationAvailable && <a href='https://consult.bestdocapp.com/home/KIMSTVM?version=new' target='_blank'>
                                                 <span className="video-iconfor-listing"><i className="fa-solid fa-video"></i></span>
@@ -77,7 +77,7 @@ const DoctorDetails = async ({ params }) => {
 
 
                                         <div className="main-heading sub-heading mt-3">
-                                            <h3>{data.name}</h3>
+                                            <h3>{`${data.salutation?data.salutation+" ":""}${data.name}`}</h3>
                                         </div>
                                         <div className="left-details-list mt-3">
                                             <ul>

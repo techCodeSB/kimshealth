@@ -119,7 +119,7 @@ $('.homepage-slider').owlCarousel({
 // })
 
 $('.exellence').owlCarousel({
-    loop: true,
+    loop: false,
     margin: 10,
     autoplay: false,
     nav: true,
@@ -221,7 +221,7 @@ $('.testimonial').owlCarousel({
 
 // blog
 $('.blog').owlCarousel({
-    loop: true,
+    loop: false,
     margin: 15,
     nav: false,
     navText: ["<img src='/img/left-arrow.svg'>", "<img src='/img/slider-right-arrow.svg'>"],

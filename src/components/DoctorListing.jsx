@@ -265,7 +265,7 @@ const DoctorListing = ({ baseURL, allLocation, allSpeciality, allDoctorCount, la
                                                     <img
                                                         src={d.doctorImage?.url ? `${process.env.NEXT_PUBLIC_IMAGE_URL}${d.doctorImage?.url}` : "/img/no-image.jpg"}
                                                         className="img-fluid w-100"
-                                                        alt={d.name}
+                                                        alt={`${d.salutation?d.salutation+" ":""}${d.name}`}
                                                     />
 
                                                 </a>
@@ -274,7 +274,7 @@ const DoctorListing = ({ baseURL, allLocation, allSpeciality, allDoctorCount, la
                                                 </a>}
                                             </div>
                                             <div className="card-content px-0">
-                                                <h4>{d.name}</h4>
+                                                <h4>{`${d.salutation?d.salutation+" ":""}${d.name}`}</h4>
                                                 <p>{d.doctorDesignation}</p>
                                                 <h5>{d.specialities[0]?.title}</h5>
                                                 {/* <div className="from-btn">

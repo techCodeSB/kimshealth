@@ -65,8 +65,8 @@ const HomeServices = async () => {
                             <div className="row mb-lg-5">
                                 <div className="col-md-5 mb-lg-0 mb-4 order-lg-1 order-2">
                                     <div className="details-right-col text-center">
-                                        {/* <img src="/img/home-services-left-col.jpg" alt="" className="img-fluid w-100" /> */}
-                                        <iframe width="100%" height="315" src={`https://www.youtube.com/embed/${pageContent[1].videoId}?si=uQi_tVy9LN6UaOhE`} title={"KIMSHEALTH"} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
+                                        <img src={pageContent[1].thumbnail?.url ? process.env.NEXT_PUBLIC_IMAGE_URL + pageContent[1].thumbnail?.url : "/img/no-image.jpg"}alt="" className="img-fluid w-100" />
+                                        {/* <iframe width="100%" height="315" src={`https://www.youtube.com/embed/${pageContent[1].videoId}?si=uQi_tVy9LN6UaOhE`} title={"KIMSHEALTH"} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe> */}
                                         <h5>{pageContent[1].title}</h5>
                                         <p>{pageContent[1].subTitle}</p>
                                         {/* <div className="main-btn">

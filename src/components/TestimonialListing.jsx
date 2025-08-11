@@ -119,7 +119,7 @@ const TestimonialListing = ({ basePath, langLoc, URLParams }) => {
 
                                                 <div className="d-flex align-items-center justify-content-between mt-3">
                                                     <div className="doctor-name">
-                                                        <p><span><img src="/img/doctor.png" className="img-fluid" alt="" /></span> {t.doctor?.name} </p>
+                                                        {t.doctor?.name && <p><span><img src="/img/doctor.png" className="img-fluid" alt="" /></span>{`${t.doctor?.salutation?t.doctor?.salutation+" ":""}${t.doctor?.name}`} </p>}
                                                     </div>
                                                     <div className="doctor-catagory">
                                                         <p>{t.specialities[0]?.title}</p>

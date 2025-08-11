@@ -50,14 +50,14 @@ const BlogDetails = async ({ params }) => {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div className="details-banner blog-details-banner-image">
+                                            {docData?.name && <div className="details-banner blog-details-banner-image">
                                                 <div className="details-heading">
                                                     <div className="row">
                                                         <div className="col-md-4 ">
-                                                            <img src={docData.doctorImage.url ? process.env.NEXT_PUBLIC_IMAGE_URL + docData.doctorImage?.url : "/img/no-image.jpg"} alt={docData?.name} className="img-fluid" />
+                                                            <img src={docData?.doctorImage.url ? process.env.NEXT_PUBLIC_IMAGE_URL + docData.doctorImage?.url : "/img/no-image.jpg"} alt={docData?.name} className="img-fluid" />
                                                         </div>
                                                         <div className="col-md-8 my-auto">
-                                                            <h3>{docData?.name}</h3>
+                                                            <h3>{`${docData.salutation?docData.salutation+" ":""}${docData.name}`}</h3>
                                                             <p>
                                                                 {docData?.hospitals?.map((data, _) => {
                                                                     return data.title + (docData?.hospitals?.length - 1 !== _ ? "," : "");
@@ -74,7 +74,7 @@ const BlogDetails = async ({ params }) => {
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div>}
                                         </div>
                                     </div>
 
@@ -114,12 +114,13 @@ const BlogDetails = async ({ params }) => {
                                 </div>
 
 
-                                <div className="col-md-6 mt-lg-0 mt-4">
+                                {docData?.name && <div className="col-md-6 mt-lg-0 mt-4">
                                     <div className="details-banner">
                                         <div className="details-heading">
                                             <div className="row">
                                                 <div className="col-12 my-auto pe-3">
                                                     <h3>{data.title}</h3>
+                                                    <h4>{`${docData.salutation?docData.salutation+" ":""}${docData.name}`}</h4>
                                                     <p>{docData?.hospitals?.map((data, _) => {
                                                         return data.title + (docData?.hospitals?.length - 1 !== _ ? "," : "");
                                                     })}</p>
@@ -138,7 +139,7 @@ const BlogDetails = async ({ params }) => {
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div>}
                             </div>
                         </div>
                     </section>

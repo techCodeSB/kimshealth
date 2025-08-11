@@ -450,12 +450,12 @@ const InternationalPage = async () => {
                                             <h2>{pageContent[7].title} </h2>
                                         </div>
                                     </div>
-                                    <div className="col-md-2 col-4">
+                                    {/* <div className="col-md-2 col-4">
                                         <div className="over-all-btn text-end">
 
                                             <a download target='_blank' href={process.env.NEXT_PUBLIC_IMAGE_URL + pageContent[7].file?.url} >{pageContent[7].buttonText} <span><img src="/img/slider-right-arrow.svg" className="img-fluid" alt="" /></span></a>
                                         </div>
-                                    </div>
+                                    </div> */}
                                 </div>
                             </div>
                             <div id="exampleSlider">

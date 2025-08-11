@@ -185,7 +185,7 @@ const Footer = () => {
                                         <i className="fa-solid fa-location-dot"></i>
                                         <div className="ms-3">
                                             <strong><u>{locationData?.country}</u></strong>
-                                            <p>{locationData?.address}</p>
+                                            <p><a href={locationData?.mapLink?locationData?.mapLink:"#"} target='_blank'>{locationData?.address}</a></p>
                                         </div>
                                     </div>
                                     <a href={"mailto:" + locationData?.email}>
@@ -490,7 +490,7 @@ const Footer = () => {
                                         <i className="fa-solid fa-location-dot"></i>
                                         <div className="ms-2">
                                             <strong style={{ color: '#b71c2b' }}><u>{locationData?.country}</u></strong>
-                                            <p>{locationData?.address}</p>
+                                            <p><a href={locationData?.mapLink?locationData?.mapLink:"#"} target='_blank'>{locationData?.address}</a></p>
                                         </div>
                                     </div>
                                     <a href={"mailto:" + locationData?.email}>

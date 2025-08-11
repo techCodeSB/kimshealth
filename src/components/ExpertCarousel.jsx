@@ -50,7 +50,7 @@ const ExpertCarousel = ({ dataSet }) => {
                                             <a href={dataSet.baseUrl + "/doctor/" + d.slug}>
                                                 <img
                                                     src={d.doctorImage?.url ? `${process.env.NEXT_PUBLIC_IMAGE_URL}${d.doctorImage?.url}` : "/img/no-image.jpg"}
-                                                    className="img-fluid w-100" alt={d.name}
+                                                    className="img-fluid w-100" alt={`${d.salutation?d.salutation+" ":""}${d.name}`}
                                                 />
                                             </a>
                                             {d.teleConsultationAvailable && <a href='https://consult.bestdocapp.com/home/KIMSTVM?version=new' target='_blank'>
@@ -58,7 +58,7 @@ const ExpertCarousel = ({ dataSet }) => {
                                             </a>}
                                         </div>
                                         <div className="card-content">
-                                            <h4>{d.name}</h4>
+                                            <h4>{`${d.salutation?d.salutation+" ":""}${d.name}`}</h4>
                                             <p>{d.doctorDesignation}</p>
                                             <h5>{d.specialities[0]?.title}</h5>
                                             <div className="from-btn">

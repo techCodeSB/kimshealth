@@ -16,7 +16,7 @@ function MediaCoverageCarousel({ dataSet, extraClass }) {
     }, []);
     return (
         <>
-            <section className={`section d-lg-block d-none  ${extraClass}`}>
+            <section className={`section d-lg-block d-none pb-1  ${extraClass}`}>
                 <div className="container">
                     <div className="row justify-content-between">
                         <div className="col-md-6 col-8">

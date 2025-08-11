@@ -84,8 +84,46 @@ const HeaderCorporate = () => {
 
   }, [])
 
-    
+/********************************Google Translator*****************************/  
+useEffect(() => {
+    // Prevent adding script multiple times
+    if (!document.querySelector("#google-translate-script")) {
+      const script = document.createElement("script");
+      script.id = "google-translate-script";
+      script.src =
+        "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+      script.async = true;
+      document.body.appendChild(script);
+    }
 
+    // Define the init function only once
+    if (!window.googleTranslateElementInit) {
+      window.googleTranslateElementInit = () => {
+        if (!document.querySelector(".goog-te-combo")) {
+          new window.google.translate.TranslateElement(
+            {
+              pageLanguage: "en", // default language
+              autoDisplay: false,
+            },
+            "google_translate_element"
+          );
+        }
+      };
+    }
+  }, []);
+
+  const handleChange = (e) => {
+    const lang = e.target.value;
+    if (lang) {
+      const translateSelect = document.querySelector(".goog-te-combo");
+      if (translateSelect && translateSelect.value !== lang) {
+        translateSelect.value = lang;
+        translateSelect.dispatchEvent(new Event("change"));
+      }
+    }
+  };
+
+/********************************Google Translator*****************************/  
 
   return (
     <>
@@ -135,7 +173,9 @@ const HeaderCorporate = () => {
                 </div>
 
                 <div className="top-drop-down">
-                  <select value={selectedLang?.slug || ""} className="border-0 " onChange={onLangChangeRedirection}>
+                  {/* Hidden Google Translate container */}
+                  <div id="google_translate_element" style={{ display: "none" }} />
+                  <select className="border-0 " onChange={handleChange}>
                     {
                       allLanguages.length < 1 ? <option>Loading...</option> :
                         allLanguages.map((l, _) => {
@@ -145,6 +185,16 @@ const HeaderCorporate = () => {
                         })
                     }
                   </select>
+                  {/* <select value={selectedLang?.slug || ""} className="border-0 " onChange={onLangChangeRedirection}>
+                    {
+                      allLanguages.length < 1 ? <option>Loading...</option> :
+                        allLanguages.map((l, _) => {
+                          return <option value={l.code} data-fulldata={JSON.stringify(l)} key={l.id}>
+                            {l.name}
+                          </option>
+                        })
+                    }
+                  </select> */}
                 </div>
               </div>
 
@@ -506,7 +556,7 @@ const HeaderCorporate = () => {
                   </li>
                   <li className="quicklink-header">
                     <a href={basePath + "/doctor-talk"}>
-                      {staticTexts['Videos']}</a>
+                      {staticTexts['Expert Talks']}</a>
                   </li>
 
 
@@ -689,7 +739,7 @@ const HeaderCorporate = () => {
                       </li>
                       <li>
                         <a href={basePath + "/doctor-talk"} className="menu-item ">
-                          {staticTexts['Videos']}</a>
+                          {staticTexts['Expert Talks']}</a>
                       </li>
                       <li>
                         <a href={basePath + "/ethics-committee"} className="menu-item ">{staticTexts['Ethics Committee']}</a>

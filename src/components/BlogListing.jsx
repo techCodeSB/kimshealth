@@ -163,11 +163,11 @@ const BlogListing = ({ basePath, speciality, langLoc, URLParams }) => {
                                             </a>
                                             <p>
                                                 {allBlog[0].shortDetails.slice(0, 90)}
-                                                <span>...{staticText['Read More']}</span>
+                                                <a href={basePath + "/blog/" + allBlog[0]?.slug}><span>...{staticText['Read More']}</span></a>
                                             </p>
                                             <div className="d-flex align-items-center justify-content-between">
                                                 <div>
-                                                    <strong> {staticText['By']}: {allBlog[0].doctor[0]?.name}</strong>
+                                                    {allBlog[1].doctor[0]?.name && <strong> {staticText['By']}: {`${allBlog[0].doctor[0]?.salutation?allBlog[0].doctor[0]?.salutation+" ":""}${allBlog[0].doctor[0]?.name}`}</strong>}
                                                 </div>
                                                 <div className="main-btn">
                                                     <p>{formatDate(allBlog[0].date)}</p>
@@ -194,8 +194,10 @@ const BlogListing = ({ basePath, speciality, langLoc, URLParams }) => {
                                             </p>
                                             <div className="d-flex align-items-center justify-content-between">
                                                 <div>
-                                                    <strong> {staticText['By']}: {allBlog[1].doctor[0]?.name}</strong>
+                                                    {allBlog[1].doctor[0]?.name && <strong> {staticText['By']}: {`${allBlog[1].doctor[0]?.salutation?allBlog[1].doctor[0]?.salutation+" ":""}${allBlog[1].doctor[0]?.name}`}</strong>}
                                                 </div>
+
+                                                
                                                 <div className="main-btn">
                                                     <p>{formatDate(allBlog[1].date)}</p>
                                                 </div>
@@ -215,7 +217,7 @@ const BlogListing = ({ basePath, speciality, langLoc, URLParams }) => {
                                                         <p>{b.shortDetails} <span> {staticText['Read More']}</span></p>
                                                         <div className="d-flex align-items-center justify-content-between">
                                                             <div>
-                                                                <strong> {staticText['By']}: {b.doctor[0]?.name}</strong>
+                                                                {b?.doctor[0]?.name && <strong> {staticText['By']}: {`${b?.doctor[0]?.salutation?b?.doctor[0]?.salutation+" ":""}${b?.doctor[0]?.name}`}</strong>}
                                                             </div>
                                                             <div className="main-btn">
                                                                 <p>{formatDate(b.date)}</p>
@@ -264,11 +266,11 @@ const BlogListing = ({ basePath, speciality, langLoc, URLParams }) => {
                                                     </a>
                                                     <p>
                                                         {b.shortDetails?.slice(0, 90)}
-                                                        <span>...{staticText['Read More']}</span>
+                                                        <a href={basePath + "/blog/" + b.slug}><span>...{staticText['Read More']}</span></a>
                                                     </p>
                                                     <div className="d-flex align-items-center justify-content-between">
                                                         <div>
-                                                            <strong> {staticText['By']}: {b?.doctor[0]?.name}</strong>
+                                                            {b?.doctor[0]?.name && <strong> {staticText['By']}: {`${b?.doctor[0]?.salutation?b?.doctor[0]?.salutation+" ":""}${b?.doctor[0]?.name}`}</strong>}
                                                         </div>
                                                         <div className="main-btn">
                                                             <p>{formatDate(b?.date)}</p>

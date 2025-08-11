@@ -81,8 +81,10 @@ const DoctorTalkDetails = async ({ params }) => {
                                         </div>
                                         <div className="d-flex align-items-center justify-content-between mt-3">
                                             <div className="doctor-name">
-                                                <p><span><img src="/img/doctor.png" className="img-fluid" alt="" /></span>
-                                                    {data.doctor?.name}</p>
+                                                {data.doctor?.name && <p><span><img src="/img/doctor.png" className="img-fluid" alt="" /></span>
+                                                    {`${data.doctor.salutation?data.doctor.salutation+" ":""}${data.doctor.name}`}</p>}
+
+                                                    
                                             </div>
                                             <div className="doctor-catagory">
                                                 <p>

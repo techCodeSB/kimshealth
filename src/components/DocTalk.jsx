@@ -29,7 +29,7 @@ const FromDoctor = ({ dataSet }) => {
                     <div className="row justify-content-between" data-aos="fade-up">
                         <div className="col-md-4 col-8">
                             <div className="main-heading">
-                                <h2>{dataSet?.sectionTitle} </h2>
+                                <h2>{staticTexts['Expert Talks']} </h2>
                             </div>
                         </div>
                         <div className="col-md-2 col-4">
