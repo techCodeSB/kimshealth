@@ -546,7 +546,7 @@ $('.counter').counterUp({
 });
 
 // ...existing code...
-document.querySelectorAll(".phone-international").forEach(function(input) {
+document.querySelectorAll(".phone-international").forEach(function (input) {
     window.intlTelInput(input, {
         utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@19.5.5/build/js/utils.js",
         initialCountry: "us"
@@ -563,4 +563,21 @@ $('#exampleSlider').multislider({
     interval: 1000,
     slideAll: true,
     duration: 4000
+});
+
+
+$('.emg').on('click', function (e) {
+    $(".emergency-trigger-panel").fadeIn();
+});
+
+$('.close_img').on('click', function (e) {
+    $(".emergency-trigger-panel").fadeOut();
+});
+$(document).mouseup(function (e) {
+    var container = $(".emergency-trigger-panel");
+
+    // if the target of the click isn't the container nor a descendant of the container
+    if (!container.is(e.target) && container.has(e.target).length === 0) {
+        container.fadeOut();
+    }
 });

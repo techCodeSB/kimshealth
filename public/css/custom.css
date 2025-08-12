@@ -1597,8 +1597,6 @@ footer.footer {
     background-color: #c13434;
     transition: background-color .3s, opacity .5s, visibility .5s;
     padding: 10.5px 11px;
-    writing-mode: vertical-rl;
-    text-orientation: upright;
     text-transform: uppercase;
     display: flex;
     border: none;
@@ -1606,6 +1604,12 @@ footer.footer {
     appearance: none;
     outline: 0;
     font-weight: 400;
+}
+
+.fixed-lg-footer .emg{
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+
 }
 
 .fixed-lg-footer a {
@@ -6004,3 +6008,52 @@ select option:hover {
     margin-bottom: 12px;
     padding-bottom:8px;
 }
+
+ .emergency-trigger-panel {
+   z-index: -1;
+   position: absolute;
+   top: 0px;
+   width: 225px;
+   right: 35px;
+   padding: 15px;
+   background: #fff;
+   color: #b71c2b;
+   height: 100%;
+   border: 1px solid #6e4e47;
+   border-top-left-radius: 4px;
+   border-bottom-left-radius: 4px;
+   text-align: center;
+ }
+
+ .emergency-trigger-panel a {
+   color: #b71c2b;
+   display: flex;
+   flex-direction: column;
+  align-content: center;
+  justify-content: center;
+ }
+ .emergency-trigger-panel p {
+   color: #b71c2b;
+   font-size: 17px;
+ }
+
+ .emergency-trigger-panel i {
+   font-size: 50px;
+ }
+
+ .close_img {
+   display: flex;
+   width: 35px;
+   height: 35px;
+   background: white;
+   color: black;
+   font-size: 30px;
+   justify-content: center;
+   align-items: center;
+   border-radius: 1000px;
+   position: absolute;
+   left: -15px;
+   border: 1px solid #Ccc;
+   top: -15px;
+   cursor: pointer;
+ }

@@ -185,7 +185,7 @@ const Footer = () => {
                                         <i className="fa-solid fa-location-dot"></i>
                                         <div className="ms-3">
                                             <strong><u>{locationData?.country}</u></strong>
-                                            <p><a href={locationData?.mapLink?locationData?.mapLink:"#"} target='_blank'>{locationData?.address}</a></p>
+                                            <p><a href={locationData?.mapLink ? locationData?.mapLink : "#"} target='_blank'>{locationData?.address}</a></p>
                                         </div>
                                     </div>
                                     <a href={"mailto:" + locationData?.email}>
@@ -226,7 +226,7 @@ const Footer = () => {
                                         </div>
                                     </a>}
 
-                                    {locationData?.corporateEnquiries&& <a href={"tel:" + locationData?.corporateEnquiries}>
+                                    {locationData?.corporateEnquiries && <a href={"tel:" + locationData?.corporateEnquiries}>
                                         <div className="address-item d-flex align-items-center mb-3">
                                             <i className="fa-solid fa-phone"></i>
                                             <div className="ms-2">
@@ -350,7 +350,7 @@ const Footer = () => {
                                                 hospitals?.map((h, index) => {
                                                     return (h.type === null || h.type === "Hospital") && h?.manageAppearance?.showingFooter ?
                                                         <li key={index}>
-                                                            <a href={basePathOnlyLang +"/"+ h?.location.slug + "/hospital/" + h?.slug}>{h?.title}</a>
+                                                            <a href={basePathOnlyLang + "/" + h?.location.slug + "/hospital/" + h?.slug}>{h?.title}</a>
                                                         </li>
                                                         : null
                                                 })
@@ -366,7 +366,7 @@ const Footer = () => {
                                             {
                                                 hospitals?.map((h, index) => {
                                                     return (h.type !== null && h.type !== "Hospital") && h?.manageAppearance?.showingFooter ? <li key={index}>
-                                                        <a href={basePathOnlyLang +"/"+ h?.location.slug + "/hospital/" + h?.slug}>{h?.title}</a>
+                                                        <a href={basePathOnlyLang + "/" + h?.location.slug + "/hospital/" + h?.slug}>{h?.title}</a>
                                                     </li>
                                                         : null
                                                 })
@@ -409,7 +409,7 @@ const Footer = () => {
                                         hospitals?.map((h, index) => {
                                             return (h.type === null || h.type === "Hospital") && h?.manageAppearance?.showingFooter ?
                                                 <li key={index}>
-                                                    <a href={basePathOnlyLang +"/"+ h?.location.slug + "/hospital/" + h?.slug}>{h?.title}</a>
+                                                    <a href={basePathOnlyLang + "/" + h?.location.slug + "/hospital/" + h?.slug}>{h?.title}</a>
                                                 </li>
                                                 : null
                                         })
@@ -427,7 +427,7 @@ const Footer = () => {
                                         hospitals?.map((h, index) => {
                                             return h.type !== null && h.type !== "Hospital" && h?.manageAppearance?.showingFooter ?
                                                 <li key={index}>
-                                                    <a href={basePathOnlyLang +"/"+ h?.location.slug + "/hospital/" + h?.slug}>{h?.title}</a>
+                                                    <a href={basePathOnlyLang + "/" + h?.location.slug + "/hospital/" + h?.slug}>{h?.title}</a>
                                                 </li>
                                                 : null
                                         })
@@ -490,7 +490,7 @@ const Footer = () => {
                                         <i className="fa-solid fa-location-dot"></i>
                                         <div className="ms-2">
                                             <strong style={{ color: '#b71c2b' }}><u>{locationData?.country}</u></strong>
-                                            <p><a href={locationData?.mapLink?locationData?.mapLink:"#"} target='_blank'>{locationData?.address}</a></p>
+                                            <p><a href={locationData?.mapLink ? locationData?.mapLink : "#"} target='_blank'>{locationData?.address}</a></p>
                                         </div>
                                     </div>
                                     <a href={"mailto:" + locationData?.email}>
@@ -530,7 +530,7 @@ const Footer = () => {
                                         </div>
                                     </a>}
 
-                                    {locationData?.corporateEnquiries&& <a href={"tel:" + locationData?.corporateEnquiries}>
+                                    {locationData?.corporateEnquiries && <a href={"tel:" + locationData?.corporateEnquiries}>
                                         <div className="address-item d-flex align-items-center mb-3">
                                             <i className="fa-solid fa-phone"></i>
                                             <div className="ms-2">
@@ -643,7 +643,15 @@ const Footer = () => {
             </div>
 
             <div className="fixed-lg-footer d-none d-lg-block">
-                <a href={"tel:" + locationData?.emergency}>{staticTexts['EMERGENCY']}</a>
+                <a href="#" className='emg'>{staticTexts['EMERGENCY']}</a>
+                <div className="emergency-trigger-panel" style={{ 'display': 'none' }}>
+                    <a href={"tel:" + locationData?.emergency} >
+                        <i class="fa-solid fa-phone mb-4"></i>
+                        <p className='mb-4'>{staticTexts['Call Us']}</p>
+                        {locationData?.emergency}
+                    </a>
+                    <div className="close_img"><img src="/img/Times_symbol.svg" className="img-fluid" alt="Close Meitra Navigate" /></div>
+                </div>
             </div>
 
             <button id="scrolltoButton" className=""></button>
