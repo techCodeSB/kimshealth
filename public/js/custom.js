@@ -303,7 +303,7 @@ AOS.init({
     duration: 1000,
     easing: 'ease',
     once: false,
-    mirror: true,
+    mirror: false,
 });
 
 
