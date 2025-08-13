@@ -605,12 +605,6 @@ const Footer = () => {
                 </div>
             </footer>
 
-
-
-
-
-
-
             <div className="midle-footer py-2">
                 <div className="container">
                     <div className="row justify-content-center align-items-center">
@@ -645,10 +639,8 @@ const Footer = () => {
             <div className="fixed-lg-footer d-none d-lg-block">
                 <a href="#" className='emg'>{staticTexts['EMERGENCY']}</a>
                 <div className="emergency-trigger-panel" style={{ 'display': 'none' }}>
-                    <a href={"tel:" + locationData?.emergency} >
-                        <i class="fa-solid fa-phone mb-4"></i>
-                        <p className='mb-4'>{staticTexts['Call Us']}</p>
-                        {locationData?.emergency}
+                    <a href={"tel:" + locationData?.emergency}>
+                        <i className="fa-solid fa-phone me-2" ></i>{locationData?.emergency}
                     </a>
                     <div className="close_img"><img src="/img/Times_symbol.svg" className="img-fluid" alt="Close Meitra Navigate" /></div>
                 </div>

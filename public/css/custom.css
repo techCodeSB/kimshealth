@@ -1606,7 +1606,7 @@ footer.footer {
     font-weight: 400;
 }
 
-.fixed-lg-footer .emg{
+.fixed-lg-footer .emg {
     writing-mode: vertical-rl;
     text-orientation: upright;
 
@@ -4595,7 +4595,8 @@ li.chat-ic::before {
     font-weight: 700;
 }
 
-.details-banner form input, .details-banner form select {
+.details-banner form input,
+.details-banner form select {
     padding: 10px 30px;
     border-radius: 40px;
 }
@@ -6006,54 +6007,80 @@ select option:hover {
 
 .desktop-humberger-menu .menu-items li {
     margin-bottom: 12px;
-    padding-bottom:8px;
+    padding-bottom: 8px;
 }
 
- .emergency-trigger-panel {
-   z-index: -1;
-   position: absolute;
-   top: 0px;
-   width: 225px;
-   right: 35px;
-   padding: 15px;
-   background: #fff;
-   color: #b71c2b;
-   height: 100%;
-   border: 1px solid #6e4e47;
-   border-top-left-radius: 4px;
-   border-bottom-left-radius: 4px;
-   text-align: center;
- }
+.emergency-trigger-panel {
+    z-index: -1;
+    position: absolute;
+    bottom: 0px;
+    width: 225px;
+    right: 39px;
+    padding: 15px;
+    background: #fff;
+    color: #b71c2b;
+    border: 1px solid #b71c2b;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    text-align: center;
+}
 
- .emergency-trigger-panel a {
-   color: #b71c2b;
-   display: flex;
-   flex-direction: column;
-  align-content: center;
-  justify-content: center;
- }
- .emergency-trigger-panel p {
-   color: #b71c2b;
-   font-size: 17px;
- }
+.emergency-trigger-panel a {
+    color: #b71c2b;
+}
 
- .emergency-trigger-panel i {
-   font-size: 50px;
- }
+.emergency-trigger-panel p {
+    color: #b71c2b;
+    font-size: 17px;
+}
 
- .close_img {
-   display: flex;
-   width: 35px;
-   height: 35px;
-   background: white;
-   color: black;
-   font-size: 30px;
-   justify-content: center;
-   align-items: center;
-   border-radius: 1000px;
-   position: absolute;
-   left: -15px;
-   border: 1px solid #Ccc;
-   top: -15px;
-   cursor: pointer;
- }
+
+.close_img {
+    display: flex;
+    width: 25px;
+    height: 25px;
+    background: white;
+    color: #b71c2b;
+    font-size: 30px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1000px;
+    position: absolute;
+    left: -12px;
+    border: 1px solid #Ccc;
+    top: -12px;
+    cursor: pointer;
+}
+
+.exellence .read-more {
+    font-size: 16px;
+    font-weight: 600;
+    color: #b71c2b;
+    border-bottom: 1px solid #b71c2b;
+}
+
+.corporate-notice-form.association-form-card{
+    box-shadow: none;
+}
+.corporate-notice-form.association-form-card input, 
+.corporate-notice-form.association-form-card select, 
+.corporate-notice-form.association-form-card textarea{
+    background: #f3f3f3;
+    padding: 10px 10px;
+}
+.corporate-notice-form.association-form-card h3{
+    text-align: left;
+}
+.corporate-notice-form.association-form-card .input-group-text{
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+    border: none;
+    background: #f3f3f3;
+    color: #b71c2b;
+    padding-left: 30px;
+}
+.corporate-notice-form.association-form-card input:focus, 
+.corporate-notice-form.association-form-card select:focus, 
+.corporate-notice-form.association-form-card textarea:focus{
+    border: none;
+}

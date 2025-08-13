@@ -165,13 +165,11 @@ const MediaEventListing = ({ basePath, langLoc, URLParams }) => {
                                 <div className="col-xl-3 col-lg-3 col-md-3 col-12 mb-4" key={i}>
                                     <div className="media-card" data-aos="fade-right" data-aos-duration="1800" data-aos-delay="100">
                                         <div className="media-img">
-                                            <a href={basePath + "/media-and-events/" + av.slug}>
                                                 <img
                                                     src={av.featuredImage?.url ? process.env.NEXT_PUBLIC_IMAGE_URL + av.featuredImage?.url : '/img/no-image.jpg'}
                                                     className="img-fluid w-100"
                                                     alt={av.title}
                                                 />
-                                            </a>
                                         </div>
                                         <div className="media-content">
                                             <p>{av.shortDetails}</p>
@@ -180,7 +178,7 @@ const MediaEventListing = ({ basePath, langLoc, URLParams }) => {
                                                     <div>
                                                         <img src="/img/kims-small-logo.png" className="img-fluid" alt="" />
                                                     </div>
-                                                    <p><a href={basePath + "/media-and-events/" + av.slug}><strong>{av.title.slice(0, 20) + "..."}</strong></a> <br /> {formatDate(av?.date)}</p>
+                                                    <p>{formatDate(av?.date)}</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -202,13 +200,11 @@ const MediaEventListing = ({ basePath, langLoc, URLParams }) => {
                                 <div className="col-xl-3 col-lg-3 col-md-3 col-6 mb-2" key={i}>
                                     <div className="media-card">
                                         <div className="media-img">
-                                            <a href={basePath + "/media-and-events/" + e.slug}>
                                                 <img
                                                     src={e.featuredImage?.url ? process.env.NEXT_PUBLIC_IMAGE_URL + e.featuredImage?.url : '/img/no-image.jpg'}
                                                     className="img-fluid w-100"
                                                     alt={e.title}
                                                 />
-                                            </a>
                                         </div>
                                         <div className="media-content">
                                             <p>{e.shortDetails}</p>
@@ -217,7 +213,6 @@ const MediaEventListing = ({ basePath, langLoc, URLParams }) => {
                                                     <div>
                                                         <img src="/img/kims-small-logo.png" className="img-fluid" alt="" />
                                                     </div>
-                                                    <p><a href={basePath + "/media-and-events/" + e.slug}><strong>{e.title.slice(0, 20) + "..."}</strong></a></p>
                                                     
                                                 </div>
                                                 <p className="mt-2 ms-4 ps-3">{formatDate(e?.date)}</p>

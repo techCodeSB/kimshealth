@@ -17,6 +17,7 @@ const MediaAndEvents = async ({searchParams}) => {
     const staticText = await getStaticText();
     const URLParams = await searchParams;
 
+    console.log(getLangLoc);
 
 
     return (

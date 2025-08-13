@@ -51,9 +51,9 @@ const ExcellenceCarousel = ({ dataSet }) => {
                                                 <h4>{e.title}</h4>
                                                 <p>{e.overviewSection.details}</p>
                                                 <div className="main-btn">
-                                                    <a href={dataSet.baseUrl + "/speciality/" + e.speciality?.slug}>
+                                                    <span className='read-more'>
                                                         {staticTexts['Read More']} <span><i className="fa-solid fa-arrow-right"></i></span>
-                                                    </a>
+                                                    </span>
                                                 </div>
                                             </div>
                                         </a>

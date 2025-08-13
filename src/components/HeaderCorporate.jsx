@@ -438,7 +438,7 @@ useEffect(() => {
                     <a target='_blank' href="https://consult.bestdocapp.com/home/KIMSTVM?version=new" className="anchor-menu">{staticTexts['Telehealth']}</a>
                   </li>
                   <li className="quicklink-header">
-                    <a href={basePath + "/investor"} className="anchor-menu">{staticTexts['Corporate']}</a>
+                    <a href={basePath + "/corporate"} className="anchor-menu">{staticTexts['Corporate']}</a>
                   </li>
                   <li className="menu-item-has-children show-submenu quicklink-header">
                     <a href="#" className="anchor-menu">{staticTexts['CSR']}</a>
@@ -652,7 +652,7 @@ useEffect(() => {
                         <a target='_blank' href="https://consult.bestdocapp.com/home/KIMSTVM?version=new" className="menu-item ">{staticTexts['Telehealth']}</a>
                       </li>
                       <li>
-                        <a href={basePath + "/investor"} className="menu-item">{staticTexts['Corporate']}</a>
+                        <a href={basePath + "/corporate"} className="menu-item">{staticTexts['Corporate']}</a>
                       </li>
 
                       <li className="has-dropdown">

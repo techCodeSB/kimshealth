@@ -25,10 +25,10 @@ const Speciality = async ({ searchParams }) => {
     const coeSpecility = await getSpecialityData.getSpeciality({
         field: 'Center of Excellence', langLoc: getLangLoc, URLParams: URLParams
     });
+
     const allSpecility = await getSpecialityData.getSpecialityAll({
         langLoc: getLangLoc, URLParams: URLParams
     });
-
 
 
     return (
@@ -50,7 +50,7 @@ const Speciality = async ({ searchParams }) => {
                     </div>
                 </section>
 
-                <section className="section pt-lg-4 pt-0">
+                <section className="section pt-lg-4 pt-0 ">
                     <div className="container">
                         <div className="row">
                             <div className="col-md-8 mb-3">
@@ -99,45 +99,47 @@ const Speciality = async ({ searchParams }) => {
                             /> */}
 
                             <div className="col-md-3">
-                                <a href={baseUrlOnlyLang + "/" + pageContent[3].card1Hyperlink}>
-                                    <div className="key-master-book-appointment-btn mb-1">
-                                        <div className="key-master-book-appointment-content">
-                                            <img src={pageContent[3]?.card1Icon?.url ? process.env.NEXT_PUBLIC_IMAGE_URL + pageContent[3].card1Icon.url : "/img/doctor.svg"} alt="" className="img-fluid" />
-                                            <h5> {pageContent[3].card1Title}</h5>
+                                <div className='association-left-col sticky-from'>
+                                    <a href={baseUrlOnlyLang + "/" + pageContent[3].card1Hyperlink}>
+                                        <div className="key-master-book-appointment-btn mb-1">
+                                            <div className="key-master-book-appointment-content">
+                                                <img src={pageContent[3]?.card1Icon?.url ? process.env.NEXT_PUBLIC_IMAGE_URL + pageContent[3].card1Icon.url : "/img/doctor.svg"} alt="" className="img-fluid" />
+                                                <h5> {pageContent[3].card1Title}</h5>
+                                            </div>
+
+
                                         </div>
+                                    </a>
 
 
-                                    </div>
-                                </a>
-
-
-                                <a href={baseUrlOnlyLang + "/" + pageContent[3].card2Hyperlink}>
-                                    <div className="key-master-book-appointment-btn mb-1">
-                                        <div className="key-master-book-appointment-content">
-                                            <img src={pageContent[3]?.card2Icon?.url ? process.env.NEXT_PUBLIC_IMAGE_URL + pageContent[3].card2Icon.url : "/img/calender.svg"} alt="" className="img-fluid" />
-                                            <h5>{pageContent[3].card2Title}</h5>
+                                    <a href={baseUrlOnlyLang + "/" + pageContent[3].card2Hyperlink}>
+                                        <div className="key-master-book-appointment-btn mb-1">
+                                            <div className="key-master-book-appointment-content">
+                                                <img src={pageContent[3]?.card2Icon?.url ? process.env.NEXT_PUBLIC_IMAGE_URL + pageContent[3].card2Icon.url : "/img/calender.svg"} alt="" className="img-fluid" />
+                                                <h5>{pageContent[3].card2Title}</h5>
+                                            </div>
                                         </div>
-                                    </div>
-                                </a>
+                                    </a>
 
 
-                                <a href={baseUrlOnlyLang + "/" + pageContent[3].card3Hyperlink}>
-                                    <div className="key-master-help-btn">
-                                        <div className="key-master-book-appointment-content">
-                                            <h5>{pageContent[3].card3Title}</h5>
+                                    <a href={baseUrlOnlyLang + "/" + pageContent[3].card3Hyperlink}>
+                                        <div className="key-master-help-btn">
+                                            <div className="key-master-book-appointment-content">
+                                                <h5>{pageContent[3].card3Title}</h5>
+                                            </div>
+
+
                                         </div>
-
-
-                                    </div>
-                                </a>
-                                <a href={`tel:${pageContent[3].card4Title}`}>
-                                    <div className="key-master-call-btn">
-                                        <div className="key-master-book-appointment-content text-center">
-                                            <h5>{pageContent[3].card4Title}</h5>
-                                            <h4><i className="fa-solid fa-phone"></i> {pageContent[3].card4Contact}</h4>
+                                    </a>
+                                    <a href={`tel:${pageContent[3].card4Contact}`}>
+                                        <div className="key-master-call-btn">
+                                            <div className="key-master-book-appointment-content text-center">
+                                                <h5>{pageContent[3].card4Title}</h5>
+                                                <h4><i className="fa-solid fa-phone text-white"></i> {pageContent[3].card4Contact}</h4>
+                                            </div>
                                         </div>
-                                    </div>
-                                </a>
+                                    </a>
+                                </div>
                             </div>
 
                         </div>
