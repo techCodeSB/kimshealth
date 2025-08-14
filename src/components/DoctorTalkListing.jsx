@@ -116,22 +116,24 @@ const DoctorTalkListing = ({ baseURL, langLoc, URLParams, speciality }) => {
                         {
                             data?.map((dt, index) => {
                                 return <div className="col-md-4 blog-right-col overflow-hidden mb-3" key={index}>
-                                    <div className="position-relative overflow-hidden hear-doc-overlay" data-aos={index % 2 == 0 ? "fade-right" : "fade-left"}>
-                                        <img src={dt?.thumbnailImage?.url ? process.env.NEXT_PUBLIC_IMAGE_URL + dt?.thumbnailImage?.url : "/img/no-image.jpg"} className="img-fluid w-100 hear-doc-image" alt="" />
-                                        <div className="hear-doctor-content">
-                                            <div className="d-block align-items-center justify-content-between">
-                                                <div>
-                                                    <h5 className="">{formatDate(dt.date)}</h5>
-                                                    <p>{dt.title}</p>
-                                                </div>
-                                                <div className="main-btn ">
-                                                    <span><img src="/img/play-button.png" className="img-fluid" alt="" /> </span>
-                                                    <a href={baseURL + "/doctor-talk/" + dt.slug}>{staticText['Watch Video']} <span>
-                                                        <i className="fa-solid fa-arrow-right"></i></span></a>
+                                    <a href={baseURL + "/doctor-talk/" + dt.slug}>
+                                        <div className="position-relative overflow-hidden hear-doc-overlay" data-aos={index % 2 == 0 ? "fade-right" : "fade-left"}>
+                                            <img src={dt?.thumbnailImage?.url ? process.env.NEXT_PUBLIC_IMAGE_URL + dt?.thumbnailImage?.url : "/img/no-image.jpg"} className="img-fluid w-100 hear-doc-image" alt="" />
+                                            <div className="hear-doctor-content">
+                                                <div className="d-block align-items-center justify-content-between">
+                                                    <div>
+                                                        <h5 className="">{formatDate(dt.date)}</h5>
+                                                        <p>{dt.title}</p>
+                                                    </div>
+                                                    <div className="main-btn ">
+                                                        <span><img src="/img/play-button.png" className="img-fluid" alt="" /> </span>
+                                                        <a href={baseURL + "/doctor-talk/" + dt.slug}>{staticText['Watch Video']} <span>
+                                                            <i className="fa-solid fa-arrow-right"></i></span></a>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </a>
                                 </div>
                             })
                         }
