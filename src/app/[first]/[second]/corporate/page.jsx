@@ -171,7 +171,7 @@ const Investor = async () => {
 
                         </div>
 
-                        <CorporateForm/>
+                        <CorporateForm />
                     </div>
                 </section>
 
@@ -225,8 +225,8 @@ const Investor = async () => {
                             <h2>{pageContent[5]?.title}</h2>
                         </div>
 
-                        <div dangerouslySetInnerHTML={{ __html: pageContent[5]?.details }}>
-
+                        <div className='main-heading sub-heading main-list'
+                            dangerouslySetInnerHTML={{ __html: pageContent[5]?.details }}>
                         </div>
                     </div>
 
