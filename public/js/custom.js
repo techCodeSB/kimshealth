@@ -151,6 +151,39 @@ $('.exellence').owlCarousel({
     }
 });
 
+$('.sub-speciality-slide').owlCarousel({
+    loop: false,
+    margin: 10,
+    autoplay: false,
+    nav: true,
+    items: 3,
+    dots: false,
+    slideTransition: 'linear',
+    autoplaySpeed: 10000,
+    navText: ["<img src='/img/left-arrow.svg'>", "<img src='/img/slider-right-arrow.svg'>"],
+    responsive: {
+        0: {
+            items: 1,
+            margin: 15,
+            nav: false
+        },
+        480: {
+            items: 1,
+            margin: 15,
+            nav: false
+        },
+        768: {
+            items: 1,
+            margin: 15,
+            nav: false
+        },
+        992: {
+            items: 3,
+            margin: 15
+        }
+    }
+});
+
 // expert slider
 
 $('.expert').owlCarousel({

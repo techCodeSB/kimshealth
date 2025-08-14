@@ -28,7 +28,7 @@ const SpecialityDetails = async ({ params, searchParams }) => {
     const baseUrlLangOnly = await getBaseUrl(true, false)
     const data = await getSpecialityData.getSingleSpeciality({ slug: params.details, langLoc: getLangLoc });
    
-    const allSubSpeciality = await getSpecialityData.getAllSubSpeciality(data.speciality?.id)
+    const allSubSpeciality = await getSpecialityData.getAllSubSpeciality({langLoc: getLangLoc, id:data.speciality?.id})
 
     
     // const allDiseas = await diseaseData.getAll({langLoc: getLangLoc, URLParams:URLParams})
@@ -142,6 +142,41 @@ const SpecialityDetails = async ({ params, searchParams }) => {
                             </div>
                         </div>
                     </section>
+
+
+                    <section className="section"
+                        style={{ background: "linear-gradient(180deg,rgba(255, 255, 255, 1) 45%, rgba(248, 248, 248, 1) 74%)" }}>
+                        <div className="container">
+                            <div className="details-card-wrapper pb-5">
+                                <div className="owl-carousel owl-theme sub-speciality-slide position-relative" style={{ zIndex: "99" }}>
+
+                                    {
+                                        allSubSpeciality.map((subS, index) => {
+                                            return <div className="item" key={index}>
+                                                <div className="details-card text-center">
+                                                    <div className="card-content">
+                                                        <h4>{subS.title}</h4>
+                                                        <p>{subS.overviewSection?.details.slice(0, 140)}...</p>
+
+                                                        <div className="main-btn">
+                                                            <a href={baseUrl + "/speciality/" + subS?.speciality?.slug}>
+                                                                {staticText['Read More']}<span>
+                                                                    <i className="fa-solid fa-arrow-right"></i>
+                                                                </span>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        })
+                                    }
+
+                                </div>
+                            </div>
+                        </div>
+                    </section> 
+
+
 
                     <section className="section">
                         <div className="container">
