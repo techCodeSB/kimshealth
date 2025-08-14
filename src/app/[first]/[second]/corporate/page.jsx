@@ -184,33 +184,42 @@ const Investor = async () => {
                         </div>
 
                         <div className="row">
-                            <div className="col-md-3">
-                                {
-                                    parts[0]?.map((data, _) => {
-                                        return <li>{data.title}</li>
-                                    })
-                                }
+                            <div className="col-md-3 main-list">
+                                <ul>
+                                    {
+                                        parts[0]?.map((data, _) => {
+                                            return <li>{data.title}</li>
+                                        })
+                                    }
+                                </ul>
+
                             </div>
-                            <div className="col-md-3">
-                                {
-                                    parts[1]?.map((data, _) => {
-                                        return <li>{data.title}</li>
-                                    })
-                                }
+                            <div className="col-md-3 main-list">
+                                <ul>
+                                    {
+                                        parts[1]?.map((data, _) => {
+                                            return <li>{data.title}</li>
+                                        })
+                                    }
+                                </ul>
                             </div>
-                            <div className="col-md-3">
-                                {
-                                    parts[2]?.map((data, _) => {
-                                        return <li>{data.title}</li>
-                                    })
-                                }
+                            <div className="col-md-3 main-list">
+                                <ul>
+                                    {
+                                        parts[2]?.map((data, _) => {
+                                            return <li>{data.title}</li>
+                                        })
+                                    }
+                                </ul>
                             </div>
-                            <div className="col-md-3">
-                                {
-                                    parts[3]?.map((data, _) => {
-                                        return <li>{data.title}</li>
-                                    })
-                                }
+                            <div className="col-md-3 main-list">
+                                <ul>
+                                    {
+                                        parts[3]?.map((data, _) => {
+                                            return <li>{data.title}</li>
+                                        })
+                                    }
+                                </ul>
                             </div>
                         </div>
 
