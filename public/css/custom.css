@@ -6084,3 +6084,13 @@ select option:hover {
 .corporate-notice-form.association-form-card textarea:focus{
     border: none;
 }
+.bg-yellow{
+    background-color: yellow !important;
+}
+
+.bg-red{
+    background-color: red !important;
+}
+.bg-blue{
+    background-color: blue !important;
+}

@@ -11,6 +11,8 @@ import getStaticText from '@/helper/getStaticText';
 import getCurrentLangLocClient from '@/helper/getCurrentLangLocClient';
 import InternationalMenu from './InternationalMenu';
 import SearchBox from './Forms/SearchBox';
+import getStaticPage from '@/helper/staticPage';
+
 
 
 const HeaderCorporate = () => {
@@ -26,12 +28,15 @@ const HeaderCorporate = () => {
   const [allHospital, setAllHospital] = useState();
   const [activeIndex, setActiveIndex] = useState(null);
   const [staticTexts, setStaticTexts] = useState({});
+  const [staticPageChecker, setPageChecker] = useState({});
   const [showSearch, setShowSearch] = useState(false); // FOR SEARCH TOGGLE
+
 
 
   useEffect(() => {
     const fetchTexts = async () => {
       setStaticTexts({ ...await getStaticText() })
+      setPageChecker({...await getStaticPage()})
     };
 
     fetchTexts();

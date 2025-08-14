@@ -11,6 +11,7 @@ import getStaticText from '@/helper/getStaticText';
 import getCurrentLangLocClient from '@/helper/getCurrentLangLocClient';
 import InternationalMenu from './InternationalMenu';
 import SearchBox from './Forms/SearchBox';
+import getStaticPage from '@/helper/staticPage';
 
 
 const HeaderUnit = () => {
@@ -26,12 +27,15 @@ const HeaderUnit = () => {
   const [allHospital, setAllHospital] = useState();
   const [activeIndex, setActiveIndex] = useState(null);
   const [staticTexts, setStaticTexts] = useState({});
+  const [staticPageChecker, setPageChecker] = useState({});
   const [showSearch, setShowSearch] = useState(false); // FOR SEARCH TOGGLE
 
 
   useEffect(() => {
     const fetchTexts = async () => {
       setStaticTexts({ ...await getStaticText() })
+
+      setPageChecker({ ...await getStaticPage() })
     };
 
     fetchTexts();
@@ -82,15 +86,15 @@ const HeaderUnit = () => {
     setBasePath(getBaseUrl(true, true));
     setBasePathOnlyLang(getBaseUrl(true, false));
 
-    
+
 
   }, [])
 
 
 
 
-/********************************Google Translator*****************************/  
-useEffect(() => {
+  /********************************Google Translator*****************************/
+  useEffect(() => {
     // Prevent adding script multiple times
     if (!document.querySelector("#google-translate-script")) {
       const script = document.createElement("script");
@@ -128,7 +132,7 @@ useEffect(() => {
     }
   };
 
-/********************************Google Translator*****************************/  
+  /********************************Google Translator*****************************/
 
 
 
@@ -161,7 +165,7 @@ useEffect(() => {
                   </div>
                 </li> */}
                 {/* <li><a href={"https://healthcheckup.kimshealthcare.com/p/kims-trivandrum-1/"} target='_blank'>{staticTexts['Health Checkup']}</a></li> */}
-                <li><a href={locationData?.virtualTour?locationData?.virtualTour:"#"} target='_blank'>
+                <li><a href={locationData?.virtualTour ? locationData?.virtualTour : "#"} target='_blank'>
                   {staticTexts['360° Virtual Tour']}</a>
                 </li>
               </ul>

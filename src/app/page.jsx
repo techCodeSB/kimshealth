@@ -16,7 +16,6 @@ import getSpecialityData from '@/app/lib/getSpeciality'
 import getAwardData from '@/app/lib/getAward'
 import doctorTalkData from '@/app/lib/getDoctorTalk'
 import hospitalData from '@/app/lib/getHospital'
-import staticPage from '@/app/lib/getStaticPage'
 import BookAnAppoinmentShort from '@/components/Forms/BookAnAppoinmentShort'
 import getCurrentLangLoc from './lib/getCurrentLangLoc';
 import TabHome from '@/components/TabHome'

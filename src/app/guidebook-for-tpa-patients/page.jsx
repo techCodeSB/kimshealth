@@ -35,7 +35,7 @@ const GuidebookTpa = async () => {
                             <div className="row">
                                 <div className="col-12">
                                     <Breadcrumb
-                                        activeTitle={staticText[pageContent[0]?.title]}
+                                        activeTitle={pageContent[0]?.title}
                                         middleTitle={''}
                                         middleURL={""}
                                     />
