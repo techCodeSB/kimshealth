@@ -157,7 +157,7 @@ const CareerDetails = async ({ params }) => {
                                 <div className="col-md-4">
                                     <div className="association-left-col sticky-from">
                                         <div className="association-form-card mb-5">
-                                            <JobForm title={"Apply Now"}/>
+                                            <JobForm title={"Apply Now"} jobTitle={data?.title}/>
                                         </div>
                                     </div>
                                 </div>

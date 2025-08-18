@@ -77,7 +77,7 @@ const HealthPackageDetails = async ({ params }) => {
                                 </div>
                                 <div className="col-md-4">
                                     <div className="association-form-card mb-5">
-                                        <Form1 title="GET A CALLBACK FROM OUR HEALTH ADVISOR" />
+                                        <Form1 title="GET A CALLBACK FROM OUR HEALTH ADVISOR" type={"Bookhealth Checkup"}/>
                                     </div>
                                 </div>
                             </div>

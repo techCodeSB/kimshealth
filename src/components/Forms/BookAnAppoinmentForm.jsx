@@ -3,7 +3,6 @@ import getStaticText from '@/helper/getStaticText';
 import getCurrentLangLocClient from '@/helper/getCurrentLangLocClient'
 import langLoc from '@/helper/getLangLoc'
 import React, { useEffect, useState } from 'react'
-import { ToastContainer, toast } from 'react-toastify';
 
 
 
@@ -20,34 +19,48 @@ const BookAnAppoinmentForm = ({ pageContent, URLParams }) => {
         name: '', contactNumber: '', location: '',
         department: "", doctor: '', appoinmentDate: ''
     });
+    const [loading, setLoading] = useState(false);
 
 
     const sendMail = async () => {
-        const { loc } = await getCurrentLangLocClient();
-        const currentLoc = loc.slug;
-
+        console.log(formData);
+        setLoading(true);
         if ([formData.name, formData.contactNumber, formData.location, formData.department, formData.doctor, formData.appoinmentDate].some((field) => !field || field === "")) {
-            toast("fill the require", {
+            toast("Fill the required fields", {
                 position: 'bottom-right',
                 theme: 'light',
                 type: 'error',
                 closeOnClick: true
             })
+            setLoading(false);
             return;
         }
 
         try {
-            const req = await fetch("/api/send-email", {
+            const htmlMsg = `
+                <ul>
+                    <li><strong> Patient / Visitor Name: </strong> ${formData.name}</li>
+                    <li><strong> Contact Number: </strong> ${formData.contactNumber}</li>
+                    <li><strong> Location: </strong> ${formData.location.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}</li>
+                    <li><strong> Department: </strong> ${formData.department.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}</li>
+                    <li><strong> Doctor: </strong> ${formData.doctor}</li>
+                    <li><strong> Appointment Date: </strong> ${formData.appoinmentDate}</li>
+                    <li><strong> Page URL: </strong> ${document.location.href}</li>
+                </ul>
+            `;
+            const req = await fetch("/api/send-mail", {
                 method: 'POST',
                 'headers': {
                     "Content-type": "application/json",
                 },
-                body: JSON.stringify({ formData, formType: "Book An Appoinment", loc: currentLoc })
+                body: JSON.stringify({ data: htmlMsg, formType: "Book Appointment" }),
+                // credentials: "include",
             });
 
             const res = await req.json();
 
             if (req.status !== 200) {
+                setLoading(false);
                 return toast(res.err, {
                     position: 'bottom-right',
                     theme: 'light',
@@ -56,15 +69,23 @@ const BookAnAppoinmentForm = ({ pageContent, URLParams }) => {
                 })
             }
 
-            return toast("Successfully", {
+            setLoading(false);
+            toast("Successfully sent", {
                 position: 'bottom-right',
                 theme: 'light',
-                type: 'error',
+                type: 'success',
                 closeOnClick: true
-            })
+            });
+            setFormData({
+                name: '', contactNumber: '', location: '',
+                department: "", doctor: '', appoinmentDate: ''
+            });
+            return
 
 
         } catch (error) {
+            setLoading(false);
+            console.log(error)
             return toast("Something went wrong", {
                 position: 'bottom-right',
                 theme: 'light',
@@ -162,7 +183,6 @@ const BookAnAppoinmentForm = ({ pageContent, URLParams }) => {
 
     return (
         <>
-            <ToastContainer />
 
             <section className="section">
                 <div className="container">
@@ -241,7 +261,7 @@ const BookAnAppoinmentForm = ({ pageContent, URLParams }) => {
                                                                     <>
                                                                         <option value="">{staticText['Select a Doctor']}</option>
                                                                         {allDoctors.map((d, i) => (
-                                                                            <option value={d?.slug} key={i}>
+                                                                            <option value={`${d?.salutation ? d?.salutation + " " : ""}${d?.name}`} key={i}>
                                                                                 {`${d?.salutation ? d?.salutation + " " : ""}${d?.name}`}
                                                                             </option>
                                                                         ))}
@@ -255,10 +275,20 @@ const BookAnAppoinmentForm = ({ pageContent, URLParams }) => {
                                                         <div className="col-xl-12 col-lg-12 col-md-12 col-12 mb-3">
                                                             <label htmlFor=''>{staticText['Appointment Date']}*</label>
                                                             <div className="input-group">
-                                                                <input type="text" placeholder="Select Your Date" name=""
-                                                                    className="form-control pe-0 datepicker" autoComplete="off"
-                                                                    onChange={(e) => setFormData({ ...formData, appoinmentDate: e.target.value })}
+                                                                <input
+                                                                    type="date"  // use date instead of text for date selection
+                                                                    placeholder="Select Your Date"
+                                                                    name="appoinmentDate"
+                                                                    className="form-control pe-0"
+                                                                    autoComplete="off"
                                                                     value={formData.appoinmentDate}
+                                                                    onChange={(e) => {
+                                                                        console.log(e.target.value); // <-- get the selected date
+                                                                        setFormData({
+                                                                            ...formData,
+                                                                            appoinmentDate: e.target.value, // <-- update state
+                                                                        });
+                                                                    }}
                                                                 />
                                                                 <span className="input-group-text" id="from-icon"><i
                                                                     className="icon-calendar"></i></span>
@@ -269,8 +299,10 @@ const BookAnAppoinmentForm = ({ pageContent, URLParams }) => {
                                             </div>
                                             <div className="col-md-12">
                                                 <div className="from-btn text-center">
-                                                    <button type="button" className="btn d-inline-block w-auto" onClick={sendMail}>
-                                                        {staticText['Submit']}</button>
+                                                    <button type="button" className="btn d-inline-block w-auto" onClick={sendMail} disabled={loading}>
+                                                        {staticText['Submit']}
+                                                        {loading && <i className="fas fa-spinner fa-spin ms-1"></i>}
+                                                    </button>
                                                 </div>
                                             </div>
                                         </div>

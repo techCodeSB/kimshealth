@@ -68,7 +68,7 @@ const AmericanHeartAssoc = async () => {
                                 <div className="col-md-4 ">
                                     <div className="association-left-col">
                                         <div className="association-form-card mb-5">
-                                            <Form1 title={"Request a Call Back"} />
+                                            <Form1 title={"Request a Call Back"} type={"American Heart Association"} />
                                         </div>
 
                                         <h4>{pageContent[3].sectionTitle}</h4>

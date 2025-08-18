@@ -70,7 +70,7 @@ const DiseaseDetails = async ({ params }) => {
                                     </div>
                                     <div className="details-banner pb-5">
                                         <div className="details-heading">
-                                            <Form2 title={"Have a query?"}/>
+                                            <Form2 title={"Have a query?"} type={"Disease"} subject={data.title}/>
                                         </div>
                                     </div>
                                 </div>

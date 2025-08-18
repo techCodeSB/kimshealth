@@ -198,7 +198,7 @@ const DoctorListing = ({ baseURL, allLocation, allSpeciality, allDoctorCount, la
                             </div> 
 
                             <div className="find-doc-box">
-                                <Form3 title={staticText['Need Help Making an Appointment?']} />
+                                <Form3 title={staticText['Need Help Making an Appointment?']} type="Doctor" />
                             </div>
                         </div>
                     </div> */}

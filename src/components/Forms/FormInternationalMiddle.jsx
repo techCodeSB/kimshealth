@@ -1,38 +1,147 @@
-"use client"
-import getStaticText from '@/helper/getStaticText';
-import React, { useEffect, useState } from 'react'
+"use client";
+import getStaticText from "@/helper/getStaticText";
+import React, { useEffect, useRef, useState } from "react";
+import { toast } from "react-toastify";
 
 const FormInternationalMiddle = () => {
     const [staticTexts, setStaticTexts] = useState({});
+    const [formData, setFormData] = useState({
+        name: "",
+        number: "+1",
+    });
+    const [loading, setLoading] = useState(false);
+    const phoneInputRef = useRef(null);
+    const itiRef = useRef(null);
 
+    // Init intlTelInput once
+    useEffect(() => {
+        if (typeof window !== "undefined" && phoneInputRef.current) {
+            // eslint-disable-next-line no-undef
+            itiRef.current = intlTelInput(phoneInputRef.current, {
+                utilsScript:
+                    "https://cdn.jsdelivr.net/npm/intl-tel-input@19.5.5/build/js/utils.js",
+                initialCountry: "us",
+            });
+
+            phoneInputRef.current.addEventListener("countrychange", (e) => {
+                setFormData((prev) => ({
+                    ...prev,
+                    number: e.target.value,
+                }));
+            });
+
+            phoneInputRef.current.addEventListener("input", (e) => {
+
+                setFormData((prev) => ({
+                    ...prev,
+                    number: e.target.value,
+                }));
+            });
+        }
+    }, []);
+
+    const sendMail = async (e) => {
+        e.preventDefault();
+        setLoading(true);
+
+        console.log(formData)
+
+        if ([formData.name, formData.number].some((f) => !f)) {
+            toast("Fill the required fields", {
+                position: "bottom-right",
+                theme: "light",
+                type: "error",
+                closeOnClick: true,
+            });
+            setLoading(false);
+            return;
+        }
+
+        try {
+            const htmlMsg = `
+        <ul>
+          <li><strong>Name:</strong> ${formData.name}</li>
+          <li><strong>Mobile Number:</strong> ${formData.number}</li>
+          <li><strong> Page URL: </strong> ${document.location.href}</li>
+        </ul>`;
+
+            const req = await fetch("/api/send-mail", {
+                method: "POST",
+                headers: {
+                    "Content-type": "application/json",
+                },
+                body: JSON.stringify({ data: htmlMsg, formType: "International" }),
+            });
+
+            const res = await req.json();
+
+            if (req.status !== 200) {
+                setLoading(false);
+                return toast(res.err, {
+                    position: "bottom-right",
+                    theme: "light",
+                    type: "error",
+                    closeOnClick: true,
+                });
+            }
+
+            toast("Successfully sent", {
+                position: "bottom-right",
+                theme: "light",
+                type: "success",
+                closeOnClick: true,
+            });
+
+            setFormData({ name: "", number: "+1" });
+            return;
+            
+        } catch (error) {
+            console.log(error);
+            toast("Something went wrong", {
+                position: "bottom-right",
+                theme: "light",
+                type: "error",
+                closeOnClick: true,
+            });
+        } finally {
+            setLoading(false);
+        }
+    };
 
     useEffect(() => {
         const fetchTexts = async () => {
-            setStaticTexts({ ...await getStaticText() })
+            setStaticTexts({ ...(await getStaticText()) });
         };
-
         fetchTexts();
     }, []);
-
-
 
     return (
         <div className="row justify-content-center">
             <div className="col-md-4 col-12 mb-3">
                 <div className="input-group">
                     <input type="text" className="form-control" placeholder={staticTexts["Enter Your Name"]}
-                        name="search" />
+                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                        value={formData.name}
+                    />
                 </div>
             </div>
             <div className="col-md-4 col-12 mb-3">
                 <div className="input-group">
-                    <input type="text" className="form-control phone-international" defaultValue={'+1'}
-                        placeholder={staticTexts["Enter Mobile Number"]} name="search" />
+                    <input
+                        type="tel"
+                        ref={phoneInputRef}
+                        className="form-control"
+                        placeholder={staticTexts["Enter Mobile Number"]}
+                        defaultValue={formData.number} // let intlTelInput handle formatting
+                    />
                 </div>
             </div>
 
             <div className="col-lg-2 col-xl-3 col-md-3 col-12 mb-3 ">
-                <button className="form-btn w-100 px-5">{staticTexts['Submit']}</button>
+                <button className="form-btn w-100 px-5" disabled={loading} onClick={sendMail}>
+                    {staticTexts['Submit']}
+                    {loading && <i className="fas fa-spinner fa-spin ms-1"></i>}
+                </button>
             </div>
         </div>
     )

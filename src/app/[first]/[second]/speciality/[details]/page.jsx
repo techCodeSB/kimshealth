@@ -27,19 +27,19 @@ const SpecialityDetails = async ({ params, searchParams }) => {
     const baseUrl = await getBaseUrl(true, true);
     const baseUrlLangOnly = await getBaseUrl(true, false)
     const data = await getSpecialityData.getSingleSpeciality({ slug: params.details, langLoc: getLangLoc });
-   
-    const allSubSpeciality = await getSpecialityData.getAllSubSpeciality({langLoc: getLangLoc, id:data.speciality?.id})
 
-    
+    const allSubSpeciality = await getSpecialityData.getAllSubSpeciality({ langLoc: getLangLoc, id: data.speciality?.id })
+
+
     // const allDiseas = await diseaseData.getAll({langLoc: getLangLoc, URLParams:URLParams})
     // const allProcedure = await procedureData.getAll({langLoc: getLangLoc, URLParams:URLParams})
 
 
-    
-    const allDiseas = await diseaseData.getDiseaseBySpeciality({langLoc: getLangLoc, speciality:data.speciality?.slug})
-    const allProcedure = await procedureData.getProcedureBySpeciality({langLoc: getLangLoc, speciality:data.speciality?.slug})
 
-    
+    const allDiseas = await diseaseData.getDiseaseBySpeciality({ langLoc: getLangLoc, speciality: data.speciality?.slug })
+    const allProcedure = await procedureData.getProcedureBySpeciality({ langLoc: getLangLoc, speciality: data.speciality?.slug })
+
+
 
     // ::::::::: ALL DATA SETS :::::::::
     const expertDataSet = {
@@ -71,6 +71,7 @@ const SpecialityDetails = async ({ params, searchParams }) => {
     return (
         <>
             <Header />
+
             <div role="main" className="main">
                 <div className="speciality-details-page">
                     <section className="section details-page-before py-0 d-lg-block d-none">
@@ -82,7 +83,8 @@ const SpecialityDetails = async ({ params, searchParams }) => {
                                             <div className="breadcrumb-wrapper">
                                                 <div className="row">
                                                     <div className="col-12 px-lg-0 px-4">
-                                                        <Breadcrumb activeTitle={data.title}
+                                                        <Breadcrumb
+                                                            activeTitle={data.title}
                                                             middleTitle={staticText['Specialities']}
                                                             middleURL={baseUrl + "/speciality"}
                                                         />
@@ -91,7 +93,7 @@ const SpecialityDetails = async ({ params, searchParams }) => {
                                             </div>
                                             <div className="details-banner pt-2">
                                                 <div className="details-heading">
-                                                    <FormSpeciality title={"Have a query?"} />
+                                                    <FormSpeciality title={"Have a query?"} speciality={data.title} />
                                                 </div>
                                             </div>
                                         </div>
@@ -132,8 +134,7 @@ const SpecialityDetails = async ({ params, searchParams }) => {
 
                                             <div className="details-banner pt-lg-5 pt-4">
                                                 <div className="details-heading">
-                                                    <FormSpeciality title={"Have a query?"} />
-
+                                                    <FormSpeciality title={"Have a query?"} speciality={data.title} />
                                                 </div>
                                             </div>
                                         </div>
@@ -174,7 +175,7 @@ const SpecialityDetails = async ({ params, searchParams }) => {
                                 </div>
                             </div>
                         </div>
-                    </section> 
+                    </section>
 
 
 
@@ -206,7 +207,7 @@ const SpecialityDetails = async ({ params, searchParams }) => {
                         </div>
                     </section>
 
-                   {/* <div className="line-divider"> </div>
+                    {/* <div className="line-divider"> </div>
                     <section className="section"
                         style={{ background: "linear-gradient(180deg,rgba(255, 255, 255, 1) 45%, rgba(248, 248, 248, 1) 74%)" }}>
                         <div className="container">

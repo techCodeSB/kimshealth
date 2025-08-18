@@ -6,6 +6,9 @@ const CorporateForm = () => {
     const [staticTexts, setStaticTexts] = useState({});
     const [allLocation, setAllLocation] = useState();
     const [selectedLocation, setSelectedLocation] = useState(null);
+    const [formData, setFormData] = useState({
+        subject: 'Appointment Queries', fname: "", lname: '', number: '', email: '', hostpital: '', query: ''
+    });
 
     useEffect(() => {
         const fetchTexts = async () => {
@@ -120,8 +123,10 @@ const CorporateForm = () => {
                             </div>
                         </div>
                         <div className="col-md-12 mb-3 text-start">
-                            <button
-                                className="btn mb-lg-0 mb-2 hospital-primarybtn px-5 py-2">{staticTexts['Submit']}</button>
+                            <button 
+                                className="btn mb-lg-0 mb-2 hospital-primarybtn px-5 py-2">
+                                {staticTexts['Submit']}
+                            </button>
                         </div>
                     </div>
                 </div>

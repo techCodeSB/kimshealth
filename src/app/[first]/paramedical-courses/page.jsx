@@ -110,7 +110,7 @@ const ParamedicalCourse = async () => {
                                 <div className="col-md-4">
                                     <div className="association-left-col sticky-left">
                                         <div className="association-form-card mb-5">
-                                            <Form1 title={"Request a Call Back"} />
+                                            <Form1 title={"Request a Call Back"} type={"Paramedical courses"}/>
                                         </div>
                                         <h4>{pageContent[4].sectionTitle}</h4>
                                         <p><strong>{pageContent[4].contactPerson}</strong></p>

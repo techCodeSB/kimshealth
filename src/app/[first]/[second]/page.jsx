@@ -6,7 +6,8 @@ import Home from '@/app/page'
 
 
 const SecHome = async ({ params }) => {
-  const check = await checkLocation(params.second)
+  const paramData = await params;
+  const check = await checkLocation(paramData.second)
 
   if (check) {
     return <Hospital />

@@ -139,7 +139,7 @@ const ClinicalSkills = async () => {
                                 <div className="col-md-4">
                                     <div className="association-left-col">
                                         <div className="association-form-card mb-5">
-                                            <Form1 title={"Request a Call Back"}/>
+                                            <Form1 title={"Request a Call Back"} type={"KIMSHEALTH Clinical Skills and Simulation Centre"}/>
                                             <h4>{pageContent[3]?.sectionTitle}</h4>
                                             <p><strong>{pageContent[3]?.contactPerson}</strong></p>
                                             <p> {pageContent[3]?.designation}</p>

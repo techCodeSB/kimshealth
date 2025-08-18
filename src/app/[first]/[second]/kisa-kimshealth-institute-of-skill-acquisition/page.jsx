@@ -60,7 +60,7 @@ const KisaHealth = async () => {
                                     </div>
 
                                     <div className="col-md-6 details-proceduce-banner-right-col">
-                                        <img src={pageContent[1]?.bannerItem[0]?.bannerImageDesktop.url ? process.env.NEXT_PUBLIC_IMAGE_URL + pageContent[1]?.bannerItem[0]?.bannerImageDesktop.url : "/img/no-image.jpg"} className="img-fluid details-banner-image" alt={pageContent[0].title}/>
+                                        <img src={pageContent[1]?.bannerItem[0]?.bannerImageDesktop?.url ? process.env.NEXT_PUBLIC_IMAGE_URL + pageContent[1]?.bannerItem[0]?.bannerImageDesktop?.url : "/img/no-image.jpg"} className="img-fluid details-banner-image" alt={pageContent[0].title}/>
                                     </div>
                                 </div>
                             </div>
@@ -138,7 +138,7 @@ const KisaHealth = async () => {
                                 </div>
                                 <div className="col-md-4">
                                     <div className="association-form-card mb-5">
-                                        <Form1 title={"Request a Call Back"} />
+                                        <Form1 title={"Request a Call Back"} type={"KISA"} />
                                     </div>
                                 </div>
                             </div>

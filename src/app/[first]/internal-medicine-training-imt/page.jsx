@@ -96,7 +96,7 @@ const InternalMedicine = async () => {
                                 </div>
                                 <div className="col-md-4">
                                     <div className="association-form-card mb-0 mt-2 sticky-from" id='imtApply'>
-                                        <Form1 title={"GET A CALLBACK FROM OUR HEALTH ADVISOR"} />
+                                        <Form1 title={"GET A CALLBACK FROM OUR HEALTH ADVISOR"} type={"IMT"}/>
                                         <h3 className="mt-3">{pageContent[7]?.title}</h3>
                                         <div
                                             dangerouslySetInnerHTML={{ __html: pageContent[7]?.details || "" }}

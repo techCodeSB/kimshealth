@@ -3,11 +3,88 @@ import getStaticText from '@/helper/getStaticText';
 import React, { useEffect, useState } from 'react'
 import langLoc from '@/helper/getLangLoc';
 import getCurrentLangLocClient from '@/helper/getCurrentLangLocClient';
+import { toast } from 'react-toastify';
 
-const Form2 = ({ title }) => {
+
+
+const Form2 = ({ title, type, subject }) => {
   const [staticTexts, setStaticTexts] = useState({});
   const [allLocation, setAllLocation] = useState();
   const [selectedLocation, setSelectedLocation] = useState(null);
+  const [formData, setFormData] = useState({
+    name: "", number: "", hospital: ''
+  });
+  const [loading, setLoading] = useState(false);
+
+  const sendMail = async () => {
+    setLoading(true);
+    if ([formData.name, formData.number, formData.hospital].some((field) => !field || field === "")) {
+      toast("Fill the required fields", {
+        position: 'bottom-right',
+        theme: 'light',
+        type: 'error',
+        closeOnClick: true
+      })
+      setLoading(false);
+      return;
+    }
+
+    try {
+      const htmlMsg = `
+        <ul>
+          <li><strong> Subject: </strong> ${`${type} : ${subject}`}</li>
+          <li><strong> Name: </strong> ${formData.name}</li>
+          <li><strong> Mobile Number: </strong> ${formData.number}</li>
+          <li><strong> Hospital: </strong> ${formData.hospital.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}</li>
+          <li><strong> Page URL: </strong> ${document.location.href}</li>
+        </ul>`;
+      const req = await fetch("/api/send-mail", {
+        method: 'POST',
+        'headers': {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({ data: htmlMsg, formType: "Contact" }),
+      });
+
+      const res = await req.json();
+
+      if (req.status !== 200) {
+        setLoading(false);
+        return toast(res.err, {
+          position: 'bottom-right',
+          theme: 'light',
+          type: 'error',
+          closeOnClick: true
+        })
+      }
+
+      toast("Successfully sent", {
+        position: 'bottom-right',
+        theme: 'light',
+        type: 'success',
+        closeOnClick: true
+      })
+
+      // Remove data
+      setFormData({ name: "", number: "", hospital: '' });
+      setSelectedLocation("");
+      setLoading(false);
+      return;
+
+
+    } catch (error) {
+      console.log(error)
+      setLoading(false);
+      return toast("Something went wrong", {
+        position: 'bottom-right',
+        theme: 'light',
+        type: 'error',
+        closeOnClick: true
+      })
+    }
+
+  }
+
 
   useEffect(() => {
     const fetchTexts = async () => {
@@ -37,11 +114,15 @@ const Form2 = ({ title }) => {
           <div className="col-xl-8 col-lg-8 col-md-8 col-12 mb-3">
             <input type="text" className="form-control border-0"
               placeholder={`${staticTexts['Enter Your Name']} *`} aria-label="Username"
-              aria-describedby="basic-addon1" />
+              aria-describedby="basic-addon1"
+              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+              value={formData.name}
+            />
           </div>
           <div className="col-xl-8 col-lg-8 col-md-8 col-12 mb-3">
             <select className="form-select border-0" value={selectedLocation} onChange={(e) => {
-              setSelectedLocation(e.target.value)
+              setSelectedLocation(e.target.value);
+              setFormData({ ...formData, hospital: e.target.value });
             }}>
               <option value={""}>{staticTexts['All Hospital']}</option>
               {
@@ -55,11 +136,17 @@ const Form2 = ({ title }) => {
           <div className="col-xl-8 col-lg-8 col-md-8 col-12 mb-3">
             <input type="text" className="form-control border-0"
               placeholder={`${staticTexts['Enter 10 Digit Mobile Number']} *`} aria-label="Username"
-              aria-describedby="basic-addon1" />
+              aria-describedby="basic-addon1"
+              onChange={(e) => setFormData({ ...formData, number: e.target.value })}
+              value={formData.number}
+            />
           </div>
           <div className="col-xl-8 col-lg-8 col-md-8 col-12">
             <div className="from-btn">
-              <button type="button" className="btn">{staticTexts['Request a Call Back']}</button>
+              <button type="button" className="btn" disabled={loading} onClick={sendMail}>
+                {staticTexts['Request a Call Back']}
+                {loading && <i className="fas fa-spinner fa-spin ms-1"></i>}
+              </button>
             </div>
           </div>
         </div>

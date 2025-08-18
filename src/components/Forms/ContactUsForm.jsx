@@ -4,10 +4,92 @@ import langLoc from '@/helper/getLangLoc';
 import { useEffect, useState } from "react";
 import getCurrentLangLocClient from "@/helper/getCurrentLangLocClient";
 
+
+
 const ContactUsForm = () => {
     const [staticTexts, setStaticTexts] = useState({});
     const [allLocation, setAllLocation] = useState();
     const [selectedLocation, setSelectedLocation] = useState(null);
+    const [formData, setFormData] = useState({
+        subject: 'Appointment Queries', fname: "", lname: '', number: '', email: '', hostpital: '', query: ''
+    });
+    const [loading, setLoading] = useState(false);
+
+
+
+    const sendMail = async () => {
+        setLoading(true);
+        if ([formData.fname, formData.lname, formData.number, formData.email, formData.hostpital, formData.query].some((field) => !field || field === "")) {
+            toast("Fill the required fields", {
+                position: 'bottom-right',
+                theme: 'light',
+                type: 'error',
+                closeOnClick: true
+            })
+            setLoading(false);
+            return;
+        }
+
+        try {
+            const htmlMsg = `
+                    <ul>
+                        <li><strong> Subject: </strong> ${formData.subject}</li>
+                        <li><strong> First Name: </strong> ${formData.fname}</li>
+                        <li><strong> Last Name: </strong> ${formData.lname}</li>
+                        <li><strong> Mobile Number: </strong> ${formData.number}</li>
+                        <li><strong> Email: </strong> ${formData.email}</li>
+                        <li><strong> Hospital: </strong> ${formData.hostpital.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}</li>
+                        <li><strong> Query: </strong> ${formData.query}</li>
+                        <li><strong> Page URL: </strong> ${document.location.href}</li>
+                    </ul>
+                `;
+            const req = await fetch("/api/send-mail", {
+                method: 'POST',
+                'headers': {
+                    "Content-type": "application/json",
+                },
+                body: JSON.stringify({ data: htmlMsg, formType: "Contact", subject: formData.subject }),
+            });
+
+            const res = await req.json();
+
+            if (req.status !== 200) {
+                setLoading(false);
+                return toast(res.err, {
+                    position: 'bottom-right',
+                    theme: 'light',
+                    type: 'error',
+                    closeOnClick: true
+                })
+            }
+
+            toast("Successfully sent", {
+                position: 'bottom-right',
+                theme: 'light',
+                type: 'success',
+                closeOnClick: true
+            })
+
+            // Remove data
+            setFormData({
+               ...formData ,fname: "", lname: '', number: '', email: '', hostpital: '', query: ''
+            })
+            setLoading(false);
+            return;
+
+
+        } catch (error) {
+            console.log(error)
+            setLoading(false);
+            return toast("Something went wrong", {
+                position: 'bottom-right',
+                theme: 'light',
+                type: 'error',
+                closeOnClick: true
+            })
+        }
+
+    }
 
 
     useEffect(() => {
@@ -35,11 +117,17 @@ const ContactUsForm = () => {
             <div className="association-form-card mb-5 sticky-from custom-tab-button-wrapper">
                 <div className="tab-group text-start mb-3">
                     <button type="button" className="btn-tab treat-tab form-btn w-auto w-md-100 mb-lg-auto mb-1 active mx-2 omega d-inline-block"
-                        onClick={() => showBox('omega')}>
+                        onClick={() => {
+                            showBox('omega')
+                            setFormData({ ...formData, subject: 'Appointment Queries' })
+                        }}>
                         {staticTexts['Appointment Queries']}
                     </button>
 
-                    <button type="button" className="btn-tab form-btn w-auto w-md-100 treat-tab mx-2 omega1" onClick={() => showBox('omega1')}>
+                    <button type="button" className="btn-tab form-btn w-auto w-md-100 treat-tab mx-2 omega1" onClick={() => {
+                        showBox('omega1')
+                        setFormData({ ...formData, subject: 'Feedback/Complaints' })
+                    }}>
                         {staticTexts['Feedback/Complaints']}
                     </button>
                 </div>
@@ -48,28 +136,41 @@ const ContactUsForm = () => {
                         <div className="row justify-content-between">
                             <div className="col-xl-6 col-lg-6 col-md-6 col-12 mb-3">
                                 <label htmlFor=''>{staticTexts['First Name']}*</label>
-                                <input type="text" className="form-control pe-0" />
+                                <input type="text" className="form-control pe-0"
+                                    onChange={(e) => setFormData({ ...formData, fname: e.target.value })}
+                                    value={formData.fname}
+                                />
 
                             </div>
                             <div className="col-xl-6 col-lg-6 col-md-6 col-12 mb-3">
                                 <label htmlFor=''>{staticTexts['Last Name']}*</label>
-                                <input type="text" className="form-control pe-0" />
+                                <input type="text" className="form-control pe-0"
+                                    onChange={(e) => setFormData({ ...formData, lname: e.target.value })}
+                                    value={formData.lname}
+                                />
                             </div>
 
 
                             <div className="col-xl-6 col-lg-6 col-md-6 col-12 mb-3">
                                 <label htmlFor=''>{staticTexts['Mobile Number']}*</label>
-                                <input type="text" id="phone" defaultValue="+91" className="form-control pe-0" />
+                                <input type="text" id="phone" defaultValue="+91" className="form-control pe-0"
+                                    onChange={(e) => setFormData({ ...formData, number: e.target.value })}
+                                    value={formData.number}
+                                />
                             </div>
 
                             <div className="col-xl-6 col-lg-6 col-md-6 col-12 mb-3">
                                 <label htmlFor=''>{staticTexts['Email']}*</label>
-                                <input type="text" className="form-control pe-0" />
+                                <input type="text" className="form-control pe-0"
+                                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                                    value={formData.email}
+                                />
                             </div>
                             <div className="col-xl-12 col-lg-12 col-md-12 col-12 mb-3">
                                 <label htmlFor=''>{staticTexts['Hospitals']}*</label>
                                 <select className="form-select from-location" value={selectedLocation} onChange={(e) => {
                                     setSelectedLocation(e.target.value)
+                                    setFormData({ ...formData, hostpital: e.target.value })
                                 }}>
                                     <option value={""}>{staticTexts['All Hospital']}</option>
                                     {
@@ -83,13 +184,17 @@ const ContactUsForm = () => {
                             <div className="col-xl-12 col-lg-12 col-md-12 col-12 mb-3">
                                 <label htmlFor=''>{staticTexts['Query']}*</label>
                                 <textarea className="form-control" placeholder="Leave a comment here"
-                                    id="floatingTextarea"></textarea>
+                                    id="floatingTextarea" onChange={(e) => setFormData({ ...formData, query: e.target.value })}
+                                    value={formData.query}></textarea>
                             </div>
 
                             <div className="col-xl-6 col-lg-6 col-md-6 col-12 mb-3">
                                 <div className="from-btn">
-                                    <button type="button"
-                                        className="btn d-inline-block w-auto">{staticTexts['Submit']}</button>
+                                    <button type="button" className="btn d-inline-block w-auto" 
+                                    onClick={() => sendMail()} disabled={loading}>
+                                        {staticTexts['Submit']}
+                                        {loading && <i className="fas fa-spinner fa-spin ms-1"></i>}
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -102,23 +207,38 @@ const ContactUsForm = () => {
                         <div className="row justify-content-between">
                             <div className="col-xl-6 col-lg-6 col-md-6 col-12 mb-3">
                                 <label htmlFor=''>{staticTexts['First Name']}*</label>
-                                <input type="text" className="form-control pe-0" />
+                                <input type="text" className="form-control pe-0"
+                                    onChange={(e) => setFormData({ ...formData, fname: e.target.value })}
+                                    value={formData.fname}
+                                />
                             </div>
                             <div className="col-xl-6 col-lg-6 col-md-6 col-12 mb-3">
                                 <label htmlFor=''>{staticTexts['Last Name']}*</label>
-                                <input type="text" className="form-control pe-0" />
+                                <input type="text" className="form-control pe-0"
+                                    onChange={(e) => setFormData({ ...formData, lname: e.target.value })}
+                                    value={formData.lname}
+                                />
                             </div>
                             <div className="col-xl-6 col-lg-6 col-md-6 col-12 mb-3">
                                 <label htmlFor=''>{staticTexts['Mobile Number']}*</label>
-                                <input type="text" id="tel" defaultValue="+91" className="form-control pe-0" />
+                                <input type="text" id="tel" defaultValue="+91" className="form-control pe-0"
+                                    onChange={(e) => setFormData({ ...formData, number: e.target.value })}
+                                    value={formData.number}
+                                />
                             </div>
                             <div className="col-xl-6 col-lg-6 col-md-6 col-12 mb-3">
                                 <label htmlFor=''>{staticTexts['Email']}*</label>
-                                <input type="text" className="form-control pe-0" />
+                                <input type="email" className="form-control pe-0"
+                                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                                    value={formData.email}
+                                />
                             </div>
                             <div className="col-xl-12 col-lg-12 col-md-12 col-12 mb-3">
                                 <label htmlFor=''>{staticTexts['Hospitals']}*</label>
-                                <select className="form-select from-location">
+                                <select className="form-select from-location" value={selectedLocation} onChange={(e) => {
+                                    setSelectedLocation(e.target.value)
+                                    setFormData({ ...formData, hostpital: e.target.value })
+                                }}>
                                     <option value={""}>{staticTexts['Select Hospital']}</option>
                                     {
                                         allLocation?.map((loc, i) => {
@@ -130,12 +250,16 @@ const ContactUsForm = () => {
                             <div className="col-xl-12 col-lg-12 col-md-12 col-12 mb-3">
                                 <label htmlFor=''>{staticTexts['Query']}*</label>
                                 <textarea className="form-control" placeholder={staticTexts["Leave a comment here"]}
-                                    id="floatingTextarea"></textarea>
+                                    id="floatingTextarea" onChange={(e) => setFormData({ ...formData, query: e.target.value })}
+                                    value={formData.query}></textarea>
                             </div>
                             <div className="col-xl-6 col-lg-6 col-md-6 col-12 mb-3">
                                 <div className="from-btn">
-                                    <button type="button"
-                                        className="btn d-inline-block w-auto">{staticTexts['Submit']}</button>
+                                    <button type="button" className="btn d-inline-block w-auto" 
+                                    onClick={() => sendMail()} disabled={loading}>
+                                        {staticTexts['Submit']}
+                                        {loading && <i className="fas fa-spinner fa-spin ms-1"></i>}
+                                    </button>
                                 </div>
                             </div>
                         </div>

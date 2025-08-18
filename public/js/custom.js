@@ -597,12 +597,12 @@ $('.counter').counterUp({
 });
 
 // ...existing code...
-document.querySelectorAll(".phone-international").forEach(function (input) {
-    window.intlTelInput(input, {
-        utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@19.5.5/build/js/utils.js",
-        initialCountry: "us"
-    });
-});
+// document.querySelectorAll(".phone-international").forEach(function (input) {
+//     window.intlTelInput(input, {
+//         utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@19.5.5/build/js/utils.js",
+//         initialCountry: "us"
+//     });
+// });
 // ...existing code...
 
 
