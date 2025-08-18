@@ -35,7 +35,6 @@ export const getStaticPageContent = async (slug = 'home', field = "", lang = tru
             notFound();
         }
         
-        console.log("Static Page Content: ", staticPageContentRes);  
 
         return staticPageContentRes;
 

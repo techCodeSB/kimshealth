@@ -1,13 +1,12 @@
 "use client"
-import Cookies from "js-cookie";
+import getCurrentLangLocClient from "./getCurrentLangLocClient";
 
 const getStaticPage = async () => {
     const baseUrl = process.env.NEXT_PUBLIC_CMS_API_URL;
-    const getLang = JSON.parse(Cookies.get("systemLang"));
-    const getLoc = JSON.parse(Cookies.get("systemLocation"));
-    const langId = getLang.id;
-    const locId = getLoc.id;
+    const getLangLoc = await getCurrentLangLocClient();
+    const locId = getLangLoc.loc.id;
 
+    // console.log(getLangLoc)
 
     let staticData = {};
 
@@ -23,9 +22,6 @@ const getStaticPage = async () => {
 
         staticData[pages.data[i]['slug']] = json.data.length > 0 ? true : false;
     }
-
-
-    console.log(staticData)
 
 
     return staticData;

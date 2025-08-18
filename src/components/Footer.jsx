@@ -295,27 +295,84 @@ const Footer = () => {
                             <div className="link-part">
                                 <h3>{staticTexts['Important Link']}</h3>
                                 <ul>
-                                    <li><a href={basePath + "/about-us"}>{staticTexts['About Us']}</a></li>
-                                    <li><a href={basePath + "/blog"}>{staticTexts['Blog']}</a></li>
-                                    <li><a href={basePath + "/book-an-appointment"}>{staticTexts['Book an Appointment']}</a></li>
+                                    {staticPageChecker['about-us'] && (
+                                        <li>
+                                            <a href={basePath + "/about-us"}>{staticTexts['About Us']}</a>
+                                        </li>
+                                    )}
+                                    {staticPageChecker['blog'] && (
+                                        <li>
+                                            <a href={basePath + "/blog"}>{staticTexts['Blog']}</a>
+                                        </li>
+                                    )}
+
+                                    <li>
+                                        <a href={basePath + "/book-an-appointment"}>
+                                            {staticTexts['Book an Appointment']}
+                                        </a>
+                                    </li>
+
                                     <li>
                                         <a target='_blank'
                                             href={"https://healthcheckup.kimshealthcare.com/p/kims-trivandrum-1/"}>
                                             {staticTexts['Book a Health Check-up']}
                                         </a>
                                     </li>
-                                    <li><a href={basePath + "#"}>{staticTexts['Career']}</a></li>
-                                    <li><a href={basePath + "/contact-us"}>{staticTexts['Contact Us']}</a></li>
-                                    <li><a href={basePath + "/media-and-events"}>{staticTexts['Events']}</a></li>
-                                    <li><a href={basePath + "/doctor"}>{staticTexts['Find a Doctor']}</a></li>
-                                    <li><a href={basePath + "/gallery"}>{staticTexts['Gallery']}</a></li>
-                                    <li><a href={basePath + "/at-home-services"}>{staticTexts['Home Care']}</a></li>
-                                    <li><a href={basePath + "/second-opinion"}>{staticTexts['In-Patient Deposit']}</a></li>
-                                    <li><a href={basePath + "/organ-transplant-compliance"}>{staticTexts['Organ Transplant Compliance']}</a></li>
-                                    <li>
-                                        <a href={basePathOnlyLang + "/international-patient"}>{staticTexts['International Care']}</a>
-                                    </li>
-                                    <li><a href={basePath + "#"}>{staticTexts['Specialist']}</a></li>
+                                    {staticPageChecker['career'] && (
+                                        <li>
+                                            <a href={basePath + "/career"}>{staticTexts['Career']}</a>
+                                        </li>
+                                    )}
+                                    {staticPageChecker['contact-us'] && (
+                                        <li>
+                                            <a href={basePath + "/contact-us"}>{staticTexts['Contact Us']}</a>
+                                        </li>
+                                    )}
+                                    {staticPageChecker['media-and-events'] && (
+                                        <li>
+                                            <a href={basePath + "/media-and-events"}>{staticTexts['Events']}</a>
+                                        </li>
+                                    )}
+                                    {staticPageChecker['doctor'] && (
+                                        <li>
+                                            <a href={basePath + "/doctor"}>{staticTexts['Find a Doctor']}</a>
+                                        </li>
+                                    )}
+                                    {staticPageChecker['gallery'] && (
+                                        <li>
+                                            <a href={basePath + "/gallery"}>{staticTexts['Gallery']}</a>
+                                        </li>
+                                    )}
+                                    {staticPageChecker['at-home-services'] && (
+                                        <li>
+                                            <a href={basePath + "/at-home-services"}>{staticTexts['Home Care']}</a>
+                                        </li>
+                                    )}
+                                    {staticPageChecker['second-opinion'] && (
+                                        <li>
+                                            <a href={basePath + "/second-opinion"}>{staticTexts['In-Patient Deposit']}</a>
+                                        </li>
+                                    )}
+                                    {staticPageChecker['organ-transplant-compliance'] && (
+                                        <li>
+                                            <a href={basePath + "/organ-transplant-compliance"}>
+                                                {staticTexts['Organ Transplant Compliance']}
+                                            </a>
+                                        </li>
+                                    )}
+                                    {staticPageChecker['international-patient'] && (
+                                        <li>
+                                            <a href={basePathOnlyLang + "/international-patient"}>
+                                                {staticTexts['International Care']}
+                                            </a>
+                                        </li>
+                                    )}
+                                    {staticPageChecker['specialist'] && (
+                                        <li>
+                                            <a href={basePath + "/specialist"}>{staticTexts['Specialist']}</a>
+                                        </li>
+                                    )}
+
                                 </ul>
                             </div>
                         </div>
@@ -460,25 +517,85 @@ const Footer = () => {
                             <div className="footer-menu expanded link-part">
                                 <h3 className="accordian-footer position-relative d-lg-none">{staticTexts['Important Link']}</h3>
                                 <ul className="first-child">
-                                    <li><a href={basePath + "/about-us"}>{staticTexts['About Us']}</a></li>
-                                    <li><a href={basePath + "/blog"}>{staticTexts['Blog']}</a></li>
-                                    <li><a href={basePath + "/book-an-appointment"}>{staticTexts['Book an Appointment']}</a></li>
+                                    {staticPageChecker['about-us'] && (
+                                        <li>
+                                            <a href={basePath + "/about-us"}>{staticTexts['About Us']}</a>
+                                        </li>
+                                    )}
+                                    {staticPageChecker['blog'] && (
+                                        <li>
+                                            <a href={basePath + "/blog"}>{staticTexts['Blog']}</a>
+                                        </li>
+                                    )}
+                                    {staticPageChecker['book-an-appointment'] && (
+                                        <li>
+                                            <a href={basePath + "/book-an-appointment"}>
+                                                {staticTexts['Book an Appointment']}
+                                            </a>
+                                        </li>
+                                    )}
+
                                     <li>
                                         <a target='_blank'
                                             href={"https://healthcheckup.kimshealthcare.com/p/kims-trivandrum-1/"}>
                                             {staticTexts['Book a Health Check-up']}
                                         </a>
                                     </li>
-                                    <li><a href={basePath + "#"}>{staticTexts['Career']}</a></li>
-                                    <li><a href={basePath + "/contact-us"}>{staticTexts['Contact Us']}</a></li>
-                                    <li><a href={basePath + "/media-and-events"}>{staticTexts['Events']}</a></li>
-                                    <li><a href={basePath + "/doctor"}>{staticTexts['Find a Doctor']}</a></li>
-                                    <li><a href={basePath + "/gallery"}>{staticTexts['Gallery']}</a></li>
-                                    <li><a href={basePath + "/at-home-services"}>{staticTexts['Home Care']}</a></li>
-                                    <li><a href={basePath + "/second-opinion"}>{staticTexts['In-Patient Deposit']}</a></li>
-                                    <li><a href={basePath + "/organ-transplant-compliance"}>{staticTexts['Organ Transplant Compliance']}</a></li>
-                                    <li><a href={basePathOnlyLang + "/international-patient"}>{staticTexts['International Care']}</a></li>
-                                    <li><a href={basePath + "#"}>{staticTexts['Specialist']}</a></li>
+                                    {staticPageChecker['career'] && (
+                                        <li>
+                                            <a href={basePath + "/career"}>{staticTexts['Career']}</a>
+                                        </li>
+                                    )}
+                                    {staticPageChecker['contact-us'] && (
+                                        <li>
+                                            <a href={basePath + "/contact-us"}>{staticTexts['Contact Us']}</a>
+                                        </li>
+                                    )}
+                                    {staticPageChecker['media-and-events'] && (
+                                        <li>
+                                            <a href={basePath + "/media-and-events"}>{staticTexts['Events']}</a>
+                                        </li>
+                                    )}
+                                    {staticPageChecker['doctor'] && (
+                                        <li>
+                                            <a href={basePath + "/doctor"}>{staticTexts['Find a Doctor']}</a>
+                                        </li>
+                                    )}
+                                    {staticPageChecker['gallery'] && (
+                                        <li>
+                                            <a href={basePath + "/gallery"}>{staticTexts['Gallery']}</a>
+                                        </li>
+                                    )}
+                                    {staticPageChecker['at-home-services'] && (
+                                        <li>
+                                            <a href={basePath + "/at-home-services"}>{staticTexts['Home Care']}</a>
+                                        </li>
+                                    )}
+                                    {staticPageChecker['second-opinion'] && (
+                                        <li>
+                                            <a href={basePath + "/second-opinion"}>{staticTexts['In-Patient Deposit']}</a>
+                                        </li>
+                                    )}
+                                    {staticPageChecker['organ-transplant-compliance'] && (
+                                        <li>
+                                            <a href={basePath + "/organ-transplant-compliance"}>
+                                                {staticTexts['Organ Transplant Compliance']}
+                                            </a>
+                                        </li>
+                                    )}
+                                    {staticPageChecker['international-patient'] && (
+                                        <li>
+                                            <a href={basePathOnlyLang + "/international-patient"}>
+                                                {staticTexts['International Care']}
+                                            </a>
+                                        </li>
+                                    )}
+                                    {staticPageChecker['specialist'] && (
+                                        <li>
+                                            <a href={basePath + "/specialist"}>{staticTexts['Specialist']}</a>
+                                        </li>
+                                    )}
+
                                 </ul>
                             </div>
                         </div>

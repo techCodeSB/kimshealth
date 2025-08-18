@@ -6,7 +6,8 @@ import Home from '@/app/page'
 
 
 const FstHome = async ({ params }) => {
-  const check = await checkLocation(params.first)
+  const  paramData = await params
+  const check = await checkLocation(paramData.first)
 
   if (check) {
     return <Hospital />
@@ -14,6 +15,8 @@ const FstHome = async ({ params }) => {
   }
 
   return <Home/>
+
+
 }
 
 export default FstHome;

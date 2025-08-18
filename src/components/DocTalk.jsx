@@ -128,7 +128,6 @@ const FromDoctor = ({ dataSet }) => {
                 </div>
             </section>
 
-
         </>
     )
 

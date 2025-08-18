@@ -42,6 +42,7 @@ const HeaderUnit = () => {
   }, []);
 
 
+
   const toggleAccordion = (index) => {
     setActiveIndex((prev) => (prev === index ? null : index));
   };
@@ -49,7 +50,8 @@ const HeaderUnit = () => {
 
   useEffect(() => {
     const get = async () => {
-      const LangLoc = await getCurrentLangLocClient()
+      const LangLoc = await getCurrentLangLocClient();
+      // console.log(LangLoc, "in header");
       setselectedLangLoc(LangLoc);
 
       setSpeciality(await getSpecialityData.getHeaderSpeciality({ LangLoc }))
@@ -448,9 +450,9 @@ const HeaderUnit = () => {
                   <li className="quicklink-header">
                     <a target='_blank' href="https://consult.bestdocapp.com/home/KIMSTVM?version=new" className="anchor-menu">{staticTexts['Telehealth']}</a>
                   </li>
-                  <li className="quicklink-header">
+                  {staticPageChecker['corporate'] && (<li className="quicklink-header">
                     <a href={basePath + "/corporate"} className="anchor-menu">{staticTexts['Corporate']}</a>
-                  </li>
+                  </li>)}
                   <li className="menu-item-has-children show-submenu quicklink-header">
                     <a href="#" className="anchor-menu">{staticTexts['CSR']}</a>
                     <div className="sub-menu">
@@ -458,14 +460,20 @@ const HeaderUnit = () => {
                         <div className="col-lg-4">
                           <div className="sub-menu-details">
                             <ul>
-                              <li>
-                                <a href={basePath + "/csr-policy"}>
-                                  {staticTexts['CSR Policy']}</a>
-                              </li>
-                              <li>
-                                <a href={basePath + "/csr-initiative"}>
-                                  {staticTexts['CSR Initiative']}</a>
-                              </li>
+                              {staticPageChecker['csr-policy'] && (
+                                <li>
+                                  <a href={basePath + "/csr-policy"}>
+                                    {staticTexts['CSR Policy']}
+                                  </a>
+                                </li>
+                              )}
+                              {staticPageChecker['csr-initiative'] && (
+                                <li>
+                                  <a href={basePath + "/csr-initiative"}>
+                                    {staticTexts['CSR Initiative']}
+                                  </a>
+                                </li>
+                              )}
                             </ul>
                           </div>
                         </div>
@@ -479,23 +487,34 @@ const HeaderUnit = () => {
                         <div className="col-lg-4">
                           <div className="sub-menu-details">
                             <ul>
-                              <li>
-                                <a href={basePath + "/testimonial"}>
-                                  {staticTexts['Patient Testimonials']}</a>
-                              </li>
-                              <li>
-                                <a href={basePath + "/patient-stories"}>
-                                  {staticTexts['Patient Stories']}</a>
-                              </li>
-                              <li>
-                                <a href={basePath + "/patients-rights-and-responsibilities"} >
-                                  {staticTexts['Patient Rights']}
-                                </a>
-                              </li>
-                              <li>
-                                <a href={basePath + "/guidebook-for-tpa-patients"}>
-                                  {staticTexts['Guidelines']}</a>
-                              </li>
+                              {staticPageChecker['testimonial'] && (
+                                <li>
+                                  <a href={basePath + "/testimonial"}>
+                                    {staticTexts['Patient Testimonials']}
+                                  </a>
+                                </li>
+                              )}
+                              {staticPageChecker['patient-stories'] && (
+                                <li>
+                                  <a href={basePath + "/patient-stories"}>
+                                    {staticTexts['Patient Stories']}
+                                  </a>
+                                </li>
+                              )}
+                              {staticPageChecker['patients-rights-and-responsibilities'] && (
+                                <li>
+                                  <a href={basePath + "/patients-rights-and-responsibilities"}>
+                                    {staticTexts['Patient Rights']}
+                                  </a>
+                                </li>
+                              )}
+                              {staticPageChecker['guidebook-for-tpa-patients'] && (
+                                <li>
+                                  <a href={basePath + "/guidebook-for-tpa-patients"}>
+                                    {staticTexts['Guidelines']}
+                                  </a>
+                                </li>
+                              )}
                             </ul>
                           </div>
                         </div>
@@ -512,38 +531,69 @@ const HeaderUnit = () => {
                         <div className="col-lg-4">
                           <div className="sub-menu-details">
                             <ul>
-                              <li>
-                                <a href={basePath + "/kisa-kimshealth-institute-of-skill-acquisition"}>{staticTexts['KISA (KIMSHEALTH Institute of Skill Acquisition)']}</a>
-                              </li>
-                              <li>
-                                <a href={basePath + "/internal-medicine-training-imt"}>{staticTexts['Internal Medicine Training (IMT)']}</a>
-                              </li>
-                              <li>
-                                <a href={basePath + "/emergency-medicine-program"}>{staticTexts['Emergency Medicine Program']}</a>
-                              </li>
-                              <li>
-                                <a href={basePath + "/american-heart-association"}>
-                                  {staticTexts['American Heart Association']}</a>
-                              </li>
-                              <li>
-                                <a href={basePath + "/doctoral-courses"}>
-                                  {staticTexts['Doctoral Courses']}</a>
-                              </li>
-                              <li>
-                                <a href={basePath + "/socomer"}>
-                                  {staticTexts['SOCOMER']}</a>
-                              </li>
-                              <li>
-                                <a href={basePath + "#"}>
-                                  {staticTexts['Nursing Recruitment']}</a>
-                              </li>
-                              <li>
-                                <a href={basePath + "/paramedical-courses"}>{staticTexts['Paramedical Courses']}</a>
-                              </li>
-                              <li>
-                                <a href={basePath + "/kimshealth-clinical-skills-and-simulation-centre"}>
-                                  {staticTexts['KIMSHEALTH Clinical Skills and Simulation Centre']}</a>
-                              </li>
+                              {staticPageChecker['kisa-kimshealth-institute-of-skill-acquisition'] && (
+                                <li>
+                                  <a href={basePath + "/kisa-kimshealth-institute-of-skill-acquisition"}>
+                                    {staticTexts['KISA (KIMSHEALTH Institute of Skill Acquisition)']}
+                                  </a>
+                                </li>
+                              )}
+                              {staticPageChecker['internal-medicine-training-imt'] && (
+                                <li>
+                                  <a href={basePath + "/internal-medicine-training-imt"}>
+                                    {staticTexts['Internal Medicine Training (IMT)']}
+                                  </a>
+                                </li>
+                              )}
+                              {staticPageChecker['emergency-medicine-program'] && (
+                                <li>
+                                  <a href={basePath + "/emergency-medicine-program"}>
+                                    {staticTexts['Emergency Medicine Program']}
+                                  </a>
+                                </li>
+                              )}
+                              {staticPageChecker['american-heart-association'] && (
+                                <li>
+                                  <a href={basePath + "/american-heart-association"}>
+                                    {staticTexts['American Heart Association']}
+                                  </a>
+                                </li>
+                              )}
+                              {staticPageChecker['doctoral-courses'] && (
+                                <li>
+                                  <a href={basePath + "/doctoral-courses"}>
+                                    {staticTexts['Doctoral Courses']}
+                                  </a>
+                                </li>
+                              )}
+                              {staticPageChecker['socomer'] && (
+                                <li>
+                                  <a href={basePath + "/socomer"}>
+                                    {staticTexts['SOCOMER']}
+                                  </a>
+                                </li>
+                              )}
+                              {staticPageChecker['nursing-recruitment'] && (
+                                <li>
+                                  <a href={basePath + "#"}>
+                                    {staticTexts['Nursing Recruitment']}
+                                  </a>
+                                </li>
+                              )}
+                              {staticPageChecker['paramedical-courses'] && (
+                                <li>
+                                  <a href={basePath + "/paramedical-courses"}>
+                                    {staticTexts['Paramedical Courses']}
+                                  </a>
+                                </li>
+                              )}
+                              {staticPageChecker['kimshealth-clinical-skills-and-simulation-centre'] && (
+                                <li>
+                                  <a href={basePath + "/kimshealth-clinical-skills-and-simulation-centre"}>
+                                    {staticTexts['KIMSHEALTH Clinical Skills and Simulation Centre']}
+                                  </a>
+                                </li>
+                              )}
                             </ul>
                           </div>
                         </div>
@@ -556,20 +606,32 @@ const HeaderUnit = () => {
                   {/* <li className="quicklink-header">
                     <a href={basePath + "#"}>{staticTexts['Quality Focus']}</a>
                   </li> */}
-                  <li className="quicklink-header">
-                    <a href={basePath + "/all-companies-on-panel"}>{staticTexts['Insurance Providers']}</a>
-                  </li>
-                  {/* <li className="quicklink-header">
-                    <a href={basePath + "#"}>{staticTexts['Careers']}</a>
-                  </li> */}
-                  <li className="quicklink-header">
-                    <a href={basePath + "/blog"}>{staticTexts['Blogs']}</a>
-                  </li>
-                  <li className="quicklink-header">
-                    <a href={basePath + "/doctor-talk"}>
-                      {staticTexts['Expert Talks']}</a>
-                  </li>
+                  {staticPageChecker['all-companies-on-panel'] && (
+                    <li className="quicklink-header">
+                      <a href={basePath + "/all-companies-on-panel"}>
+                        {staticTexts['Insurance Providers']}
+                      </a>
+                    </li>
+                  )}
 
+                  {/* <li className="quicklink-header">
+                        <a href={basePath + "#"}>{staticTexts['Careers']}</a>
+                      </li> */}
+
+                  {staticPageChecker['blog'] && (
+                    <li className="quicklink-header">
+                      <a href={basePath + "/blog"}>
+                        {staticTexts['Blogs']}
+                      </a>
+                    </li>
+                  )}
+                  {staticPageChecker['doctor-talk'] && (
+                    <li className="quicklink-header">
+                      <a href={basePath + "/doctor-talk"}>
+                        {staticTexts['Expert Talks']}
+                      </a>
+                    </li>
+                  )}
 
                   <li className="menu-item-has-children show-submenu quicklink-header">
                     <a href="#" className="anchor-menu">{staticTexts['Others']}</a>
@@ -578,45 +640,89 @@ const HeaderUnit = () => {
                         <div className="col-lg-4">
                           <div className="sub-menu-details">
                             <ul>
-                              <li>
-                                <a href={basePath + "/media-and-events"}>{staticTexts['Events']}</a>
-                              </li>
-                              <li>
-                                <a href={basePath + "/travel-clinic"}>{staticTexts['Travel Clinic']}</a>
-                              </li>
-                              <li>
-                                <a href={basePath + "/ews-services"}>{staticTexts['EWS Services']}</a>
-                              </li>
-                              <li>
-                                <a href={basePath + "/blood-bank"} >
-                                  {staticTexts['Blood Bank']}
-                                </a>
-                              </li>
-                              <li>
-                                <a href={basePath + "/bmw-report"}>{staticTexts['BMW Reports']}</a>
-                              </li>
+                              {staticPageChecker['media-and-events'] && (
+                                <li>
+                                  <a href={basePath + "/media-and-events"}>
+                                    {staticTexts['Events']}
+                                  </a>
+                                </li>
+                              )}
+                              {staticPageChecker['travel-clinic'] && (
+                                <li>
+                                  <a href={basePath + "/travel-clinic"}>
+                                    {staticTexts['Travel Clinic']}
+                                  </a>
+                                </li>
+                              )}
+                              {staticPageChecker['ews-services'] && (
+                                <li>
+                                  <a href={basePath + "/ews-services"}>
+                                    {staticTexts['EWS Services']}
+                                  </a>
+                                </li>
+                              )}
+                              {staticPageChecker['blood-bank'] && (
+                                <li>
+                                  <a href={basePath + "/blood-bank"}>
+                                    {staticTexts['Blood Bank']}
+                                  </a>
+                                </li>
+                              )}
+                              {staticPageChecker['bmw-report'] && (
+                                <li>
+                                  <a href={basePath + "/bmw-report"}>
+                                    {staticTexts['BMW Reports']}
+                                  </a>
+                                </li>
+                              )}
 
                               {/* <li>
-                                <a href={basePath + "/faqs"}>{staticTexts['FAQs']}</a>
-                              </li> */}
-                              <li>
-                                <a href={basePath + "/stents-price-list"}>{staticTexts['Stents Price List']}</a>
-                              </li>
-                              <li>
-                                <a href={basePath + "/knee-implant-list"}>{staticTexts['Knee Implant List']}</a>
-                              </li>
-                              <li>
-                                <a href={basePath + "/donor-information"}>{staticTexts['Donor Information']}</a>
-                              </li>
-                              <li>
-                                <a href={basePath + "/privacy-policy"}>{staticTexts['Privacy Policies']}</a>
-                              </li>
-                              <li>
-                                <a href={basePath + "/terms-and-conditions"}>{staticTexts['Term & Conditions']}</a>
-                              </li>
-                              <li>
-                                <a href={basePath + "/refund-and-cancellation-policy"}>{staticTexts['Refund & Cancellation Policy']}</a>
-                              </li>
+                                    <a href={basePath + "/faqs"}>{staticTexts['FAQs']}</a>
+                                  </li> */}
+
+                              {staticPageChecker['stents-price-list'] && (
+                                <li>
+                                  <a href={basePath + "/stents-price-list"}>
+                                    {staticTexts['Stents Price List']}
+                                  </a>
+                                </li>
+                              )}
+                              {staticPageChecker['knee-implant-list'] && (
+                                <li>
+                                  <a href={basePath + "/knee-implant-list"}>
+                                    {staticTexts['Knee Implant List']}
+                                  </a>
+                                </li>
+                              )}
+                              {staticPageChecker['donor-information'] && (
+                                <li>
+                                  <a href={basePath + "/donor-information"}>
+                                    {staticTexts['Donor Information']}
+                                  </a>
+                                </li>
+                              )}
+                              {staticPageChecker['privacy-policy'] && (
+                                <li>
+                                  <a href={basePath + "/privacy-policy"}>
+                                    {staticTexts['Privacy Policies']}
+                                  </a>
+                                </li>
+                              )}
+                              {staticPageChecker['terms-and-conditions'] && (
+                                <li>
+                                  <a href={basePath + "/terms-and-conditions"}>
+                                    {staticTexts['Term & Conditions']}
+                                  </a>
+                                </li>
+                              )}
+                              {staticPageChecker['refund-and-cancellation-policy'] && (
+                                <li>
+                                  <a href={basePath + "/refund-and-cancellation-policy"}>
+                                    {staticTexts['Refund & Cancellation Policy']}
+                                  </a>
+                                </li>
+                              )}
+
                             </ul>
                           </div>
                         </div>
@@ -634,6 +740,9 @@ const HeaderUnit = () => {
                 </button>
               </div>
 
+
+              {/*:::::::::::::::::::::::::::::::::::::  Humbarger start here ::::::::::::::::::::::::::::::: */}
+              {/*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::  */}
 
               <div className="desktop-humberger-menu">
                 <div className="hamburger" id="hamburger">
@@ -662,20 +771,29 @@ const HeaderUnit = () => {
                       <li>
                         <a target='_blank' href="https://consult.bestdocapp.com/home/KIMSTVM?version=new" className="menu-item ">{staticTexts['Telehealth']}</a>
                       </li>
-                      <li>
+                      {staticPageChecker['corporate'] && (<li>
                         <a href={basePath + "/corporate"} className="menu-item">{staticTexts['Corporate']}</a>
-                      </li>
+                      </li>)}
 
                       <li className="has-dropdown">
                         <a href="#" className="menu-item">{staticTexts['CSR']}<i className="fa-solid fa-angle-down"></i></a>
 
                         <ul className="submenu">
-                          <li className="submenu-item">
-                            <a href={basePath + "/csr-policy"}>{staticTexts['CSR Policy']}</a>
-                          </li>
-                          <li className="submenu-item">
-                            <a href={basePath + "/csr-initiative"}>{staticTexts['CSR Initiative']}</a>
-                          </li>
+                          {staticPageChecker['csr-policy'] && (
+                            <li className="submenu-item">
+                              <a href={basePath + "/csr-policy"}>
+                                {staticTexts['CSR Policy']}
+                              </a>
+                            </li>
+                          )}
+                          {staticPageChecker['csr-initiative'] && (
+                            <li className="submenu-item">
+                              <a href={basePath + "/csr-initiative"}>
+                                {staticTexts['CSR Initiative']}
+                              </a>
+                            </li>
+                          )}
+
                         </ul>
                       </li>
 
@@ -683,20 +801,35 @@ const HeaderUnit = () => {
                         <a href="#" className="menu-item">{staticTexts['Patients and Visitors']}<i className="fa-solid fa-angle-down"></i></a>
 
                         <ul className="submenu">
-                          <li className="submenu-item">
-                            <a href={basePath + "/testimonial"}>{staticTexts['Patient Testimonials']}</a>
-                          </li>
-                          <li className="submenu-item">
-                            <a href={basePath + "/patient-stories"}>{staticTexts['Patient Stories']}</a>
-                          </li>
-                          <li className="submenu-item">
-                            <a href={basePath + "/patients-rights-and-responsibilities"} >
-                              {staticTexts['Patient Rights']}
-                            </a>
-                          </li>
-                          <li className="submenu-item">
-                            <a href={basePath + "/guidebook-for-tpa-patients"}>{staticTexts['Guidelines']}</a>
-                          </li>
+                          {staticPageChecker['testimonial'] && (
+                            <li className="submenu-item">
+                              <a href={basePath + "/testimonial"}>
+                                {staticTexts['Patient Testimonials']}
+                              </a>
+                            </li>
+                          )}
+                          {staticPageChecker['patient-stories'] && (
+                            <li className="submenu-item">
+                              <a href={basePath + "/patient-stories"}>
+                                {staticTexts['Patient Stories']}
+                              </a>
+                            </li>
+                          )}
+                          {staticPageChecker['patients-rights-and-responsibilities'] && (
+                            <li className="submenu-item">
+                              <a href={basePath + "/patients-rights-and-responsibilities"}>
+                                {staticTexts['Patient Rights']}
+                              </a>
+                            </li>
+                          )}
+                          {staticPageChecker['guidebook-for-tpa-patients'] && (
+                            <li className="submenu-item">
+                              <a href={basePath + "/guidebook-for-tpa-patients"}>
+                                {staticTexts['Guidelines']}
+                              </a>
+                            </li>
+                          )}
+
                         </ul>
                       </li>
 
@@ -704,33 +837,68 @@ const HeaderUnit = () => {
                         <a href="#" className="menu-item">{staticTexts['Academics']}<i className="fa-solid fa-angle-down"></i></a>
 
                         <ul className="submenu">
-                          <li className="submenu-item">
-                            <a href={basePath + "/kisa-kimshealth-institute-of-skill-acquisition"}>{staticTexts['KISA (KIMSHEALTH Institute of Skill Acquisition)']}</a>
-                          </li>
-                          <li className="submenu-item">
-                            <a href={basePath + "/internal-medicine-training-imt"}>{staticTexts['Internal Medicine Training (IMT)']}</a>
-                          </li>
-                          <li className="submenu-item">
-                            <a href={basePath + "/emergency-medicine-program"}>{staticTexts['Emergency Medicine Program']}</a>
-                          </li>
-                          <li className="submenu-item">
-                            <a href={basePath + "/american-heart-association"}>{staticTexts['American Heart Association']}</a>
-                          </li>
-                          <li className="submenu-item">
-                            <a href={basePath + "/doctoral-courses"}>{staticTexts['Doctoral Courses']}</a>
-                          </li>
-                          <li className="submenu-item">
-                            <a href={basePath + "/socomer"}>{staticTexts['SOCOMER']}</a>
-                          </li>
+                          {staticPageChecker['kisa-kimshealth-institute-of-skill-acquisition'] && (
+                            <li className="submenu-item">
+                              <a href={basePath + "/kisa-kimshealth-institute-of-skill-acquisition"}>
+                                {staticTexts['KISA (KIMSHEALTH Institute of Skill Acquisition)']}
+                              </a>
+                            </li>
+                          )}
+                          {staticPageChecker['internal-medicine-training-imt'] && (
+                            <li className="submenu-item">
+                              <a href={basePath + "/internal-medicine-training-imt"}>
+                                {staticTexts['Internal Medicine Training (IMT)']}
+                              </a>
+                            </li>
+                          )}
+                          {staticPageChecker['emergency-medicine-program'] && (
+                            <li className="submenu-item">
+                              <a href={basePath + "/emergency-medicine-program"}>
+                                {staticTexts['Emergency Medicine Program']}
+                              </a>
+                            </li>
+                          )}
+                          {staticPageChecker['american-heart-association'] && (
+                            <li className="submenu-item">
+                              <a href={basePath + "/american-heart-association"}>
+                                {staticTexts['American Heart Association']}
+                              </a>
+                            </li>
+                          )}
+                          {staticPageChecker['doctoral-courses'] && (
+                            <li className="submenu-item">
+                              <a href={basePath + "/doctoral-courses"}>
+                                {staticTexts['Doctoral Courses']}
+                              </a>
+                            </li>
+                          )}
+                          {staticPageChecker['socomer'] && (
+                            <li className="submenu-item">
+                              <a href={basePath + "/socomer"}>
+                                {staticTexts['SOCOMER']}
+                              </a>
+                            </li>
+                          )}
+
                           {/* <li className="submenu-item">
-                            <a href={basePath + "#"}>{staticTexts['Nursing Recruitment']}</a>
-                          </li> */}
-                          <li className="submenu-item">
-                            <a href={basePath + "/paramedical-courses"}>{staticTexts['Paramedical Courses']}</a>
-                          </li>
-                          <li className="submenu-item">
-                            <a href={basePath + "/kimshealth-clinical-skills-and-simulation-centre"}>{staticTexts['KIMSHEALTH Clinical Skills and Simulation Centre']}</a>
-                          </li>
+                                <a href={basePath + "#"}>{staticTexts['Nursing Recruitment']}</a>
+                              </li> */}
+
+                          {staticPageChecker['paramedical-courses'] && (
+                            <li className="submenu-item">
+                              <a href={basePath + "/paramedical-courses"}>
+                                {staticTexts['Paramedical Courses']}
+                              </a>
+                            </li>
+                          )}
+                          {staticPageChecker['kimshealth-clinical-skills-and-simulation-centre'] && (
+                            <li className="submenu-item">
+                              <a href={basePath + "/kimshealth-clinical-skills-and-simulation-centre"}>
+                                {staticTexts['KIMSHEALTH Clinical Skills and Simulation Centre']}
+                              </a>
+                            </li>
+                          )}
+
                         </ul>
                       </li>
                       {/* <li>
@@ -739,67 +907,130 @@ const HeaderUnit = () => {
                       {/* <li>
                         <a href={basePath + "#"} className="menu-item ">{staticTexts['Quality Focus']}</a>
                       </li> */}
-                      <li>
-                        <a href={basePath + "/all-companies-on-panel"} className="menu-item ">{staticTexts['Insurance Providers']}</a>
-                      </li>
+                      {staticPageChecker['all-companies-on-panel'] && (
+                        <li>
+                          <a href={basePath + "/all-companies-on-panel"} className="menu-item ">
+                            {staticTexts['Insurance Providers']}
+                          </a>
+                        </li>
+                      )}
+
                       {/* <li>
-                        <a href={basePath + "#"} className="menu-item ">{staticTexts['Careers']}</a>
-                      </li> */}
-                      <li>
-                        <a href={basePath + "/blog"} className="menu-item ">{staticTexts['Blogs']}</a>
-                      </li>
-                      <li>
-                        <a href={basePath + "/doctor-talk"} className="menu-item ">
-                          {staticTexts['Expert Talks']}</a>
-                      </li>
-                      <li>
-                        <a href={basePath + "/ethics-committee"} className="menu-item ">{staticTexts['Ethics Committee']}</a>
-                      </li>
+                          <a href={basePath + "#"} className="menu-item ">
+                            {staticTexts['Careers']}
+                          </a>
+                        </li> */}
+
+                      {staticPageChecker['blog'] && (
+                        <li>
+                          <a href={basePath + "/blog"} className="menu-item ">
+                            {staticTexts['Blogs']}
+                          </a>
+                        </li>
+                      )}
+                      {staticPageChecker['doctor-talk'] && (
+                        <li>
+                          <a href={basePath + "/doctor-talk"} className="menu-item ">
+                            {staticTexts['Expert Talks']}
+                          </a>
+                        </li>
+                      )}
+                      {staticPageChecker['ethics-committee'] && (
+                        <li>
+                          <a href={basePath + "/ethics-committee"} className="menu-item ">
+                            {staticTexts['Ethics Committee']}
+                          </a>
+                        </li>
+                      )}
+
 
                       {/* OTHERS */}
                       <li className="has-dropdown">
                         <a href="#" className="menu-item">{staticTexts['Others']} <i className="fa-solid fa-angle-down"></i></a>
 
                         <ul className="submenu">
-                          <li className="submenu-item">
-                            <a href={basePath + "/media-and-events"}>{staticTexts['Events']}</a>
-                          </li>
-                          <li className="submenu-item">
-                            <a href={basePath + "/travel-clinic"}>{staticTexts['Travel Clinic']}</a>
-                          </li>
-                          <li className="submenu-item">
-                            <a href={basePath + "/ews-services"}>{staticTexts['EWS Services']}</a>
-                          </li>
-                          <li className="submenu-item">
-                            <a href={basePath + "/blood-bank"} >
-                              {staticTexts['Blood Bank']}
-                            </a>
-                          </li>
-                          <li className="submenu-item">
-                            <a href={basePath + "/bmw-report"}>{staticTexts['BMW Reports']}</a>
-                          </li>
+                          {staticPageChecker['media-and-events'] && (
+                            <li className="submenu-item">
+                              <a href={basePath + "/media-and-events"}>
+                                {staticTexts['Events']}
+                              </a>
+                            </li>
+                          )}
+                          {staticPageChecker['travel-clinic'] && (
+                            <li className="submenu-item">
+                              <a href={basePath + "/travel-clinic"}>
+                                {staticTexts['Travel Clinic']}
+                              </a>
+                            </li>
+                          )}
+                          {staticPageChecker['ews-services'] && (
+                            <li className="submenu-item">
+                              <a href={basePath + "/ews-services"}>
+                                {staticTexts['EWS Services']}
+                              </a>
+                            </li>
+                          )}
+                          {staticPageChecker['blood-bank'] && (
+                            <li className="submenu-item">
+                              <a href={basePath + "/blood-bank"}>
+                                {staticTexts['Blood Bank']}
+                              </a>
+                            </li>
+                          )}
+                          {staticPageChecker['bmw-report'] && (
+                            <li className="submenu-item">
+                              <a href={basePath + "/bmw-report"}>
+                                {staticTexts['BMW Reports']}
+                              </a>
+                            </li>
+                          )}
 
                           {/* <li className="submenu-item">
-                            <a href={basePath + "/faqs"}>{staticTexts['FAQs']}</a>
-                          </li> */}
-                          <li className="submenu-item">
-                            <a href={basePath + "/stents-price-list"}>{staticTexts['Stents Price List']}</a>
-                          </li>
-                          <li className="submenu-item">
-                            <a href={basePath + "/knee-implant-list"}>{staticTexts['Knee Implant List']}</a>
-                          </li>
-                          <li className="submenu-item">
-                            <a href={basePath + "/donor-information"}>{staticTexts['Donor Information']}</a>
-                          </li>
-                          <li className="submenu-item">
-                            <a href={basePath + "/privacy-policy"}>{staticTexts['Privacy Policies']}</a>
-                          </li>
-                          <li className="submenu-item">
-                            <a href={basePath + "/terms-and-conditions"}>{staticTexts['Term & Conditions']}</a>
-                          </li>
-                          <li className="submenu-item">
-                            <a href={basePath + "/refund-and-cancellation-policy"}>{staticTexts['Refund & Cancellation Policy']}</a>
-                          </li>
+                                <a href={basePath + "/faqs"}>{staticTexts['FAQs']}</a>
+                              </li> */}
+
+                          {staticPageChecker['stents-price-list'] && (
+                            <li className="submenu-item">
+                              <a href={basePath + "/stents-price-list"}>
+                                {staticTexts['Stents Price List']}
+                              </a>
+                            </li>
+                          )}
+                          {staticPageChecker['knee-implant-list'] && (
+                            <li className="submenu-item">
+                              <a href={basePath + "/knee-implant-list"}>
+                                {staticTexts['Knee Implant List']}
+                              </a>
+                            </li>
+                          )}
+                          {staticPageChecker['donor-information'] && (
+                            <li className="submenu-item">
+                              <a href={basePath + "/donor-information"}>
+                                {staticTexts['Donor Information']}
+                              </a>
+                            </li>
+                          )}
+                          {staticPageChecker['privacy-policy'] && (
+                            <li className="submenu-item">
+                              <a href={basePath + "/privacy-policy"}>
+                                {staticTexts['Privacy Policies']}
+                              </a>
+                            </li>
+                          )}
+                          {staticPageChecker['terms-and-conditions'] && (
+                            <li className="submenu-item">
+                              <a href={basePath + "/terms-and-conditions"}>
+                                {staticTexts['Term & Conditions']}
+                              </a>
+                            </li>
+                          )}
+                          {staticPageChecker['refund-and-cancellation-policy'] && (
+                            <li className="submenu-item">
+                              <a href={basePath + "/refund-and-cancellation-policy"}>
+                                {staticTexts['Refund & Cancellation Policy']}
+                              </a>
+                            </li>
+                          )}
 
                         </ul>
                       </li>

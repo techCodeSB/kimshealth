@@ -1,6 +1,7 @@
 "use client"
 import { getBaseUrl } from '@/helper/getBaseUrl';
 import langLoc from '@/helper/getLangLoc';
+import getStaticText from '@/helper/getStaticText';
 import React, { useEffect, useState } from 'react'
 
 const HospitalFilter = ({ title, selectedLocation }) => {
