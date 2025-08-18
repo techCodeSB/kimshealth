@@ -8,6 +8,7 @@ import langLoc from '@/helper/getLangLoc';
 import getStaticText from '@/helper/getStaticText';
 import React, { useEffect, useRef, useState } from 'react'
 import SearchBox from '@/components/Forms/SearchBox';
+import getStaticPage from '@/helper/staticPage';
 
 
 
@@ -20,6 +21,7 @@ const Footer = () => {
     const [staticTexts, setStaticTexts] = useState({});
     const [allLocations, setAllLocations] = useState([]);
     const [locationData, setLocationData] = useState();
+    const [staticPageChecker, setPageChecker] = useState({});
 
 
 
@@ -27,6 +29,7 @@ const Footer = () => {
         const fetchTexts = async () => {
             setStaticTexts({ ...await getStaticText() })
             setLocationData(await getLocation());
+            setPageChecker({ ...await getStaticPage() })
         };
 
         fetchTexts();

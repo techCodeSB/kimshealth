@@ -38,7 +38,6 @@ const HeaderCorporate = () => {
       setStaticTexts({ ...await getStaticText() })
       setPageChecker({ ...await getStaticPage() })
 
-
     };
 
     fetchTexts();

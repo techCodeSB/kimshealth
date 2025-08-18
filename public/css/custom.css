@@ -6094,3 +6094,11 @@ select option:hover {
 .bg-blue{
     background-color: blue !important;
 }
+.hospital-details-slider2.owl-carousel .owl-nav button.owl-prev{
+    left: 0 !important;
+    top: 35%;
+}
+.hospital-details-slider2.owl-carousel .owl-nav button.owl-next{
+    right: 0 !important;
+    top: 35%;
+}

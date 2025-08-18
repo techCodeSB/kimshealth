@@ -22,6 +22,7 @@ import TabHome from '@/components/TabHome';
 import mediaCoverData from '@/app/lib/getMediaCoverage';
 import mediaData from '@/app/lib/getMediaEvent';
 import galleryData from '@/app/lib/getGallery';
+import SocialMedia from '@/components/SocialMedia';
 
 
 
@@ -96,6 +97,7 @@ const HospitalDetails = async ({ params }) => {
         <>
             <Header />
             <div role="main" className="main">
+                
                 {/* <section className="section this-text pt-3 hospital-details-page-section d-lg-block  d-none"
                     style={hptData?.pageBanner?.[0]?.bannerImageDesktop?.url ? { backgroundImage: `url(${process.env.NEXT_PUBLIC_IMAGE_URL}${hptData?.pageBanner?.[0]?.bannerImageDesktop?.url})` } : {}}
                 >
@@ -164,7 +166,7 @@ const HospitalDetails = async ({ params }) => {
 
                 <section className="d-lg-block d-none">
                     <div className="container-wrapper">
-                        <div className="owl-carousel owl-theme homepage-slider">
+                        <div className="owl-carousel owl-theme hospital-details-slider2">
                             {
                                 hptData?.pageBanner?.map((banner, index) => {
                                     return <div className="item" key={index}>
@@ -178,7 +180,7 @@ const HospitalDetails = async ({ params }) => {
                 </section>
                 <section className="d-lg-none d-block">
                     <div className="container-wrapper">
-                        <div className="owl-carousel owl-theme homepage-slider">
+                        <div className="owl-carousel owl-theme hospital-details-slider">
                             {
                                 hptData?.pageBanner?.map((banner, index) => {
                                     return <div className="item" key={index}>
@@ -521,6 +523,7 @@ const HospitalDetails = async ({ params }) => {
                 </section> */}
 
             </div>
+            <SocialMedia />
             <Footer />
         </>
     )
