@@ -3,7 +3,7 @@ import langLoc from '@/helper/getLangLoc';
 import getStaticText from '@/helper/getStaticText';
 import React, { useEffect, useState } from 'react';
 import getCurrentLangLocClient from '@/helper/getCurrentLangLocClient';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 
 const Form3 = ({ title }) => {
@@ -20,7 +20,6 @@ const Form3 = ({ title }) => {
         setLoading(true);
         if ([formData.name, formData.number, formData.hospital].some((field) => !field || field === "")) {
             toast("Fill the required fields", {
-                position: 'bottom-right',
                 theme: 'light',
                 type: 'error',
                 closeOnClick: true
@@ -51,7 +50,6 @@ const Form3 = ({ title }) => {
             if (req.status !== 200) {
                 setLoading(false);
                 return toast(res.err, {
-                    position: 'bottom-right',
                     theme: 'light',
                     type: 'error',
                     closeOnClick: true
@@ -59,7 +57,6 @@ const Form3 = ({ title }) => {
             }
 
             toast("Successfully sent", {
-                position: 'bottom-right',
                 theme: 'light',
                 type: 'success',
                 closeOnClick: true
@@ -75,7 +72,6 @@ const Form3 = ({ title }) => {
             console.log(error)
             setLoading(false);
             return toast("Something went wrong", {
-                position: 'bottom-right',
                 theme: 'light',
                 type: 'error',
                 closeOnClick: true

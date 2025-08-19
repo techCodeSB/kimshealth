@@ -3,7 +3,7 @@ import getCurrentLangLocClient from "@/helper/getCurrentLangLocClient";
 import langLoc from "@/helper/getLangLoc";
 import getStaticText from "@/helper/getStaticText";
 import { useEffect, useState } from "react";
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 
 const SecondOpinionForm = ({ pageContent }) => {
@@ -23,7 +23,7 @@ const SecondOpinionForm = ({ pageContent }) => {
         setLoading(true);
         if ([formData.name, formData.speciality, formData.number].some((field) => !field || field === "")) {
             toast("Fill the required fields", {
-                position: 'bottom-right',
+                
                 theme: 'light',
                 type: 'error',
                 closeOnClick: true
@@ -60,7 +60,7 @@ const SecondOpinionForm = ({ pageContent }) => {
             if (req.status !== 200) {
                 setLoading(false);
                 return toast(res.err, {
-                    position: 'bottom-right',
+                    
                     theme: 'light',
                     type: 'error',
                     closeOnClick: true
@@ -68,7 +68,7 @@ const SecondOpinionForm = ({ pageContent }) => {
             }
 
             toast("Successfully sent", {
-                position: 'bottom-right',
+                
                 theme: 'light',
                 type: 'success',
                 closeOnClick: true
@@ -87,7 +87,7 @@ const SecondOpinionForm = ({ pageContent }) => {
             console.log(error)
             setLoading(false);
             return toast("Something went wrong", {
-                position: 'bottom-right',
+                
                 theme: 'light',
                 type: 'error',
                 closeOnClick: true
@@ -107,7 +107,7 @@ const SecondOpinionForm = ({ pageContent }) => {
         // Validate file type
         if (!acceptedType.includes(fileExtension)) {
             return toast("Invalid file type. Allowed: " + acceptedType.join(", "), {
-                position: 'bottom-right',
+                
                 theme: 'light',
                 type: 'error',
                 closeOnClick: true

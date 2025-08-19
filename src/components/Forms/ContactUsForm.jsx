@@ -3,6 +3,7 @@ import getStaticText from "@/helper/getStaticText";
 import langLoc from '@/helper/getLangLoc';
 import { useEffect, useState } from "react";
 import getCurrentLangLocClient from "@/helper/getCurrentLangLocClient";
+import { toast } from "react-toastify";
 
 
 
@@ -21,7 +22,6 @@ const ContactUsForm = () => {
         setLoading(true);
         if ([formData.fname, formData.lname, formData.number, formData.email, formData.hospital, formData.query].some((field) => !field || field === "")) {
             toast("Fill the required fields", {
-                position: 'bottom-right',
                 theme: 'light',
                 type: 'error',
                 closeOnClick: true
@@ -56,7 +56,6 @@ const ContactUsForm = () => {
             if (req.status !== 200) {
                 setLoading(false);
                 return toast(res.err, {
-                    position: 'bottom-right',
                     theme: 'light',
                     type: 'error',
                     closeOnClick: true
@@ -64,7 +63,6 @@ const ContactUsForm = () => {
             }
 
             toast("Successfully sent", {
-                position: 'bottom-right',
                 theme: 'light',
                 type: 'success',
                 closeOnClick: true
@@ -82,7 +80,6 @@ const ContactUsForm = () => {
             console.log(error)
             setLoading(false);
             return toast("Something went wrong", {
-                position: 'bottom-right',
                 theme: 'light',
                 type: 'error',
                 closeOnClick: true

@@ -48,7 +48,7 @@ const FormInternational = () => {
 
     if ([formData.name, formData.number].some((f) => !f)) {
       toast("Fill the required fields", {
-        position: "bottom-right",
+        
         theme: "light",
         type: "error",
         closeOnClick: true,
@@ -78,7 +78,7 @@ const FormInternational = () => {
       if (req.status !== 200) {
         setLoading(false);
         return toast(res.err, {
-          position: "bottom-right",
+          
           theme: "light",
           type: "error",
           closeOnClick: true,
@@ -86,7 +86,7 @@ const FormInternational = () => {
       }
 
       toast("Successfully sent", {
-        position: "bottom-right",
+        
         theme: "light",
         type: "success",
         closeOnClick: true,
@@ -96,7 +96,7 @@ const FormInternational = () => {
     } catch (error) {
       console.log(error);
       toast("Something went wrong", {
-        position: "bottom-right",
+        
         theme: "light",
         type: "error",
         closeOnClick: true,

@@ -20,7 +20,6 @@ const Form2 = ({ title, type, subject }) => {
     setLoading(true);
     if ([formData.name, formData.number, formData.hospital].some((field) => !field || field === "")) {
       toast("Fill the required fields", {
-        position: 'bottom-right',
         theme: 'light',
         type: 'error',
         closeOnClick: true
@@ -51,7 +50,6 @@ const Form2 = ({ title, type, subject }) => {
       if (req.status !== 200) {
         setLoading(false);
         return toast(res.err, {
-          position: 'bottom-right',
           theme: 'light',
           type: 'error',
           closeOnClick: true
@@ -59,7 +57,6 @@ const Form2 = ({ title, type, subject }) => {
       }
 
       toast("Successfully sent", {
-        position: 'bottom-right',
         theme: 'light',
         type: 'success',
         closeOnClick: true
@@ -76,7 +73,6 @@ const Form2 = ({ title, type, subject }) => {
       console.log(error)
       setLoading(false);
       return toast("Something went wrong", {
-        position: 'bottom-right',
         theme: 'light',
         type: 'error',
         closeOnClick: true

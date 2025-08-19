@@ -64,7 +64,7 @@ const Header = () => {
 
   if (loc.default === true) {
     return <>
-      <ToastContainer />
+      <ToastContainer position='bottom-center' />
       <HederCorporate />
     </>
   }

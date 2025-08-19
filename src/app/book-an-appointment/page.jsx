@@ -5,6 +5,7 @@ import Breadcrumb from '@/components/Breadcrumb';
 import getStaticText from '@/app/lib/getStaticTextServer';
 import getCurrentLangLoc from '@/app/lib/getCurrentLangLoc';
 import BookAnAppoinmentForm from '@/components/Forms/BookAnAppoinmentForm';
+import { ToastContainer } from 'react-toastify';
 
 const BookAnAppoinment = async ({ searchParams }) => {
     const URLParams = await searchParams;
@@ -39,7 +40,7 @@ const BookAnAppoinment = async ({ searchParams }) => {
                         </div>
                     </section>
 
-                    <BookAnAppoinmentForm pageContent={pageContent} URLParams={URLParams}/>
+                    <BookAnAppoinmentForm pageContent={pageContent} URLParams={URLParams} />
                 </div>
             </div>
             <Footer />

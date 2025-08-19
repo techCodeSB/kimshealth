@@ -3,6 +3,7 @@ import getStaticText from '@/helper/getStaticText';
 import getCurrentLangLocClient from '@/helper/getCurrentLangLocClient'
 import langLoc from '@/helper/getLangLoc'
 import React, { useEffect, useState } from 'react'
+import { toast } from 'react-toastify';
 
 
 
@@ -23,11 +24,9 @@ const BookAnAppoinmentForm = ({ pageContent, URLParams }) => {
 
 
     const sendMail = async () => {
-        console.log(formData);
         setLoading(true);
         if ([formData.name, formData.contactNumber, formData.location, formData.department, formData.doctor, formData.appoinmentDate].some((field) => !field || field === "")) {
             toast("Fill the required fields", {
-                position: 'bottom-right',
                 theme: 'light',
                 type: 'error',
                 closeOnClick: true
@@ -62,20 +61,20 @@ const BookAnAppoinmentForm = ({ pageContent, URLParams }) => {
             if (req.status !== 200) {
                 setLoading(false);
                 return toast(res.err, {
-                    position: 'bottom-right',
                     theme: 'light',
                     type: 'error',
                     closeOnClick: true
                 })
+
             }
 
             setLoading(false);
             toast("Successfully sent", {
-                position: 'bottom-right',
                 theme: 'light',
                 type: 'success',
                 closeOnClick: true
             });
+            
             setFormData({
                 name: '', contactNumber: '', location: '',
                 department: "", doctor: '', appoinmentDate: ''
@@ -85,9 +84,7 @@ const BookAnAppoinmentForm = ({ pageContent, URLParams }) => {
 
         } catch (error) {
             setLoading(false);
-            console.log(error)
             return toast("Something went wrong", {
-                position: 'bottom-right',
                 theme: 'light',
                 type: 'error',
                 closeOnClick: true
@@ -187,10 +184,12 @@ const BookAnAppoinmentForm = ({ pageContent, URLParams }) => {
             <section className="section">
                 <div className="container">
                     <div className="row justify-content-center">
+                        
                         <div className="col-md-12 mb-3">
                             <div className="book-appointment-card">
                                 <div className="main-heading text-center mb-4">
                                     <h2>{pageContent[1]?.title}</h2>
+                                    
                                 </div>
                                 <div className="row justify-content-center">
                                     <div className="col-md-10">
