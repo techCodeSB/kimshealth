@@ -11,7 +11,7 @@ const ContactUsForm = () => {
     const [allLocation, setAllLocation] = useState();
     const [selectedLocation, setSelectedLocation] = useState(null);
     const [formData, setFormData] = useState({
-        subject: 'Appointment Queries', fname: "", lname: '', number: '', email: '', hostpital: '', query: ''
+        subject: 'Appointment Queries', fname: "", lname: '', number: '', email: '', hospital: '', query: ''
     });
     const [loading, setLoading] = useState(false);
 
@@ -19,7 +19,7 @@ const ContactUsForm = () => {
 
     const sendMail = async () => {
         setLoading(true);
-        if ([formData.fname, formData.lname, formData.number, formData.email, formData.hostpital, formData.query].some((field) => !field || field === "")) {
+        if ([formData.fname, formData.lname, formData.number, formData.email, formData.hospital, formData.query].some((field) => !field || field === "")) {
             toast("Fill the required fields", {
                 position: 'bottom-right',
                 theme: 'light',
@@ -38,7 +38,7 @@ const ContactUsForm = () => {
                         <li><strong> Last Name: </strong> ${formData.lname}</li>
                         <li><strong> Mobile Number: </strong> ${formData.number}</li>
                         <li><strong> Email: </strong> ${formData.email}</li>
-                        <li><strong> Hospital: </strong> ${formData.hostpital.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}</li>
+                        <li><strong> Hospital: </strong> ${formData.hospital.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}</li>
                         <li><strong> Query: </strong> ${formData.query}</li>
                         <li><strong> Page URL: </strong> ${document.location.href}</li>
                     </ul>
@@ -48,7 +48,7 @@ const ContactUsForm = () => {
                 'headers': {
                     "Content-type": "application/json",
                 },
-                body: JSON.stringify({ data: htmlMsg, formType: "Contact", subject: formData.subject }),
+                body: JSON.stringify({ data: htmlMsg, formType: "Contact", subject: formData.subject, locationData: formData.hospital }),
             });
 
             const res = await req.json();
@@ -72,7 +72,7 @@ const ContactUsForm = () => {
 
             // Remove data
             setFormData({
-               ...formData ,fname: "", lname: '', number: '', email: '', hostpital: '', query: ''
+               ...formData ,fname: "", lname: '', number: '', email: '', hospital: '', query: ''
             })
             setLoading(false);
             return;
@@ -170,7 +170,7 @@ const ContactUsForm = () => {
                                 <label htmlFor=''>{staticTexts['Hospitals']}*</label>
                                 <select className="form-select from-location" value={selectedLocation} onChange={(e) => {
                                     setSelectedLocation(e.target.value)
-                                    setFormData({ ...formData, hostpital: e.target.value })
+                                    setFormData({ ...formData, hospital: e.target.value })
                                 }}>
                                     <option value={""}>{staticTexts['All Hospital']}</option>
                                     {
@@ -237,7 +237,7 @@ const ContactUsForm = () => {
                                 <label htmlFor=''>{staticTexts['Hospitals']}*</label>
                                 <select className="form-select from-location" value={selectedLocation} onChange={(e) => {
                                     setSelectedLocation(e.target.value)
-                                    setFormData({ ...formData, hostpital: e.target.value })
+                                    setFormData({ ...formData, hospital: e.target.value })
                                 }}>
                                     <option value={""}>{staticTexts['Select Hospital']}</option>
                                     {

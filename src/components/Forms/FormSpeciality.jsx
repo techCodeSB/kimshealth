@@ -42,7 +42,7 @@ const FormSpeciality = ({ title, speciality }) => {
                 'headers': {
                     "Content-type": "application/json",
                 },
-                body: JSON.stringify({ data: htmlMsg, formType: "Contact" }),
+                body: JSON.stringify({ data: htmlMsg, formType: "Contact", subject: speciality, locationData: formData.hospital }),
             });
 
             const res = await req.json();

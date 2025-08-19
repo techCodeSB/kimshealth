@@ -53,7 +53,7 @@ const BookAnAppoinmentForm = ({ pageContent, URLParams }) => {
                 'headers': {
                     "Content-type": "application/json",
                 },
-                body: JSON.stringify({ data: htmlMsg, formType: "Book Appointment" }),
+                body: JSON.stringify({ data: htmlMsg, formType: "Book Appointment" , locationData: formData.location}),
                 // credentials: "include",
             });
 

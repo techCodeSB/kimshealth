@@ -44,7 +44,7 @@ const Form1 = ({ title, type, subject }) => {
         'headers': {
           "Content-type": "application/json",
         },
-        body: JSON.stringify({ data: htmlMsg, formType: type? type: "Contact" }),
+        body: JSON.stringify({ data: htmlMsg, formType: type? type: "Contact" , locationData: formData.hospital}),
       });
 
       const res = await req.json();

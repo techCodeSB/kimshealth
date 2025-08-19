@@ -43,7 +43,7 @@ const Form2 = ({ title, type, subject }) => {
         'headers': {
           "Content-type": "application/json",
         },
-        body: JSON.stringify({ data: htmlMsg, formType: "Contact" }),
+        body: JSON.stringify({ data: htmlMsg, formType: "Contact", locationData: formData.hospital }),
       });
 
       const res = await req.json();
@@ -141,7 +141,7 @@ const Form2 = ({ title, type, subject }) => {
               value={formData.number}
             />
           </div>
-          <div className="col-xl-8 col-lg-8 col-md-8 col-12">
+          <div className="col-xl-8 col-lg-8 col-md-8 col-12">, location: formData.hospital
             <div className="from-btn">
               <button type="button" className="btn" disabled={loading} onClick={sendMail}>
                 {staticTexts['Request a Call Back']}

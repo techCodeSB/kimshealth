@@ -84,28 +84,28 @@ const emailFrom = {
 };
 
 export async function POST(req) {
-  const cookieStore = await cookies();
-  const getLoc = JSON.parse(cookieStore.get("systemLocation")?.value);
-  const loc = getLoc.slug;
 
   try {
-    const { data, formType, sub, attachment, filename } = await req.json();
+    const { data, formType, sub, attachment, filename, locationData } = await req.json();
+    const cookieStore = await cookies();
+    const getLoc = JSON.parse(cookieStore.get("systemLocation")?.value);
+    let loc = locationData? locationData: getLoc.slug;
 
     if (!data || !loc || !formType) {
       return res.json({ err: "Fill the required fields" }, { status: 400 });
     }
 
 
-    const recipients = emailData?.[loc]?.[formType];
+    let recipients = emailData?.[loc]?.[formType];
     if (!recipients || recipients.length === 0) {
       return res.json({ err: "No email mapping found" }, { status: 404 });
     }
 
 
     const transporter = nodemailer.createTransport({
-      host: "smtp.gmail.com",
-      port: 465,
-      secure: true,
+      host: "email-smtp.us-east-1.amazonaws.com",
+      port: 587,
+      secure: false,
       auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS,
@@ -115,8 +115,9 @@ export async function POST(req) {
     // Send mail
     const mailOptions = {
       from: emailFrom[loc],
-      // to: recipients.join(","),
-      to: "sbhadipchanda@gmail.com",
+      to: recipients.join(","),
+      // cc: "mohit@healthcaremartech.com", // CC
+      // bcc: "sbhadipchanda@gmail.com", // hidden recipient
       subject: !sub ? `${formType}` : `${formType} : ${sub}`,
       html: data,
     };
