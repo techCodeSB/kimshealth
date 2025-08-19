@@ -1,20 +1,31 @@
 import Script from "next/script";
+import { getStaticPageContent } from "./lib/getStaticPageContent";
+import { headers } from "next/headers";
+import parse from "html-react-parser";
+import getMetadata from "./lib/getMetaData";
 
 
-      // ******************
-      // JAY JAGANNATH O!O;
-      // ******************
+// *******************************
+// JAY JAGANNATH O!O JAY JAGANNATH
+// *******************************
 // *******************************
 // Developed by Techinnovator team
-// ********************************
+// *******************************
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  let metaData = await getMetadata();
+
+
   return (
     <html lang="en">
       <head>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>KIMS</title>
+        <title>{metaData?.metaTitle || "KIMS HEALTH"}</title>
+        <meta name="description" content={metaData?.metaDescription || "KIMS HEALTH"}/>
+        <meta name="keywords" content={metaData?.metaKeyword || "KIMS HEALTH"}/>
+        {metaData?.extraHeaderCode &&<>{parse(metaData?.extraHeaderCode)}</>}
+
         {/* <!-- bootstrap cdn --> */}
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
         {/* <!-- font-awasome cdn --> */}

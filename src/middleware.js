@@ -5,7 +5,7 @@ export async function middleware(request) {
     const { nextUrl } = request;
     const url = nextUrl.pathname;
     const segments = url.split('/').filter(Boolean);
-    //console.log(url)
+
 
     const first = segments[0];
     const second = segments[1];
@@ -100,6 +100,9 @@ export async function middleware(request) {
 
     const response = NextResponse.next();
 
+    // Set Which page;
+    response.headers.set("x-meta-page", url)
+
     // Set cookies
     response.cookies.set("systemLang", JSON.stringify(lang), { path: "/", maxAge: 60 * 60 * 24 * 365 });
     response.cookies.set("systemLocation", JSON.stringify(loc), { path: "/", maxAge: 60 * 60 * 24 * 365 });
@@ -111,9 +114,9 @@ export async function middleware(request) {
 }
 
 export const config = {
-  matcher: [
-    // Match everything except static files, images, fonts, and APIs
-    "/((?!_next/|api/|js/|css/|img/|fonts/|.well-known/|favicon.ico|robots.txt|sitemap.xml).*)",
-  ],
+    matcher: [
+        // Match everything except static files, images, fonts, and APIs
+        "/((?!_next/|api/|js/|css/|img/|fonts/|.well-known/|favicon.ico|robots.txt|sitemap.xml).*)",
+    ],
 };
 
