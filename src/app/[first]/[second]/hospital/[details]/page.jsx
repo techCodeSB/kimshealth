@@ -322,7 +322,7 @@ const HospitalDetails = async ({ params }) => {
                     </div>
                 </section>
 
-                <BookAnAppoinmentShort basePath={basePath} extraClass={"py-5"} currentLangLoc={getLangLoc} />
+                <BookAnAppoinmentShort basePath={basePath} extraClass={"py-4"} currentLangLoc={getLangLoc} />
 
                 <section className="section pt-lg-0 pt-2 pb-2 d-lg-none d-block" data-aos="fade-up">
                     <div className="container-fluid ps-0">
