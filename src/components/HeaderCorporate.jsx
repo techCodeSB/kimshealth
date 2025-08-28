@@ -146,7 +146,7 @@ const HeaderCorporate = () => {
             <div className="header-contact d-flex align-items-center justify-content-center position-relative">
               <ul>
                 <li><a href={`${basePath}/about-us`}>{staticTexts['About Us']}</a></li>
-                <li><a href={`${basePath}/career`}>{staticTexts['Career']}</a></li>
+                {/* <li><a href={`${basePath}/career`}>{staticTexts['Career']}</a></li> */}
                 <li><a href={`${basePath}/at-home-services`}>{staticTexts['Home Care']}</a></li>
                 {/* <li><a href={`${basePath}/second-opinion`}>{staticTexts['Second Opinion']}</a></li> */}
                 {/* <li><a href={`${basePath}/ambulance-services`}>{staticTexts['Call Ambulance']}</a></li> */}
@@ -433,7 +433,7 @@ const HeaderCorporate = () => {
                       </div>
                     </div>
                   </li>
-                  <li className="quicklink-header"><a href={`${basePath}/career`} className="anchor-menu">{staticTexts['Career']}</a></li>
+                  {/* <li className="quicklink-header"><a href={`${basePath}/career`} className="anchor-menu">{staticTexts['Career']}</a></li> */}
                   <li className="quicklink-header"><a href={`${basePath}/at-home-services`} className="anchor-menu">{staticTexts['Home Care']}</a></li>
                   {/* <li className="quicklink-header"><a href={`${basePath}/second-opinion`} className="anchor-menu">{staticTexts['Second Opinion']}</a></li> */}
                   {/* <li className="quicklink-header"><a href={`${basePath}/ambulance-services`} className="anchor-menu">{staticTexts['Call Ambulance']}</a></li> */}

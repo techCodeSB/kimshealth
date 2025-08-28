@@ -24,14 +24,14 @@ const DoctorDetails = async ({ params }) => {
 
     // :::::: ALL DATA SETS ::::::
     const docTalkDataSet = {
-        sectionTitle: data.doctorTalk.title,
+        sectionTitle: data.doctorTalk?.title,
         buttonText: 'View All', buttonURL: basePath + "/doctor-talk?doctor=" + data.slug,
         data: await doctorTalkData.getByDoctor({ id: data.id, langLoc: getLangLoc }),
         baseUrl: basePath
     }
 
     const blogDataSet = {
-        sectionTitle: data.blogSection.title,
+        sectionTitle: data.blogSection?.title,
         buttonText: 'View All', buttonURL: basePath + "/blog?doctor=" + data.slug,
         data: await blogData.getByDoctor({ id: data.id, langLoc: getLangLoc }),
         baseUrl: basePath

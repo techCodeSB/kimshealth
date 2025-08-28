@@ -353,7 +353,7 @@ const Footer = () => {
                                     )}
                                     {staticPageChecker['second-opinion'] && (
                                         <li>
-                                            <a href={basePath + "/second-opinion"}>{staticTexts['In-Patient Deposit']}</a>
+                                            <a href={basePath + "/second-opinion"}>{staticTexts['Second Opinion']}</a>
                                         </li>
                                     )}
                                     {staticPageChecker['organ-transplant-compliance'] && (
