@@ -180,7 +180,7 @@ const HospitalDetails = async ({ params }) => {
                 </section>
                 <section className="d-lg-none d-block">
                     <div className="container-wrapper">
-                        <div className="owl-carousel owl-theme hospital-details-slider">
+                        <div className="owl-carousel owl-theme hospital-details-slider2">
                             {
                                 hptData?.pageBanner?.map((banner, index) => {
                                     return <div className="item" key={index}>

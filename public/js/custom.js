@@ -99,10 +99,12 @@ $('.hospital-details-slider2').owlCarousel({
     nav: true,
     responsive: {
         0: {
-            items: 1
+            items: 1,
+    nav: false
         },
         600: {
-            items: 1
+            items: 1,
+    nav: false
         },
         1000: {
             items: 1
