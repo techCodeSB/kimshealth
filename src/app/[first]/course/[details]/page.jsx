@@ -73,7 +73,7 @@ const DoctoralCourseDetails = async ({ params }) => {
                     <section className="section">
                         <div className="container">
                             <div className="main-heading">
-                                <h2>{courseDetails.courseSection.title}</h2>
+                                <h2>{courseDetails.courseSection?.title}</h2>
                             </div>
                             <div className="owl-carousel owl-theme hospital-slider">
                                 {
