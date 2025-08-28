@@ -120,9 +120,9 @@ const getMetadata = async () => {
         metaData = data?.metaSection;
     }
     else if (metaPage.includes("/speciality") && parts[parts.indexOf("speciality") + 1]) {
-        
+
         const data = await getSpecialityData.getSingleSpeciality({
-            slug: parts[parts.indexOf("speciality") + 1], langLoc: langLoc
+            slug: parts[parts.indexOf("speciality") + 1], langLoc: langLoc, isMeta: true
         });
         metaData = data?.metaSection;
     }
@@ -131,9 +131,9 @@ const getMetadata = async () => {
             slug: parts[parts.indexOf("testimonial") + 1], langLoc: langLoc
         });
         metaData = data?.metaSection;
-    } 
+    }
     else {
-        const data = await getStaticPageContent(parts[lastIndex]);
+        const data = await getStaticPageContent(parts[lastIndex], "", true, true, true);
         metaData = data?.data[0]?.metaSection;
     }
 

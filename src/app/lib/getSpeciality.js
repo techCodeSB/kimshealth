@@ -1,3 +1,5 @@
+import { notFound } from "next/navigation";
+
 const getSpecialityData = {
     // FOR CAROUSEL COMPONENT
     getAll: async (limit,) => {
@@ -97,10 +99,18 @@ const getSpecialityData = {
 
 
     // FOR DETAILS PAGE;
-    getSingleSpeciality: async ({ slug, langLoc }) => {
+    getSingleSpeciality: async ({ slug, langLoc, isMeta }) => {
         // get speciality id;
         const getIdReq = await fetch(process.env.NEXT_PUBLIC_CMS_API_URL + `/specialities?filters[slug][$eq]=${slug}`);
         const getIdRes = await getIdReq.json();
+
+        // if slug not exists
+        if(isMeta && getIdRes.data.length === 0){
+            return null;
+        }
+        else if(!isMeta && getIdRes.data.length === 0){
+           return notFound();
+        }   
         const id = getIdRes.data[0].id;
 
         // Get speciality data using id;
