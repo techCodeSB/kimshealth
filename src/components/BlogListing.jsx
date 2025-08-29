@@ -114,7 +114,7 @@ const BlogListing = ({ basePath, speciality, langLoc, URLParams }) => {
             <div className="container">
                 <div className="row">
                     <div className="col-md-3 mb-3">
-                        <div className="blog-left-col">
+                        <div className="blog-left-col sticky-from">
                             <h3>{staticText['By Specialties']}</h3>
 
                             <div className="rounded-field-form my-3">
