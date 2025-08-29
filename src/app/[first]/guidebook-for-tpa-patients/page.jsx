@@ -66,8 +66,8 @@ const GuidebookTpa = async () => {
                     <section className="section">
                         <div className="container">
                             <div className="main-heading sub-heading main-list">
-                                <h2>{pageContent[2]?.title}</h2>
-                                <div dangerouslySetInnerHTML={{ __html: pageContent[2]?.details || "" }}></div>
+                                <h2>{pageContent[3]?.title}</h2>
+                                <div dangerouslySetInnerHTML={{ __html: pageContent[3]?.details || "" }}></div>
                             </div>
                         </div>
                     </section>
