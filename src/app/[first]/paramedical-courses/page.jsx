@@ -8,6 +8,7 @@ import courseData from '@/app/lib/getCourse';
 import Form1 from '@/components/Forms/Form1';
 import Breadcrumb from '@/components/Breadcrumb';
 import getCurrentLangLoc from '@/app/lib/getCurrentLangLoc';
+import CourseButton from '@/components/CourseButton';
 
 
 
@@ -85,20 +86,18 @@ const ParamedicalCourse = async () => {
                                         </div>
                                         <div className="row">
                                             {
-                                                allDiplomaCourses.slice(0, 8).map((l, i) => {
+                                                allDiplomaCourses.map((l, i) => {
                                                     return <div className="col-md-6 mb-3" key={i}>
                                                         <div className="doctoral-card-content">
                                                             <h3 className="text-dark">{l.title}</h3>
                                                             <ul>
-                                                                <li className="hourglass">{staticText['Duration']}: {l.duration}</li>
-                                                                <li className="luxury">{staticText['Eligibility']}: {l.eligibility} </li>
-                                                                <li className="calender-doc">
-                                                                    {staticText['Commencement']}: {l.commencement}</li>
-                                                                <li className="car-seat">{staticText['No of seat']}: {l.noOfSeat}</li>
+                                                                {l.duration && <li className="hourglass">{staticText['Duration']}: {l.duration}</li>}
+                                                                {l.eligibility && <li className="luxury">{staticText['Eligibility']}: {l.eligibility} </li>}
+                                                                {l.commencement && <li className="calender-doc">
+                                                                    {staticText['Commencement']}: {l.commencement}</li>}
+                                                                {l.noOfSeat && <li className="car-seat">{staticText['No of seat']}: {l.noOfSeat}</li>}
                                                             </ul>
-                                                            <a href={basePath + "/course/" + l.slug} className="doctotal-btn">
-                                                                {staticText['View More']}
-                                                            </a>
+                                                            <CourseButton corseCategory={l.courseCategory.title} courseName={l.title}/>
                                                         </div>
                                                     </div>
                                                 })

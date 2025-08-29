@@ -6102,3 +6102,11 @@ select option:hover {
     right: 0 !important;
     top: 35%;
 }
+.course-popup-form h3{
+  color: #b71c2b;
+  font-weight: 600;
+  margin-bottom: 15px;
+  line-height: 22px;
+  font-size: 20px !important;
+  text-align: center;
+}

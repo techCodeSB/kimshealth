@@ -9,6 +9,7 @@ import courseData from '@/app/lib/getCourse';
 import getStaticText from '@/app/lib/getStaticTextServer';
 import Breadcrumb from '@/components/Breadcrumb';
 import getCurrentLangLoc from '@/app/lib/getCurrentLangLoc';
+import CourseButton from '@/components/CourseButton'
 
 
 
@@ -22,7 +23,6 @@ const KisaHealth = async () => {
     const pageContent = data?.data[0]?.pageContent;
     const pageMeta = data?.data[0]?.metaSection;
     let allKisaCourse = await courseData.getAll({ id: pageContent[4].courseCategory?.id, langLoc: getLangLoc });;
-
 
 
 
@@ -96,7 +96,7 @@ const KisaHealth = async () => {
 
                                             <div className="row">
                                                 {
-                                                    allKisaCourse?.slice(0, 8).map((l, i) => {
+                                                    allKisaCourse?.map((l, i) => {
                                                         return <div className="col-md-4" key={i}>
                                                             <div className="procedure-acc-card mb-3">
                                                                 <div className="accordion" id="accordionExample">
@@ -111,18 +111,18 @@ const KisaHealth = async () => {
                                                                         <div id={"collapse" + i} className={`accordion-collapse collapse ${i <= 2 ? "show" : ""}`}>
                                                                             <div className="accordion-body main-list px-0 pt-0">
                                                                                 <ul>
-                                                                                    <li>{staticText['Affiliation']}: {l.affiliation}</li>
-                                                                                    <li>{staticText['Entry Level']}: {l.entryLevel}</li>
-                                                                                    <li>
+                                                                                    {l.affiliation && <li>{staticText['Affiliation']}: {l.affiliation}</li>}
+                                                                                    {l.entryLevel && <li>{staticText['Entry Level']}: {l.entryLevel}</li>}
+                                                                                    {l.duration && <li>
                                                                                         {staticText['Course Duration']}: {l.duration}
-                                                                                    </li>
-                                                                                    <li>{staticText['Fees']}: {l.fees}</li>
-                                                                                    <li>
+                                                                                    </li>}
+                                                                                    {l.fees && <li>{staticText['Fees']}: {l.fees}</li>}
+                                                                                    {l.coursePeriodStipend && <li>
                                                                                         {staticText['Course period (stipend)']}: {l.coursePeriodStipend}
-                                                                                    </li>
-                                                                                    <li>{staticText['Internship (stipend)']}: {l.internshipStipend}</li>
+                                                                                    </li>}
+                                                                                    {l.internshipStipend && <li>{staticText['Internship (stipend)']}: {l.internshipStipend}</li>}
                                                                                 </ul>
-                                                                                <a href={basePath + "/course/" + l.slug} className="doctotal-btn">{staticText['View More']}</a>
+                                                                                <CourseButton corseCategory={l.courseCategory.title} courseName={l.title}/>
                                                                             </div>
                                                                         </div>
                                                                     </div>

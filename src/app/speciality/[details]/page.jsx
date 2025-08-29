@@ -145,7 +145,7 @@ const SpecialityDetails = async ({ params, searchParams }) => {
                     </section>
 
 
-                    <section className="section"
+                    {allSubSpeciality.length>0 && <section className="section"
                         style={{ background: "linear-gradient(180deg,rgba(255, 255, 255, 1) 45%, rgba(248, 248, 248, 1) 74%)" }}>
                         <div className="container">
                             <div className="details-card-wrapper pb-5">
@@ -175,7 +175,7 @@ const SpecialityDetails = async ({ params, searchParams }) => {
                                 </div>
                             </div>
                         </div>
-                    </section>
+                    </section>}
 
 
 
