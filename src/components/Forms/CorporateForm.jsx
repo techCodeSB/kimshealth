@@ -1,117 +1,89 @@
 "use client"
 import getStaticText from '@/helper/getStaticText';
 import React, { useEffect, useState } from 'react'
-import langLoc from '@/helper/getLangLoc';
-import getCurrentLangLocClient from '@/helper/getCurrentLangLocClient';
 import { toast } from 'react-toastify';
-
-
 
 const CorporateForm = () => {
     const [staticTexts, setStaticTexts] = useState({});
-    const [formData, setFormData] = useState({
-        type: "", email: "", report_notice_type: ""
-    });
     const [loading, setLoading] = useState(false);
 
-    const sendMail = async () => {
+    // separate states for each block
+    const [noticeForm, setNoticeForm] = useState({ email: "", report_notice_type: "", type: "Notice of General Meetings" });
+    const [annualForm, setAnnualForm] = useState({ email: "", report_notice_type: "", type: "Download Annual Report" });
+    const [draftForm, setDraftForm] = useState({ email: "", report_notice_type: "", type: "Download Draft Annual Return" });
+
+    const sendMail = async (formData) => {
         setLoading(true);
+
         if ([formData.email, formData.report_notice_type].some((field) => !field || field === "")) {
-            toast("Fill the required fields", {
-                theme: 'light',
-                type: 'error',
-                closeOnClick: true
-            })
+            toast("Fill the required fields", { theme: 'light', type: 'error', closeOnClick: true });
             setLoading(false);
             return;
         }
 
         try {
             const htmlMsg = `
-        <ul>
-          <li><strong> Subject: </strong> ${`${formData.type}`}</li>
-          <li><strong> Email: </strong> ${formData.email}</li>
-          <li><strong> Report/Notice: </strong> ${formData.report_notice_type}</li>
-          <li><strong> Page URL: </strong> ${document.location.href}</li>
-        </ul>`;
+                <ul>
+                    <li><strong> Subject: </strong> ${formData.type}</li>
+                    <li><strong> Email: </strong> ${formData.email}</li>
+                    <li><strong> Report/Notice: </strong> ${formData.report_notice_type}</li>
+                    <li><strong> Page URL: </strong> ${document.location.href}</li>
+                </ul>`;
+
             const req = await fetch("/api/send-mail", {
                 method: 'POST',
-                'headers': {
-                    "Content-type": "application/json",
-                },
+                headers: { "Content-type": "application/json" },
                 body: JSON.stringify({ data: htmlMsg, formType: "Corporate" }),
             });
 
             const res = await req.json();
 
             if (req.status !== 200) {
-                setLoading(false);
-                return toast(res.err, {
-                    theme: 'light',
-                    type: 'error',
-                    closeOnClick: true
-                })
+                toast(res.err, { theme: 'light', type: 'error', closeOnClick: true });
+            } else {
+                toast("Successfully sent", { theme: 'light', type: 'success', closeOnClick: true });
             }
 
-            toast("Successfully sent", {
-                theme: 'light',
-                type: 'success',
-                closeOnClick: true
-            })
-
-            // Remove data
-            setFormData({ type: "", email: "", report_notice_type: "" });
-            setLoading(false);
-            return;
-
+            // reset the specific form
+            if (formData.type === "Notice of General Meetings") setNoticeForm({ email: "", report_notice_type: "", type: formData.type });
+            if (formData.type === "Download Annual Report") setAnnualForm({ email: "", report_notice_type: "", type: formData.type });
+            if (formData.type === "Download Draft Annual Return") setDraftForm({ email: "", report_notice_type: "", type: formData.type });
 
         } catch (error) {
-            console.log(error)
-            setLoading(false);
-            return toast("Something went wrong", {
-                theme: 'light',
-                type: 'error',
-                closeOnClick: true
-            })
+            console.log(error);
+            toast("Something went wrong", { theme: 'light', type: 'error', closeOnClick: true });
         }
 
+        setLoading(false);
     }
 
-
     useEffect(() => {
-        const fetchTexts = async () => {
-            setStaticTexts({ ...await getStaticText() })
-        };
-
+        const fetchTexts = async () => setStaticTexts({ ...await getStaticText() });
         fetchTexts();
     }, []);
 
-
-
     return (
         <div className="row">
+
+            {/* Notice Form */}
             <div className="col-md-4 mb-3">
                 <div className="corporate-notice-form association-form-card">
                     <h3>{staticTexts['Notice of General Meetings']}</h3>
                     <div className="row">
                         <div className="col-md-12 mb-3">
                             <div className="input-group mb-lg-0 mb-3">
-                                <span className="input-group-text" id="from-icon">
-                                    <i className="fa-regular fa-envelope"></i>
-                                </span>
-                                <input type="text" className="form-control" placeholder={staticTexts['Email']} name="Email"
-                                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                    value={formData.email} />
+                                <span className="input-group-text"><i className="fa-regular fa-envelope"></i></span>
+                                <input type="text" className="form-control" placeholder={staticTexts['Email']}
+                                    value={noticeForm.email}
+                                    onChange={(e) => setNoticeForm({ ...noticeForm, email: e.target.value })} />
                             </div>
-
                         </div>
                         <div className="col-md-12 mb-3">
                             <div className="input-group mb-lg-0 mb-3">
-                                <span className="input-group-text" id="from-icon">
-                                    <i className="fa-regular fa-pen-to-square"></i>
-                                </span>
-                                <select className="form-select from-location" onChange={(e) => setFormData({ ...formData, report_notice_type: e.target.value })}
-                                    value={formData.report_notice_type}>
+                                <span className="input-group-text"><i className="fa-regular fa-pen-to-square"></i></span>
+                                <select className="form-select from-location"
+                                    value={noticeForm.report_notice_type}
+                                    onChange={(e) => setNoticeForm({ ...noticeForm, report_notice_type: e.target.value })}>
                                     <option value="">{staticTexts['Select Notice']}</option>
                                     <option value="Notice - 20th AGM">Notice - 20th AGM</option>
                                     <option value="Notice - 21st AGM">Notice - 21st AGM</option>
@@ -130,11 +102,9 @@ const CorporateForm = () => {
                             </div>
                         </div>
                         <div className="col-md-12 mb-3 text-start">
-                            <button
-                                className="btn mb-lg-0 mb-2 hospital-primarybtn px-5 py-2" disabled={loading} onClick={(e) => {
-                                    setFormData({ ...formData, type: 'Notice of General Meetings' });
-                                    sendMail();
-                                }}>
+                            <button className="btn hospital-primarybtn px-5 py-2"
+                                disabled={loading}
+                                onClick={() => sendMail(noticeForm)}>
                                 {staticTexts['Submit']}
                                 {loading && <i className="fas fa-spinner fa-spin ms-1"></i>}
                             </button>
@@ -143,27 +113,25 @@ const CorporateForm = () => {
                 </div>
             </div>
 
+            {/* Annual Report Form */}
             <div className="col-md-4 mb-3">
                 <div className="corporate-notice-form association-form-card">
                     <h3>{staticTexts['Download Annual Report']}</h3>
                     <div className="row">
                         <div className="col-md-12 mb-3">
                             <div className="input-group mb-lg-0 mb-3">
-                                <span className="input-group-text" id="from-icon">
-                                    <i className="fa-regular fa-envelope"></i>
-                                </span>
-                                <input type="text" className="form-control" placeholder={staticTexts['Email']} name="Email" onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                    value={formData.email} />
+                                <span className="input-group-text"><i className="fa-regular fa-envelope"></i></span>
+                                <input type="text" className="form-control" placeholder={staticTexts['Email']}
+                                    value={annualForm.email}
+                                    onChange={(e) => setAnnualForm({ ...annualForm, email: e.target.value })} />
                             </div>
-
                         </div>
                         <div className="col-md-12 mb-3">
                             <div className="input-group mb-lg-0 mb-3">
-                                <span className="input-group-text" id="from-icon">
-                                    <i className="fa-regular fa-pen-to-square"></i>
-                                </span>
-                                <select className="form-select from-location" onChange={(e) => setFormData({ ...formData, report_notice_type: e.target.value })}
-                                    value={formData.report_notice_type}>
+                                <span className="input-group-text"><i className="fa-regular fa-pen-to-square"></i></span>
+                                <select className="form-select from-location"
+                                    value={annualForm.report_notice_type}
+                                    onChange={(e) => setAnnualForm({ ...annualForm, report_notice_type: e.target.value })}>
                                     <option value="">{staticTexts['Select Report']}</option>
                                     <option value="FY 2014-2015">FY 2014-2015</option>
                                     <option value="FY 2015-2016">FY 2015-2016</option>
@@ -180,11 +148,9 @@ const CorporateForm = () => {
                             </div>
                         </div>
                         <div className="col-md-12 mb-3 text-start">
-                            <button
-                                className="btn mb-lg-0 mb-2 hospital-primarybtn px-5 py-2" disabled={loading} onClick={(e) => {
-                                    setFormData({ ...formData, type: 'Download Annual Report' });
-                                    sendMail();
-                                }}>
+                            <button className="btn hospital-primarybtn px-5 py-2"
+                                disabled={loading}
+                                onClick={() => sendMail(annualForm)}>
                                 {staticTexts['Submit']}
                                 {loading && <i className="fas fa-spinner fa-spin ms-1"></i>}
                             </button>
@@ -193,27 +159,25 @@ const CorporateForm = () => {
                 </div>
             </div>
 
+            {/* Draft Annual Return Form */}
             <div className="col-md-4 mb-3">
                 <div className="corporate-notice-form association-form-card">
                     <h3>{staticTexts['Download Draft Annual Return']}</h3>
                     <div className="row">
                         <div className="col-md-12 mb-3">
                             <div className="input-group mb-lg-0 mb-3">
-                                <span className="input-group-text" id="from-icon">
-                                    <i className="fa-regular fa-envelope"></i>
-                                </span>
-                                <input type="text" className="form-control" placeholder={staticTexts['Email']} name="Email" onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                    value={formData.email} />
+                                <span className="input-group-text"><i className="fa-regular fa-envelope"></i></span>
+                                <input type="text" className="form-control" placeholder={staticTexts['Email']}
+                                    value={draftForm.email}
+                                    onChange={(e) => setDraftForm({ ...draftForm, email: e.target.value })} />
                             </div>
-
                         </div>
                         <div className="col-md-12 mb-3">
                             <div className="input-group mb-lg-0 mb-3">
-                                <span className="input-group-text" id="from-icon">
-                                    <i className="fa-regular fa-pen-to-square"></i>
-                                </span>
-                                <select className="form-select from-location" onChange={(e) => setFormData({ ...formData, report_notice_type: e.target.value })}
-                                    value={formData.report_notice_type}>
+                                <span className="input-group-text"><i className="fa-regular fa-pen-to-square"></i></span>
+                                <select className="form-select from-location"
+                                    value={draftForm.report_notice_type}
+                                    onChange={(e) => setDraftForm({ ...draftForm, report_notice_type: e.target.value })}>
                                     <option value="">{staticTexts['Select Report']}</option>
                                     <option value="Annual Return - 2020-21">Annual Return - 2020-21</option>
                                     <option value="Annual Return - 2021-22">Annual Return - 2021-22</option>
@@ -223,11 +187,9 @@ const CorporateForm = () => {
                             </div>
                         </div>
                         <div className="col-md-12 mb-3 text-start">
-                            <button
-                                className="btn mb-lg-0 mb-2 hospital-primarybtn px-5 py-2" disabled={loading} onClick={(e) => {
-                                    setFormData({ ...formData, type: 'Download Draft Annual Return' });
-                                    sendMail();
-                                }}>
+                            <button className="btn hospital-primarybtn px-5 py-2"
+                                disabled={loading}
+                                onClick={() => sendMail(draftForm)}>
                                 {staticTexts['Submit']}
                                 {loading && <i className="fas fa-spinner fa-spin ms-1"></i>}
                             </button>
@@ -235,8 +197,9 @@ const CorporateForm = () => {
                     </div>
                 </div>
             </div>
+
         </div>
     )
 }
 
-export default CorporateForm
+export default CorporateForm;
