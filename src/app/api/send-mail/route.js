@@ -10,6 +10,7 @@ const emailData = {
     "Bookhealth Checkup": ["kimstech@webenza.com"],
     "Career": ["jobs@kimshealth.org"],
     "Contact": ["relations@kimskerala.com"],
+    "Corporate": ["relations@kimskerala.com"],
     "KISA": ["paramedical@kimskerala.com"],
     "IMT": ["imt@kimshealth.org"],
     "Emergency Medicine Programme": ["socomer@kimsglobal.com"],
@@ -24,6 +25,7 @@ const emailData = {
     "Book Appointment": ["appointments@kimskerala.com", "appointments@kimsglobal.com"],
     "Career": ["jobs@kimshealth.org"],
     "Contact": ["relations@kimskerala.com"],
+    "Corporate": ["relations@kimskerala.com"],
     "Health At Home Services": ["healthathome.tvm@kimsglobal.com"],
     "KISA": ["kisa.tvm@kimshealth.org"],
     "IMT": ["imt@kimshealth.org"],
@@ -41,6 +43,7 @@ const emailData = {
     "Bookhealth Checkup": ["gpr.klm@kimshealth.org"],
     "Career": ["shiraz.n@kimsglobal.com"],
     "Contact": ["kimskollam@kimshealth.org"],
+    "Corporate": ["relations@kimskerala.com"],
     "International": ["ipr.tvm@kimshealth.org"]
   },
   kottayam: {
@@ -48,6 +51,7 @@ const emailData = {
     "Bookhealth Checkup": ["kims.ktm@kimshealth.org"],
     "Career": ["hr.ktm@kimsglobal.com"],
     "Contact": ["kims.ktm@kimshealth.org"],
+    "Corporate": ["relations@kimskerala.com"],
     "International": ["ipr.tvm@kimshealth.org"]
   },
   alshifa: {
@@ -55,6 +59,7 @@ const emailData = {
     "Bookhealth Checkup": ["health.checkup@kimsalshifa.com"],
     "Career": ["hrd@kimsalshifa.com"],
     "Contact": ["shakkir.pt@kimsalshifa.com"],
+    "Corporate": ["relations@kimskerala.com"],
     "International": ["ipr.tvm@kimshealth.org"]
   },
   nagercoil: {
@@ -62,6 +67,7 @@ const emailData = {
     "Bookhealth Checkup": ["appointments.ngl@kimsglobal.com"],
     "Career": ["hr.ngl@kimshealth.org"],
     "Contact": ["relations.ngl@kimshealth.org"],
+    "Corporate": ["relations@kimskerala.com"],
     "International": ["ipr.tvm@kimshealth.org"]
   },
   ip: {
@@ -69,6 +75,7 @@ const emailData = {
     "Bookhealth Checkup": ["ipr.tvm@kimshealth.org"],
     "Career": ["jobs@kimshealth.org"],
     "Contact": ["ipr.tvm@kimshealth.org"],
+    "Corporate": ["relations@kimskerala.com"],
     "International": ["ipr.tvm@kimshealth.org"]
   }
 };
