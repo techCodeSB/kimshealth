@@ -19,6 +19,7 @@ import TestimonialSection from '@/components/TestimonialSection'
 import WatchVideoButton from '@/components/WatchVideoButton'
 import { marked } from 'marked'
 import React from 'react'
+import Popup from '@/components/Popup'
 
 const SpecialityDetails = async ({ params, searchParams }) => {
     const URLParams = await searchParams;
@@ -28,7 +29,8 @@ const SpecialityDetails = async ({ params, searchParams }) => {
     const baseUrlLangOnly = await getBaseUrl(true, false)
     const data = await getSpecialityData.getSingleSpeciality({ slug: params.details, langLoc: getLangLoc });
 
-    const allSubSpeciality = await getSpecialityData.getAllSubSpeciality({ langLoc: getLangLoc, id: data.speciality?.id })
+    const allSubSpeciality = await getSpecialityData.getAllSubSpeciality({ langLoc: getLangLoc, id: data.speciality?.id });
+
 
 
     // const allDiseas = await diseaseData.getAll({langLoc: getLangLoc, URLParams:URLParams})
@@ -145,7 +147,7 @@ const SpecialityDetails = async ({ params, searchParams }) => {
                     </section>
 
 
-                    {allSubSpeciality.length>0 && <section className="section"
+                    {allSubSpeciality.length > 0 && <section className="section"
                         style={{ background: "linear-gradient(180deg,rgba(255, 255, 255, 1) 45%, rgba(248, 248, 248, 1) 74%)" }}>
                         <div className="container">
                             <div className="details-card-wrapper pb-5">
@@ -158,14 +160,31 @@ const SpecialityDetails = async ({ params, searchParams }) => {
                                                     <div className="card-content">
                                                         <h4>{subS.title}</h4>
                                                         <p>{subS.overviewSection?.details.slice(0, 140)}...</p>
+                                                        {subS?.manageAppearance?.viewingMode === "Popup" ? (
 
-                                                        <div className="main-btn">
-                                                            <a href={baseUrl + "/speciality/" + subS?.speciality?.slug}>
-                                                                {staticText['Read More']}<span>
-                                                                    <i className="fa-solid fa-arrow-right"></i>
-                                                                </span>
-                                                            </a>
-                                                        </div>
+                                                            <div className="main-btn">
+                                                                <a
+                                                                    href="#"
+                                                                    data-bs-toggle="modal"
+                                                                    data-bs-target={`#popupModalSubSpeciality-${index}`}
+                                                                >
+                                                                    {staticText["Read More"]}
+                                                                    <span>
+                                                                        <i className="fa-solid fa-arrow-right"></i>
+                                                                    </span>
+                                                                </a>
+                                                            </div>
+                                                        ) : (
+                                                            <div className="main-btn">
+                                                                <a href={baseUrl + "/speciality/" + subS?.speciality?.slug}>
+                                                                    {staticText['Read More']}
+                                                                    <span>
+                                                                        <i className="fa-solid fa-arrow-right"></i>
+                                                                    </span>
+                                                                </a>
+                                                            </div>
+                                                        )}
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -176,6 +195,12 @@ const SpecialityDetails = async ({ params, searchParams }) => {
                             </div>
                         </div>
                     </section>}
+
+                    {
+                        allSubSpeciality.map((subS, index) => {
+                            return <Popup key={index} modalId={`popupModalSubSpeciality-${index}`} title={subS.title} content={subS.overviewSection?.details} />
+                        })
+                    }
 
 
 

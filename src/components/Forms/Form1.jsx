@@ -43,7 +43,7 @@ const Form1 = ({ title, type, subject }) => {
         'headers': {
           "Content-type": "application/json",
         },
-        body: JSON.stringify({ data: htmlMsg, formType: type? type: "Contact" , locationData: formData.hospital}),
+        body: JSON.stringify({ data: htmlMsg, formType: type ? type : "Contact", locationData: formData.hospital }),
       });
 
       const res = await req.json();
@@ -107,45 +107,45 @@ const Form1 = ({ title, type, subject }) => {
   return (
     <>
       <h3>{staticTexts[title]}</h3>
-        <div className="row">
-          <div className="col-md-12 mb-3">
-            <input type="text" className="form-control" placeholder={staticTexts['Name']} 
+      <div className="row">
+        <div className="col-md-12 mb-3">
+          <input type="text" className="form-control" placeholder={staticTexts['Name']}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              value={formData.name}
-            />
-          </div>
-          <div className="col-md-12 mb-3">
-            <select className="form-control" value={selectedLocation} onChange={(e)=>{
-              setSelectedLocation(e.target.value);
-              setFormData({ ...formData, hospital: e.target.value });
-            }}>
-              <option value={""}>{staticTexts['All Hospital']}</option>
-              {
-                allLocation?.map((loc, i) => {
-                  return <option value={loc.slug} key={i}>{loc.title}</option>
-                })
-              }
-            </select>
-          </div>
-          <div className="col-md-12 mb-3">
-            <input type="text" className="form-control"
-              placeholder={staticTexts['Enter 10 Digit Mobile Number']} 
-              onChange={(e) => setFormData({ ...formData, number: e.target.value })}
-              value={formData.number}
-              />
-          </div>
-          <div className="col-md-12 mb-3">
-            <textarea className="form-control" placeholder={staticTexts['Message']}
-              id="floatingTextarea" onChange={(e) => setFormData({ ...formData, query: e.target.value })}
-              value={formData.query}></textarea>
-          </div>
-          <div className="col-md-12 mb-3 text-center">
-            <button className="btn mb-lg-0 mb-2 hospital-primarybtn px-5 py-2" disabled={loading} onClick={sendMail}>
-              {staticTexts['Submit']}
-              {loading && <i className="fas fa-spinner fa-spin ms-1"></i>}
-              </button>
-          </div>
+            value={formData.name}
+          />
         </div>
+        <div className="col-md-12 mb-3">
+          <select className="form-control" value={selectedLocation} onChange={(e) => {
+            setSelectedLocation(e.target.value);
+            setFormData({ ...formData, hospital: e.target.value });
+          }}>
+            <option value={""}>{staticTexts['All Hospital']}</option>
+            {
+              allLocation?.map((loc, i) => {
+                return <option value={loc.slug} key={i}>{loc.title}</option>
+              })
+            }
+          </select>
+        </div>
+        <div className="col-md-12 mb-3">
+          <input type="text" className="form-control"
+            placeholder={staticTexts['Enter 10 Digit Mobile Number']}
+            onChange={(e) => setFormData({ ...formData, number: e.target.value })}
+            value={formData.number}
+          />
+        </div>
+        <div className="col-md-12 mb-3">
+          <textarea className="form-control" placeholder={staticTexts['Message']}
+            id="floatingTextarea" onChange={(e) => setFormData({ ...formData, query: e.target.value })}
+            value={formData.query}></textarea>
+        </div>
+        <div className="col-md-12 mb-3 text-center">
+          <button className="btn mb-lg-0 mb-2 hospital-primarybtn px-5 py-2" disabled={loading} onClick={sendMail}>
+            {staticTexts['Submit']}
+            {loading && <i className="fas fa-spinner fa-spin ms-1"></i>}
+          </button>
+        </div>
+      </div>
     </>
   )
 }
