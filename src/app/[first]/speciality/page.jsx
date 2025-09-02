@@ -26,7 +26,7 @@ const Speciality = async ({ searchParams }) => {
         field: 'Center of Excellence', langLoc: getLangLoc, URLParams: URLParams
     });
 
-    const allSpecility = await getSpecialityData.getSpecialityAll({
+    const allSpecility = await getSpecialityData.getSpecialityAllAlphabetic({
         langLoc: getLangLoc, URLParams: URLParams
     });
 

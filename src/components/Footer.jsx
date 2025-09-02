@@ -50,7 +50,7 @@ const Footer = () => {
             try {
                 const LangLoc = await getCurrentLangLocClient() //GET LOCATION AND LANGUAGE;
 
-                setSpeciality(await getSpecialityData.getFooterSpeciality({ langLoc: LangLoc }));
+                setSpeciality(await getSpecialityData.getFooterSpecialityAlphabetic({ langLoc: LangLoc }));
 
                 setHospitals(await hospitalData.getFooterHospital({ langLoc: langLoc }));
 

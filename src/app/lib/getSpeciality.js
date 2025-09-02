@@ -98,6 +98,39 @@ const getSpecialityData = {
     },
 
 
+    // FOR LISTING PAGE;
+    getSpecialityAllAlphabetic: async ({ langLoc, URLParams }) => {
+        const baseUrl = process.env.NEXT_PUBLIC_CMS_API_URL;
+
+
+        const hospitalFilter = URLParams?.hospital
+            ? `&filters[speciality][hospitals][slug][$eq]=${URLParams.hospital}`
+            : ``;
+
+        // Get total count
+        const initialReq = await fetch(`${baseUrl}/specialty-details?filters[locations][id][$eq]=${langLoc.loc.id}${hospitalFilter}`);
+        const initialRes = await initialReq.json();
+        const totalCount = initialRes.meta.pagination.total;
+
+        const limit = 100;
+        const pages = Math.ceil(totalCount / limit);
+        let data = [];
+
+
+        for (let i = 0; i < pages; i++) {
+            const start = i * limit;
+            const url = baseUrl + `/specialty-details/?populate[0]=overviewSection&populate[1]=manageAppearance&populate[2]=speciality${hospitalFilter}&populate[3]=speciality.iconImage&pagination[start]=${start}&pagination[limit]=${limit}&filters[locations][id][$eq]=${langLoc.loc.id}&sort=title:asc`;
+            const res = await fetch(url);
+            const json = await res.json();
+            data = [...data, ...json.data];
+        }
+
+
+        return data;
+
+    },
+
+
     // FOR DETAILS PAGE;
     getSingleSpeciality: async ({ slug, langLoc, isMeta }) => {
         // get speciality id;
@@ -161,6 +194,31 @@ const getSpecialityData = {
         for (let i = 0; i < pages; i++) {
             const start = i * limit;
             const url = `${baseUrl}/specialty-details?populate[0]=speciality&filters[locations][id][$eq]=${langLoc.loc.id}&populate[1]=manageAppearance&filters[manageAppearance][showingFooter][$eq]=true&pagination[start]=${start}&pagination[limit]=${limit}&sort=manageAppearance.orderInMasterList:desc,title:asc`;
+            const res = await fetch(url);
+            const json = await res.json();
+            data = [...data, ...json.data];
+        }
+
+
+        return data;
+    },
+
+
+    getFooterSpecialityAlphabetic: async ({ langLoc }) => {
+        const baseUrl = process.env.NEXT_PUBLIC_CMS_API_URL;
+        // Get total count
+        const initialReq = await fetch(`${baseUrl}/specialty-details`);
+        const initialRes = await initialReq.json();
+        const totalCount = initialRes.meta.pagination.total;
+
+        const limit = 100;
+        const pages = Math.ceil(totalCount / limit);
+        let data = [];
+
+        // Actual Data
+        for (let i = 0; i < pages; i++) {
+            const start = i * limit;
+            const url = `${baseUrl}/specialty-details?populate[0]=speciality&filters[locations][id][$eq]=${langLoc.loc.id}&populate[1]=manageAppearance&filters[manageAppearance][showingFooter][$eq]=true&pagination[start]=${start}&pagination[limit]=${limit}&sort=title:asc`;
             const res = await fetch(url);
             const json = await res.json();
             data = [...data, ...json.data];
