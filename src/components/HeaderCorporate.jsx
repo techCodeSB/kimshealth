@@ -275,7 +275,7 @@ const HeaderCorporate = () => {
                             <div className="tabs">
                               {
                                 allLocations.map((loc, i) => {
-                                  return <><div
+                                  return <div
                                     onMouseEnter={(e) => {
                                       const tabId = e.currentTarget.getAttribute('data-tab');
                                       document.querySelectorAll('.tab-content').forEach(tab => {
@@ -291,14 +291,6 @@ const HeaderCorporate = () => {
                                   >
                                     <a href={basePathOnlyLang + "/" + loc?.slug}>{loc?.title} <i className="fa-solid fa-chevron-right"></i></a>
                                   </div>
-
-                                    {i === 0 ? (
-                                      <div className='tab'>
-                                        <a href={`${basePathOnlyLang}/${loc?.slug}/hospital/kimshealth-cancer-center`}>
-                                          KIMSHEALTH Cancer Center <i className="fa-solid fa-chevron-right"></i>
-                                        </a>
-                                      </div>
-                                    ) : null}</>
                                 })
                               }
                             </div>
@@ -377,13 +369,6 @@ const HeaderCorporate = () => {
                                   <div className="accordion-icon"></div>
                                 </div>
 
-                                {index === 0 ? (
-                                  <div className='accordion-header'>
-                                    <a href={`${basePathOnlyLang}/${l?.slug}/hospital/kimshealth-cancer-center`}>
-                                      KIMSHEALTH Cancer Center
-                                    </a>
-                                  </div>
-                                ) : null}
 
                                 {isOpen && (
                                   <div className="accordion-content">

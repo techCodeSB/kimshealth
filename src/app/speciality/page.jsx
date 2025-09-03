@@ -19,17 +19,12 @@ const Speciality = async ({ searchParams }) => {
     const pageMeta = data?.data[0]?.metaSection;
     const staticText = await getStaticText()
 
-    const otherSpecility = await getSpecialityData.getSpeciality({
-        field: 'Other Specialties', langLoc: getLangLoc, URLParams: URLParams
-    });
-    const coeSpecility = await getSpecialityData.getSpeciality({
-        field: 'Center of Excellence', langLoc: getLangLoc, URLParams: URLParams
-    });
 
-    const allSpecility = await getSpecialityData.getSpecialityAllAlphabetic({
+    const allSpecility = await getSpecialityData.getSpecialityAllParent({
         langLoc: getLangLoc, URLParams: URLParams
     });
 
+    console.log(allSpecility)
 
     return (
         <>
