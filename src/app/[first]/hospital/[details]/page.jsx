@@ -38,7 +38,7 @@ const HospitalDetails = async ({ params }) => {
     const specialityDataSet = {
         sectionTitle: hptData.specialitySection.title,
         buttonText: 'View All', buttonURL: `${basePath + "/speciality?hospital=" + hptData.slug}`,
-        data: await getSpecialityData.getAllByHospital({ langLoc: getLangLoc, hospitalId: hptData.id }),
+        data: await getSpecialityData.getAllByFeaturedHospital({ langLoc: getLangLoc, hospitalId: hptData.id }),
         baseUrl: basePath
     };
 

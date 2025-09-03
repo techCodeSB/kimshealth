@@ -20,6 +20,17 @@ const getSpecialityData = {
         return res.data;
     },
 
+    getAllByFeaturedHospital: async ({ langLoc, hospitalId }) => {
+        let baseUrl = process.env.NEXT_PUBLIC_CMS_API_URL;
+        const url = `${baseUrl}/specialty-details?filters[locations][id][$eq]=${langLoc.loc.id}&populate[0]=overviewSection&populate[1]=manageAppearance&populate[2]=speciality&populate[3]=speciality.featuredImage&filters[speciality][hospitals][$eq]=${hospitalId}&filters[manageAppearance][showInFeaturedList][$eq]=true&sort=manageAppearance.orderInFeaturedList:asc,title:asc`;
+
+
+        const req = await fetch(url);
+        const res = await req.json();
+
+        return res.data;
+    },
+
     getAllByHospital: async ({ langLoc, hospitalId }) => {
         let baseUrl = process.env.NEXT_PUBLIC_CMS_API_URL;
         const url = `${baseUrl}/specialty-details?filters[locations][id][$eq]=${langLoc.loc.id}&populate[0]=overviewSection&populate[1]=manageAppearance&populate[2]=speciality&populate[3]=speciality.featuredImage&filters[speciality][hospitals][$eq]=${hospitalId}&sort=manageAppearance.orderInMasterList:asc,title:asc`;
