@@ -408,7 +408,7 @@ const Footer = () => {
                                         <ul>
                                             {
                                                 hospitals?.map((h, index) => {
-                                                    return (h.type === null || h.type === "Hospital") && h?.manageAppearance?.showingFooter ?
+                                                    return (h.type === null || h.type === "Hospital") ?
                                                         <li key={index}>
                                                             <a href={basePathOnlyLang + "/" + h?.location.slug + "/hospital/" + h?.slug}>{h?.title}</a>
                                                         </li>
@@ -425,7 +425,7 @@ const Footer = () => {
                                         <ul>
                                             {
                                                 hospitals?.map((h, index) => {
-                                                    return (h.type !== null && h.type !== "Hospital") && h?.manageAppearance?.showingFooter ? <li key={index}>
+                                                    return (h.type !== null && h.type !== "Hospital") ? <li key={index}>
                                                         <a href={basePathOnlyLang + "/" + h?.location.slug + "/hospital/" + h?.slug}>{h?.title}</a>
                                                     </li>
                                                         : null
@@ -467,7 +467,7 @@ const Footer = () => {
                                 <ul className="first-child">
                                     {
                                         hospitals?.map((h, index) => {
-                                            return (h.type === null || h.type === "Hospital") && h?.manageAppearance?.showingFooter ?
+                                            return (h.type === null || h.type === "Hospital") ?
                                                 <li key={index}>
                                                     <a href={basePathOnlyLang + "/" + h?.location.slug + "/hospital/" + h?.slug}>{h?.title}</a>
                                                 </li>
@@ -485,7 +485,7 @@ const Footer = () => {
                                 <ul className="first-child">
                                     {
                                         hospitals?.map((h, index) => {
-                                            return h.type !== null && h.type !== "Hospital" && h?.manageAppearance?.showingFooter ?
+                                            return h.type !== null && h.type !== "Hospital" ?
                                                 <li key={index}>
                                                     <a href={basePathOnlyLang + "/" + h?.location.slug + "/hospital/" + h?.slug}>{h?.title}</a>
                                                 </li>
