@@ -4,15 +4,17 @@ import langLoc from '@/helper/getLangLoc';
 import getStaticText from '@/helper/getStaticText';
 import React, { useEffect, useState } from 'react';
 
-const BookAnAppoinmentShort = ({ basePath, extraClass,currentLangLoc }) => {
+const BookAnAppoinmentShort = ({ basePath, extraClass, currentLangLoc, currentHospital }) => {
     const [staticTexts, setStaticTexts] = useState({});
     const [locationList, setLocationList] = useState()
-    const [selectedLocation, setSelectedLocation] = useState(currentLangLoc?.loc.slug || "");
-    const [selectedSpeciality, setSelectedSpeciality] = useState();
-    const [selectedDoctor, setSelectedDoctor] = useState();
+    const [allHospital, setAllHospital] = useState();
     const [allSpeciality, setAllSpeciality] = useState();
     const [allDoctors, setAllDoctors] = useState([]);
-    const [doctorLoading, setDoctorLoading]= useState(true);
+    const [selectedLocation, setSelectedLocation] = useState(currentLangLoc?.loc.slug || "");
+    const [selectedHospital, setSelectedHospital] = useState(currentHospital || "");
+    const [selectedSpeciality, setSelectedSpeciality] = useState();
+    const [selectedDoctor, setSelectedDoctor] = useState();
+    const [doctorLoading, setDoctorLoading] = useState(true);
 
 
     useEffect(() => {
@@ -24,11 +26,18 @@ const BookAnAppoinmentShort = ({ basePath, extraClass,currentLangLoc }) => {
     }, []);
 
 
-    const getSpeciality = async ({ lang, loc }) => {
+    const getHospital = async ({ lang, loc }) => {
 
         const baseUrl = process.env.NEXT_PUBLIC_CMS_API_URL;
+
+        const locationFilter = loc
+            ? `&filters[location][slug][$eq]=${loc}`
+            : `&filters[location][slug][$eq]=${loc}`;
+
         // Get total count
-        const initialReq = await fetch(`${baseUrl}/specialty-details?filters[locations][slug][$eq]=${loc}`);
+        const initialReq = await fetch(`${baseUrl}/hospitals?${locationFilter}`);
+
+
         const initialRes = await initialReq.json();
         const totalCount = initialRes.meta.pagination.total;
 
@@ -39,7 +48,42 @@ const BookAnAppoinmentShort = ({ basePath, extraClass,currentLangLoc }) => {
         // Actual Data
         for (let i = 0; i < pages; i++) {
             const start = i * limit;
-            const url = `${baseUrl}/specialty-details?populate=*&pagination[start]=${start}&pagination[limit]=${limit}&filters[locations][slug][$eq]=${loc}&sort=title:asc`;
+            const url = `${baseUrl}/hospitals?fields=title&fields=slug${locationFilter}&populate[0]=manageAppearance&populate[1]=location&pagination[start]=${start}&pagination[limit]=${limit}&sort=manageAppearance.orderInMasterList:asc,title:asc`;
+            const res = await fetch(url);
+            const json = await res.json();
+            data = [...data, ...json.data];
+
+        }
+
+        return data;
+    }
+
+
+    const getSpeciality = async ({ lang, loc, hospital }) => {
+
+        const baseUrl = process.env.NEXT_PUBLIC_CMS_API_URL;
+
+        const locationFilter = loc
+            ? `&filters[locations][slug][$eq]=${loc}`
+            : ``;
+
+        const hospitalFilter = loc
+            ? `&filters[speciality][hospitals][slug][$eq]=${hospital}`
+            : ``;
+
+        // Get total count
+        const initialReq = await fetch(`${baseUrl}/specialty-details?${locationFilter}${hospitalFilter}`);
+        const initialRes = await initialReq.json();
+        const totalCount = initialRes.meta.pagination.total;
+
+        const limit = 100;
+        const pages = Math.ceil(totalCount / limit);
+        let data = [];
+
+        // Actual Data
+        for (let i = 0; i < pages; i++) {
+            const start = i * limit;
+            const url = `${baseUrl}/specialty-details?populate=*&pagination[start]=${start}&pagination[limit]=${limit}${locationFilter}${hospitalFilter}&sort=title:asc`;
             const res = await fetch(url);
             const json = await res.json();
             data = [...data, ...json.data];
@@ -49,7 +93,7 @@ const BookAnAppoinmentShort = ({ basePath, extraClass,currentLangLoc }) => {
         return data;
     }
 
-    const getDoctor = async ({ lang, loc, speciality }) => {
+    const getDoctor = async ({ lang, loc, hospital, speciality }) => {
         setDoctorLoading(true)
         const baseUrl = process.env.NEXT_PUBLIC_CMS_API_URL;
 
@@ -57,12 +101,16 @@ const BookAnAppoinmentShort = ({ basePath, extraClass,currentLangLoc }) => {
             ? `&filters[locations][slug][$eq]=${loc}`
             : ``;
 
+        const hospitalFilter = loc
+            ? `&filters[hospitals][slug][$eq]=${hospital}`
+            : ``;
+
         const specialityFilter = speciality
             ? `&filters[specialities][slug][$eq]=${speciality}`
             : ``;
 
         // Get total count
-        const initialReq = await fetch(`${baseUrl}/doctor-details?${locationFilter}${specialityFilter}`);
+        const initialReq = await fetch(`${baseUrl}/doctor-details?${locationFilter}${specialityFilter}${hospitalFilter}`);
         const initialRes = await initialReq.json();
         const totalCount = initialRes.meta.pagination.total;
 
@@ -73,7 +121,7 @@ const BookAnAppoinmentShort = ({ basePath, extraClass,currentLangLoc }) => {
         // Actual Data
         for (let i = 0; i < pages; i++) {
             const start = i * limit;
-            const url = `${baseUrl}/doctor-details?populate=*&pagination[start]=${start}&pagination[limit]=${limit}${locationFilter}${specialityFilter}&sort=name:asc`;
+            const url = `${baseUrl}/doctor-details?populate=*&pagination[start]=${start}&pagination[limit]=${limit}${locationFilter}${specialityFilter}${hospitalFilter}&sort=name:asc`;
             const res = await fetch(url);
             const json = await res.json();
             data = [...data, ...json.data];
@@ -89,27 +137,31 @@ const BookAnAppoinmentShort = ({ basePath, extraClass,currentLangLoc }) => {
         const get = async () => {
             let currentLangLoc = await getCurrentLangLocClient();
             setLocationList(await langLoc.getLocationsOnlyCMS())
-            setAllSpeciality(await getSpeciality({ loc: selectedLocation == "" ? currentLangLoc.loc.slug : selectedLocation }));
-            await getDoctor({ loc: selectedLocation == "" ? "" : selectedLocation, speciality: selectedSpeciality == "" ? "" : selectedSpeciality });
+            setAllHospital(await getHospital({ loc: selectedLocation == "" ? "" : selectedLocation }));
+            setAllSpeciality(await getSpeciality({ loc: selectedLocation == "" ? currentLangLoc.loc.slug : selectedLocation, hospital: selectedHospital == "" ? "" : selectedHospital }));
+            await getDoctor({ loc: selectedLocation == "" ? "" : selectedLocation, hospital: selectedHospital == "" ? "" : selectedHospital, speciality: selectedSpeciality == "" ? "" : selectedSpeciality });
+
+
 
         }
         get()
 
-    }, [selectedLocation, selectedSpeciality])
+    }, [selectedLocation, selectedHospital, selectedSpeciality])
 
 
 
     return (
         <section className={'section book-form-mobile-card ' + extraClass}>
-            <div className="container">
+            <div className="container-fluid">
                 <div className="custom-from">
                     <div className="row justify-content-between">
-                        <div className="col-xl-3 col-lg-3 col-md-3 col-12">
+                        <div className="banner-from-col-custom">
                             <div className="input-group mb-lg-0 mb-3">
                                 <span className="input-group-text" id="from-icon"><i
                                     className="fa-solid icon-location-pin"></i></span>
                                 <select className="form-select from-location" value={selectedLocation} onChange={(e) => {
                                     setSelectedLocation(e.target.value);
+                                    setSelectedHospital("");
                                     setSelectedSpeciality("");
                                     setSelectedDoctor("");
                                 }}>
@@ -122,7 +174,25 @@ const BookAnAppoinmentShort = ({ basePath, extraClass,currentLangLoc }) => {
                                 </select>
                             </div>
                         </div>
-                        <div className="col-xl-3 col-lg-3 col-md-3 col-12">
+                        <div className="banner-from-col-custom">
+                            <div className="input-group mb-lg-0 mb-3">
+                                <span className="input-group-text" id="from-icon"><i
+                                    className="fa-solid fa-hospital"></i></span>
+                                <select className="form-select from-location" value={selectedHospital} onChange={(e) => {
+                                    setSelectedHospital(e.target.value);
+                                    setSelectedSpeciality("");
+                                    setSelectedDoctor("");
+                                }}>
+                                    <option value={""}>{staticTexts['Select Hospital']}</option>
+                                    {
+                                        allHospital?.map((hos, i) => {
+                                            return <option value={hos.slug} key={i}>{hos.title}</option>
+                                        })
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div className="banner-from-col-custom">
                             <div className="input-group mb-lg-0 mb-3">
                                 <span className="input-group-text" id="from-icon"><i
                                     className="fa-solid fa-magnifying-glass"></i></span>
@@ -139,7 +209,7 @@ const BookAnAppoinmentShort = ({ basePath, extraClass,currentLangLoc }) => {
                                 </select>
                             </div>
                         </div>
-                        <div className="col-xl-3 col-lg-3 col-md-3 col-12">
+                        <div className="banner-from-col-custom">
                             <div className="input-group mb-lg-0 mb-3">
                                 <span className="input-group-text" id="from-icon"><i className="fa-solid fa-user-doctor"></i></span>
                                 <select className="form-select from-location" value={selectedDoctor} onChange={(e) => {
@@ -149,8 +219,8 @@ const BookAnAppoinmentShort = ({ basePath, extraClass,currentLangLoc }) => {
                                         <>
                                             <option value="">{staticTexts['Select a Doctor']}</option>
                                             {allDoctors.map((d, i) => (
-                                                <option value={d?.slug} key={i}>
-                                                    {`${d?.salutation?d?.salutation+" ":""}${d?.name}`}
+                                                <option value={`${d?.salutation ? d?.salutation + " " : ""}${d?.name}`} key={i}>
+                                                    {`${d?.salutation ? d?.salutation + " " : ""}${d?.name}`}
                                                 </option>
                                             ))}
                                         </>
@@ -161,16 +231,17 @@ const BookAnAppoinmentShort = ({ basePath, extraClass,currentLangLoc }) => {
                                 </select>
                             </div>
                         </div>
-                        <div className="col-xl-3 col-lg-3 col-md-3 col-12">
+                        <div className="banner-from-col-custom">
                             <div className="from-btn">
                                 <a
                                     href={
                                         basePath +
                                         '/book-an-appointment' +
-                                        (selectedLocation || selectedSpeciality || selectedDoctor
+                                        (selectedLocation || selectedSpeciality || selectedDoctor || selectedHospital
                                             ? '?' +
                                             [
                                                 selectedLocation ? `location=${encodeURIComponent(selectedLocation)}` : null,
+                                                selectedHospital ? `hospital=${encodeURIComponent(selectedHospital)}` : null,
                                                 selectedSpeciality ? `speciality=${encodeURIComponent(selectedSpeciality)}` : null,
                                                 selectedDoctor ? `doctor=${encodeURIComponent(selectedDoctor)}` : null,
                                             ]
@@ -182,6 +253,7 @@ const BookAnAppoinmentShort = ({ basePath, extraClass,currentLangLoc }) => {
                                 >
                                     {staticTexts['Book An Appointment']}
                                 </a>
+
                             </div>
                         </div>
                     </div>
