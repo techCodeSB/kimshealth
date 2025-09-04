@@ -4,8 +4,9 @@ import { useEffect, useState } from "react";
 
 import getStaticText from "@/helper/getStaticText";
 
-const SocialMedia = () => {
+const SocialMedia = ({socialWidgetID}) => {
     const [staticTexts, setStaticTexts] = useState({});
+    const [widgetID, setWidgetID] = useState(socialWidgetID || "elfsight-app-ee9a0b8c-7785-49ab-be28-50eff9d278a3");
     useEffect(() => {
         const fetchTexts = async () => {
             setStaticTexts({ ...await getStaticText() })
@@ -211,7 +212,7 @@ const SocialMedia = () => {
 
                     <div className="row">
                         <div className="col-xl-12 col-lg-12 col-md-12 col-12">
-                            <div className="elfsight-app-ee9a0b8c-7785-49ab-be28-50eff9d278a3" data-elfsight-app-lazy></div>
+                            <div className={widgetID} data-elfsight-app-lazy></div>
                         </div>
                     </div>
 

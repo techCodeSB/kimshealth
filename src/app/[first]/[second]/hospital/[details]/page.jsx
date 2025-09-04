@@ -523,7 +523,7 @@ const HospitalDetails = async ({ params }) => {
                 </section> */}
 
             </div>
-            <SocialMedia />
+            <SocialMedia socialWidgetID={hptData.elfScocialWidget} />
             <Footer />
         </>
     )
