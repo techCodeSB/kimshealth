@@ -247,7 +247,7 @@ const BookAnAppoinmentForm = ({ pageContent, URLParams }) => {
                                 <div className="row justify-content-center">
                                     <div className="col-md-10">
                                         <div className="row">
-                                            <div className="col-md-6 mb-3">
+                                            <div className="col-md-6">
                                                 <div className="custom-from bg-field mx-0">
                                                     <div className="row justify-content-between">
                                                         <div className="col-xl-12 col-lg-12 col-md-12 col-12 mb-3">
@@ -281,6 +281,12 @@ const BookAnAppoinmentForm = ({ pageContent, URLParams }) => {
                                                                 }
                                                             </select>
                                                         </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="col-md-6">
+                                                <div className="custom-from bg-field mx-0">
+                                                    <div className="row justify-content-between">
 
 
                                                         <div className="col-xl-12 col-lg-12 col-md-12 col-12 mb-3">
@@ -297,12 +303,7 @@ const BookAnAppoinmentForm = ({ pageContent, URLParams }) => {
                                                                 }
                                                             </select>
                                                         </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="col-md-6 mb-3">
-                                                <div className="custom-from bg-field mx-0">
-                                                    <div className="row justify-content-between">
+
                                                         <div className="col-xl-12 col-lg-12 col-md-12 col-12 mb-3">
                                                             <label htmlFor=''>{staticText['Select Department']}*</label>
                                                             <select className="form-select from-location" value={selectedSpeciality} onChange={(e) => {
@@ -339,7 +340,7 @@ const BookAnAppoinmentForm = ({ pageContent, URLParams }) => {
                                                             </select>
                                                         </div>
 
-                                                        <div className="col-xl-12 col-lg-12 col-md-12 col-12 mb-3">
+                                                        {/* <div className="col-xl-12 col-lg-12 col-md-12 col-12 mb-3">
                                                             <label htmlFor=''>{staticText['Appointment Date']}*</label>
                                                             <div className="input-group">
                                                                 <input
@@ -380,6 +381,35 @@ const BookAnAppoinmentForm = ({ pageContent, URLParams }) => {
                                                                         });
                                                                     }}
                                                                 />
+                                                            </div>
+                                                        </div> */}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="col-md-12 mb-3">
+                                                <div className="custom-from bg-field mx-0">
+                                                    <div className="row justify-content-between">
+
+                                                        <div className="col-xl-12 col-lg-12 col-md-12 col-12 mb-3">
+                                                            <label htmlFor=''>{staticText['Appointment Date']}*</label>
+                                                            <div className="input-group">
+                                                                <input
+                                                                    type="date"  // use date instead of text for date selection
+                                                                    placeholder="Select Your Date"
+                                                                    name="appoinmentDate"
+                                                                    className="form-control pe-0"
+                                                                    autoComplete="off"
+                                                                    value={formData.appoinmentDate}
+                                                                    onChange={(e) => {
+                                                                        console.log(e.target.value); // <-- get the selected date
+                                                                        setFormData({
+                                                                            ...formData,
+                                                                            appoinmentDate: e.target.value, // <-- update state
+                                                                        });
+                                                                    }}
+                                                                />
+                                                                {/* <span className="input-group-text" id="from-icon"><i
+                                                                    className="icon-calendar"></i></span> */}
                                                             </div>
                                                         </div>
                                                     </div>

@@ -200,14 +200,35 @@ const Footer = () => {
                                         </div>
                                     </a>
 
-                                    <a href={"tel:" + locationData?.phone}>
+                                    {locationData?.phone && <a href={"tel:" + locationData?.phone}>
                                         <div className="address-item d-flex align-items-center mb-3">
                                             <i className="fa-solid fa-phone"></i>
                                             <div className="ms-2">
-                                                <strong className="fw-normal">{locationData?.phone}</strong>
+                                                <strong><u>{staticTexts['Contact Us']}</u></strong>
+                                                <p><strong className="fw-normal">{locationData?.phone}</strong></p>
                                             </div>
                                         </div>
-                                    </a>
+                                    </a>}
+
+                                    {locationData?.whatsapp && <a href={`https://wa.me/${locationData.whatsapp.replace(/[^0-9]/g, '')}`}    target="_blank">
+                                        <div className="address-item d-flex align-items-center mb-3">
+                                            <i className="fa-solid fa-brands fa-whatsapp"></i>
+                                            <div className="ms-2">
+                                                <strong><u>{staticTexts['WhatsApp']}</u></strong>
+                                                <p><strong className="fw-normal">{locationData?.whatsapp}</strong></p>
+                                            </div>
+                                        </div>
+                                    </a>}
+
+                                    {locationData?.bookAnAppointment && <a href={"tel:" + locationData?.bookAnAppointment}>
+                                        <div className="address-item d-flex align-items-center mb-3">
+                                            <i className="fa-solid fa-phone"></i>
+                                            <div className="ms-2">
+                                                <strong><u>{staticTexts['To Book an Appointment']}</u></strong>
+                                                <p><strong className="fw-normal">{locationData?.bookAnAppointment}</strong></p>
+                                            </div>
+                                        </div>
+                                    </a>}
 
                                     {locationData?.emergency && <a href={"tel:" + locationData?.emergency}>
                                         <div className="address-item d-flex align-items-center mb-3">
@@ -400,7 +421,7 @@ const Footer = () => {
                             </div>
                         </div>
 
-                        <div className="col-md-2">
+                        <div className="col-md-3">
                             <div className="row">
                                 <div className="col-12  mb-lg-4">
                                     <div className="link-part">
@@ -622,14 +643,36 @@ const Footer = () => {
                                         </div>
                                     </a>
 
-                                    <a href={"tel:" + locationData?.phone}>
+                                    {locationData?.phone && <a href={"tel:" + locationData?.phone}>
                                         <div className="address-item d-flex align-items-center mb-3">
                                             <i className="fa-solid fa-phone"></i>
                                             <div className="ms-2">
-                                                <strong>{locationData?.phone}</strong>
+                                                <strong><u>{staticTexts['Contact Us']}</u></strong>
+                                                <p><strong className="fw-normal">{locationData?.phone}</strong></p>
                                             </div>
                                         </div>
-                                    </a>
+                                    </a>}
+                                    
+                                    {locationData?.whatsapp && <a href={`https://wa.me/${locationData.whatsapp.replace(/[^0-9]/g, '')}`}    target="_blank">
+                                        <div className="address-item d-flex align-items-center mb-3">
+                                            <i className="fa-solid fa-brands fa-whatsapp"></i>
+                                            <div className="ms-2">
+                                                <strong><u>{staticTexts['WhatsApp']}</u></strong>
+                                                <p><strong className="fw-normal">{locationData?.whatsapp}</strong></p>
+                                            </div>
+                                        </div>
+                                    </a>}
+
+                                    {locationData?.bookAnAppointment && <a href={"tel:" + locationData?.bookAnAppointment}>
+                                        <div className="address-item d-flex align-items-center mb-3">
+                                            <i className="fa-solid fa-phone"></i>
+                                            <div className="ms-2">
+                                                <strong><u>{staticTexts['To Book an Appointment']}</u></strong>
+                                                <p><strong className="fw-normal">{locationData?.bookAnAppointment}</strong></p>
+                                            </div>
+                                        </div>
+                                    </a>}
+
                                     {locationData?.emergency && <a href={"tel:" + locationData?.emergency}>
                                         <div className="address-item d-flex align-items-center mb-3">
                                             <i className="fa-solid fa-phone"></i>

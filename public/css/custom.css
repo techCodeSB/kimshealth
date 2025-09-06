@@ -948,7 +948,7 @@ header {
 }
 
 .expert-section .card-content h4 {
-    font-size: 19px;
+    font-size: 18px;
     color: #000000;
     font-weight: 600;
     margin-bottom: 0px;
@@ -5290,7 +5290,11 @@ li.chat-ic::before {
     gap: 10px;
 }
 
-.sub-menu-details.location-menu-red-color ul li:first-child a {
+.sub-menu-details .location-menu-red-color ul li:first-child a {
+    color: #b71c2b;
+}
+
+.sub-menu-details .location-menu-red-color li:first-child a {
     color: #b71c2b;
 }
 

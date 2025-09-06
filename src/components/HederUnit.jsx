@@ -307,7 +307,7 @@ const HeaderUnit = () => {
                         </div>
 
                         <div className="col-lg-8">
-                          <div className="sub-menu-details location-menu-red-color">
+                          <div className="sub-menu-details">
                             {
                               allLocations.map((l, index) => {
                                 // Filter once per location
@@ -319,7 +319,7 @@ const HeaderUnit = () => {
                                 return (
                                   <div id={"tab" + index} className={`tab-content ${index === 0 ? 'active' : ''}`} key={index}>
                                     {l?.slug !== "ip" ? <div className="row">
-                                      <div className="col-md-6 mb-3">
+                                      <div className="col-md-6 mb-3 location-menu-red-color">
                                         {onlyHospitals?.length > 0 && <h3>{staticTexts['Hospitals']}</h3>}
                                         <ul>
                                           {onlyHospitals.map((hospital, i) => (

@@ -221,7 +221,19 @@ const DoctorListing = ({ baseURL, allLocation, allSpeciality, allDoctorCount, la
                                                             <option value={loc.slug} key={index + "1"}>{loc.title}</option>
                                                         ))}
                                                     </select>
-                                                    <span className="input-group-text">
+                                                    <span onClick={(e) => {
+                                                        const selectEl = e.currentTarget.closest(".input-group")?.querySelector("select");
+
+                                                        if (selectEl) {
+                                                            if (typeof selectEl.showPicker === "function") {
+                                                                // ✅ Chrome / Edge
+                                                                selectEl.showPicker();
+                                                            } else {
+                                                                // 🔄 Safari / Firefox fallback
+                                                                selectEl.focus();
+                                                            }
+                                                        }
+                                                    }} className="input-group-text">
                                                         <i className="fa-solid fa-angle-down"></i>
                                                     </span>
                                                 </div>
@@ -245,7 +257,19 @@ const DoctorListing = ({ baseURL, allLocation, allSpeciality, allDoctorCount, la
                                                             <option value={s.speciality?.slug} key={index + "1"}>{s.title}</option>
                                                         ))}
                                                     </select>
-                                                    <span className="input-group-text">
+                                                    <span onClick={(e) => {
+                                                        const selectEl = e.currentTarget.closest(".input-group")?.querySelector("select");
+
+                                                        if (selectEl) {
+                                                            if (typeof selectEl.showPicker === "function") {
+                                                                // ✅ Chrome / Edge
+                                                                selectEl.showPicker();
+                                                            } else {
+                                                                // 🔄 Safari / Firefox fallback
+                                                                selectEl.focus();
+                                                            }
+                                                        }
+                                                    }} className="input-group-text">
                                                         <i className="fa-solid fa-angle-down"></i>
                                                     </span>
                                                 </div>
@@ -265,7 +289,7 @@ const DoctorListing = ({ baseURL, allLocation, allSpeciality, allDoctorCount, la
                                                     <img
                                                         src={d.doctorImage?.url ? `${process.env.NEXT_PUBLIC_IMAGE_URL}${d.doctorImage?.url}` : "/img/no-image.jpg"}
                                                         className="img-fluid w-100"
-                                                        alt={`${d.salutation?d.salutation+" ":""}${d.name}`}
+                                                        alt={`${d.salutation ? d.salutation + " " : ""}${d.name}`}
                                                     />
 
                                                 </a>
@@ -274,7 +298,7 @@ const DoctorListing = ({ baseURL, allLocation, allSpeciality, allDoctorCount, la
                                                 </a>}
                                             </div>
                                             <div className="card-content px-0">
-                                                <h4>{`${d.salutation?d.salutation+" ":""}${d.name}`}</h4>
+                                                <h4>{`${d.salutation ? d.salutation + " " : ""}${d.name}`}</h4>
                                                 <p>{d.doctorDesignation}</p>
                                                 <h5>{d.specialities[0]?.title}</h5>
                                                 {/* <div className="from-btn">

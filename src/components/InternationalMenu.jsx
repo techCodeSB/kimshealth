@@ -7,7 +7,7 @@ const InternationalMenu = () => {
             <div className="row">
                 <div className="col-md-6 mb-3">
                     <h3>Bahrain</h3>
-                    <ul>
+                    <ul className='location-menu-red-color'>
                         <li><a target='_blank' href="https://www.kimshealth.org/bahrain/ummalhassam-2/">Umm Al Hassam (Hospital)</a></li>
                         <li><a target='_blank' href="https://www.royalbahrainhospital.com/">Salmaniya (Hospital)</a></li>
                         <li><a target='_blank' href="https://www.kimshealth.org/bahrain/ummalhassam">Umm Al Hassam (Medical Center)</a></li>

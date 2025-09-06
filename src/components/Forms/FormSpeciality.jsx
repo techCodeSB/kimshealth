@@ -19,7 +19,7 @@ const FormSpeciality = ({ title, speciality }) => {
         setLoading(true);
         if ([formData.name, formData.number, formData.hospital].some((field) => !field || field === "")) {
             toast("Fill the required fields", {
-                
+
                 theme: 'light',
                 type: 'error',
                 closeOnClick: true
@@ -50,7 +50,7 @@ const FormSpeciality = ({ title, speciality }) => {
             if (req.status !== 200) {
                 setLoading(false);
                 return toast(res.err, {
-                    
+
                     theme: 'light',
                     type: 'error',
                     closeOnClick: true
@@ -58,7 +58,7 @@ const FormSpeciality = ({ title, speciality }) => {
             }
 
             toast("Successfully sent", {
-                
+
                 theme: 'light',
                 type: 'success',
                 closeOnClick: true
@@ -75,7 +75,7 @@ const FormSpeciality = ({ title, speciality }) => {
             console.log(error)
             setLoading(false);
             return toast("Something went wrong", {
-                
+
                 theme: 'light',
                 type: 'error',
                 closeOnClick: true
@@ -125,7 +125,21 @@ const FormSpeciality = ({ title, speciality }) => {
                                             })
                                         }
                                     </select>
-                                    <span className="input-group-text"><i className="fa-solid fa-chevron-down"></i></span>
+                                    <span onClick={(e) => {
+                                        const selectEl = e.currentTarget.closest(".input-group")?.querySelector("select");
+
+                                        if (selectEl) {
+                                            if (typeof selectEl.showPicker === "function") {
+                                                // ✅ Chrome / Edge
+                                                selectEl.showPicker();
+                                            } else {
+                                                // 🔄 Safari / Firefox fallback
+                                                selectEl.focus();
+                                            }
+                                        }
+                                    }} className="input-group-text">
+                                        <i className="fa-solid fa-chevron-down"></i>
+                                    </span>
                                 </div>
 
                             </div>
