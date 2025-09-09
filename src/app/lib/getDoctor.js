@@ -45,7 +45,7 @@ const doctorData = {
             : `&filters[locations][id][$eq]=${langLoc.loc.id}`;
 
         const textFilter = searchText
-        ?`&filters[name][$contains]=${searchText}`
+        ?`&filters[$or][0][name][$contains]=${searchText}&filters[$or][1][specialities][title][$contains]=${searchText}`
         :``;
 
 
