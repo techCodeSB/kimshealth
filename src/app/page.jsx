@@ -275,9 +275,9 @@ const Home = async () => {
 
 
 
-        {/* <div className="line-divider"> </div> */}
+        <div className="line-divider"> </div>
 
-        {/* <ExpertCarousel dataSet={expertDataSet} /> */}
+        <ExpertCarousel dataSet={expertDataSet} /> 
 
         <section className="section international-counter-section">
           <div className="container">
