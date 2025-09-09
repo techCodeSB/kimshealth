@@ -36,6 +36,29 @@ const doctorData = {
     },
 
 
+    getDoctorAllOnFindDoctor: async (start = 0, limit = 12, langLoc, hospital,searchText) => {
+        const base = process.env.NEXT_PUBLIC_CMS_API_URL;
+
+        // Determine the correct filter
+        const locationFilter = hospital
+            ? `&filters[hospitals][slug][$eq]=${hospital}`
+            : `&filters[locations][id][$eq]=${langLoc.loc.id}`;
+
+        const textFilter = searchText
+        ?`&filters[name][$contains]=${searchText}`
+        :``;
+
+
+        const url = `${base}/doctor-details?populate=*${locationFilter}${textFilter}&pagination[start]=${start}&pagination[limit]=${limit}&sort=name:asc,manageAppearance.orderInMasterList:asc`;
+
+
+        const req = await fetch(url);
+        const res = await req.json();
+        console.log(url)
+        return res.data;
+    },
+
+
     getSingleDoctor: async ({slug, langLoc}) => {
         let url = process.env.NEXT_PUBLIC_CMS_API_URL + `/doctor-details/?filters[slug][$eq]=${slug}&populate[0]=doctorImage&populate[1]=hospitals&populate[2]=diseases&populate[3]=locations&populate[4]=procedures&populate[5]=specialities&populate[6]=manageAppearance&populate[7]=metaSection&populate[8]=blogSection&populate[9]=doctorTalk`;
         const req = await fetch(url);
@@ -99,6 +122,15 @@ const doctorData = {
 
     getBySpeciality: async ({ id, langLoc }) => {
         const url = process.env.NEXT_PUBLIC_CMS_API_URL + `/doctor-details?populate=*&filters[specialities][id][$eq]=${id}&filters[locations][id][$eq]=${langLoc.loc.id}&sort=manageAppearance.orderInMasterList:desc,name:asc`;
+        const req = await fetch(url);
+        const res = await req.json();
+
+        return res.data;
+    },
+
+
+    getBySpecialityAndHospital: async ({ id, hospital, langLoc }) => {
+        const url = process.env.NEXT_PUBLIC_CMS_API_URL + `/doctor-details?populate=*&filters[specialities][id][$eq]=${id}&filters[hospitals][slug][$eq]=${hospital}&filters[locations][id][$eq]=${langLoc.loc.id}&sort=manageAppearance.orderInMasterList:desc,name:asc`;
         const req = await fetch(url);
         const res = await req.json();
 

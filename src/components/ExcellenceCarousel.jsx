@@ -42,7 +42,7 @@ const ExcellenceCarousel = ({ dataSet }) => {
                             dataSet.data.map((e, index) => {
                                 return <div className="item" key={index}>
                                     <div className="card border-0">
-                                        <a href={dataSet.baseUrl + "/speciality/" + e.speciality?.slug}>
+                                        <a href={dataSet.baseUrl + "/speciality/" + e.speciality?.slug + "?hospital=" + dataSet.slug}>
                                             <div className="card-top">
                                                 <img src={e.speciality?.featuredImage?.url ? `${process.env.NEXT_PUBLIC_IMAGE_URL}${e.speciality?.featuredImage?.url}` : '/img/no-image.jpg'}
                                                     className="img-fluid w-100" alt={e.title} />

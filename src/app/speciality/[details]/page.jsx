@@ -31,7 +31,7 @@ const SpecialityDetails = async ({ params, searchParams }) => {
 
     const allSubSpeciality = await getSpecialityData.getAllSubSpeciality({ langLoc: getLangLoc, id: data.speciality?.id });
 
-
+    const selectedHospital=URLParams.hospital?URLParams.hospital:"";
 
     // const allDiseas = await diseaseData.getAll({langLoc: getLangLoc, URLParams:URLParams})
     // const allProcedure = await procedureData.getAll({langLoc: getLangLoc, URLParams:URLParams})
@@ -47,7 +47,7 @@ const SpecialityDetails = async ({ params, searchParams }) => {
     const expertDataSet = {
         sectionTitle: data.expertSection?.title,
         buttonText: 'View All', buttonURL: `${baseUrl + "/doctor?speciality=" + data.speciality?.slug}`,
-        data: await doctorData.getBySpeciality({ id: data.speciality.id, langLoc: getLangLoc }),
+        data: await doctorData.getBySpecialityAndHospital({ id: data.speciality.id, hospital:selectedHospital, langLoc: getLangLoc }),
         baseUrl: baseUrl
     };
     const testimonialDataSet = {
@@ -399,4 +399,3 @@ const SpecialityDetails = async ({ params, searchParams }) => {
 }
 
 export default SpecialityDetails;
-

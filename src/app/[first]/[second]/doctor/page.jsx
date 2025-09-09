@@ -10,6 +10,7 @@ import langLoc from '@/helper/getLangLoc';
 import getSpecialityData from '@/app/lib/getSpeciality';
 import Breadcrumb from '@/components/Breadcrumb';
 import getCurrentLangLoc from '@/app/lib/getCurrentLangLoc';
+import hospitalData from '@/app/lib/getHospital';
 
 
 
@@ -23,6 +24,7 @@ const Doctor = async ({ searchParams }) => {
     const staticText = await getStaticText();
 
     const allLocation = await langLoc.getLocationsOnlyCMS()
+    const allHospital=await hospitalData.getAllHospitalAndMedicalCenter()
     const allSpeciality = await getSpecialityData.getAllSpecialityForFilter({langLoc: getLangLoc})
     const allDoctorCount = await doctorData.allDoctorCount({langLoc: getLangLoc, URLParams:URLParams});
 
@@ -55,6 +57,7 @@ const Doctor = async ({ searchParams }) => {
                     <DoctorListing
                         allDoctorCount={allDoctorCount}
                         allLocation={allLocation}
+                        allHospital={allHospital}
                         allSpeciality={allSpeciality}
                         baseURL={baseURL}
                         langLoc={getLangLoc}
