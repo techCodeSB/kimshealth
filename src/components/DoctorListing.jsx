@@ -58,7 +58,8 @@ const DoctorListing = ({ baseURL, allLocation, allHospital, allSpeciality, allDo
             limit,
             langLoc,
             selectedHospital,
-            selectedSearchText
+            selectedSearchText,
+            URLParams
         );
 
         if (data.length < 1) {

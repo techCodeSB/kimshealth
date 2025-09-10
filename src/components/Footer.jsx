@@ -264,19 +264,22 @@ const Footer = () => {
                             </div>
 
                             <div className="social-media-icon mt-4">
-                                {/* <img src="/img/facebook.png" className="img-fluid" alt="Facebook" /> */}
-                                <a href={locationData?.facebook} target="_blank" rel="noopener noreferrer">
+
+                                {locationData?.facebook && <a href={locationData?.facebook} target="_blank" rel="noopener noreferrer">
                                     <img src="/img/facebook.png" className="img-fluid" alt="Facebook" />
-                                </a>
-                                <a href={locationData?.instagram} target="_blank" rel="noopener noreferrer" className="instagram-logo">
+                                </a>}
+                                {locationData?.instagram && <a href={locationData?.instagram} target="_blank" rel="noopener noreferrer">
                                     <img src="/img/instagram.png" className="img-fluid" alt="Instagram" />
-                                </a>
-                                <a href={locationData?.linkedin} target="_blank" rel="noopener noreferrer">
+                                </a>}
+                                {locationData?.linkedin && <a href={locationData?.linkedin} target="_blank" rel="noopener noreferrer">
                                     <img src="/img/linkedin.png" className="img-fluid" alt="LinkedIn" />
-                                </a>
-                                <a href={locationData?.youtube} target="_blank" rel="noopener noreferrer">
+                                </a>}
+                                {locationData?.twitterX && <a href={locationData?.twitterX} target="_blank" rel="noopener noreferrer">
+                                    <img src="/img/x-twitter.png" className="img-fluid" alt="X" />
+                                </a>}
+                                {locationData?.youtube && <a href={locationData?.youtube} target="_blank" rel="noopener noreferrer">
                                     <img src="/img/youtube.png" className="img-fluid" alt="YouTube" />
-                                </a>
+                                </a>}
                             </div>
 
                             {/* <div className="newsletter mt-5">
@@ -707,18 +710,21 @@ const Footer = () => {
                             </div>
 
                             <div className="social-media-icon mt-4">
-                                <a href={locationData?.facebook} target="_blank" rel="noopener noreferrer">
+                                {locationData?.facebook && <a href={locationData?.facebook} target="_blank" rel="noopener noreferrer">
                                     <img src="/img/facebook.png" className="img-fluid" alt="Facebook" />
-                                </a>
-                                <a href={locationData?.instagram} target="_blank" rel="noopener noreferrer">
+                                </a>}
+                                {locationData?.instagram && <a href={locationData?.instagram} target="_blank" rel="noopener noreferrer">
                                     <img src="/img/instagram.png" className="img-fluid" alt="Instagram" />
-                                </a>
-                                <a href={locationData?.linkedin} target="_blank" rel="noopener noreferrer">
+                                </a>}
+                                {locationData?.linkedin && <a href={locationData?.linkedin} target="_blank" rel="noopener noreferrer">
                                     <img src="/img/linkedin.png" className="img-fluid" alt="LinkedIn" />
-                                </a>
-                                <a href={locationData?.youtube} target="_blank" rel="noopener noreferrer">
+                                </a>}
+                                {locationData?.twitterX && <a href={locationData?.twitterX} target="_blank" rel="noopener noreferrer">
+                                    <img src="/img/x-twitter.png" className="img-fluid" alt="X" />
+                                </a>}
+                                {locationData?.youtube && <a href={locationData?.youtube} target="_blank" rel="noopener noreferrer">
                                     <img src="/img/youtube.png" className="img-fluid" alt="YouTube" />
-                                </a>
+                                </a>}
                             </div>
 
                             {/* <div className="newsletter mt-4">
