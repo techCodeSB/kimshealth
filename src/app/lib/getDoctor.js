@@ -54,12 +54,8 @@ const doctorData = {
             ? `&filters[specialities][slug][$eq]=${URLParams.speciality}`
             : ``;
 
-        const hospitalFilter = URLParams?.hospital
-            ? `&filters[hospitals][slug][$eq]=${URLParams.hospital}`
-            : ``;
 
-
-        const url = `${base}/doctor-details?populate=*${locationFilter}${textFilter}${specialityFilter}${hospitalFilter}&pagination[start]=${start}&pagination[limit]=${limit}&sort=name:asc,manageAppearance.orderInMasterList:asc`;
+        const url = `${base}/doctor-details?populate=*${locationFilter}${textFilter}${specialityFilter}&pagination[start]=${start}&pagination[limit]=${limit}&sort=name:asc,manageAppearance.orderInMasterList:asc`;
 
 
         const req = await fetch(url);
