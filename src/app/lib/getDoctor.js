@@ -130,10 +130,16 @@ const doctorData = {
 
 
     getBySpecialityAndHospital: async ({ id, hospital, langLoc }) => {
-        const url = process.env.NEXT_PUBLIC_CMS_API_URL + `/doctor-details?populate=*&filters[specialities][id][$eq]=${id}&filters[hospitals][slug][$eq]=${hospital}&filters[locations][id][$eq]=${langLoc.loc.id}&sort=manageAppearance.orderInMasterList:desc,name:asc`;
+
+        const hospitalFilter=hospital
+        ?`&filters[hospitals][slug][$eq]=${hospital}`
+        :``
+
+        const url = process.env.NEXT_PUBLIC_CMS_API_URL + `/doctor-details?populate=*&filters[specialities][id][$eq]=${id}${hospitalFilter}&filters[locations][id][$eq]=${langLoc.loc.id}&sort=manageAppearance.orderInMasterList:desc,name:asc`;
         const req = await fetch(url);
         const res = await req.json();
 
+        console.log(url)
         return res.data;
     },
 
