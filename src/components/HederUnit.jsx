@@ -14,7 +14,7 @@ import SearchBox from './Forms/SearchBox';
 import getStaticPage from '@/helper/staticPage';
 
 
-const HeaderUnit = () => {
+const HeaderUnit = ({hospital}) => {
   const [selectedLangLoc, setselectedLangLoc] = useState([]);
   const [allLanguages, setAllLanguage] = useState([]); // Store all language;
   const [allLocations, setAllLocations] = useState([]); // Store all locations;
@@ -135,7 +135,7 @@ const HeaderUnit = () => {
   };
 
   /********************************Google Translator*****************************/
-
+console.log(hospital)
 
 
   return (
@@ -144,7 +144,7 @@ const HeaderUnit = () => {
         <section id="topheader" className="d-lg-block d-none">
           <div className="container d-flex align-items-center justify-content-between">
             <div className="navbar-logo py-2 ">
-              <a href="/">
+              <a href={basePath}>
                 <img src="/img/logo.png" alt="" className="img-fluid" />
               </a>
             </div>
@@ -271,7 +271,7 @@ const HeaderUnit = () => {
 
                     </div>
                   </li>
-                  <li><a href={`${basePath}/doctor`} className="anchor-menu">{staticTexts['Find a Doctor']}</a></li>
+                  <li><a href={`${basePath}/doctor${hospital?'?hospital='+hospital:''}`} className="anchor-menu">{staticTexts['Find a Doctor']}</a></li>
                   <li><a href={`${basePathOnlyLang}/visa-medical`} className="anchor-menu">{staticTexts['Visa Medical']}</a></li>
                   <li><a href={`${basePathOnlyLang}/international-patient`} className="anchor-menu">
                     {staticTexts['International Patients']}</a></li>

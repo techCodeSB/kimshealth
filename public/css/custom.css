@@ -6063,19 +6063,22 @@ select option:hover {
     border-bottom: 1px solid #b71c2b;
 }
 
-.corporate-notice-form.association-form-card{
+.corporate-notice-form.association-form-card {
     box-shadow: none;
 }
-.corporate-notice-form.association-form-card input, 
-.corporate-notice-form.association-form-card select, 
-.corporate-notice-form.association-form-card textarea{
+
+.corporate-notice-form.association-form-card input,
+.corporate-notice-form.association-form-card select,
+.corporate-notice-form.association-form-card textarea {
     background: #f3f3f3;
     padding: 10px 10px;
 }
-.corporate-notice-form.association-form-card h3{
+
+.corporate-notice-form.association-form-card h3 {
     text-align: left;
 }
-.corporate-notice-form.association-form-card .input-group-text{
+
+.corporate-notice-form.association-form-card .input-group-text {
     border-top-left-radius: 30px;
     border-bottom-left-radius: 30px;
     border: none;
@@ -6083,37 +6086,81 @@ select option:hover {
     color: #b71c2b;
     padding-left: 30px;
 }
-.corporate-notice-form.association-form-card input:focus, 
-.corporate-notice-form.association-form-card select:focus, 
-.corporate-notice-form.association-form-card textarea:focus{
+
+.corporate-notice-form.association-form-card input:focus,
+.corporate-notice-form.association-form-card select:focus,
+.corporate-notice-form.association-form-card textarea:focus {
     border: none;
 }
-.bg-yellow{
+
+.bg-yellow {
     background-color: yellow !important;
 }
 
-.bg-red{
+.bg-red {
     background-color: red !important;
 }
-.bg-blue{
+
+.bg-blue {
     background-color: blue !important;
 }
-.hospital-details-slider2.owl-carousel .owl-nav button.owl-prev{
+
+.hospital-details-slider2.owl-carousel .owl-nav button.owl-prev {
     left: 0 !important;
     top: 35%;
 }
-.hospital-details-slider2.owl-carousel .owl-nav button.owl-next{
+
+.hospital-details-slider2.owl-carousel .owl-nav button.owl-next {
     right: 0 !important;
     top: 35%;
 }
-.course-popup-form h3{
-  color: #b71c2b;
-  font-weight: 600;
-  margin-bottom: 15px;
-  line-height: 22px;
-  font-size: 20px !important;
-  text-align: center;
+
+.course-popup-form h3 {
+    color: #b71c2b;
+    font-weight: 600;
+    margin-bottom: 15px;
+    line-height: 22px;
+    font-size: 20px !important;
+    text-align: center;
 }
-.banner-from-col-custom{
+
+.banner-from-col-custom {
     width: 20%;
+}
+
+.search-data {
+    padding: 10px 30px;
+    min-height: 225px;
+    overflow-y: scroll;
+    height: 225px;
+    position: absolute;
+    top: 45px;
+    width: 96%;
+    background: #f3f3f3;
+    z-index: 999;
+    border-radius: 12px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.search-data ul {
+    margin-bottom: 20px !important;
+}
+
+.expert-doc-listing-box.custom-z-indexing{
+    position: relative;
+    z-index: -1 ;
+}
+.search-data ul li{
+    position: relative;
+    padding-left: 1rem;
+}
+.search-data ul li::before{
+    content: '';
+    position: absolute;
+    top: 39%;
+    left: 0;
+    width: 7px;
+    height: 7px;
+    background: #c71d22;
+    border-radius: 100%;
 }

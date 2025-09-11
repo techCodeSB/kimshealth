@@ -3,9 +3,18 @@ const doctorData = {
         const base = process.env.NEXT_PUBLIC_CMS_API_URL;
 
         // Determine the correct filter
-        const locationFilter = URLParams?.location
+        const hospitalFilter = URLParams?.hospital
+            ? `&filters[hospitals][slug][$eq]=${URLParams.hospital}`
+            : ``;
+
+        let locationFilter = URLParams?.location
             ? `&filters[locations][slug][$eq]=${URLParams.location}`
             : `&filters[locations][id][$eq]=${langLoc.loc.id}`;
+
+        if (hospitalFilter) {
+            locationFilter = ``;
+        }
+
 
         const specialityFilter = URLParams?.speciality
             ? `&filters[specialities][slug][$eq]=${URLParams.speciality}`
@@ -15,9 +24,7 @@ const doctorData = {
             ? `&filters[doctorGender][$eq]=${URLParams.gender}`
             : ``;
 
-        const hospitalFilter = URLParams?.hospital
-            ? `&filters[hospitals][slug][$eq]=${URLParams.hospital}`
-            : ``;
+
 
         const procedureFilter = URLParams?.procedure
             ? `&filters[procedures][slug][$eq]=${URLParams.procedure}`
@@ -47,8 +54,6 @@ const doctorData = {
         const textFilter = searchText
             ? `&filters[$or][0][name][$contains]=${searchText}&filters[$or][1][specialities][title][$contains]=${searchText}`
             : ``;
-
-
 
         const specialityFilter = URLParams?.speciality
             ? `&filters[specialities][slug][$eq]=${URLParams.speciality}`

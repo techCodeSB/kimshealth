@@ -43,6 +43,43 @@ const getSpecialityData = {
     },
 
 
+
+
+    getAllSpecialityOfHospitalForFilter: async ({ langLoc, hospitalSlug }) => {
+        const baseUrl = process.env.NEXT_PUBLIC_CMS_API_URL;
+
+        // First request to get total count
+        const initialUrl = `${baseUrl}/specialities?filters[hospitals][slug][$eq]=${hospitalSlug}`;
+        
+
+        const initialReq = await fetch(initialUrl);
+        const initialRes = await initialReq.json();
+        const totalCount = initialRes?.meta?.pagination?.total || 0;
+
+        if (totalCount === 0) return [];
+
+        const limit = 100;
+        const pages = Math.ceil(totalCount / limit);
+
+        // Create an array of fetch promises
+        const requests = Array.from({ length: pages }, (_, i) => {
+            const start = i * limit;
+            const url = `${baseUrl}/specialities?populate=*&pagination[start]=${start}&pagination[limit]=${limit}&filters[hospitals][slug][$eq]=${hospitalSlug}&sort=title:asc`;
+            return fetch(url).then((res) => res.json());
+        });
+
+        // Run requests in parallel
+        const results = await Promise.all(requests);
+
+        // Merge data
+        const data = results.flatMap((res) => res.data || []);
+
+
+        return data;
+    },
+
+
+
     // FOR LISTING PAGE;
     getSpeciality: async ({ field, langLoc, URLParams }) => {
         const baseUrl = process.env.NEXT_PUBLIC_CMS_API_URL;
@@ -182,12 +219,12 @@ const getSpecialityData = {
         const getIdRes = await getIdReq.json();
 
         // if slug not exists
-        if(isMeta && getIdRes.data.length === 0){
+        if (isMeta && getIdRes.data.length === 0) {
             return null;
         }
-        else if(!isMeta && getIdRes.data.length === 0){
-           return notFound();
-        }   
+        else if (!isMeta && getIdRes.data.length === 0) {
+            return notFound();
+        }
         const id = getIdRes.data[0].id;
 
         // Get speciality data using id;

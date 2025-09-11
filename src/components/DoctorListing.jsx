@@ -3,6 +3,7 @@ import doctorData from '@/app/lib/getDoctor';
 import getStaticText from '@/helper/getStaticText';
 import React, { useEffect, useState, useRef } from 'react';
 import Form3 from './Forms/Form3';
+import getSpecialityData from '@/app/lib/getSpeciality';
 
 
 
@@ -12,8 +13,6 @@ const DoctorListing = ({ baseURL, allLocation, allHospital, allSpeciality, allDo
     const [staticText, setStaticTexts] = useState({});
     const [locationList, setLocationList] = useState([]);
     const [hospitalList, setHospitalList] = useState([]);
-    const [selectedHospital, setHospital] = useState(URLParams.hospital || '');
-    const [selectedSearchText, setSearchText] = useState('');
     const [specialityList, setSpecialityList] = useState([]);
     const observerRef = useRef(null);
     const loadingRef = useRef(false); // throttle loading
@@ -21,12 +20,27 @@ const DoctorListing = ({ baseURL, allLocation, allHospital, allSpeciality, allDo
     const [endData, setEndData] = useState(false);
     const limit = 12;
 
+    async function setSpecility()
+    {
+        if (URLParams?.hospital) {
+            setSpecialityList(
+                await getSpecialityData.getAllSpecialityOfHospitalForFilter({
+                    langLoc,
+                    hospitalSlug: URLParams.hospital
+                })
+            );
+        } else {
+            setSpecialityList(allSpeciality);
+        }
+    }
 
     useEffect(() => {
         setLocationList(allLocation);
         setHospitalList(allHospital);
-        setSpecialityList(allSpeciality);
-    }, [allLocation, allSpeciality]);
+        setSpecility()
+        
+    }, [allLocation, allHospital, allSpeciality]);
+
 
 
     useEffect(() => {
@@ -47,37 +61,20 @@ const DoctorListing = ({ baseURL, allLocation, allHospital, allSpeciality, allDo
     }, []);
 
 
-    const loadDoctor = async (reset = false) => {
-        if (loading) return;
+    const loadDoctor = async () => {
+        if (loading) return; // prevent multiple triggers
         setLoading(true);
 
-        const start = reset ? 0 : count; // 👈 if reset, start from 0
-
-        const data = await doctorData.getDoctorAllOnFindDoctor(
-            start,
-            limit,
-            langLoc,
-            selectedHospital,
-            selectedSearchText,
-            URLParams
-        );
+        const data = await doctorData.getDoctorAll(count, limit, langLoc, URLParams);
 
         if (data.length < 1) {
-            setEndData(true);
+            setEndData(true)
         }
-
-        if (reset) {
-            setDocData(data);   // replace with fresh data
-            setCount(limit);    // next batch will start after limit
-            setEndData(false);
-        } else {
-            setDocData(prev => [...prev, ...data]); // append to old
-            setCount(prev => prev + limit);
-        }
+        setDocData(prev => [...prev, ...data]);
+        setCount(prev => prev + limit);
 
         setLoading(false);
     };
-
 
     useEffect(() => {
         const observer = new IntersectionObserver(
@@ -98,16 +95,129 @@ const DoctorListing = ({ baseURL, allLocation, allHospital, allSpeciality, allDo
     }, [count, loading, endData]);
 
 
-    useEffect(() => {
-        loadDoctor(true);
-    }, [selectedSearchText, selectedHospital]);
+    // const onLocationChange = (e) => {
+    //     const search = e.target.value.toLowerCase();
+    //     const filtered = allLocation.filter(loc => loc.title.toLowerCase().includes(search));
+    //     setLocationList(filtered);
+    // };
 
+    // const onSpecialityChange = (e) => {
+    //     const search = e.target.value.toLowerCase();
 
+    //     if (!search) {
+    //         setSpecialityList(allSpeciality);
+    //         return;
+    //     }
+
+    //     const filtered = allSpeciality.filter(spl =>
+    //         spl.title.toLowerCase().includes(search)
+    //     );
+
+    //     setSpecialityList(filtered);
+    // };
 
     return (
         <section className="section">
             <div className="container">
+                {/* <div className="row">
+                    <div className="col-md-12 col-6">
+                        <div className="main-heading">
+                            <h2>{allDoctorCount} {staticText['Doctors Found']}</h2>
+                        </div>
+                    </div>
+                    <div className="col-6 d-lg-none d-block">
+                        <button type="button" className="btn-tab form-btn mx-2 filter-box-mobile">
+                            {staticText['Filters']} <i className="fa-solid fa-filter"></i>
+                        </button>
+                    </div>
+                </div> */}
                 <div className="row">
+                    {/* <div className="col-md-3 mb-4">
+                        <div className="find-doctor-left-col filter-form">
+                            <h4 className=" d-md-none d-block">{staticText['Select Filters']}</h4>
+
+                            <div className="find-doc-box d-md-none d-block">
+                                <h3>{staticText['By City']}</h3>
+                                <div className="rounded-field-form mb-3">
+                                    <div className="row">
+                                        <div className="col-12">
+                                            <div className="input-group">
+                                                <input type="text" className="form-control" placeholder="Search ...." onChange={onLocationChange} />
+                                                <span className="input-group-text">
+                                                    <i className="fa-solid fa-magnifying-glass"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="option-find-doc">
+                                        <ul>
+                                            {locationList?.map((loc, index) => (
+                                                <li key={index + "1"} >
+                                                    <a href={`${baseURL}/doctor?location=${loc.slug}${URLParams.speciality ? `&speciality=${URLParams.speciality}` : ''}${URLParams.gender ? `&gender=${URLParams.gender}` : ''}${URLParams.hospital ? `&hospital=${URLParams.hospital}` : ''}`} className={loc.slug === URLParams.location ? 'active' : ''}>
+                                                        {loc.title}
+                                                    </a>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="find-doc-box d-md-none d-block">
+                                <h3>{staticText['By Departments']}</h3>
+                                <div className="rounded-field-form mb-3">
+                                    <div className="row">
+                                        <div className="col-12">
+                                            <div className="input-group">
+                                                <input type="text"
+                                                    className="form-control"
+                                                    placeholder={staticText['Search'] + " ....."}
+                                                    onChange={onSpecialityChange}
+                                                />
+                                                <span className="input-group-text"><i className="fa-solid fa-magnifying-glass"></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="option-find-doc">
+                                        <ul>
+                                            {specialityList?.map((s, index) => (
+                                                <li key={index + "1"}>
+                                                    <a href={`${baseURL}/doctor?speciality=${s.speciality?.slug}${URLParams.location ? `&location=${URLParams.location}` : ''}${URLParams.gender ? `&gender=${URLParams.gender}` : ''}${URLParams.hospital ? `&hospital=${URLParams.hospital}` : ''}`} className={s.speciality?.slug === URLParams.speciality ? 'active' : ''}>
+                                                        {s.title}
+                                                    </a>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="find-doc-box">
+                                <h3>{staticText['By Gender']}</h3>
+                                <div className="rounded-field-form mb-3">
+                                    <div className="row">
+                                        <div className="col-12">
+                                            <div className="input-group">
+                                                <select className="form-select" value={URLParams.gender ? URLParams.gender : ""} aria-label="Select Gender" onChange={(e) => {
+                                                    location.href = `${baseURL}/doctor?gender=${e.target.value}${URLParams.speciality ? `&speciality=${URLParams.speciality}` : ''}${URLParams.location ? `&location=${URLParams.location}` : ''}${URLParams.hospital ? `&hospital=${URLParams.hospital}` : ''}`;
+                                                }}>
+                                                    <option value="">{staticText['Gender']}</option>
+                                                    <option value="Male">{staticText['Male']}</option>
+                                                    <option value="Female">{staticText['Female']}</option>
+                                                    <option value="Others">{staticText['Others']}</option>
+                                                </select>
+                                                <span className="input-group-text"><i className="fa-solid fa-chevron-down"></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> 
+
+                            <div className="find-doc-box">
+                                <Form3 title={staticText['Need Help Making an Appointment?']} type="Doctor" />
+                            </div>
+                        </div>
+                    </div> */}
 
                     {/* Doctor Cards */}
                     <div className="col-md-12 expert-section">
@@ -118,8 +228,8 @@ const DoctorListing = ({ baseURL, allLocation, allHospital, allSpeciality, allDo
                                         <div className="row">
                                             <div className="col-12">
                                                 <div className="input-group">
-                                                    <select className="form-select" aria-label="Default select example" value={selectedHospital} onChange={(e) => {
-                                                        setHospital(e.target.value)
+                                                    <select value={URLParams.hospital} className="form-select" aria-label="Default select example" onChange={(e) => {
+                                                        location.href = `${baseURL}/doctor?hospital=${e.target.value}${URLParams.speciality ? `&speciality=${URLParams.speciality}` : ''}${URLParams.gender ? `&gender=${URLParams.gender}` : ''}${URLParams.location ? `&location=${URLParams.location}` : ''}`;
                                                     }}>
                                                         <option value={''}>{staticText['Select Hospital / Medical Center']}</option>
 
@@ -154,9 +264,30 @@ const DoctorListing = ({ baseURL, allLocation, allHospital, allSpeciality, allDo
                                         <div className="row">
                                             <div className="col-12">
                                                 <div className="input-group">
-                                                    <input type='text' className='form-control' placeholder={staticText['Search by Speciality or Doctor Name']} value={selectedSearchText} onChange={(e) => {
-                                                        setSearchText(e.target.value)
-                                                    }} />
+                                                    <select value={URLParams.speciality} className="form-select" aria-label="Default select example" onChange={(e) => {
+                                                        location.href = `${baseURL}/doctor?speciality=${e.target.value}${URLParams.location ? `&location=${URLParams.location}` : ''}${URLParams.gender ? `&gender=${URLParams.gender}` : ''}${URLParams.hospital ? `&hospital=${URLParams.hospital}` : ''}`;
+                                                    }}>
+                                                        <option value={''}>Select Speciality</option>
+
+                                                        {specialityList?.map((s, index) => (
+                                                            <option value={URLParams?.hospital ? s.slug : s.speciality?.slug} key={index + "1"}>{s.title}</option>
+                                                        ))}
+                                                    </select>
+                                                    <span onClick={(e) => {
+                                                        const selectEl = e.currentTarget.closest(".input-group")?.querySelector("select");
+
+                                                        if (selectEl) {
+                                                            if (typeof selectEl.showPicker === "function") {
+                                                                // ✅ Chrome / Edge
+                                                                selectEl.showPicker();
+                                                            } else {
+                                                                // 🔄 Safari / Firefox fallback
+                                                                selectEl.focus();
+                                                            }
+                                                        }
+                                                    }} className="input-group-text">
+                                                        <i className="fa-solid fa-angle-down"></i>
+                                                    </span>
                                                 </div>
                                             </div>
                                         </div>

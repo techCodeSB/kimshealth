@@ -6,7 +6,7 @@ import HeaderUnit from './HederUnit';
 import { ToastContainer } from 'react-toastify';
 
 
-const Header = () => {
+const Header = ({hospital}) => {
   const loc = Cookies.get("systemLocation") ? JSON.parse(Cookies.get("systemLocation")) : "";
   const lang = Cookies.get("systemLang") ? JSON.parse(Cookies.get("systemLang")) : "";
 
@@ -65,13 +65,13 @@ const Header = () => {
   if (loc.default === true) {
     return <>
       <ToastContainer position='bottom-center' />
-      <HederCorporate />
+      <HederCorporate hospital={hospital} />
     </>
   }
   else {
     return <>
       <ToastContainer />
-      <HeaderUnit />
+      <HeaderUnit  hospital={hospital} />
     </>
   }
 

@@ -15,10 +15,10 @@ import getStaticPage from '@/helper/staticPage';
 
 
 
-const HeaderCorporate = () => {
+const HeaderCorporate = ({hospital}) => {
   const [selectedLangLoc, setselectedLangLoc] = useState([]);
   const [allLanguages, setAllLanguage] = useState([]); // Store all language;
-  const [allLocations, setAllLocations] = useState([]); // Store all locations;
+  const [allLocations, setAllLocations] = useState([]); // Store all locationsF;
   const [selectedLang, setSelectedLang] = useState(null);
   const [selectedLoc, setSelectedLoc] = useState(null);
   const [basePath, setBasePath] = useState();
@@ -139,7 +139,7 @@ const HeaderCorporate = () => {
         <section id="topheader" className="d-lg-block d-none">
           <div className="container d-flex align-items-center justify-content-between">
             <div className="navbar-logo py-2 ">
-              <a href="/">
+              <a href={basePath}>
                 <img src="/img/logo.png" alt="" className="img-fluid" />
               </a>
             </div>
@@ -264,7 +264,7 @@ const HeaderCorporate = () => {
 
                     </div>
                   </li>
-                  <li><a href={`${basePath}/doctor`} className="anchor-menu">{staticTexts['Find a Doctor']}</a></li>
+                  <li><a href={`${basePath}/doctor${hospital?'?hospital='+hospital:''}`} className="anchor-menu">{staticTexts['Find a Doctor']}</a></li>
                   {/* <li><a href={`${basePathOnlyLang}/visa-medical`} className="anchor-menu">{staticTexts['Visa Medical']}</a></li> */}
                   <li className="menu-item-has-children show-submenu d-lg-inline-block d-none">
                     <a href={basePathOnlyLang + "/hospital"} className="anchor-menu">{staticTexts['Locations']}</a>
