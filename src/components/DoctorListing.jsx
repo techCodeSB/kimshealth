@@ -318,10 +318,19 @@ const DoctorListing = ({ baseURL, allLocation, allHospital, allSpeciality, allDo
                                                 <p>{d.doctorDesignation}</p>
                                                 <h5>{d.specialities[0]?.title}</h5>
                                                 {/* <div className="from-btn">
-                                                    <a href={`${baseURL}/book-an-appointment/?doctor=${d.slug}`} className="btn">{staticText['Appointment']}</a>
+                                                    <a href={`${baseURL}/book-an-appointment/?doctor=${d.name}`} className="btn">{staticText['Appointment']}</a>
                                                 </div> */}
                                                 <div className="from-btn">
-                                                    {d.appointmentAvailable && <a href={baseURL + "/book-an-appointment/?doctor=" + d.slug} className="btn">{staticText['Appointment']}</a>}
+
+                                                    {d.appointmentAvailable && (
+                                                        <a
+                                                            href={`${baseURL}/book-an-appointment/?doctor=${d?.salutation ? d?.salutation + " " : ""}${d?.name}`}
+                                                            className="btn"
+                                                        >
+                                                            {staticText['Appointment']}
+                                                        </a>
+                                                    )}
+
                                                     <a href={baseURL + "/doctor/" + d.slug} className="btn vice-btn">{staticText['View Profile']}</a>
                                                 </div>
                                             </div>

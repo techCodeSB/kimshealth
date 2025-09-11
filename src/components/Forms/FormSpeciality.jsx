@@ -98,6 +98,10 @@ const FormSpeciality = ({ title, speciality }) => {
 
             const loc = (await getCurrentLangLocClient()).loc;
             setSelectedLocation(loc.slug);
+
+            setFormData({
+                ...formData, hospital: loc.slug
+            })
         }
 
         get()

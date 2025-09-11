@@ -19,8 +19,8 @@ const BookAnAppoinmentForm = ({ pageContent, URLParams }) => {
     const [selectedDoctor, setSelectedDoctor] = useState(URLParams.doctor);
     const [doctorLoading, setDoctorLoading] = useState(true);
     const [formData, setFormData] = useState({
-        name: '', contactNumber: '', location: '', hospital: '',
-        department: "", doctor: '', appoinmentDate: '', appoinmentTime: ''
+        name: '', contactNumber: '', location: URLParams.location, hospital: URLParams.hospital,
+        department: URLParams.speciality, doctor: URLParams.doctor, appoinmentDate: '', appoinmentTime: ''
     });
     const [loading, setLoading] = useState(false);
 

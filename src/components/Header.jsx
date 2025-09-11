@@ -70,7 +70,7 @@ const Header = ({hospital}) => {
   }
   else {
     return <>
-      <ToastContainer />
+      <ToastContainer position='bottom-center' />
       <HeaderUnit  hospital={hospital} />
     </>
   }

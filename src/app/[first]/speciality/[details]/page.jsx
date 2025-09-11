@@ -46,7 +46,7 @@ const SpecialityDetails = async ({ params, searchParams }) => {
     // ::::::::: ALL DATA SETS :::::::::
     const expertDataSet = {
         sectionTitle: data.expertSection?.title,
-        buttonText: 'View All', buttonURL: `${baseUrl + "/doctor?speciality=" + data.speciality?.slug}`,
+        buttonText: 'View All', buttonURL: `${baseUrl + "/doctor?speciality=" + data.speciality?.slug +`${URLParams.hospital?'&hospital='+URLParams.hospital:''}`}`,
         data: await doctorData.getBySpecialityAndHospital({ id: data.speciality.id, hospital:selectedHospital, langLoc: getLangLoc }),
         baseUrl: baseUrl
     };

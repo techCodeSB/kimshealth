@@ -70,7 +70,7 @@ const ContactUsForm = () => {
 
             // Remove data
             setFormData({
-               ...formData ,fname: "", lname: '', number: '', email: '', hospital: '', query: ''
+                ...formData, fname: "", lname: '', number: '', email: '', hospital: '', query: ''
             })
             setLoading(false);
             return;
@@ -104,6 +104,10 @@ const ContactUsForm = () => {
 
             const loc = (await getCurrentLangLocClient()).loc;
             setSelectedLocation(loc.slug);
+
+            setFormData({
+                ...formData, hospital: loc.slug
+            })
         }
 
         get()
@@ -187,8 +191,8 @@ const ContactUsForm = () => {
 
                             <div className="col-xl-6 col-lg-6 col-md-6 col-12 mb-3">
                                 <div className="from-btn">
-                                    <button type="button" className="btn d-inline-block w-auto" 
-                                    onClick={() => sendMail()} disabled={loading}>
+                                    <button type="button" className="btn d-inline-block w-auto"
+                                        onClick={() => sendMail()} disabled={loading}>
                                         {staticTexts['Submit']}
                                         {loading && <i className="fas fa-spinner fa-spin ms-1"></i>}
                                     </button>
@@ -252,8 +256,8 @@ const ContactUsForm = () => {
                             </div>
                             <div className="col-xl-6 col-lg-6 col-md-6 col-12 mb-3">
                                 <div className="from-btn">
-                                    <button type="button" className="btn d-inline-block w-auto" 
-                                    onClick={() => sendMail()} disabled={loading}>
+                                    <button type="button" className="btn d-inline-block w-auto"
+                                        onClick={() => sendMail()} disabled={loading}>
                                         {staticTexts['Submit']}
                                         {loading && <i className="fas fa-spinner fa-spin ms-1"></i>}
                                     </button>

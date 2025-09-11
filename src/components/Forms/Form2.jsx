@@ -96,6 +96,12 @@ const Form2 = ({ title, type, subject }) => {
 
       const loc = (await getCurrentLangLocClient()).loc;
       setSelectedLocation(loc.slug);
+
+
+
+      setFormData({
+        ...formData, hospital: loc.slug
+      })
     }
 
     get()

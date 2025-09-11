@@ -94,6 +94,12 @@ const Form3 = ({ title }) => {
 
             const loc = (await getCurrentLangLocClient()).loc;
             setSelectedLocation(loc.slug);
+
+
+
+            setFormData({
+                ...formData, hospital: loc.slug
+            })
         }
 
         get()
@@ -102,7 +108,7 @@ const Form3 = ({ title }) => {
 
     return (
         <>
-            
+
             <h3>{title}</h3>
             <div className="rounded-field-form mb-3">
                 <div className="row">
