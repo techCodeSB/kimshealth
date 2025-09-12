@@ -15,7 +15,7 @@ import getStaticPage from '@/helper/staticPage';
 
 
 
-const HeaderCorporate = ({hospital}) => {
+const HeaderCorporate = ({ hospital }) => {
   const [selectedLangLoc, setselectedLangLoc] = useState([]);
   const [allLanguages, setAllLanguage] = useState([]); // Store all language;
   const [allLocations, setAllLocations] = useState([]); // Store all locationsF;
@@ -30,8 +30,7 @@ const HeaderCorporate = ({hospital}) => {
   const [staticTexts, setStaticTexts] = useState({});
   const [staticPageChecker, setPageChecker] = useState({});
   const [showSearch, setShowSearch] = useState(false); // FOR SEARCH TOGGLE
-
-
+  const [activeLogoUrl, setLogoUrl] = useState();
 
   useEffect(() => {
     const fetchTexts = async () => {
@@ -131,6 +130,18 @@ const HeaderCorporate = ({hospital}) => {
     }
   };
 
+
+
+
+  useEffect(() => {
+
+    let logoURL = getBaseUrl(true, true);
+    if (hospital)
+      logoURL = logoURL + "/hospital/" + hospital;
+    setLogoUrl(logoURL)
+
+  }, [hospital])
+
   /********************************Google Translator*****************************/
 
   return (
@@ -139,7 +150,7 @@ const HeaderCorporate = ({hospital}) => {
         <section id="topheader" className="d-lg-block d-none">
           <div className="container d-flex align-items-center justify-content-between">
             <div className="navbar-logo py-2 ">
-              <a href={basePath}>
+              <a href={activeLogoUrl}>
                 <img src="/img/logo.png" alt="" className="img-fluid" />
               </a>
             </div>
@@ -215,7 +226,7 @@ const HeaderCorporate = ({hospital}) => {
           <div className="container">
             <nav className="header-menu-container justify-content-lg-end">
               <div className="navbar-brand">
-                <a href={"/"} className="text-decoration-none">
+                <a href={activeLogoUrl} className="text-decoration-none">
                   <img src="/img/logo.png" height="55" className="img-fluid" />
                 </a>
               </div>
@@ -235,7 +246,7 @@ const HeaderCorporate = ({hospital}) => {
                               const colIndex = Math.floor(i / perColumn);
                               columns[colIndex].push(
                                 <li key={i}>
-                                  <a href={basePath + "/speciality/" + s?.speciality?.slug}>
+                                  <a href={`${basePath}/speciality/${s?.speciality?.slug}${hospital ? '?hospital=' + hospital : ''}`}>
                                     <span>
                                       <img src={s.speciality?.iconImage?.url ? process.env.NEXT_PUBLIC_IMAGE_URL + s.speciality?.iconImage.url : "/img/no-image.jpg"} alt={s?.title} className="img-fluid" />
                                     </span>
@@ -257,14 +268,14 @@ const HeaderCorporate = ({hospital}) => {
                         }
                       </div>
                       <div className="from-btn text-center">
-                        <a href={basePath + "/speciality"} className="btn w-auto d-inline-block px-5">
+                        <a href={`${basePath}/speciality${hospital ? '?hospital=' + hospital : ''}`} className="btn w-auto d-inline-block px-5">
                           View All
                         </a>
                       </div>
 
                     </div>
                   </li>
-                  <li><a href={`${basePath}/doctor${hospital?'?hospital='+hospital:''}`} className="anchor-menu">{staticTexts['Find a Doctor']}</a></li>
+                  <li><a href={`${basePath}/doctor${hospital ? '?hospital=' + hospital : ''}`} className="anchor-menu">{staticTexts['Find a Doctor']}</a></li>
                   {/* <li><a href={`${basePathOnlyLang}/visa-medical`} className="anchor-menu">{staticTexts['Visa Medical']}</a></li> */}
                   <li className="menu-item-has-children show-submenu d-lg-inline-block d-none">
                     <a href={basePathOnlyLang + "/hospital"} className="anchor-menu">{staticTexts['Locations']}</a>
@@ -735,7 +746,7 @@ const HeaderCorporate = ({hospital}) => {
 
               <div className="appointment-btn d-lg-block d-none me-4">
                 <button className="btn" type="submit"
-                  onClick={() => { location.href = `${basePath}/book-an-appointment` }}>
+                  onClick={() => { location.href = `${basePath}/book-an-appointment${hospital ? '?hospital=' + hospital : ''}` }}>
                   {staticTexts['Book An Appointment']}
                 </button>
               </div>

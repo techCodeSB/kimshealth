@@ -76,7 +76,8 @@ const Speciality = async ({ searchParams }) => {
                                             allSpecility?.map((os, index) => {
                                                 return <div className="col-md-6" key={index}>
                                                     <div className="speciality-masterpage-card-content">
-                                                        <a href={baseURL + "/speciality/" + os.speciality?.slug}>
+                                                        <a href={`${baseURL}/speciality/${os.speciality?.slug}${URLParams.hospital ? `?hospital=${URLParams.hospital}` : ""}`}
+>
                                                             <span><img src={os.speciality?.iconImage?.url ? process.env.NEXT_PUBLIC_IMAGE_URL + os.speciality?.iconImage.url : "/img/no-image.jpg"} alt={os?.title} className="img-fluid" /></span> {os.title}
                                                         </a>
                                                     </div>

@@ -23,9 +23,9 @@ const DoctorListing = ({ baseURL, allLocation, allHospital, allSpeciality, allDo
     async function setSpecility() {
         if (URLParams?.hospital) {
             setSpecialityList(
-                await getSpecialityData.getAllSpecialityOfHospitalForFilter({
+                await getSpecialityData.getSpecialityAllParent({
                     langLoc,
-                    hospitalSlug: URLParams.hospital
+                    URLParams
                 })
             );
         } else {
@@ -269,7 +269,7 @@ const DoctorListing = ({ baseURL, allLocation, allHospital, allSpeciality, allDo
                                                         <option value={''}>Select Speciality</option>
 
                                                         {specialityList?.map((s, index) => (
-                                                            <option value={URLParams?.hospital ? s.slug : s.speciality?.slug} key={index + "1"}>{s.title}</option>
+                                                            <option value={s.speciality?.slug} key={index + "1"}>{s.title}</option>
                                                         ))}
                                                     </select>
                                                     <span onClick={(e) => {

@@ -13,7 +13,7 @@ const BookAnAppoinmentForm = ({ pageContent, URLParams }) => {
     const [allHospital, setAllHospital] = useState();
     const [allSpeciality, setAllSpeciality] = useState();
     const [allDoctors, setAllDoctors] = useState([]);
-    const [selectedLocation, setSelectedLocation] = useState(URLParams.location)
+    const [selectedLocation, setSelectedLocation] = useState(URLParams.location || "")
     const [selectedHospital, setSelectedHospital] = useState(URLParams.hospital);
     const [selectedSpeciality, setSelectedSpeciality] = useState(URLParams.speciality);
     const [selectedDoctor, setSelectedDoctor] = useState(URLParams.doctor);
@@ -221,6 +221,10 @@ const BookAnAppoinmentForm = ({ pageContent, URLParams }) => {
     useEffect(() => {
         const get = async () => {
             let currentLangLoc = await getCurrentLangLocClient();
+
+            if(!selectedLocation)
+                setSelectedLocation(currentLangLoc.loc.slug)
+
             setLocationList(await langLoc.getLocationsOnlyCMS())
             setAllHospital(await getHospital({ loc: selectedLocation == "" ? "" : selectedLocation }));
             setAllSpeciality(await getSpeciality({ loc: selectedLocation == "" ? currentLangLoc.loc.slug : selectedLocation, hospital: selectedHospital == "" ? "" : selectedHospital }));

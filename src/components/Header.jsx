@@ -1,16 +1,28 @@
 "use client"
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Cookies from 'js-cookie';
 import HederCorporate from './HeaderCorporate';
 import HeaderUnit from './HederUnit';
 import { ToastContainer } from 'react-toastify';
 
+const Header = ({ hospital }) => {
+  const [activeHospital, setActiveHospital] = useState(hospital);
 
-const Header = ({hospital}) => {
+  // cookies
   const loc = Cookies.get("systemLocation") ? JSON.parse(Cookies.get("systemLocation")) : "";
   const lang = Cookies.get("systemLang") ? JSON.parse(Cookies.get("systemLang")) : "";
 
+  // Override hospital from URL param if available
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const hospitalParam = params.get("hospital");
 
+    if (hospitalParam) {
+      setActiveHospital(hospitalParam);
+    }
+  }, [hospital]);
+
+  // Sidebar & dropdown handler
   useEffect(() => {
     const dropdownItems = document.querySelectorAll('.has-dropdown');
     const hamburger = document.querySelector('#hamburger');
@@ -63,19 +75,20 @@ const Header = ({hospital}) => {
   }, []);
 
   if (loc.default === true) {
-    return <>
-      <ToastContainer position='bottom-center' />
-      <HederCorporate hospital={hospital} />
-    </>
+    return (
+      <>
+        <ToastContainer position='bottom-center' />
+        <HederCorporate hospital={activeHospital} />
+      </>
+    );
+  } else {
+    return (
+      <>
+        <ToastContainer position='bottom-center' />
+        <HeaderUnit hospital={activeHospital} />
+      </>
+    );
   }
-  else {
-    return <>
-      <ToastContainer position='bottom-center' />
-      <HeaderUnit  hospital={hospital} />
-    </>
-  }
-
-}
+};
 
 export default Header;
-

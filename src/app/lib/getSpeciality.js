@@ -12,7 +12,7 @@ const getSpecialityData = {
 
     getAllFeatured: async ({ langLoc }) => {
         let baseUrl = process.env.NEXT_PUBLIC_CMS_API_URL;
-        const url = `${baseUrl}/specialty-details?filters[locations][id][$eq]=${langLoc.loc.id}&populate[0]=overviewSection&populate[1]=manageAppearance&populate[2]=speciality&populate[3]=speciality.featuredImage&filters[manageAppearance][showInFeaturedList][$eq]=true&sort=manageAppearance.orderInFeaturedList:asc,title:asc`;
+        const url = `${baseUrl}/specialty-details?filters[locations][id][$eq]=${langLoc.loc.id}&populate[0]=overviewSection&populate[1]=manageAppearance&populate[2]=speciality&populate[3]=speciality.featuredImage&filters[manageAppearance][showInFeaturedList][$eq]=true&pagination[limit]=10&&sort=manageAppearance.orderInFeaturedList:asc,title:asc`;
 
         const req = await fetch(url);
         const res = await req.json();
@@ -22,7 +22,7 @@ const getSpecialityData = {
 
     getAllByFeaturedHospital: async ({ langLoc, hospitalId }) => {
         let baseUrl = process.env.NEXT_PUBLIC_CMS_API_URL;
-        const url = `${baseUrl}/specialty-details?filters[locations][id][$eq]=${langLoc.loc.id}&populate[0]=overviewSection&populate[1]=manageAppearance&populate[2]=speciality&populate[3]=speciality.featuredImage&filters[speciality][hospitals][$eq]=${hospitalId}&filters[manageAppearance][showInFeaturedList][$eq]=true&sort=manageAppearance.orderInFeaturedList:asc,title:asc`;
+        const url = `${baseUrl}/specialty-details?filters[locations][id][$eq]=${langLoc.loc.id}&populate[0]=overviewSection&populate[1]=manageAppearance&populate[2]=speciality&populate[3]=speciality.featuredImage&filters[speciality][hospitals][$eq]=${hospitalId}&filters[manageAppearance][showInFeaturedList][$eq]=true&pagination[limit]=10&sort=manageAppearance.orderInFeaturedList:asc,title:asc`;
 
 
         const req = await fetch(url);
@@ -49,7 +49,7 @@ const getSpecialityData = {
         const baseUrl = process.env.NEXT_PUBLIC_CMS_API_URL;
 
         // First request to get total count
-        const initialUrl = `${baseUrl}/specialities?filters[hospitals][slug][$eq]=${hospitalSlug}`;
+        const initialUrl = `${baseUrl}/specialities?filters[hospitals][slug][$eq]=${hospitalSlug}&filters[specialities][$null]=true`;
         
 
         const initialReq = await fetch(initialUrl);
@@ -64,7 +64,7 @@ const getSpecialityData = {
         // Create an array of fetch promises
         const requests = Array.from({ length: pages }, (_, i) => {
             const start = i * limit;
-            const url = `${baseUrl}/specialities?populate=*&pagination[start]=${start}&pagination[limit]=${limit}&filters[hospitals][slug][$eq]=${hospitalSlug}&sort=title:asc`;
+            const url = `${baseUrl}/specialities?populate=*&pagination[start]=${start}&pagination[limit]=${limit}&filters[hospitals][slug][$eq]=${hospitalSlug}&filters[specialities][$null]=true&sort=title:asc`;
             return fetch(url).then((res) => res.json());
         });
 
@@ -255,6 +255,34 @@ const getSpecialityData = {
             data = [...data, ...json.data];
         }
 
+
+        return data;
+    },
+
+
+    getHeaderSpecialityByHospital: async ({ LangLoc,hospital }) => {
+        const baseUrl = process.env.NEXT_PUBLIC_CMS_API_URL;
+        // Get total count
+        const initialReq = await fetch(`${baseUrl}/specialty-details`);
+        const initialRes = await initialReq.json();
+        const totalCount = initialRes.meta.pagination.total;
+
+        const limit = 100;
+        const pages = Math.ceil(totalCount / limit);
+        let data = [];
+
+        // Actual Data
+        for (let i = 0; i < pages; i++) {
+            const start = i * limit;
+            const url = `${baseUrl}/specialty-details?populate[0]=speciality&populate[1]=manageAppearance&populate[2]=speciality.iconImage&populate[3]=speciality.featuredImage&pagination[start]=${start}&pagination[limit]=${limit}&filters[locations][id][$eq]=${LangLoc.loc.id}&filters[speciality][hospitals][slug][$eq]=${hospital}&filters[manageAppearance][showingHeader][$eq]=true&sort=manageAppearance.orderInMasterList:asc,title:asc`;
+            const res = await fetch(url);
+            const json = await res.json();
+            data = [...data, ...json.data];
+
+            console.log(url)
+        }
+
+        console.log(initialRes)
 
         return data;
     },

@@ -1944,6 +1944,14 @@
     .banner-from-col-custom{
     width: 100%;
 }
+.sub-speciality-slide2.owl-carousel .owl-nav button.owl-prev{
+    top: 33%;
+  left: -35px;
+}
+.sub-speciality-slide2.owl-carousel .owl-nav button.owl-next{
+    top: 33%;
+  right: -35px;
+}
 
 }
 

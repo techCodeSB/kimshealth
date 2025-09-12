@@ -29,6 +29,7 @@ const HeaderUnit = ({hospital}) => {
   const [staticTexts, setStaticTexts] = useState({});
   const [staticPageChecker, setPageChecker] = useState({});
   const [showSearch, setShowSearch] = useState(false); // FOR SEARCH TOGGLE
+  const [activeLogoUrl, setLogoUrl] = useState();
 
 
   useEffect(() => {
@@ -54,7 +55,10 @@ const HeaderUnit = ({hospital}) => {
       // console.log(LangLoc, "in header");
       setselectedLangLoc(LangLoc);
 
-      setSpeciality(await getSpecialityData.getHeaderSpeciality({ LangLoc }))
+      if (hospital) 
+        setSpeciality(await getSpecialityData.getHeaderSpecialityByHospital({ LangLoc, hospital }))
+      else
+        setSpeciality(await getSpecialityData.getHeaderSpeciality({ LangLoc }))
 
       setLocationData(await getLocation());
 
@@ -64,7 +68,7 @@ const HeaderUnit = ({hospital}) => {
     }
     get();
 
-  }, [])
+  }, [hospital])
 
 
   useEffect(() => {
@@ -88,9 +92,16 @@ const HeaderUnit = ({hospital}) => {
     setBasePath(getBaseUrl(true, true));
     setBasePathOnlyLang(getBaseUrl(true, false));
 
-
-
   }, [])
+
+  useEffect(() => {
+
+    let logoURL=getBaseUrl(true, true);
+    if(hospital)
+      logoURL=logoURL+"/hospital/"+hospital;
+    setLogoUrl(logoURL)
+
+  }, [hospital])
 
 
 
@@ -135,7 +146,6 @@ const HeaderUnit = ({hospital}) => {
   };
 
   /********************************Google Translator*****************************/
-console.log(hospital)
 
 
   return (
@@ -144,7 +154,7 @@ console.log(hospital)
         <section id="topheader" className="d-lg-block d-none">
           <div className="container d-flex align-items-center justify-content-between">
             <div className="navbar-logo py-2 ">
-              <a href={basePath}>
+              <a href={activeLogoUrl}>
                 <img src="/img/logo.png" alt="" className="img-fluid" />
               </a>
             </div>
@@ -222,7 +232,7 @@ console.log(hospital)
           <div className="container">
             <nav className="header-menu-container justify-content-lg-end">
               <div className="navbar-brand">
-                <a href={"/"} className="text-decoration-none">
+                <a href={activeLogoUrl} className="text-decoration-none">
                   <img src="/img/logo.png" height="55" className="img-fluid" />
                 </a>
               </div>
@@ -242,7 +252,7 @@ console.log(hospital)
                               const colIndex = Math.floor(i / perColumn);
                               columns[colIndex].push(
                                 <li key={i}>
-                                  <a href={basePath + "/speciality/" + s?.speciality?.slug}>
+                                  <a href={`${basePath}/speciality/${s?.speciality?.slug}${hospital?'?hospital='+hospital:''}`}>
                                     <span>
                                       <img src={s.speciality?.iconImage?.url ? process.env.NEXT_PUBLIC_IMAGE_URL + s.speciality?.iconImage.url : "/img/no-image.jpg"} alt={s?.title} className="img-fluid" />
                                     </span>
@@ -264,7 +274,7 @@ console.log(hospital)
                         }
                       </div>
                       <div className="from-btn text-center">
-                        <a href={basePath + "/speciality"} className="btn w-auto d-inline-block px-5">
+                        <a href={`${basePath}/speciality${hospital?'?hospital='+hospital:''}`} className="btn w-auto d-inline-block px-5">
                           View All
                         </a>
                       </div>
@@ -736,7 +746,7 @@ console.log(hospital)
 
               <div className="appointment-btn d-lg-block d-none me-4">
                 <button className="btn" type="submit"
-                  onClick={() => { location.href = `${basePath}/book-an-appointment` }}>
+                  onClick={() => { location.href = `${basePath}/book-an-appointment${hospital?'?hospital='+hospital:''}` }}>
                   {staticTexts['Book An Appointment']}
                 </button>
               </div>

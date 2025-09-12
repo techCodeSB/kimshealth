@@ -707,6 +707,7 @@ header {
 
 .form-control:focus {
     box-shadow: none;
+    border: 1px solid #b71c2b;
 }
 
 .form-select:focus {
@@ -882,6 +883,13 @@ header {
     color: #b71c2b;
     border-bottom: 1px solid #b71c2b;
 }
+
+.main-btn-speciality  {
+    font-size: 16px;
+    font-weight: 600;
+    color: #b71c2b;
+}
+
 
 .owl-carousel.exellence .owl-nav button.owl-prev {
     position: absolute;
@@ -4636,6 +4644,12 @@ li.chat-ic::before {
     border-bottom: 1px solid #ffffff;
 }
 
+.details-card:hover .main-btn-speciality {
+    font-size: 16px;
+    font-weight: 600;
+    color: #ffffff;
+}
+
 .book-appointment-main-page form .form-select {
     background-image: url(../img/down-arrow-form-select.svg) !important;
     background-size: 3%;
@@ -6163,4 +6177,8 @@ select option:hover {
     height: 7px;
     background: #c71d22;
     border-radius: 100%;
+}
+.custom-min-height-content h4{
+    min-height: 44px;
+    display: block;
 }

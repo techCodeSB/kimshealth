@@ -270,7 +270,7 @@ const HospitalDetails = async ({ params }) => {
                                 </div>
                             </div> */}
                             <div className="cta-col">
-                                <a href={basePath + "/doctor"}>
+                                <a href={basePath + "/doctor?hospital="+hptData.slug}>
                                     <div className="cta-diff">
                                         <div className="d-flex align-items-center justify-content-center">
                                             <img src="/img/doctor.png" alt="" />
@@ -280,7 +280,7 @@ const HospitalDetails = async ({ params }) => {
                                 </a>
                             </div>
                             <div className="cta-col">
-                                <a href={basePath + "/book-an-appointment"}>
+                                <a href={basePath + "/book-an-appointment?hospital="+hptData.slug}>
                                     <div className="cta-diff">
                                         <div className="d-flex align-items-center justify-content-center">
                                             <img src="/img/appointment.png" alt="" />
@@ -329,7 +329,7 @@ const HospitalDetails = async ({ params }) => {
                     <div className="container-fluid ps-0">
                         <div className="row">
                             <div className="cta-col ctn-left-col">
-                                <a href={basePath + "/book-an-appointment"}>
+                                <a href={basePath + "/book-an-appointment?hospital="+hptData.slug}>
                                     <div className="cta-diff">
                                         <div className="d-flex align-items-center justify-content-center">
                                             <img src="/img/appointment-mb.png" alt="" />
@@ -339,7 +339,7 @@ const HospitalDetails = async ({ params }) => {
                                 </a>
                             </div>
                             <div className="cta-col">
-                                <a href={basePath + "/doctor"}>
+                                <a href={basePath + "/doctor?hospital="+hptData.slug}>
                                     <div className="cta-diff">
                                         <div className="d-flex align-items-center justify-content-center">
                                             <img src="/img/doctor.png" alt="" />

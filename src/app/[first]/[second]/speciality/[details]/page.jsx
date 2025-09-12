@@ -151,45 +151,55 @@ const SpecialityDetails = async ({ params, searchParams }) => {
                         style={{ background: "linear-gradient(180deg,rgba(255, 255, 255, 1) 45%, rgba(248, 248, 248, 1) 74%)" }}>
                         <div className="container">
                             <div className="details-card-wrapper pb-5">
-                                <div className="owl-carousel owl-theme sub-speciality-slide position-relative" style={{ zIndex: "99" }}>
+                                <div className="owl-carousel owl-theme sub-speciality-slide2 position-relative" style={{ zIndex: "99" }}>
 
+                                    
+                                    
                                     {
-                                        allSubSpeciality.map((subS, index) => {
-                                            return <div className="item" key={index}>
-                                                <div className="details-card text-center">
-                                                    <div className="card-content">
-                                                        <h4>{subS.title}</h4>
-                                                        <p>{subS.overviewSection?.details?.slice(0, 140)}...</p>
-                                                        {subS?.manageAppearance?.viewingMode === "Popup" ? (
+                                        allSubSpeciality.map((subS, index) => (
+                                            subS?.manageAppearance?.viewingMode === "Popup" ? (
+                                                <div className="item" key={index}>
+                                                    <a
+                                                        href="#"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target={`#popupModalSubSpeciality-${index}`}
+                                                    >
+                                                        <div className="details-card text-center">
+                                                            <div className="card-content custom-min-height-content">
+                                                                <h4>{subS.title}</h4>
+                                                                <p>{subS.overviewSection?.details?.slice(0, 140)}...</p>
+                                                                <div className="main-btn-speciality ">
 
-                                                            <div className="main-btn">
-                                                                <a
-                                                                    href="#"
-                                                                    data-bs-toggle="modal"
-                                                                    data-bs-target={`#popupModalSubSpeciality-${index}`}
-                                                                >
                                                                     {staticText["Read More"]}
                                                                     <span>
                                                                         <i className="fa-solid fa-arrow-right"></i>
                                                                     </span>
-                                                                </a>
+                                                                </div>
                                                             </div>
-                                                        ) : (
-                                                            <div className="main-btn">
-                                                                <a href={baseUrl + "/speciality/" + subS?.speciality?.slug}>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            ) : (
+                                                <div className="item" key={index}>
+                                                    <a href={`${baseUrl}/speciality/${subS?.speciality?.slug}`}>
+                                                        <div className="details-card text-center">
+                                                            <div className="card-content custom-min-height-content">
+                                                                <h4>{subS.title}</h4>
+                                                                <p>{subS.overviewSection?.details?.slice(0, 140)}...</p>
+                                                                <div className="main-btn-speciality ">
                                                                     {staticText['Read More']}
                                                                     <span>
                                                                         <i className="fa-solid fa-arrow-right"></i>
                                                                     </span>
-                                                                </a>
+                                                                </div>
                                                             </div>
-                                                        )}
-
-                                                    </div>
+                                                        </div>
+                                                    </a>
                                                 </div>
-                                            </div>
-                                        })
+                                            )
+                                        ))
                                     }
+
 
                                 </div>
                             </div>
