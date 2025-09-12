@@ -159,7 +159,7 @@ const SpecialityDetails = async ({ params, searchParams }) => {
                                                 <div className="details-card text-center">
                                                     <div className="card-content">
                                                         <h4>{subS.title}</h4>
-                                                        <p>{subS.overviewSection?.details.slice(0, 140)}...</p>
+                                                        <p>{subS.overviewSection?.details?.slice(0, 140)}...</p>
                                                         {subS?.manageAppearance?.viewingMode === "Popup" ? (
 
                                                             <div className="main-btn">

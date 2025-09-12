@@ -85,8 +85,19 @@ const DoctorDetails = async ({ params }) => {
                                                 <li className="details-liver-ic"><strong>{data.specialities[0]?.title}</strong></li>
                                                 <li className="details-hospital-ic">{data.hospitals[0]?.address}</li>
                                             </ul>
-                                            
-                                            {data.appointmentAvailable && <a href={`${basePath}/book-an-appointment/?doctor=${data?.salutation ? data?.salutation + " " : ""}${data?.name}`}className="form-btn mt-3 d-block text-center text-light">{staticText['Book An Appointment']}</a>}
+
+                                            {data.appointmentAvailable && (
+                                                <a
+                                                    href={`${basePath}/book-an-appointment/?doctor=${data?.salutation ? data?.salutation + " " : ""
+                                                        }${data?.name}&location=${data?.locations[0]?.slug === "generic"
+                                                            ? data?.locations[1]?.slug
+                                                            : data?.locations[0]?.slug
+                                                        }&hospital=${data?.hospitals[0]?.slug}`}
+                                                    className="form-btn mt-3 d-block text-center text-light"
+                                                >
+                                                    {staticText["Book An Appointment"]}
+                                                </a>
+                                            )}
 
                                             
                                             {data.teleConsultationAvailable && <a href='https://consult.bestdocapp.com/home/KIMSTVM?version=new' className="form-btn mt-3 d-block text-center text-light vice-btn">{staticText['Book a Telemedicine']}</a>}

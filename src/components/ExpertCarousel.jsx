@@ -15,8 +15,6 @@ const ExpertCarousel = ({ dataSet }) => {
     }, []);
 
 
-
-
     if (dataSet.data.length < 1) {
         return;
     }
@@ -62,12 +60,18 @@ const ExpertCarousel = ({ dataSet }) => {
                                             <p>{d.doctorDesignation}</p>
                                             <h5>{d.specialities[0]?.title}</h5>
                                             <div className="from-btn">
+
+
                                                 {d.appointmentAvailable && (
                                                     <a
-                                                        href={`${dataSet.baseUrl}/book-an-appointment/?doctor=${d?.salutation ? d?.salutation + " " : ""}${d?.name}`}
+                                                        href={`${dataSet.baseUrl}/book-an-appointment/?doctor=${d?.salutation ? d?.salutation + " " : ""
+                                                            }${d?.name}&location=${d?.locations?.[0]?.slug === "generic"
+                                                                ? d?.locations?.[1]?.slug
+                                                                : d?.locations?.[0]?.slug
+                                                            }&hospital=${d?.hospitals?.[0]?.slug}`}
                                                         className="btn"
                                                     >
-                                                        {staticTexts['Appointment']}
+                                                        {staticTexts["Appointment"]}
                                                     </a>
                                                 )}
 

@@ -20,8 +20,7 @@ const DoctorListing = ({ baseURL, allLocation, allHospital, allSpeciality, allDo
     const [endData, setEndData] = useState(false);
     const limit = 12;
 
-    async function setSpecility()
-    {
+    async function setSpecility() {
         if (URLParams?.hospital) {
             setSpecialityList(
                 await getSpecialityData.getAllSpecialityOfHospitalForFilter({
@@ -38,7 +37,7 @@ const DoctorListing = ({ baseURL, allLocation, allHospital, allSpeciality, allDo
         setLocationList(allLocation);
         setHospitalList(allHospital);
         setSpecility()
-        
+
     }, [allLocation, allHospital, allSpeciality]);
 
 
@@ -322,14 +321,22 @@ const DoctorListing = ({ baseURL, allLocation, allHospital, allSpeciality, allDo
                                                 </div> */}
                                                 <div className="from-btn">
 
+
                                                     {d.appointmentAvailable && (
                                                         <a
-                                                            href={`${baseURL}/book-an-appointment/?doctor=${d?.salutation ? d?.salutation + " " : ""}${d?.name}`}
+                                                            href={`${baseURL}/book-an-appointment/?doctor=${d?.salutation ? d?.salutation + " " : ""
+                                                                }${d?.name}&location=${d?.locations?.[0]?.slug === "generic"
+                                                                    ? d?.locations?.[1]?.slug
+                                                                    : d?.locations?.[0]?.slug
+                                                                }&hospital=${d?.hospitals?.[0]?.slug}`}
                                                             className="btn"
                                                         >
-                                                            {staticText['Appointment']}
+                                                            {staticText["Appointment"]}
                                                         </a>
                                                     )}
+
+
+
 
                                                     <a href={baseURL + "/doctor/" + d.slug} className="btn vice-btn">{staticText['View Profile']}</a>
                                                 </div>

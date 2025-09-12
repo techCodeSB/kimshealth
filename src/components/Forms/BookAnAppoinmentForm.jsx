@@ -27,7 +27,7 @@ const BookAnAppoinmentForm = ({ pageContent, URLParams }) => {
 
     const sendMail = async () => {
         setLoading(true);
-        if ([formData.name, formData.contactNumber, formData.location,  formData.hospital, formData.department, formData.doctor, formData.appoinmentDate].some((field) => !field || field === "")) {
+        if ([formData.name, formData.contactNumber, formData.location, formData.hospital, formData.department, formData.doctor, formData.appoinmentDate].some((field) => !field || field === "")) {
             toast("Fill the required fields", {
                 theme: 'light',
                 type: 'error',
@@ -246,7 +246,7 @@ const BookAnAppoinmentForm = ({ pageContent, URLParams }) => {
                                 </div>
                                 <div className="row justify-content-center">
                                     <div className="col-md-10">
-                                        <div className="row">
+                                        <div className="row justify-content-center">
                                             <div className="col-md-6">
                                                 <div className="custom-from bg-field mx-0">
                                                     <div className="row justify-content-between">
@@ -257,6 +257,12 @@ const BookAnAppoinmentForm = ({ pageContent, URLParams }) => {
                                                                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                                                                 value={formData.name} />
                                                         </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="col-md-6">
+                                                <div className="custom-from bg-field mx-0">
+                                                    <div className="row justify-content-between">
                                                         <div className="col-xl-12 col-lg-12 col-md-12 col-12 mb-3">
                                                             <label htmlFor=''>{staticText['Contact Number']}*</label>
                                                             <input type="text" placeholder={staticText["Enter Your Phone Number"]} name=""
@@ -265,8 +271,12 @@ const BookAnAppoinmentForm = ({ pageContent, URLParams }) => {
                                                                 value={formData.contactNumber}
                                                             />
                                                         </div>
-
-
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="col-md-6">
+                                                <div className="custom-from bg-field mx-0">
+                                                    <div className="row justify-content-between">
                                                         <div className="col-xl-12 col-lg-12 col-md-12 col-12 mb-3">
                                                             <label htmlFor=''>{staticText['Location']}*</label>
                                                             <select className="form-select from-location" value={selectedLocation} onChange={(e) => {
@@ -284,6 +294,10 @@ const BookAnAppoinmentForm = ({ pageContent, URLParams }) => {
                                                     </div>
                                                 </div>
                                             </div>
+
+
+
+
                                             <div className="col-md-6">
                                                 <div className="custom-from bg-field mx-0">
                                                     <div className="row justify-content-between">
@@ -303,6 +317,13 @@ const BookAnAppoinmentForm = ({ pageContent, URLParams }) => {
                                                                 }
                                                             </select>
                                                         </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div className="col-md-6">
+                                                <div className="custom-from bg-field mx-0">
+                                                    <div className="row justify-content-between">
 
                                                         <div className="col-xl-12 col-lg-12 col-md-12 col-12 mb-3">
                                                             <label htmlFor=''>{staticText['Select Department']}*</label>
@@ -318,6 +339,14 @@ const BookAnAppoinmentForm = ({ pageContent, URLParams }) => {
                                                                 }
                                                             </select>
                                                         </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div className="col-md-6">
+                                                <div className="custom-from bg-field mx-0">
+                                                    <div className="row justify-content-between">
+
 
                                                         <div className="col-xl-12 col-lg-12 col-md-12 col-12 mb-3">
                                                             <label htmlFor=''>{staticText['Select Doctors']}*</label>
@@ -339,54 +368,12 @@ const BookAnAppoinmentForm = ({ pageContent, URLParams }) => {
                                                                 )}
                                                             </select>
                                                         </div>
-
-                                                        {/* <div className="col-xl-12 col-lg-12 col-md-12 col-12 mb-3">
-                                                            <label htmlFor=''>{staticText['Appointment Date']}*</label>
-                                                            <div className="input-group">
-                                                                <input
-                                                                    type="date"  // use date instead of text for date selection
-                                                                    placeholder="Select Your Date"
-                                                                    name="appoinmentDate"
-                                                                    className="form-control pe-0"
-                                                                    autoComplete="off"
-                                                                    value={formData.appoinmentDate}
-                                                                    onChange={(e) => {
-                                                                        console.log(e.target.value); // <-- get the selected date
-                                                                        setFormData({
-                                                                            ...formData,
-                                                                            appoinmentDate: e.target.value, // <-- update state
-                                                                        });
-                                                                    }}
-                                                                />
-                                                                <span className="input-group-text" id="from-icon"><i
-                                                                    className="icon-calendar"></i></span>
-                                                            </div>
-                                                        </div>
-
-                                                        <div className="col-xl-12 col-lg-12 col-md-12 col-12 mb-3">
-                                                            <label htmlFor=''>{staticText['Appointment Time']}</label>
-                                                            <div className="input-group">
-                                                                <input
-                                                                    type="time"  // use date instead of text for date selection
-                                                                    placeholder="Select Your Time"
-                                                                    name="appoinmentTime"
-                                                                    className="form-control pe-0"
-                                                                    autoComplete="off"
-                                                                    value={formData.appoinmentTime}
-                                                                    onChange={(e) => {
-                                                                        console.log(e.target.value); // <-- get the selected date
-                                                                        setFormData({
-                                                                            ...formData,
-                                                                            appoinmentTime: e.target.value, // <-- update state
-                                                                        });
-                                                                    }}
-                                                                />
-                                                            </div>
-                                                        </div> */}
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div className="col-md-12 mb-3">
+
+
+                                            <div className="col-md-6 mb-3">
                                                 <div className="custom-from bg-field mx-0">
                                                     <div className="row justify-content-between">
 
@@ -394,12 +381,18 @@ const BookAnAppoinmentForm = ({ pageContent, URLParams }) => {
                                                             <label htmlFor=''>{staticText['Appointment Date']}*</label>
                                                             <div className="input-group">
                                                                 <input
-                                                                    type="date"  // use date instead of text for date selection
+                                                                    type="date"
                                                                     placeholder="Select Your Date"
                                                                     name="appoinmentDate"
                                                                     className="form-control pe-0"
                                                                     autoComplete="off"
                                                                     value={formData.appoinmentDate}
+                                                                    onClick={(e) => {
+                                                                        // Force open date picker on click anywhere inside input
+                                                                        if (e.target.showPicker) {
+                                                                            e.target.showPicker();
+                                                                        }
+                                                                    }}
                                                                     onChange={(e) => {
                                                                         console.log(e.target.value); // <-- get the selected date
                                                                         setFormData({
@@ -408,8 +401,7 @@ const BookAnAppoinmentForm = ({ pageContent, URLParams }) => {
                                                                         });
                                                                     }}
                                                                 />
-                                                                {/* <span className="input-group-text" id="from-icon"><i
-                                                                    className="icon-calendar"></i></span> */}
+
                                                             </div>
                                                         </div>
                                                     </div>
@@ -428,59 +420,6 @@ const BookAnAppoinmentForm = ({ pageContent, URLParams }) => {
                                 </div>
                             </div>
                         </div>
-                        {/* <div className="col-md-5 mb-3">
-                                        <div className="main-heading">
-                                            <h2>{pageContent[2]?.title}</h2>
-                                        </div>
-                                        <div className="custom-from bg-field mx-0">
-                                            <div className="row justify-content-between">
-                                                <div className="col-xl-12 col-lg-12 col-md-12 col-12 mb-3">
-                                                    <label htmlFor=''>Select Department*</label>
-                                                    <select className="form-select from-location">
-                                                        <option >Select a Department</option>
-                                                        <option value="1">One</option>
-                                                        <option value="2">Two</option>
-                                                        <option value="3">Three</option>
-                                                    </select>
-                                                </div>
-
-
-                                                <div className="col-xl-12 col-lg-12 col-md-12 col-12 mb-3">
-                                                    <label htmlFor=''>Select Doctors*</label>
-                                                    <select className="form-select from-location">
-                                                        <option >Select a Doctor</option>
-                                                        <option value="1">One</option>
-                                                        <option value="2">Two</option>
-                                                        <option value="3">Three</option>
-                                                    </select>
-                                                </div>
-
-
-                                                <div className="col-xl-12 col-lg-12 col-md-12 col-12 mb-3">
-                                                    <label htmlFor=''>Appointment Date*</label>
-                                                    <div className="input-group">
-                                                        <input type="text" placeholder="Select Your Date" name=""
-                                                            className="form-control pe-0 datepicker" autoComplete="off" />
-                                                        <span className="input-group-text" id="from-icon"><i
-                                                            className="icon-calendar"></i></span>
-                                                    </div>
-                                                </div>
-
-
-                                                <div className="col-xl-12 col-lg-12 col-md-12 col-12 mb-3">
-                                                    <label htmlFor=''>Appointment Time*</label>
-                                                    <div className="input-group">
-                                                        <input type="text" placeholder="Select Your Time" name=""
-                                                            className="form-control pe-0 timePicker" autoComplete="off" />
-                                                        <span className="input-group-text" id="from-icon"><i
-                                                            className="icon-clock"></i></span>
-                                                    </div>
-                                                </div>
-                                                <div className="col-xl-6 col-lg-6 col-md-6 col-12 mb-3">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> */}
                     </div>
                 </div>
             </section>

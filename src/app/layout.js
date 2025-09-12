@@ -21,11 +21,11 @@ export default async function RootLayout({ children }) {
       <head>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>{metaData?.metaTitle || "KIMS HEALTH"}</title>
-        <meta name="description" content={metaData?.metaDescription || "KIMS HEALTH"}/>
-        <meta name="keywords" content={metaData?.metaKeyword || "KIMS HEALTH"}/>
+        <title>{metaData?.metaTitle || "KIMSHEALTH"}</title>
+        <meta name="description" content={metaData?.metaDescription || "KIMSHEALTH"}/>
+        <meta name="keywords" content={metaData?.metaKeyword || "KIMSHEALTH"}/>
         {metaData?.extraHeaderCode &&<>{parse(metaData?.extraHeaderCode)}</>}
-
+        <link rel="icon" href="/img/favicon.ico" sizes="any" />
         {/* <!-- bootstrap cdn --> */}
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
         {/* <!-- font-awasome cdn --> */}

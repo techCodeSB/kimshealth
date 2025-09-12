@@ -69,7 +69,18 @@ const BlogDetails = async ({ params }) => {
                                                                 })}
                                                             </h4>
                                                             <div className="mt-4">
-                                                                <a href={basePath + "/book-an-appointment?doctor=" + docData?.slug} className="hospital-primarybtn ">{staticText['Book An Appointment']}</a>
+                                                                {docData.appointmentAvailable && (
+                                                                    <a
+                                                                        href={`${basePath}/book-an-appointment/?doctor=${docData?.salutation ? docData?.salutation + " " : ""
+                                                                            }${docData?.name}&location=${docData?.locations?.[0]?.slug === "generic"
+                                                                                ? docData?.locations?.[1]?.slug
+                                                                                : docData?.locations?.[0]?.slug
+                                                                            }&hospital=${docData?.hospitals?.[0]?.slug}`}
+                                                                        className="hospital-primarybtn"
+                                                                    >
+                                                                        {staticText['Book An Appointment']}
+                                                                    </a>
+                                                                )}
                                                             </div>
                                                         </div>
                                                     </div>
