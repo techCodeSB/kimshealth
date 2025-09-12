@@ -6180,5 +6180,5 @@ select option:hover {
 }
 .custom-min-height-content h4{
     min-height: 44px;
-    display: block;
+    display: block !important;
 }
