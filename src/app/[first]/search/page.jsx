@@ -52,7 +52,7 @@ const SearchPage = async ({ searchParams }) => {
                     <section className="section pb-0">
                         <div className="container">
                             <div className="row justify-content-between">
-                                <div className="col-md-6 mb-3">
+                                <div className="col-md-4 mb-3">
                                     <div className="main-heading">
                                         <h2 className="mb-0">{staticText["Search Result"]}</h2>
                                     </div>
