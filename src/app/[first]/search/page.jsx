@@ -49,17 +49,17 @@ const SearchPage = async ({ searchParams }) => {
                         </div>
                     </section>
 
-                    <section className="section">
+                    <section className="section pb-0">
                         <div className="container">
                             <div className="row justify-content-between">
                                 <div className="col-md-6 mb-3">
                                     <div className="main-heading">
                                         <h2 className="mb-0">{staticText["Search Result"]}</h2>
                                     </div>
-                                </div>
-                                <div className="col-md-4 details-key-row rounded-field-form">
-                                    <div className="input-group p-0 my-lg-3 my-3">
-                                        <SearchBox query={URLParams.query?URLParams.query:""} />
+                                    <div className="details-key-row rounded-field-form">
+                                        <div className="input-group p-0 my-lg-3 my-3">
+                                            <SearchBox query={URLParams.query ? URLParams.query : ""} />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -125,7 +125,7 @@ const SearchPage = async ({ searchParams }) => {
                                             {
                                                 allDoctor.map((data, index) => {
                                                     return <li key={"doctor" + index}>
-                                                        <a href={basePath + "/doctor/" + data.slug}>{`${data.salutation?data.salutation+" ":""}${data.name}`}</a>
+                                                        <a href={basePath + "/doctor/" + data.slug}>{`${data.salutation ? data.salutation + " " : ""}${data.name}`}</a>
                                                     </li>
                                                 })
                                             }
@@ -143,7 +143,7 @@ const SearchPage = async ({ searchParams }) => {
                         <section className="section">
                             <div className="container">
                                 <div className="main-heading main-list sub-heading">
-                                    <h2>{staticText['Blog']}</h2>
+                                    <h2>{staticText['Blogs']}</h2>
                                     <div>
                                         <ul>
                                             {

@@ -44,7 +44,12 @@ const SearchBox = ({ query }) => {
     return (
         <>
             <input type="text" ref={searchData} className="form-control "
-                placeholder={staticTexts['Search Text'] + " ...."} defaultValue={query} id='headerSearchIcon' />
+                placeholder={staticTexts['Search Text'] + " ...."} defaultValue={query} id='headerSearchIcon' onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                        e.preventDefault(); // prevents form submission/reload
+                        searchWeb();
+                    }
+                }} />
             <button onClick={() => searchWeb()} className="input-group-text" id="from-icon">
                 <i className="fa-solid icon-magnifier"></i>
             </button>
